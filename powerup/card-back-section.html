@@ -110,6 +110,21 @@ function createPresentation(attachment) {
   openBtn.onclick = function() { window.open(url, '_blank'); };
   controls.appendChild(openBtn);
 
+  var dlBtn = document.createElement('button');
+  dlBtn.className = 'btn';
+  dlBtn.innerHTML = '⬇ Download';
+  dlBtn.onclick = function() {
+    var dlUrl = url + (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + Date.now();
+    fetch(dlUrl).then(function(r){ return r.blob(); }).then(function(blob) {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = label.replace(/\s+/g, '-').toLowerCase() + '.html';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+  };
+  controls.appendChild(dlBtn);
+
   wrap.appendChild(controls);
 
   var toast = document.createElement('div');
