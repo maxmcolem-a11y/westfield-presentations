@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Presentation Viewer</title>
+<script src="https://p.trellocdn.com/power-up.min.js"></script>
+</head>
+<body>
+<script>
+TrelloPowerUp.initialize({
+  'card-back-section': function(t, options) {
+    return t.card('attachments').get('attachments').then(function(attachments) {
+      var htmlAttachments = attachments.filter(function(a) {
+        return a.url && a.url.indexOf('maxmcolem-a11y.github.io') !== -1 && a.url.endsWith('/');
+      });
+      if (htmlAttachments.length === 0) {
+        htmlAttachments = attachments.filter(function(a) {
+          return a.url && a.url.indexOf('maxmcolem-a11y.github.io') !== -1;
+        });
+      }
+      if (htmlAttachments.length === 0) return null;
+      return {
+        title: '📊 Presentations',
+        icon: './icon.svg',
+        content: {
+          type: 'iframe',
+          url: t.signUrl('./card-back-section.html'),
+          height: 480
+        }
+      };
+    });
+  }
+});
+</script>
+</body>
+</html>

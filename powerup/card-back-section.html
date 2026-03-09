@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://p.trellocdn.com/power-up.min.js"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#0d1117; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif; color:#c9d1d9; }
+#content { padding:8px; display:flex; flex-direction:column; gap:12px; }
+
+.prez-card { position:relative; border:1px solid #30363d; border-radius:8px; overflow:hidden; background:#161b22; }
+.prez-label { padding:8px 12px; font-size:13px; font-weight:600; color:#e2e8f0; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #30363d; }
+.prez-label .status { font-size:11px; font-weight:400; color:#7d8590; }
+
+.iframe-wrap { position:relative; width:100%; padding-bottom:56.25%; background:#0d1117; }
+.iframe-wrap iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
+
+.iframe-wrap .controls { position:absolute; top:8px; right:8px; display:flex; gap:6px; opacity:0; transition:opacity 0.2s; z-index:10; }
+.iframe-wrap:hover .controls { opacity:1; }
+
+.btn { background:rgba(13,17,23,0.85); border:1px solid #30363d; color:#c9d1d9; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:12px; display:flex; align-items:center; gap:4px; backdrop-filter:blur(4px); }
+.btn:hover { background:rgba(22,27,34,0.95); color:#fff; }
+
+.toast { position:absolute; top:8px; left:50%; transform:translateX(-50%); background:#238636; color:#fff; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:600; opacity:0; transition:opacity 0.3s; z-index:20; pointer-events:none; }
+.toast.show { opacity:1; }
+
+.skeleton { position:absolute; top:0; left:0; width:100%; height:100%; background:#161b22; display:flex; align-items:center; justify-content:center; }
+.skeleton::after { content:'Loading presentation...'; color:#7d8590; font-size:14px; }
+.skeleton.hide { display:none; }
+</style>
+</head>
+<body>
+<div id="content"></div>
+<script>
+var t = TrelloPowerUp.iframe();
+var POLL_INTERVAL = 60000; // 60s to stay under GitHub rate limit
+var REPO = 'maxmcolem-a11y/westfield-presentations';
+var commitCache = {};
+
+function extractPath(url) {
+  // https://maxmcolem-a11y.github.io/westfield-presentations/ai-agent-proposal/
+  var match = url.match(/github\.io\/westfield-presentations\/(.+?)(?:index\.html)?$/);
+  if (match) return match[1].replace(/\/$/, '') + '/index.html';
+  return null;
+}
+
+function extractLabel(url) {
+  var match = url.match(/westfield-presentations\/(.+?)\/(?:index\.html)?$/);
+  if (match) return match[1].replace(/-/g, ' ').replace(/\b\w/g, function(c){ return c.toUpperCase(); });
+  return 'Presentation';
+}
+
+function checkForUpdate(path, iframe, toast) {
+  var apiUrl = 'https://api.github.com/repos/' + REPO + '/commits?path=' + encodeURIComponent(path) + '&per_page=1';
+  fetch(apiUrl).then(function(r){ return r.json(); }).then(function(data) {
+    if (!data || !data[0]) return;
+    var sha = data[0].sha;
+    if (commitCache[path] && commitCache[path] !== sha) {
+      // New commit — reload iframe
+      var src = iframe.src.split('?')[0];
+      iframe.src = src + '?v=' + Date.now();
+      toast.classList.add('show');
+      setTimeout(function(){ toast.classList.remove('show'); }, 3000);
+    }
+    commitCache[path] = sha;
+  }).catch(function(){});
+}
+
+function createPresentation(attachment) {
+  var url = attachment.url;
+  var path = extractPath(url);
+  var label = extractLabel(url);
+
+  var card = document.createElement('div');
+  card.className = 'prez-card';
+
+  var labelEl = document.createElement('div');
+  labelEl.className = 'prez-label';
+  labelEl.innerHTML = '<span>📊 ' + label + '</span><span class="status">Live • Auto-refresh</span>';
+  card.appendChild(labelEl);
+
+  var wrap = document.createElement('div');
+  wrap.className = 'iframe-wrap';
+
+  var skeleton = document.createElement('div');
+  skeleton.className = 'skeleton';
+  wrap.appendChild(skeleton);
+
+  var iframe = document.createElement('iframe');
+  iframe.src = url + (url.indexOf('?') === -1 ? '?v=' : '&v=') + Date.now();
+  iframe.sandbox = 'allow-scripts allow-same-origin allow-popups allow-presentation';
+  iframe.onload = function(){ skeleton.classList.add('hide'); };
+  wrap.appendChild(iframe);
+
+  var controls = document.createElement('div');
+  controls.className = 'controls';
+
+  var fsBtn = document.createElement('button');
+  fsBtn.className = 'btn';
+  fsBtn.innerHTML = '⛶ Fullscreen';
+  fsBtn.onclick = function() {
+    if (iframe.requestFullscreen) iframe.requestFullscreen();
+    else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
+  };
+  controls.appendChild(fsBtn);
+
+  var openBtn = document.createElement('button');
+  openBtn.className = 'btn';
+  openBtn.innerHTML = '↗ Open';
+  openBtn.onclick = function() { window.open(url, '_blank'); };
+  controls.appendChild(openBtn);
+
+  wrap.appendChild(controls);
+
+  var toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = '✓ Updated';
+  wrap.appendChild(toast);
+
+  card.appendChild(wrap);
+
+  // Start polling for updates
+  if (path) {
+    checkForUpdate(path, iframe, toast); // Initial SHA fetch
+    setInterval(function(){ checkForUpdate(path, iframe, toast); }, POLL_INTERVAL);
+  }
+
+  return card;
+}
+
+t.card('attachments').get('attachments').then(function(attachments) {
+  var container = document.getElementById('content');
+  var htmlAtts = attachments.filter(function(a) {
+    return a.url && a.url.indexOf('maxmcolem-a11y.github.io') !== -1;
+  });
+
+  if (htmlAtts.length === 0) {
+    container.innerHTML = '<div style="padding:12px;color:#7d8590;">No presentations found. Attach a GitHub Pages URL to this card.</div>';
+    t.sizeTo('#content');
+    return;
+  }
+
+  htmlAtts.forEach(function(att) {
+    container.appendChild(createPresentation(att));
+  });
+
+  t.sizeTo('#content');
+});
+</script>
+</body>
+</html>
