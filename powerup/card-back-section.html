@@ -95,15 +95,6 @@ function createPresentation(attachment) {
   var controls = document.createElement('div');
   controls.className = 'controls';
 
-  var fsBtn = document.createElement('button');
-  fsBtn.className = 'btn';
-  fsBtn.innerHTML = '⛶ Fullscreen';
-  fsBtn.onclick = function() {
-    if (iframe.requestFullscreen) iframe.requestFullscreen();
-    else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
-  };
-  controls.appendChild(fsBtn);
-
   var openBtn = document.createElement('button');
   openBtn.className = 'btn';
   openBtn.innerHTML = '↗ Open';
@@ -114,14 +105,12 @@ function createPresentation(attachment) {
   dlBtn.className = 'btn';
   dlBtn.innerHTML = '⬇ Download';
   dlBtn.onclick = function() {
-    var dlUrl = url + (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + Date.now();
-    fetch(dlUrl).then(function(r){ return r.blob(); }).then(function(blob) {
-      var a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = label.replace(/\s+/g, '-').toLowerCase() + '.html';
-      a.click();
-      URL.revokeObjectURL(a.href);
-    });
+    var filename = label.replace(/\s+/g, '-').toLowerCase() + '.html';
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.target = '_blank';
+    a.click();
   };
   controls.appendChild(dlBtn);
 
