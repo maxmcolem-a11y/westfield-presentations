@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timber Ridge 26L Daypack — S28 Design Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0e0e;
+  --bg2: #141414;
+  --bg3: #1c1c1c;
+  --bg4: #242424;
+  --text: #f0ede8;
+  --text2: #888;
+  --text3: #555;
+  --accent: #c9943a;
+  --accent2: #e0b46a;
+  --accent-dim: rgba(201,148,58,0.1);
+  --accent-dim2: rgba(201,148,58,0.18);
+  --green: #5dab82;
+  --blue: #5b8fd4;
+  --red: #c95d5d;
+  --purple: #9b7ecb;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --ts: clamp(2.4rem, 5.5vw, 5rem);
+  --h2: clamp(1.5rem, 3.2vw, 2.8rem);
+  --h3: clamp(1rem, 1.8vw, 1.5rem);
+  --body: clamp(0.78rem, 1.15vw, 0.98rem);
+  --sm: clamp(0.65rem, 0.88vw, 0.78rem);
+  --pad: clamp(2.2rem, 5.5vw, 5.5rem);
+  --gap: clamp(0.75rem, 1.6vw, 1.4rem);
+  --r: 10px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth;height:100%;overflow-x:hidden;}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);height:100%;overflow-x:hidden;}
+
+/* SLIDES */
+.slide{width:100vw;height:100vh;height:100dvh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding:var(--pad);}
+.slide-content{flex:1;display:flex;flex-direction:column;justify-content:center;max-height:100%;overflow:hidden;}
+
+/* ANIMATIONS */
+.r{opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);}
+.slide.vis .r{opacity:1;transform:translateY(0);}
+.r:nth-child(1){transition-delay:.05s}.r:nth-child(2){transition-delay:.14s}
+.r:nth-child(3){transition-delay:.23s}.r:nth-child(4){transition-delay:.32s}
+.r:nth-child(5){transition-delay:.41s}.r:nth-child(6){transition-delay:.5s}
+.r:nth-child(7){transition-delay:.59s}.r:nth-child(8){transition-delay:.68s}
+
+/* PROGRESS + NAV */
+.prog{position:fixed;top:0;left:0;height:2px;background:var(--accent);width:0%;transition:width .3s;z-index:1000;}
+.dots{position:fixed;right:16px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:7px;z-index:999;}
+.dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.18);cursor:pointer;transition:all .25s;border:none;}
+.dot.on{background:var(--accent);transform:scale(1.5);}
+.dot:hover{background:rgba(255,255,255,0.45);}
+
+/* TYPOGRAPHY HELPERS */
+.eyebrow{font-size:var(--sm);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.55rem;}
+.slide-h2{font-family:var(--font-display);font-size:var(--h2);font-weight:900;line-height:1.12;margin-bottom:clamp(1rem,2.2vw,1.8rem);}
+.slide-body{font-size:var(--body);color:var(--text2);line-height:1.68;}
+.accent{color:var(--accent);}
+
+/* LAYOUTS */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,4.5vw,4.5rem);align-items:center;}
+.two-col.lh{grid-template-columns:3fr 2fr;}
+.two-col.rh{grid-template-columns:2fr 3fr;}
+
+/* TITLE SLIDE */
+.s-title{background:var(--bg);}
+.s-title::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 35%,rgba(201,148,58,.07) 0%,transparent 60%);pointer-events:none;}
+.t-line{width:52px;height:2px;background:var(--accent);margin-bottom:clamp(.8rem,1.8vw,1.4rem);}
+.t-main{font-family:var(--font-display);font-size:var(--ts);font-weight:900;line-height:1.02;margin-bottom:.6rem;}
+.t-sub{font-size:clamp(.9rem,1.7vw,1.25rem);font-weight:300;color:var(--text2);max-width:520px;line-height:1.55;}
+.t-meta{margin-top:clamp(1.5rem,3vw,2.5rem);display:flex;gap:clamp(1.2rem,3vw,2.5rem);flex-wrap:wrap;}
+.mi{display:flex;flex-direction:column;gap:3px;}
+.ml{font-size:var(--sm);color:var(--text2);letter-spacing:.08em;text-transform:uppercase;}
+.mv{font-size:clamp(.88rem,1.4vw,1.08rem);font-weight:700;color:var(--accent);}
+
+/* CARDS */
+.card{background:var(--bg3);border:1px solid rgba(255,255,255,.05);border-radius:var(--r);padding:clamp(.9rem,1.8vw,1.4rem);}
+.card.hi{border-color:var(--accent);background:var(--accent-dim);}
+.card-icon{font-size:clamp(1.3rem,2.2vw,1.8rem);margin-bottom:.45rem;}
+.card-title{font-size:var(--body);font-weight:700;margin-bottom:.3rem;}
+.card-body{font-size:var(--sm);color:var(--text2);line-height:1.55;}
+
+/* GRID LAYOUTS */
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap);}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);}
+
+/* COMPETITOR TABLE */
+.ct{width:100%;border-collapse:collapse;font-size:var(--sm);}
+.ct th{text-align:left;font-weight:600;letter-spacing:.06em;color:var(--text3);padding:.35rem .75rem;border-bottom:1px solid rgba(255,255,255,.07);text-transform:uppercase;font-size:clamp(.58rem,.76vw,.68rem);}
+.ct td{padding:clamp(.28rem,.55vw,.48rem) .75rem;border-bottom:1px solid rgba(255,255,255,.035);color:var(--text);font-size:var(--sm);vertical-align:middle;}
+.ct tr:last-child td{border-bottom:none;}
+.ct tr.us td{background:var(--accent-dim);color:var(--text);}
+.ct tr.us td:first-child{font-weight:700;color:var(--accent);}
+.pb{display:inline-block;padding:2px 7px;background:var(--accent-dim2);border-radius:4px;color:var(--accent);font-weight:700;}
+.ct-tag{display:inline-block;padding:1px 5px;border-radius:3px;font-size:clamp(.52rem,.65vw,.6rem);font-weight:700;margin:1px;letter-spacing:.03em;}
+.ts{background:rgba(91,143,212,.14);color:var(--blue);}
+.tm{background:rgba(201,93,93,.14);color:var(--red);}
+.tc{background:rgba(93,171,130,.14);color:var(--green);}
+.tsp{background:rgba(201,148,58,.14);color:var(--accent);}
+
+/* PRICING */
+.pc-wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap);}
+.pc{background:var(--bg3);border:1px solid rgba(255,255,255,.05);border-radius:var(--r);padding:clamp(1.2rem,2.2vw,2rem);}
+.pc.hi{border-color:var(--accent);}
+.pc-ch{font-size:var(--sm);color:var(--text2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.35rem;}
+.pc-price{font-family:var(--font-display);font-size:clamp(2rem,4vw,3.5rem);font-weight:900;color:var(--accent);margin-bottom:.55rem;}
+.pc-r{font-size:var(--sm);color:var(--text2);display:flex;align-items:center;gap:6px;margin-bottom:3px;}
+.pc-r::before{content:'·';color:var(--accent);}
+
+/* STEP LIST */
+.steps{display:flex;flex-direction:column;gap:var(--gap);}
+.step{display:flex;gap:1.1rem;align-items:flex-start;}
+.step-n{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;color:var(--accent);opacity:.35;line-height:1;min-width:1.8rem;}
+.step-t{display:flex;flex-direction:column;gap:.2rem;padding-top:.15rem;}
+.step-title{font-size:var(--body);font-weight:700;}
+.step-desc{font-size:var(--sm);color:var(--text2);line-height:1.55;}
+
+/* TREND BAR */
+.trend-bar{display:flex;flex-direction:column;gap:var(--gap);}
+.tb-item{display:flex;flex-direction:column;gap:.3rem;}
+.tb-label{display:flex;justify-content:space-between;align-items:center;}
+.tb-name{font-size:var(--sm);font-weight:600;}
+.tb-pct{font-size:var(--sm);color:var(--accent);font-weight:700;}
+.tb-track{height:4px;background:rgba(255,255,255,.08);border-radius:2px;}
+.tb-fill{height:100%;border-radius:2px;background:var(--accent);transition:width 1.2s cubic-bezier(.16,1,.3,1);}
+.tb-sub{font-size:clamp(.58rem,.78vw,.68rem);color:var(--text3);}
+
+/* IMAGE MOSAIC */
+.mosaic{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;height:clamp(220px,38vh,380px);max-height:40vh;}
+.mosaic img{width:100%;height:100%;object-fit:cover;border-radius:8px;background:var(--bg4);}
+.mosaic img:first-child{grid-row:1/3;}
+
+/* STAT CARDS */
+.stat{background:var(--bg3);border:1px solid rgba(255,255,255,.05);border-radius:var(--r);padding:clamp(.9rem,1.8vw,1.4rem);}
+.stat-num{font-family:var(--font-display);font-size:clamp(2rem,4vw,3.2rem);font-weight:900;color:var(--accent);line-height:1;}
+.stat-label{font-size:var(--sm);color:var(--text2);margin-top:.3rem;line-height:1.4;}
+
+/* DIVIDER SLIDE */
+.s-div{background:var(--bg2);align-items:flex-start;}
+.div-bg-num{font-family:var(--font-display);font-size:clamp(6rem,18vw,16rem);font-weight:900;color:rgba(255,255,255,.03);line-height:.85;position:absolute;right:var(--pad);bottom:var(--pad);user-select:none;pointer-events:none;}
+.div-label{font-size:var(--sm);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.55rem;}
+.div-title{font-family:var(--font-display);font-size:clamp(2.8rem,6.5vw,6rem);font-weight:900;line-height:1.0;max-width:65%;}
+
+/* INSIGHT BOX */
+.insight{background:var(--accent-dim);border:1px solid rgba(201,148,58,.25);border-radius:var(--r);padding:clamp(.9rem,1.8vw,1.4rem);}
+.insight-label{font-size:var(--sm);font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.35rem;}
+.insight-text{font-size:var(--body);line-height:1.6;color:var(--text);}
+
+/* RESPONSIVE */
+@media(max-height:700px){:root{--pad:clamp(1.2rem,3.2vw,2.8rem);--gap:clamp(.5rem,1.1vw,.9rem);}}
+@media(max-height:600px){:root{--pad:1rem;}.dots,.div-bg-num{display:none;}}
+@media(max-width:900px){.two-col,.two-col.lh,.two-col.rh{grid-template-columns:1fr;}.g3{grid-template-columns:1fr 1fr;}.g4{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.g3,.g4,.pc-wrap{grid-template-columns:1fr;}.mosaic{height:clamp(160px,28vh,240px);}}
+@media(prefers-reduced-motion:reduce){.r{transition:opacity .2s;transform:none;}}
+</style>
+</head>
+<body>
+
+<div class="prog" id="prog"></div>
+<nav class="dots" id="dots"></nav>
+
+<!-- ════════════════════════════════════════
+     SLIDE 1 — TITLE
+═══════════════════════════════════════════ -->
+<section class="slide s-title" id="s1">
+  <div class="slide-content">
+    <div class="eyebrow r">Westfield Outdoors · Timber Ridge · S28 Innovation</div>
+    <div class="t-line r"></div>
+    <h1 class="t-main r">Timber Ridge<br><span class="accent">26L Daypack</span></h1>
+    <p class="t-sub r">Design a brand new, iconic silhouette — immediately recognizable, immediately Timber Ridge.</p>
+    <div class="t-meta r">
+      <div class="mi"><span class="ml">Capacity</span><span class="mv">26 Liters</span></div>
+      <div class="mi"><span class="ml">RSP Target</span><span class="mv">$79 – $100</span></div>
+      <div class="mi"><span class="ml">Origin</span><span class="mv">Cambodia</span></div>
+      <div class="mi"><span class="ml">Consumer</span><span class="mv">The Athleisurist</span></div>
+      <div class="mi"><span class="ml">Season</span><span class="mv">S28</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     SLIDE 2 — CONSUMER
+═══════════════════════════════════════════ -->
+<section class="slide" id="s2" style="background:var(--bg2)">
+  <div class="slide-content">
+    <div class="eyebrow r">Target Consumer</div>
+    <h2 class="slide-h2 r">The Athleisurist</h2>
+    <div class="g3 r">
+      <div class="card">
+        <div class="card-icon">🏃</div>
+        <div class="card-title">Active Every Day</div>
+        <div class="card-body">Gym on Tuesday. Trail on Saturday. Commute on Monday. Same bag, different context. Wants one pack that handles it all without looking like a tactical vest.</div>
+      </div>
+      <div class="card hi">
+        <div class="card-icon">⚖️</div>
+        <div class="card-title">Quality Without Premium Price</div>
+        <div class="card-body">Shops DSG, Costco, Walmart. Wants the performance aesthetic of a $150 pack at $80–100. Will pay for quality but won't be gouged. Value-conscious, not cheap.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎨</div>
+        <div class="card-title">Style-Aware</div>
+        <div class="card-body">Influenced by TikTok, outdoor lifestyle brands, and athleisure. Wants a bag that looks intentional — not a commodity. Colorway and silhouette matter as much as features.</div>
+      </div>
+    </div>
+    <div class="insight r" style="margin-top:var(--gap)">
+      <div class="insight-label">Design Implication</div>
+      <div class="insight-text">A pack that reads as <strong>athletic + organized + considered</strong>. Clean lines. One signature detail. Not a hiker's technical pack. Not a school bag. The gap between JanSport and Osprey — and that gap is where we win.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     SLIDE 3 — MARKET OPPORTUNITY
+═══════════════════════════════════════════ -->
+<section class="slide" id="s3">
+  <div class="slide-content">
+    <div class="two-col">
+      <div>
+        <div class="eyebrow r">Market Opportunity</div>
+        <h2 class="slide-h2 r">Wide-open middle in a crowded market</h2>
+        <p class="slide-body r">The 20–30L daypack category is a tale of two extremes: premium brand names at $120–200+ and unbranded commodity packs below $40. The $79–$100 band is where volume lives — but no one owns a distinct identity there.</p>
+        <br>
+        <p class="slide-body r">At DSG, the top outdoor daypack brands are Osprey, The North Face, and Patagonia — all $100+. Walmart and Costco carry private-label and Kirkland-equivalent bags with zero brand equity. <strong>Timber Ridge can own the designed middle.</strong></p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:var(--gap)">
+        <div class="stat r">
+          <div class="stat-num">$8.5B</div>
+          <div class="stat-label">Global backpack market (2024). Daypack segment growing ~6% CAGR driven by outdoor recreation and hybrid work commuting trends.</div>
+        </div>
+        <div class="stat r">
+          <div class="stat-num">26L</div>
+          <div class="stat-label">Most-searched daypack capacity online. Large enough for a full day out, compact enough to feel packable. The universal sweet spot.</div>
+        </div>
+        <div class="stat r">
+          <div class="stat-num">#1</div>
+          <div class="stat-label">Top seller slot at DSG outdoor daypacks — The North Face Basin 24L at $110. Directly adjacent to our target price and capacity. Beatable on value.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     SLIDE 4 — COMPETITIVE LANDSCAPE
+═══════════════════════════════════════════ -->
+<section class="slide" id="s4" style="background:var(--bg2)">
+  <div class="slide-content">
+    <div class="eyebrow r">Competitive Landscape</div>
+    <h2 class="slide-h2 r">Who we're up against at retail</h2>
+    <div class="r" style="overflow:auto;max-height:60vh">
+      <table class="ct">
+        <thead>
+          <tr>
+            <th>Brand / Model</th>
+            <th>Vol.</th>
+            <th>RSP</th>
+            <th>Channel</th>
+            <th>Differentiator</th>
+            <th>Threat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>The North Face Basin 24</strong></td>
+            <td>24L</td>
+            <td><span class="pb">$110</span></td>
+            <td><span class="ct-tag ts">DSG</span><span class="ct-tag tsp">REI</span></td>
+            <td>Brand equity, FlexVent suspension, airflow back</td>
+            <td style="color:var(--red)">🔴 High</td>
+          </tr>
+          <tr>
+            <td><strong>Osprey Daylite Plus</strong></td>
+            <td>20L</td>
+            <td><span class="pb">$90</span></td>
+            <td><span class="ct-tag ts">DSG</span><span class="ct-tag tsp">REI</span></td>
+            <td>Outdoor credibility, AirSpeed back, lifetime guarantee</td>
+            <td style="color:var(--red)">🔴 High</td>
+          </tr>
+          <tr>
+            <td><strong>Cotopaxi Batac 24</strong></td>
+            <td>24L</td>
+            <td><span class="pb">$100</span></td>
+            <td><span class="ct-tag ts">DSG</span><span class="ct-tag tsp">REI</span></td>
+            <td>Del Día colorblocking, purpose brand story</td>
+            <td style="color:var(--accent)">🟡 Med</td>
+          </tr>
+          <tr>
+            <td><strong>Herschel Little America</strong></td>
+            <td>25L</td>
+            <td><span class="pb">$85</span></td>
+            <td><span class="ct-tag ts">DSG</span><span class="ct-tag tsp">Specialty</span></td>
+            <td>Iconic strap + buckle silhouette, lifestyle brand</td>
+            <td style="color:var(--accent)">🟡 Med</td>
+          </tr>
+          <tr>
+            <td><strong>Nike Brasilia 9.5</strong></td>
+            <td>24L</td>
+            <td><span class="pb">$55</span></td>
+            <td><span class="ct-tag ts">DSG</span><span class="ct-tag tm">Walmart</span></td>
+            <td>Nike brand, simple commuter, wide distribution</td>
+            <td style="color:var(--accent)">🟡 Med</td>
+          </tr>
+          <tr>
+            <td><strong>DSG Own Label 26L</strong></td>
+            <td>26L</td>
+            <td><span class="pb">$60</span></td>
+            <td><span class="ct-tag ts">DSG</span></td>
+            <td>Value at DSG, house brand credibility</td>
+            <td style="color:var(--green)">🟢 Low</td>
+          </tr>
+          <tr>
+            <td><strong>Kirkland / Walmart PL</strong></td>
+            <td>25L</td>
+            <td><span class="pb">$25–35</span></td>
+            <td><span class="ct-tag tm">Walmart</span><span class="ct-tag tc">Costco</span></td>
+            <td>Pure price play — zero brand equity or design</td>
+            <td style="color:var(--green)">🟢 Low</td>
+          </tr>
+          <tr class="us">
+            <td>🎒 <strong>Timber Ridge 26L</strong> <em>(target)</em></td>
+            <td>26L</td>
+            <td><span class="pb">$79–$100</span></td>
+            <td><span class="ct-tag ts">DSG</span><span class="ct-tag tm">Walmart</span><span class="ct-tag tc">Costco</span><span class="ct-tag tsp">LL Bean</span></td>
+            <td style="color:var(--accent)">Designed, iconic, brand-owned — the gap no one fills</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     SLIDE 5 — DESIGN TRENDS
+═══════════════════════════════════════════ -->
+<section class="slide" id="s5">
+  <div class="slide-content">
+    <div class="eyebrow r">Design Trends 2025–26</div>
+    <h2 class="slide-h2 r">Where the market is moving</h2>
+    <div class="g3 r">
+      <div class="card">
+        <div class="card-icon">📐</div>
+        <div class="card-title">Structured Silhouettes</div>
+        <div class="card-body">Away from blobby pillow shapes. Defined panels, intentional geometry. A bag that looks good standing alone on a shelf. "Presence" matters.</div>
+      </div>
+      <div class="card hi">
+        <div class="card-icon">🎯</div>
+        <div class="card-title">One Signature Element</div>
+        <div class="card-body">The JanSport bottom patch. The Herschel buckle strap. The Osprey back panel. One detail that makes it instantly recognizable from across a store. This is what Timber Ridge needs.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌿</div>
+        <div class="card-title">Earth Tones + Matte Finish</div>
+        <div class="card-body">Desert sand, sage, slate, olive, warm tan. Matte over glossy. Black remains #1 at mass. Contrast zipper pulls in accent color. Away from oversaturated brights.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">💻</div>
+        <div class="card-title">Laptop Sleeve + Quick-Access</div>
+        <div class="card-body">Padded 15" sleeve is now table stakes. Front quick-access panel with key clip expected at this price. Wide-mouth water bottle pockets on both sides. Hidden back-panel security pocket trending up.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔄</div>
+        <div class="card-title">Recycled / Sustainable Materials</div>
+        <div class="card-body">RPET fabric claims are becoming standard at $80+. Brands like Cotopaxi and Fjällräven have raised consumer expectations. A "Made with recycled materials" callout is now a basic cost-of-entry claim at specialty.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📱</div>
+        <div class="card-title">TikTok-Driven Virality</div>
+        <div class="card-body">#ViralTravelBackpack = 137M TikTok views. Packs need a "moment" — a feature or visual detail that reads in a 15-second vertical video. Demonstration potential is a new design criterion.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     SLIDE 6 — CHANNEL + PRICING
+═══════════════════════════════════════════ -->
+<section class="slide" id="s6" style="background:var(--bg2)">
+  <div class="slide-content">
+    <div class="eyebrow r">Channel Strategy &amp; Pricing</div>
+    <h2 class="slide-h2 r">Two-tier retail approach</h2>
+    <div class="pc-wrap r">
+      <div class="pc hi">
+        <div class="pc-ch">Sport / Specialty Tier</div>
+        <div class="pc-price">$99.99</div>
+        <div class="pc-r">Dick's Sporting Goods (851 stores)</div>
+        <div class="pc-r">Bass Pro / Cabela's (175 stores)</div>
+        <div class="pc-r">LL Bean (58 stores + e-comm)</div>
+        <div class="pc-r">Academy Sports (273 stores)</div>
+        <div class="pc-r">Mid States · Mills Fleet Farm</div>
+      </div>
+      <div class="pc">
+        <div class="pc-ch">Mass / Club / WM Tier</div>
+        <div class="pc-price">$79.99</div>
+        <div class="pc-r">Walmart USA (4,717 stores)</div>
+        <div class="pc-r">Costco (583 US + 107 Canada)</div>
+        <div class="pc-r">Sam's Club (600 locations)</div>
+        <div class="pc-r">Walmart.com / Costco.com</div>
+      </div>
+    </div>
+    <div class="g3 r" style="margin-top:var(--gap)">
+      <div class="insight">
+        <div class="insight-label">Origin</div>
+        <div class="insight-text">Cambodia · Duty category: Backpacks / Sporting Goods</div>
+      </div>
+      <div class="insight">
+        <div class="insight-label">WF Margin Target</div>
+        <div class="insight-text">8–12% by channel · Sport/Specialty margin at top of range</div>
+      </div>
+      <div class="insight">
+        <div class="insight-label">Tariff Note</div>
+        <div class="insight-text">Cambodia CoO used to manage tariff exposure vs. China-sourced competitors</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     SLIDE 7 — DESIGN BRIEF
+═══════════════════════════════════════════ -->
+<section class="slide" id="s7">
+  <div class="slide-content">
+    <div class="two-col rh">
+      <div>
+        <div class="eyebrow r">Design Brief</div>
+        <h2 class="slide-h2 r">What success looks like</h2>
+        <div class="steps r">
+          <div class="step">
+            <div class="step-n">1</div>
+            <div class="step-t">
+              <div class="step-title">An iconic, ownable silhouette</div>
+              <div class="step-desc">Identifiable from 20 feet. A shape that belongs to Timber Ridge — not a generic daypack with a logo placement. Think about the "one element" that anchors the design.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">2</div>
+            <div class="step-t">
+              <div class="step-title">Athleisurist-first design language</div>
+              <div class="step-desc">Serious enough for a day hike, clean enough for the office. Performance details without tactical overkill. No MOLLE webbing. No excess pockets.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">3</div>
+            <div class="step-t">
+              <div class="step-title">Smart at $79–$100</div>
+              <div class="step-desc">Engineered for the price point. Right materials (800–1000D ripstop, RPET where possible), right features, nothing wasted. Must look like it costs $140.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">4</div>
+            <div class="step-t">
+              <div class="step-title">Viable across both price tiers</div>
+              <div class="step-desc">Core design at $79.99, with a differentiated colorway or feature-add for the $99.99 specialty channel version. One tooling investment, two revenue channels.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <!-- Inspiration mosaic using Unsplash lifestyle images -->
+        <div class="mosaic r">
+          <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80&auto=format" alt="Daypack lifestyle" loading="lazy" onerror="this.style.background='var(--bg4)'">
+          <img src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=400&q=80&auto=format" alt="Active lifestyle" loading="lazy" onerror="this.style.background='var(--bg4)'">
+          <img src="https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?w=400&q=80&auto=format" alt="Trail daypack" loading="lazy" onerror="this.style.background='var(--bg4)'">
+        </div>
+        <p class="slide-body r" style="margin-top:.75rem;font-size:var(--sm);color:var(--text3);text-align:center">Lifestyle reference — organized, active, intentional</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     SLIDE 8 — FEATURE TARGETS
+═══════════════════════════════════════════ -->
+<section class="slide" id="s8" style="background:var(--bg2)">
+  <div class="slide-content">
+    <div class="eyebrow r">Feature Targets</div>
+    <h2 class="slide-h2 r">What the pack needs to do</h2>
+    <div class="two-col r">
+      <div style="display:flex;flex-direction:column;gap:var(--gap)">
+        <div class="card hi">
+          <div class="card-title">🎒 Main Compartment</div>
+          <div class="card-body">26L capacity · padded 15" laptop sleeve · internal organization panel · top grab handle</div>
+        </div>
+        <div class="card">
+          <div class="card-title">⚡ Front Panel</div>
+          <div class="card-body">Quick-access zip · key clip attachment · small pocket organization</div>
+        </div>
+        <div class="card">
+          <div class="card-title">💧 Side Pockets</div>
+          <div class="card-body">Dual stretch mesh water bottle pockets · wide-mouth Nalgene compatible</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🔒 Hidden Pocket</div>
+          <div class="card-body">Back-panel security pocket (trending) · RFID-blocking lining optional</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:var(--gap)">
+        <div class="card">
+          <div class="card-title">🦺 Back System</div>
+          <div class="card-body">Contoured foam back panel with ventilation channels · padded sternum strap · adjustable load lifters on shoulder straps</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🧵 Materials</div>
+          <div class="card-body">800–1000D ripstop nylon or polyester · matte finish · YKK or equivalent zippers · RPET claim preferred for specialty channel</div>
+        </div>
+        <div class="card hi">
+          <div class="card-title">🎨 Colorways (Proposed)</div>
+          <div class="card-body">Black (hero) · Slate Grey · Olive / Sage · Desert Sand · + one seasonal accent. Contrast zipper pulls throughout.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">⚖️ Weight Target</div>
+          <div class="card-body">&lt;1.1 kg (2.4 lbs) packed weight · must feel lighter than it looks</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     SLIDE 9 — NEXT STEPS
+═══════════════════════════════════════════ -->
+<section class="slide" id="s9">
+  <div class="slide-content">
+    <div class="eyebrow r">Path Forward</div>
+    <h2 class="slide-h2 r">Next Steps</h2>
+    <div class="two-col r">
+      <div class="steps">
+        <div class="step">
+          <div class="step-n">1</div>
+          <div class="step-t">
+            <div class="step-title">Assign Designer</div>
+            <div class="step-desc">Project parked pending soft goods resources in INDY. Confirm resourcing and assign a soft goods designer lead.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">2</div>
+          <div class="step-t">
+            <div class="step-title">Competitive Shop</div>
+            <div class="step-desc">Physical teardown of TNF Basin 24, Osprey Daylite Plus, Herschel Little America. Material, feature, and pack-out analysis. Find the gap.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">3</div>
+          <div class="step-t">
+            <div class="step-title">Ideation — Find the Signature</div>
+            <div class="step-desc">3–5 sketch concepts focused on silhouette exploration. Present to PDD. The "one element" question must be answered in this phase.</div>
+          </div>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n">4</div>
+          <div class="step-t">
+            <div class="step-title">Spec + BOM Development</div>
+            <div class="step-desc">Feature set finalization, material spec, colorway palette. Target BOM aligned to channel pricing. RPET sourcing path defined.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">5</div>
+          <div class="step-t">
+            <div class="step-title">Cambodia Factory RFQ</div>
+            <div class="step-desc">Connect with factory partners. Request samples, tooling quote. Align to S28 schedule. Assess two-tier variant feasibility.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">6</div>
+          <div class="step-t">
+            <div class="step-title">MR1 Review</div>
+            <div class="step-desc">Strategy milestone: account feedback, pricing validation, consumer testing. Lock before prototype investment.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="insight r" style="margin-top:var(--gap)">
+      <div class="insight-label">Status</div>
+      <div class="insight-text">Parked pending soft goods development resources in INDY. Brief prepared and research complete. Ready to activate when resourced.</div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const slides=document.querySelectorAll('.slide');
+  const prog=document.getElementById('prog');
+  const dotsEl=document.getElementById('dots');
+  let cur=0;
+
+  slides.forEach((_,i)=>{
+    const d=document.createElement('button');
+    d.className='dot'+(i===0?' on':'');
+    d.setAttribute('aria-label','Slide '+(i+1));
+    d.onclick=()=>goTo(i);
+    dotsEl.appendChild(d);
+  });
+
+  function updateUI(i){
+    cur=i;
+    prog.style.width=((i/(slides.length-1))*100)+'%';
+    document.querySelectorAll('.dot').forEach((d,j)=>d.classList.toggle('on',j===i));
+  }
+  function goTo(i){ slides[i].scrollIntoView({behavior:'smooth'}); }
+
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowDown'||e.key==='ArrowRight'||e.key===' '){e.preventDefault();goTo(Math.min(cur+1,slides.length-1));}
+    else if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();goTo(Math.max(cur-1,0));}
+  });
+
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        en.target.classList.add('vis');
+        const i=Array.from(slides).indexOf(en.target);
+        if(i>=0) updateUI(i);
+      }
+    });
+  },{threshold:0.5});
+  slides.forEach(s=>obs.observe(s));
+
+  let ts=0;
+  document.addEventListener('touchstart',e=>{ts=e.touches[0].clientY;},{passive:true});
+  document.addEventListener('touchend',e=>{
+    const dy=ts-e.changedTouches[0].clientY;
+    if(Math.abs(dy)>50) dy>0?goTo(Math.min(cur+1,slides.length-1)):goTo(Math.max(cur-1,0));
+  },{passive:true});
+
+  updateUI(0);
+})();
+</script>
+</body>
+</html>
