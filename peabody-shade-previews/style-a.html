@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Style A — Craft & Industry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #1a1208;
+  color: #f0e8d8;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: clamp(2rem, 6vw, 6rem);
+}
+
+/* Warm industrial texture bg */
+.bg-texture {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 85%, rgba(180, 100, 20, 0.25) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 20%, rgba(120, 60, 10, 0.15) 0%, transparent 50%),
+    #1a1208;
+}
+
+/* Horizontal rule accent */
+.rule {
+  width: 80px;
+  height: 3px;
+  background: #c87533;
+  margin-bottom: clamp(1rem, 3vh, 2rem);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: growRule 0.8s 0.3s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+@keyframes growRule {
+  to { transform: scaleX(1); }
+}
+
+.eyebrow {
+  font-size: clamp(0.6rem, 1.2vw, 0.8rem);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #c87533;
+  margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
+  opacity: 0;
+  animation: fadeUp 0.7s 0.5s ease forwards;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  color: #f0e8d8;
+  margin-bottom: clamp(1rem, 2.5vh, 2rem);
+  opacity: 0;
+  animation: fadeUp 0.8s 0.65s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+h1 em {
+  font-style: italic;
+  color: #c87533;
+}
+
+.subtitle {
+  font-size: clamp(0.85rem, 1.8vw, 1.15rem);
+  font-weight: 300;
+  color: rgba(240,232,216,0.65);
+  line-height: 1.6;
+  max-width: 480px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.8s ease forwards;
+}
+
+.corner-tag {
+  position: absolute;
+  bottom: clamp(1.5rem, 4vh, 3rem);
+  right: clamp(2rem, 5vw, 5rem);
+  text-align: right;
+  opacity: 0;
+  animation: fadeUp 0.6s 1.1s ease forwards;
+}
+
+.corner-tag span {
+  display: block;
+  font-size: clamp(0.6rem, 1vw, 0.75rem);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(200, 117, 51, 0.6);
+}
+
+/* Decorative circle */
+.deco-circle {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,117,51,0.15);
+  opacity: 0;
+  animation: fadeIn 1.5s 0.2s ease forwards;
+}
+.deco-circle::after {
+  content: '';
+  position: absolute;
+  inset: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,117,51,0.08);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.style-label {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(200,117,51,0.2);
+  border: 1px solid rgba(200,117,51,0.4);
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #c87533;
+}
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="bg-texture"></div>
+  <div class="deco-circle"></div>
+  <div class="style-label">STYLE A — CRAFT & INDUSTRY</div>
+
+  <div style="position:relative; z-index:1; max-width: 700px;">
+    <div class="rule"></div>
+    <div class="eyebrow">Outdoor Shade Proposal · 2026</div>
+    <h1>Shade <em>Sails</em><br>for Peabody<br>Heights Brewery</h1>
+    <p class="subtitle">A permanent, storm-resilient shade system. Sourced direct from China, installed for a fraction of commercial quotes.</p>
+  </div>
+
+  <div class="corner-tag">
+    <span>Prepared by</span>
+    <span style="color: #f0e8d8; font-size: 0.8rem; margin-top:2px;">Max Moore</span>
+  </div>
+</div>
+</body>
+</html>

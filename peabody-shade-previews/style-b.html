@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Style B — Clean Blueprint</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f4f1eb;
+  color: #1a1a1a;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.slide {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Left panel */
+.left {
+  background: #2b3a2e;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 6vw, 5rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.left::before {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  left: -80px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+
+.left-eyebrow {
+  font-size: clamp(0.6rem, 1vw, 0.75rem);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: clamp(0.75rem, 2vh, 1.5rem);
+  opacity: 0;
+  animation: slideRight 0.7s 0.3s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: clamp(1rem, 2.5vh, 2rem);
+  opacity: 0;
+  animation: slideRight 0.8s 0.5s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+.accent-word {
+  color: #8dc98d;
+}
+
+.tagline {
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.65;
+  max-width: 320px;
+  border-left: 2px solid #8dc98d;
+  padding-left: clamp(0.75rem, 1.5vw, 1.25rem);
+  opacity: 0;
+  animation: slideRight 0.8s 0.7s ease forwards;
+}
+
+/* Right panel */
+.right {
+  background: #f4f1eb;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 6vw, 5rem);
+  gap: clamp(1rem, 2.5vh, 2rem);
+}
+
+.stat-block {
+  opacity: 0;
+  animation: fadeUp 0.7s ease forwards;
+}
+.stat-block:nth-child(1) { animation-delay: 0.6s; }
+.stat-block:nth-child(2) { animation-delay: 0.75s; }
+.stat-block:nth-child(3) { animation-delay: 0.9s; }
+
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  color: #2b3a2e;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+  color: #888;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+.divider {
+  height: 1px;
+  background: #ddd8ce;
+  margin: clamp(0.5rem, 1.5vh, 1rem) 0;
+}
+
+.style-label {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(43,58,46,0.1);
+  border: 1px solid rgba(43,58,46,0.2);
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #2b3a2e;
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-25px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="style-label">STYLE B — CLEAN BLUEPRINT</div>
+
+  <div class="left">
+    <div class="left-eyebrow">Shade Sail Proposal · Baltimore MD · 2026</div>
+    <h1>Peabody<br>Heights<br><span class="accent-word">Brewery</span></h1>
+    <p class="tagline">Three retractable triangular sails. Winch-lowered in minutes. Sourced direct, delivered smart.</p>
+  </div>
+
+  <div class="right">
+    <div class="stat-block">
+      <div class="stat-num">3</div>
+      <div class="stat-label">TRIANGULAR SHADE SAILS</div>
+    </div>
+    <div class="divider"></div>
+    <div class="stat-block">
+      <div class="stat-num">~$4–6K</div>
+      <div class="stat-label">ESTIMATED ALL-IN COST</div>
+    </div>
+    <div class="divider"></div>
+    <div class="stat-block">
+      <div class="stat-num">5 min</div>
+      <div class="stat-label">STORM PREP TIME PER SAIL</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
