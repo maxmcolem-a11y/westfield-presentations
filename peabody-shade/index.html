@@ -720,6 +720,16 @@ body {
 }
 
 /* ===========================================
+   CALLOUT BOX (used on wind slides)
+   =========================================== */
+.callout-box {
+  border-left: 2px solid var(--gold);
+  background: rgba(200,169,110,0.05);
+  padding: clamp(0.75rem,1.5vw,1.25rem) clamp(1rem,2vw,1.5rem);
+  margin-top: clamp(0.75rem,1.5vh,1.25rem);
+}
+
+/* ===========================================
    PROGRESS BAR
    =========================================== */
 .progress-bar {
@@ -1124,7 +1134,137 @@ body {
 </section>
 
 <!-- ============================================================
-     SLIDE 8: NEXT STEPS
+     SLIDE 9: WIND & ENGINEERING — PART 1
+     ============================================================ -->
+<section class="slide" id="s-wind1">
+  <div class="bg-word" style="bottom:-3vw; right:-1vw;">WIND</div>
+
+  <div class="top-bar reveal-fade d1">
+    <div class="top-label">Engineering</div>
+    <div class="top-right">Wind &amp; Load</div>
+  </div>
+
+  <div class="content">
+    <div class="two-col" style="gap: clamp(1.5rem, 4vw, 5rem);">
+      <div>
+        <div class="eyebrow reveal d1">Wind Loading</div>
+        <div class="section-title reveal d2">Designed for<br><em>90 mph</em><br>winds.</div>
+        <div class="hr reveal d3"></div>
+        <p class="body-text reveal d3">
+          Baltimore falls under ASCE 7 wind zone requiring design for <strong style="color:var(--text)">90 mph</strong> (Exposure Category C — open area). At 30 mph, a 300 sq ft sail already sees 1,500–4,500 lbs of total wind load transferred through the corner cables to the anchors.
+        </p>
+        <div class="hr reveal d4"></div>
+        <p class="body-text reveal d4">
+          Wind pressure on fabric runs <strong style="color:var(--text)">5–15 lbs per sq ft</strong> depending on speed and angle. Cable tension can spike to <strong style="color:var(--text)">3,000+ lbs</strong> under gusts — which is exactly why the existing steel I-beam is the right anchor, not masonry brackets.
+        </p>
+      </div>
+      <div>
+        <div class="eyebrow reveal d2" style="margin-bottom: clamp(0.75rem,2vh,1.5rem);">Key Numbers</div>
+
+        <div style="display:flex; flex-direction:column; gap: clamp(0.5rem,1.5vh,1.25rem);">
+
+          <div class="reveal d2" style="border:1px solid rgba(200,169,110,0.15); border-radius:2px; padding: clamp(0.75rem,1.5vw,1.25rem);">
+            <div style="font-family:var(--font-display); font-style:italic; font-size:clamp(2rem,4vw,3.2rem); color:var(--gold); line-height:1;">90 mph</div>
+            <div style="font-size:var(--label-size); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim); margin-top:4px;">Design wind speed · Baltimore ASCE 7</div>
+          </div>
+
+          <div class="reveal d3" style="border:1px solid rgba(200,169,110,0.15); border-radius:2px; padding: clamp(0.75rem,1.5vw,1.25rem);">
+            <div style="font-family:var(--font-display); font-style:italic; font-size:clamp(2rem,4vw,3.2rem); color:var(--gold); line-height:1;">5–15 psf</div>
+            <div style="font-size:var(--label-size); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim); margin-top:4px;">Wind pressure on sail fabric</div>
+          </div>
+
+          <div class="reveal d4" style="border:1px solid rgba(200,169,110,0.15); border-radius:2px; padding: clamp(0.75rem,1.5vw,1.25rem);">
+            <div style="font-family:var(--font-display); font-style:italic; font-size:clamp(2rem,4vw,3.2rem); color:var(--gold); line-height:1;">3,000+ lbs</div>
+            <div style="font-size:var(--label-size); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim); margin-top:4px;">Peak cable tension under gusts</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-bar reveal-fade d5">
+    <div class="bottom-label">Lower sails when sustained winds exceed ~30 mph · I-beam anchor rated for peak loads</div>
+    <div class="slide-num">09</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 10: WIND & ENGINEERING — PART 2 (Tension + Spec)
+     ============================================================ -->
+<section class="slide" id="s-wind2">
+  <div class="top-bar reveal-fade d1">
+    <div class="top-label">Engineering</div>
+    <div class="top-right">Tension &amp; Hardware Spec</div>
+  </div>
+
+  <div class="content">
+    <div class="two-col" style="gap: clamp(1.5rem, 4vw, 5rem);">
+      <div>
+        <div class="eyebrow reveal d1">Tension &amp; Pitch</div>
+        <div class="section-title reveal d2"><em>Pitch</em> is the<br>best engineering<br>tool you have.</div>
+        <div class="hr reveal d3"></div>
+        <p class="body-text reveal d3">
+          Corner pre-tension at rest: <strong style="color:var(--text)">150–400 lbs per corner</strong> minimum to keep the sail taut and drain water. But the single biggest lever for reducing load on anchors and cables is sail pitch.
+        </p>
+        <div class="callout-box reveal d4">
+          <div style="font-size:var(--label-size); letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">The Pitch Rule</div>
+          <p style="font-size:var(--body-size); color:var(--text-dim); line-height:1.65;">A flat (10°) sail under the same wind puts <strong style="color:var(--text)">3–4× more corner tension</strong> than a 30° pitched sail. Getting good height difference between the I-beam high points and the winch low corners isn't just about drainage — it cuts load on everything dramatically.</p>
+          <div style="margin-top:10px; font-size:var(--label-size); letter-spacing:2px; color:var(--gold);">Target: 20–30° minimum pitch on both sails</div>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow reveal d2">Hardware Spec</div>
+        <table class="bom-table reveal d3" style="margin-top: clamp(0.5rem,1vh,1rem);">
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Minimum Spec</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Wire rope (cable)</td>
+              <td>1/4" 7×19 SS 316 — ~7,000 lb break strength</td>
+            </tr>
+            <tr>
+              <td>Turnbuckles</td>
+              <td>1/2" jaw-jaw, SS 316</td>
+            </tr>
+            <tr>
+              <td>Winch (per sail)</td>
+              <td>800–1,200 lb working load (e.g. Lewmar 40/48)</td>
+            </tr>
+            <tr>
+              <td>Corner D-rings</td>
+              <td>SS 316, min. 5,000 lb WLL</td>
+            </tr>
+            <tr>
+              <td>I-beam clamps</td>
+              <td>Beam clamp rated for point load — get PE sign-off</td>
+            </tr>
+            <tr>
+              <td>Pergola reinforcement</td>
+              <td>Steel gusset plates + 1/2" lag bolts into structural members</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hr reveal d4"></div>
+        <p class="body-text reveal d4" style="font-size: calc(var(--body-size) * 0.92);">
+          <strong style="color:var(--text);">Structural engineer review recommended</strong> — a PE sign-off letter on the I-beam and pergola attachment points is ~$500–1,000 and protects the brewery if the city asks questions.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-bar reveal-fade d5">
+    <div class="bottom-label">All hardware: SS 316 (not 304) — Baltimore coastal air environment</div>
+    <div class="slide-num">10</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 11: NEXT STEPS
      ============================================================ -->
 <section class="slide" id="s8">
   <div class="top-bar reveal-fade d1">
@@ -1190,7 +1330,7 @@ body {
 
   <div class="bottom-bar reveal-fade d6">
     <div class="bottom-label">Preliminary concept · subject to site survey &amp; structural review · March 2026</div>
-    <div class="slide-num">09</div>
+    <div class="slide-num">11</div>
   </div>
 </section>
 
