@@ -609,6 +609,17 @@ body {
   clip-path: inset(0 50% 0 0); /* updated by JS */
   transition: clip-path 0.02s linear;
 }
+/* Mobile: contain instead of cover so full image is visible */
+@media (max-width: 768px), (max-height: 600px) {
+  #s-daynight .img-day {
+    background-size: contain;
+    background-color: #050505;
+  }
+  #s-daynight .img-night {
+    background-size: contain;
+    background-color: #050505;
+  }
+}
 /* Divider line */
 #s-daynight .divider-line {
   position: absolute;
