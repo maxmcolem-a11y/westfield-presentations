@@ -804,7 +804,7 @@ body {
     <div style="display:contents">
       <div class="sub-row reveal d3">
         <div class="sub-line"></div>
-        <div class="sub-text">Three sails · Winch-lowered · Direct-sourced</div>
+        <div class="sub-text">Two sails · Winch-lowered · Factory-direct pricing</div>
         <div class="sub-line"></div>
       </div>
     </div>
@@ -884,25 +884,25 @@ body {
     <div class="two-col">
       <div>
         <div class="eyebrow reveal d1">The Concept</div>
-        <div class="section-title reveal d2">Three<br><em>overlapping</em><br>triangles.</div>
+        <div class="section-title reveal d2">Two<br><em>overlapping</em><br>triangles.</div>
         <div class="hr reveal d3"></div>
         <p class="body-text reveal d3">
-          Triangular sail geometry is inherently rigid under tension and more wind-stable than rectangular panels. Three overlapping sails with staggered anchor points provide full patio coverage with no single point of failure.
+          Triangular sail geometry is inherently rigid under tension and more wind-stable than rectangular panels. Two large overlapping sails cover the full patio area, anchored to the existing steel I-beam roof structure on one side and the reinforced wooden pergola on the other.
         </p>
       </div>
       <div>
         <ul class="concept-list">
           <li class="reveal d2">
             <span class="num">①</span>
-            <div><strong>Two fixed corners</strong> — wall anchors or post tops, bolted permanently. Set-and-forget tension via turnbuckles.</div>
+            <div><strong>Steel I-beam anchors</strong> — existing roof structure on the building side provides solid fixed anchor points. No new structural steel required.</div>
           </li>
           <li class="reveal d3">
             <span class="num">②</span>
-            <div><strong>One live corner</strong> — stainless cable runs through a pulley at the post top, down to a deck-mounted manual winch. Crank down to lower, crank up to raise.</div>
+            <div><strong>Reinforced pergola anchors</strong> — existing wooden pergola structure on the opposite side, reinforced at anchor points to handle sail tension loads.</div>
           </li>
           <li class="reveal d4">
             <span class="num">③</span>
-            <div><strong>Overlap design</strong> — the three sail live corners are on separate posts, so no two winches share a structure. Partial coverage maintained if one sail is lowered.</div>
+            <div><strong>One live corner each</strong> — stainless cable through a pulley down to a deck-mounted marine winch. Crank down in ~5 min before a storm, raise and re-tension after.</div>
           </li>
         </ul>
       </div>
@@ -910,7 +910,7 @@ body {
   </div>
 
   <div class="bottom-bar reveal-fade d5">
-    <div class="bottom-label">3 sails · 3 winch posts · full patio coverage</div>
+    <div class="bottom-label">2 sails · I-beam + pergola anchors · full patio coverage</div>
     <div class="slide-num">04</div>
   </div>
 </section>
@@ -925,150 +925,162 @@ body {
   </div>
 
   <div class="content">
-    <div class="eyebrow reveal d1">Patio Layout</div>
-    <div class="diagram-container reveal d2">
-      <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
-        <!-- Defs -->
+    <div class="eyebrow reveal d1">Patio Layout — Satellite View</div>
+    <div class="diagram-container reveal d2" style="position:relative; background: url('layout.jpg') center/contain no-repeat; border-radius:4px; overflow:hidden;">
+      <div style="position:absolute;inset:0;background:rgba(14,14,14,0.52);border-radius:4px;"></div>
+      <div style="position:relative;z-index:1;width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+      <svg viewBox="0 0 820 480" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <filter id="glow">
+          <filter id="glow2">
             <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
             <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
-          <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
-            <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+          <pattern id="grid2" width="28" height="28" patternUnits="userSpaceOnUse">
+            <path d="M 28 0 L 0 0 0 28" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="0.5"/>
           </pattern>
         </defs>
 
         <!-- Background -->
-        <rect width="800" height="500" fill="#111"/>
-        <rect width="800" height="500" fill="url(#grid)"/>
+        <rect width="820" height="480" fill="#111"/>
+        <rect width="820" height="480" fill="url(#grid2)"/>
 
-        <!-- Surrounding context (grey areas) -->
-        <!-- Left building -->
-        <rect x="0" y="0" width="135" height="500" fill="#1a1a1a" opacity="0.8"/>
-        <!-- Top building -->
-        <rect x="0" y="0" width="800" height="95" fill="#1a1a1a" opacity="0.8"/>
-        <!-- Right area -->
-        <rect x="480" y="95" width="320" height="405" fill="#181818" opacity="0.7"/>
-        <!-- Bottom area below patio -->
-        <rect x="135" y="390" width="345" height="110" fill="#181818" opacity="0.7"/>
+        <!-- Building block (top-left, the brewery) -->
+        <rect x="0" y="0" width="500" height="85" fill="#1c1c1c" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <text x="250" y="50" text-anchor="middle" font-family="Outfit" font-size="10" fill="rgba(255,255,255,0.25)" letter-spacing="2">BREWERY BUILDING</text>
 
-        <!-- The actual patio area (lighter) -->
-        <rect x="135" y="95" width="345" height="295" fill="#1e1e1e" rx="2"/>
-        <rect x="135" y="95" width="345" height="295" fill="none" stroke="rgba(200,169,110,0.25)" stroke-width="1.5"/>
+        <!-- Steel I-beam label on building edge -->
+        <rect x="80" y="82" width="280" height="16" fill="rgba(200,169,110,0.12)" rx="1"/>
+        <text x="220" y="94" text-anchor="middle" font-family="Outfit" font-size="9" fill="rgba(200,169,110,0.7)" letter-spacing="2">STEEL I-BEAM ROOF STRUCTURE</text>
 
-        <!-- Patio label -->
-        <text x="307" y="450" text-anchor="middle" font-family="Outfit" font-size="10" fill="rgba(200,169,110,0.4)" letter-spacing="3">PATIO AREA</text>
+        <!-- Patio area -->
+        <rect x="80" y="98" width="340" height="280" fill="#1a1a1a" rx="2" stroke="rgba(200,169,110,0.18)" stroke-width="1"/>
 
-        <!-- Building wall label (top) -->
-        <rect x="135" y="75" width="345" height="20" fill="rgba(200,169,110,0.06)" rx="1"/>
-        <text x="307" y="88" text-anchor="middle" font-family="Outfit" font-size="9" fill="rgba(200,169,110,0.5)" letter-spacing="2">BUILDING WALL — ANCHOR POINTS</text>
+        <!-- Pergola on right side -->
+        <rect x="420" y="98" width="18" height="280" fill="#2a2018" stroke="rgba(200,169,110,0.3)" stroke-width="1"/>
+        <!-- Pergola cross-beams -->
+        <line x1="420" y1="145" x2="438" y2="145" stroke="rgba(200,169,110,0.25)" stroke-width="1.5"/>
+        <line x1="420" y1="198" x2="438" y2="198" stroke="rgba(200,169,110,0.25)" stroke-width="1.5"/>
+        <line x1="420" y1="251" x2="438" y2="251" stroke="rgba(200,169,110,0.25)" stroke-width="1.5"/>
+        <line x1="420" y1="304" x2="438" y2="304" stroke="rgba(200,169,110,0.25)" stroke-width="1.5"/>
+        <text x="429" y="95" text-anchor="middle" font-family="Outfit" font-size="8" fill="rgba(200,169,110,0.5)" letter-spacing="0">⬆</text>
 
-        <!-- =============================
-             SAIL ANCHOR POINTS
-             Based on Max's sketch:
-             Red:   top-left(155,105), top-right(380,105), bottom-left(155,350)  — wall top-left + wall top-right + post bottom-left
-             Blue:  top-right(435,105), mid-right(480,215), center(310,215)       — wall top-right + post right + center
-             Green: center(310,215), bottom-right(480,370), bottom-left(155,385)  — center + post bottom-right + post bottom-left
-             ============================= -->
+        <!-- Pergola label -->
+        <text x="510" y="240" text-anchor="middle" font-family="Outfit" font-size="9" fill="rgba(200,169,110,0.55)" letter-spacing="2"
+          transform="rotate(-90, 510, 240)">PERGOLA (REINF.)</text>
 
-        <!-- RED SAIL — upper left quadrant -->
+        <!-- Street/ground below -->
+        <rect x="0" y="378" width="820" height="102" fill="#181818" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <text x="250" y="430" text-anchor="middle" font-family="Outfit" font-size="10" fill="rgba(255,255,255,0.12)" letter-spacing="3">PATIO DECK / E 30TH ST</text>
+
+        <!-- Right context -->
+        <rect x="438" y="98" width="382" height="280" fill="#161616" rx="2"/>
+
+        <!-- =====================
+             SAIL ① — RED (bottom-left triangle)
+             Matches sketch: top-left corner at building, sweeps down-left, apex at bottom
+             Corners: building-left(105,98), building-right-of-center(310,98), bottom-left(105,345)
+             ===================== -->
         <polygon
-          points="155,108 430,108 175,330"
-          fill="rgba(180,55,55,0.30)"
-          stroke="rgba(220,80,80,0.75)"
-          stroke-width="1.5"
+          points="105,98 390,98 130,345"
+          fill="rgba(190,55,55,0.28)"
+          stroke="rgba(230,80,80,0.80)"
+          stroke-width="2"
           stroke-linejoin="round"
-          filter="url(#glow)"
+          filter="url(#glow2)"
         />
 
-        <!-- BLUE SAIL — upper right -->
+        <!-- =====================
+             SAIL ② — BLUE (top-right triangle)
+             Matches sketch: wide top spanning building, apex pointing down-right
+             Corners: building-left(105,98), building-far-right(415,98), bottom-right(415,345)
+             ===================== -->
         <polygon
-          points="430,108 478,108 478,270 310,230"
-          fill="rgba(60,100,200,0.25)"
-          stroke="rgba(80,130,230,0.70)"
-          stroke-width="1.5"
+          points="130,98 415,98 415,345"
+          fill="rgba(60,90,210,0.24)"
+          stroke="rgba(90,130,240,0.75)"
+          stroke-width="2"
           stroke-linejoin="round"
-          filter="url(#glow)"
+          filter="url(#glow2)"
         />
 
-        <!-- GREEN SAIL — lower sweep -->
-        <polygon
-          points="175,330 310,230 478,270 430,385 155,385"
-          fill="rgba(55,160,85,0.25)"
-          stroke="rgba(80,200,110,0.65)"
-          stroke-width="1.5"
-          stroke-linejoin="round"
-          filter="url(#glow)"
-        />
-
-        <!-- =============================
+        <!-- =====================
              ANCHOR POINTS
-             ============================= -->
-        <!-- Wall anchors (gold squares) -->
-        <rect x="148" y="101" width="14" height="14" rx="2" fill="rgba(200,169,110,0.9)" stroke="#0e0e0e" stroke-width="1"/>
-        <rect x="423" y="101" width="14" height="14" rx="2" fill="rgba(200,169,110,0.9)" stroke="#0e0e0e" stroke-width="1"/>
-        <rect x="471" y="101" width="14" height="14" rx="2" fill="rgba(200,169,110,0.9)" stroke="#0e0e0e" stroke-width="1"/>
+             ===================== -->
 
-        <!-- Post anchors (circles) -->
-        <!-- Post A — bottom left (green + red winch) -->
-        <circle cx="168" cy="340" r="9" fill="rgba(200,169,110,0.15)" stroke="rgba(200,169,110,0.6)" stroke-width="1.5"/>
-        <circle cx="168" cy="340" r="4" fill="rgba(200,169,110,0.8)"/>
+        <!-- I-beam anchors — gold squares along top building edge -->
+        <rect x="98" y="91" width="14" height="14" rx="2" fill="rgba(200,169,110,0.95)" stroke="#111" stroke-width="1.5"/>
+        <text x="105" y="101" text-anchor="middle" font-size="8" fill="#111" font-weight="bold">I</text>
 
-        <!-- Post B — center (blue + green share) -->
-        <circle cx="310" cy="230" r="9" fill="rgba(200,169,110,0.15)" stroke="rgba(200,169,110,0.6)" stroke-width="1.5"/>
-        <circle cx="310" cy="230" r="4" fill="rgba(200,169,110,0.8)"/>
+        <rect x="253" y="91" width="14" height="14" rx="2" fill="rgba(200,169,110,0.95)" stroke="#111" stroke-width="1.5"/>
+        <text x="260" y="101" text-anchor="middle" font-size="8" fill="#111" font-weight="bold">I</text>
 
-        <!-- Post C — right (blue winch + green) -->
-        <circle cx="478" cy="270" r="9" fill="rgba(200,169,110,0.15)" stroke="rgba(200,169,110,0.6)" stroke-width="1.5"/>
-        <circle cx="478" cy="270" r="4" fill="rgba(200,169,110,0.8)"/>
+        <rect x="408" y="91" width="14" height="14" rx="2" fill="rgba(200,169,110,0.95)" stroke="#111" stroke-width="1.5"/>
+        <text x="415" y="101" text-anchor="middle" font-size="8" fill="#111" font-weight="bold">I</text>
 
-        <!-- Post D — bottom right (green anchor) -->
-        <circle cx="430" cy="385" r="7" fill="rgba(200,169,110,0.1)" stroke="rgba(200,169,110,0.4)" stroke-width="1"/>
-        <circle cx="430" cy="385" r="3" fill="rgba(200,169,110,0.5)"/>
+        <!-- Pergola anchors — circles on right -->
+        <circle cx="429" cy="200" r="8" fill="rgba(200,169,110,0.15)" stroke="rgba(200,169,110,0.65)" stroke-width="1.5"/>
+        <circle cx="429" cy="200" r="3.5" fill="rgba(200,169,110,0.8)"/>
 
-        <!-- Winch indicators (gear icons via text) -->
-        <text x="168" y="345" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">⚙</text>
-        <text x="310" y="235" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">⚙</text>
-        <text x="478" y="275" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">⚙</text>
+        <!-- WINCH points — live corners -->
+        <!-- Sail ① live corner: bottom-left (pergola anchor or deck post) -->
+        <circle cx="130" cy="345" r="11" fill="rgba(230,80,80,0.15)" stroke="rgba(230,80,80,0.7)" stroke-width="1.5"/>
+        <text x="130" y="350" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.9)">⚙</text>
 
-        <!-- =============================
-             SAIL LABELS
-             ============================= -->
-        <text x="230" y="178" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="20" fill="rgba(220,80,80,0.7)">①</text>
-        <text x="420" y="175" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="20" fill="rgba(80,130,230,0.7)">②</text>
-        <text x="315" y="330" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="20" fill="rgba(80,200,110,0.7)">③</text>
+        <!-- Sail ② live corner: bottom-right (pergola) -->
+        <circle cx="415" cy="345" r="11" fill="rgba(90,130,240,0.15)" stroke="rgba(90,130,240,0.7)" stroke-width="1.5"/>
+        <text x="415" y="350" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.9)">⚙</text>
 
-        <!-- =============================
-             LEGEND
-             ============================= -->
-        <rect x="520" y="130" width="220" height="185" rx="3" fill="rgba(0,0,0,0.5)" stroke="rgba(200,169,110,0.12)" stroke-width="1"/>
+        <!-- Cable dashed lines from winch to top anchors -->
+        <line x1="130" y1="334" x2="105" y2="105" stroke="rgba(230,80,80,0.35)" stroke-width="1" stroke-dasharray="5,4"/>
+        <line x1="415" y1="334" x2="415" y2="105" stroke="rgba(90,130,240,0.35)" stroke-width="1" stroke-dasharray="5,4"/>
 
-        <text x="630" y="153" text-anchor="middle" font-family="Outfit" font-size="9" fill="rgba(200,169,110,0.6)" letter-spacing="3">LEGEND</text>
+        <!-- SAIL LABELS -->
+        <text x="190" y="230" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="26" fill="rgba(230,80,80,0.65)">①</text>
+        <text x="335" y="185" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="26" fill="rgba(90,130,240,0.65)">②</text>
 
-        <!-- Wall anchor -->
-        <rect x="537" y="163" width="10" height="10" rx="1.5" fill="rgba(200,169,110,0.9)"/>
-        <text x="555" y="172" font-family="Outfit" font-size="10" fill="rgba(232,224,212,0.6)">Wall anchor (fixed)</text>
+        <!-- OVERLAP zone callout -->
+        <polygon points="130,98 390,98 130,345" fill="none"/>
+        <!-- small overlap shading between the two sails in the center -->
+        <polygon
+          points="130,98 390,98 130,260"
+          fill="rgba(160,100,200,0.12)"
+          stroke="none"
+        />
+        <text x="230" y="160" text-anchor="middle" font-family="Outfit" font-size="9" fill="rgba(200,169,110,0.45)" letter-spacing="1">OVERLAP</text>
 
-        <!-- Post with winch -->
-        <circle cx="542" cy="192" r="6" fill="rgba(200,169,110,0.15)" stroke="rgba(200,169,110,0.6)" stroke-width="1.5"/>
-        <text x="542" y="196" text-anchor="middle" font-size="8" fill="#fff">⚙</text>
-        <text x="555" y="197" font-family="Outfit" font-size="10" fill="rgba(232,224,212,0.6)">Post + winch (live corner)</text>
+        <!-- LEGEND -->
+        <rect x="545" y="115" width="225" height="195" rx="3" fill="rgba(0,0,0,0.55)" stroke="rgba(200,169,110,0.12)" stroke-width="1"/>
+        <text x="657" y="138" text-anchor="middle" font-family="Outfit" font-size="9" fill="rgba(200,169,110,0.6)" letter-spacing="3">LEGEND</text>
 
-        <!-- Sail colors -->
-        <line x1="533" y1="218" x2="553" y2="218" stroke="rgba(220,80,80,0.8)" stroke-width="2.5"/>
-        <text x="558" y="222" font-family="Outfit" font-size="10" fill="rgba(232,224,212,0.6)">Sail ① — upper left</text>
+        <rect x="562" y="148" width="11" height="11" rx="1.5" fill="rgba(200,169,110,0.9)"/>
+        <text x="562" y="147" font-size="7" fill="#111" font-weight="bold" dx="2" dy="8">I</text>
+        <text x="580" y="157" font-family="Outfit" font-size="10" fill="rgba(232,224,212,0.6)">I-beam anchor (fixed)</text>
 
-        <line x1="533" y1="237" x2="553" y2="237" stroke="rgba(80,130,230,0.8)" stroke-width="2.5"/>
-        <text x="558" y="241" font-family="Outfit" font-size="10" fill="rgba(232,224,212,0.6)">Sail ② — upper right</text>
+        <circle cx="567" cy="178" r="6" fill="rgba(200,169,110,0.15)" stroke="rgba(200,169,110,0.65)" stroke-width="1.5"/>
+        <circle cx="567" cy="178" r="2.5" fill="rgba(200,169,110,0.8)"/>
+        <text x="580" y="182" font-family="Outfit" font-size="10" fill="rgba(232,224,212,0.6)">Pergola anchor (fixed)</text>
 
-        <line x1="533" y1="256" x2="553" y2="256" stroke="rgba(80,200,110,0.8)" stroke-width="2.5"/>
-        <text x="558" y="260" font-family="Outfit" font-size="10" fill="rgba(232,224,212,0.6)">Sail ③ — lower sweep</text>
+        <circle cx="567" cy="202" r="7" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+        <text x="567" y="206" text-anchor="middle" font-size="9" fill="#fff">⚙</text>
+        <text x="580" y="206" font-family="Outfit" font-size="10" fill="rgba(232,224,212,0.6)">Winch (live corner)</text>
 
-        <!-- Note -->
-        <text x="630" y="295" text-anchor="middle" font-family="Outfit" font-size="9" font-style="italic" fill="rgba(200,169,110,0.3)">Schematic — site survey req'd</text>
+        <line x1="558" y1="225" x2="576" y2="225" stroke="rgba(230,80,80,0.85)" stroke-width="2.5"/>
+        <text x="580" y="229" font-family="Outfit" font-size="10" fill="rgba(232,224,212,0.6)">Sail ① — bottom-left</text>
+
+        <line x1="558" y1="245" x2="576" y2="245" stroke="rgba(90,130,240,0.85)" stroke-width="2.5"/>
+        <text x="580" y="249" font-family="Outfit" font-size="10" fill="rgba(232,224,212,0.6)">Sail ② — top-right</text>
+
+        <line x1="558" y1="265" x2="576" y2="265" stroke="rgba(160,100,200,0.6)" stroke-width="2.5"/>
+        <text x="580" y="269" font-family="Outfit" font-size="10" fill="rgba(232,224,212,0.6)">Overlap zone</text>
+
+        <text x="657" y="300" text-anchor="middle" font-family="Outfit" font-size="9" font-style="italic" fill="rgba(200,169,110,0.3)">Schematic — site survey req'd</text>
       </svg>
+      </div>
     </div>
+  </div>
+
+  <div class="bottom-bar reveal-fade d4">
+    <div class="bottom-label">Layout based on satellite view    </div>
   </div>
 
   <div class="bottom-bar reveal-fade d4">
@@ -1145,21 +1157,21 @@ body {
       <tbody>
         <tr>
           <td>Shade fabric panels</td>
-          <td>HDPE mesh 185–320 g/m², UV-stabilized, reinforced corner webbing + stainless D-rings, custom-cut triangles</td>
+          <td>HDPE mesh 185–320 g/m², UV-stabilized, reinforced corner webbing + stainless D-rings, custom-cut triangles × 2</td>
           <td><span class="tag tag-cn">🇨🇳 Colordura</span></td>
         </tr>
         <tr>
-          <td>Steel posts</td>
-          <td>3" galvanized HSS tube, ~14ft, base plates for concrete footings</td>
-          <td><span class="tag tag-us">🇺🇸 Local fab</span></td>
-        </tr>
-        <tr>
-          <td>Wall anchors</td>
-          <td>Stainless D-ring plates, thru-bolted to masonry</td>
+          <td>I-beam anchor fittings</td>
+          <td>Stainless beam clamps + D-ring plates, no drilling required on existing steel</td>
           <td><span class="tag tag-us">🇺🇸 Rigging</span></td>
         </tr>
         <tr>
-          <td>Manual winches × 3</td>
+          <td>Pergola reinforcement</td>
+          <td>Steel gusset plates + lag bolt hardware to beef up existing wooden pergola at anchor points</td>
+          <td><span class="tag tag-us">🇺🇸 Local fab</span></td>
+        </tr>
+        <tr>
+          <td>Manual winches × 2</td>
           <td>2-speed marine deck winch, 500–800 lb capacity (Lewmar 16 or equiv.)</td>
           <td><span class="tag tag-us">🇺🇸 Marine</span></td>
         </tr>
@@ -1168,22 +1180,17 @@ body {
           <td>3/16" 7×19 SS wire rope, single-sheave blocks, jaw-jaw turnbuckles 3/8"</td>
           <td><span class="tag tag-us">🇺🇸 Rigging</span></td>
         </tr>
-        <tr>
-          <td>Concrete footings</td>
-          <td>Poured-in-place for post bases</td>
-          <td><span class="tag tag-us">🇺🇸 Contractor</span></td>
-        </tr>
       </tbody>
     </table>
 
     <div class="hr reveal d4"></div>
     <p class="body-text reveal d4" style="max-width:100%">
-      Shade fabric consolidated onto an <strong style="color:var(--text)">existing container shipment</strong> from Colordura's city — same supplier network, near-zero incremental freight cost. All structural hardware sourced locally on arrival.
+      We plan to work directly with the source factory in China, <strong style="color:var(--text)">Colordura</strong>, to get the best pricing on the shade fabric. All structural hardware and installation sourced locally.
     </p>
   </div>
 
   <div class="bottom-bar reveal-fade d5">
-    <div class="bottom-label">Colordura — RPET &amp; waterproof outdoor fabrics manufacturer, China</div>
+    <div class="bottom-label">Colordura — outdoor fabric manufacturer, China · all hardware sourced locally</div>
     <div class="slide-num">07</div>
   </div>
 </section>
@@ -1206,21 +1213,21 @@ body {
         <div class="section-title reveal d2">A fraction<br>of commercial<br><em>quotes.</em></div>
         <div class="hr reveal d3"></div>
         <div class="vs-note reveal d4">
-          A US commercial shade contractor would quote <strong>$15,000–$30,000</strong> installed for a comparable retractable system. This approach — direct-sourced fabric + marine rigging — achieves the same result for <strong style="color:var(--gold)">roughly 80% less.</strong>
+          A US commercial shade contractor would quote <strong>$15,000–$30,000</strong> installed for a comparable retractable system. This approach — direct-sourced fabric + marine rigging — achieves the same result for <strong style="color:var(--gold)">roughly 80–85% less.</strong>
         </div>
       </div>
       <div>
         <ul class="cost-list">
           <li class="cost-row reveal d2">
-            <div class="cost-name">Shade fabric — 3 panels (Colordura, ex-factory + container share)</div>
-            <div class="cost-val">$800–1,500</div>
+            <div class="cost-name">Shade fabric — 2 panels (Colordura, factory-direct pricing)</div>
+            <div class="cost-val">$600–1,200</div>
           </li>
           <li class="cost-row reveal d3">
             <div class="cost-name">Steel posts + base plates (3 posts, local fab)</div>
             <div class="cost-val">$600–1,200</div>
           </li>
           <li class="cost-row reveal d3">
-            <div class="cost-name">Winches × 3 (marine grade, deck mount)</div>
+            <div class="cost-name">Winches × 2 + pulleys (marine grade, deck mount)</div>
             <div class="cost-val">$450–900</div>
           </li>
           <li class="cost-row reveal d4">
@@ -1228,16 +1235,16 @@ body {
             <div class="cost-val">$400–700</div>
           </li>
           <li class="cost-row reveal d4">
-            <div class="cost-name">Wall anchors + masonry install</div>
-            <div class="cost-val">$300–600</div>
+            <div class="cost-name">I-beam clamps + pergola reinforcement hardware</div>
+            <div class="cost-val">$400–700</div>
           </li>
           <li class="cost-row reveal d5">
-            <div class="cost-name">Concrete footings + post install (labor)</div>
-            <div class="cost-val">$800–1,500</div>
+            <div class="cost-name">Rigging install labor (anchors, cable, winch mount)</div>
+            <div class="cost-val">$600–1,200</div>
           </li>
           <li class="cost-row total reveal d5">
             <div class="cost-name">Total Estimated Range</div>
-            <div class="cost-val">$3,350–6,400</div>
+            <div class="cost-val">$2,800–5,400</div>
           </li>
         </ul>
       </div>
@@ -1245,7 +1252,7 @@ body {
   </div>
 
   <div class="bottom-bar reveal-fade d6">
-    <div class="bottom-label">Excludes permits, string lights, contingency</div>
+    <div class="bottom-label">Excludes permits, string lights, contingency · no new structural posts required</div>
     <div class="slide-num">08</div>
   </div>
 </section>
@@ -1279,7 +1286,7 @@ body {
             <div class="step-n">1</div>
             <div class="step-body">
               <strong>Site survey</strong>
-              <span>Measure patio, confirm wall anchor points, assess post footing viability</span>
+              <span>Measure patio, confirm I-beam anchor points, assess pergola reinforcement needs</span>
             </div>
           </li>
           <li class="step-item reveal d3">
@@ -1300,14 +1307,14 @@ body {
             <div class="step-n">4</div>
             <div class="step-body">
               <strong>Local contractor quotes</strong>
-              <span>Steel posts, footings, masonry anchors, rigging install</span>
+              <span>Pergola reinforcement, I-beam clamp install, cable + winch rigging</span>
             </div>
           </li>
           <li class="step-item reveal d5">
             <div class="step-n">5</div>
             <div class="step-body">
-              <strong>Baltimore City permit</strong>
-              <span>Structural permit likely required for permanent post footings</span>
+              <strong>Baltimore City permit check</strong>
+              <span>Verify if permit required for permanent shade structure attachment to existing building</span>
             </div>
           </li>
         </ul>
