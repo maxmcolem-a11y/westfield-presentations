@@ -557,6 +557,158 @@ body {
 }
 
 /* ===========================================
+   SLIDE 1: TITLE — full bleed night photo
+   =========================================== */
+#s1 {
+  background: #050505;
+}
+#s1 .title-bg {
+  position: absolute;
+  inset: 0;
+  background: url('night.jpg') center center / cover no-repeat;
+  opacity: 0.45;
+  z-index: 0;
+}
+#s1 .title-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(5,5,5,0.35) 0%,
+    rgba(5,5,5,0.2) 40%,
+    rgba(5,5,5,0.7) 100%
+  );
+}
+
+/* ===========================================
+   SLIDE: DAY / NIGHT SLIDER
+   =========================================== */
+#s-daynight {
+  background: #050505;
+  padding: 0;
+}
+#s-daynight .slider-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  cursor: ew-resize;
+  user-select: none;
+}
+/* Day image — full background */
+#s-daynight .img-day {
+  position: absolute;
+  inset: 0;
+  background: url('day.jpg') center center / cover no-repeat;
+}
+/* Night image — clipped on left side by slider */
+#s-daynight .img-night {
+  position: absolute;
+  inset: 0;
+  background: url('night.jpg') center center / cover no-repeat;
+  clip-path: inset(0 50% 0 0); /* updated by JS */
+  transition: clip-path 0.02s linear;
+}
+/* Divider line */
+#s-daynight .divider-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255,255,255,0.85);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none;
+}
+/* Handle knob */
+#s-daynight .divider-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  border: 2px solid rgba(255,255,255,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 11;
+  pointer-events: none;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.4);
+}
+#s-daynight .divider-handle svg {
+  width: 22px;
+  height: 22px;
+  color: #333;
+}
+/* Day / Night labels */
+#s-daynight .label-day,
+#s-daynight .label-night {
+  position: absolute;
+  top: clamp(1rem, 3vh, 2rem);
+  font-family: var(--font-body);
+  font-size: var(--label-size);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  z-index: 10;
+  pointer-events: none;
+  background: rgba(0,0,0,0.35);
+  padding: 4px 12px;
+  border-radius: 2px;
+}
+#s-daynight .label-day  { right: clamp(1.5rem, 4vw, 4rem); }
+#s-daynight .label-night { left: clamp(1.5rem, 4vw, 4rem); }
+
+/* Dark overlay on each half for readability */
+#s-daynight .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%);
+  z-index: 5;
+  pointer-events: none;
+}
+/* Caption area at bottom */
+#s-daynight .caption {
+  position: absolute;
+  bottom: clamp(1.5rem, 4vh, 3rem);
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 12;
+  pointer-events: none;
+  white-space: nowrap;
+}
+#s-daynight .caption-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3vw, 2.2rem);
+  font-style: italic;
+  color: #fff;
+  letter-spacing: 1px;
+}
+#s-daynight .caption-sub {
+  font-family: var(--font-body);
+  font-size: var(--label-size);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+}
+#s-daynight .slide-num-overlay {
+  position: absolute;
+  bottom: clamp(1.5rem, 4vh, 3rem);
+  right: clamp(1.5rem, 4vw, 4rem);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: rgba(255,255,255,0.08);
+  z-index: 12;
+  pointer-events: none;
+}
+
+/* ===========================================
    PROGRESS BAR
    =========================================== */
 .progress-bar {
@@ -635,20 +787,21 @@ body {
 <nav class="nav-dots" id="navDots"></nav>
 
 <!-- ============================================================
-     SLIDE 1: TITLE
+     SLIDE 1: TITLE (night photo full-bleed)
      ============================================================ -->
 <section class="slide" id="s1">
-  <div class="bg-word">SHADE</div>
+  <div class="title-bg"></div>
+  <div class="bg-word" style="z-index:1;">SHADE</div>
 
-  <div class="top-bar reveal-fade d1">
+  <div class="top-bar reveal-fade d1" style="position:relative;z-index:2;">
     <div class="top-label">Peabody Heights Brewery · Baltimore, MD</div>
     <div class="top-right">Design Proposal<br>March 2026</div>
   </div>
 
-  <div class="content">
+  <div class="content" style="z-index:2;">
     <div class="eyebrow reveal d1">Outdoor Infrastructure</div>
     <h1 class="reveal d2">Retractable<br><em>Shade Sail</em><br>System</h1>
-    <div id="s1" style="display:contents">
+    <div style="display:contents">
       <div class="sub-row reveal d3">
         <div class="sub-line"></div>
         <div class="sub-text">Three sails · Winch-lowered · Direct-sourced</div>
@@ -657,13 +810,38 @@ body {
     </div>
   </div>
 
-  <div class="bottom-bar reveal-fade d4">
+  <div class="bottom-bar reveal-fade d4" style="position:relative;z-index:2;">
     <div class="bottom-label">
       Prepared by Max Moore<br>
       <span style="color:rgba(200,169,110,0.4);">Industrial Design</span>
     </div>
     <div class="slide-num">01</div>
   </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 2: DAY / NIGHT SLIDER
+     ============================================================ -->
+<section class="slide" id="s-daynight">
+  <div class="slider-wrap" id="sliderWrap">
+    <div class="img-day"></div>
+    <div class="img-night" id="imgNight"></div>
+    <div class="divider-line" id="dividerLine"></div>
+    <div class="divider-handle" id="dividerHandle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+        <polyline points="9 18 15 12 9 6" transform="translate(6,0)"></polyline>
+      </svg>
+    </div>
+    <div class="overlay"></div>
+    <div class="label-night">Night</div>
+    <div class="label-day">Day</div>
+  </div>
+  <div class="caption">
+    <div class="caption-title">The Space — Old Oriole Park Patio</div>
+    <div class="caption-sub">Drag to compare day &amp; night · Peabody Heights Brewery</div>
+  </div>
+  <div class="slide-num-overlay">02</div>
 </section>
 
 <!-- ============================================================
@@ -689,7 +867,7 @@ body {
 
   <div class="bottom-bar reveal-fade d5">
     <div class="bottom-label">Peabody Heights · 401 E 30th St, Baltimore MD</div>
-    <div class="slide-num">02</div>
+    <div class="slide-num">04</div>
   </div>
 </section>
 
@@ -733,7 +911,7 @@ body {
 
   <div class="bottom-bar reveal-fade d5">
     <div class="bottom-label">3 sails · 3 winch posts · full patio coverage</div>
-    <div class="slide-num">03</div>
+    <div class="slide-num">04</div>
   </div>
 </section>
 
@@ -895,7 +1073,7 @@ body {
 
   <div class="bottom-bar reveal-fade d4">
     <div class="bottom-label">Layout based on satellite view · 401 E 30th St, Baltimore MD</div>
-    <div class="slide-num">04</div>
+    <div class="slide-num">05</div>
   </div>
 </section>
 
@@ -939,7 +1117,7 @@ body {
 
   <div class="bottom-bar reveal-fade d6">
     <div class="bottom-label">One person · no tools · storm-ready in under 15 minutes</div>
-    <div class="slide-num">05</div>
+    <div class="slide-num">06</div>
   </div>
 </section>
 
@@ -1006,7 +1184,7 @@ body {
 
   <div class="bottom-bar reveal-fade d5">
     <div class="bottom-label">Colordura — RPET &amp; waterproof outdoor fabrics manufacturer, China</div>
-    <div class="slide-num">06</div>
+    <div class="slide-num">07</div>
   </div>
 </section>
 
@@ -1068,7 +1246,7 @@ body {
 
   <div class="bottom-bar reveal-fade d6">
     <div class="bottom-label">Excludes permits, string lights, contingency</div>
-    <div class="slide-num">07</div>
+    <div class="slide-num">08</div>
   </div>
 </section>
 
@@ -1139,7 +1317,7 @@ body {
 
   <div class="bottom-bar reveal-fade d6">
     <div class="bottom-label">Preliminary concept · subject to site survey &amp; structural review · March 2026</div>
-    <div class="slide-num">08</div>
+    <div class="slide-num">09</div>
   </div>
 </section>
 
@@ -1243,9 +1421,51 @@ class SlidePresentation {
   }
 }
 
+/* ===========================================
+   DAY / NIGHT SLIDER CONTROLLER
+   Drag or touch the divider to reveal day vs night views.
+   =========================================== */
+class DayNightSlider {
+  constructor() {
+    this.wrap    = document.getElementById('sliderWrap');
+    this.night   = document.getElementById('imgNight');
+    this.line    = document.getElementById('dividerLine');
+    this.handle  = document.getElementById('dividerHandle');
+    if (!this.wrap) return;
+
+    this.pct = 50; // start at center
+    this.dragging = false;
+
+    this.wrap.addEventListener('mousedown',  e => { this.dragging = true; this.update(e.clientX); });
+    window.addEventListener('mousemove',     e => { if (this.dragging) this.update(e.clientX); });
+    window.addEventListener('mouseup',       ()  => { this.dragging = false; });
+
+    this.wrap.addEventListener('touchstart', e => { this.dragging = true; this.update(e.touches[0].clientX); }, {passive:true});
+    window.addEventListener('touchmove',     e => { if (this.dragging) this.update(e.touches[0].clientX); }, {passive:true});
+    window.addEventListener('touchend',      ()  => { this.dragging = false; });
+
+    this.render();
+  }
+
+  update(clientX) {
+    const rect = this.wrap.getBoundingClientRect();
+    this.pct = Math.min(100, Math.max(0, ((clientX - rect.left) / rect.width) * 100));
+    this.render();
+  }
+
+  render() {
+    const p = this.pct;
+    // Night is on the LEFT; clip it so right edge = p%
+    this.night.style.clipPath  = `inset(0 ${100 - p}% 0 0)`;
+    this.line.style.left       = `${p}%`;
+    this.handle.style.left     = `${p}%`;
+  }
+}
+
 // Boot
 document.addEventListener('DOMContentLoaded', () => {
   new SlidePresentation();
+  new DayNightSlider();
   // Trigger first slide immediately
   document.querySelector('.slide').classList.add('visible');
 });
