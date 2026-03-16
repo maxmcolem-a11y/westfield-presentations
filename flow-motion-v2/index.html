@@ -49,6 +49,10 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 @media(max-width:900px){.two,.g3{grid-template-columns:1fr}}
 @media(max-width:600px){.g2{grid-template-columns:1fr}.wf-logo{height:22px;right:12px;top:12px}}
 @media(prefers-reduced-motion:reduce){.r{transition:opacity .2s;transform:none}}
+
+#cmpSlider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 8px rgba(184,131,42,.3);cursor:grab}
+#cmpSlider::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 8px rgba(184,131,42,.3);cursor:grab}
+#cmpSlider:active::-webkit-slider-thumb{cursor:grabbing}
 </style>
 </head>
 <body>
@@ -70,6 +74,59 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 </div>
 </div>
 </section>
+
+<section class="slide" id="s-hero" style="background:var(--bg2)">
+<div class="sc" style="align-items:center;padding:0">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;width:100%;position:relative">
+<div class="ey r" style="position:absolute;top:var(--pad);left:var(--pad)">Flow-Motion V2</div>
+<img src="hero.png" class="r" style="max-height:78vh;max-width:85vw;object-fit:contain;filter:drop-shadow(0 8px 32px rgba(0,0,0,.12))" alt="Flow-Motion V2 Chair"/>
+<div class="r" style="position:absolute;bottom:var(--pad);text-align:center">
+<div style="font-family:var(--fd);font-size:var(--h3);font-weight:700;color:var(--text)">Angled Leaf Spring with Asymmetric Rocking</div>
+<div style="font-size:var(--sm);color:var(--text3);margin-top:4px;letter-spacing:1px">PATENT STATUS: 🟡 MODERATE-STRONG PATENTABILITY</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="slide" id="s-compare" style="background:var(--bg);overflow:hidden;padding:0">
+<div style="display:flex;flex-direction:column;height:100%;padding:var(--pad);padding-bottom:clamp(12px,2vh,20px)">
+
+<div class="ey r">Mechanism Comparison</div>
+<h2 class="h2 r" style="margin-bottom:clamp(.5rem,1.5vw,1rem)">V1 vs V2 — side by side</h2>
+
+<div class="r" style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,2vw,24px);min-height:0">
+<div style="display:flex;flex-direction:column;min-height:0">
+<div style="font-size:var(--sm);font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:clamp(4px,1vh,8px)"><span style="opacity:.5">V1</span> — Flat Leaf Spring</div>
+<div style="flex:1;position:relative;border:1px solid rgba(0,0,0,.08);border-radius:var(--r);overflow:hidden;background:var(--bg2);min-height:0">
+<img src="v1-forward.jpg" class="cmp-img cmp-v1" data-pos="forward" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .25s ease" alt="V1 Forward"/>
+<img src="v1-rest.jpg" class="cmp-img cmp-v1" data-pos="rest" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:1;transition:opacity .25s ease" alt="V1 Rest"/>
+<img src="v1-rear.jpg" class="cmp-img cmp-v1" data-pos="rear" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .25s ease" alt="V1 Rear"/>
+<div class="cmp-badge cmp-badge-v1" style="position:absolute;top:8px;right:8px;background:rgba(0,0,0,.55);color:#fff;padding:3px 10px;border-radius:4px;font-size:var(--sm);letter-spacing:1px;text-transform:uppercase;pointer-events:none">Rest</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;min-height:0">
+<div style="font-size:var(--sm);font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:clamp(4px,1vh,8px)"><span style="opacity:.5">V2</span> — Angled Spring + Wedge</div>
+<div style="flex:1;position:relative;border:1px solid rgba(0,0,0,.08);border-radius:var(--r);overflow:hidden;background:var(--bg2);min-height:0">
+<img src="v2-forward.jpg" class="cmp-img cmp-v2" data-pos="forward" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .25s ease" alt="V2 Forward"/>
+<img src="v2-rest.jpg" class="cmp-img cmp-v2" data-pos="rest" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:1;transition:opacity .25s ease" alt="V2 Rest"/>
+<img src="v2-rear.jpg" class="cmp-img cmp-v2" data-pos="rear" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .25s ease" alt="V2 Rear"/>
+<div class="cmp-badge cmp-badge-v2" style="position:absolute;top:8px;right:8px;background:rgba(0,0,0,.55);color:#fff;padding:3px 10px;border-radius:4px;font-size:var(--sm);letter-spacing:1px;text-transform:uppercase;pointer-events:none">Rest</div>
+</div>
+</div>
+</div>
+
+<div class="r" style="display:flex;flex-direction:column;align-items:center;gap:clamp(4px,1vh,10px);margin-top:clamp(6px,1.5vh,14px);flex-shrink:0">
+<div id="cmpPosText" style="font-size:var(--body);color:var(--accent);font-weight:600;letter-spacing:1px">At Rest</div>
+<div style="display:flex;justify-content:space-between;width:min(500px,75vw);font-size:var(--sm);color:var(--text3);letter-spacing:1px;text-transform:uppercase">
+<span>← Rear Rock</span><span>Forward Rock →</span>
+</div>
+<input type="range" id="cmpSlider" min="0" max="100" value="50" step="1" style="width:min(500px,75vw);height:4px;-webkit-appearance:none;appearance:none;background:linear-gradient(to right,rgba(184,131,42,.15),rgba(184,131,42,.4) 50%,rgba(184,131,42,.15));border-radius:2px;outline:none;cursor:pointer"/>
+</div>
+
+</div>
+</section>
+
 
 <!-- S2 THE PROBLEM -->
 <section class="slide" id="s2" style="background:var(--bg2)">
@@ -310,6 +367,29 @@ sl.forEach(function(s){obs.observe(s)});
 var ts=0;document.addEventListener('touchstart',function(e){ts=e.touches[0].clientY},{passive:true});
 document.addEventListener('touchend',function(e){var dy=ts-e.changedTouches[0].clientY;if(Math.abs(dy)>50)dy>0?go(Math.min(c+1,sl.length-1)):go(Math.max(c-1,0))},{passive:true});
 ui(0)})();
+
+
+// Comparison slider
+const cmpSlider = document.getElementById('cmpSlider');
+const cmpPosText = document.getElementById('cmpPosText');
+if (cmpSlider) {
+  cmpSlider.addEventListener('input', function(e) {
+    const v = parseInt(e.target.value);
+    let state;
+    if (v <= 33) state = 'rear';
+    else if (v <= 66) state = 'rest';
+    else state = 'forward';
+
+    document.querySelectorAll('.cmp-img').forEach(img => {
+      img.style.opacity = img.dataset.pos === state ? '1' : '0';
+    });
+
+    const labels = {forward:'Forward',rest:'Rest',rear:'Rear'};
+    const texts = {rear:'\u2190 Rear Rock',rest:'At Rest',forward:'Forward Rock \u2192'};
+    document.querySelectorAll('.cmp-badge-v1,.cmp-badge-v2').forEach(b => b.textContent = labels[state]);
+    cmpPosText.textContent = texts[state];
+  });
+}
 </script>
 </body>
 </html>
