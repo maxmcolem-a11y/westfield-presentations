@@ -155,54 +155,39 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 
 
 <!-- S2 THE PROBLEM -->
-<section class="slide" id="s2" style="background:var(--bg2)">
-<div class="sc">
+
+<section class="slide" id="s4" style="background:var(--bg2)">
+<div class="sc" style="padding:0 var(--pad)">
 <div class="ey r">The Problem</div>
-<h2 class="h2 r">V1 rocks symmetrically — and that's a problem</h2>
-<div class="two r">
+<h2 class="h2 r">V1 works — but can't be <em style="font-style:normal;color:var(--accent)">tuned.</em></h2>
+
+<div class="r two" style="margin-top:clamp(.5rem,1.5vw,1.2rem)">
 <div>
-<p class="bd" style="margin-bottom:var(--gap)">The original Flow-Motion uses a flat leaf spring running parallel to the ground. It provides a great rocking motion — but with equal force in both directions, three issues emerge:</p>
-<div class="st">
-<div class="card" style="border-color:var(--red);background:rgba(174,61,61,.06)">
-<div class="ct" style="color:var(--red)">⚠ Pinch Points</div>
-<div class="cb">Equal forward rock means the front gap closes under load — creating potential finger/toe pinch points that require guards or design compromises.</div>
+<div class="bd" style="margin-bottom:clamp(.8rem,2vw,1.5rem)">The original Flow-Motion uses a flat leaf spring parallel to the ground. It delivers a satisfying rocking motion — but the symmetry creates three limitations that V2 directly solves.</div>
+
+<div style="display:flex;flex-direction:column;gap:var(--gap)">
+<div class="card">
+<div class="ct">⚠️ Pinch Points</div>
+<div class="cb">Equal forward rock means the front gap closes under load — creating potential pinch hazards that require guards or design workarounds.</div>
 </div>
 <div class="card">
-<div class="ct">One-Size Rocking</div>
-<div class="cb">Every chair model gets the same rocking feel. No way to tune for different seat heights, weight ranges, or use cases.</div>
+<div class="ct">🔒 One-Size Rocking</div>
+<div class="cb">Every chair model gets the same rocking feel. No way to tune for different seat heights, weight ranges, or use cases without redesigning the frame.</div>
 </div>
 <div class="card">
-<div class="ct">Static Appearance</div>
+<div class="ct">👁️ Static Appearance</div>
 <div class="cb">A flat spring parallel to the ground reads as inert. It doesn't communicate "this chair rocks" until someone sits in it.</div>
 </div>
 </div>
 </div>
-<div>
 
-</div>
-</div>
-</div>
-</section>
-
-<!-- S3 THE SOLUTION -->
-<section class="slide" id="s3">
-<div class="sc">
-<div class="ey r">The Solution</div>
-<h2 class="h2 r">Angle the spring. Change everything.</h2>
-<div class="two r">
 <div>
-
-</div>
-<div>
-<p class="bd" style="margin-bottom:var(--gap)">V2 places a <strong>wedge component</strong> beneath the leaf spring, tilting it at an angle. This single change creates two distinct fulcrum points with different lever arms:</p>
-<div class="st">
-<div class="card hi">
-<div class="ct" style="color:var(--red)">🔴 Rear Fulcrum (Fixed)</div>
-<div class="cb">Where the spring meets the back of the wedge. Shorter lever arm = less force to rock backward. The "easy lean-back."</div>
-</div>
-<div class="card hi">
-<div class="ct" style="color:var(--blue)">🔵 Forward Fulcrum (Tunable)</div>
-<div class="cb">Position along the spring is adjustable. Controls how hard it is to rock forward, how far forward it goes, and whether the front gap ever closes.</div>
+<div class="insight">
+<div class="insight-l">V2 Solves All Three</div>
+<div class="insight-t" style="display:flex;flex-direction:column;gap:clamp(.4rem,1vh,.8rem)">
+<div><strong>Pinch points →</strong> Forward fulcrum geometry limits max deflection. Gap never closes enough to pinch.</div>
+<div><strong>One-size rocking →</strong> Swap the wedge to customize feel per model. Same frame, different personality.</div>
+<div><strong>Static look →</strong> Angled spring reads as motion at rest. Communicates "this rocks" before anyone sits.</div>
 </div>
 </div>
 </div>
@@ -210,114 +195,71 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 </div>
 </section>
 
-<!-- S4 SINGLE VARIABLE -->
-<section class="slide" id="s4" style="background:var(--bg2)">
-<div class="sc">
-<div class="ey r">Key Insight</div>
-<h2 class="h2 r">One parameter. Three outcomes.</h2>
-<p class="bd r" style="max-width:620px;margin-bottom:var(--gap)">The forward fulcrum position is the single design variable. Slide it forward or back to simultaneously control:</p>
-<div class="g3 r">
-<div class="card hi" style="text-align:center">
-<div style="font-size:clamp(2rem,4vw,3rem);margin-bottom:.4rem">⚖️</div>
-<div class="ct">Force Asymmetry</div>
-<div class="cb">How much easier backward rocking is vs. forward. Dial in the natural "lean back, gentle return" feel that people prefer.</div>
-</div>
-<div class="card hi" style="text-align:center">
-<div style="font-size:clamp(2rem,4vw,3rem);margin-bottom:.4rem">📏</div>
-<div class="ct">Forward Amplitude</div>
-<div class="cb">How far forward the chair can travel. Fulcrum all the way forward = zero forward rock. Move it back = progressively more travel.</div>
-</div>
-<div class="card hi" style="text-align:center">
-<div style="font-size:clamp(2rem,4vw,3rem);margin-bottom:.4rem">🛡️</div>
-<div class="ct">Pinch Gap</div>
-<div class="cb">Minimum front gap at max deflection. Tune to always stay above the safety threshold — pinch points eliminated at the mechanism level.</div>
-</div>
-</div>
-<div class="insight r" style="margin-top:var(--gap)">
-<div class="insight-l">Design Implication</div>
-<div class="insight-t">This isn't just a spring change. It's a <strong>tuning system</strong>. Same base frame, same leaf spring — swap the wedge to customize the rocking feel for every chair in the lineup.</div>
-</div>
-</div>
-</section>
-
-<!-- S5 PRODUCT IMAGE (placeholder for Max's photos) -->
 <section class="slide" id="s5">
-<div class="sc">
-<div class="ey r">Product</div>
-<h2 class="h2 r">Flow-Motion V2 in development</h2>
-<div class="two r">
-<div class="placeholder" id="photo-placeholder-1">
-📷 Product image placeholder<br><small>Awaiting photos from Max</small>
-</div>
-<div>
-<div class="st">
-<div class="card">
-<div class="ct">Leaf Spring</div>
-<div class="cb">Flat steel — same proven material as V1. No new spring tooling required to prototype the V2 concept.</div>
-</div>
-<div class="card hi">
-<div class="ct">Wedge Component</div>
-<div class="cb">Separate piece from base frame. Can be injection molded plastic or stamped steel. Cheap tooling, easy to iterate. Acts as the "tuning cartridge" for the system.</div>
-</div>
-<div class="card">
-<div class="ct">Visual Impact</div>
-<div class="cb">The angled spring reads as motion even at rest. Communicates "this thing rocks" before anyone sits in it. V1's flat spring looks static by comparison.</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- S6 PLATFORM ADVANTAGE -->
-<section class="slide" id="s6" style="background:var(--bg2)">
-<div class="sc">
+<div class="sc" style="padding:0 var(--pad)">
 <div class="ey r">Platform Advantage</div>
-<h2 class="h2 r">One system. Entire lineup.</h2>
-<div class="g2 r">
-<div class="card">
+<h2 class="h2 r">The wedge is the <em style="font-style:normal;color:var(--accent)">personality.</em></h2>
+
+<div class="r" style="margin-top:clamp(.5rem,1.5vw,1rem)">
+<div class="bd" style="margin-bottom:clamp(.8rem,2vw,1.5rem);max-width:600px">Same base frame tube and leaf spring across every Flow-Motion chair. The wedge component is the only variable — and it controls everything.</div>
+</div>
+
+<div class="r g2" style="margin-bottom:clamp(.6rem,1.5vw,1rem)">
+<div class="card hi">
 <div class="ct">🔧 Standardized Base</div>
-<div class="cb">Same base frame tube and leaf spring across every Flow-Motion chair. Reduces tooling cost, simplifies manufacturing, lowers SKU complexity.</div>
+<div class="cb">Same frame tube + leaf spring across the entire lineup. Reduces tooling, simplifies manufacturing, lowers SKU complexity.</div>
 </div>
 <div class="card hi">
 <div class="ct">🎛️ Tunable Per Model</div>
 <div class="cb">Different wedge = different feel. A compact camp chair gets a different rocking profile than a tall director's chair. One tooling change, not a frame redesign.</div>
 </div>
-<div class="card">
+<div class="card hi">
 <div class="ct">💰 Low Tooling Cost</div>
-<div class="cb">Wedge is a simple molded or stamped component. Cheap to tool, cheap to modify, cheap to test multiple variants. Way cheaper than bending new frame tubes.</div>
+<div class="cb">Wedge is a simple injection molded or stamped component. Cheap to tool, cheap to modify, cheap to test multiple variants.</div>
 </div>
-<div class="card">
+<div class="card hi">
 <div class="ct">🏪 Retail Flexibility</div>
-<div class="cb">If a retailer wants a different "feel" for their exclusive variant, it's a wedge swap — not a frame change. Customize without multiplying tooling investment.</div>
+<div class="cb">If a retailer wants a different "feel" for their exclusive — it's a wedge swap, not a frame change. Customize without multiplying tooling investment.</div>
 </div>
 </div>
-<div class="insight r" style="margin-top:var(--gap)">
-<div class="insight-l">The Wedge Is the Personality</div>
-<div class="insight-t">Base frame, spring, and chair structure stay standardized. All the rocking personality lives in one small, cheap, swappable component.</div>
+
+<div class="r insight">
+<div class="insight-l">Business Model</div>
+<div class="insight-t">Base frame, spring, and chair structure are shared infrastructure. The wedge is the personality — the cheapest, fastest component to change. One tuning cartridge per chair model across the entire Flow-Motion lineup.</div>
 </div>
 </div>
 </section>
 
-<!-- S7 STATUS + NEXT STEPS -->
-<section class="slide" id="s7">
-<div class="sc">
+<section class="slide" id="s6" style="background:var(--bg2)">
+<div class="sc" style="padding:0 var(--pad)">
 <div class="ey r">Path Forward</div>
 <h2 class="h2 r">Next Steps</h2>
-<div class="two r">
+
+<div class="r two" style="margin-top:clamp(.5rem,1.5vw,1.2rem)">
+<div>
 <div class="st">
-<div class="si"><div class="sn">1</div><div class="stx"><div class="stt">Patent Filing</div><div class="std">Patentability rated 🟡 MODERATE-STRONG. Three independent claims drafted. Engage patent counsel for provisional application before any public disclosure.</div></div></div>
-<div class="si"><div class="sn">2</div><div class="stx"><div class="stt">Prototype Build</div><div class="std">Existing V1 spring + movable wedge block. Test at multiple positions. Measure force curves. Validate the tuning concept physically.</div></div></div>
-<div class="si"><div class="sn">3</div><div class="stx"><div class="stt">Design Patent</div><div class="std">The angled spring + wedge assembly has a visually distinctive profile. Consider parallel design patent filing on the appearance.</div></div></div>
+<div class="si"><div class="sn">1</div><div class="stx"><div class="stt">Patent Filing</div><div class="std">Patentability rated 🟡 MODERATE-STRONG. Three independent claims drafted, five novel elements identified. Engage patent counsel for provisional application.</div></div></div>
+<div class="si"><div class="sn">2</div><div class="stx"><div class="stt">Prototype Build</div><div class="std">Existing V1 spring + movable wedge block. Test at multiple fulcrum positions. Measure force curves and validate tuning concept physically.</div></div></div>
+<div class="si"><div class="sn">3</div><div class="stx"><div class="stt">Wedge Variants</div><div class="std">Design 3–4 wedge profiles for different chair models. Test across the Flow-Motion lineup. Validate the "tuning cartridge" concept.</div></div></div>
 </div>
+</div>
+
+<div>
 <div class="st">
-<div class="si"><div class="sn">4</div><div class="stx"><div class="stt">Wedge Variants</div><div class="std">Design 3–4 wedge profiles for different chair models. Test across the Flow-Motion lineup. Validate "tuning cartridge" concept.</div></div></div>
-<div class="si"><div class="sn">5</div><div class="stx"><div class="stt">Pinch Point Validation</div><div class="std">Formal gap measurement testing at optimal fulcrum position. Demonstrate pinch elimination with test data for compliance.</div></div></div>
-<div class="si"><div class="sn">6</div><div class="stx"><div class="stt">Production Path</div><div class="std">Finalize wedge material (plastic vs. steel). Source tooling. Integrate into S28 development timeline with HF/Cambodia manufacturing.</div></div></div>
+<div class="si"><div class="sn">4</div><div class="stx"><div class="stt">Pinch Point Validation</div><div class="std">Formal gap measurements at optimal fulcrum position. Demonstrate pinch elimination with test data for compliance.</div></div></div>
+<div class="si"><div class="sn">5</div><div class="stx"><div class="stt">Design Patent</div><div class="std">Angled spring + wedge has a visually distinctive profile. Consider parallel design patent filing on the appearance.</div></div></div>
+<div class="si"><div class="sn">6</div><div class="stx"><div class="stt">Production Path</div><div class="std">Finalize wedge material (injection vs. stamped) and integrate into existing Flow-Motion production line. Minimal retooling required.</div></div></div>
+</div>
+
+<div class="insight" style="margin-top:clamp(.5rem,1.2vh,.8rem)">
+<div class="insight-l">Key Advantage</div>
+<div class="insight-t">V2 prototyping starts with existing V1 hardware — no new tooling needed to validate the concept. The wedge is the only new component.</div>
+</div>
 </div>
 </div>
 </div>
 </section>
+
 
 <script>
 (function(){
