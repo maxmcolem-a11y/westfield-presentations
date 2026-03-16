@@ -78,11 +78,37 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 <section class="slide" id="s-hero" style="background:var(--bg2)">
 <div class="sc" style="align-items:center;padding:0">
 <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;width:100%;position:relative">
-<div class="ey r" style="position:absolute;top:var(--pad);left:var(--pad)">Flow-Motion V2</div>
-<img src="hero.png" class="r" style="max-height:78vh;max-width:85vw;object-fit:contain;filter:drop-shadow(0 8px 32px rgba(0,0,0,.12))" alt="Flow-Motion V2 Chair"/>
-<div class="r" style="position:absolute;bottom:var(--pad);text-align:center">
-<div style="font-family:var(--fd);font-size:var(--h3);font-weight:700;color:var(--text)">Angled Leaf Spring with Asymmetric Rocking</div>
-<div style="font-size:var(--sm);color:var(--text3);margin-top:4px;letter-spacing:1px">PATENT STATUS: 🟡 MODERATE-STRONG PATENTABILITY</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,3vw,3rem);width:100%;height:100%;padding:var(--pad)">
+
+<div style="display:flex;flex-direction:column;justify-content:center">
+<div class="ey r">Flow-Motion V2</div>
+<h2 class="h2 r">Angled Leaf Spring with <em style="font-style:normal;color:var(--accent)">Asymmetric Rocking</em></h2>
+<div class="r bd" style="margin-bottom:clamp(.6rem,1.5vw,1.2rem)">V2 angles the previously flat leaf spring by placing a wedge beneath it, creating two distinct fulcrum points with different force characteristics — easy lean-back, controlled return.</div>
+
+<div class="r" style="display:flex;flex-direction:column;gap:var(--gap)">
+<div class="card hi">
+<div class="ct">🎯 Asymmetric Rocking</div>
+<div class="cb">Rear fulcrum (fixed) = easy lean-back. Forward fulcrum (tunable) = controlled resistance. Natural, intuitive feel.</div>
+</div>
+<div class="card hi">
+<div class="ct">🔧 Single-Variable Tuning</div>
+<div class="cb">Move the forward fulcrum position to control rocking amplitude, force asymmetry, and pinch gap — all at once.</div>
+</div>
+<div class="card hi">
+<div class="ct">🛡️ Pinch Point Elimination</div>
+<div class="cb">Forward rock amplitude limited by fulcrum geometry — the front gap never closes enough to pinch.</div>
+</div>
+</div>
+
+<div class="r" style="margin-top:clamp(.5rem,1.2vh,1rem)">
+<span class="badge b-y">🟡 MODERATE-STRONG PATENTABILITY</span>
+</div>
+</div>
+
+<div style="display:flex;align-items:center;justify-content:center">
+<img src="hero.png" class="r" style="max-height:75vh;max-width:100%;object-fit:contain;filter:drop-shadow(0 8px 32px rgba(0,0,0,.12))" alt="Flow-Motion V2 Chair"/>
+</div>
+
 </div>
 </div>
 </div>
@@ -152,33 +178,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 </div>
 </div>
 <div>
-<svg viewBox="0 0 640 340" xmlns="http://www.w3.org/2000/svg" font-family="Inter, system-ui, sans-serif" style="width:100%;max-height:min(52vh,440px)">
-  <defs>
-    <filter id="flt-v1" x="-4%" y="-4%" width="108%" height="108%"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.06"/></filter>
-    <linearGradient id="g-spring" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#475569"/><stop offset="100%" stop-color="#64748b"/></linearGradient>
-    <linearGradient id="g-up" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#dc6b4a"/><stop offset="100%" stop-color="#e8836a"/></linearGradient>
-    <linearGradient id="g-dn" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a9ebe"/><stop offset="100%" stop-color="#6ab4d0"/></linearGradient>
-  </defs>
-  <rect x="0" y="0" width="640" height="340" rx="12" fill="#fff" filter="url(#flt-v1)"/>
-  <text x="32" y="38" font-size="11" font-weight="700" fill="#b8832a" letter-spacing="0.12em">V1</text>
-  <text x="32" y="58" font-size="18" font-weight="800" fill="#1a1714">Flat Spring</text>
-  <text x="32" y="76" font-size="12" fill="#94a3b8" font-weight="500">Single fulcrum · Symmetric force</text>
-  <rect x="440" y="30" width="160" height="40" rx="8" fill="#fef7ee" stroke="#f0dfc8" stroke-width="1"/>
-  <text x="520" y="48" text-anchor="middle" font-size="10" fill="#b8832a" font-weight="700" letter-spacing="0.06em">SYMMETRIC</text>
-  <text x="520" y="62" text-anchor="middle" font-size="11" fill="#6b6560">Equal force both ways</text>
-  <line x1="40" y1="268" x2="600" y2="268" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="6,4"/>
-  <rect x="140" y="222" width="380" height="14" rx="7" fill="#e2e8f0"/>
-  <rect x="120" y="200" width="400" height="8" rx="4" fill="url(#g-spring)"/>
-  <text x="320" y="192" text-anchor="middle" font-size="10" fill="#64748b" font-weight="600" letter-spacing="0.06em">LEAF SPRING</text>
-  <circle cx="520" cy="213" r="20" fill="#fff" stroke="#b8832a" stroke-width="3"/>
-  <circle cx="520" cy="213" r="8" fill="#b8832a"/>
-  <text x="520" y="250" text-anchor="middle" font-size="10" fill="#b8832a" font-weight="700">FULCRUM</text>
-  <g transform="translate(72, 155)"><path d="M0,-28 L11,0 L4,0 L4,30 L-4,30 L-4,0 L-11,0 Z" fill="url(#g-up)" opacity="0.9"/></g>
-  <text x="72" y="120" text-anchor="middle" font-size="9" fill="#dc6b4a" font-weight="700">F ↑</text>
-  <g transform="translate(72, 228)"><path d="M0,28 L11,0 L4,0 L4,-30 L-4,-30 L-4,0 L-11,0 Z" fill="url(#g-dn)" opacity="0.9"/></g>
-  <text x="72" y="270" text-anchor="middle" font-size="9" fill="#4a9ebe" font-weight="700">F ↓</text>
-  <text x="72" y="208" text-anchor="middle" font-size="14" fill="#6b6560" font-weight="800">=</text>
-</svg>
+
 </div>
 </div>
 </div>
@@ -191,43 +191,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 <h2 class="h2 r">Angle the spring. Change everything.</h2>
 <div class="two r">
 <div>
-<svg viewBox="0 0 640 440" xmlns="http://www.w3.org/2000/svg" font-family="Inter, system-ui, sans-serif" style="width:100%;max-height:min(52vh,440px)">
-  <defs>
-    <filter id="flt-v2" x="-4%" y="-4%" width="108%" height="108%"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.06"/></filter>
-    <linearGradient id="g-sp2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#475569"/><stop offset="100%" stop-color="#64748b"/></linearGradient>
-    <linearGradient id="g-wedge" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f5e6d0"/><stop offset="100%" stop-color="#e8d4b4"/></linearGradient>
-    <linearGradient id="g-up2" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#dc6b4a"/><stop offset="100%" stop-color="#e8836a"/></linearGradient>
-    <linearGradient id="g-dn2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a9ebe"/><stop offset="100%" stop-color="#6ab4d0"/></linearGradient>
-  </defs>
-  <rect x="0" y="0" width="640" height="440" rx="12" fill="#fff" filter="url(#flt-v2)"/>
-  <text x="32" y="38" font-size="11" font-weight="700" fill="#b8832a" letter-spacing="0.12em">V2</text>
-  <text x="32" y="58" font-size="18" font-weight="800" fill="#1a1714">Angled Spring + Wedge</text>
-  <text x="32" y="76" font-size="12" fill="#94a3b8" font-weight="500">Dual fulcrum · Asymmetric force</text>
-  <rect x="420" y="30" width="180" height="52" rx="8" fill="#fef7ee" stroke="#f0dfc8" stroke-width="1"/>
-  <text x="510" y="50" text-anchor="middle" font-size="10" fill="#b8832a" font-weight="700" letter-spacing="0.06em">ASYMMETRIC</text>
-  <text x="510" y="65" text-anchor="middle" font-size="11" fill="#6b6560">Easy back, controlled</text>
-  <text x="510" y="78" text-anchor="middle" font-size="11" fill="#6b6560">forward</text>
-  <line x1="40" y1="398" x2="600" y2="398" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="6,4"/>
-  <rect x="200" y="368" width="360" height="14" rx="7" fill="#e2e8f0"/>
-  <polygon points="245,195 245,372 555,372" fill="url(#g-wedge)" stroke="#d4b88a" stroke-width="2" stroke-linejoin="round"/>
-  <text x="365" y="355" font-size="11" fill="#b8832a" font-weight="700" letter-spacing="0.06em">WEDGE</text>
-  <line x1="140" y1="140" x2="590" y2="385" stroke="url(#g-sp2)" stroke-width="8" stroke-linecap="round"/>
-  <text x="450" y="296" font-size="10" fill="#64748b" font-weight="600" letter-spacing="0.06em" transform="rotate(28, 450, 296)">LEAF SPRING</text>
-  <circle cx="260" cy="205" r="22" fill="#fff" stroke="#4a9ebe" stroke-width="3"/>
-  <circle cx="260" cy="205" r="9" fill="#4a9ebe"/>
-  <text x="225" y="188" text-anchor="end" font-size="10" fill="#4a9ebe" font-weight="700">FRONT</text>
-  <text x="225" y="200" text-anchor="end" font-size="10" fill="#4a9ebe" font-weight="700">FULCRUM</text>
-  <text x="225" y="213" text-anchor="end" font-size="9" fill="#94a3b8" font-weight="500">tunable ← →</text>
-  <circle cx="555" cy="370" r="22" fill="#fff" stroke="#dc6b4a" stroke-width="3"/>
-  <circle cx="555" cy="370" r="9" fill="#dc6b4a"/>
-  <text x="555" y="410" text-anchor="middle" font-size="10" fill="#dc6b4a" font-weight="700">REAR FULCRUM</text>
-  <text x="555" y="423" text-anchor="middle" font-size="9" fill="#94a3b8" font-weight="500">fixed</text>
-  <g transform="translate(60, 130)"><path d="M0,-40 L16,0 L6,0 L6,55 L-6,55 L-6,0 L-16,0 Z" fill="url(#g-up2)" opacity="0.9"/></g>
-  <text x="60" y="82" text-anchor="middle" font-size="9" fill="#dc6b4a" font-weight="700">HIGH ↑</text>
-  <g transform="translate(60, 310)"><path d="M0,18 L8,0 L3,0 L3,-20 L-3,-20 L-3,0 L-8,0 Z" fill="url(#g-dn2)" opacity="0.9"/></g>
-  <text x="60" y="340" text-anchor="middle" font-size="9" fill="#4a9ebe" font-weight="700">LOW ↓</text>
-  <text x="60" y="248" text-anchor="middle" font-size="14" fill="#6b6560" font-weight="800">≠</text>
-</svg>
+
 </div>
 <div>
 <p class="bd" style="margin-bottom:var(--gap)">V2 places a <strong>wedge component</strong> beneath the leaf spring, tilting it at an angle. This single change creates two distinct fulcrum points with different lever arms:</p>
