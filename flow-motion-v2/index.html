@@ -53,6 +53,18 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 #cmpSlider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 8px rgba(184,131,42,.3);cursor:grab}
 #cmpSlider::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 8px rgba(184,131,42,.3);cursor:grab}
 #cmpSlider:active::-webkit-slider-thumb{cursor:grabbing}
+
+/* Language toggle */
+.lang-toggle { position:fixed; bottom:14px; right:60px; z-index:9999; display:flex; gap:4px; background:rgba(30,28,25,0.75); border:1px solid rgba(200,169,110,0.25); border-radius:20px; padding:4px 6px; backdrop-filter:blur(6px); }
+.lang-toggle button { background:none; border:none; color:rgba(255,255,255,0.45); padding:4px 12px; border-radius:16px; cursor:pointer; font-size:12px; font-weight:600; letter-spacing:1px; transition:all 0.2s; font-family:inherit; }
+.lang-toggle button.active { background:var(--accent, #b8832a); color:#fff; }
+.lang-toggle button:hover:not(.active) { color:rgba(255,255,255,0.8); }
+[data-en] { }
+[data-zh] { display:none; }
+body.zh [data-en] { display:none !important; }
+body.zh span[data-zh], body.zh div[data-zh], body.zh p[data-zh] { display:block; }
+body.zh span[data-zh] { display:inline; }
+
 </style>
 </head>
 <body>
@@ -63,14 +75,14 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 <!-- S1 TITLE -->
 <section class="slide" id="s1">
 <div class="sc">
-<div class="ey r">Westfield Outdoors · S28 Innovation</div>
+<div class="ey r"><span data-en>Westfield Outdoors · S28 Innovation</span><span data-zh>Westfield Outdoors · S28 创新</span></div>
 <div class="t-line r"></div>
 <h1 class="r" style="font-family:var(--fd);font-size:var(--ts);font-weight:900;line-height:1.05">Flow-Motion <span style="color:var(--accent)">V2</span></h1>
 <p class="r" style="font-size:clamp(1rem,2vw,1.4rem);font-weight:300;color:var(--text2);max-width:540px;margin-top:.5rem">Angled Leaf Spring with Adjustable Wedge — Asymmetric Rocking, Tunable Per Model, Pinch Points Eliminated</p>
 <div class="r" style="margin-top:clamp(1.5rem,3vw,2.5rem);display:flex;gap:clamp(1.5rem,3vw,2.5rem);flex-wrap:wrap">
-<div><span class="ey" style="margin-bottom:3px;display:block">Patent Status</span><span class="badge b-y" style="font-size:clamp(.85rem,1.3vw,1.05rem);padding:4px 12px">🟡 MODERATE-STRONG</span></div>
-<div><span class="ey" style="margin-bottom:3px;display:block">Evolution</span><span style="font-weight:700;font-size:clamp(.85rem,1.3vw,1.05rem)">V1 → V2</span></div>
-<div><span class="ey" style="margin-bottom:3px;display:block">Spring Type</span><span style="font-weight:700;font-size:clamp(.85rem,1.3vw,1.05rem)">Flat Steel Leaf</span></div>
+<div><span class="ey" style="margin-bottom:3px;display:block"><span data-en>Patent Status</span><span data-zh>专利状态</span></span><span class="badge b-y" style="font-size:clamp(.85rem,1.3vw,1.05rem);padding:4px 12px">🟡 MODERATE-STRONG</span></div>
+<div><span class="ey" style="margin-bottom:3px;display:block"><span data-en>Evolution</span><span data-zh>V1 到 V2 演进</span></span><span style="font-weight:700;font-size:clamp(.85rem,1.3vw,1.05rem)"><span data-en>V1 → V2</span><span data-zh>演进</span></span></div>
+<div><span class="ey" style="margin-bottom:3px;display:block"><span data-en>Spring Type</span><span data-zh>弹簧类型</span></span><span style="font-weight:700;font-size:clamp(.85rem,1.3vw,1.05rem)"><span data-en>Flat Steel Leaf</span><span data-zh>扁钢板簧</span></span></div>
 </div>
 </div>
 </section>
@@ -81,7 +93,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,3vw,3rem);width:100%;height:100%;padding:var(--pad)">
 
 <div style="display:flex;flex-direction:column;justify-content:center">
-<div class="ey r">Flow-Motion V2</div>
+<div class="ey r"><span data-en>Flow-Motion V2</span><span data-zh>Flow-Motion V2</span></div>
 <h2 class="h2 r">Angled Leaf Spring with <em style="font-style:normal;color:var(--accent)">Asymmetric Rocking</em></h2>
 <div class="r bd" style="margin-bottom:clamp(.6rem,1.5vw,1.2rem)">V2 angles the previously flat leaf spring by placing a wedge beneath it, creating two distinct fulcrum points with different force characteristics — easy lean-back, controlled return.</div>
 
@@ -117,12 +129,12 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 <section class="slide" id="s-compare" style="background:var(--bg);overflow:hidden;padding:0">
 <div style="display:flex;flex-direction:column;height:100%;padding:var(--pad);padding-bottom:clamp(12px,2vh,20px)">
 
-<div class="ey r">Mechanism Comparison</div>
-<h2 class="h2 r" style="margin-bottom:clamp(.5rem,1.5vw,1rem)">V1 vs V2 — side by side</h2>
+<div class="ey r"><span data-en>Mechanism Comparison</span><span data-zh>机构对比</span></div>
+<h2 class="h2 r" style="margin-bottom:clamp(.5rem,1.5vw,1rem)"><span data-en>V1 vs V2 — side by side</span><span data-zh>V1 与 V2 — 并排对比</span></h2>
 
 <div class="r" style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,2vw,24px);min-height:0">
 <div style="display:flex;flex-direction:column;min-height:0">
-<div style="font-size:var(--sm);font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:clamp(4px,1vh,8px)"><span style="opacity:.5">V1</span> — Flat Leaf Spring</div>
+<div style="font-size:var(--sm);font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:clamp(4px,1vh,8px)"><span style="opacity:.5">V1</span> — <span data-en>Flat Leaf Spring</span><span data-zh>水平板簧</span></div>
 <div style="flex:1;position:relative;border:1px solid rgba(0,0,0,.08);border-radius:var(--r);overflow:hidden;background:var(--bg2);min-height:0">
 <img src="v1-forward.jpg" class="cmp-img cmp-v1" data-pos="forward" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .25s ease" alt="V1 Forward"/>
 <img src="v1-rest.jpg" class="cmp-img cmp-v1" data-pos="rest" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:1;transition:opacity .25s ease" alt="V1 Rest"/>
@@ -132,7 +144,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 </div>
 
 <div style="display:flex;flex-direction:column;min-height:0">
-<div style="font-size:var(--sm);font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:clamp(4px,1vh,8px)"><span style="opacity:.5">V2</span> — Angled Spring + Wedge</div>
+<div style="font-size:var(--sm);font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:clamp(4px,1vh,8px)"><span style="opacity:.5">V2</span> — <span data-en>Angled Spring + Wedge</span><span data-zh>斜置板簧 + 楔块</span></div>
 <div style="flex:1;position:relative;border:1px solid rgba(0,0,0,.08);border-radius:var(--r);overflow:hidden;background:var(--bg2);min-height:0">
 <img src="v2-forward.jpg" class="cmp-img cmp-v2" data-pos="forward" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .25s ease" alt="V2 Forward"/>
 <img src="v2-rest.jpg" class="cmp-img cmp-v2" data-pos="rest" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:1;transition:opacity .25s ease" alt="V2 Rest"/>
@@ -143,7 +155,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 </div>
 
 <div class="r" style="display:flex;flex-direction:column;align-items:center;gap:clamp(4px,1vh,10px);margin-top:clamp(6px,1.5vh,14px);flex-shrink:0">
-<div id="cmpPosText" style="font-size:var(--body);color:var(--accent);font-weight:600;letter-spacing:1px">At Rest</div>
+<div id="cmpPosText" style="font-size:var(--body);color:var(--accent);font-weight:600;letter-spacing:1px"><span data-en>At Rest</span><span data-zh>静止</span></div>
 <div style="display:flex;justify-content:space-between;width:min(500px,75vw);font-size:var(--sm);color:var(--text3);letter-spacing:1px;text-transform:uppercase">
 <span>← Rear Rock</span><span>Forward Rock →</span>
 </div>
@@ -158,7 +170,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 
 <section class="slide" id="s4" style="background:var(--bg2)">
 <div class="sc" style="padding:0 var(--pad)">
-<div class="ey r">The Problem</div>
+<div class="ey r"><span data-en>The Problem</span><span data-zh>问题所在</span></div>
 <h2 class="h2 r">V1 works — but can't be <em style="font-style:normal;color:var(--accent)">tuned.</em></h2>
 
 <div class="r two" style="margin-top:clamp(.5rem,1.5vw,1.2rem)">
@@ -167,15 +179,15 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 
 <div style="display:flex;flex-direction:column;gap:var(--gap)">
 <div class="card">
-<div class="ct">⚠️ Pinch Points</div>
+<div class="ct">⚠️ <span data-en>Pinch Points</span><span data-zh>夹伤隐患</span></div>
 <div class="cb">Equal forward rock means the front gap closes under load — creating potential pinch hazards that require guards or design workarounds.</div>
 </div>
 <div class="card">
-<div class="ct">🔒 One-Size Rocking</div>
+<div class="ct">🔒 <span data-en>One-Size Rocking</span><span data-zh>千篇一律的摇动感</span></div>
 <div class="cb">Every chair model gets the same rocking feel. No way to tune for different seat heights, weight ranges, or use cases without redesigning the frame.</div>
 </div>
 <div class="card">
-<div class="ct">👁️ Static Appearance</div>
+<div class="ct">👁️ <span data-en>Static Appearance</span><span data-zh>静态外观</span></div>
 <div class="cb">A flat spring parallel to the ground reads as inert. It doesn't communicate "this chair rocks" until someone sits in it.</div>
 </div>
 </div>
@@ -183,7 +195,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 
 <div>
 <div class="insight">
-<div class="insight-l">V2 Solves All Three</div>
+<div class="insight-l"><span data-en>V2 Solves All Three</span><span data-zh>V2 一次性解决三大问题</span></div>
 <div class="insight-t" style="display:flex;flex-direction:column;gap:clamp(.4rem,1vh,.8rem)">
 <div><strong>Pinch points →</strong> Forward fulcrum geometry limits max deflection. Gap never closes enough to pinch.</div>
 <div><strong>One-size rocking →</strong> Swap the wedge to customize feel per model. Same frame, different personality.</div>
@@ -197,7 +209,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 
 <section class="slide" id="s5">
 <div class="sc" style="padding:0 var(--pad)">
-<div class="ey r">Platform Advantage</div>
+<div class="ey r"><span data-en>Platform Advantage</span><span data-zh>平台优势</span></div>
 <h2 class="h2 r">The wedge is the <em style="font-style:normal;color:var(--accent)">personality.</em></h2>
 
 <div class="r" style="margin-top:clamp(.5rem,1.5vw,1rem)">
@@ -206,25 +218,25 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 
 <div class="r g2" style="margin-bottom:clamp(.6rem,1.5vw,1rem)">
 <div class="card hi">
-<div class="ct">🔧 Standardized Base</div>
+<div class="ct">🔧 <span data-en>Standardized Base</span><span data-zh>标准化基础</span></div>
 <div class="cb">Same frame tube + leaf spring across the entire lineup. Reduces tooling, simplifies manufacturing, lowers SKU complexity.</div>
 </div>
 <div class="card hi">
-<div class="ct">🎛️ Tunable Per Model</div>
+<div class="ct">🎛️ <span data-en>Tunable Per Model</span><span data-zh>按型号可调</span></div>
 <div class="cb">Different wedge = different feel. A compact camp chair gets a different rocking profile than a tall director's chair. One tooling change, not a frame redesign.</div>
 </div>
 <div class="card hi">
-<div class="ct">💰 Low Tooling Cost</div>
+<div class="ct">💰 <span data-en>Low Tooling Cost</span><span data-zh>模具成本低</span></div>
 <div class="cb">Wedge is a simple injection molded or stamped component. Cheap to tool, cheap to modify, cheap to test multiple variants.</div>
 </div>
 <div class="card hi">
-<div class="ct">🏪 Retail Flexibility</div>
+<div class="ct">🏪 <span data-en>Retail Flexibility</span><span data-zh>零售灵活性</span></div>
 <div class="cb">If a retailer wants a different "feel" for their exclusive — it's a wedge swap, not a frame change. Customize without multiplying tooling investment.</div>
 </div>
 </div>
 
 <div class="r insight">
-<div class="insight-l">Business Model</div>
+<div class="insight-l"><span data-en>Business Model</span><span data-zh>商业模式</span></div>
 <div class="insight-t">Base frame, spring, and chair structure are shared infrastructure. The wedge is the personality — the cheapest, fastest component to change. One tuning cartridge per chair model across the entire Flow-Motion lineup.</div>
 </div>
 </div>
@@ -232,27 +244,27 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);height:100%;ov
 
 <section class="slide" id="s6" style="background:var(--bg2)">
 <div class="sc" style="padding:0 var(--pad)">
-<div class="ey r">Path Forward</div>
-<h2 class="h2 r">Next Steps</h2>
+<div class="ey r"><span data-en>Path Forward</span><span data-zh>前进路径</span></div>
+<h2 class="h2 r"><span data-en>Next Steps</span><span data-zh>下一步计划</span></h2>
 
 <div class="r two" style="margin-top:clamp(.5rem,1.5vw,1.2rem)">
 <div>
 <div class="st">
-<div class="si"><div class="sn">1</div><div class="stx"><div class="stt">Patent Filing</div><div class="std">Patentability rated 🟡 MODERATE-STRONG. Three independent claims drafted, five novel elements identified. Engage patent counsel for provisional application.</div></div></div>
-<div class="si"><div class="sn">2</div><div class="stx"><div class="stt">Prototype Build</div><div class="std">Existing V1 spring + movable wedge block. Test at multiple fulcrum positions. Measure force curves and validate tuning concept physically.</div></div></div>
-<div class="si"><div class="sn">3</div><div class="stx"><div class="stt">Wedge Variants</div><div class="std">Design 3–4 wedge profiles for different chair models. Test across the Flow-Motion lineup. Validate the "tuning cartridge" concept.</div></div></div>
+<div class="si"><div class="sn">1</div><div class="stx"><div class="stt"><span data-en>Patent Filing</span><span data-zh>专利申请</span></div><div class="std">Patentability rated 🟡 MODERATE-STRONG. Three independent claims drafted, five novel elements identified. Engage patent counsel for provisional application.</div></div></div>
+<div class="si"><div class="sn">2</div><div class="stx"><div class="stt"><span data-en>Prototype Build</span><span data-zh>原型制作</span></div><div class="std">Existing V1 spring + movable wedge block. Test at multiple fulcrum positions. Measure force curves and validate tuning concept physically.</div></div></div>
+<div class="si"><div class="sn">3</div><div class="stx"><div class="stt"><span data-en>Wedge Variants</span><span data-zh>楔块变体</span></div><div class="std">Design 3–4 wedge profiles for different chair models. Test across the Flow-Motion lineup. Validate the "tuning cartridge" concept.</div></div></div>
 </div>
 </div>
 
 <div>
 <div class="st">
-<div class="si"><div class="sn">4</div><div class="stx"><div class="stt">Pinch Point Validation</div><div class="std">Formal gap measurements at optimal fulcrum position. Demonstrate pinch elimination with test data for compliance.</div></div></div>
-<div class="si"><div class="sn">5</div><div class="stx"><div class="stt">Design Patent</div><div class="std">Angled spring + wedge has a visually distinctive profile. Consider parallel design patent filing on the appearance.</div></div></div>
-<div class="si"><div class="sn">6</div><div class="stx"><div class="stt">Production Path</div><div class="std">Finalize wedge material (injection vs. stamped) and integrate into existing Flow-Motion production line. Minimal retooling required.</div></div></div>
+<div class="si"><div class="sn">4</div><div class="stx"><div class="stt"><span data-en>Pinch Point Validation</span><span data-zh>夹伤风险验证</span></div><div class="std">Formal gap measurements at optimal fulcrum position. Demonstrate pinch elimination with test data for compliance.</div></div></div>
+<div class="si"><div class="sn">5</div><div class="stx"><div class="stt"><span data-en>Design Patent</span><span data-zh>外观设计专利</span></div><div class="std">Angled spring + wedge has a visually distinctive profile. Consider parallel design patent filing on the appearance.</div></div></div>
+<div class="si"><div class="sn">6</div><div class="stx"><div class="stt"><span data-en>Production Path</span><span data-zh>量产路径</span></div><div class="std">Finalize wedge material (injection vs. stamped) and integrate into existing Flow-Motion production line. Minimal retooling required.</div></div></div>
 </div>
 
 <div class="insight" style="margin-top:clamp(.5rem,1.2vh,.8rem)">
-<div class="insight-l">Key Advantage</div>
+<div class="insight-l"><span data-en>Key Advantage</span><span data-zh>核心优势</span></div>
 <div class="insight-t">V2 prototyping starts with existing V1 hardware — no new tooling needed to validate the concept. The wedge is the only new component.</div>
 </div>
 </div>
@@ -297,5 +309,19 @@ if (cmpSlider) {
   });
 }
 </script>
+
+<div class="lang-toggle" id="langToggle">
+  <button class="active" onclick="setLang('en')">EN</button>
+  <button onclick="setLang('zh')">中文</button>
+</div>
+<script>
+function setLang(lang) {
+  document.body.classList.toggle('zh', lang === 'zh');
+  var btns = document.querySelectorAll('.lang-toggle button');
+  btns[0].classList.toggle('active', lang === 'en');
+  btns[1].classList.toggle('active', lang === 'zh');
+}
+</script>
+
 </body>
 </html>
