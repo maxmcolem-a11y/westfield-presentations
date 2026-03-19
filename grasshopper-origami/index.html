@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computational Origami + AI Agent Design Pipeline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===========================================
+       CSS CUSTOM PROPERTIES
+    =========================================== */
+    :root {
+      --bg-primary:     #0a0c10;
+      --bg-secondary:   #111520;
+      --bg-card:        #161b27;
+      --bg-highlight:   #1c2133;
+      --text-primary:   #e8eaf0;
+      --text-secondary: #8892a4;
+      --text-muted:     #505869;
+      --accent:         #f97316;        /* orange — industrial */
+      --accent-dim:     rgba(249,115,22,0.18);
+      --accent-glow:    rgba(249,115,22,0.35);
+      --teal:           #22d3c8;
+      --teal-dim:       rgba(34,211,200,0.14);
+      --violet:         #a78bfa;
+      --violet-dim:     rgba(167,139,250,0.14);
+      --green:          #34d399;
+      --green-dim:      rgba(52,211,153,0.14);
+      --red:            #f87171;
+
+      --font-display: 'Space Grotesk', system-ui, sans-serif;
+      --font-mono:    'Space Mono', monospace;
+
+      --title-size:    clamp(2rem, 5.5vw, 4.5rem);
+      --h2-size:       clamp(1.4rem, 3vw, 2.4rem);
+      --h3-size:       clamp(1rem, 2vw, 1.5rem);
+      --body-size:     clamp(0.78rem, 1.3vw, 1rem);
+      --small-size:    clamp(0.68rem, 1vw, 0.82rem);
+      --mono-size:     clamp(0.7rem, 1.1vw, 0.85rem);
+
+      --slide-padding: clamp(1.5rem, 4vw, 4rem);
+      --content-gap:   clamp(0.6rem, 1.8vw, 1.8rem);
+      --card-gap:      clamp(0.4rem, 1vw, 0.9rem);
+
+      --radius:        10px;
+      --ease:          cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ===========================================
+       RESET & BASE
+    =========================================== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: var(--font-display);
+      background: var(--bg-primary);
+      overflow-y: scroll;
+      overflow-x: hidden;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      color: var(--text-primary);
+      height: 100%;
+    }
+
+    /* ===========================================
+       SLIDE SYSTEM — CRITICAL: VIEWPORT FITTING
+    =========================================== */
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .slide-inner {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--slide-padding);
+      max-height: 100%;
+      overflow: hidden;
+      gap: var(--content-gap);
+    }
+
+    /* ===========================================
+       BACKGROUNDS & DECORATIVE
+    =========================================== */
+    .bg-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .bg-noise {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        radial-gradient(ellipse at 15% 85%, rgba(249,115,22,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 15%, rgba(34,211,200,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 50%, rgba(167,139,250,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .bg-diagonal {
+      position: absolute; inset: 0; z-index: 0;
+      background: linear-gradient(135deg, var(--bg-primary) 0%, #0f1520 50%, var(--bg-primary) 100%);
+      pointer-events: none;
+    }
+
+    .slide-inner > * { position: relative; z-index: 1; }
+
+    /* ===========================================
+       TYPOGRAPHY
+    =========================================== */
+    .label {
+      font-family: var(--font-mono);
+      font-size: var(--small-size);
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.3em;
+    }
+
+    .label-teal   { color: var(--teal); }
+    .label-violet { color: var(--violet); }
+    .label-green  { color: var(--green); }
+
+    h1.title {
+      font-size: var(--title-size);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    h2.section-title {
+      font-size: var(--h2-size);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+
+    h3.card-title {
+      font-size: var(--h3-size);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    p, li {
+      font-size: var(--body-size);
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    strong { color: var(--text-primary); font-weight: 600; }
+
+    .accent-text  { color: var(--accent); }
+    .teal-text    { color: var(--teal); }
+    .violet-text  { color: var(--violet); }
+    .green-text   { color: var(--green); }
+
+    /* ===========================================
+       ACCENT BAR
+    =========================================== */
+    .accent-bar {
+      display: inline-block;
+      width: clamp(2.5rem, 5vw, 5rem);
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-bottom: 0.6em;
+    }
+    .accent-bar-teal   { background: var(--teal); }
+    .accent-bar-violet { background: var(--violet); }
+    .accent-bar-green  { background: var(--green); }
+
+    /* ===========================================
+       CARDS & GRIDS
+    =========================================== */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--card-gap);
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--card-gap);
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--card-gap);
+    }
+    .grid-2-3 {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: calc(var(--card-gap) * 2);
+      align-items: start;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: clamp(0.8rem, 1.5vw, 1.4rem);
+    }
+
+    .card-accent  { border-color: var(--accent-dim); border-top: 2px solid var(--accent); }
+    .card-teal    { border-color: var(--teal-dim);   border-top: 2px solid var(--teal); }
+    .card-violet  { border-color: var(--violet-dim); border-top: 2px solid var(--violet); }
+    .card-green   { border-color: var(--green-dim);  border-top: 2px solid var(--green); }
+
+    .card p, .card li { font-size: var(--small-size); line-height: 1.55; }
+    .card ul { list-style: none; padding: 0; margin-top: 0.5em; }
+    .card li::before { content: "→ "; color: var(--text-muted); }
+
+    /* Plugin icon box */
+    .plugin-icon {
+      width: clamp(2rem, 3.5vw, 3.2rem);
+      height: clamp(2rem, 3.5vw, 3.2rem);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(1rem, 1.8vw, 1.6rem);
+      margin-bottom: 0.6em;
+      flex-shrink: 0;
+    }
+    .icon-orange  { background: var(--accent-dim); }
+    .icon-teal    { background: var(--teal-dim); }
+    .icon-violet  { background: var(--violet-dim); }
+    .icon-green   { background: var(--green-dim); }
+
+    /* ===========================================
+       BULLET LISTS
+    =========================================== */
+    .bullet-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.35em; }
+    .bullet-list li { display: flex; align-items: flex-start; gap: 0.5em; font-size: var(--body-size); color: var(--text-secondary); }
+    .bullet-list li::before { content: "•"; color: var(--accent); flex-shrink: 0; font-size: 1.1em; margin-top: 0.05em; }
+
+    /* Tag / pill */
+    .tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: var(--small-size);
+      padding: 0.15em 0.6em;
+      border-radius: 4px;
+      background: var(--bg-highlight);
+      color: var(--text-secondary);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .tag-accent  { background: var(--accent-dim);  color: var(--accent);  border-color: var(--accent-dim); }
+    .tag-teal    { background: var(--teal-dim);    color: var(--teal);    border-color: var(--teal-dim); }
+    .tag-green   { background: var(--green-dim);   color: var(--green);   border-color: var(--green-dim); }
+    .tag-violet  { background: var(--violet-dim);  color: var(--violet);  border-color: var(--violet-dim); }
+
+    /* ===========================================
+       CAPABILITY TABLE (slide 7)
+    =========================================== */
+    .capability-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--card-gap);
+    }
+    .cap-col {
+      border-radius: var(--radius);
+      padding: clamp(0.7rem, 1.2vw, 1.2rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+    }
+    .cap-col.auto    { background: var(--green-dim);  border: 1px solid rgba(52,211,153,0.2); }
+    .cap-col.collab  { background: var(--teal-dim);   border: 1px solid rgba(34,211,200,0.2); }
+    .cap-col.human   { background: var(--accent-dim); border: 1px solid rgba(249,115,22,0.2); }
+    .cap-col .cap-head { font-size: var(--small-size); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+    .cap-col.auto  .cap-head  { color: var(--green); }
+    .cap-col.collab .cap-head { color: var(--teal); }
+    .cap-col.human .cap-head  { color: var(--accent); }
+    .cap-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.3em; }
+    .cap-col li { font-size: var(--small-size); color: var(--text-secondary); display: flex; gap: 0.4em; }
+    .cap-col li::before { flex-shrink: 0; }
+    .cap-col.auto  li::before { content: "✓"; color: var(--green); }
+    .cap-col.collab li::before { content: "↔"; color: var(--teal); }
+    .cap-col.human li::before { content: "👁"; font-size: 0.75em; }
+
+    /* ===========================================
+       ANIMATIONS
+    =========================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+    }
+    .slide.visible .reveal { opacity: 1; transform: translateY(0); }
+    .reveal:nth-child(1) { transition-delay: 0.05s; }
+    .reveal:nth-child(2) { transition-delay: 0.15s; }
+    .reveal:nth-child(3) { transition-delay: 0.25s; }
+    .reveal:nth-child(4) { transition-delay: 0.35s; }
+    .reveal:nth-child(5) { transition-delay: 0.42s; }
+    .reveal:nth-child(6) { transition-delay: 0.48s; }
+
+    /* ===========================================
+       PROGRESS BAR
+    =========================================== */
+    .progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      background: var(--accent);
+      z-index: 100;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    /* ===========================================
+       NAV DOTS
+    =========================================== */
+    .nav-dots {
+      position: fixed;
+      right: clamp(0.8rem, 2vw, 1.8rem);
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 100;
+    }
+    .nav-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .nav-dot.active {
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent-glow);
+      transform: scale(1.4);
+    }
+    .nav-dot:hover { background: var(--text-secondary); }
+
+    /* ===========================================
+       SLIDE NUMBER
+    =========================================== */
+    .slide-num {
+      position: absolute;
+      bottom: clamp(0.8rem, 2vw, 1.5rem);
+      right: clamp(1rem, 3vw, 2.5rem);
+      font-family: var(--font-mono);
+      font-size: var(--small-size);
+      color: var(--text-muted);
+      z-index: 10;
+    }
+
+    /* ===========================================
+       RESPONSIVE BREAKPOINTS
+    =========================================== */
+    @media (max-height: 700px) {
+      :root {
+        --slide-padding: clamp(1rem, 3vw, 2.5rem);
+        --content-gap: clamp(0.4rem, 1.2vw, 1rem);
+      }
+    }
+    @media (max-height: 600px) {
+      :root {
+        --slide-padding: clamp(0.8rem, 2.5vw, 1.8rem);
+        --content-gap: clamp(0.3rem, 1vw, 0.8rem);
+        --title-size: clamp(1.5rem, 5vw, 3rem);
+        --h2-size: clamp(1.1rem, 2.5vw, 1.8rem);
+        --body-size: clamp(0.72rem, 1.1vw, 0.88rem);
+      }
+      .nav-dots, .keyboard-hint { display: none; }
+    }
+    @media (max-height: 500px) {
+      :root {
+        --slide-padding: 0.75rem 1.5rem;
+        --title-size: clamp(1.2rem, 4vw, 2rem);
+        --h2-size: clamp(1rem, 2vw, 1.4rem);
+        --body-size: clamp(0.65rem, 1vw, 0.8rem);
+      }
+    }
+    @media (max-width: 600px) {
+      .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+      .grid-2-3 { grid-template-columns: 1fr; }
+      .capability-row { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { transition: opacity 0.2s ease; transform: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ===================================
+       TITLE SLIDE
+    =================================== */
+    .title-slide .slide-inner {
+      justify-content: center;
+      gap: 0;
+    }
+    .title-slide h1 { margin-bottom: 0.3em; }
+    .title-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--small-size);
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: clamp(0.6rem, 1.5vw, 1.2rem);
+    }
+    .title-sub {
+      font-size: clamp(0.9rem, 1.8vw, 1.3rem);
+      color: var(--text-secondary);
+      max-width: 50ch;
+      line-height: 1.55;
+      margin-top: 0.5em;
+    }
+    .title-meta {
+      margin-top: clamp(1.2rem, 2.5vw, 2rem);
+      display: flex;
+      gap: 0.6em;
+      flex-wrap: wrap;
+    }
+
+    /* Large fold SVG on title */
+    .fold-bg-svg {
+      position: absolute;
+      right: -2%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(280px, 38vw, 560px);
+      opacity: 0.07;
+      pointer-events: none;
+    }
+
+    /* ===================================
+       VISION SLIDE (slide 2)
+    =================================== */
+    .vision-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: clamp(0.8rem, 2vw, 2rem);
+    }
+    .vision-side {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: clamp(0.8rem, 1.5vw, 1.5rem);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .vision-arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4em;
+    }
+    .vision-arrow-svg { color: var(--accent); opacity: 0.6; }
+    .vision-label-small { font-family: var(--font-mono); font-size: var(--small-size); color: var(--text-muted); text-align: center; }
+
+    /* ===================================
+       ARCHITECTURE SLIDE (slide 6)
+    =================================== */
+    .arch-container {
+      display: flex;
+      flex-direction: column;
+      gap: var(--card-gap);
+      max-height: calc(100vh - 12rem);
+    }
+    .arch-mac-box {
+      border: 1.5px solid rgba(249,115,22,0.3);
+      border-radius: 14px;
+      padding: clamp(0.7rem, 1.5vw, 1.2rem);
+      background: rgba(249,115,22,0.04);
+      position: relative;
+    }
+    .arch-mac-label {
+      position: absolute;
+      top: -0.7em;
+      left: 1.2em;
+      background: var(--bg-primary);
+      padding: 0 0.5em;
+      font-family: var(--font-mono);
+      font-size: var(--small-size);
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+    .arch-row {
+      display: flex;
+      gap: clamp(0.5rem, 1.5vw, 1rem);
+      align-items: stretch;
+    }
+    .arch-block {
+      flex: 1;
+      border-radius: 8px;
+      padding: clamp(0.5rem, 1vw, 0.9rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.3em;
+    }
+    .arch-block.agent   { background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.2); }
+    .arch-block.rhino   { background: rgba(34,211,200,0.08); border: 1px solid rgba(34,211,200,0.2); }
+    .arch-block.files   { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); }
+    .arch-block-title {
+      font-size: var(--small-size);
+      font-weight: 700;
+      font-family: var(--font-mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .arch-block.agent .arch-block-title  { color: var(--violet); }
+    .arch-block.rhino .arch-block-title  { color: var(--teal); }
+    .arch-block.files .arch-block-title  { color: var(--accent); }
+    .arch-block p, .arch-block li { font-size: var(--small-size); color: var(--text-secondary); }
+    .arch-block ul { list-style: none; padding: 0; }
+    .arch-block li::before { content: "· "; color: var(--text-muted); }
+    .arch-arrow-h {
+      display: flex;
+      align-items: center;
+      color: var(--text-muted);
+      font-size: 1.1em;
+      flex-shrink: 0;
+      padding: 0 0.2em;
+    }
+
+    .loop-strip {
+      display: flex;
+      align-items: center;
+      background: var(--bg-highlight);
+      border-radius: 8px;
+      padding: clamp(0.4rem, 0.8vw, 0.7rem) clamp(0.6rem, 1vw, 1rem);
+      gap: 0;
+      overflow: hidden;
+    }
+    .loop-step {
+      flex: 1;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15em;
+    }
+    .loop-step-num {
+      font-family: var(--font-mono);
+      font-size: var(--small-size);
+      color: var(--text-muted);
+    }
+    .loop-step-label {
+      font-size: var(--small-size);
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .loop-arrow {
+      color: var(--accent);
+      font-size: 1em;
+      flex-shrink: 0;
+      padding: 0 0.15em;
+      opacity: 0.5;
+    }
+
+    /* ===================================
+       WORKFLOW SLIDE
+    =================================== */
+    .workflow-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: clamp(0.7rem, 1.2vw, 1.1rem);
+    }
+    .workflow-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25em;
+      margin-top: 0.5em;
+      align-items: center;
+    }
+    .wf-step {
+      font-family: var(--font-mono);
+      font-size: var(--small-size);
+      background: var(--bg-highlight);
+      padding: 0.2em 0.5em;
+      border-radius: 4px;
+      color: var(--text-secondary);
+    }
+    .wf-arrow { color: var(--text-muted); font-size: 0.8em; }
+
+    /* ===================================
+       TIMELINE SLIDE
+    =================================== */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: clamp(5rem, 10vw, 9rem) 1fr;
+      gap: 0;
+      position: relative;
+      padding-bottom: clamp(0.5rem, 1vw, 0.8rem);
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: clamp(5rem, 10vw, 9rem);
+      top: 0.7em;
+      bottom: -0.1em;
+      width: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+    .timeline-item:last-child::before { display: none; }
+    .t-label {
+      font-family: var(--font-mono);
+      font-size: var(--small-size);
+      color: var(--accent);
+      padding-right: 1em;
+      padding-top: 0.05em;
+      flex-shrink: 0;
+    }
+    .t-content {
+      padding-left: 1.4em;
+      position: relative;
+    }
+    .t-content::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .t-content strong { font-size: var(--body-size); color: var(--text-primary); display: block; }
+    .t-content span { font-size: var(--small-size); color: var(--text-secondary); }
+
+    /* ===================================
+       NEXT STEPS
+    =================================== */
+    .next-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--card-gap);
+    }
+    .next-item {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: clamp(0.7rem, 1.2vw, 1.1rem);
+      display: flex;
+      gap: 0.8em;
+      align-items: flex-start;
+    }
+    .next-num {
+      font-family: var(--font-mono);
+      font-size: clamp(1.3rem, 2.5vw, 2rem);
+      color: var(--accent);
+      font-weight: 700;
+      line-height: 1;
+      flex-shrink: 0;
+      opacity: 0.5;
+    }
+    .next-body strong { font-size: var(--body-size); color: var(--text-primary); display: block; margin-bottom: 0.2em; }
+    .next-body span { font-size: var(--small-size); color: var(--text-secondary); }
+
+  </style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Nav dots -->
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- ============================================================
+     SLIDE 1 — TITLE
+============================================================ -->
+<section class="slide title-slide" id="slide-0">
+  <div class="bg-diagonal"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-noise"></div>
+
+  <!-- Large origami fold SVG watermark -->
+  <svg class="fold-bg-svg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="white" stroke-width="1">
+      <!-- Miura-Ori grid pattern -->
+      <polyline points="50,50 150,100 250,50 350,100 450,50"/>
+      <polyline points="50,150 150,200 250,150 350,200 450,150"/>
+      <polyline points="50,250 150,300 250,250 350,300 450,250"/>
+      <polyline points="50,350 150,400 250,350 350,400 450,350"/>
+      <polyline points="50,450 150,450 250,450 350,450 450,450"/>
+      <!-- vertical lines -->
+      <line x1="50" y1="50" x2="50" y2="450"/>
+      <line x1="150" y1="100" x2="150" y2="450"/>
+      <line x1="250" y1="50" x2="250" y2="450"/>
+      <line x1="350" y1="100" x2="350" y2="450"/>
+      <line x1="450" y1="50" x2="450" y2="450"/>
+      <!-- diagonals -->
+      <line x1="50" y1="50" x2="150" y2="100"/>
+      <line x1="150" y1="100" x2="250" y2="50"/>
+      <line x1="250" y1="50" x2="350" y2="100"/>
+      <line x1="350" y1="100" x2="450" y2="50"/>
+      <line x1="50" y1="150" x2="150" y2="200"/>
+      <line x1="150" y1="200" x2="250" y2="150"/>
+      <line x1="250" y1="150" x2="350" y2="200"/>
+      <line x1="350" y1="200" x2="450" y2="150"/>
+      <line x1="50" y1="250" x2="150" y2="300"/>
+      <line x1="150" y1="300" x2="250" y2="250"/>
+      <line x1="250" y1="250" x2="350" y2="300"/>
+      <line x1="350" y1="300" x2="450" y2="250"/>
+      <line x1="50" y1="350" x2="150" y2="400"/>
+      <line x1="150" y1="400" x2="250" y2="350"/>
+      <line x1="250" y1="350" x2="350" y2="400"/>
+      <line x1="350" y1="400" x2="450" y2="350"/>
+    </g>
+  </svg>
+
+  <div class="slide-inner">
+    <div class="title-eyebrow reveal">Westfield Outdoors · Industrial Design</div>
+    <h1 class="title reveal">Computational<br><span class="accent-text">Origami</span> +<br>AI Agent</h1>
+    <p class="title-sub reveal">A new design pipeline: Grasshopper's parametric folding engine, guided by an AI agent — from concept crease pattern to manufacturing DXF in a single loop.</p>
+    <div class="title-meta reveal">
+      <span class="tag tag-accent">Rhino 8 + Grasshopper</span>
+      <span class="tag tag-teal">OpenClaw Agent</span>
+      <span class="tag">Local Mac Architecture</span>
+      <span class="tag">~2 hrs to first run</span>
+    </div>
+  </div>
+  <div class="slide-num">01 / 11</div>
+</section>
+
+<!-- ============================================================
+     SLIDE 2 — THE VISION
+============================================================ -->
+<section class="slide" id="slide-1">
+  <div class="bg-grid"></div>
+  <div class="bg-noise"></div>
+  <div class="slide-inner">
+    <div class="reveal">
+      <div class="accent-bar"></div>
+      <h2 class="section-title">The Vision</h2>
+    </div>
+
+    <div class="vision-grid reveal">
+      <!-- Max side -->
+      <div class="vision-side" style="border-top: 2px solid var(--teal);">
+        <div class="label label-teal">Designer</div>
+        <h3 class="card-title teal-text">Max</h3>
+        <ul class="bullet-list" style="margin-top:0.5em;">
+          <li style="color:var(--text-secondary)">Describes fold idea in plain English</li>
+          <li style="color:var(--text-secondary)">Evaluates geometry in Rhino</li>
+          <li style="color:var(--text-secondary)">Judges ergonomics, aesthetics</li>
+          <li style="color:var(--text-secondary)">Approves manufacturing output</li>
+        </ul>
+      </div>
+
+      <!-- Arrow -->
+      <div class="vision-arrow">
+        <svg width="32" height="80" viewBox="0 0 32 80" fill="none">
+          <line x1="16" y1="0" x2="16" y2="80" stroke="rgba(249,115,22,0.35)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <path d="M8 60 L16 72 L24 60" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+          <path d="M8 20 L16 8 L24 20" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+        </svg>
+        <div class="vision-label-small">real-time<br>loop</div>
+      </div>
+
+      <!-- Agent side -->
+      <div class="vision-side" style="border-top: 2px solid var(--violet);">
+        <div class="label label-violet">AI Agent</div>
+        <h3 class="card-title violet-text">Saria</h3>
+        <ul class="bullet-list" style="margin-top:0.5em;">
+          <li style="color:var(--text-secondary)">Generates GhPython scripts</li>
+          <li style="color:var(--text-secondary)">Runs parametric variation sweeps</li>
+          <li style="color:var(--text-secondary)">Analyzes screenshots + geometry data</li>
+          <li style="color:var(--text-secondary)">Exports DXF / STL / BOM autonomously</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card reveal" style="background: var(--bg-highlight); border: 1px solid rgba(249,115,22,0.15);">
+      <p style="color: var(--text-secondary); font-style: italic;">"Make the Miura cell tighter — I want it to pack under 60mm" → agent generates 12 variations in 90 seconds → Max picks geometry from contact sheet → agent exports laser DXF immediately.</p>
+    </div>
+  </div>
+  <div class="slide-num">02 / 11</div>
+</section>
+
+<!-- ============================================================
+     SLIDE 3 — WHY GRASSHOPPER
+============================================================ -->
+<section class="slide" id="slide-2">
+  <div class="bg-grid"></div>
+  <div class="slide-inner">
+    <div class="reveal">
+      <div class="accent-bar accent-bar-teal"></div>
+      <h2 class="section-title">Why <span class="teal-text">Grasshopper</span></h2>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div>
+        <ul class="bullet-list">
+          <li><strong>Crease patterns are math.</strong> Kawasaki's theorem, Maekawa's theorem — directly expressible as node algorithms.</li>
+          <li><strong>Iteration in seconds.</strong> "Pack under 60mm" = move one slider. All geometry updates live.</li>
+          <li><strong>Physics built-in.</strong> Kangaroo 2 ships with Rhino 8. Watch a flat sheet fold to 3D in real time.</li>
+          <li><strong>Fab outputs are parametric.</strong> The same definition that generates 3D form also produces DXF for laser cutting.</li>
+          <li><strong>Free with Rhino 8.</strong> $995 one-time gets you everything: GH + Kangaroo + scripting.</li>
+        </ul>
+      </div>
+
+      <div>
+        <!-- Mini comparison table as cards -->
+        <div class="card" style="display:grid; grid-template-columns:1fr auto auto; gap:0.3em 0.8em; font-size:var(--small-size); align-items:center;">
+          <span style="color:var(--text-muted)">Capability</span>
+          <span style="color:var(--text-muted)">GH</span>
+          <span style="color:var(--text-muted)">Others</span>
+          
+          <span style="color:var(--text-secondary)">Origami simulation</span>
+          <span class="green-text" style="font-size:0.9em;">✓✓</span>
+          <span class="red" style="color:var(--red);font-size:0.9em;">✗</span>
+          
+          <span style="color:var(--text-secondary)">Live physics</span>
+          <span class="green-text" style="font-size:0.9em;">✓✓</span>
+          <span style="color:var(--text-muted);font-size:0.9em;">—</span>
+          
+          <span style="color:var(--text-secondary)">Flat-pattern unfold</span>
+          <span class="green-text" style="font-size:0.9em;">✓✓</span>
+          <span style="color:var(--text-muted);font-size:0.9em;">sheet metal only</span>
+
+          <span style="color:var(--text-secondary)">AI scriptable</span>
+          <span class="green-text" style="font-size:0.9em;">✓✓</span>
+          <span style="color:var(--text-muted);font-size:0.9em;">limited</span>
+
+          <span style="color:var(--text-secondary)">STEP → Solid Edge</span>
+          <span class="green-text" style="font-size:0.9em;">✓</span>
+          <span class="green-text" style="font-size:0.9em;">✓</span>
+        </div>
+
+        <div class="card" style="margin-top:var(--card-gap); background:var(--accent-dim); border-color:rgba(249,115,22,0.2);">
+          <p style="font-size:var(--small-size);">Rhino 8 runs <strong>natively on Apple Silicon</strong> (M1–M4). Fast single-core CPU is exactly what Grasshopper's solver needs. 32 GB recommended for physics simulation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">03 / 11</div>
+</section>
+
+<!-- ============================================================
+     SLIDE 4 — KEY PLUGINS
+============================================================ -->
+<section class="slide" id="slide-3">
+  <div class="bg-grid"></div>
+  <div class="bg-noise"></div>
+  <div class="slide-inner">
+    <div class="reveal">
+      <div class="accent-bar accent-bar-violet"></div>
+      <h2 class="section-title">Key <span class="violet-text">Plugins</span></h2>
+    </div>
+
+    <div class="grid-4 reveal">
+      <!-- Crane -->
+      <div class="card card-accent">
+        <div class="plugin-icon icon-orange">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2L4 7V17L12 22L20 17V7L12 2Z" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+            <path d="M12 2V12M4 7L12 12M20 7L12 12" stroke="var(--accent)" stroke-width="1"/>
+          </svg>
+        </div>
+        <h3 class="card-title">Crane</h3>
+        <p style="color:var(--accent);font-size:var(--small-size);margin-bottom:0.4em;">Origami Simulation</p>
+        <ul>
+          <li>Miura, Waterbomb, Yoshimura tessellations</li>
+          <li>Rigid-fold constraint solver</li>
+          <li>Crease pattern → 3D form</li>
+          <li>Thickened panel fabrication</li>
+          <li>Free · Food4Rhino</li>
+        </ul>
+      </div>
+
+      <!-- Kangaroo -->
+      <div class="card card-teal">
+        <div class="plugin-icon icon-teal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="8" stroke="var(--teal)" stroke-width="1.5" fill="none"/>
+            <path d="M7 12 Q12 5 17 12 Q12 19 7 12Z" stroke="var(--teal)" stroke-width="1"/>
+            <circle cx="12" cy="12" r="2" fill="var(--teal)" opacity="0.4"/>
+          </svg>
+        </div>
+        <h3 class="card-title">Kangaroo 2</h3>
+        <p style="color:var(--teal);font-size:var(--small-size);margin-bottom:0.4em;">Live Physics Engine</p>
+        <ul>
+          <li>Ships FREE with Rhino 7/8</li>
+          <li>Soft goods simulation (fabric drape)</li>
+          <li>Hinge + rigid panel animation</li>
+          <li>Tensegrity + membrane structures</li>
+          <li>Position-Based Dynamics</li>
+        </ul>
+      </div>
+
+      <!-- Ivy -->
+      <div class="card card-green">
+        <div class="plugin-icon icon-green">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="3" width="8" height="8" rx="1" stroke="var(--green)" stroke-width="1.5" fill="none"/>
+            <rect x="13" y="3" width="8" height="8" rx="1" stroke="var(--green)" stroke-width="1.5" fill="none" opacity="0.4"/>
+            <rect x="8" y="13" width="8" height="8" rx="1" stroke="var(--green)" stroke-width="1.5" fill="none" opacity="0.7"/>
+            <path d="M11 7H13M17 11V13M7 11V13" stroke="var(--green)" stroke-width="1"/>
+          </svg>
+        </div>
+        <h3 class="card-title">Ivy</h3>
+        <p style="color:var(--green);font-size:var(--small-size);margin-bottom:0.4em;">Mesh Unfolding</p>
+        <ul>
+          <li>3D mesh → flat 2D pattern</li>
+          <li>Seam placement control</li>
+          <li>Sewing tab generation</li>
+          <li>DXF export for laser / die cut</li>
+          <li>Free · Food4Rhino</li>
+        </ul>
+      </div>
+
+      <!-- Karamba3D -->
+      <div class="card card-violet">
+        <div class="plugin-icon icon-violet">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M4 20L12 4L20 20H4Z" stroke="var(--violet)" stroke-width="1.5" fill="none"/>
+            <path d="M8 20L12 12L16 20" stroke="var(--violet)" stroke-width="1" opacity="0.5"/>
+            <line x1="12" y1="4" x2="12" y2="20" stroke="var(--violet)" stroke-width="0.5" opacity="0.4"/>
+          </svg>
+        </div>
+        <h3 class="card-title">Karamba3D</h3>
+        <p style="color:var(--violet);font-size:var(--small-size);margin-bottom:0.4em;">Structural FEA</p>
+        <ul>
+          <li>Shell / beam / truss analysis</li>
+          <li>ASTM load testing in GH</li>
+          <li>Cross-section optimization</li>
+          <li>Live stress visualization</li>
+          <li>Free Lite / €1,490 Pro</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="reveal" style="display:flex; gap:0.5em; flex-wrap:wrap;">
+      <span class="tag">+ Lunchbox (tessellation)</span>
+      <span class="tag">+ Weaverbird (mesh topology)</span>
+      <span class="tag">+ Pufferfish (morphing)</span>
+      <span class="tag">+ Pancake (DXF/STEP export)</span>
+    </div>
+  </div>
+  <div class="slide-num">04 / 11</div>
+</section>
+
+<!-- ============================================================
+     SLIDE 5 — PRODUCT APPLICATIONS
+============================================================ -->
+<section class="slide" id="slide-4">
+  <div class="bg-grid"></div>
+  <div class="slide-inner">
+    <div class="reveal">
+      <div class="accent-bar"></div>
+      <h2 class="section-title">Product <span class="accent-text">Applications</span></h2>
+    </div>
+
+    <div class="grid-3 reveal">
+      <!-- Chairs -->
+      <div class="card card-accent">
+        <div style="margin-bottom:0.5em;">
+          <svg width="48" height="36" viewBox="0 0 48 36" fill="none">
+            <rect x="8" y="18" width="32" height="8" rx="1" fill="rgba(249,115,22,0.2)" stroke="var(--accent)" stroke-width="1"/>
+            <rect x="10" y="4" width="28" height="14" rx="1" fill="rgba(249,115,22,0.1)" stroke="var(--accent)" stroke-width="1" opacity="0.6"/>
+            <line x1="12" y1="26" x2="10" y2="34" stroke="var(--accent)" stroke-width="1.5"/>
+            <line x1="36" y1="26" x2="38" y2="34" stroke="var(--accent)" stroke-width="1.5"/>
+            <!-- fold lines on seat -->
+            <line x1="16" y1="18" x2="16" y2="26" stroke="var(--accent)" stroke-width="0.5" stroke-dasharray="2 1"/>
+            <line x1="24" y1="18" x2="24" y2="26" stroke="var(--accent)" stroke-width="0.5" stroke-dasharray="2 1"/>
+            <line x1="32" y1="18" x2="32" y2="26" stroke="var(--accent)" stroke-width="0.5" stroke-dasharray="2 1"/>
+          </svg>
+          <h3 class="card-title">Chairs &amp; Rockers</h3>
+        </div>
+        <div style="display:flex; gap:0.3em; flex-wrap:wrap; margin-bottom:0.5em;">
+          <span class="tag tag-accent">Waterbomb</span>
+          <span class="tag tag-accent">Ron Resch</span>
+        </div>
+        <ul>
+          <li>Single-sheet PP seat → fold flat &lt;60mm</li>
+          <li>Waterbomb base for X-frame mechanism</li>
+          <li>Kangaroo: rocker arc constraint</li>
+          <li>Karamba: ASTM F1561 load test (300 lb)</li>
+          <li>Crane Thicken: 3mm panel with hinge offset</li>
+        </ul>
+      </div>
+
+      <!-- Packs -->
+      <div class="card card-teal">
+        <div style="margin-bottom:0.5em;">
+          <svg width="48" height="36" viewBox="0 0 48 36" fill="none">
+            <rect x="10" y="6" width="28" height="26" rx="3" fill="rgba(34,211,200,0.1)" stroke="var(--teal)" stroke-width="1"/>
+            <rect x="15" y="2" width="18" height="6" rx="2" fill="rgba(34,211,200,0.15)" stroke="var(--teal)" stroke-width="1"/>
+            <!-- Miura grid on pack body -->
+            <line x1="10" y1="14" x2="38" y2="14" stroke="var(--teal)" stroke-width="0.5" stroke-dasharray="2 2" opacity="0.6"/>
+            <line x1="10" y1="22" x2="38" y2="22" stroke="var(--teal)" stroke-width="0.5" stroke-dasharray="2 2" opacity="0.6"/>
+            <line x1="22" y1="6" x2="22" y2="32" stroke="var(--teal)" stroke-width="0.5" stroke-dasharray="2 2" opacity="0.6"/>
+          </svg>
+          <h3 class="card-title">Packs &amp; Bags</h3>
+        </div>
+        <div style="display:flex; gap:0.3em; flex-wrap:wrap; margin-bottom:0.5em;">
+          <span class="tag tag-teal">Miura-Ori</span>
+          <span class="tag tag-teal">Bellows</span>
+        </div>
+        <ul>
+          <li>Miura collar: 20L → 30L in one pull</li>
+          <li>Ivy: auto flat-pattern all sewn panels</li>
+          <li>Seam allowance offsets parametric</li>
+          <li>Kangaroo: laptop load on back panel</li>
+          <li>Issey Miyake construction technique</li>
+        </ul>
+      </div>
+
+      <!-- Tents -->
+      <div class="card card-violet">
+        <div style="margin-bottom:0.5em;">
+          <svg width="48" height="36" viewBox="0 0 48 36" fill="none">
+            <path d="M4 32 L24 6 L44 32Z" fill="rgba(167,139,250,0.1)" stroke="var(--violet)" stroke-width="1"/>
+            <line x1="24" y1="6" x2="24" y2="32" stroke="var(--violet)" stroke-width="0.8" stroke-dasharray="3 2"/>
+            <!-- Waterbomb grid -->
+            <line x1="14" y1="19" x2="24" y2="6" stroke="var(--violet)" stroke-width="0.5" opacity="0.4"/>
+            <line x1="34" y1="19" x2="24" y2="6" stroke="var(--violet)" stroke-width="0.5" opacity="0.4"/>
+            <line x1="9" y1="26" x2="14" y2="19" stroke="var(--violet)" stroke-width="0.5" opacity="0.4"/>
+            <line x1="39" y1="26" x2="34" y2="19" stroke="var(--violet)" stroke-width="0.5" opacity="0.4"/>
+          </svg>
+          <h3 class="card-title">Tents &amp; Shelters</h3>
+        </div>
+        <div style="display:flex; gap:0.3em; flex-wrap:wrap; margin-bottom:0.5em;">
+          <span class="tag tag-violet">Yoshimura</span>
+          <span class="tag tag-violet">Waterbomb</span>
+          <span class="tag tag-violet">Kresling</span>
+        </div>
+        <ul>
+          <li>Pop-up: Kangaroo pre-stress simulation</li>
+          <li>Waterbomb tunnel: 1-DOF deployment</li>
+          <li>Yoshimura: linear concertina extension</li>
+          <li>Tensegrity hub-and-spoke frame</li>
+          <li>Snow load: 2 kN/m² via Karamba</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">05 / 11</div>
+</section>
+
+<!-- ============================================================
+     SLIDE 6 — THE ARCHITECTURE (KEY SLIDE)
+============================================================ -->
+<section class="slide" id="slide-5">
+  <div class="bg-grid"></div>
+  <div class="bg-noise"></div>
+  <div class="slide-inner" style="gap:0.6em;">
+    <div class="reveal">
+      <div class="accent-bar"></div>
+      <h2 class="section-title">AI-in-the-Loop <span class="accent-text">Architecture</span></h2>
+      <p style="font-size:var(--small-size); color:var(--text-muted); margin-top:0.2em;">Agent and Rhino live on the same Mac — no network, no latency, no tunnel.</p>
+    </div>
+
+    <!-- Main Mac bounding box -->
+    <div class="arch-mac-box reveal">
+      <div class="arch-mac-label">⌘ Max's Mac — Rhino 8 + OpenClaw Agent</div>
+
+      <div class="arch-row">
+
+        <!-- Agent block -->
+        <div class="arch-block agent">
+          <div class="arch-block-title">🤖 Agent (Claude)</div>
+          <ul>
+            <li>Reads Telegram from Max</li>
+            <li>Generates GhPython scripts</li>
+            <li>Writes params JSON</li>
+            <li>Runs screencapture</li>
+            <li>Analyzes viewport images</li>
+            <li>Exports DXF / STL / BOM</li>
+          </ul>
+          <div style="margin-top:0.4em; display:flex; flex-wrap:wrap; gap:0.2em;">
+            <span class="tag tag-violet" style="font-size:0.65em;">rhino3dm</span>
+            <span class="tag tag-violet" style="font-size:0.65em;">ezdxf</span>
+            <span class="tag tag-violet" style="font-size:0.65em;">ghhops_server</span>
+          </div>
+        </div>
+
+        <div class="arch-arrow-h">⟺</div>
+
+        <!-- Shared folder block -->
+        <div class="arch-block files">
+          <div class="arch-block-title">📁 ~/rhino-collab/</div>
+          <ul>
+            <li>current_params.json</li>
+            <li>fold_script.py</li>
+            <li>screenshots/latest.png</li>
+            <li>manufacturing/fold.dxf</li>
+            <li>manufacturing/fold.stl</li>
+            <li>results.json</li>
+          </ul>
+          <div style="margin-top:0.4em; display:flex; flex-wrap:wrap; gap:0.2em;">
+            <span class="tag tag-accent" style="font-size:0.65em;">atomic writes</span>
+            <span class="tag tag-accent" style="font-size:0.65em;">FileWatcher</span>
+          </div>
+        </div>
+
+        <div class="arch-arrow-h">⟺</div>
+
+        <!-- Rhino block -->
+        <div class="arch-block rhino">
+          <div class="arch-block-title">🦏 Rhino 8 + GH</div>
+          <ul>
+            <li>GH FileWatcher detects JSON change</li>
+            <li>Canvas auto-recomputes</li>
+            <li>Kangaroo physics runs live</li>
+            <li>Crane solver animates fold</li>
+            <li>Viewport screenshot fires</li>
+            <li>Karamba stress check</li>
+          </ul>
+          <div style="margin-top:0.4em; display:flex; flex-wrap:wrap; gap:0.2em;">
+            <span class="tag tag-teal" style="font-size:0.65em;">&lt;500ms recompute</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- The loop strip -->
+    <div class="loop-strip reveal">
+      <div class="loop-step">
+        <div class="loop-step-num">01</div>
+        <div class="loop-step-label" style="color:var(--teal);">Max describes</div>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="loop-step-num">02</div>
+        <div class="loop-step-label" style="color:var(--violet);">Agent generates script</div>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="loop-step-num">03</div>
+        <div class="loop-step-label" style="color:var(--accent);">GH computes</div>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="loop-step-num">04</div>
+        <div class="loop-step-label" style="color:var(--violet);">Agent analyzes</div>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="loop-step-num">05</div>
+        <div class="loop-step-label" style="color:var(--teal);">Max approves</div>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="loop-step-num">06</div>
+        <div class="loop-step-label" style="color:var(--green);">Export DXF</div>
+      </div>
+    </div>
+
+    <!-- Bottom note -->
+    <p class="reveal" style="font-size:var(--small-size); color:var(--text-muted); text-align:center;">
+      ⚠ <code style="font-family:var(--font-mono);">rhinoinside</code> headless is Windows-only — this file-watcher + CLI architecture achieves the same result on Mac with sub-second latency.
+    </p>
+  </div>
+  <div class="slide-num">06 / 11</div>
+</section>
+
+<!-- ============================================================
+     SLIDE 7 — WHAT THE AGENT CAN DO
+============================================================ -->
+<section class="slide" id="slide-6">
+  <div class="bg-grid"></div>
+  <div class="slide-inner">
+    <div class="reveal">
+      <div class="accent-bar accent-bar-green"></div>
+      <h2 class="section-title">What the Agent <span class="green-text">Can Do</span></h2>
+    </div>
+
+    <div class="capability-row reveal">
+      <div class="cap-col auto">
+        <div class="cap-head">🤖 Fully Autonomous</div>
+        <ul>
+          <li>Generate crease pattern (any type)</li>
+          <li>Run 50+ parameter variations</li>
+          <li>Build contact sheet of results</li>
+          <li>Export DXF for laser cutting</li>
+          <li>Export STL for 3D printing</li>
+          <li>Generate BOM + material dimensions</li>
+          <li>Capture + analyze viewport screenshots</li>
+          <li>Write complete GhPython definitions</li>
+          <li>Compute fold ratios, area, weight</li>
+        </ul>
+      </div>
+
+      <div class="cap-col collab">
+        <div class="cap-head">↔ Collaborative</div>
+        <ul>
+          <li>Design direction + iteration</li>
+          <li>Parametric sweep → Max picks</li>
+          <li>Constraint definition from brief</li>
+          <li>Kangaroo sim setup → Max evaluates</li>
+          <li>Manufacturing file review</li>
+          <li>Structural check + suggestions</li>
+          <li>Translate sketch to GH algorithm</li>
+          <li>Optimize weight vs. stiffness</li>
+        </ul>
+      </div>
+
+      <div class="cap-col human">
+        <div class="cap-head">👁 Needs Max</div>
+        <ul>
+          <li>Aesthetic judgment ("does it look right")</li>
+          <li>Ergonomic / tactile decisions</li>
+          <li>Physical prototype testing</li>
+          <li>Material selection (hand feel)</li>
+          <li>Final fold sequence approval</li>
+          <li>Supplier / cost tradeoffs</li>
+          <li>Engineering sign-off</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">07 / 11</div>
+</section>
+
+<!-- ============================================================
+     SLIDE 8 — WORKFLOW EXAMPLES
+============================================================ -->
+<section class="slide" id="slide-7">
+  <div class="bg-grid"></div>
+  <div class="bg-noise"></div>
+  <div class="slide-inner">
+    <div class="reveal">
+      <div class="accent-bar accent-bar-violet"></div>
+      <h2 class="section-title">Workflow <span class="violet-text">Examples</span></h2>
+    </div>
+
+    <div class="grid-3 reveal" style="align-items:stretch;">
+
+      <!-- Workflow A -->
+      <div class="workflow-card">
+        <div class="label label-violet">Workflow A</div>
+        <h3 class="card-title" style="margin-bottom:0.4em;">Parametric Chair Exploration</h3>
+        <p style="font-size:var(--small-size); color:var(--text-muted); margin-bottom:0.6em;">Max: "I want a Waterbomb seat that packs under 50mm"</p>
+        <div class="workflow-steps">
+          <span class="wf-step">Agent writes script</span>
+          <span class="wf-arrow">→</span>
+          <span class="wf-step">Crane WaterbombTessellation</span>
+          <span class="wf-arrow">→</span>
+          <span class="wf-step">Crane Solver (fold_ratio slider)</span>
+          <span class="wf-arrow">→</span>
+          <span class="wf-step">BoundingBox measure</span>
+          <span class="wf-arrow">→</span>
+          <span class="wf-step">Screenshot → Agent</span>
+          <span class="wf-arrow">→</span>
+          <span class="wf-step">Iterate 12 variants</span>
+          <span class="wf-arrow">→</span>
+          <span class="wf-step">Max picks best</span>
+        </div>
+        <p style="font-size:var(--small-size); color:var(--text-muted); margin-top:0.6em; font-style:italic;">~90 seconds for 12 variations</p>
+      </div>
+
+      <!-- Workflow B -->
+      <div class="workflow-card">
+        <div class="label label-teal">Workflow B</div>
+        <h3 class="card-title" style="margin-bottom:0.4em;">Bag Panel Auto-Pattern</h3>
+        <p style="font-size:var(--small-size); color:var(--text-muted); margin-bottom:0.6em;">Max finalizes 3D bag surface in Rhino</p>
+        <div class="workflow-steps">
+          <span class="wf-step">Rhino NURBS surface</span>
+          <span class="wf-arrow">→</span>
+          <span class="wf-step">Ivy: Spanning Tree (seam placement)</span>
+          <span class="wf-arrow">→</span>
+          <span class="wf-step">Ivy: Unfold</span>
+          <span class="wf-arrow">→</span>
+          <span class="wf-step">Offset: +12mm seam allow</span>
+          <span class="wf-arrow">→</span>
+          <span class="wf-step">Pancake: Export DXF</span>
+          <span class="wf-arrow">→</span>
+          <span class="wf-step">Agent sends file to sample room</span>
+        </div>
+        <p style="font-size:var(--small-size); color:var(--text-muted); margin-top:0.6em; font-style:italic;">Zero manual pattern drafting</p>
+      </div>
+
+      <!-- Workflow C -->
+      <div class="workflow-card">
+        <div class="label label-green">Workflow C</div>
+        <h3 class="card-title" style="margin-bottom:0.4em;">Manufacturing Output</h3>
+        <p style="font-size:var(--small-size); color:var(--text-muted); margin-bottom:0.6em;">Max says "finalize" — agent runs autonomous</p>
+        <div class="workflow-steps">
+          <span class="wf-step">Agent generates Rhino script</span>
+          <span class="wf-arrow">→</span>
+          <span class="wf-step">Rhino CLI: open + -runscript</span>
+          <span class="wf-arrow">→</span>
+          <span class="wf-step">DXF (laser cut)</span>
+          <span class="wf-arrow">→</span>
+          <span class="wf-step">STL (3D print)</span>
+          <span class="wf-arrow">→</span>
+          <span class="wf-step">STEP → Solid Edge</span>
+          <span class="wf-arrow">→</span>
+          <span class="wf-step">BOM JSON</span>
+          <span class="wf-arrow">→</span>
+          <span class="wf-step">Telegram to Max</span>
+        </div>
+        <p style="font-size:var(--small-size); color:var(--text-muted); margin-top:0.6em; font-style:italic;">All outputs in &lt;60 seconds</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="slide-num">08 / 11</div>
+</section>
+
+<!-- ============================================================
+     SLIDE 9 — REAL-WORLD PRECEDENTS
+============================================================ -->
+<section class="slide" id="slide-8">
+  <div class="bg-grid"></div>
+  <div class="slide-inner">
+    <div class="reveal">
+      <div class="accent-bar"></div>
+      <h2 class="section-title">Real-World <span class="accent-text">Precedents</span></h2>
+    </div>
+
+    <div class="grid-2 reveal" style="gap:var(--card-gap);">
+
+      <div style="display:flex; flex-direction:column; gap:var(--card-gap);">
+        <div class="card" style="display:flex;gap:0.8em;align-items:flex-start;">
+          <div class="plugin-icon icon-teal" style="flex-shrink:0;">🛶</div>
+          <div>
+            <h3 class="card-title teal-text">Oru Kayak / Oru Camp</h3>
+            <p style="font-size:var(--small-size);">Corrugated polypropylene sheet folded into a functional kayak — same material in the <strong>Oru Camp</strong> outdoor furniture line (PopLounge chair, SwitchTable). Folds to 5" profile. Direct competitive precedent.</p>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex;gap:0.8em;align-items:flex-start;">
+          <div class="plugin-icon icon-violet" style="flex-shrink:0;">👜</div>
+          <div>
+            <h3 class="card-title violet-text">Issey Miyake</h3>
+            <p style="font-size:var(--small-size);"><strong>Bao Bao</strong>: triangular tile tessellation bag, variable volume. <strong>Pleats Please</strong>: heat-pleated polyester backpack, compresses to flat when empty. Proof of commercial viability at scale.</p>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex;gap:0.8em;align-items:flex-start;">
+          <div class="plugin-icon icon-orange" style="flex-shrink:0;">🪑</div>
+          <div>
+            <h3 class="card-title accent-text">Nendo — Orizuru Series</h3>
+            <p style="font-size:var(--small-size);">Tokyo studio applies origami crease patterns directly to leather goods. Single flat sheet → finished bag with no main seam stitching. Computationally designed.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:var(--card-gap);">
+        <div class="card" style="display:flex;gap:0.8em;align-items:flex-start;">
+          <div class="plugin-icon icon-green" style="flex-shrink:0;">🚀</div>
+          <div>
+            <h3 class="card-title green-text">NASA JPL — Miura Solar Array</h3>
+            <p style="font-size:var(--small-size);">Rigid-panel Miura-fold solar array compresses to 1/10 deployed area. <strong>1-DOF synchronous deployment</strong> — single pull deploys entire structure. Direct parallel for tent design. (NTRS 20140002353)</p>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex;gap:0.8em;align-items:flex-start;">
+          <div class="plugin-icon icon-teal" style="flex-shrink:0;">🔬</div>
+          <div>
+            <h3 class="card-title teal-text">BYU Compliant Mechanisms Lab</h3>
+            <p style="font-size:var(--small-size);">SORCE pattern (Stacked Origami for Repeated Compression/Extension) for thick-panel folding. The "offset fold" technique used in Crane for aluminum panels is directly based on this research.</p>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex;gap:0.8em;align-items:flex-start;">
+          <div class="plugin-icon icon-violet" style="flex-shrink:0;">📐</div>
+          <div>
+            <h3 class="card-title violet-text">Academic Foundation</h3>
+            <p style="font-size:var(--small-size);">ACM TOCHI 2023 (Crane paper) · ResearchGate rigid-origami + GH study · MDPI Sustainability Dec 2024 review of 174 origami furniture papers. Proven methodology, not experimental.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="slide-num">09 / 11</div>
+</section>
+
+<!-- ============================================================
+     SLIDE 10 — SETUP & TIMELINE
+============================================================ -->
+<section class="slide" id="slide-9">
+  <div class="bg-grid"></div>
+  <div class="bg-noise"></div>
+  <div class="slide-inner">
+    <div class="reveal">
+      <div class="accent-bar accent-bar-green"></div>
+      <h2 class="section-title">Setup &amp; <span class="green-text">Timeline</span></h2>
+      <p style="font-size:var(--small-size); color:var(--text-muted); margin-top:0.2em;">Mac + Rhino 8 + plugins + OpenClaw → first fold simulation in ~2 hours.</p>
+    </div>
+
+    <div class="grid-2-3 reveal">
+
+      <!-- Left: stack -->
+      <div>
+        <div class="label">The Stack</div>
+        <div style="display:flex; flex-direction:column; gap:0.4em; margin-top:0.5em;">
+          <div class="card" style="display:flex; align-items:center; gap:0.8em; padding:0.6em 0.9em;">
+            <span style="font-size:1.2em;">🦏</span>
+            <div>
+              <strong style="font-size:var(--small-size);">Rhino 8</strong>
+              <p style="font-size:var(--small-size);">$995 perpetual · 90-day free trial · Native Apple Silicon</p>
+            </div>
+          </div>
+          <div class="card" style="display:flex; align-items:center; gap:0.8em; padding:0.6em 0.9em;">
+            <span style="font-size:1.2em;">🔌</span>
+            <div>
+              <strong style="font-size:var(--small-size);">Plugins (all free)</strong>
+              <p style="font-size:var(--small-size);">Kangaroo (built-in) · Crane · Ivy · Lunchbox · Weaverbird</p>
+            </div>
+          </div>
+          <div class="card" style="display:flex; align-items:center; gap:0.8em; padding:0.6em 0.9em;">
+            <span style="font-size:1.2em;">🤖</span>
+            <div>
+              <strong style="font-size:var(--small-size);">OpenClaw + Agent</strong>
+              <p style="font-size:var(--small-size);">Already running · pip install rhino3dm ezdxf svgwrite</p>
+            </div>
+          </div>
+          <div class="card" style="display:flex; align-items:center; gap:0.8em; padding:0.6em 0.9em; border-color:rgba(52,211,153,0.2);">
+            <span style="font-size:1.2em;">💾</span>
+            <div>
+              <strong style="font-size:var(--small-size); color:var(--green);">Total cost</strong>
+              <p style="font-size:var(--small-size);">$995 (Rhino perpetual) + $0 plugins + existing Mac</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: timeline -->
+      <div>
+        <div class="label">Setup Steps</div>
+        <div class="timeline" style="margin-top:0.5em;">
+          <div class="timeline-item">
+            <div class="t-label">0:00–0:15</div>
+            <div class="t-content">
+              <strong>Install Rhino 8</strong>
+              <span>Download from rhino3d.com, start 90-day trial. No seat needed to start.</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="t-label">0:15–0:30</div>
+            <div class="t-content">
+              <strong>Install plugins via Package Manager</strong>
+              <span>Rhino → Tools → Package Manager → search Crane, Lunchbox, Weaverbird, Ivy.</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="t-label">0:30–0:45</div>
+            <div class="t-content">
+              <strong>Python env on Mac</strong>
+              <span><code style="font-family:var(--font-mono);font-size:0.85em;">pip install rhino3dm ezdxf svgwrite watchdog ghhops-server</code></span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="t-label">0:45–1:30</div>
+            <div class="t-content">
+              <strong>Build GH template</strong>
+              <span>JSON Reader + GhPython Script + FileWatcher C# + Kangaroo chain. Save as fold_template.gh.</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="t-label">1:30–2:00</div>
+            <div class="t-content">
+              <strong>First Miura fold via agent</strong>
+              <span>Agent writes params, Grasshopper recomputes live. Screenshot → Telegram. 🎉</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="slide-num">10 / 11</div>
+</section>
+
+<!-- ============================================================
+     SLIDE 11 — NEXT STEPS
+============================================================ -->
+<section class="slide" id="slide-10">
+  <div class="bg-diagonal"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-noise"></div>
+  <div class="slide-inner">
+    <div class="reveal">
+      <div class="accent-bar"></div>
+      <h2 class="section-title">Next Steps — <span class="accent-text">This Week</span></h2>
+    </div>
+
+    <div class="next-grid reveal">
+      <div class="next-item">
+        <div class="next-num">01</div>
+        <div class="next-body">
+          <strong>Install Rhino 8 + plugins</strong>
+          <span>Download trial. Install Crane, Ivy, Lunchbox via Package Manager. 30 min total.</span>
+        </div>
+      </div>
+
+      <div class="next-item">
+        <div class="next-num">02</div>
+        <div class="next-body">
+          <strong>Run the Miura exercise</strong>
+          <span>Crane → MiuraOri → CraneSolver → fold_ratio slider. 30–45 min. Builds all the intuition needed.</span>
+        </div>
+      </div>
+
+      <div class="next-item">
+        <div class="next-num">03</div>
+        <div class="next-body">
+          <strong>Build the GH template</strong>
+          <span>JSON Reader + GhPython + FileWatcher C# component. One-time 60-min build unlocks all agent workflows.</span>
+        </div>
+      </div>
+
+      <div class="next-item">
+        <div class="next-num">04</div>
+        <div class="next-body">
+          <strong>First real design problem</strong>
+          <span>Pick one current product — folding chair or bag panel. Describe it to the agent. See what comes back.</span>
+        </div>
+      </div>
+
+      <div class="next-item">
+        <div class="next-num">05</div>
+        <div class="next-body">
+          <strong>Watch the Parametric House Crane tutorial</strong>
+          <span>youtube.com search: "Origami with Crane Grasshopper". 20 min. Best hands-on intro available.</span>
+        </div>
+      </div>
+
+      <div class="next-item" style="border-color:rgba(34,211,200,0.2); background:rgba(34,211,200,0.04);">
+        <div class="next-num" style="color:var(--teal);">→</div>
+        <div class="next-body">
+          <strong style="color:var(--teal);">Ask the agent to set it up</strong>
+          <span>Say "Set up the Grasshopper origami pipeline on my Mac." Saria will write the scripts, guide the install, and run the first fold.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="text-align:center; margin-top:0.5em;">
+      <span class="tag tag-accent" style="font-size:var(--small-size);">Rhino 8: rhino3d.com/download</span>
+      &nbsp;
+      <span class="tag tag-teal" style="font-size:var(--small-size);">Crane: food4rhino.com/en/app/crane</span>
+      &nbsp;
+      <span class="tag tag-green" style="font-size:var(--small-size);">Kangaroo: built into Rhino 8</span>
+    </div>
+  </div>
+  <div class="slide-num">11 / 11</div>
+</section>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+  /* ===========================================
+     SLIDE PRESENTATION CONTROLLER
+  =========================================== */
+  const SLIDES = document.querySelectorAll('.slide');
+  const TOTAL  = SLIDES.length;
+  let currentIndex = 0;
+  let isScrolling = false;
+
+  // ── Build nav dots ───────────────────────────
+  const navDots = document.getElementById('navDots');
+  SLIDES.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.title = `Slide ${i + 1}`;
+    dot.addEventListener('click', () => goTo(i));
+    navDots.appendChild(dot);
+  });
+
+  function getDots() { return navDots.querySelectorAll('.nav-dot'); }
+
+  // ── Update state ─────────────────────────────
+  function updateUI(idx) {
+    currentIndex = idx;
+    // Progress bar
+    document.getElementById('progressBar').style.width = ((idx + 1) / TOTAL * 100) + '%';
+    // Nav dots
+    getDots().forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+
+  // ── Navigate to slide ────────────────────────
+  function goTo(idx) {
+    if (idx < 0 || idx >= TOTAL) return;
+    SLIDES[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    updateUI(idx);
+  }
+
+  // ── Intersection Observer (trigger animations + track current slide) ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.45) {
+        entry.target.classList.add('visible');
+        const idx = Array.from(SLIDES).indexOf(entry.target);
+        if (idx !== -1) updateUI(idx);
+      }
+    });
+  }, { threshold: 0.45 });
+
+  SLIDES.forEach(s => observer.observe(s));
+
+  // ── Keyboard navigation ───────────────────────
+  document.addEventListener('keydown', e => {
+    switch (e.key) {
+      case 'ArrowDown':
+      case 'ArrowRight':
+      case ' ':
+        e.preventDefault();
+        goTo(currentIndex + 1);
+        break;
+      case 'ArrowUp':
+      case 'ArrowLeft':
+        e.preventDefault();
+        goTo(currentIndex - 1);
+        break;
+      case 'Home':
+        e.preventDefault();
+        goTo(0);
+        break;
+      case 'End':
+        e.preventDefault();
+        goTo(TOTAL - 1);
+        break;
+    }
+  });
+
+  // ── Wheel navigation (debounced) ─────────────
+  let wheelTimer = null;
+  document.addEventListener('wheel', e => {
+    if (wheelTimer) return;
+    e.preventDefault();
+    if (e.deltaY > 30) goTo(currentIndex + 1);
+    else if (e.deltaY < -30) goTo(currentIndex - 1);
+    wheelTimer = setTimeout(() => { wheelTimer = null; }, 800);
+  }, { passive: false });
+
+  // ── Touch / swipe ────────────────────────────
+  let touchStartY = 0;
+  document.addEventListener('touchstart', e => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', e => {
+    const delta = touchStartY - e.changedTouches[0].clientY;
+    if (Math.abs(delta) > 40) {
+      if (delta > 0) goTo(currentIndex + 1);
+      else goTo(currentIndex - 1);
+    }
+  }, { passive: true });
+
+  // ── Init ─────────────────────────────────────
+  updateUI(0);
+  SLIDES[0].classList.add('visible');
+</script>
+
+</body>
+</html>
