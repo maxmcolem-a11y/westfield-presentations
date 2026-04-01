@@ -1,0 +1,2047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetSuite 101 — Westfield Outdoors Training</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===========================================
+           THEME: Westfield Outdoors — Blue/Dark Blue
+           Light background, dark blue accents, black text
+           Professional, studious, clean
+           =========================================== */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-slide: #f8f9fb;
+            --bg-accent: #eef2f7;
+            --bg-dark: #0d1f3c;
+            --bg-blue: #1a3a6b;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a5568;
+            --text-light: #ffffff;
+            --accent: #1a3a6b;
+            --accent-light: #2c5aa0;
+            --accent-border: #c7d4e4;
+            --border: #dde3ec;
+            --success: #2d7a4f;
+            --warning: #b8860b;
+            --danger: #c0392b;
+
+            --font-display: 'Inter', sans-serif;
+            --font-body: 'Source Sans 3', 'Inter', sans-serif;
+
+            --title-size: clamp(1.8rem, 4.5vw, 3.2rem);
+            --h2-size: clamp(1.3rem, 3vw, 2.2rem);
+            --h3-size: clamp(1rem, 2.2vw, 1.5rem);
+            --body-size: clamp(0.8rem, 1.4vw, 1.1rem);
+            --small-size: clamp(0.7rem, 1vw, 0.9rem);
+            --slide-padding: clamp(1.5rem, 4vw, 4rem);
+            --content-gap: clamp(0.6rem, 1.8vw, 1.5rem);
+            --element-gap: clamp(0.3rem, 0.8vw, 0.75rem);
+
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        /* ===========================================
+           SLIDE CONTAINER
+           =========================================== */
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: var(--bg-slide);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: 100%;
+            overflow: hidden;
+            padding: var(--slide-padding);
+            padding-top: clamp(1rem, 2.5vw, 2rem);
+        }
+
+        /* ===========================================
+           SLIDE VARIANTS
+           =========================================== */
+        .slide.dark {
+            background: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        .slide.blue {
+            background: var(--bg-blue);
+            color: var(--text-light);
+        }
+
+        .slide.section-header {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-blue) 100%);
+            color: var(--text-light);
+        }
+
+        /* ===========================================
+           TOP BAR — Section indicator
+           =========================================== */
+        .slide-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: clamp(0.4rem, 1vw, 0.75rem) var(--slide-padding);
+            background: var(--bg-dark);
+            color: var(--text-light);
+            font-size: var(--small-size);
+            font-weight: 500;
+            flex-shrink: 0;
+            min-height: clamp(1.8rem, 3vh, 2.5rem);
+        }
+
+        .slide-header .section-label {
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: clamp(0.55rem, 0.8vw, 0.75rem);
+        }
+
+        .slide-header .logo-text {
+            font-weight: 700;
+            font-size: clamp(0.6rem, 0.9vw, 0.8rem);
+            letter-spacing: 0.04em;
+        }
+
+        /* ===========================================
+           TYPOGRAPHY
+           =========================================== */
+        h1 {
+            font-family: var(--font-display);
+            font-size: var(--title-size);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: var(--content-gap);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: var(--h2-size);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--content-gap);
+            color: var(--accent);
+        }
+
+        .dark h2, .blue h2, .section-header h2 {
+            color: var(--text-light);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: var(--h3-size);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: var(--element-gap);
+            color: var(--accent);
+        }
+
+        .dark h3, .blue h3 { color: rgba(255,255,255,0.9); }
+
+        p, li {
+            font-size: var(--body-size);
+            line-height: 1.5;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .dark .subtitle, .blue .subtitle, .section-header .subtitle {
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* ===========================================
+           LAYOUT HELPERS
+           =========================================== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(1rem, 3vw, 3rem);
+            flex: 1;
+            align-items: start;
+            max-height: calc(100% - 3rem);
+        }
+
+        .three-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: clamp(0.75rem, 2vw, 2rem);
+            flex: 1;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .two-col, .three-col { grid-template-columns: 1fr; }
+        }
+
+        /* ===========================================
+           BULLET LISTS
+           =========================================== */
+        ul.clean {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--element-gap);
+        }
+
+        ul.clean li {
+            padding-left: 1.2em;
+            position: relative;
+        }
+
+        ul.clean li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-light);
+            font-weight: 700;
+        }
+
+        .dark ul.clean li::before,
+        .blue ul.clean li::before {
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* ===========================================
+           TABLES
+           =========================================== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: var(--body-size);
+        }
+
+        table th {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            padding: clamp(0.3rem, 0.8vw, 0.6rem) clamp(0.5rem, 1vw, 1rem);
+            text-align: left;
+            font-weight: 600;
+            font-size: var(--small-size);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        table td {
+            padding: clamp(0.25rem, 0.6vw, 0.5rem) clamp(0.5rem, 1vw, 1rem);
+            border-bottom: 1px solid var(--border);
+        }
+
+        table tr:nth-child(even) td {
+            background: var(--bg-accent);
+        }
+
+        /* ===========================================
+           CARDS / BOXES
+           =========================================== */
+        .card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: clamp(0.75rem, 1.5vw, 1.5rem);
+        }
+
+        .card.accent {
+            border-left: 4px solid var(--accent);
+        }
+
+        .card.blue-bg {
+            background: var(--bg-accent);
+            border-color: var(--accent-border);
+        }
+
+        .highlight-box {
+            background: var(--bg-accent);
+            border: 1px solid var(--accent-border);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: clamp(0.6rem, 1.2vw, 1.2rem);
+            font-size: var(--body-size);
+        }
+
+        .key-point {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            border-radius: 6px;
+            padding: clamp(0.6rem, 1.2vw, 1rem) clamp(0.8rem, 1.5vw, 1.5rem);
+            font-size: var(--body-size);
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* ===========================================
+           SCREENSHOT PLACEHOLDER
+           =========================================== */
+        .screenshot-placeholder {
+            border: 2px dashed var(--accent-border);
+            border-radius: 8px;
+            padding: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 2vw, 2rem);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: var(--body-size);
+            background: var(--bg-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: clamp(6rem, 15vh, 12rem);
+        }
+
+        /* ===========================================
+           SVG FLOW DIAGRAMS
+           =========================================== */
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(0.2rem, 0.5vw, 0.5rem);
+            flex-wrap: wrap;
+            padding: clamp(0.5rem, 1vw, 1rem) 0;
+        }
+
+        .flow-step {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            padding: clamp(0.4rem, 0.8vw, 0.7rem) clamp(0.6rem, 1.2vw, 1.2rem);
+            border-radius: 6px;
+            font-size: var(--small-size);
+            font-weight: 600;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .flow-step.highlight {
+            background: var(--accent-light);
+        }
+
+        .flow-step.outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .flow-arrow {
+            color: var(--accent-light);
+            font-size: clamp(1rem, 1.8vw, 1.5rem);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Vertical flow */
+        .flow-vertical {
+            flex-direction: column;
+        }
+        .flow-vertical .flow-arrow {
+            transform: rotate(90deg);
+        }
+
+        /* ===========================================
+           T-ACCOUNT DIAGRAM
+           =========================================== */
+        .t-account {
+            border: 2px solid var(--accent);
+            border-radius: 4px;
+            min-width: clamp(10rem, 20vw, 16rem);
+            font-size: var(--small-size);
+        }
+
+        .t-account-title {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: clamp(0.2rem, 0.4vw, 0.4rem);
+            font-weight: 700;
+            font-size: var(--small-size);
+        }
+
+        .t-account-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: clamp(2.5rem, 6vh, 4rem);
+        }
+
+        .t-account-body .debit {
+            padding: clamp(0.3rem, 0.5vw, 0.5rem);
+            border-right: 2px solid var(--accent);
+        }
+
+        .t-account-body .credit {
+            padding: clamp(0.3rem, 0.5vw, 0.5rem);
+        }
+
+        .t-account-body .label {
+            font-weight: 600;
+            font-size: clamp(0.55rem, 0.7vw, 0.7rem);
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.2rem;
+        }
+
+        /* ===========================================
+           ACCOUNT NUMBER BADGES
+           =========================================== */
+        .acct {
+            display: inline-block;
+            background: var(--bg-accent);
+            border: 1px solid var(--accent-border);
+            border-radius: 4px;
+            padding: 0.1em 0.4em;
+            font-family: 'Inter', monospace;
+            font-weight: 600;
+            font-size: 0.9em;
+            color: var(--accent);
+        }
+
+        /* ===========================================
+           SECTION NUMBER BADGE
+           =========================================== */
+        .section-number {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            width: clamp(2rem, 4vw, 3rem);
+            height: clamp(2rem, 4vw, 3rem);
+            line-height: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            font-weight: 700;
+            font-size: clamp(0.9rem, 1.8vw, 1.4rem);
+            margin-bottom: clamp(0.3rem, 0.8vw, 0.75rem);
+        }
+
+        /* ===========================================
+           ANIMATIONS
+           =========================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+        }
+
+        .slide.visible .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal:nth-child(2) { transition-delay: 0.08s; }
+        .reveal:nth-child(3) { transition-delay: 0.16s; }
+        .reveal:nth-child(4) { transition-delay: 0.24s; }
+        .reveal:nth-child(5) { transition-delay: 0.32s; }
+        .reveal:nth-child(6) { transition-delay: 0.40s; }
+
+        /* ===========================================
+           PROGRESS BAR
+           =========================================== */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent-light);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        /* ===========================================
+           NAV DOTS
+           =========================================== */
+        .nav-dots {
+            position: fixed;
+            right: clamp(0.5rem, 1.5vw, 1.5rem);
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-border);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .nav-dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        .nav-dot.section-start {
+            width: 10px;
+            height: 10px;
+        }
+
+        /* ===========================================
+           SLIDE COUNTER
+           =========================================== */
+        .slide-counter {
+            position: fixed;
+            bottom: clamp(0.5rem, 1.5vw, 1rem);
+            right: clamp(0.5rem, 1.5vw, 1.5rem);
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+            font-weight: 500;
+            z-index: 100;
+            background: rgba(255,255,255,0.85);
+            padding: 0.2em 0.6em;
+            border-radius: 4px;
+        }
+
+        /* ===========================================
+           RESPONSIVE
+           =========================================== */
+        @media (max-height: 700px) {
+            :root {
+                --slide-padding: clamp(1rem, 3vw, 2.5rem);
+                --content-gap: clamp(0.4rem, 1.2vw, 1rem);
+                --title-size: clamp(1.5rem, 4vw, 2.5rem);
+                --h2-size: clamp(1.1rem, 2.5vw, 1.8rem);
+            }
+        }
+
+        @media (max-height: 600px) {
+            :root {
+                --slide-padding: clamp(0.75rem, 2.5vw, 1.5rem);
+                --content-gap: clamp(0.3rem, 1vw, 0.75rem);
+                --title-size: clamp(1.2rem, 3.5vw, 2rem);
+                --body-size: clamp(0.7rem, 1.2vw, 0.95rem);
+            }
+            .nav-dots { display: none; }
+        }
+
+        @media (max-height: 500px) {
+            :root {
+                --slide-padding: clamp(0.5rem, 2vw, 1rem);
+                --title-size: clamp(1rem, 3vw, 1.5rem);
+                --h2-size: clamp(0.9rem, 2.2vw, 1.25rem);
+                --body-size: clamp(0.65rem, 1vw, 0.85rem);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.2s !important;
+            }
+            html { scroll-behavior: auto; }
+        }
+
+        /* ===========================================
+           UTILITY
+           =========================================== */
+        .text-center { text-align: center; }
+        .text-accent { color: var(--accent); }
+        .text-muted { color: var(--text-secondary); }
+        .mt-auto { margin-top: auto; }
+        .mb-sm { margin-bottom: var(--element-gap); }
+        .mb-md { margin-bottom: var(--content-gap); }
+        .gap-sm { gap: var(--element-gap); }
+        .gap-md { gap: var(--content-gap); }
+        .flex-center { display: flex; align-items: center; justify-content: center; }
+        .bold { font-weight: 700; }
+        .inline-flow { display: flex; align-items: center; gap: clamp(0.3rem, 0.8vw, 0.6rem); flex-wrap: wrap; }
+    </style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Navigation Dots -->
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- Slide Counter -->
+<div class="slide-counter" id="slideCounter"></div>
+
+
+<!-- ============================================================
+     SLIDE 1: TITLE
+     ============================================================ -->
+<section class="slide dark" data-section="title">
+    <div class="slide-content" style="justify-content:center; align-items:center; text-align:center;">
+        <div class="reveal" style="margin-bottom:var(--content-gap); font-size:var(--small-size); text-transform:uppercase; letter-spacing:0.15em; opacity:0.6;">Westfield Outdoors</div>
+        <h1 class="reveal" style="color:#fff;">NetSuite 101</h1>
+        <p class="reveal subtitle" style="max-width:36em;">Understanding the System That Runs Our Business</p>
+        <div class="reveal" style="margin-top:clamp(1.5rem,3vw,3rem); font-size:var(--small-size); opacity:0.5;">
+            Internal Training &nbsp;·&nbsp; 2026
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SLIDE 2: AGENDA
+     ============================================================ -->
+<section class="slide" data-section="title">
+    <div class="slide-header">
+        <span class="section-label">Overview</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">What We'll Cover</h2>
+        <div class="reveal two-col" style="align-items:start;">
+            <div>
+                <ul class="clean" style="gap:var(--content-gap);">
+                    <li><strong>1. Accounting Basics</strong><br><span class="text-muted">Income Statement vs Balance Sheet</span></li>
+                    <li><strong>2. Balanced Entries</strong><br><span class="text-muted">Every transaction must balance</span></li>
+                    <li><strong>3. Records vs Transactions</strong><br><span class="text-muted">Permanent data vs actions</span></li>
+                    <li><strong>4. Transaction Flows</strong><br><span class="text-muted">Purchasing, Sales, Inventory</span></li>
+                </ul>
+            </div>
+            <div>
+                <ul class="clean" style="gap:var(--content-gap);">
+                    <li><strong>5. Item Records</strong><br><span class="text-muted">SKU, cost, class, category</span></li>
+                    <li><strong>6. Customer Records</strong><br><span class="text-muted">Required fields, parent/child</span></li>
+                    <li><strong>7. Supporting Records</strong><br><span class="text-muted">Vendor, Employee, Partner</span></li>
+                    <li><strong>8. System Structure</strong><br><span class="text-muted">Departments, Classes, Locations</span></li>
+                    <li><strong>9. Final Walkthrough</strong><br><span class="text-muted">Bass Pro: SO → Invoice</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 1: ACCOUNTING BASICS
+     ============================================================ -->
+<section class="slide section-header" data-section="accounting" data-section-start>
+    <div class="slide-content" style="justify-content:center; align-items:center; text-align:center;">
+        <div class="section-number reveal">1</div>
+        <h1 class="reveal" style="color:#fff;">Accounting Basics</h1>
+        <p class="reveal subtitle">The two financial statements that drive everything</p>
+    </div>
+</section>
+
+<!-- SLIDE: Income Statement -->
+<section class="slide" data-section="accounting">
+    <div class="slide-header">
+        <span class="section-label">Section 1 — Accounting Basics</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Income Statement</h2>
+        <p class="reveal text-muted mb-md">Measures profitability over a <strong>period of time</strong> (month, quarter, year)</p>
+        <div class="reveal card accent" style="margin-bottom:var(--content-gap);">
+            <table>
+                <tr><th style="width:60%;">Line Item</th><th>Account</th></tr>
+                <tr><td>Gross Sales (Revenue)</td><td><span class="acct">4105</span></td></tr>
+                <tr><td>− Product Cost (COGS)</td><td><span class="acct">5105</span></td></tr>
+                <tr><td><strong>= Gross Profit</strong></td><td></td></tr>
+                <tr><td>− Operating Expenses</td><td></td></tr>
+                <tr><td><strong>= Net Income</strong></td><td></td></tr>
+            </table>
+        </div>
+        <div class="reveal highlight-box">
+            <strong>Key idea:</strong> The Income Statement resets each period. It answers: "Did we make money?"
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Balance Sheet -->
+<section class="slide" data-section="accounting">
+    <div class="slide-header">
+        <span class="section-label">Section 1 — Accounting Basics</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Balance Sheet</h2>
+        <p class="reveal text-muted mb-md">A snapshot of what the company <strong>owns and owes</strong> at a single point in time</p>
+        <div class="reveal two-col" style="gap:clamp(0.75rem,2vw,2rem);">
+            <div>
+                <h3 style="margin-bottom:var(--element-gap);">Assets (what we own)</h3>
+                <table>
+                    <tr><td>Accounts Receivable</td><td><span class="acct">1110</span></td></tr>
+                    <tr><td>Inventory</td><td><span class="acct">1210</span></td></tr>
+                    <tr><td>Equipment, Property…</td><td></td></tr>
+                </table>
+            </div>
+            <div>
+                <h3 style="margin-bottom:var(--element-gap);">Liabilities (what we owe)</h3>
+                <table>
+                    <tr><td>Accounts Payable</td><td><span class="acct">2010</span></td></tr>
+                    <tr><td>Loans, Accrued Exp…</td><td></td></tr>
+                </table>
+                <h3 style="margin-top:var(--content-gap); margin-bottom:var(--element-gap);">Equity</h3>
+                <table>
+                    <tr><td>Owner's Equity / Retained Earnings</td><td></td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="reveal key-point" style="margin-top:var(--content-gap);">
+            Assets = Liabilities + Equity &nbsp;←&nbsp; Always.
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: How Westfield Uses Them -->
+<section class="slide" data-section="accounting">
+    <div class="slide-header">
+        <span class="section-label">Section 1 — Accounting Basics</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">How Westfield Uses These</h2>
+        <div class="reveal two-col" style="gap:clamp(1rem,3vw,3rem);">
+            <div class="card accent">
+                <h3>Income Statement</h3>
+                <ul class="clean">
+                    <li>Track revenue from each sales channel</li>
+                    <li>Monitor COGS to protect margins</li>
+                    <li>Monthly P&L reviews by brand/class</li>
+                    <li>Budget vs. actuals comparison</li>
+                </ul>
+            </div>
+            <div class="card accent">
+                <h3>Balance Sheet</h3>
+                <ul class="clean">
+                    <li>Monitor inventory levels (<span class="acct">1210</span>)</li>
+                    <li>Track what customers owe us (<span class="acct">1110</span>)</li>
+                    <li>Track what we owe vendors (<span class="acct">2010</span>)</li>
+                    <li>Overall financial health snapshot</li>
+                </ul>
+            </div>
+        </div>
+        <div class="reveal highlight-box" style="margin-top:var(--content-gap);">
+            <strong>Why it matters:</strong> Every transaction you enter in NetSuite feeds into one or both of these reports. Understanding them helps you understand <em>why</em> NetSuite works the way it does.
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 2: BALANCED ENTRIES
+     ============================================================ -->
+<section class="slide section-header" data-section="balanced" data-section-start>
+    <div class="slide-content" style="justify-content:center; align-items:center; text-align:center;">
+        <div class="section-number reveal">2</div>
+        <h1 class="reveal" style="color:#fff;">Balanced Entries</h1>
+        <p class="reveal subtitle">Every transaction must balance — debits equal credits</p>
+    </div>
+</section>
+
+<!-- SLIDE: The Golden Rule -->
+<section class="slide" data-section="balanced">
+    <div class="slide-header">
+        <span class="section-label">Section 2 — Balanced Entries</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">The Golden Rule of Accounting</h2>
+        <p class="reveal text-muted mb-md">For every transaction, the total debits must equal the total credits. NetSuite enforces this automatically.</p>
+        <div class="reveal" style="display:flex; gap:clamp(1rem,3vw,3rem); justify-content:center; flex-wrap:wrap; margin-bottom:var(--content-gap);">
+            <div class="t-account">
+                <div class="t-account-title">Debit Side</div>
+                <div class="t-account-body">
+                    <div class="debit" style="text-align:center; padding-top:0.8rem;">
+                        <div style="font-size:clamp(1.2rem,2vw,1.8rem); font-weight:700;">+</div>
+                        <div class="label">Increases</div>
+                    </div>
+                    <div class="credit" style="text-align:center; padding-top:0.8rem;">
+                        <div style="font-size:clamp(1.2rem,2vw,1.8rem); font-weight:700; color:var(--text-secondary);">−</div>
+                        <div class="label">Decreases</div>
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex; align-items:center; font-size:clamp(1.5rem,3vw,2.5rem); font-weight:700; color:var(--accent);">=</div>
+            <div class="t-account">
+                <div class="t-account-title">Credit Side</div>
+                <div class="t-account-body">
+                    <div class="debit" style="text-align:center; padding-top:0.8rem;">
+                        <div style="font-size:clamp(1.2rem,2vw,1.8rem); font-weight:700; color:var(--text-secondary);">−</div>
+                        <div class="label">Decreases</div>
+                    </div>
+                    <div class="credit" style="text-align:center; padding-top:0.8rem;">
+                        <div style="font-size:clamp(1.2rem,2vw,1.8rem); font-weight:700;">+</div>
+                        <div class="label">Increases</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="reveal highlight-box">
+            <strong>Remember:</strong> Assets &amp; Expenses increase with debits. Revenue, Liabilities &amp; Equity increase with credits.
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Example — Selling a Chair -->
+<section class="slide" data-section="balanced">
+    <div class="slide-header">
+        <span class="section-label">Section 2 — Balanced Entries</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Example: Selling a Chair for $100</h2>
+        <p class="reveal text-muted mb-md">When we invoice a customer, NetSuite creates balanced journal entries behind the scenes:</p>
+        <div class="reveal card accent" style="margin-bottom:var(--content-gap);">
+            <h3 style="margin-bottom:var(--element-gap);">Revenue Recognition Entry</h3>
+            <table>
+                <tr><th>Account</th><th style="width:20%;">Debit</th><th style="width:20%;">Credit</th></tr>
+                <tr><td><span class="acct">1110</span> Accounts Receivable</td><td><strong>$100</strong></td><td></td></tr>
+                <tr><td><span class="acct">4105</span> Gross Sales</td><td></td><td><strong>$100</strong></td></tr>
+            </table>
+        </div>
+        <div class="reveal card accent">
+            <h3 style="margin-bottom:var(--element-gap);">COGS Entry (if item costs $40)</h3>
+            <table>
+                <tr><th>Account</th><th style="width:20%;">Debit</th><th style="width:20%;">Credit</th></tr>
+                <tr><td><span class="acct">5105</span> Product (COGS)</td><td><strong>$40</strong></td><td></td></tr>
+                <tr><td><span class="acct">1210</span> Inventory</td><td></td><td><strong>$40</strong></td></tr>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: What This Means in NetSuite -->
+<section class="slide" data-section="balanced">
+    <div class="slide-header">
+        <span class="section-label">Section 2 — Balanced Entries</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">What This Means for You</h2>
+        <ul class="clean reveal" style="gap:var(--content-gap); max-width:42em;">
+            <li><strong>You don't create journal entries manually</strong> — NetSuite does it when you enter transactions (invoices, bills, receipts)</li>
+            <li><strong>But understanding them helps</strong> — when something looks wrong in a report, you'll know which accounts to check</li>
+            <li><strong>NetSuite won't save an unbalanced transaction</strong> — if you get a "transaction is not in balance" error, check your amounts</li>
+        </ul>
+        <div class="reveal key-point" style="margin-top:var(--content-gap);">
+            You enter the <em>business event</em>. NetSuite handles the accounting math.
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 3: RECORDS vs TRANSACTIONS
+     ============================================================ -->
+<section class="slide section-header" data-section="records" data-section-start>
+    <div class="slide-content" style="justify-content:center; align-items:center; text-align:center;">
+        <div class="section-number reveal">3</div>
+        <h1 class="reveal" style="color:#fff;">Records vs Transactions</h1>
+        <p class="reveal subtitle">Permanent data vs. actions that move money</p>
+    </div>
+</section>
+
+<!-- SLIDE: The Difference -->
+<section class="slide" data-section="records">
+    <div class="slide-header">
+        <span class="section-label">Section 3 — Records vs Transactions</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Two Types of Data in NetSuite</h2>
+        <div class="reveal two-col" style="gap:clamp(1rem,3vw,3rem);">
+            <div class="card" style="border-top:4px solid var(--accent);">
+                <h3>📋 Records</h3>
+                <p class="text-muted mb-sm">Permanent reference data — the "nouns"</p>
+                <ul class="clean">
+                    <li>Customers</li>
+                    <li>Items / Products</li>
+                    <li>Vendors</li>
+                    <li>Employees</li>
+                    <li>Locations</li>
+                </ul>
+                <div class="highlight-box" style="margin-top:var(--element-gap);">
+                    Records <strong>exist</strong>. They don't affect financials by themselves.
+                </div>
+            </div>
+            <div class="card" style="border-top:4px solid var(--success);">
+                <h3>⚡ Transactions</h3>
+                <p class="text-muted mb-sm">Actions that move money — the "verbs"</p>
+                <ul class="clean">
+                    <li>Sales Orders</li>
+                    <li>Invoices</li>
+                    <li>Purchase Orders</li>
+                    <li>Item Receipts</li>
+                    <li>Vendor Bills</li>
+                </ul>
+                <div class="highlight-box" style="margin-top:var(--element-gap);">
+                    Transactions <strong>happen</strong>. They create journal entries and affect financials.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: How They Connect -->
+<section class="slide" data-section="records">
+    <div class="slide-header">
+        <span class="section-label">Section 3 — Records vs Transactions</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">How They Work Together</h2>
+        <p class="reveal text-muted mb-md">Transactions always reference records. Records provide the data; transactions create the accounting.</p>
+        <div class="reveal" style="display:flex; flex-direction:column; align-items:center; gap:var(--content-gap);">
+            <!-- Visual: Records feed into Transactions -->
+            <div style="display:flex; gap:clamp(0.5rem,1.5vw,1.5rem); flex-wrap:wrap; justify-content:center;">
+                <div class="flow-step outline">Customer Record</div>
+                <div class="flow-step outline">Item Record</div>
+                <div class="flow-step outline">Location</div>
+            </div>
+            <div style="font-size:clamp(1.2rem,2vw,1.8rem); color:var(--accent-light);">↓ &nbsp; referenced by &nbsp; ↓</div>
+            <div class="flow-step highlight" style="padding:clamp(0.6rem,1vw,1rem) clamp(1.5rem,3vw,3rem); font-size:var(--body-size);">
+                Sales Order Transaction
+            </div>
+            <div style="font-size:clamp(1.2rem,2vw,1.8rem); color:var(--accent-light);">↓ &nbsp; generates &nbsp; ↓</div>
+            <div class="flow-step" style="background:var(--success); padding:clamp(0.6rem,1vw,1rem) clamp(1.5rem,3vw,3rem); font-size:var(--body-size);">
+                Journal Entry (Accounting Impact)
+            </div>
+        </div>
+        <div class="reveal highlight-box" style="margin-top:var(--content-gap);">
+            <strong>Think of it this way:</strong> A Customer record is like a contact card. A Sales Order is the action of selling them something.
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 4: TRANSACTION FLOWS
+     ============================================================ -->
+<section class="slide section-header" data-section="flows" data-section-start>
+    <div class="slide-content" style="justify-content:center; align-items:center; text-align:center;">
+        <div class="section-number reveal">4</div>
+        <h1 class="reveal" style="color:#fff;">Transaction Flows</h1>
+        <p class="reveal subtitle">How purchasing, sales, and inventory move through NetSuite</p>
+    </div>
+</section>
+
+<!-- SLIDE: Purchasing Overview -->
+<section class="slide" data-section="flows">
+    <div class="slide-header">
+        <span class="section-label">Section 4 — Transaction Flows</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Purchasing Flow</h2>
+        <p class="reveal text-muted mb-md">From ordering product to paying the vendor</p>
+        <div class="reveal flow-diagram" style="margin-bottom:var(--content-gap);">
+            <div class="flow-step">Purchase Order</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step highlight">Item Receipt</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">Vendor Bill</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step" style="background:var(--success);">Payment</div>
+        </div>
+        <div class="reveal two-col" style="gap:clamp(0.75rem,2vw,2rem);">
+            <div class="card accent">
+                <h3>Purchase Order</h3>
+                <p>No accounting impact — just a commitment to buy. Reserves budget but doesn't hit the books.</p>
+            </div>
+            <div class="card accent">
+                <h3>Item Receipt</h3>
+                <p><strong>This is where inventory increases.</strong><br>
+                Debit <span class="acct">1210</span> Inventory<br>
+                Credit <span class="acct">2010</span> Accounts Payable</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Purchasing — Bill & Payment -->
+<section class="slide" data-section="flows">
+    <div class="slide-header">
+        <span class="section-label">Section 4 — Transaction Flows</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Purchasing: Bill &amp; Payment</h2>
+        <div class="reveal two-col" style="gap:clamp(1rem,3vw,3rem);">
+            <div class="card accent">
+                <h3>Vendor Bill</h3>
+                <p class="text-muted mb-sm">The vendor's invoice to us. If receipt already posted to AP, the bill matches against it.</p>
+                <p>If received without a PO:<br>
+                Debit <span class="acct">1210</span> Inventory (or Expense)<br>
+                Credit <span class="acct">2010</span> Accounts Payable</p>
+            </div>
+            <div class="card accent">
+                <h3>Bill Payment</h3>
+                <p class="text-muted mb-sm">When we actually pay the vendor.</p>
+                <p>Debit <span class="acct">2010</span> Accounts Payable<br>
+                Credit Cash/Bank Account</p>
+            </div>
+        </div>
+        <div class="reveal highlight-box" style="margin-top:var(--content-gap);">
+            <strong>Key insight:</strong> Receiving inventory and paying for it are separate events. The Item Receipt adds to inventory; the Bill Payment removes cash.
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Sales Flow Overview -->
+<section class="slide" data-section="flows">
+    <div class="slide-header">
+        <span class="section-label">Section 4 — Transaction Flows</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Sales Flow</h2>
+        <p class="reveal text-muted mb-md">From customer order to revenue recognition</p>
+        <div class="reveal flow-diagram" style="margin-bottom:var(--content-gap);">
+            <div class="flow-step">Sales Order</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step highlight">Fulfillment</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step" style="background:var(--success);">Invoice</div>
+        </div>
+        <div class="reveal three-col" style="gap:clamp(0.5rem,1.5vw,1.5rem);">
+            <div class="card accent">
+                <h3>Sales Order</h3>
+                <p class="text-muted">No accounting impact — records the customer's order and commits inventory</p>
+            </div>
+            <div class="card accent">
+                <h3>Fulfillment</h3>
+                <p><strong>Inventory decreases:</strong><br>
+                Debit <span class="acct">5105</span> COGS<br>
+                Credit <span class="acct">1210</span> Inventory</p>
+            </div>
+            <div class="card accent">
+                <h3>Invoice</h3>
+                <p><strong>Revenue recognized:</strong><br>
+                Debit <span class="acct">1110</span> AR<br>
+                Credit <span class="acct">4105</span> Gross Sales</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Transfers & Returns -->
+<section class="slide" data-section="flows">
+    <div class="slide-header">
+        <span class="section-label">Section 4 — Transaction Flows</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Transfers, Returns &amp; Adjustments</h2>
+        <div class="reveal three-col" style="gap:clamp(0.5rem,1.5vw,1.5rem);">
+            <div class="card accent">
+                <h3>Inventory Transfer</h3>
+                <p class="text-muted mb-sm">Moves stock between locations</p>
+                <p>Debit <span class="acct">1210</span> Inv (To)<br>
+                Credit <span class="acct">1210</span> Inv (From)</p>
+                <p class="text-muted" style="margin-top:var(--element-gap); font-size:var(--small-size);">Total inventory stays the same — just moves between warehouses.</p>
+            </div>
+            <div class="card accent">
+                <h3>Return (RMA)</h3>
+                <p class="text-muted mb-sm">Customer returns product</p>
+                <p>Reverses the original sale: reduces AR, adds back inventory, reverses COGS</p>
+                <p class="text-muted" style="margin-top:var(--element-gap); font-size:var(--small-size);">Creates a Credit Memo or Return Authorization.</p>
+            </div>
+            <div class="card accent">
+                <h3>Inventory Adjustment</h3>
+                <p class="text-muted mb-sm">Corrects quantity discrepancies</p>
+                <p>Debit/Credit <span class="acct">1210</span> Inv<br>
+                Offset to <span class="acct">6820</span> Inv Adj</p>
+                <p class="text-muted" style="margin-top:var(--element-gap); font-size:var(--small-size);">Used after physical counts or damage write-offs.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Transaction Flow Visual Summary -->
+<section class="slide" data-section="flows">
+    <div class="slide-header">
+        <span class="section-label">Section 4 — Transaction Flows</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">The Big Picture</h2>
+        <p class="reveal text-muted mb-md">How purchasing and sales connect through inventory</p>
+        <div class="reveal" style="display:flex; flex-direction:column; align-items:center; gap:clamp(0.4rem,1vw,0.8rem);">
+            <!-- Purchasing row -->
+            <div style="font-size:var(--small-size); font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em;">Purchasing Side</div>
+            <div class="flow-diagram" style="padding:0;">
+                <div class="flow-step">PO</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step highlight">Item Receipt</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">Vendor Bill</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">Payment</div>
+            </div>
+            <!-- Inventory center -->
+            <div style="display:flex; align-items:center; gap:clamp(0.5rem,1vw,1rem);">
+                <div style="font-size:clamp(1.2rem,2vw,1.6rem); color:var(--accent-light);">↓</div>
+            </div>
+            <div class="flow-step" style="background:var(--success); padding:clamp(0.5rem,1vw,0.8rem) clamp(2rem,5vw,5rem); font-size:var(--body-size);">
+                <span class="acct" style="background:rgba(255,255,255,0.2); color:#fff; border-color:rgba(255,255,255,0.3);">1210</span> &nbsp;Inventory
+            </div>
+            <div style="display:flex; align-items:center; gap:clamp(0.5rem,1vw,1rem);">
+                <div style="font-size:clamp(1.2rem,2vw,1.6rem); color:var(--accent-light);">↓</div>
+            </div>
+            <!-- Sales row -->
+            <div style="font-size:var(--small-size); font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em;">Sales Side</div>
+            <div class="flow-diagram" style="padding:0;">
+                <div class="flow-step">Sales Order</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step highlight">Fulfillment</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step" style="background:var(--success);">Invoice</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">Payment</div>
+            </div>
+        </div>
+        <div class="reveal key-point" style="margin-top:var(--content-gap);">
+            Inventory is the bridge between purchasing and sales.
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Transaction Flow Screenshot -->
+<section class="slide" data-section="flows">
+    <div class="slide-header">
+        <span class="section-label">Section 4 — Transaction Flows</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">NetSuite Transaction View</h2>
+        <p class="reveal text-muted mb-md">Here's what a typical transaction looks like in the system</p>
+        <div class="reveal screenshot-placeholder">
+            🔲 [INSERT NETSUITE SCREENSHOT — Sales Order or Invoice form view]
+        </div>
+        <div class="reveal highlight-box" style="margin-top:var(--content-gap);">
+            <strong>Notice:</strong> The header contains customer/date info. The line items contain products, quantities, and amounts. The GL Impact tab shows the journal entries NetSuite creates.
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 5: ITEM RECORDS
+     ============================================================ -->
+<section class="slide section-header" data-section="items" data-section-start>
+    <div class="slide-content" style="justify-content:center; align-items:center; text-align:center;">
+        <div class="section-number reveal">5</div>
+        <h1 class="reveal" style="color:#fff;">Item Records</h1>
+        <p class="reveal subtitle">The building blocks of everything we buy and sell</p>
+    </div>
+</section>
+
+<!-- SLIDE: Item Record Basics -->
+<section class="slide" data-section="items">
+    <div class="slide-header">
+        <span class="section-label">Section 5 — Item Records</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">What's on an Item Record?</h2>
+        <div class="reveal card accent" style="margin-bottom:var(--content-gap);">
+            <table>
+                <tr><th style="width:30%;">Field</th><th>Description</th></tr>
+                <tr><td><strong>Item Name / SKU</strong></td><td>Unique identifier (e.g., GCI-39154)</td></tr>
+                <tr><td><strong>Display Name</strong></td><td>What appears on invoices and reports</td></tr>
+                <tr><td><strong>Description</strong></td><td>Detailed product description</td></tr>
+                <tr><td><strong>Class</strong></td><td>Brand or product line (e.g., GCI Outdoor, Westfield)</td></tr>
+                <tr><td><strong>Category</strong></td><td>Product type (e.g., Chairs, Wagons, Tents)</td></tr>
+                <tr><td><strong>Base Price</strong></td><td>Standard selling price</td></tr>
+            </table>
+        </div>
+        <div class="reveal screenshot-placeholder" style="min-height:clamp(4rem,10vh,8rem);">
+            🔲 [INSERT NETSUITE SCREENSHOT — Item Record form]
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Cost Concepts -->
+<section class="slide" data-section="items">
+    <div class="slide-header">
+        <span class="section-label">Section 5 — Item Records</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Cost Concepts</h2>
+        <p class="reveal text-muted mb-md">Understanding the different cost fields on an item</p>
+        <div class="reveal" style="display:flex; flex-direction:column; gap:var(--element-gap);">
+            <div class="card accent">
+                <div style="display:flex; align-items:baseline; gap:0.5em;">
+                    <h3 style="margin-bottom:0;">Purchase Price</h3>
+                    <span class="text-muted" style="font-size:var(--small-size);">— what we pay the vendor</span>
+                </div>
+                <p>Set on the PO. Can vary by vendor or order.</p>
+            </div>
+            <div class="card accent">
+                <div style="display:flex; align-items:baseline; gap:0.5em;">
+                    <h3 style="margin-bottom:0;">Average Cost</h3>
+                    <span class="text-muted" style="font-size:var(--small-size);">— what NetSuite uses for COGS</span>
+                </div>
+                <p>Calculated automatically. Weighted average of all purchase prices for units in stock.</p>
+            </div>
+            <div class="card accent">
+                <div style="display:flex; align-items:baseline; gap:0.5em;">
+                    <h3 style="margin-bottom:0;">Transfer Cost</h3>
+                    <span class="text-muted" style="font-size:var(--small-size);">— intercompany pricing</span>
+                </div>
+                <p>Used when transferring items between subsidiaries or internal divisions. May include markup.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Average Cost Flow -->
+<section class="slide" data-section="items">
+    <div class="slide-header">
+        <span class="section-label">Section 5 — Item Records</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">How Average Cost Works</h2>
+        <p class="reveal text-muted mb-md">NetSuite recalculates average cost with each receipt</p>
+        <div class="reveal card accent" style="margin-bottom:var(--content-gap);">
+            <table>
+                <tr><th>Event</th><th>Qty</th><th>Unit Cost</th><th>On Hand</th><th>Avg Cost</th></tr>
+                <tr><td>Receipt #1</td><td>100</td><td>$10.00</td><td>100</td><td>$10.00</td></tr>
+                <tr><td>Receipt #2</td><td>100</td><td>$12.00</td><td>200</td><td>$11.00</td></tr>
+                <tr><td>Sell 50 units</td><td>−50</td><td>—</td><td>150</td><td>$11.00</td></tr>
+                <tr><td>Receipt #3</td><td>50</td><td>$14.00</td><td>200</td><td>$11.75</td></tr>
+            </table>
+        </div>
+        <div class="reveal highlight-box">
+            <strong>Why this matters:</strong> When we fulfill an order, NetSuite uses the current average cost to calculate COGS (<span class="acct">5105</span>). A higher average cost = lower margin on each sale.
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Item Record Screenshot -->
+<section class="slide" data-section="items">
+    <div class="slide-header">
+        <span class="section-label">Section 5 — Item Records</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Item Record in NetSuite</h2>
+        <p class="reveal text-muted mb-md">Key tabs and fields to know</p>
+        <div class="reveal screenshot-placeholder" style="flex:1; max-height:50vh;">
+            🔲 [INSERT NETSUITE SCREENSHOT — Item record showing Class, Category, Cost fields]
+        </div>
+        <div class="reveal" style="margin-top:var(--content-gap);">
+            <ul class="clean">
+                <li><strong>Primary Info tab:</strong> Name, SKU, description, class, category</li>
+                <li><strong>Purchasing tab:</strong> Preferred vendor, purchase price</li>
+                <li><strong>Pricing tab:</strong> Base price, price levels by customer</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 6: CUSTOMER RECORDS
+     ============================================================ -->
+<section class="slide section-header" data-section="customers" data-section-start>
+    <div class="slide-content" style="justify-content:center; align-items:center; text-align:center;">
+        <div class="section-number reveal">6</div>
+        <h1 class="reveal" style="color:#fff;">Customer Records</h1>
+        <p class="reveal subtitle">Managing who we sell to and how</p>
+    </div>
+</section>
+
+<!-- SLIDE: Required Fields -->
+<section class="slide" data-section="customers">
+    <div class="slide-header">
+        <span class="section-label">Section 6 — Customer Records</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Customer Record — Required Fields</h2>
+        <div class="reveal two-col" style="gap:clamp(1rem,3vw,3rem);">
+            <div>
+                <div class="card accent" style="margin-bottom:var(--content-gap);">
+                    <table>
+                        <tr><th>Field</th><th>Example</th></tr>
+                        <tr><td>Company Name</td><td>Bass Pro Shops</td></tr>
+                        <tr><td>Customer ID</td><td>Auto-generated</td></tr>
+                        <tr><td>Category</td><td>Retail / Mass / Direct</td></tr>
+                        <tr><td>Terms</td><td>Net 30, Net 60</td></tr>
+                        <tr><td>Price Level</td><td>Wholesale, Retail</td></tr>
+                        <tr><td>Billing Address</td><td>Required for invoicing</td></tr>
+                        <tr><td>Shipping Address</td><td>Can have multiple</td></tr>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <div class="highlight-box" style="margin-bottom:var(--content-gap);">
+                    <strong>Auto-Population:</strong> Once a customer record exists, their terms, price level, and addresses auto-fill on new Sales Orders — saving time and reducing errors.
+                </div>
+                <div class="screenshot-placeholder" style="min-height:clamp(6rem,12vh,10rem);">
+                    🔲 [INSERT NETSUITE SCREENSHOT — Customer record]
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Parent/Child Relationships -->
+<section class="slide" data-section="customers">
+    <div class="slide-header">
+        <span class="section-label">Section 6 — Customer Records</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Parent / Child Customers</h2>
+        <p class="reveal text-muted mb-md">Large retailers often have multiple "ship-to" locations under one parent account</p>
+        <div class="reveal" style="display:flex; flex-direction:column; align-items:center; gap:clamp(0.3rem,0.8vw,0.6rem);">
+            <div class="flow-step" style="padding:clamp(0.5rem,1vw,0.8rem) clamp(2rem,4vw,4rem); font-size:var(--body-size);">
+                Bass Pro Shops (Parent)
+            </div>
+            <div style="display:flex; gap:clamp(1rem,3vw,3rem); align-items:flex-start;">
+                <div style="display:flex; flex-direction:column; align-items:center; gap:0.3rem;">
+                    <div style="color:var(--accent-light); font-size:1.2rem;">↓</div>
+                    <div class="flow-step outline" style="font-size:var(--small-size);">Store #0001<br>Springfield, MO</div>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:0.3rem;">
+                    <div style="color:var(--accent-light); font-size:1.2rem;">↓</div>
+                    <div class="flow-step outline" style="font-size:var(--small-size);">Store #0142<br>Nashville, TN</div>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:0.3rem;">
+                    <div style="color:var(--accent-light); font-size:1.2rem;">↓</div>
+                    <div class="flow-step outline" style="font-size:var(--small-size);">Store #0305<br>Grapevine, TX</div>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:0.3rem;">
+                    <div style="color:var(--accent-light); font-size:1.2rem;">↓</div>
+                    <div class="flow-step outline" style="font-size:var(--small-size);">Cabela's (Child)<br>Sidney, NE</div>
+                </div>
+            </div>
+        </div>
+        <div class="reveal two-col" style="margin-top:var(--content-gap); gap:clamp(0.75rem,2vw,2rem);">
+            <div class="highlight-box">
+                <strong>Parent record</strong> holds shared settings: terms, price level, credit limit, tax status
+            </div>
+            <div class="highlight-box">
+                <strong>Child records</strong> inherit parent settings but have their own shipping addresses and contacts
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Auto-Population -->
+<section class="slide" data-section="customers">
+    <div class="slide-header">
+        <span class="section-label">Section 6 — Customer Records</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Auto-Population in Action</h2>
+        <p class="reveal text-muted mb-md">When you select a customer on a Sales Order, NetSuite fills in:</p>
+        <div class="reveal" style="display:flex; flex-wrap:wrap; gap:var(--element-gap); justify-content:center; margin-bottom:var(--content-gap);">
+            <div class="flow-step outline" style="font-size:var(--small-size);">Payment Terms</div>
+            <div class="flow-step outline" style="font-size:var(--small-size);">Price Level</div>
+            <div class="flow-step outline" style="font-size:var(--small-size);">Tax Status</div>
+            <div class="flow-step outline" style="font-size:var(--small-size);">Billing Address</div>
+            <div class="flow-step outline" style="font-size:var(--small-size);">Shipping Address</div>
+            <div class="flow-step outline" style="font-size:var(--small-size);">Sales Rep</div>
+            <div class="flow-step outline" style="font-size:var(--small-size);">Currency</div>
+        </div>
+        <div class="reveal highlight-box">
+            <strong>Why this matters:</strong> Clean, complete customer records = fewer errors on orders. If a customer's terms are wrong on the record, every order will inherit that mistake.
+        </div>
+        <div class="reveal key-point" style="margin-top:var(--content-gap);">
+            Good data in → Good data out. Keep customer records accurate.
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 7: SUPPORTING RECORDS
+     ============================================================ -->
+<section class="slide section-header" data-section="supporting" data-section-start>
+    <div class="slide-content" style="justify-content:center; align-items:center; text-align:center;">
+        <div class="section-number reveal">7</div>
+        <h1 class="reveal" style="color:#fff;">Supporting Records</h1>
+        <p class="reveal subtitle">Vendors, Employees, and Partners</p>
+    </div>
+</section>
+
+<!-- SLIDE: Vendor, Employee, Partner -->
+<section class="slide" data-section="supporting">
+    <div class="slide-header">
+        <span class="section-label">Section 7 — Supporting Records</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Other Key Record Types</h2>
+        <div class="reveal three-col" style="gap:clamp(0.5rem,1.5vw,1.5rem);">
+            <div class="card" style="border-top:4px solid var(--accent);">
+                <h3>🏭 Vendor Records</h3>
+                <ul class="clean" style="gap:var(--element-gap);">
+                    <li>Company name &amp; contacts</li>
+                    <li>Payment terms</li>
+                    <li>Currency &amp; tax info</li>
+                    <li>Purchase price lists</li>
+                    <li>Lead time data</li>
+                </ul>
+                <p class="text-muted" style="margin-top:var(--element-gap); font-size:var(--small-size);">Referenced on POs and Vendor Bills</p>
+            </div>
+            <div class="card" style="border-top:4px solid var(--success);">
+                <h3>👤 Employee Records</h3>
+                <ul class="clean" style="gap:var(--element-gap);">
+                    <li>Name &amp; department</li>
+                    <li>Role &amp; supervisor</li>
+                    <li>Expense report approver</li>
+                    <li>System access level</li>
+                    <li>Location assignment</li>
+                </ul>
+                <p class="text-muted" style="margin-top:var(--element-gap); font-size:var(--small-size);">Controls what you can see and do in NetSuite</p>
+            </div>
+            <div class="card" style="border-top:4px solid var(--warning);">
+                <h3>🤝 Partner Records</h3>
+                <ul class="clean" style="gap:var(--element-gap);">
+                    <li>Sales reps &amp; agents</li>
+                    <li>Commission rates</li>
+                    <li>Territory assignment</li>
+                    <li>Performance tracking</li>
+                </ul>
+                <p class="text-muted" style="margin-top:var(--element-gap); font-size:var(--small-size);">Used for commission calculations and partner portals</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Supporting Records - How They Connect -->
+<section class="slide" data-section="supporting">
+    <div class="slide-header">
+        <span class="section-label">Section 7 — Supporting Records</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">How Supporting Records Connect</h2>
+        <p class="reveal text-muted mb-md">Every transaction references multiple record types</p>
+        <div class="reveal" style="display:flex; flex-direction:column; align-items:center; gap:clamp(0.3rem,0.8vw,0.6rem);">
+            <div style="display:flex; gap:clamp(0.5rem,1.5vw,1.5rem); flex-wrap:wrap; justify-content:center;">
+                <div class="flow-step outline" style="font-size:var(--small-size);">👤 Employee<br><span style="opacity:0.7; font-size:0.85em;">enters the order</span></div>
+                <div class="flow-step outline" style="font-size:var(--small-size);">🏭 Vendor<br><span style="opacity:0.7; font-size:0.85em;">supplied the product</span></div>
+                <div class="flow-step outline" style="font-size:var(--small-size);">🤝 Partner<br><span style="opacity:0.7; font-size:0.85em;">earns commission</span></div>
+            </div>
+            <div style="font-size:clamp(1rem,1.5vw,1.4rem); color:var(--accent-light);">↓ &nbsp; ↓ &nbsp; ↓</div>
+            <div class="flow-step highlight" style="padding:clamp(0.5rem,1vw,0.8rem) clamp(2rem,4vw,4rem); font-size:var(--body-size);">
+                Sales Order
+            </div>
+            <div style="font-size:clamp(1rem,1.5vw,1.4rem); color:var(--accent-light);">↑</div>
+            <div style="display:flex; gap:clamp(0.5rem,1.5vw,1.5rem); flex-wrap:wrap; justify-content:center;">
+                <div class="flow-step outline" style="font-size:var(--small-size);">🛒 Customer<br><span style="opacity:0.7; font-size:0.85em;">who's buying</span></div>
+                <div class="flow-step outline" style="font-size:var(--small-size);">📦 Items<br><span style="opacity:0.7; font-size:0.85em;">what's being sold</span></div>
+            </div>
+        </div>
+        <div class="reveal highlight-box" style="margin-top:var(--content-gap);">
+            <strong>Everything connects:</strong> A single Sales Order can reference a customer, multiple items, an employee, a partner, and ultimately trace back to the vendor who supplied the product.
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 8: SYSTEM STRUCTURE
+     ============================================================ -->
+<section class="slide section-header" data-section="structure" data-section-start>
+    <div class="slide-content" style="justify-content:center; align-items:center; text-align:center;">
+        <div class="section-number reveal">8</div>
+        <h1 class="reveal" style="color:#fff;">System Structure</h1>
+        <p class="reveal subtitle">Departments, Classes, Categories, and Locations</p>
+    </div>
+</section>
+
+<!-- SLIDE: Departments -->
+<section class="slide" data-section="structure">
+    <div class="slide-header">
+        <span class="section-label">Section 8 — System Structure</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Departments</h2>
+        <p class="reveal text-muted mb-md">Organizational units that help segment reporting</p>
+        <div class="reveal two-col" style="gap:clamp(1rem,3vw,3rem);">
+            <div>
+                <div class="card accent">
+                    <h3 style="margin-bottom:var(--element-gap);">What Departments Do</h3>
+                    <ul class="clean">
+                        <li>Segment financial reports by team</li>
+                        <li>Track revenue &amp; expenses per group</li>
+                        <li>Control approvals and workflows</li>
+                        <li>Filter dashboards and saved searches</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <div class="card blue-bg">
+                    <h3 style="margin-bottom:var(--element-gap);">Example Departments</h3>
+                    <ul class="clean">
+                        <li>Sales</li>
+                        <li>Product Design &amp; Development</li>
+                        <li>Operations / Warehouse</li>
+                        <li>Marketing</li>
+                        <li>Finance / Accounting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="reveal highlight-box" style="margin-top:var(--content-gap);">
+            <strong>Set on transactions and employee records.</strong> When you enter a PO, the department tells NetSuite which team is spending the money.
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Classes / Brands -->
+<section class="slide" data-section="structure">
+    <div class="slide-header">
+        <span class="section-label">Section 8 — System Structure</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Classes (Brands)</h2>
+        <p class="reveal text-muted mb-md">At Westfield, we use the Class field to track <strong>brands</strong></p>
+        <div class="reveal" style="display:flex; flex-wrap:wrap; gap:var(--element-gap); justify-content:center; margin-bottom:var(--content-gap);">
+            <div class="flow-step" style="font-size:var(--body-size);">GCI Outdoor</div>
+            <div class="flow-step highlight" style="font-size:var(--body-size);">Westfield</div>
+            <div class="flow-step" style="font-size:var(--body-size);">Timber Ridge</div>
+            <div class="flow-step" style="background:var(--success); font-size:var(--body-size);">Other Brands</div>
+        </div>
+        <div class="reveal two-col" style="gap:clamp(1rem,3vw,3rem);">
+            <div class="highlight-box">
+                <strong>On Item Records:</strong> Every product is assigned to a class/brand. This lets us run P&L reports by brand.
+            </div>
+            <div class="highlight-box">
+                <strong>On Transactions:</strong> When you sell a GCI chair, the class flows through to revenue and COGS reports automatically.
+            </div>
+        </div>
+        <div class="reveal key-point" style="margin-top:var(--content-gap);">
+            Class = Brand → "How is GCI performing vs Westfield this quarter?"
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Item Categories -->
+<section class="slide" data-section="structure">
+    <div class="slide-header">
+        <span class="section-label">Section 8 — System Structure</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Item Categories</h2>
+        <p class="reveal text-muted mb-md">Product types that help organize inventory and reporting</p>
+        <div class="reveal" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 140px), 1fr)); gap:var(--element-gap); margin-bottom:var(--content-gap);">
+            <div class="card text-center" style="padding:clamp(0.5rem,1vw,1rem);">
+                <div style="font-size:clamp(1.2rem,2vw,1.6rem); margin-bottom:0.2rem;">🪑</div>
+                <strong style="font-size:var(--small-size);">Chairs</strong>
+            </div>
+            <div class="card text-center" style="padding:clamp(0.5rem,1vw,1rem);">
+                <div style="font-size:clamp(1.2rem,2vw,1.6rem); margin-bottom:0.2rem;">🛒</div>
+                <strong style="font-size:var(--small-size);">Wagons</strong>
+            </div>
+            <div class="card text-center" style="padding:clamp(0.5rem,1vw,1rem);">
+                <div style="font-size:clamp(1.2rem,2vw,1.6rem); margin-bottom:0.2rem;">⛺</div>
+                <strong style="font-size:var(--small-size);">Tents</strong>
+            </div>
+            <div class="card text-center" style="padding:clamp(0.5rem,1vw,1rem);">
+                <div style="font-size:clamp(1.2rem,2vw,1.6rem); margin-bottom:0.2rem;">🎒</div>
+                <strong style="font-size:var(--small-size);">Accessories</strong>
+            </div>
+            <div class="card text-center" style="padding:clamp(0.5rem,1vw,1rem);">
+                <div style="font-size:clamp(1.2rem,2vw,1.6rem); margin-bottom:0.2rem;">🔫</div>
+                <strong style="font-size:var(--small-size);">Gun Cases</strong>
+            </div>
+            <div class="card text-center" style="padding:clamp(0.5rem,1vw,1rem);">
+                <div style="font-size:clamp(1.2rem,2vw,1.6rem); margin-bottom:0.2rem;">📦</div>
+                <strong style="font-size:var(--small-size);">Other</strong>
+            </div>
+        </div>
+        <div class="reveal highlight-box">
+            <strong>Class vs Category:</strong> Class = <em>Brand</em> (who makes it). Category = <em>Product type</em> (what it is). An item like a GCI Freestyle Rocker would be Class: GCI Outdoor, Category: Chairs.
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Locations -->
+<section class="slide" data-section="structure">
+    <div class="slide-header">
+        <span class="section-label">Section 8 — System Structure</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Locations</h2>
+        <p class="reveal text-muted mb-md">Physical or logical places where inventory is stored and transactions occur</p>
+        <div class="reveal two-col" style="gap:clamp(1rem,3vw,3rem);">
+            <div>
+                <div class="card accent">
+                    <h3 style="margin-bottom:var(--element-gap);">What Locations Track</h3>
+                    <ul class="clean">
+                        <li>Inventory quantities per location</li>
+                        <li>Fulfillment origin for shipping</li>
+                        <li>Cost tracking by warehouse</li>
+                        <li>Transfer orders between locations</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <div class="card blue-bg">
+                    <h3 style="margin-bottom:var(--element-gap);">Example Locations</h3>
+                    <ul class="clean">
+                        <li>Indianapolis HQ / Warehouse</li>
+                        <li>3PL Warehouse (East)</li>
+                        <li>3PL Warehouse (West)</li>
+                        <li>In-Transit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="reveal highlight-box" style="margin-top:var(--content-gap);">
+            <strong>On every transaction:</strong> Location determines <em>where</em> inventory is added (receipts) or removed (fulfillments). The same item can have different quantities at different locations.
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: How It All Connects -->
+<section class="slide" data-section="structure">
+    <div class="slide-header">
+        <span class="section-label">Section 8 — System Structure</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">How It All Connects</h2>
+        <p class="reveal text-muted mb-md">Every transaction carries these classification fields</p>
+        <div class="reveal" style="display:flex; flex-direction:column; align-items:center; gap:clamp(0.3rem,0.6vw,0.5rem);">
+            <div style="display:flex; gap:clamp(0.5rem,1.5vw,1.5rem); flex-wrap:wrap; justify-content:center;">
+                <div class="flow-step outline" style="font-size:var(--small-size);">Department<br><span style="opacity:0.7; font-size:0.85em;">(who)</span></div>
+                <div class="flow-step outline" style="font-size:var(--small-size);">Class / Brand<br><span style="opacity:0.7; font-size:0.85em;">(which brand)</span></div>
+                <div class="flow-step outline" style="font-size:var(--small-size);">Category<br><span style="opacity:0.7; font-size:0.85em;">(what type)</span></div>
+                <div class="flow-step outline" style="font-size:var(--small-size);">Location<br><span style="opacity:0.7; font-size:0.85em;">(where)</span></div>
+            </div>
+            <div style="font-size:clamp(1rem,1.5vw,1.4rem); color:var(--accent-light);">↓ &nbsp; ↓ &nbsp; ↓ &nbsp; ↓</div>
+            <div class="flow-step highlight" style="padding:clamp(0.5rem,1vw,0.8rem) clamp(2rem,4vw,4rem); font-size:var(--body-size);">
+                Transaction
+            </div>
+            <div style="font-size:clamp(1rem,1.5vw,1.4rem); color:var(--accent-light);">↓</div>
+            <div style="display:flex; gap:clamp(0.5rem,1.5vw,1.5rem); flex-wrap:wrap; justify-content:center;">
+                <div class="flow-step" style="background:var(--success); font-size:var(--small-size);">Income Statement<br><span style="opacity:0.7; font-size:0.85em;">filtered by all 4</span></div>
+                <div class="flow-step" style="background:var(--success); font-size:var(--small-size);">Balance Sheet<br><span style="opacity:0.7; font-size:0.85em;">filtered by all 4</span></div>
+            </div>
+        </div>
+        <div class="reveal key-point" style="margin-top:var(--content-gap);">
+            These four dimensions let you slice financials any way you need:<br>
+            "GCI Outdoor chairs sold from Indianapolis in Q1" ← one report
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 9: FINAL WALKTHROUGH
+     ============================================================ -->
+<section class="slide section-header" data-section="walkthrough" data-section-start>
+    <div class="slide-content" style="justify-content:center; align-items:center; text-align:center;">
+        <div class="section-number reveal">9</div>
+        <h1 class="reveal" style="color:#fff;">Final Walkthrough</h1>
+        <p class="reveal subtitle">Putting it all together with a real example</p>
+    </div>
+</section>
+
+<!-- SLIDE: Bass Pro Scenario -->
+<section class="slide" data-section="walkthrough">
+    <div class="slide-header">
+        <span class="section-label">Section 9 — Final Walkthrough</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Scenario: Bass Pro Shops Orders Chairs</h2>
+        <div class="reveal card accent" style="margin-bottom:var(--content-gap);">
+            <div style="display:grid; grid-template-columns:auto 1fr; gap:0.3rem 1rem; font-size:var(--body-size);">
+                <strong>Customer:</strong> <span>Bass Pro Shops (Parent)</span>
+                <strong>Ship To:</strong> <span>Store #0142 — Nashville, TN (Child)</span>
+                <strong>Item:</strong> <span>GCI Freestyle Rocker (SKU: GCI-39154)</span>
+                <strong>Quantity:</strong> <span>200 units</span>
+                <strong>Unit Price:</strong> <span>$35.00 (wholesale)</span>
+                <strong>Average Cost:</strong> <span>$18.50</span>
+                <strong>Class:</strong> <span>GCI Outdoor</span>
+                <strong>Category:</strong> <span>Chairs</span>
+                <strong>Location:</strong> <span>Indianapolis Warehouse</span>
+            </div>
+        </div>
+        <div class="reveal highlight-box">
+            <strong>Let's walk through the three steps:</strong> Sales Order → Fulfillment → Invoice — and see exactly what happens in the accounts.
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Step 1 — Sales Order -->
+<section class="slide" data-section="walkthrough">
+    <div class="slide-header">
+        <span class="section-label">Section 9 — Final Walkthrough</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Step 1: Sales Order</h2>
+        <div class="reveal flow-diagram" style="margin-bottom:var(--content-gap);">
+            <div class="flow-step highlight">Sales Order ←</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step" style="opacity:0.4;">Fulfillment</div>
+            <div class="flow-arrow" style="opacity:0.4;">→</div>
+            <div class="flow-step" style="opacity:0.4;">Invoice</div>
+        </div>
+        <div class="reveal two-col" style="gap:clamp(1rem,3vw,3rem);">
+            <div>
+                <h3>What happens:</h3>
+                <ul class="clean">
+                    <li>Order is entered with customer, items, quantities</li>
+                    <li>Customer fields auto-populate (terms, price, address)</li>
+                    <li>200 units committed from Indianapolis inventory</li>
+                    <li>Order status: <strong>Pending Fulfillment</strong></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Accounting impact:</h3>
+                <div class="key-point" style="margin-top:var(--element-gap);">
+                    <strong>None.</strong><br>
+                    The Sales Order is a commitment, not a financial event. No journal entries are created.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Step 2 — Fulfillment -->
+<section class="slide" data-section="walkthrough">
+    <div class="slide-header">
+        <span class="section-label">Section 9 — Final Walkthrough</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Step 2: Item Fulfillment</h2>
+        <div class="reveal flow-diagram" style="margin-bottom:var(--content-gap);">
+            <div class="flow-step" style="opacity:0.4;">Sales Order</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step highlight">Fulfillment ←</div>
+            <div class="flow-arrow" style="opacity:0.4;">→</div>
+            <div class="flow-step" style="opacity:0.4;">Invoice</div>
+        </div>
+        <div class="reveal">
+            <h3>What happens:</h3>
+            <p class="text-muted mb-sm">200 chairs are picked, packed, and shipped from Indianapolis to Nashville</p>
+        </div>
+        <div class="reveal card accent" style="margin-bottom:var(--content-gap);">
+            <h3 style="margin-bottom:var(--element-gap);">Accounting Entry — COGS Recognition</h3>
+            <table>
+                <tr><th>Account</th><th style="width:25%;">Debit</th><th style="width:25%;">Credit</th></tr>
+                <tr><td><span class="acct">5105</span> Product (COGS)</td><td><strong>$3,700</strong></td><td></td></tr>
+                <tr><td><span class="acct">1210</span> Inventory</td><td></td><td><strong>$3,700</strong></td></tr>
+            </table>
+            <p class="text-muted" style="margin-top:var(--element-gap); font-size:var(--small-size);">200 units × $18.50 avg cost = $3,700</p>
+        </div>
+        <div class="reveal highlight-box">
+            Inventory at Indianapolis decreases by 200 units. COGS increases by $3,700.
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: Step 3 — Invoice -->
+<section class="slide" data-section="walkthrough">
+    <div class="slide-header">
+        <span class="section-label">Section 9 — Final Walkthrough</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">Step 3: Invoice</h2>
+        <div class="reveal flow-diagram" style="margin-bottom:var(--content-gap);">
+            <div class="flow-step" style="opacity:0.4;">Sales Order</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step" style="opacity:0.4;">Fulfillment</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step highlight">Invoice ←</div>
+        </div>
+        <div class="reveal">
+            <h3>What happens:</h3>
+            <p class="text-muted mb-sm">Revenue is recognized. Bass Pro now owes us $7,000.</p>
+        </div>
+        <div class="reveal card accent" style="margin-bottom:var(--content-gap);">
+            <h3 style="margin-bottom:var(--element-gap);">Accounting Entry — Revenue Recognition</h3>
+            <table>
+                <tr><th>Account</th><th style="width:25%;">Debit</th><th style="width:25%;">Credit</th></tr>
+                <tr><td><span class="acct">1110</span> Accounts Receivable</td><td><strong>$7,000</strong></td><td></td></tr>
+                <tr><td><span class="acct">4105</span> Gross Sales</td><td></td><td><strong>$7,000</strong></td></tr>
+            </table>
+            <p class="text-muted" style="margin-top:var(--element-gap); font-size:var(--small-size);">200 units × $35.00 sell price = $7,000</p>
+        </div>
+        <div class="reveal highlight-box">
+            AR increases by $7,000 (Bass Pro owes us). Revenue increases by $7,000 on the Income Statement.
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE: The Full Picture -->
+<section class="slide" data-section="walkthrough">
+    <div class="slide-header">
+        <span class="section-label">Section 9 — Final Walkthrough</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content">
+        <h2 class="reveal">The Complete Picture</h2>
+        <p class="reveal text-muted mb-md">Everything that happened across both financial statements</p>
+        <div class="reveal two-col" style="gap:clamp(1rem,3vw,3rem);">
+            <div class="card" style="border-top:4px solid var(--accent);">
+                <h3>Income Statement Impact</h3>
+                <table>
+                    <tr><td><span class="acct">4105</span> Gross Sales</td><td style="text-align:right;">$7,000</td></tr>
+                    <tr><td><span class="acct">5105</span> COGS</td><td style="text-align:right;">($3,700)</td></tr>
+                    <tr style="border-top:2px solid var(--accent);"><td><strong>Gross Profit</strong></td><td style="text-align:right;"><strong>$3,300</strong></td></tr>
+                </table>
+                <p class="text-muted" style="margin-top:var(--element-gap); font-size:var(--small-size);">Margin: 47.1%</p>
+            </div>
+            <div class="card" style="border-top:4px solid var(--success);">
+                <h3>Balance Sheet Impact</h3>
+                <table>
+                    <tr><td><span class="acct">1110</span> AR</td><td style="text-align:right;">+$7,000</td></tr>
+                    <tr><td><span class="acct">1210</span> Inventory</td><td style="text-align:right;">−$3,700</td></tr>
+                </table>
+                <p class="text-muted" style="margin-top:var(--element-gap); font-size:var(--small-size);">Net assets increased by $3,300 (the profit)</p>
+            </div>
+        </div>
+        <div class="reveal key-point" style="margin-top:var(--content-gap);">
+            Three transactions. Two financial statements updated. All balanced. All automatic.
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SLIDE: CLOSING
+     ============================================================ -->
+<section class="slide dark" data-section="closing" data-section-start>
+    <div class="slide-content" style="justify-content:center; align-items:center; text-align:center;">
+        <div class="reveal" style="font-size:var(--small-size); text-transform:uppercase; letter-spacing:0.15em; opacity:0.5; margin-bottom:var(--content-gap);">Westfield Outdoors</div>
+        <h1 class="reveal" style="color:#fff; margin-bottom:var(--element-gap);">Key Takeaways</h1>
+        <div class="reveal" style="max-width:36em; text-align:left; margin:0 auto;">
+            <ul class="clean" style="gap:var(--content-gap);">
+                <li>Every transaction creates <strong>balanced journal entries</strong> automatically</li>
+                <li><strong>Records</strong> are your reference data; <strong>Transactions</strong> are your actions</li>
+                <li>Inventory is the <strong>bridge</strong> between purchasing and sales</li>
+                <li>Department, Class, Category, Location = your <strong>reporting dimensions</strong></li>
+                <li>Clean data in records = <strong>accurate financials</strong> downstream</li>
+            </ul>
+        </div>
+        <div class="reveal" style="margin-top:clamp(1.5rem,3vw,3rem); opacity:0.5; font-size:var(--small-size);">
+            Questions? Reach out to your manager or the accounting team.
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SLIDE: ACCOUNT REFERENCE
+     ============================================================ -->
+<section class="slide" data-section="closing">
+    <div class="slide-header">
+        <span class="section-label">Quick Reference</span>
+        <span class="logo-text">Westfield Outdoors</span>
+    </div>
+    <div class="slide-content" style="align-items:center;">
+        <h2 class="reveal">Account Number Reference</h2>
+        <div class="reveal card accent" style="max-width:36em; width:100%;">
+            <table>
+                <tr><th>Account #</th><th>Name</th><th>Statement</th></tr>
+                <tr><td><span class="acct">1110</span></td><td>Accounts Receivable</td><td>Balance Sheet</td></tr>
+                <tr><td><span class="acct">1210</span></td><td>Inventory</td><td>Balance Sheet</td></tr>
+                <tr><td><span class="acct">2010</span></td><td>Accounts Payable</td><td>Balance Sheet</td></tr>
+                <tr><td><span class="acct">4105</span></td><td>Gross Sales</td><td>Income Statement</td></tr>
+                <tr><td><span class="acct">5105</span></td><td>Product (COGS)</td><td>Income Statement</td></tr>
+                <tr><td><span class="acct">6820</span></td><td>Inventory Adjustment</td><td>Income Statement</td></tr>
+            </table>
+        </div>
+        <div class="reveal" style="margin-top:var(--content-gap); text-align:center;">
+            <p class="text-muted" style="font-size:var(--small-size);">NetSuite 101 Training &nbsp;·&nbsp; Westfield Outdoors &nbsp;·&nbsp; 2026</p>
+        </div>
+    </div>
+</section>
+
+
+<script>
+/* ===========================================
+   SLIDE PRESENTATION CONTROLLER
+   Handles navigation, animations, progress
+   =========================================== */
+class SlidePresentation {
+    constructor() {
+        this.slides = Array.from(document.querySelectorAll('.slide'));
+        this.currentIndex = 0;
+        this.isScrolling = false;
+        this.scrollTimeout = null;
+
+        this.initNavDots();
+        this.initObserver();
+        this.initKeyboard();
+        this.initTouch();
+        this.initWheel();
+        this.updateProgress();
+
+        // Mark first slide visible
+        this.slides[0].classList.add('visible');
+    }
+
+    /* --- Navigation Dots --- */
+    initNavDots() {
+        const nav = document.getElementById('navDots');
+        this.slides.forEach((slide, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'nav-dot';
+            dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+            if (slide.hasAttribute('data-section-start')) {
+                dot.classList.add('section-start');
+            }
+            dot.addEventListener('click', () => this.goToSlide(i));
+            nav.appendChild(dot);
+        });
+        this.dots = Array.from(nav.querySelectorAll('.nav-dot'));
+        this.updateDots();
+    }
+
+    updateDots() {
+        this.dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === this.currentIndex);
+        });
+    }
+
+    /* --- Intersection Observer for animations --- */
+    initObserver() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    const idx = this.slides.indexOf(entry.target);
+                    if (idx !== -1) {
+                        this.currentIndex = idx;
+                        this.updateDots();
+                        this.updateProgress();
+                        this.updateCounter();
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        this.slides.forEach(slide => observer.observe(slide));
+    }
+
+    /* --- Keyboard Navigation --- */
+    initKeyboard() {
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                this.goToSlide(Math.min(this.currentIndex + 1, this.slides.length - 1));
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                e.preventDefault();
+                this.goToSlide(Math.max(this.currentIndex - 1, 0));
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                this.goToSlide(0);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                this.goToSlide(this.slides.length - 1);
+            }
+        });
+    }
+
+    /* --- Touch/Swipe --- */
+    initTouch() {
+        let startY = 0;
+        document.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            const diff = startY - e.changedTouches[0].clientY;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    this.goToSlide(Math.min(this.currentIndex + 1, this.slides.length - 1));
+                } else {
+                    this.goToSlide(Math.max(this.currentIndex - 1, 0));
+                }
+            }
+        }, { passive: true });
+    }
+
+    /* --- Mouse Wheel --- */
+    initWheel() {
+        document.addEventListener('wheel', (e) => {
+            if (this.isScrolling) return;
+            this.isScrolling = true;
+
+            if (e.deltaY > 0) {
+                this.goToSlide(Math.min(this.currentIndex + 1, this.slides.length - 1));
+            } else if (e.deltaY < 0) {
+                this.goToSlide(Math.max(this.currentIndex - 1, 0));
+            }
+
+            clearTimeout(this.scrollTimeout);
+            this.scrollTimeout = setTimeout(() => {
+                this.isScrolling = false;
+            }, 800);
+        }, { passive: true });
+    }
+
+    /* --- Go to specific slide --- */
+    goToSlide(index) {
+        if (index < 0 || index >= this.slides.length) return;
+        this.currentIndex = index;
+        this.slides[index].scrollIntoView({ behavior: 'smooth' });
+        this.updateDots();
+        this.updateProgress();
+        this.updateCounter();
+    }
+
+    /* --- Progress bar --- */
+    updateProgress() {
+        const progress = ((this.currentIndex + 1) / this.slides.length) * 100;
+        document.getElementById('progressBar').style.width = progress + '%';
+    }
+
+    /* --- Slide counter --- */
+    updateCounter() {
+        document.getElementById('slideCounter').textContent =
+            `${this.currentIndex + 1} / ${this.slides.length}`;
+    }
+}
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', () => {
+    new SlidePresentation();
+});
+</script>
+
+</body>
+</html>
