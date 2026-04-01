@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origami Wagon — Westfield Outdoors Skunk Works</title>
+    <style>
+        /* ===========================================
+           THEME: Westfield Outdoors — Light Industrial
+           Color palette: white/light backgrounds, #1b6b3a green, warm grays
+           Aesthetic: clean, professional, industrial design
+           =========================================== */
+        :root {
+            /* Brand Colors */
+            --green:         #1b6b3a;
+            --green-mid:     #2a8a50;
+            --green-light:   #e8f3ec;
+            --green-dark:    #134d2b;
+            --warm-white:    #fafaf8;
+            --warm-gray-1:   #f4f3f0;
+            --warm-gray-2:   #e8e6e1;
+            --warm-gray-3:   #c8c4bc;
+            --warm-gray-4:   #8a8680;
+            --warm-gray-5:   #5c5853;
+            --ink:           #1e1c1a;
+
+            /* Typography */
+            --font-display:  'Georgia', 'Times New Roman', serif;
+            --font-body:     -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            --font-mono:     'SF Mono', 'Fira Code', 'Courier New', monospace;
+
+            /* Scales — all clamp() for responsive */
+            --title-size:    clamp(2rem, 6vw, 5rem);
+            --h2-size:       clamp(1.4rem, 3.5vw, 2.8rem);
+            --h3-size:       clamp(1rem, 2vw, 1.5rem);
+            --body-size:     clamp(0.8rem, 1.4vw, 1.05rem);
+            --small-size:    clamp(0.65rem, 1vw, 0.8rem);
+            --label-size:    clamp(0.55rem, 0.9vw, 0.7rem);
+
+            /* Spacing */
+            --slide-padding: clamp(1.5rem, 4vw, 5rem);
+            --content-gap:   clamp(0.75rem, 2vw, 2rem);
+            --element-gap:   clamp(0.4rem, 1vw, 1rem);
+
+            /* Animation */
+            --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+            --dur:           0.55s;
+        }
+
+        /* ===========================================
+           RESET & BASE
+           =========================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
+            overflow-x: hidden;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--warm-white);
+            color: var(--ink);
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        /* ===========================================
+           SLIDE SYSTEM — VIEWPORT FITTING (CRITICAL)
+           Every slide = exactly 100vh, no scrolling ever
+           =========================================== */
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .slide-inner {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: var(--slide-padding);
+            max-height: 100%;
+            overflow: hidden;
+        }
+
+        /* ===========================================
+           PROGRESS BAR
+           =========================================== */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--green);
+            z-index: 100;
+            transition: width 0.3s ease;
+        }
+
+        /* ===========================================
+           NAV DOTS
+           =========================================== */
+        #nav-dots {
+            position: fixed;
+            right: clamp(0.75rem, 2vw, 1.5rem);
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--warm-gray-3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            padding: 0;
+        }
+
+        .nav-dot.active {
+            background: var(--green);
+            transform: scale(1.4);
+        }
+
+        .nav-dot:hover {
+            background: var(--green-mid);
+        }
+
+        /* ===========================================
+           SLIDE COUNTER
+           =========================================== */
+        #slide-counter {
+            position: fixed;
+            bottom: clamp(0.75rem, 2vw, 1.5rem);
+            right: clamp(1rem, 3vw, 2rem);
+            font-family: var(--font-mono);
+            font-size: var(--small-size);
+            color: var(--warm-gray-4);
+            z-index: 100;
+        }
+
+        /* ===========================================
+           REVEAL ANIMATIONS
+           Triggered by .visible class (added by IntersectionObserver)
+           =========================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity var(--dur) var(--ease-out),
+                        transform var(--dur) var(--ease-out);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity var(--dur) var(--ease-out),
+                        transform var(--dur) var(--ease-out);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity var(--dur) var(--ease-out),
+                        transform var(--dur) var(--ease-out);
+        }
+
+        .slide.visible .reveal,
+        .slide.visible .reveal-left,
+        .slide.visible .reveal-scale {
+            opacity: 1;
+            transform: none;
+        }
+
+        .slide.visible .reveal:nth-child(1) { transition-delay: 0.05s; }
+        .slide.visible .reveal:nth-child(2) { transition-delay: 0.12s; }
+        .slide.visible .reveal:nth-child(3) { transition-delay: 0.19s; }
+        .slide.visible .reveal:nth-child(4) { transition-delay: 0.26s; }
+        .slide.visible .reveal:nth-child(5) { transition-delay: 0.33s; }
+        .slide.visible .reveal:nth-child(6) { transition-delay: 0.40s; }
+
+        /* ===========================================
+           UTILITY STYLES
+           =========================================== */
+        .tag {
+            display: inline-block;
+            padding: 0.25em 0.75em;
+            border-radius: 2px;
+            font-size: var(--label-size);
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .tag-green {
+            background: var(--green);
+            color: white;
+        }
+
+        .tag-outline {
+            background: transparent;
+            border: 1px solid var(--green);
+            color: var(--green);
+        }
+
+        .tag-gray {
+            background: var(--warm-gray-2);
+            color: var(--warm-gray-5);
+        }
+
+        .divider {
+            width: clamp(2rem, 5vw, 4rem);
+            height: 2px;
+            background: var(--green);
+            margin: var(--element-gap) 0;
+        }
+
+        .divider-full {
+            width: 100%;
+            height: 1px;
+            background: var(--warm-gray-2);
+            margin: var(--element-gap) 0;
+        }
+
+        /* ===========================================
+           SLIDE 1: TITLE
+           =========================================== */
+        .slide-title {
+            background: var(--warm-white);
+        }
+
+        .slide-title .slide-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--content-gap);
+            align-items: center;
+        }
+
+        .title-text-col {
+            display: flex;
+            flex-direction: column;
+            gap: var(--element-gap);
+        }
+
+        .title-main {
+            font-family: var(--font-display);
+            font-size: var(--title-size);
+            font-weight: normal;
+            line-height: 1.05;
+            color: var(--ink);
+            letter-spacing: -0.02em;
+        }
+
+        .title-main span {
+            color: var(--green);
+        }
+
+        .title-sub {
+            font-size: var(--body-size);
+            color: var(--warm-gray-4);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .title-byline {
+            display: flex;
+            align-items: center;
+            gap: 0.6em;
+            margin-top: var(--element-gap);
+        }
+
+        .title-byline-text {
+            font-size: var(--small-size);
+            color: var(--warm-gray-4);
+        }
+
+        /* Title SVG — origami crane icon */
+        .title-svg-col {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .title-svg-col svg {
+            width: min(45vw, 42vh);
+            height: min(45vw, 42vh);
+        }
+
+        /* ===========================================
+           SLIDE 2: THE PROBLEM
+           =========================================== */
+        .slide-problem {
+            background: var(--warm-gray-1);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--content-gap);
+            margin-top: var(--content-gap);
+        }
+
+        .problem-card {
+            background: white;
+            border: 1px solid var(--warm-gray-2);
+            border-radius: 4px;
+            padding: clamp(0.75rem, 2vw, 1.5rem);
+            display: flex;
+            flex-direction: column;
+            gap: var(--element-gap);
+        }
+
+        .problem-card-icon {
+            width: clamp(1.8rem, 3vw, 2.5rem);
+            height: clamp(1.8rem, 3vw, 2.5rem);
+        }
+
+        .problem-card h3 {
+            font-size: var(--h3-size);
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+        }
+
+        .problem-card p {
+            font-size: var(--body-size);
+            color: var(--warm-gray-5);
+            line-height: 1.5;
+        }
+
+        /* ===========================================
+           SLIDE 3: THE INSIGHT
+           =========================================== */
+        .slide-insight {
+            background: var(--green);
+            color: white;
+        }
+
+        .insight-headline {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 4.5vw, 3.8rem);
+            font-weight: normal;
+            line-height: 1.15;
+            color: white;
+            max-width: 22ch;
+        }
+
+        .insight-headline em {
+            font-style: normal;
+            opacity: 0.7;
+        }
+
+        .insight-body {
+            font-size: var(--body-size);
+            color: rgba(255,255,255,0.75);
+            max-width: 55ch;
+            line-height: 1.7;
+            margin-top: var(--content-gap);
+        }
+
+        .insight-stat-row {
+            display: flex;
+            gap: var(--content-gap);
+            margin-top: var(--content-gap);
+        }
+
+        .insight-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3em;
+        }
+
+        .insight-stat-num {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+            color: white;
+            font-weight: normal;
+        }
+
+        .insight-stat-label {
+            font-size: var(--small-size);
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .insight-divider {
+            width: 1px;
+            background: rgba(255,255,255,0.2);
+            align-self: stretch;
+        }
+
+        /* ===========================================
+           SLIDE 4: THE CONCEPT
+           =========================================== */
+        .slide-concept {
+            background: var(--warm-white);
+        }
+
+        .concept-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--content-gap);
+            align-items: center;
+            margin-top: var(--content-gap);
+        }
+
+        .concept-points {
+            display: flex;
+            flex-direction: column;
+            gap: var(--element-gap);
+        }
+
+        .concept-point {
+            display: flex;
+            gap: 0.75em;
+            align-items: flex-start;
+        }
+
+        .concept-point-num {
+            flex-shrink: 0;
+            width: clamp(1.4rem, 2.2vw, 1.8rem);
+            height: clamp(1.4rem, 2.2vw, 1.8rem);
+            background: var(--green-light);
+            color: var(--green-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--small-size);
+            font-weight: 700;
+            font-family: var(--font-mono);
+            margin-top: 0.1em;
+        }
+
+        .concept-point-text strong {
+            display: block;
+            font-size: var(--body-size);
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 0.15em;
+        }
+
+        .concept-point-text span {
+            font-size: var(--small-size);
+            color: var(--warm-gray-5);
+            line-height: 1.5;
+        }
+
+        /* ===========================================
+           SLIDE 5: HOW IT WORKS — Living Hinge
+           =========================================== */
+        .slide-hinge {
+            background: var(--warm-gray-1);
+        }
+
+        .hinge-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: var(--content-gap);
+            align-items: center;
+            margin-top: var(--content-gap);
+        }
+
+        .hinge-points {
+            display: flex;
+            flex-direction: column;
+            gap: var(--element-gap);
+        }
+
+        .hinge-point {
+            display: flex;
+            gap: 0.75em;
+            align-items: flex-start;
+        }
+
+        .hinge-dot {
+            flex-shrink: 0;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            margin-top: 0.45em;
+        }
+
+        .hinge-point p {
+            font-size: var(--body-size);
+            color: var(--warm-gray-5);
+            line-height: 1.55;
+        }
+
+        .hinge-point p strong {
+            color: var(--ink);
+        }
+
+        .hinge-svg-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hinge-svg-wrap svg {
+            width: 100%;
+            max-width: min(38vw, 38vh);
+            max-height: min(38vw, 38vh);
+        }
+
+        /* ===========================================
+           SLIDE 6: THE FOLD — Compact → Deployed
+           =========================================== */
+        .slide-fold {
+            background: var(--warm-white);
+        }
+
+        .fold-layout {
+            display: flex;
+            flex-direction: column;
+            gap: var(--content-gap);
+            margin-top: var(--element-gap);
+        }
+
+        .fold-svg-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(1rem, 3vw, 3rem);
+        }
+
+        .fold-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--element-gap);
+        }
+
+        .fold-stage-label {
+            font-size: var(--small-size);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--warm-gray-4);
+        }
+
+        .fold-stage svg {
+            width: min(22vw, 22vh);
+            height: min(22vw, 22vh);
+        }
+
+        .fold-arrow svg {
+            width: clamp(1.5rem, 3vw, 2.5rem);
+            height: clamp(1.5rem, 3vw, 2.5rem);
+        }
+
+        .fold-stats {
+            display: flex;
+            gap: var(--content-gap);
+            justify-content: center;
+        }
+
+        .fold-stat {
+            text-align: center;
+        }
+
+        .fold-stat-val {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+            color: var(--green);
+            font-weight: normal;
+        }
+
+        .fold-stat-lbl {
+            font-size: var(--small-size);
+            color: var(--warm-gray-4);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* ===========================================
+           SLIDE 7: COMPETITIVE ADVANTAGE
+           =========================================== */
+        .slide-competitive {
+            background: var(--warm-white);
+        }
+
+        .comp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--content-gap);
+            margin-top: var(--content-gap);
+        }
+
+        .comp-col-label {
+            font-size: var(--small-size);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--element-gap);
+        }
+
+        .comp-col-label.them { color: var(--warm-gray-4); }
+        .comp-col-label.us   { color: var(--green); }
+
+        .comp-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--element-gap) * 0.8);
+        }
+
+        .comp-list li {
+            font-size: var(--body-size);
+            color: var(--warm-gray-5);
+            display: flex;
+            gap: 0.6em;
+            align-items: flex-start;
+            line-height: 1.45;
+        }
+
+        .comp-list li .icon {
+            flex-shrink: 0;
+            margin-top: 0.1em;
+            font-size: 0.85em;
+        }
+
+        .comp-list.us-list li { color: var(--ink); }
+
+        .comp-box {
+            background: var(--warm-gray-1);
+            border: 1px solid var(--warm-gray-2);
+            border-radius: 4px;
+            padding: clamp(0.75rem, 2vw, 1.5rem);
+        }
+
+        .comp-box.us-box {
+            background: var(--green-light);
+            border-color: var(--green);
+        }
+
+        /* ===========================================
+           SLIDE 8: SKUNK WORKS RISK
+           =========================================== */
+        .slide-risk {
+            background: var(--warm-gray-1);
+        }
+
+        .risk-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--content-gap);
+            margin-top: var(--content-gap);
+        }
+
+        .risk-card {
+            background: white;
+            border: 1px solid var(--warm-gray-2);
+            border-radius: 4px;
+            padding: clamp(0.75rem, 2vw, 1.5rem);
+            border-top: 3px solid var(--green);
+        }
+
+        .risk-card.high {
+            border-top-color: #c0392b;
+        }
+
+        .risk-card.medium {
+            border-top-color: #e67e22;
+        }
+
+        .risk-card h3 {
+            font-size: var(--h3-size);
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 0.4em;
+        }
+
+        .risk-card p {
+            font-size: var(--body-size);
+            color: var(--warm-gray-5);
+            line-height: 1.55;
+        }
+
+        .risk-badge {
+            display: inline-block;
+            padding: 0.15em 0.6em;
+            border-radius: 2px;
+            font-size: var(--label-size);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-top: 0.5em;
+        }
+
+        .risk-badge.high   { background: #fdf0ef; color: #c0392b; }
+        .risk-badge.medium { background: #fef9ef; color: #d4820a; }
+        .risk-badge.low    { background: var(--green-light); color: var(--green-dark); }
+
+        /* ===========================================
+           SLIDE 9: PAYOFF
+           =========================================== */
+        .slide-payoff {
+            background: var(--green-dark);
+            color: white;
+        }
+
+        .payoff-big {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 4vw, 3.5rem);
+            font-weight: normal;
+            line-height: 1.2;
+            color: white;
+            max-width: 24ch;
+        }
+
+        .payoff-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--content-gap);
+            margin-top: var(--content-gap);
+        }
+
+        .payoff-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4em;
+        }
+
+        .payoff-item-head {
+            font-size: var(--body-size);
+            font-weight: 700;
+            color: rgba(255,255,255,0.95);
+        }
+
+        .payoff-item-body {
+            font-size: var(--small-size);
+            color: rgba(255,255,255,0.6);
+            line-height: 1.55;
+        }
+
+        .payoff-item-top {
+            width: 2px;
+            height: clamp(1rem, 2.5vh, 2rem);
+            background: rgba(255,255,255,0.25);
+            margin-bottom: 0.25em;
+        }
+
+        /* ===========================================
+           SLIDE 10: NEXT STEPS / SPRINT 1
+           =========================================== */
+        .slide-sprint {
+            background: var(--warm-white);
+        }
+
+        .sprint-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: var(--content-gap);
+            align-items: start;
+            margin-top: var(--content-gap);
+        }
+
+        .sprint-intro p {
+            font-size: var(--body-size);
+            color: var(--warm-gray-5);
+            line-height: 1.6;
+        }
+
+        .sprint-tasks {
+            display: flex;
+            flex-direction: column;
+            gap: var(--element-gap);
+        }
+
+        .sprint-task {
+            display: flex;
+            gap: 0.75em;
+            align-items: flex-start;
+            padding: clamp(0.5rem, 1.5vw, 1rem);
+            background: var(--warm-gray-1);
+            border-radius: 4px;
+            border-left: 3px solid var(--green);
+        }
+
+        .sprint-task-person {
+            flex-shrink: 0;
+            padding: 0.2em 0.5em;
+            background: var(--green);
+            color: white;
+            border-radius: 2px;
+            font-size: var(--label-size);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .sprint-task-text {
+            font-size: var(--body-size);
+            color: var(--ink);
+            line-height: 1.45;
+        }
+
+        .sprint-task-text span {
+            display: block;
+            font-size: var(--small-size);
+            color: var(--warm-gray-4);
+            margin-top: 0.15em;
+        }
+
+        /* ===========================================
+           SLIDE 11: END / BRANDING
+           =========================================== */
+        .slide-end {
+            background: var(--warm-white);
+        }
+
+        .slide-end .slide-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--content-gap);
+            align-items: center;
+        }
+
+        .end-text {
+            display: flex;
+            flex-direction: column;
+            gap: var(--element-gap);
+        }
+
+        .end-brand {
+            font-family: var(--font-display);
+            font-size: clamp(1.2rem, 3vw, 2.5rem);
+            color: var(--ink);
+            font-weight: normal;
+            letter-spacing: -0.01em;
+        }
+
+        .end-brand span {
+            color: var(--green);
+        }
+
+        .end-tagline {
+            font-size: var(--body-size);
+            color: var(--warm-gray-4);
+        }
+
+        .end-meta {
+            margin-top: var(--element-gap);
+            font-size: var(--small-size);
+            color: var(--warm-gray-3);
+            font-family: var(--font-mono);
+        }
+
+        .end-svg-col {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .end-svg-col svg {
+            width: min(40vw, 38vh);
+            height: min(40vw, 38vh);
+        }
+
+        /* ===========================================
+           SLIDE HEADER (reusable)
+           =========================================== */
+        .slide-header {
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--element-gap) * 0.6);
+        }
+
+        .slide-header h2 {
+            font-family: var(--font-display);
+            font-size: var(--h2-size);
+            font-weight: normal;
+            color: var(--ink);
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+        }
+
+        .slide-header.light h2 { color: white; }
+
+        .slide-body-text {
+            font-size: var(--body-size);
+            color: var(--warm-gray-5);
+            line-height: 1.65;
+            max-width: 60ch;
+        }
+
+        .slide-body-text.light { color: rgba(255,255,255,0.7); }
+
+        /* ===========================================
+           RESPONSIVE BREAKPOINTS
+           =========================================== */
+        @media (max-height: 700px) {
+            :root {
+                --slide-padding:  clamp(1rem, 3vw, 3rem);
+                --content-gap:    clamp(0.5rem, 1.5vw, 1.25rem);
+                --element-gap:    clamp(0.3rem, 0.75vw, 0.6rem);
+                --h2-size:        clamp(1.2rem, 3vw, 2rem);
+                --title-size:     clamp(1.6rem, 5vw, 3.5rem);
+            }
+        }
+
+        @media (max-height: 600px) {
+            :root {
+                --slide-padding:  clamp(0.75rem, 2.5vw, 2rem);
+                --content-gap:    clamp(0.4rem, 1vw, 0.9rem);
+                --element-gap:    clamp(0.2rem, 0.6vw, 0.5rem);
+                --body-size:      clamp(0.7rem, 1.2vw, 0.9rem);
+                --h2-size:        clamp(1rem, 2.5vw, 1.6rem);
+                --title-size:     clamp(1.3rem, 4vw, 2.8rem);
+            }
+            #nav-dots { display: none; }
+        }
+
+        @media (max-height: 500px) {
+            :root {
+                --slide-padding:  clamp(0.5rem, 2vw, 1.5rem);
+                --content-gap:    clamp(0.3rem, 0.8vw, 0.75rem);
+                --h2-size:        clamp(0.9rem, 2vw, 1.3rem);
+                --title-size:     clamp(1.1rem, 3.5vw, 2rem);
+                --body-size:      clamp(0.65rem, 1vw, 0.8rem);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .problem-grid,
+            .comp-grid,
+            .risk-cards,
+            .payoff-grid,
+            .sprint-layout,
+            .concept-layout,
+            .hinge-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .slide-title .slide-inner,
+            .slide-end .slide-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .title-svg-col, .end-svg-col { display: none; }
+
+            .fold-svg-row { gap: clamp(0.5rem, 2vw, 1.5rem); }
+
+            :root {
+                --title-size: clamp(1.6rem, 9vw, 3rem);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .reveal-left, .reveal-scale {
+                transition: opacity 0.25s ease;
+                transform: none;
+            }
+            html { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Nav Dots (generated by JS) -->
+<nav id="nav-dots" aria-label="Slide navigation"></nav>
+
+<!-- Slide Counter -->
+<div id="slide-counter"></div>
+
+<!-- =====================================================
+     SLIDE 1: TITLE
+     ===================================================== -->
+<section class="slide slide-title" id="slide-1" aria-label="Title Slide">
+    <div class="slide-inner">
+        <div class="title-text-col">
+            <div class="reveal">
+                <span class="tag tag-green">Skunk Works</span>
+            </div>
+            <h1 class="title-main reveal">
+                Origami<br><span>Wagon</span>
+            </h1>
+            <div class="divider reveal"></div>
+            <p class="title-sub reveal">Westfield Outdoors &nbsp;·&nbsp; Product Concept</p>
+            <div class="title-byline reveal">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <rect x="2" y="2" width="5" height="5" fill="#1b6b3a" opacity="0.5"/>
+                    <rect x="9" y="2" width="5" height="5" fill="#1b6b3a" opacity="0.3"/>
+                    <rect x="2" y="9" width="5" height="5" fill="#1b6b3a" opacity="0.3"/>
+                    <rect x="9" y="9" width="5" height="5" fill="#1b6b3a" opacity="0.7"/>
+                </svg>
+                <span class="title-byline-text">Living Hinge Technology &nbsp;·&nbsp; Single-Sheet Construction</span>
+            </div>
+        </div>
+
+        <div class="title-svg-col reveal-scale">
+            <!-- SVG: Origami-inspired flat sheet folding into a box/wagon form -->
+            <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Origami fold diagram">
+                <!-- Background crease pattern -->
+                <rect x="60" y="60" width="280" height="280" fill="#f4f3f0" stroke="#e8e6e1" stroke-width="1"/>
+
+                <!-- Mountain folds (solid green lines) -->
+                <!-- Horizontal mid -->
+                <line x1="60" y1="200" x2="340" y2="200" stroke="#1b6b3a" stroke-width="1.5" stroke-dasharray="0"/>
+                <!-- Vertical mid -->
+                <line x1="200" y1="60" x2="200" y2="340" stroke="#1b6b3a" stroke-width="1.5" stroke-dasharray="0"/>
+
+                <!-- Valley folds (dashed) -->
+                <!-- Diagonals -->
+                <line x1="60" y1="60" x2="340" y2="340" stroke="#1b6b3a" stroke-width="1" stroke-dasharray="6 4" opacity="0.5"/>
+                <line x1="340" y1="60" x2="60" y2="340" stroke="#1b6b3a" stroke-width="1" stroke-dasharray="6 4" opacity="0.5"/>
+
+                <!-- Quarter fold lines -->
+                <line x1="60" y1="130" x2="340" y2="130" stroke="#1b6b3a" stroke-width="0.8" stroke-dasharray="4 5" opacity="0.4"/>
+                <line x1="60" y1="270" x2="340" y2="270" stroke="#1b6b3a" stroke-width="0.8" stroke-dasharray="4 5" opacity="0.4"/>
+                <line x1="130" y1="60" x2="130" y2="340" stroke="#1b6b3a" stroke-width="0.8" stroke-dasharray="4 5" opacity="0.4"/>
+                <line x1="270" y1="60" x2="270" y2="340" stroke="#1b6b3a" stroke-width="0.8" stroke-dasharray="4 5" opacity="0.4"/>
+
+                <!-- Center panels highlighted -->
+                <rect x="130" y="130" width="140" height="140" fill="#1b6b3a" fill-opacity="0.08" stroke="#1b6b3a" stroke-width="1" stroke-opacity="0.3"/>
+
+                <!-- Fold direction arrows -->
+                <!-- Top flap arrow pointing down -->
+                <path d="M200 75 L193 93 L200 88 L207 93 Z" fill="#1b6b3a" opacity="0.6"/>
+                <!-- Bottom flap arrow pointing up -->
+                <path d="M200 325 L193 307 L200 312 L207 307 Z" fill="#1b6b3a" opacity="0.6"/>
+                <!-- Left flap arrow pointing right -->
+                <path d="M75 200 L93 193 L88 200 L93 207 Z" fill="#1b6b3a" opacity="0.6"/>
+                <!-- Right flap arrow pointing left -->
+                <path d="M325 200 L307 193 L312 200 L307 207 Z" fill="#1b6b3a" opacity="0.6"/>
+
+                <!-- Corner cut indicators -->
+                <line x1="60" y1="60" x2="100" y2="60" stroke="#c8c4bc" stroke-width="1.5"/>
+                <line x1="60" y1="60" x2="60" y2="100" stroke="#c8c4bc" stroke-width="1.5"/>
+                <line x1="340" y1="60" x2="300" y2="60" stroke="#c8c4bc" stroke-width="1.5"/>
+                <line x1="340" y1="60" x2="340" y2="100" stroke="#c8c4bc" stroke-width="1.5"/>
+                <line x1="60" y1="340" x2="100" y2="340" stroke="#c8c4bc" stroke-width="1.5"/>
+                <line x1="60" y1="340" x2="60" y2="300" stroke="#c8c4bc" stroke-width="1.5"/>
+                <line x1="340" y1="340" x2="300" y2="340" stroke="#c8c4bc" stroke-width="1.5"/>
+                <line x1="340" y1="340" x2="340" y2="300" stroke="#c8c4bc" stroke-width="1.5"/>
+
+                <!-- Center dot -->
+                <circle cx="200" cy="200" r="3" fill="#1b6b3a" opacity="0.6"/>
+
+                <!-- Mountain/Valley legend -->
+                <line x1="68" y1="358" x2="100" y2="358" stroke="#1b6b3a" stroke-width="1.5"/>
+                <text x="104" y="362" font-family="-apple-system, sans-serif" font-size="9" fill="#8a8680">Mountain fold</text>
+                <line x1="180" y1="358" x2="212" y2="358" stroke="#1b6b3a" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.7"/>
+                <text x="216" y="362" font-family="-apple-system, sans-serif" font-size="9" fill="#8a8680">Valley fold</text>
+            </svg>
+        </div>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 2: THE PROBLEM
+     ===================================================== -->
+<section class="slide slide-problem" id="slide-2" aria-label="The Problem">
+    <div class="slide-inner">
+        <header class="slide-header reveal">
+            <span class="tag tag-gray">01 / Problem</span>
+            <h2>The market is stuck.</h2>
+        </header>
+        <p class="slide-body-text reveal">Current utility wagons are visually identical and fail at both ends of the use cycle — inefficient to store and awkward to deploy.</p>
+
+        <div class="problem-grid">
+            <div class="problem-card reveal">
+                <!-- Icon: grid of identical boxes -->
+                <svg class="problem-card-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                    <rect x="4" y="4" width="14" height="14" fill="#c8c4bc" rx="1"/>
+                    <rect x="22" y="4" width="14" height="14" fill="#c8c4bc" rx="1"/>
+                    <rect x="4" y="22" width="14" height="14" fill="#c8c4bc" rx="1"/>
+                    <rect x="22" y="22" width="14" height="14" fill="#c8c4bc" rx="1"/>
+                </svg>
+                <h3>Visually Homogeneous</h3>
+                <p>Every wagon on the market looks the same — boxy tube frames with fabric inserts. Zero differentiation at shelf level.</p>
+            </div>
+
+            <div class="problem-card reveal">
+                <!-- Icon: oversized storage footprint -->
+                <svg class="problem-card-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                    <rect x="4" y="12" width="32" height="20" fill="#c8c4bc" rx="1" stroke="#8a8680" stroke-width="1"/>
+                    <rect x="10" y="4" width="6" height="8" fill="#8a8680" rx="1"/>
+                    <rect x="24" y="4" width="6" height="8" fill="#8a8680" rx="1"/>
+                    <path d="M8 32 L4 38 M32 32 L36 38" stroke="#8a8680" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <h3>Storage Inefficient</h3>
+                <p>Quad-fold designs reduce only one dimension. Bi-fold is marginally better. Neither achieves a truly compact footprint.</p>
+            </div>
+
+            <div class="problem-card reveal">
+                <!-- Icon: awkward deploy arrows -->
+                <svg class="problem-card-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                    <path d="M8 20 Q8 8 20 8 Q32 8 32 20" stroke="#c8c4bc" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <path d="M8 20 Q8 32 20 32 Q32 32 32 20" stroke="#8a8680" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="3 3"/>
+                    <circle cx="8" cy="20" r="3" fill="#c8c4bc"/>
+                    <circle cx="32" cy="20" r="3" fill="#8a8680"/>
+                    <path d="M18 14 L22 14 M20 12 L20 16" stroke="#8a8680" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <h3>Inelegant Deployment</h3>
+                <p>Two-person setup, excessive steps, and no satisfying single-motion open. The experience doesn't match the price point.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 3: THE INSIGHT
+     ===================================================== -->
+<section class="slide slide-insight" id="slide-3" aria-label="The Insight">
+    <div class="slide-inner">
+        <span class="tag reveal" style="background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.85); margin-bottom: 0.5em;">02 / Insight</span>
+        <h2 class="insight-headline reveal">
+            What if structure<br>
+            <em>and</em> basket were<br>
+            the same thing?
+        </h2>
+        <p class="insight-body reveal">
+            Nature and industrial design have long used the principle of the living hinge —
+            a single continuous surface that bends rather than breaks. Applied to wagon design,
+            this eliminates the distinction between structural frame and containment surface.
+        </p>
+        <div class="insight-stat-row reveal">
+            <div class="insight-stat">
+                <span class="insight-stat-num">1</span>
+                <span class="insight-stat-label">Material surface</span>
+            </div>
+            <div class="insight-divider"></div>
+            <div class="insight-stat">
+                <span class="insight-stat-num">0</span>
+                <span class="insight-stat-label">Frame components</span>
+            </div>
+            <div class="insight-divider"></div>
+            <div class="insight-stat">
+                <span class="insight-stat-num">∞</span>
+                <span class="insight-stat-label">Fold cycles</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 4: THE CONCEPT
+     ===================================================== -->
+<section class="slide slide-concept" id="slide-4" aria-label="The Concept">
+    <div class="slide-inner">
+        <header class="slide-header reveal">
+            <span class="tag tag-green">03 / Concept</span>
+            <h2>One sheet.<br>No frame.</h2>
+        </header>
+
+        <div class="concept-layout">
+            <div class="concept-points">
+                <div class="concept-point reveal">
+                    <div class="concept-point-num">1</div>
+                    <div class="concept-point-text">
+                        <strong>Single Polymer Sheet</strong>
+                        <span>The entire wagon body — walls, base, and structural ribs — is thermoformed or injection-molded from one continuous polymer panel.</span>
+                    </div>
+                </div>
+                <div class="concept-point reveal">
+                    <div class="concept-point-num">2</div>
+                    <div class="concept-point-text">
+                        <strong>Living Hinge Architecture</strong>
+                        <span>Strategically placed perforations and thin zones allow the sheet to articulate at precise fold lines, combining origami geometry with polymer engineering.</span>
+                    </div>
+                </div>
+                <div class="concept-point reveal">
+                    <div class="concept-point-num">3</div>
+                    <div class="concept-point-text">
+                        <strong>Basket = Structure</strong>
+                        <span>The basket walls double as load-bearing structure. When deployed, the folded geometry locks in shape. No separate frame required.</span>
+                    </div>
+                </div>
+                <div class="concept-point reveal">
+                    <div class="concept-point-num">4</div>
+                    <div class="concept-point-text">
+                        <strong>Radical Compaction</strong>
+                        <span>Fully collapsed, the wagon flattens to a fraction of traditional storage footprint — a first in the category.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Concept SVG: polymer sheet with hinge zones annotated -->
+            <div class="reveal-scale">
+                <svg viewBox="0 0 300 340" fill="none" xmlns="http://www.w3.org/2000/svg"
+                     style="width: 100%; max-width: min(30vw, 30vh);" aria-label="Concept diagram: annotated sheet with hinge zones">
+                    <!-- Sheet outline -->
+                    <rect x="30" y="20" width="240" height="300" rx="2" fill="#f4f3f0" stroke="#c8c4bc" stroke-width="1.5"/>
+
+                    <!-- Hinge zones (highlighted strips) -->
+                    <rect x="30" y="100" width="240" height="12" fill="#1b6b3a" fill-opacity="0.18" stroke="#1b6b3a" stroke-width="0.5" stroke-opacity="0.4"/>
+                    <rect x="30" y="210" width="240" height="12" fill="#1b6b3a" fill-opacity="0.18" stroke="#1b6b3a" stroke-width="0.5" stroke-opacity="0.4"/>
+                    <rect x="100" y="20" width="12" height="300" fill="#1b6b3a" fill-opacity="0.12" stroke="#1b6b3a" stroke-width="0.5" stroke-opacity="0.4"/>
+                    <rect x="188" y="20" width="12" height="300" fill="#1b6b3a" fill-opacity="0.12" stroke="#1b6b3a" stroke-width="0.5" stroke-opacity="0.4"/>
+
+                    <!-- Perforation dots along hinge lines -->
+                    <!-- Horizontal top hinge -->
+                    <circle cx="50" cy="106" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="68" cy="106" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="86" cy="106" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="118" cy="106" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="136" cy="106" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="154" cy="106" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="172" cy="106" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="204" cy="106" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="222" cy="106" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="240" cy="106" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="258" cy="106" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+
+                    <!-- Horizontal bottom hinge (same pattern) -->
+                    <circle cx="50" cy="216" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="68" cy="216" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="86" cy="216" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="118" cy="216" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="136" cy="216" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="154" cy="216" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="172" cy="216" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="204" cy="216" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="222" cy="216" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="240" cy="216" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+                    <circle cx="258" cy="216" r="1.5" fill="#1b6b3a" opacity="0.6"/>
+
+                    <!-- Center panel label -->
+                    <rect x="112" y="112" width="76" height="98" fill="#1b6b3a" fill-opacity="0.07" stroke="#1b6b3a" stroke-width="0.5" stroke-dasharray="4 3" stroke-opacity="0.5"/>
+                    <text x="150" y="162" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#1b6b3a" opacity="0.8">BASE</text>
+
+                    <!-- Annotation: hinge zone -->
+                    <line x1="270" y1="106" x2="290" y2="80" stroke="#8a8680" stroke-width="0.8"/>
+                    <text x="292" y="76" font-family="-apple-system, sans-serif" font-size="8.5" fill="#8a8680">Hinge</text>
+                    <text x="292" y="87" font-family="-apple-system, sans-serif" font-size="8.5" fill="#8a8680">zone</text>
+
+                    <!-- Annotation: wall panel -->
+                    <line x1="60" y1="160" x2="22" y2="145" stroke="#8a8680" stroke-width="0.8"/>
+                    <text x="4" y="138" font-family="-apple-system, sans-serif" font-size="8.5" fill="#8a8680">Side</text>
+                    <text x="4" y="149" font-family="-apple-system, sans-serif" font-size="8.5" fill="#8a8680">wall</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 5: HOW IT WORKS — Living Hinge Technology
+     ===================================================== -->
+<section class="slide slide-hinge" id="slide-5" aria-label="How It Works">
+    <div class="slide-inner">
+        <header class="slide-header reveal">
+            <span class="tag tag-green">04 / Technology</span>
+            <h2>The living hinge.</h2>
+        </header>
+
+        <div class="hinge-layout">
+            <div class="hinge-points">
+                <p class="slide-body-text reveal" style="margin-bottom: var(--element-gap);">
+                    A living hinge is a thin, flexible zone within a rigid material — typically formed by reducing cross-section thickness along a crease line.
+                </p>
+                <div class="hinge-point reveal">
+                    <div class="hinge-dot"></div>
+                    <p><strong>PP &amp; HDPE are proven materials</strong> — high-flex polymers used in living hinge applications since the 1950s. Billions of fold cycles tested.</p>
+                </div>
+                <div class="hinge-point reveal">
+                    <div class="hinge-dot"></div>
+                    <p><strong>Perforation pattern controls flex angle</strong> — slot geometry determines the folding direction, radius, and return force.</p>
+                </div>
+                <div class="hinge-point reveal">
+                    <div class="hinge-dot"></div>
+                    <p><strong>Origami geometry adds rigidity</strong> — the same way a corrugated sheet resists bending, a folded polygon locks under load without a frame.</p>
+                </div>
+                <div class="hinge-point reveal">
+                    <div class="hinge-dot"></div>
+                    <p><strong>No fasteners, no loose parts</strong> — the hinge is integral to the material. Nothing to lose, nothing to break.</p>
+                </div>
+            </div>
+
+            <!-- Living hinge cross-section SVG -->
+            <div class="hinge-svg-wrap reveal-scale">
+                <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Living hinge cross-section and fold pattern diagram">
+
+                    <!-- Title label -->
+                    <text x="150" y="16" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#8a8680" text-transform="uppercase" letter-spacing="0.06em">LIVING HINGE — CROSS SECTION</text>
+
+                    <!-- LEFT PANEL (rigid, flat) -->
+                    <rect x="20" y="30" width="100" height="30" rx="1" fill="#e8e6e1" stroke="#c8c4bc" stroke-width="1"/>
+                    <!-- Thickness indicator left -->
+                    <line x1="20" y1="68" x2="120" y2="68" stroke="#c8c4bc" stroke-width="0.8"/>
+                    <text x="70" y="80" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#8a8680">~3mm (rigid)</text>
+
+                    <!-- HINGE ZONE (thin neck) -->
+                    <path d="M120 30 Q140 30 140 42 Q140 60 120 60" fill="#e8e6e1" stroke="#c8c4bc" stroke-width="1"/>
+                    <path d="M140 30 Q160 30 160 42 Q160 60 140 60" fill="#e8e6e1" stroke="#c8c4bc" stroke-width="1"/>
+                    <!-- thin center of hinge -->
+                    <rect x="138" y="43" width="4" height="14" rx="1" fill="#1b6b3a" fill-opacity="0.6"/>
+                    <text x="140" y="80" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#1b6b3a">~0.4mm</text>
+                    <text x="140" y="89" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="7.5" fill="#1b6b3a">(flex zone)</text>
+
+                    <!-- RIGHT PANEL -->
+                    <rect x="160" y="30" width="100" height="30" rx="1" fill="#e8e6e1" stroke="#c8c4bc" stroke-width="1"/>
+                    <line x1="160" y1="68" x2="260" y2="68" stroke="#c8c4bc" stroke-width="0.8"/>
+                    <text x="210" y="80" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#8a8680">~3mm (rigid)</text>
+
+                    <!-- Fold demonstration -->
+                    <!-- Flat state label -->
+                    <text x="140" y="105" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8.5" fill="#5c5853" font-weight="600">FLAT (stored)</text>
+
+                    <!-- Divider -->
+                    <line x1="20" y1="115" x2="280" y2="115" stroke="#e8e6e1" stroke-width="1"/>
+
+                    <!-- Folded state: 90 degrees -->
+                    <!-- Base panel (horizontal) -->
+                    <rect x="105" y="130" width="90" height="22" rx="1" fill="#e8e6e1" stroke="#c8c4bc" stroke-width="1"/>
+                    <!-- Left panel folded up -->
+                    <rect x="83" y="115" width="22" height="70" rx="1" fill="#dbd9d4" stroke="#c8c4bc" stroke-width="1" transform="rotate(0 94 150)"/>
+                    <rect x="83" y="115" width="22" height="70" rx="1" fill="#e8e6e1" stroke="#c8c4bc" stroke-width="1"/>
+                    <!-- Right panel folded up -->
+                    <rect x="195" y="115" width="22" height="70" rx="1" fill="#e8e6e1" stroke="#c8c4bc" stroke-width="1"/>
+                    <!-- Hinge curves shown -->
+                    <path d="M105 152 Q105 130 83 130" fill="none" stroke="#1b6b3a" stroke-width="1.5" opacity="0.7"/>
+                    <path d="M195 152 Q195 130 217 130" fill="none" stroke="#1b6b3a" stroke-width="1.5" opacity="0.7"/>
+                    <!-- Fold angle arcs -->
+                    <path d="M105 140 Q99 136 94 130" fill="none" stroke="#1b6b3a" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
+                    <path d="M195 140 Q201 136 206 130" fill="none" stroke="#1b6b3a" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
+
+                    <!-- 90° labels -->
+                    <text x="94" y="200" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#1b6b3a">90°</text>
+                    <text x="206" y="200" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#1b6b3a">90°</text>
+
+                    <!-- Deployed label -->
+                    <text x="150" y="212" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8.5" fill="#5c5853" font-weight="600">DEPLOYED (use)</text>
+
+                    <!-- Polymer material labels -->
+                    <text x="150" y="244" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#8a8680">Material candidates: PP · HDPE · TPU-core composite</text>
+
+                    <!-- Perforation detail inset -->
+                    <rect x="20" y="252" width="80" height="38" rx="2" fill="#f4f3f0" stroke="#c8c4bc" stroke-width="0.8"/>
+                    <text x="60" y="262" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="7" fill="#8a8680">Perforation pattern</text>
+                    <!-- dots in inset -->
+                    <circle cx="28" cy="277" r="1.5" fill="#1b6b3a" opacity="0.7"/>
+                    <circle cx="36" cy="277" r="1.5" fill="#1b6b3a" opacity="0.7"/>
+                    <circle cx="44" cy="277" r="1.5" fill="#1b6b3a" opacity="0.7"/>
+                    <circle cx="52" cy="277" r="1.5" fill="#1b6b3a" opacity="0.7"/>
+                    <circle cx="60" cy="277" r="1.5" fill="#1b6b3a" opacity="0.7"/>
+                    <circle cx="68" cy="277" r="1.5" fill="#1b6b3a" opacity="0.7"/>
+                    <circle cx="76" cy="277" r="1.5" fill="#1b6b3a" opacity="0.7"/>
+                    <circle cx="84" cy="277" r="1.5" fill="#1b6b3a" opacity="0.7"/>
+                    <circle cx="92" cy="277" r="1.5" fill="#1b6b3a" opacity="0.7"/>
+                    <text x="60" y="292" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="7" fill="#1b6b3a">↑ controls flex radius</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 6: THE FOLD — Compact → Deployed
+     ===================================================== -->
+<section class="slide slide-fold" id="slide-6" aria-label="The Fold">
+    <div class="slide-inner">
+        <header class="slide-header reveal">
+            <span class="tag tag-green">05 / The Fold</span>
+            <h2>Flat to field-ready.</h2>
+        </header>
+        <p class="slide-body-text reveal">A single motion deploys the structure. The origami geometry locks under load — no latches, no clips.</p>
+
+        <div class="fold-layout">
+            <div class="fold-svg-row reveal-scale">
+
+                <!-- Stage 1: FLAT (collapsed) -->
+                <div class="fold-stage">
+                    <span class="fold-stage-label">Stored</span>
+                    <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Flat collapsed wagon">
+                        <!-- Flat stacked sheets -->
+                        <rect x="20" y="62" width="120" height="8" rx="1" fill="#c8c4bc" stroke="#8a8680" stroke-width="0.8"/>
+                        <rect x="20" y="72" width="120" height="8" rx="1" fill="#d4d1cb" stroke="#8a8680" stroke-width="0.8"/>
+                        <rect x="20" y="82" width="120" height="8" rx="1" fill="#e8e6e1" stroke="#c8c4bc" stroke-width="0.8"/>
+                        <rect x="20" y="92" width="120" height="8" rx="1" fill="#f0eeea" stroke="#c8c4bc" stroke-width="0.8"/>
+
+                        <!-- Fold lines on top sheet -->
+                        <line x1="55" y1="62" x2="55" y2="100" stroke="#1b6b3a" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
+                        <line x1="105" y1="62" x2="105" y2="100" stroke="#1b6b3a" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
+
+                        <!-- Wheels -->
+                        <circle cx="45" cy="118" r="10" fill="none" stroke="#8a8680" stroke-width="2"/>
+                        <circle cx="45" cy="118" r="3" fill="#8a8680"/>
+                        <circle cx="115" cy="118" r="10" fill="none" stroke="#8a8680" stroke-width="2"/>
+                        <circle cx="115" cy="118" r="3" fill="#8a8680"/>
+
+                        <!-- Axle -->
+                        <line x1="45" y1="100" x2="45" y2="108" stroke="#8a8680" stroke-width="1.5"/>
+                        <line x1="115" y1="100" x2="115" y2="108" stroke="#8a8680" stroke-width="1.5"/>
+
+                        <!-- Size indicator -->
+                        <line x1="20" y1="138" x2="140" y2="138" stroke="#c8c4bc" stroke-width="0.8"/>
+                        <line x1="20" y1="135" x2="20" y2="141" stroke="#c8c4bc" stroke-width="0.8"/>
+                        <line x1="140" y1="135" x2="140" y2="141" stroke="#c8c4bc" stroke-width="0.8"/>
+                        <text x="80" y="150" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#8a8680">~4" thick</text>
+                    </svg>
+                </div>
+
+                <!-- Arrow -->
+                <div class="fold-arrow">
+                    <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                        <path d="M8 20 L28 20 M20 12 L28 20 L20 28" stroke="#1b6b3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+
+                <!-- Stage 2: PARTIALLY OPEN (mid-fold) -->
+                <div class="fold-stage">
+                    <span class="fold-stage-label">Unfolding</span>
+                    <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Wagon mid-fold">
+                        <!-- Base (bottom) -->
+                        <rect x="30" y="95" width="100" height="8" rx="1" fill="#e8e6e1" stroke="#c8c4bc" stroke-width="1"/>
+
+                        <!-- Left side panel — angled partway up -->
+                        <path d="M30 95 L30 95 L10 65 L10 57 L30 87 Z" fill="#dbd9d4" stroke="#c8c4bc" stroke-width="0.8"/>
+
+                        <!-- Right side panel — angled partway up -->
+                        <path d="M130 95 L130 95 L150 65 L150 57 L130 87 Z" fill="#dbd9d4" stroke="#c8c4bc" stroke-width="0.8"/>
+
+                        <!-- Front/back — wider angle -->
+                        <path d="M50 95 L50 95 L40 60 L60 52 L65 90 Z" fill="#e8e6e1" stroke="#c8c4bc" stroke-width="0.8" opacity="0.7"/>
+                        <path d="M110 95 L110 95 L120 60 L100 52 L95 90 Z" fill="#e8e6e1" stroke="#c8c4bc" stroke-width="0.8" opacity="0.7"/>
+
+                        <!-- Hinge fold lines -->
+                        <line x1="30" y1="95" x2="10" y2="65" stroke="#1b6b3a" stroke-width="1" stroke-dasharray="3 2" opacity="0.6"/>
+                        <line x1="130" y1="95" x2="150" y2="65" stroke="#1b6b3a" stroke-width="1" stroke-dasharray="3 2" opacity="0.6"/>
+
+                        <!-- Wheels -->
+                        <circle cx="45" cy="118" r="9" fill="none" stroke="#8a8680" stroke-width="1.8"/>
+                        <circle cx="45" cy="118" r="2.5" fill="#8a8680"/>
+                        <circle cx="115" cy="118" r="9" fill="none" stroke="#8a8680" stroke-width="1.8"/>
+                        <circle cx="115" cy="118" r="2.5" fill="#8a8680"/>
+                        <line x1="45" y1="103" x2="45" y2="109" stroke="#8a8680" stroke-width="1.5"/>
+                        <line x1="115" y1="103" x2="115" y2="109" stroke="#8a8680" stroke-width="1.5"/>
+                    </svg>
+                </div>
+
+                <!-- Arrow -->
+                <div class="fold-arrow">
+                    <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                        <path d="M8 20 L28 20 M20 12 L28 20 L20 28" stroke="#1b6b3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+
+                <!-- Stage 3: DEPLOYED (open) -->
+                <div class="fold-stage">
+                    <span class="fold-stage-label" style="color: var(--green); font-weight: 700;">Deployed</span>
+                    <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Wagon fully deployed">
+                        <!-- Base -->
+                        <rect x="25" y="90" width="110" height="10" rx="1" fill="#e8e6e1" stroke="#c8c4bc" stroke-width="1"/>
+
+                        <!-- Left wall — fully vertical -->
+                        <rect x="18" y="42" width="10" height="50" rx="1" fill="#dbd9d4" stroke="#c8c4bc" stroke-width="1"/>
+                        <!-- Right wall -->
+                        <rect x="132" y="42" width="10" height="50" rx="1" fill="#dbd9d4" stroke="#c8c4bc" stroke-width="1"/>
+                        <!-- Front wall -->
+                        <rect x="28" y="42" width="104" height="10" rx="1" fill="#e8e6e1" stroke="#c8c4bc" stroke-width="1"/>
+                        <!-- Back wall (lighter, indicating depth) -->
+                        <rect x="28" y="82" width="104" height="8" rx="1" fill="#eae8e3" stroke="#c8c4bc" stroke-width="0.8" opacity="0.8"/>
+
+                        <!-- Hinge lines (horizontal, showing living hinge) -->
+                        <line x1="18" y1="90" x2="28" y2="90" stroke="#1b6b3a" stroke-width="1.5" opacity="0.8"/>
+                        <line x1="132" y1="90" x2="142" y2="90" stroke="#1b6b3a" stroke-width="1.5" opacity="0.8"/>
+                        <line x1="28" y1="52" x2="132" y2="52" stroke="#1b6b3a" stroke-width="1.5" opacity="0.8"/>
+
+                        <!-- Interior grid/texture hint -->
+                        <line x1="28" y1="67" x2="132" y2="67" stroke="#c8c4bc" stroke-width="0.6" stroke-dasharray="4 6" opacity="0.5"/>
+                        <line x1="80" y1="52" x2="80" y2="90" stroke="#c8c4bc" stroke-width="0.6" stroke-dasharray="4 6" opacity="0.5"/>
+
+                        <!-- Handle -->
+                        <path d="M80 42 Q80 28 80 22" stroke="#8a8680" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M60 22 L80 22 L100 22" stroke="#8a8680" stroke-width="2" stroke-linecap="round"/>
+
+                        <!-- Wheels -->
+                        <circle cx="45" cy="118" r="10" fill="none" stroke="#1b6b3a" stroke-width="2"/>
+                        <circle cx="45" cy="118" r="3" fill="#1b6b3a"/>
+                        <circle cx="115" cy="118" r="10" fill="none" stroke="#1b6b3a" stroke-width="2"/>
+                        <circle cx="115" cy="118" r="3" fill="#1b6b3a"/>
+                        <line x1="45" y1="100" x2="45" y2="108" stroke="#1b6b3a" stroke-width="1.5"/>
+                        <line x1="115" y1="100" x2="115" y2="108" stroke="#1b6b3a" stroke-width="1.5"/>
+
+                        <!-- Size indicator -->
+                        <line x1="18" y1="138" x2="142" y2="138" stroke="#1b6b3a" stroke-width="0.8" opacity="0.5"/>
+                        <line x1="18" y1="135" x2="18" y2="141" stroke="#1b6b3a" stroke-width="0.8" opacity="0.5"/>
+                        <line x1="142" y1="135" x2="142" y2="141" stroke="#1b6b3a" stroke-width="0.8" opacity="0.5"/>
+                        <text x="80" y="150" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#1b6b3a">Full width</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="fold-stats reveal">
+                <div class="fold-stat">
+                    <div class="fold-stat-val">~4"</div>
+                    <div class="fold-stat-lbl">Stored height</div>
+                </div>
+                <div class="fold-stat" style="padding: 0 var(--content-gap); border-left: 1px solid var(--warm-gray-2); border-right: 1px solid var(--warm-gray-2);">
+                    <div class="fold-stat-val">1</div>
+                    <div class="fold-stat-lbl">Deploy motion</div>
+                </div>
+                <div class="fold-stat">
+                    <div class="fold-stat-val">0</div>
+                    <div class="fold-stat-lbl">Loose parts</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 7: COMPETITIVE ADVANTAGE
+     ===================================================== -->
+<section class="slide slide-competitive" id="slide-7" aria-label="Competitive Advantage">
+    <div class="slide-inner">
+        <header class="slide-header reveal">
+            <span class="tag tag-green">06 / Advantage</span>
+            <h2>A category of one.</h2>
+        </header>
+        <p class="slide-body-text reveal">No competitor has combined living hinge technology with origami geometry at this scale. First-mover position is achievable.</p>
+
+        <div class="comp-grid">
+            <div class="comp-box reveal">
+                <p class="comp-col-label them">Current market</p>
+                <ul class="comp-list">
+                    <li><span class="icon">—</span>Tube frame + fabric construction (universal)</li>
+                    <li><span class="icon">—</span>Quad-fold reduces length only</li>
+                    <li><span class="icon">—</span>Multiple SKUs required for storage vs. use</li>
+                    <li><span class="icon">—</span>Visual differentiation at color/print level only</li>
+                    <li><span class="icon">—</span>Assembly required or complex fold sequence</li>
+                </ul>
+            </div>
+
+            <div class="comp-box us-box reveal">
+                <p class="comp-col-label us">Origami Wagon</p>
+                <ul class="comp-list us-list">
+                    <li><span class="icon" style="color: var(--green);">+</span>Single polymer body — no separate frame</li>
+                    <li><span class="icon" style="color: var(--green);">+</span>Flat-pack storage — fraction of traditional footprint</li>
+                    <li><span class="icon" style="color: var(--green);">+</span>One-motion deployment — pull up to open</li>
+                    <li><span class="icon" style="color: var(--green);">+</span>Distinctive visual language — instantly recognizable</li>
+                    <li><span class="icon" style="color: var(--green);">+</span>Patentable construction — defensible IP position</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 8: SKUNK WORKS RISK
+     ===================================================== -->
+<section class="slide slide-risk" id="slide-8" aria-label="Skunk Works Risk">
+    <div class="slide-inner">
+        <header class="slide-header reveal">
+            <span class="tag" style="background: #fdf0ef; color: #c0392b; font-size: var(--label-size); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25em 0.75em; border-radius: 2px;">Skunk Works Risk</span>
+            <h2>Known unknowns.</h2>
+        </header>
+        <p class="slide-body-text reveal">These are the open engineering questions Sprint 1 is designed to answer.</p>
+
+        <div class="risk-cards">
+            <div class="risk-card high reveal">
+                <h3>Full-Scale Mechanism</h3>
+                <p>The fold pattern proven at small scale may not translate to a full-size 20"×36" wagon. Geometric forces multiply — wall stiffness, hinge torque, and corner lock-up all change with scale.</p>
+                <span class="risk-badge high">High Risk</span>
+            </div>
+
+            <div class="risk-card medium reveal">
+                <h3>Long-Term Hinge Durability</h3>
+                <p>Living hinges in PP are excellent for bottle caps and lids (&lt;100 cycles). Wagon use implies hundreds to thousands of fold cycles over years — fatigue behavior at this cycle count requires validation.</p>
+                <span class="risk-badge medium">Medium Risk</span>
+            </div>
+
+            <div class="risk-card medium reveal">
+                <h3>Load-Bearing Geometry</h3>
+                <p>The origami structure must support 100+ lbs static load while maintaining panel rigidity. Initial FEA is needed before physical prototyping to de-risk geometry choices.</p>
+                <span class="risk-badge medium">Medium Risk</span>
+            </div>
+
+            <div class="risk-card reveal" style="border-top-color: var(--green);">
+                <h3>Perforation SRP</h3>
+                <p>The slot-and-relief perforation pattern that enables flexure must be manufacturable within standard tooling SRP. Tolerance control on thin hinge zones is a key process variable.</p>
+                <span class="risk-badge low">Low Risk</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 9: PAYOFF
+     ===================================================== -->
+<section class="slide slide-payoff" id="slide-9" aria-label="The Payoff">
+    <div class="slide-inner">
+        <span class="tag reveal" style="background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.8); margin-bottom: 0.5em; font-size: var(--label-size); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25em 0.75em; border-radius: 2px; display: inline-block;">08 / Payoff</span>
+        <h2 class="payoff-big reveal">
+            First wagon brand<br>
+            to own the category<br>
+            of one.
+        </h2>
+
+        <div class="divider reveal" style="background: rgba(255,255,255,0.25); margin: var(--content-gap) 0;"></div>
+
+        <div class="payoff-grid">
+            <div class="payoff-item reveal">
+                <div class="payoff-item-top"></div>
+                <div class="payoff-item-head">New Category</div>
+                <div class="payoff-item-body">No immediate competitor. Establishes Westfield as the innovation brand in utility wagons.</div>
+            </div>
+            <div class="payoff-item reveal">
+                <div class="payoff-item-top"></div>
+                <div class="payoff-item-head">Premium Positioning</div>
+                <div class="payoff-item-body">Flat-pack + single-motion deploy commands a significant price premium over traditional wagons.</div>
+            </div>
+            <div class="payoff-item reveal">
+                <div class="payoff-item-top"></div>
+                <div class="payoff-item-head">Defensible IP</div>
+                <div class="payoff-item-body">Unique construction method is patentable. Living hinge application to wagons has no prior art.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 10: NEXT STEPS / SPRINT 1
+     ===================================================== -->
+<section class="slide slide-sprint" id="slide-10" aria-label="Sprint 1 — Next Steps">
+    <div class="slide-inner">
+        <header class="slide-header reveal">
+            <span class="tag tag-green">Sprint 1 · Active</span>
+            <h2>Current focus.</h2>
+        </header>
+
+        <div class="sprint-layout">
+            <div class="sprint-intro reveal">
+                <p>Sprint 1 is a physical validation sprint. The goal is to answer the two highest-risk questions before committing to full-scale tooling.</p>
+                <br>
+                <p><strong>Exit criteria:</strong> A fold pattern that holds geometry under 50 lbs static load, with a hinge perforation pattern manufacturable at target SRP.</p>
+            </div>
+
+            <div class="sprint-tasks">
+                <div class="sprint-task reveal">
+                    <span class="sprint-task-person">Ben</span>
+                    <div>
+                        <div class="sprint-task-text">Physical test folds at scale
+                            <span>Cardboard, then PP sheet — testing fold geometry from 1/4 scale up to full. Validating wall rigidity and corner lock-up.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sprint-task reveal">
+                    <span class="sprint-task-person">Ben</span>
+                    <div>
+                        <div class="sprint-task-text">SRP testing with perforations
+                            <span>Testing slot geometries on PP sheet samples. Identifying the perforation pattern that balances flex radius, fatigue resistance, and tooling feasibility.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sprint-task reveal" style="border-left-color: var(--warm-gray-3);">
+                    <span class="sprint-task-person" style="background: var(--warm-gray-3);">TBD</span>
+                    <div>
+                        <div class="sprint-task-text">Material procurement
+                            <span>Source PP and HDPE sheet samples in 2–4mm thickness range for physical fold testing.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sprint-task reveal" style="border-left-color: var(--warm-gray-3);">
+                    <span class="sprint-task-person" style="background: var(--warm-gray-3);">TBD</span>
+                    <div>
+                        <div class="sprint-task-text">FEA geometry study
+                            <span>Basic finite element analysis on 2–3 candidate fold geometries. Validating load distribution before physical prototyping.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 11: END
+     ===================================================== -->
+<section class="slide slide-end" id="slide-11" aria-label="Westfield Outdoors">
+    <div class="slide-inner">
+        <div class="end-text">
+            <div class="reveal">
+                <svg width="clamp(40px, 5vw, 60px)" height="clamp(40px, 5vw, 60px)" viewBox="0 0 60 60" fill="none" aria-label="Westfield Outdoors mark" style="margin-bottom: var(--element-gap);">
+                    <!-- W mark abstraction -->
+                    <rect width="60" height="60" rx="2" fill="#1b6b3a"/>
+                    <path d="M10 18 L18 42 L24 28 L30 42 L36 28 L42 42 L50 18" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+            </div>
+            <h2 class="end-brand reveal">Westfield<br><span>Outdoors</span></h2>
+            <div class="divider reveal"></div>
+            <p class="end-tagline reveal">Skunk Works Program &nbsp;·&nbsp; Origami Wagon</p>
+            <p class="end-meta reveal">Confidential · Internal Use Only</p>
+        </div>
+
+        <div class="end-svg-col reveal-scale">
+            <!-- Final origami SVG: deployed box form in 3D perspective, suggesting the finished wagon -->
+            <svg viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Deployed origami wagon concept illustration">
+                <!-- 3D box in origami wireframe style -->
+                <!-- Top face -->
+                <path d="M190 60 L320 120 L320 240 L190 180 Z" fill="#e8f3ec" stroke="#1b6b3a" stroke-width="1.2"/>
+                <!-- Front face -->
+                <path d="M60 120 L190 60 L190 180 L60 240 Z" fill="#f4f3f0" stroke="#1b6b3a" stroke-width="1.2"/>
+                <!-- Bottom/right face -->
+                <path d="M60 240 L190 180 L320 240 L190 300 Z" fill="#dbd9d4" stroke="#1b6b3a" stroke-width="1.2"/>
+
+                <!-- Mountain fold lines on top face -->
+                <line x1="190" y1="60" x2="255" y2="90" stroke="#1b6b3a" stroke-width="0.8" stroke-dasharray="5 4" opacity="0.5"/>
+                <line x1="255" y1="90" x2="320" y2="120" stroke="#1b6b3a" stroke-width="0.8" stroke-dasharray="5 4" opacity="0.5"/>
+
+                <!-- Valley fold lines on front face -->
+                <line x1="60" y1="120" x2="125" y2="90" stroke="#1b6b3a" stroke-width="0.8" stroke-dasharray="3 4" opacity="0.4"/>
+                <line x1="125" y1="90" x2="190" y2="60" stroke="#1b6b3a" stroke-width="0.8" stroke-dasharray="3 4" opacity="0.4"/>
+
+                <!-- Interior crease marks -->
+                <line x1="190" y1="180" x2="255" y2="210" stroke="#1b6b3a" stroke-width="0.7" stroke-dasharray="4 5" opacity="0.35"/>
+                <line x1="190" y1="180" x2="125" y2="210" stroke="#1b6b3a" stroke-width="0.7" stroke-dasharray="4 5" opacity="0.35"/>
+
+                <!-- Hinge edge highlights -->
+                <line x1="190" y1="60" x2="190" y2="180" stroke="#1b6b3a" stroke-width="2" opacity="0.7"/>
+                <line x1="60" y1="240" x2="190" y2="300" stroke="#1b6b3a" stroke-width="1.5" opacity="0.6"/>
+                <line x1="190" y1="300" x2="320" y2="240" stroke="#1b6b3a" stroke-width="1.5" opacity="0.6"/>
+
+                <!-- Wheels on the box -->
+                <circle cx="90" cy="268" r="18" fill="white" stroke="#1b6b3a" stroke-width="2"/>
+                <circle cx="90" cy="268" r="6" fill="#1b6b3a" opacity="0.5"/>
+                <circle cx="290" cy="268" r="18" fill="white" stroke="#1b6b3a" stroke-width="2"/>
+                <circle cx="290" cy="268" r="6" fill="#1b6b3a" opacity="0.5"/>
+
+                <!-- Handle -->
+                <path d="M190 60 Q190 30 190 20" stroke="#1b6b3a" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+                <line x1="155" y1="20" x2="225" y2="20" stroke="#1b6b3a" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+
+                <!-- Origami star / origin point glyph -->
+                <circle cx="190" cy="60" r="4" fill="#1b6b3a" opacity="0.4"/>
+
+                <!-- Watermark label -->
+                <text x="190" y="345" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#8a8680" letter-spacing="0.12em">CONCEPT · NOT FOR DISTRIBUTION</text>
+            </svg>
+        </div>
+    </div>
+</section>
+
+<script>
+    /* ===========================================
+       ORIGAMI WAGON PRESENTATION CONTROLLER
+       Navigation: arrow keys, scroll, swipe, dots
+       =========================================== */
+    class OrigamiPresentation {
+        constructor() {
+            this.slides = Array.from(document.querySelectorAll('.slide'));
+            this.totalSlides = this.slides.length;
+            this.currentIndex = 0;
+            this.isScrolling = false;
+            this.scrollCooldown = 800;
+
+            this.progressBar = document.getElementById('progress-bar');
+            this.navDotsContainer = document.getElementById('nav-dots');
+            this.slideCounter = document.getElementById('slide-counter');
+
+            this.buildNavDots();
+            this.bindKeyboard();
+            this.bindScroll();
+            this.bindTouch();
+            this.initObserver();
+            this.updateUI();
+        }
+
+        /* Build navigation dots */
+        buildNavDots() {
+            this.slides.forEach((slide, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'nav-dot';
+                dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+                dot.addEventListener('click', () => this.goTo(i));
+                this.navDotsContainer.appendChild(dot);
+            });
+            this.dots = Array.from(this.navDotsContainer.querySelectorAll('.nav-dot'));
+        }
+
+        /* Keyboard navigation */
+        bindKeyboard() {
+            document.addEventListener('keydown', (e) => {
+                switch (e.key) {
+                    case 'ArrowDown':
+                    case 'ArrowRight':
+                    case ' ':
+                        e.preventDefault();
+                        this.next();
+                        break;
+                    case 'ArrowUp':
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        this.prev();
+                        break;
+                    case 'Home':
+                        e.preventDefault();
+                        this.goTo(0);
+                        break;
+                    case 'End':
+                        e.preventDefault();
+                        this.goTo(this.totalSlides - 1);
+                        break;
+                }
+            });
+        }
+
+        /* Mouse wheel scroll navigation */
+        bindScroll() {
+            let wheelAccumulator = 0;
+            const threshold = 60;
+
+            document.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                if (this.isScrolling) return;
+
+                wheelAccumulator += e.deltaY;
+
+                if (Math.abs(wheelAccumulator) >= threshold) {
+                    if (wheelAccumulator > 0) this.next();
+                    else this.prev();
+                    wheelAccumulator = 0;
+                }
+
+                // Reset accumulator after pause
+                clearTimeout(this._wheelReset);
+                this._wheelReset = setTimeout(() => { wheelAccumulator = 0; }, 150);
+            }, { passive: false });
+        }
+
+        /* Touch/swipe support */
+        bindTouch() {
+            let touchStartY = 0;
+            let touchStartX = 0;
+
+            document.addEventListener('touchstart', (e) => {
+                touchStartY = e.touches[0].clientY;
+                touchStartX = e.touches[0].clientX;
+            }, { passive: true });
+
+            document.addEventListener('touchend', (e) => {
+                const dy = touchStartY - e.changedTouches[0].clientY;
+                const dx = touchStartX - e.changedTouches[0].clientX;
+
+                // Only respond to primarily vertical swipes
+                if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 40) {
+                    if (dy > 0) this.next();
+                    else this.prev();
+                }
+            }, { passive: true });
+        }
+
+        /* IntersectionObserver for reveal animations */
+        initObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Update current index based on what's in view
+                        const idx = this.slides.indexOf(entry.target);
+                        if (idx !== -1) {
+                            this.currentIndex = idx;
+                            this.updateUI();
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.5,
+                rootMargin: '0px'
+            });
+
+            this.slides.forEach(slide => observer.observe(slide));
+        }
+
+        /* Navigate to a specific slide */
+        goTo(index) {
+            if (index < 0 || index >= this.totalSlides) return;
+            this.isScrolling = true;
+            this.currentIndex = index;
+            this.slides[index].scrollIntoView({ behavior: 'smooth' });
+            this.updateUI();
+            setTimeout(() => { this.isScrolling = false; }, this.scrollCooldown);
+        }
+
+        next() { this.goTo(this.currentIndex + 1); }
+        prev() { this.goTo(this.currentIndex - 1); }
+
+        /* Update progress bar, dots, and counter */
+        updateUI() {
+            // Progress bar
+            const progress = ((this.currentIndex + 1) / this.totalSlides) * 100;
+            if (this.progressBar) this.progressBar.style.width = `${progress}%`;
+
+            // Nav dots
+            this.dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === this.currentIndex);
+            });
+
+            // Counter
+            if (this.slideCounter) {
+                this.slideCounter.textContent = `${this.currentIndex + 1} / ${this.totalSlides}`;
+            }
+        }
+    }
+
+    // Initialize when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+        new OrigamiPresentation();
+    });
+</script>
+</body>
+</html>
