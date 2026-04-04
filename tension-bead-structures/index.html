@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tension Bead Structures | Westfield Outdoors</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1a2b4a;
+  --green: #1b6b3a;
+  --green-soft: #eaf4ee;
+  --sand: #f6f4ef;
+  --ink: #243247;
+  --muted: #647287;
+  --line: #dbe3ea;
+  --white: #ffffff;
+  --shadow: 0 18px 60px rgba(26,43,74,0.10);
+  --title-size: clamp(1.7rem, 4.8vw, 4rem);
+  --h2-size: clamp(1.2rem, 3vw, 2.3rem);
+  --h3-size: clamp(0.95rem, 1.8vw, 1.35rem);
+  --body-size: clamp(0.78rem, 1.2vw, 1.02rem);
+  --small-size: clamp(0.64rem, 0.95vw, 0.86rem);
+  --slide-padding: clamp(1rem, 4vw, 4rem);
+  --content-gap: clamp(0.7rem, 1.8vw, 1.6rem);
+  --radius: 22px;
+  --ease: cubic-bezier(0.16,1,0.3,1);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow-x: hidden; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--sand); color: var(--ink); }
+.slide {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: linear-gradient(180deg, #fbfaf7 0%, #f4f1eb 100%);
+}
+.slide-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: 100%;
+  overflow: hidden;
+  padding: var(--slide-padding);
+  gap: var(--content-gap);
+}
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+.slide.visible .reveal { opacity: 1; transform: translateY(0); }
+.reveal:nth-child(1) { transition-delay: 0.08s; }
+.reveal:nth-child(2) { transition-delay: 0.16s; }
+.reveal:nth-child(3) { transition-delay: 0.24s; }
+.reveal:nth-child(4) { transition-delay: 0.32s; }
+.reveal:nth-child(5) { transition-delay: 0.40s; }
+.topbar {
+  position: absolute;
+  inset: 0 0 auto 0;
+  padding: clamp(0.8rem,2vw,1.15rem) var(--slide-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--navy);
+  font-size: var(--small-size);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.brand-mark {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green), #4c9a69);
+  box-shadow: 0 0 0 6px rgba(27,107,58,0.10);
+}
+.slide-num { font-size: var(--small-size); color: rgba(26,43,74,0.45); font-weight: 700; letter-spacing: 0.08em; }
+.hero { display: grid; grid-template-columns: 1.2fr 0.95fr; gap: clamp(1rem, 2vw, 2rem); align-items: center; min-height: 0; }
+.kicker {
+  display: inline-flex; align-items: center; gap: 0.5rem; width: fit-content; border-radius: 999px;
+  padding: 0.45rem 0.85rem; background: rgba(27,107,58,0.10); color: var(--green);
+  font-size: var(--small-size); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+}
+h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
+h1 { font-size: var(--title-size); line-height: 0.95; letter-spacing: -0.04em; color: var(--navy); }
+h2 { font-size: var(--h2-size); line-height: 1.03; color: var(--navy); }
+h3 { font-size: var(--h3-size); line-height: 1.15; color: var(--navy); }
+p { font-size: var(--body-size); line-height: 1.55; color: var(--ink); }
+.lede { max-width: 56ch; color: var(--muted); font-size: clamp(0.9rem, 1.5vw, 1.12rem); }
+.hero-card {
+  position: relative; min-height: min(58vh, 520px); border-radius: 30px;
+  background: radial-gradient(circle at 18% 16%, rgba(27,107,58,0.20), transparent 30%), linear-gradient(160deg, #203659 0%, #15253f 58%, #0d172a 100%);
+  box-shadow: var(--shadow); overflow: hidden; padding: clamp(1rem, 2vw, 1.4rem); display: flex; align-items: stretch;
+}
+.mesh { position: absolute; inset: auto -6% -16% auto; width: 84%; height: 78%; border-radius: 50%; border: 1px solid rgba(255,255,255,0.10); transform: rotate(-14deg); }
+.mesh::before, .mesh::after { content: ''; position: absolute; inset: 8%; border-radius: 50%; border: 1px dashed rgba(255,255,255,0.12); }
+.mesh::after { inset: 21%; }
+.bead-path { position: absolute; inset: 10% 8% 10% 8%; }
+.bead {
+  position: absolute; width: clamp(12px, 1.2vw, 18px); height: clamp(12px, 1.2vw, 18px); border-radius: 50%;
+  background: linear-gradient(135deg, #ffffff 0%, #d8e4f0 100%); box-shadow: 0 0 0 4px rgba(255,255,255,0.10), 0 8px 18px rgba(0,0,0,0.18);
+}
+.bead:nth-child(1){left:8%;top:62%;}.bead:nth-child(2){left:15%;top:49%;}.bead:nth-child(3){left:23%;top:38%;}.bead:nth-child(4){left:32%;top:28%;}
+.bead:nth-child(5){left:42%;top:20%;}.bead:nth-child(6){left:52%;top:15%;}.bead:nth-child(7){left:63%;top:17%;}.bead:nth-child(8){left:73%;top:26%;}
+.bead:nth-child(9){left:81%;top:39%;}.bead:nth-child(10){left:85%;top:54%;}.bead:nth-child(11){left:82%;top:69%;}.bead:nth-child(12){left:73%;top:80%;}
+.bead:nth-child(13){left:61%;top:86%;}.bead:nth-child(14){left:47%;top:87%;}.bead:nth-child(15){left:34%;top:82%;}.bead:nth-child(16){left:22%;top:74%;}
+.panel-note {
+  position: relative; margin-top: auto; align-self: flex-start; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 18px; padding: 0.9rem 1rem; color: rgba(255,255,255,0.88); max-width: 22rem; backdrop-filter: blur(14px);
+}
+.panel-note strong { display: block; font-family: 'Montserrat', sans-serif; margin-bottom: 0.25rem; }
+.grid-2, .grid-3, .grid-4 { display: grid; gap: clamp(0.7rem, 1.4vw, 1rem); }
+.grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.card {
+  background: rgba(255,255,255,0.86); border: 1px solid rgba(26,43,74,0.08); border-radius: var(--radius); box-shadow: 0 14px 32px rgba(26,43,74,0.06);
+  padding: clamp(1rem, 1.8vw, 1.35rem); display: flex; flex-direction: column; gap: 0.55rem; min-height: 0;
+}
+.card .eyebrow { font-size: var(--small-size); text-transform: uppercase; letter-spacing: 0.12em; color: var(--green); font-weight: 700; }
+.big-stat { font-family: 'Montserrat', sans-serif; font-size: clamp(1.9rem, 4vw, 3.2rem); line-height: 1; color: var(--navy); }
+.bullet-list { list-style: none; display: flex; flex-direction: column; gap: clamp(0.45rem, 1vh, 0.9rem); }
+.bullet-list li { display: flex; gap: 0.7rem; align-items: flex-start; font-size: var(--body-size); line-height: 1.45; color: var(--ink); }
+.bullet-list li::before {
+  content: ''; width: 10px; height: 10px; border-radius: 50%; flex: 0 0 10px; margin-top: 0.38rem; background: linear-gradient(135deg, var(--green), #59a271);
+}
+.process { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: clamp(0.6rem, 1.2vw, 1rem); }
+.step { position: relative; background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 1rem; min-height: 10rem; }
+.step-no { font-family: 'Montserrat', sans-serif; font-size: clamp(1.5rem, 2.6vw, 2.2rem); color: rgba(26,43,74,0.16); margin-bottom: 0.4rem; }
+.connector { position: absolute; top: 50%; right: -0.6rem; width: 1.2rem; height: 2px; background: linear-gradient(90deg, var(--green), transparent); }
+.step:last-child .connector { display: none; }
+.ribbon {
+  align-self: flex-start; background: var(--navy); color: white; border-radius: 999px; padding: 0.45rem 0.9rem;
+  font-size: var(--small-size); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.section-dark { background: linear-gradient(180deg, #162742 0%, #0d1729 100%); color: white; }
+.section-dark .slide-content { justify-content: center; }
+.section-dark h1, .section-dark h2, .section-dark h3, .section-dark p { color: white; }
+.section-dark .muted { color: rgba(255,255,255,0.72); }
+.section-dark .topbar .brand, .section-dark .slide-num { color: rgba(255,255,255,0.75); }
+.pull-quote { max-width: 11ch; font-family: 'Montserrat', sans-serif; font-size: clamp(2.3rem, 7vw, 6rem); line-height: 0.9; letter-spacing: -0.06em; }
+.compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: clamp(0.9rem, 1.6vw, 1.4rem); align-items: stretch; }
+.compare-col {
+  background: rgba(255,255,255,0.92); border-radius: 24px; border: 1px solid rgba(26,43,74,0.08); padding: clamp(1rem, 1.8vw, 1.4rem);
+  display: flex; flex-direction: column; gap: 0.8rem;
+}
+.vs {
+  align-self: center; background: var(--green-soft); color: var(--green); font-weight: 800; font-family: 'Montserrat', sans-serif; border-radius: 999px; padding: 0.65rem 0.8rem;
+}
+.risk-matrix { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: var(--content-gap); align-items: stretch; }
+.matrix-box {
+  position: relative; border-radius: 26px; border: 1px solid var(--line);
+  background: linear-gradient(rgba(26,43,74,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(26,43,74,0.06) 1px, transparent 1px), linear-gradient(180deg, #ffffff 0%, #f7faf7 100%);
+  background-size: 25% 25%, 25% 25%, auto; padding: 1.2rem; min-height: 22rem;
+}
+.axis-label { position: absolute; font-size: var(--small-size); color: var(--muted); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.axis-x { bottom: 0.8rem; left: 50%; transform: translateX(-50%); }
+.axis-y { top: 50%; left: -1.2rem; transform: rotate(-90deg) translateX(-50%); transform-origin: left top; }
+.plot { position: absolute; width: 18px; height: 18px; border-radius: 50%; background: var(--navy); box-shadow: 0 0 0 8px rgba(26,43,74,0.10); }
+.plot.green { background: var(--green); box-shadow: 0 0 0 8px rgba(27,107,58,0.12); }
+.plot-label { position: absolute; width: 10rem; font-size: var(--small-size); color: var(--ink); font-weight: 700; }
+.callout-band { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--content-gap); }
+.footer-note { margin-top: auto; font-size: var(--small-size); color: var(--muted); }
+.nav-dots {
+  position: fixed; right: 1rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 0.45rem; z-index: 100;
+}
+.nav-dot {
+  width: 9px; height: 9px; border-radius: 50%; border: none; background: rgba(26,43,74,0.18); cursor: pointer; transition: transform 0.2s ease, background 0.2s ease;
+}
+.nav-dot.active { background: var(--green); transform: scale(1.35); }
+.progress { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, var(--green), #5ab077); width: 0; z-index: 110; }
+@media (max-height: 700px) {
+  :root { --slide-padding: clamp(0.75rem, 3vw, 2rem); --content-gap: clamp(0.45rem, 1.2vw, 0.9rem); --title-size: clamp(1.3rem, 4vw, 2.6rem); --h2-size: clamp(1rem, 2.6vw, 1.8rem); }
+  .hero-card { min-height: min(52vh, 420px); }
+  .process .step { min-height: 8.6rem; }
+}
+@media (max-height: 600px) {
+  :root { --slide-padding: clamp(0.6rem, 2.5vw, 1.4rem); --title-size: clamp(1.1rem, 3.8vw, 2.1rem); --body-size: clamp(0.68rem, 1vw, 0.9rem); }
+  .nav-dots { display: none; }
+}
+@media (max-width: 980px) {
+  .hero, .risk-matrix, .callout-band, .compare { grid-template-columns: 1fr; }
+  .compare { grid-template-columns: 1fr; }
+  .compare .vs { justify-self: start; }
+  .grid-4, .process { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .grid-3, .grid-2 { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) { .grid-4, .process { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<nav class="nav-dots" aria-label="Slide navigation"></nav>
+<section class="slide visible">
+  <div class="topbar"><div class="brand"><span class="brand-mark"></span>Westfield Outdoors</div><div class="slide-num">01</div></div>
+  <div class="slide-content">
+    <div class="hero">
+      <div style="display:flex; flex-direction:column; gap:1rem; min-width:0;">
+        <div class="kicker reveal">Innovation concept • shelter systems</div>
+        <h1 class="reveal">Tension Bead<br>Structures</h1>
+        <p class="lede reveal">A concept for instant shelter architecture that swaps rigid pole assemblies for a tensioned bead framework — aiming for faster setup, simpler user experience, and a new patentable category.</p>
+        <div class="grid-2 reveal" style="margin-top:0.4rem;">
+          <div class="card"><div class="eyebrow">Core move</div><h3>Replace poles with a linked tension structure</h3><p>Think deployable geometry carried by beads, joints, and controlled tension rather than segmented rods and sleeves.</p></div>
+          <div class="card"><div class="eyebrow">Why it matters</div><h3>Instant shelter without inflatable tradeoffs</h3><p>Faster setup, less user friction, and no reliance on air retention, pumps, puncture resistance, or inflation hardware.</p></div>
+        </div>
+      </div>
+      <div class="hero-card reveal" aria-label="Concept illustration of tension bead shelter structure">
+        <div class="mesh"></div>
+        <div class="bead-path"><span class="bead"></span><span class="bead"></span><span class="bead"></span><span class="bead"></span><span class="bead"></span><span class="bead"></span><span class="bead"></span><span class="bead"></span><span class="bead"></span><span class="bead"></span><span class="bead"></span><span class="bead"></span><span class="bead"></span><span class="bead"></span><span class="bead"></span><span class="bead"></span></div>
+        <div class="panel-note"><strong>Concept visual</strong>Trello included one image attachment. API auth blocked direct download from this runtime, so this slide uses a branded structural illustration as a stand-in for previewing the deck layout.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="slide">
+  <div class="topbar"><div class="brand"><span class="brand-mark"></span>Westfield Outdoors</div><div class="slide-num">02</div></div>
+  <div class="slide-content">
+    <div class="ribbon reveal">The opportunity</div>
+    <h2 class="reveal">Shelter setup still asks too much from the user</h2>
+    <div class="grid-3" style="align-items:stretch;">
+      <div class="card reveal"><div class="eyebrow">Bulky architecture</div><div class="big-stat">Poles</div><p>Traditional structure relies on long members, hub systems, sleeves, and assembly sequences that are awkward to pack and transport.</p></div>
+      <div class="card reveal"><div class="eyebrow">Time + friction</div><div class="big-stat">Too many steps</div><p>Users have to sort parts, orient sections, connect components, and tension fabric in the correct order before the shelter feels stable.</p></div>
+      <div class="card reveal"><div class="eyebrow">User perception</div><div class="big-stat">“Not instant”</div><p>If setup feels like work, the product loses its promise — especially in pop-up, sideline, beach, and event use cases where convenience is the pitch.</p></div>
+    </div>
+    <div class="card reveal" style="background:var(--green-soft); border-color:rgba(27,107,58,0.10);"><h3>The unmet need</h3><p>A real instant structure: fast to open, fast to collapse, compact to carry, and intuitive enough that users never feel like they are “building” a shelter.</p></div>
+  </div>
+</section>
+<section class="slide section-dark">
+  <div class="topbar"><div class="brand"><span class="brand-mark"></span>Westfield Outdoors</div><div class="slide-num">03</div></div>
+  <div class="slide-content">
+    <div class="kicker reveal" style="background:rgba(255,255,255,0.10); color:white;">Insight</div>
+    <div class="callout-band">
+      <div style="display:flex; flex-direction:column; gap:1rem; min-width:0;"><p class="muted reveal">The core leap in the brief is simple:</p><div class="pull-quote reveal">Deployment and tear-down can be instant.</div></div>
+      <div class="card reveal" style="background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.12); box-shadow:none;"><h3 style="color:white;">How</h3><ul class="bullet-list" style="color:white;"><li style="color:white;">Use a chain of structural bead elements to carry curvature and form.</li><li style="color:white;">Store energy in the system through tension rather than rigid pole insertion.</li><li style="color:white;">Allow the structure to move from packed to erected with one or two controlled motions.</li></ul></div>
+    </div>
+    <p class="muted reveal">If the mechanism works, setup becomes less like assembling camping hardware and more like releasing a pre-engineered form.</p>
+  </div>
+</section>
+<section class="slide">
+  <div class="topbar"><div class="brand"><span class="brand-mark"></span>Westfield Outdoors</div><div class="slide-num">04</div></div>
+  <div class="slide-content">
+    <div class="ribbon reveal">Mechanism story</div>
+    <h2 class="reveal">What a tension bead architecture could look like</h2>
+    <div class="process">
+      <div class="step reveal"><div class="step-no">01</div><h3>Packed chain</h3><p>Bead-linked members fold or coil into a dense package without long rigid pieces protruding.</p><div class="connector"></div></div>
+      <div class="step reveal"><div class="step-no">02</div><h3>Release geometry</h3><p>The system extends into a curved frame path as the linked elements align and spacing resolves.</p><div class="connector"></div></div>
+      <div class="step reveal"><div class="step-no">03</div><h3>Tension locks form</h3><p>Fabric, cords, or dedicated tension members stabilize the bead chain into a usable shelter shape.</p><div class="connector"></div></div>
+      <div class="step reveal"><div class="step-no">04</div><h3>Instant collapse</h3><p>Reverse the tension or unlock the geometry and the structure returns to a compact, guided pack state.</p></div>
+    </div>
+    <div class="grid-2 reveal"><div class="card"><div class="eyebrow">Potential components</div><p>Beads / articulated nodes / flexible spine / tension cords / fabric channels / locking feature / end restraints</p></div><div class="card"><div class="eyebrow">Design challenge</div><p>Balance flexibility during packing with predictable shape control and stiffness when fully deployed.</p></div></div>
+  </div>
+</section>
+<section class="slide">
+  <div class="topbar"><div class="brand"><span class="brand-mark"></span>Westfield Outdoors</div><div class="slide-num">05</div></div>
+  <div class="slide-content">
+    <div class="ribbon reveal">Why this is interesting</div>
+    <h2 class="reveal">Compared to existing “easy setup” shelter paths</h2>
+    <div class="compare">
+      <div class="compare-col reveal"><div class="eyebrow">Pole-based shelters</div><h3>Known, but cumbersome</h3><ul class="bullet-list"><li>Bulky packs driven by pole length and hub geometry</li><li>Assembly sequence still matters</li><li>Setup can be slow or frustrating in wind</li><li>“Instant” often still means multiple manual steps</li></ul></div>
+      <div class="vs reveal">VS</div>
+      <div class="compare-col reveal"><div class="eyebrow">Inflatable shelters</div><h3>Fast, but with baggage</h3><ul class="bullet-list"><li>Pump, valves, leaks, and puncture concerns</li><li>Perceived fragility for some users</li><li>Added system complexity and service burden</li><li>Can still be heavy depending on construction</li></ul></div>
+    </div>
+    <div class="card reveal" style="background:linear-gradient(135deg, var(--green-soft), #f6fbf7);"><h3>Tension bead structures could sit in the white space between them</h3><p>Fast like an instant system, but mechanically distinct from air-filled architecture and less assembly-heavy than pole-and-hub products.</p></div>
+  </div>
+</section>
+<section class="slide">
+  <div class="topbar"><div class="brand"><span class="brand-mark"></span>Westfield Outdoors</div><div class="slide-num">06</div></div>
+  <div class="slide-content">
+    <div class="ribbon reveal">Potential payoff</div>
+    <h2 class="reveal">If the mechanism works, the upside is bigger than one product</h2>
+    <div class="grid-4">
+      <div class="card reveal"><div class="eyebrow">1</div><h3>New category story</h3><p>A new language for shelter setup: not pop-up, not inflatable, not traditional pole architecture.</p></div>
+      <div class="card reveal"><div class="eyebrow">2</div><h3>User-facing simplicity</h3><p>Instant deployment becomes a visible product benefit instead of a technical claim that still requires effort.</p></div>
+      <div class="card reveal"><div class="eyebrow">3</div><h3>Patentable mechanism</h3><p>If the structure, locking behavior, or pack/deploy sequence is novel, there may be real IP value around the system.</p></div>
+      <div class="card reveal"><div class="eyebrow">4</div><h3>Platform expansion</h3><p>The concept could extend from tents into shade, sideline, event, privacy, or utility shelter families.</p></div>
+    </div>
+    <div class="footer-note reveal">Brief language from the Trello card: “Could define an entirely new category of tents with a patentable mechanism.”</div>
+  </div>
+</section>
+<section class="slide">
+  <div class="topbar"><div class="brand"><span class="brand-mark"></span>Westfield Outdoors</div><div class="slide-num">07</div></div>
+  <div class="slide-content">
+    <div class="ribbon reveal">Skunk works lens</div>
+    <h2 class="reveal">The main risk isn’t the idea — it’s whether physics cooperates</h2>
+    <div class="risk-matrix">
+      <div class="matrix-box reveal"><div class="axis-label axis-x">Harder to solve →</div><div class="axis-label axis-y">Higher product payoff →</div><div class="plot" style="left:22%; top:68%;"></div><div class="plot-label" style="left:15%; top:74%;">Packability</div><div class="plot" style="left:38%; top:58%;"></div><div class="plot-label" style="left:33%; top:64%;">Setup control</div><div class="plot" style="left:57%; top:46%;"></div><div class="plot-label" style="left:50%; top:52%;">Durability</div><div class="plot green" style="left:74%; top:30%;"></div><div class="plot-label" style="left:66%; top:36%;">Strength-to-weight</div></div>
+      <div style="display:flex; flex-direction:column; gap:0.8rem; min-width:0;"><div class="card reveal"><div class="eyebrow">Known risk from brief</div><h3>Weight could be too high</h3><p>Linked structural beads, joints, and locking elements might accumulate mass fast — especially if overbuilt for strength.</p></div><div class="card reveal"><div class="eyebrow">Known risk from brief</div><h3>Structure may not be strong enough</h3><p>The system could deploy beautifully but still fail on stiffness, load distribution, wind resistance, or long-term durability.</p></div><div class="card reveal"><div class="eyebrow">Implication</div><p>This is exactly the kind of mechanism that deserves quick prototypes and boundary testing before significant platform investment.</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="slide">
+  <div class="topbar"><div class="brand"><span class="brand-mark"></span>Westfield Outdoors</div><div class="slide-num">08</div></div>
+  <div class="slide-content">
+    <div class="ribbon reveal">What to test first</div>
+    <h2 class="reveal">A smart next step is a fast feasibility sprint, not a finished product brief</h2>
+    <div class="grid-2"><div class="card reveal"><h3>Prototype questions</h3><ul class="bullet-list"><li>Can a bead chain hold predictable curvature under fabric/tension load?</li><li>Can it deploy in one smooth motion without tangling or twisting?</li><li>What bead diameter / material / link design gives the best strength-to-weight ratio?</li><li>Can the pack state stay compact enough to beat poles in a meaningful way?</li></ul></div><div class="card reveal"><h3>Evaluation criteria</h3><ul class="bullet-list"><li>Setup time vs. reference instant shelters</li><li>Total system weight</li><li>Wind stability and deflection behavior</li><li>User confidence during setup + teardown</li><li>Uniqueness / protectability of mechanism</li></ul></div></div>
+    <div class="card reveal" style="background:var(--navy); color:white; border-color:transparent;"><h3 style="color:white;">Recommended framing</h3><p style="color:rgba(255,255,255,0.86);">Treat this as a skunk works mechanism program: prove the structure, then decide whether to push into a tent concept, a shade concept, or a broader shelter platform.</p></div>
+  </div>
+</section>
+<section class="slide section-dark">
+  <div class="topbar"><div class="brand"><span class="brand-mark"></span>Westfield Outdoors</div><div class="slide-num">09</div></div>
+  <div class="slide-content" style="text-align:center; align-items:center;">
+    <div class="kicker reveal" style="background:rgba(255,255,255,0.10); color:white;">Takeaway</div>
+    <h1 class="reveal" style="max-width:10ch;">A shelter that feels instant because the structure already knows what to do.</h1>
+    <p class="lede reveal" style="max-width:46ch; color:rgba(255,255,255,0.72);">Tension bead structures are compelling because they aim at the real user problem — setup friction — with a mechanism different enough to be strategically interesting if feasibility checks come back positive.</p>
+    <div class="panel-note reveal" style="background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.88); border-color:rgba(255,255,255,0.12); margin-top:1rem; max-width:30rem; text-align:left;"><strong style="color:white;">Preview note</strong>Hosted as a lightweight HTML deck for fast review. If you want, next pass can add the original attachment image, competitive references, or a more engineering-led mechanism diagram.</div>
+  </div>
+</section>
+<script>
+class SlidePresentation {
+  constructor() {
+    this.slides = [...document.querySelectorAll('.slide')];
+    this.progress = document.querySelector('.progress');
+    this.nav = document.querySelector('.nav-dots');
+    this.current = 0;
+    this.buildDots();
+    this.bindEvents();
+    this.observeSlides();
+    this.updateUI();
+  }
+  buildDots() {
+    this.slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'nav-dot';
+      dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      dot.addEventListener('click', () => this.goTo(i));
+      this.nav.appendChild(dot);
+    });
+    this.dots = [...this.nav.querySelectorAll('.nav-dot')];
+  }
+  bindEvents() {
+    window.addEventListener('keydown', (e) => {
+      if (['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)) { e.preventDefault(); this.goTo(Math.min(this.current + 1, this.slides.length - 1)); }
+      if (['ArrowUp','ArrowLeft','PageUp'].includes(e.key)) { e.preventDefault(); this.goTo(Math.max(this.current - 1, 0)); }
+      if (e.key === 'Home') this.goTo(0);
+      if (e.key === 'End') this.goTo(this.slides.length - 1);
+    });
+    let touchStartY = null;
+    window.addEventListener('touchstart', (e) => touchStartY = e.changedTouches[0].clientY, {passive:true});
+    window.addEventListener('touchend', (e) => {
+      if (touchStartY === null) return;
+      const dy = touchStartY - e.changedTouches[0].clientY;
+      if (Math.abs(dy) > 60) this.goTo(Math.max(0, Math.min(this.slides.length - 1, this.current + (dy > 0 ? 1 : -1))));
+      touchStartY = null;
+    }, {passive:true});
+    document.addEventListener('scroll', () => this.detectCurrent(), {passive:true});
+  }
+  observeSlides() {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.45 });
+    this.slides.forEach(slide => io.observe(slide));
+  }
+  detectCurrent() {
+    const mid = window.innerHeight * 0.5;
+    let idx = this.current;
+    this.slides.forEach((slide, i) => {
+      const r = slide.getBoundingClientRect();
+      if (r.top <= mid && r.bottom >= mid) idx = i;
+    });
+    this.current = idx;
+    this.updateUI();
+  }
+  goTo(index) {
+    this.current = index;
+    this.slides[index].scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    this.updateUI();
+  }
+  updateUI() {
+    const pct = (this.current) / (this.slides.length - 1) * 100;
+    this.progress.style.width = `${pct}%`;
+    this.dots.forEach((dot, i) => dot.classList.toggle('active', i === this.current));
+  }
+}
+new SlidePresentation();
+</script>
+</body>
+</html>
