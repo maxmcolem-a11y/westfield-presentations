@@ -7,15 +7,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --navy: #1a2b4a;
-  --green: #1b6b3a;
-  --green-soft: #eaf4ee;
-  --sand: #f6f4ef;
-  --ink: #243247;
-  --muted: #647287;
-  --line: #dbe3ea;
-  --white: #ffffff;
-  --shadow: 0 18px 60px rgba(26,43,74,0.10);
+  --navy: #dce8ff;
+  --green: #59c17a;
+  --green-soft: rgba(89, 193, 122, 0.12);
+  --sand: #09111c;
+  --ink: #e8eef8;
+  --muted: #b6c3d7;
+  --line: rgba(180, 202, 230, 0.14);
+  --white: #101a28;
+  --surface: rgba(16, 26, 40, 0.88);
+  --surface-strong: rgba(12, 20, 32, 0.96);
+  --shadow: 0 24px 70px rgba(0,0,0,0.38);
   --title-size: clamp(1.7rem, 4.8vw, 4rem);
   --h2-size: clamp(1.2rem, 3vw, 2.3rem);
   --h3-size: clamp(0.95rem, 1.8vw, 1.35rem);
@@ -39,7 +41,10 @@ body { font-family: 'Inter', sans-serif; background: var(--sand); color: var(--i
   display: flex;
   flex-direction: column;
   position: relative;
-  background: linear-gradient(180deg, #fbfaf7 0%, #f4f1eb 100%);
+  background:
+    radial-gradient(circle at top left, rgba(89,193,122,0.08), transparent 28%),
+    radial-gradient(circle at top right, rgba(95,143,255,0.10), transparent 24%),
+    linear-gradient(180deg, #0d1624 0%, #09111c 100%);
 }
 .slide-content {
   flex: 1;
@@ -71,7 +76,7 @@ body { font-family: 'Inter', sans-serif; background: var(--sand); color: var(--i
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  color: var(--navy);
+  color: rgba(232,238,248,0.94);
   font-size: var(--small-size);
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -84,18 +89,18 @@ body { font-family: 'Inter', sans-serif; background: var(--sand); color: var(--i
   background: linear-gradient(135deg, var(--green), #4c9a69);
   box-shadow: 0 0 0 6px rgba(27,107,58,0.10);
 }
-.slide-num { font-size: var(--small-size); color: rgba(26,43,74,0.45); font-weight: 700; letter-spacing: 0.08em; }
+.slide-num { font-size: var(--small-size); color: rgba(232,238,248,0.68); font-weight: 700; letter-spacing: 0.08em; }
 .hero { display: grid; grid-template-columns: 1.2fr 0.95fr; gap: clamp(1rem, 2vw, 2rem); align-items: center; min-height: 0; }
 .kicker {
   display: inline-flex; align-items: center; gap: 0.5rem; width: fit-content; border-radius: 999px;
-  padding: 0.45rem 0.85rem; background: rgba(27,107,58,0.10); color: var(--green);
+  padding: 0.45rem 0.85rem; background: rgba(89,193,122,0.14); color: #8ee2a6;
   font-size: var(--small-size); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
 }
 h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
 h1 { font-size: var(--title-size); line-height: 0.95; letter-spacing: -0.04em; color: var(--navy); }
 h2 { font-size: var(--h2-size); line-height: 1.03; color: var(--navy); }
 h3 { font-size: var(--h3-size); line-height: 1.15; color: var(--navy); }
-p { font-size: var(--body-size); line-height: 1.55; color: var(--ink); }
+p, li, .step, .compare-col, .card, .panel-note { font-size: var(--body-size); line-height: 1.55; color: var(--ink); }
 .lede { max-width: 56ch; color: var(--muted); font-size: clamp(0.9rem, 1.5vw, 1.12rem); }
 .hero-card {
   position: relative; min-height: min(58vh, 520px); border-radius: 30px;
@@ -115,7 +120,7 @@ p { font-size: var(--body-size); line-height: 1.55; color: var(--ink); }
 .bead:nth-child(9){left:81%;top:39%;}.bead:nth-child(10){left:85%;top:54%;}.bead:nth-child(11){left:82%;top:69%;}.bead:nth-child(12){left:73%;top:80%;}
 .bead:nth-child(13){left:61%;top:86%;}.bead:nth-child(14){left:47%;top:87%;}.bead:nth-child(15){left:34%;top:82%;}.bead:nth-child(16){left:22%;top:74%;}
 .panel-note {
-  position: relative; margin-top: auto; align-self: flex-start; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14);
+  position: relative; margin-top: auto; align-self: flex-start; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.16);
   border-radius: 18px; padding: 0.9rem 1rem; color: rgba(255,255,255,0.88); max-width: 22rem; backdrop-filter: blur(14px);
 }
 .panel-note strong { display: block; font-family: 'Montserrat', sans-serif; margin-bottom: 0.25rem; }
@@ -124,10 +129,10 @@ p { font-size: var(--body-size); line-height: 1.55; color: var(--ink); }
 .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .card {
-  background: rgba(255,255,255,0.86); border: 1px solid rgba(26,43,74,0.08); border-radius: var(--radius); box-shadow: 0 14px 32px rgba(26,43,74,0.06);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);
   padding: clamp(1rem, 1.8vw, 1.35rem); display: flex; flex-direction: column; gap: 0.55rem; min-height: 0;
 }
-.card .eyebrow { font-size: var(--small-size); text-transform: uppercase; letter-spacing: 0.12em; color: var(--green); font-weight: 700; }
+.card .eyebrow { font-size: var(--small-size); text-transform: uppercase; letter-spacing: 0.12em; color: #8ee2a6; font-weight: 700; }
 .big-stat { font-family: 'Montserrat', sans-serif; font-size: clamp(1.9rem, 4vw, 3.2rem); line-height: 1; color: var(--navy); }
 .bullet-list { list-style: none; display: flex; flex-direction: column; gap: clamp(0.45rem, 1vh, 0.9rem); }
 .bullet-list li { display: flex; gap: 0.7rem; align-items: flex-start; font-size: var(--body-size); line-height: 1.45; color: var(--ink); }
@@ -135,15 +140,15 @@ p { font-size: var(--body-size); line-height: 1.55; color: var(--ink); }
   content: ''; width: 10px; height: 10px; border-radius: 50%; flex: 0 0 10px; margin-top: 0.38rem; background: linear-gradient(135deg, var(--green), #59a271);
 }
 .process { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: clamp(0.6rem, 1.2vw, 1rem); }
-.step { position: relative; background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 1rem; min-height: 10rem; }
-.step-no { font-family: 'Montserrat', sans-serif; font-size: clamp(1.5rem, 2.6vw, 2.2rem); color: rgba(26,43,74,0.16); margin-bottom: 0.4rem; }
+.step { position: relative; background: var(--surface-strong); border: 1px solid var(--line); border-radius: 20px; padding: 1rem; min-height: 10rem; }
+.step-no { font-family: 'Montserrat', sans-serif; font-size: clamp(1.5rem, 2.6vw, 2.2rem); color: rgba(220,232,255,0.16); margin-bottom: 0.4rem; }
 .connector { position: absolute; top: 50%; right: -0.6rem; width: 1.2rem; height: 2px; background: linear-gradient(90deg, var(--green), transparent); }
 .step:last-child .connector { display: none; }
 .ribbon {
-  align-self: flex-start; background: var(--navy); color: white; border-radius: 999px; padding: 0.45rem 0.9rem;
-  font-size: var(--small-size); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  align-self: flex-start; background: rgba(220,232,255,0.12); color: var(--navy); border-radius: 999px; padding: 0.45rem 0.9rem;
+  font-size: var(--small-size); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(220,232,255,0.12);
 }
-.section-dark { background: linear-gradient(180deg, #162742 0%, #0d1729 100%); color: white; }
+.section-dark { background: linear-gradient(180deg, #111c2d 0%, #09111c 100%); color: white; }
 .section-dark .slide-content { justify-content: center; }
 .section-dark h1, .section-dark h2, .section-dark h3, .section-dark p { color: white; }
 .section-dark .muted { color: rgba(255,255,255,0.72); }
@@ -151,34 +156,34 @@ p { font-size: var(--body-size); line-height: 1.55; color: var(--ink); }
 .pull-quote { max-width: 11ch; font-family: 'Montserrat', sans-serif; font-size: clamp(2.3rem, 7vw, 6rem); line-height: 0.9; letter-spacing: -0.06em; }
 .compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: clamp(0.9rem, 1.6vw, 1.4rem); align-items: stretch; }
 .compare-col {
-  background: rgba(255,255,255,0.92); border-radius: 24px; border: 1px solid rgba(26,43,74,0.08); padding: clamp(1rem, 1.8vw, 1.4rem);
+  background: var(--surface); border-radius: 24px; border: 1px solid var(--line); padding: clamp(1rem, 1.8vw, 1.4rem);
   display: flex; flex-direction: column; gap: 0.8rem;
 }
 .vs {
-  align-self: center; background: var(--green-soft); color: var(--green); font-weight: 800; font-family: 'Montserrat', sans-serif; border-radius: 999px; padding: 0.65rem 0.8rem;
+  align-self: center; background: var(--green-soft); color: #8ee2a6; font-weight: 800; font-family: 'Montserrat', sans-serif; border-radius: 999px; padding: 0.65rem 0.8rem; border: 1px solid rgba(89,193,122,0.15);
 }
 .risk-matrix { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: var(--content-gap); align-items: stretch; }
 .matrix-box {
   position: relative; border-radius: 26px; border: 1px solid var(--line);
-  background: linear-gradient(rgba(26,43,74,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(26,43,74,0.06) 1px, transparent 1px), linear-gradient(180deg, #ffffff 0%, #f7faf7 100%);
+  background: linear-gradient(rgba(220,232,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(220,232,255,0.08) 1px, transparent 1px), linear-gradient(180deg, rgba(14,24,38,0.98) 0%, rgba(10,18,28,0.98) 100%);
   background-size: 25% 25%, 25% 25%, auto; padding: 1.2rem; min-height: 22rem;
 }
 .axis-label { position: absolute; font-size: var(--small-size); color: var(--muted); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.plot-label { position: absolute; width: 10rem; font-size: var(--small-size); color: var(--ink); font-weight: 700; }
 .axis-x { bottom: 0.8rem; left: 50%; transform: translateX(-50%); }
 .axis-y { top: 50%; left: -1.2rem; transform: rotate(-90deg) translateX(-50%); transform-origin: left top; }
-.plot { position: absolute; width: 18px; height: 18px; border-radius: 50%; background: var(--navy); box-shadow: 0 0 0 8px rgba(26,43,74,0.10); }
-.plot.green { background: var(--green); box-shadow: 0 0 0 8px rgba(27,107,58,0.12); }
-.plot-label { position: absolute; width: 10rem; font-size: var(--small-size); color: var(--ink); font-weight: 700; }
+.plot { position: absolute; width: 18px; height: 18px; border-radius: 50%; background: var(--navy); box-shadow: 0 0 0 8px rgba(220,232,255,0.10); }
+.plot.green { background: var(--green); box-shadow: 0 0 0 8px rgba(89,193,122,0.14); }
 .callout-band { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--content-gap); }
 .footer-note { margin-top: auto; font-size: var(--small-size); color: var(--muted); }
 .nav-dots {
   position: fixed; right: 1rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 0.45rem; z-index: 100;
 }
 .nav-dot {
-  width: 9px; height: 9px; border-radius: 50%; border: none; background: rgba(26,43,74,0.18); cursor: pointer; transition: transform 0.2s ease, background 0.2s ease;
+  width: 9px; height: 9px; border-radius: 50%; border: none; background: rgba(220,232,255,0.18); cursor: pointer; transition: transform 0.2s ease, background 0.2s ease;
 }
 .nav-dot.active { background: var(--green); transform: scale(1.35); }
-.progress { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, var(--green), #5ab077); width: 0; z-index: 110; }
+.progress { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, var(--green), #7fe1a0); width: 0; z-index: 110; }
 @media (max-height: 700px) {
   :root { --slide-padding: clamp(0.75rem, 3vw, 2rem); --content-gap: clamp(0.45rem, 1.2vw, 0.9rem); --title-size: clamp(1.3rem, 4vw, 2.6rem); --h2-size: clamp(1rem, 2.6vw, 1.8rem); }
   .hero-card { min-height: min(52vh, 420px); }
@@ -236,7 +241,7 @@ p { font-size: var(--body-size); line-height: 1.55; color: var(--ink); }
       <div class="card reveal"><div class="eyebrow">Time + friction</div><div class="big-stat">Too many steps</div><p>Users have to sort parts, orient sections, connect components, and tension fabric in the correct order before the shelter feels stable.</p></div>
       <div class="card reveal"><div class="eyebrow">User perception</div><div class="big-stat">“Not instant”</div><p>If setup feels like work, the product loses its promise — especially in pop-up, sideline, beach, and event use cases where convenience is the pitch.</p></div>
     </div>
-    <div class="card reveal" style="background:var(--green-soft); border-color:rgba(27,107,58,0.10);"><h3>The unmet need</h3><p>A real instant structure: fast to open, fast to collapse, compact to carry, and intuitive enough that users never feel like they are “building” a shelter.</p></div>
+    <div class="card reveal" style="background:rgba(89,193,122,0.12); border-color:rgba(89,193,122,0.18);"><h3>The unmet need</h3><p>A real instant structure: fast to open, fast to collapse, compact to carry, and intuitive enough that users never feel like they are “building” a shelter.</p></div>
   </div>
 </section>
 <section class="slide section-dark">
@@ -274,7 +279,7 @@ p { font-size: var(--body-size); line-height: 1.55; color: var(--ink); }
       <div class="vs reveal">VS</div>
       <div class="compare-col reveal"><div class="eyebrow">Inflatable shelters</div><h3>Fast, but with baggage</h3><ul class="bullet-list"><li>Pump, valves, leaks, and puncture concerns</li><li>Perceived fragility for some users</li><li>Added system complexity and service burden</li><li>Can still be heavy depending on construction</li></ul></div>
     </div>
-    <div class="card reveal" style="background:linear-gradient(135deg, var(--green-soft), #f6fbf7);"><h3>Tension bead structures could sit in the white space between them</h3><p>Fast like an instant system, but mechanically distinct from air-filled architecture and less assembly-heavy than pole-and-hub products.</p></div>
+    <div class="card reveal" style="background:linear-gradient(135deg, rgba(89,193,122,0.14), rgba(95,143,255,0.10));"><h3>Tension bead structures could sit in the white space between them</h3><p>Fast like an instant system, but mechanically distinct from air-filled architecture and less assembly-heavy than pole-and-hub products.</p></div>
   </div>
 </section>
 <section class="slide">
@@ -308,7 +313,7 @@ p { font-size: var(--body-size); line-height: 1.55; color: var(--ink); }
     <div class="ribbon reveal">What to test first</div>
     <h2 class="reveal">A smart next step is a fast feasibility sprint, not a finished product brief</h2>
     <div class="grid-2"><div class="card reveal"><h3>Prototype questions</h3><ul class="bullet-list"><li>Can a bead chain hold predictable curvature under fabric/tension load?</li><li>Can it deploy in one smooth motion without tangling or twisting?</li><li>What bead diameter / material / link design gives the best strength-to-weight ratio?</li><li>Can the pack state stay compact enough to beat poles in a meaningful way?</li></ul></div><div class="card reveal"><h3>Evaluation criteria</h3><ul class="bullet-list"><li>Setup time vs. reference instant shelters</li><li>Total system weight</li><li>Wind stability and deflection behavior</li><li>User confidence during setup + teardown</li><li>Uniqueness / protectability of mechanism</li></ul></div></div>
-    <div class="card reveal" style="background:var(--navy); color:white; border-color:transparent;"><h3 style="color:white;">Recommended framing</h3><p style="color:rgba(255,255,255,0.86);">Treat this as a skunk works mechanism program: prove the structure, then decide whether to push into a tent concept, a shade concept, or a broader shelter platform.</p></div>
+    <div class="card reveal" style="background:linear-gradient(135deg, rgba(95,143,255,0.18), rgba(89,193,122,0.12)); color:white; border-color:rgba(220,232,255,0.12);"><h3 style="color:white;">Recommended framing</h3><p style="color:rgba(255,255,255,0.86);">Treat this as a skunk works mechanism program: prove the structure, then decide whether to push into a tent concept, a shade concept, or a broader shelter platform.</p></div>
   </div>
 </section>
 <section class="slide section-dark">
