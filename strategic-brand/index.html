@@ -900,36 +900,37 @@ p { font-size: var(--body-size); line-height: 1.6; }
   </div>
   <div class="slide-content" style="gap:var(--gap);">
     <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:var(--gap);">
-      <div style="flex:1;">
+      <div style="flex:1; max-width:58rem;">
         <div class="tr-chip">Brand assortment read</div>
-        <h2 style="margin-top:0.7rem;">Product Strategy</h2>
-        <p style="color:#5a6774; max-width:58ch;">The Timber Ridge assortment is presented as a coordinated outdoor collection, with furniture, shelter, coolers, and carry categories working together as one brand system.</p>
+        <h2 style="margin-top:0.7rem; margin-bottom:0.55rem;">Product Strategy</h2>
+        <p style="color:#5a6774; max-width:58ch; font-size:clamp(1rem,1.55vw,1.16rem); line-height:1.5;">The Timber Ridge assortment is presented as a coordinated outdoor collection, with furniture, shelter, coolers, and carry categories working together as one brand system.</p>
       </div>
-      <img src="assets/New_Timber_Ridge_Logo_-_November_2025_Approved.ai-clean.png" alt="Timber Ridge" style="height:clamp(2.2rem,5vw,3.6rem); width:auto; object-fit:contain; flex-shrink:0;">
+      <div style="display:flex; align-items:center; gap:0.8rem; flex-shrink:0;">
+        <img src="assets/New_Timber_Ridge_Logo_-_November_2025_Approved.ai-clean.png" alt="Timber Ridge shield" style="height:clamp(3.2rem,6vw,4.8rem); width:auto; object-fit:contain;">
+        <img src="assets/tr_logo_site.png" alt="Timber Ridge wordmark" style="height:clamp(3.2rem,6vw,4.8rem); width:auto; object-fit:contain;">
+      </div>
     </div>
-    <div class="grid-2" style="flex:1; min-height:0;">
-      <div class="tr-site-frame" style="display:grid; grid-template-rows:auto 1fr;">
+    <div class="grid-2" style="flex:1; min-height:0; gap:clamp(0.9rem,2vw,1.3rem); align-items:stretch;">
+      <div class="tr-site-frame" style="display:grid; grid-template-rows:auto 1fr; min-height:0;">
         <div class="tr-site-top">
-          <img src="assets/New_Timber_Ridge_Logo_-_November_2025_Approved.ai-clean.png" alt="Timber Ridge site logo" style="height:1.8rem; width:auto; object-fit:contain;">
+          <img src="assets/tr_logo_site.png" alt="Timber Ridge site logo" style="height:1.8rem; width:auto; object-fit:contain;">
           <div style="font-size:var(--small-size); color:#6f8190; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;">Site merchandising cues</div>
         </div>
         <div style="padding:1rem; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0.8rem; align-content:start;">
-          <div class="tr-panel" style="padding:0.9rem;"><h3 style="color:#31495d; margin-bottom:0.35rem;">Chairs</h3><p style="color:#586774;">Hero category with premium seating cues and named products.</p></div>
-          <div class="tr-panel" style="padding:0.9rem;"><h3 style="color:#31495d; margin-bottom:0.35rem;">Shelter</h3><p style="color:#586774;">Tents and shelter extend beyond furniture into broader outdoor use.</p></div>
-          <div class="tr-panel" style="padding:0.9rem;"><h3 style="color:#31495d; margin-bottom:0.35rem;">Carry</h3><p style="color:#586774;">Wagons and utility products reinforce real-life transport use cases.</p></div>
-          <div class="tr-panel" style="padding:0.9rem;"><h3 style="color:#31495d; margin-bottom:0.35rem;">Collections</h3><p style="color:#586774;">Color grouping helps products feel like a family, not isolated SKUs.</p></div>
+          <div class="tr-panel" style="padding:0.95rem;"><h3 style="color:#31495d; margin-bottom:0.4rem; font-size:clamp(1.05rem,1.55vw,1.25rem);">Chairs</h3><p style="color:#586774; font-size:clamp(0.95rem,1.35vw,1.08rem); line-height:1.45;">Hero category with premium seating cues and named products.</p></div>
+          <div class="tr-panel" style="padding:0.95rem;"><h3 style="color:#31495d; margin-bottom:0.4rem; font-size:clamp(1.05rem,1.55vw,1.25rem);">Shelter</h3><p style="color:#586774; font-size:clamp(0.95rem,1.35vw,1.08rem); line-height:1.45;">Tents and shelter extend beyond furniture into broader outdoor use.</p></div>
+          <div class="tr-panel" style="padding:0.95rem;"><h3 style="color:#31495d; margin-bottom:0.4rem; font-size:clamp(1.05rem,1.55vw,1.25rem);">Carry</h3><p style="color:#586774; font-size:clamp(0.95rem,1.35vw,1.08rem); line-height:1.45;">Wagons and utility products reinforce real-life transport use cases.</p></div>
+          <div class="tr-panel" style="padding:0.95rem;"><h3 style="color:#31495d; margin-bottom:0.4rem; font-size:clamp(1.05rem,1.55vw,1.25rem);">Collections</h3><p style="color:#586774; font-size:clamp(0.95rem,1.35vw,1.08rem); line-height:1.45;">Color grouping helps products feel like a family, not isolated SKUs.</p></div>
         </div>
       </div>
-      <div style="display:flex; flex-direction:column; gap:0.8rem; min-height:0;">
-        <div style="position:relative; border-radius:14px; overflow:hidden; min-height:260px; background:#c8c0b2;">
-          <img src="assets/timber_riva.jpg" alt="Timber Ridge Riva" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
-          <div style="position:absolute; inset:auto 0 0 0; padding:1rem; background:linear-gradient(180deg,rgba(15,23,32,0) 0%, rgba(15,23,32,0.72) 100%); color:white;">
-            <div class="tr-chip" style="background:rgba(255,255,255,0.14); color:white;">Named product</div>
-            <div style="font-family:'Barlow',sans-serif; font-weight:800; font-size:var(--h3-size); margin-top:0.45rem;">RIVA™ LUXE MESH CHAIR</div>
-          </div>
+      <div class="tr-site-frame" style="display:grid; grid-template-rows:auto 1fr; min-height:0; overflow:hidden;">
+        <div class="tr-site-top">
+          <div style="font-size:clamp(1.2rem,2vw,1.6rem); color:#7c848d;">⌕</div>
+          <img src="assets/tr_logo_site.png" alt="Timber Ridge site logo" style="height:2rem; width:auto; object-fit:contain;">
+          <div style="font-size:var(--small-size); color:#6f8190; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;">Product page</div>
         </div>
-        <div class="tr-panel" style="padding:1rem;">
-          <p style="color:#586774;">This is the key website behavior to borrow: let products feel designed, merchandised, and visually situated in a lifestyle context.</p>
+        <div style="padding:0.9rem; display:flex; align-items:center; justify-content:center; min-height:0; background:#f8f4ed;">
+          <img src="assets/tr_productpage_screenshot.png" alt="Timber Ridge product page screenshot" style="width:100%; height:100%; object-fit:cover; border-radius:12px; border:1px solid #ddd5c9; display:block;">
         </div>
       </div>
     </div>
@@ -960,27 +961,27 @@ p { font-size: var(--body-size); line-height: 1.6; }
         <div style="position:relative; border-radius:14px; overflow:hidden; background:#1594cf; min-height:260px; display:flex; align-items:flex-end; justify-content:center; padding:0.8rem;">
           <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.15) 100%);"></div>
           <div style="position:absolute; top:0.8rem; left:0.8rem; right:0.8rem; font-family:'Barlow',sans-serif; font-weight:900; line-height:0.88; font-size:clamp(1.4rem,2.8vw,2.4rem); color:rgba(15,61,94,0.65); text-transform:uppercase; text-align:center;">Blue<br>Lagoon</div>
-          <img src="assets/tr_cooler_icon.png" alt="Blue Lagoon collection" style="position:relative; z-index:1; width:78%; height:auto; object-fit:contain; filter:hue-rotate(190deg) saturate(1.4) brightness(1.1); opacity:0.95;">
+          
         </div>
         <div style="position:relative; border-radius:14px; overflow:hidden; background:#bfd5ef; min-height:260px; display:flex; align-items:flex-end; justify-content:center; padding:0.8rem;">
           <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(255,255,255,0.06) 0%, rgba(0,0,0,0.06) 100%);"></div>
           <div style="position:absolute; top:0.8rem; left:0.8rem; right:0.8rem; font-family:'Barlow',sans-serif; font-weight:900; line-height:0.88; font-size:clamp(1.4rem,2.8vw,2.4rem); color:rgba(86,107,143,0.55); text-transform:uppercase; text-align:center;">Coastal<br>Mist</div>
-          <img src="assets/tr_furniture_icon.png" alt="Coastal Mist collection" style="position:relative; z-index:1; width:78%; height:auto; object-fit:contain; opacity:0.9; filter:brightness(1.15) saturate(0.6);">
+          
         </div>
         <div style="position:relative; border-radius:14px; overflow:hidden; background:#f0e58e; min-height:260px; display:flex; align-items:flex-end; justify-content:center; padding:0.8rem;">
           <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(255,255,255,0.02) 0%, rgba(0,0,0,0.04) 100%);"></div>
           <div style="position:absolute; top:0.8rem; left:0.8rem; right:0.8rem; font-family:'Barlow',sans-serif; font-weight:900; line-height:0.88; font-size:clamp(1.4rem,2.8vw,2.4rem); color:rgba(125,111,41,0.48); text-transform:uppercase; text-align:center;">Desert<br>Oasis</div>
-          <img src="assets/tr_tent_icon.png" alt="Desert Oasis collection" style="position:relative; z-index:1; width:78%; height:auto; object-fit:contain; opacity:0.9; filter:sepia(0.45) saturate(0.8) brightness(1.08);">
+          
         </div>
         <div style="position:relative; border-radius:14px; overflow:hidden; background:#2a262d; min-height:260px; display:flex; align-items:flex-end; justify-content:center; padding:0.8rem;">
           <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(255,255,255,0.02) 0%, rgba(0,0,0,0.08) 100%);"></div>
           <div style="position:absolute; top:0.8rem; left:0.8rem; right:0.8rem; font-family:'Barlow',sans-serif; font-weight:900; line-height:0.88; font-size:clamp(1.4rem,2.8vw,2.4rem); color:rgba(255,255,255,0.16); text-transform:uppercase; text-align:center;">Obsidian<br>Peak</div>
-          <img src="assets/tr_bags_icon.png" alt="Obsidian Peak collection" style="position:relative; z-index:1; width:78%; height:auto; object-fit:contain; opacity:0.92; filter:brightness(0.25) contrast(1.2);">
+          
         </div>
         <div style="position:relative; border-radius:14px; overflow:hidden; background:#d81d32; min-height:260px; display:flex; align-items:flex-end; justify-content:center; padding:0.8rem;">
           <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.08) 100%);"></div>
           <div style="position:absolute; top:0.8rem; left:0.8rem; right:0.8rem; font-family:'Barlow',sans-serif; font-weight:900; line-height:0.88; font-size:clamp(1.4rem,2.8vw,2.4rem); color:rgba(112,0,13,0.42); text-transform:uppercase; text-align:center;">Red<br>Rock</div>
-          <img src="assets/tr_furniture_icon.png" alt="Red Rock collection" style="position:relative; z-index:1; width:78%; height:auto; object-fit:contain; opacity:0.9; filter:hue-rotate(310deg) saturate(1.45) brightness(1.02);">
+          
         </div>
       </div>
       <div class="msg-box" style="margin-top:0;">Blue Lagoon, Coastal Mist, Desert Oasis, Obsidian Peak, and Red Rock show how Timber Ridge turns color into a merchandising system rather than a simple variant list.</div>
