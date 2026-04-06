@@ -352,6 +352,68 @@ p { font-size: var(--body-size); line-height: 1.6; }
 .why-card .why-icon { font-size: clamp(1.2rem,2vw,1.6rem); margin-bottom: 0.4rem; }
 .why-card h3 { font-size: var(--h3-size); color: var(--navy); margin-bottom: 0.3rem; }
 .why-card p { font-size: var(--small-size); color: #555; }
+
+
+/* BRAND-SPECIFIC SECTION TREATMENTS */
+.tr-section {
+  --tr-navy: #40586d;
+  --tr-blue: #6f8fa5;
+  --tr-stone: #d9d0c2;
+  --tr-cream: #f5f1ea;
+  --tr-text: #243443;
+  background: linear-gradient(180deg, #fbf8f3 0%, #f1ece3 100%);
+  color: var(--tr-text);
+}
+.tr-section .slide-header {
+  background: rgba(255,255,255,0.82);
+  border-bottom: 1px solid #d7d0c5;
+  backdrop-filter: blur(12px);
+}
+.tr-chip {
+  display:inline-flex; align-items:center; gap:0.45rem; padding:0.35rem 0.7rem; border-radius:999px;
+  background:#e7ecef; color:#40586d; font-size:var(--small-size); font-weight:700; letter-spacing:0.04em; text-transform:uppercase;
+}
+.tr-panel {
+  background: #fff; border: 1px solid #ddd5c9; border-radius: 14px; box-shadow: 0 10px 30px rgba(71, 87, 97, 0.08);
+}
+.tr-banner {
+  background: linear-gradient(135deg, #425d75 0%, #748fa4 46%, #d8cfc2 100%); color:white; border-radius:18px;
+}
+.tr-site-frame {
+  background:#fff; border:1px solid #d9d1c5; border-radius:14px; overflow:hidden; box-shadow: 0 12px 28px rgba(40,56,70,0.08);
+}
+.tr-site-top {
+  display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:0.9rem 1rem; background:#f8f4ed; border-bottom:1px solid #e2dbcf;
+}
+.fc-section {
+  --fc-black: #16120f;
+  --fc-brown: #2b221b;
+  --fc-tan: #cfc0ab;
+  --fc-orange: #c96d34;
+  --fc-olive: #7e8c69;
+  background: linear-gradient(180deg, #171310 0%, #241c16 100%);
+  color: #f2ece2;
+}
+.fc-section .slide-header {
+  background: rgba(20,17,15,0.88);
+  border-bottom: 1px solid rgba(201,109,52,0.24);
+}
+.fc-section h2, .fc-section h3 { color:#f4ede3; }
+.fc-section p { color:rgba(242,236,226,0.84); }
+.fc-panel {
+  background: linear-gradient(180deg, #211913 0%, #2c231c 100%); border:1px solid rgba(201,109,52,0.18); border-radius:14px; box-shadow: 0 14px 34px rgba(0,0,0,0.25);
+}
+.fc-chip {
+  display:inline-flex; align-items:center; gap:0.45rem; padding:0.35rem 0.7rem; border-radius:999px; background:rgba(201,109,52,0.18);
+  color:#efb48d; font-size:var(--small-size); font-weight:700; letter-spacing:0.05em; text-transform:uppercase;
+}
+.fc-site-frame {
+  background:#1a1511; border:1px solid rgba(201,109,52,0.22); border-radius:14px; overflow:hidden; box-shadow: 0 14px 34px rgba(0,0,0,0.28);
+}
+.fc-site-top {
+  display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:0.9rem 1rem; background:#120f0d; border-bottom:1px solid rgba(201,109,52,0.2);
+}
+
 </style>
 </head>
 <body>
@@ -702,7 +764,7 @@ p { font-size: var(--body-size); line-height: 1.6; }
 <!-- ============================================================ -->
 <!-- SLIDE 8b — TIMBER RIDGE POSITIONING LADDER -->
 <!-- ============================================================ -->
-<section class="slide" id="slide-8b">
+<section class="slide tr-section" id="slide-8b">
   <div class="slide-header">
     <div class="logo"><img src="assets/WF_logo.ai.png" alt="Westfield Outdoors" style="height:clamp(1rem,1.6vw,1.5rem); width:auto; display:block;"></div>
     <div class="slide-label">Timber Ridge · Positioning</div>
@@ -734,45 +796,37 @@ p { font-size: var(--body-size); line-height: 1.6; }
 <!-- ============================================================ -->
 <!-- SLIDE 9 — BRAND IDENTITY (TIMBER RIDGE) -->
 <!-- ============================================================ -->
-<section class="slide" id="slide-9">
+<section class="slide tr-section" id="slide-9">
   <div class="slide-header">
-    <div class="logo">
-      <img src="assets/WF_logo.ai.png" alt="Westfield Outdoors" style="height:clamp(1rem,1.6vw,1.5rem); width:auto; display:block;">
-    </div>
-    <div class="slide-label">Timber Ridge · Identity</div>
+    <div class="logo"><img src="assets/WF_logo.ai.png" alt="Westfield Outdoors" style="height:clamp(1rem,1.6vw,1.5rem); width:auto; display:block;"></div>
+    <div class="slide-label" style="color:#5a7286;">Timber Ridge · Identity</div>
   </div>
-  <div class="slide-content">
-    <h2>Timber Ridge Identity</h2>
-    <!-- Tagline -->
-    <div style="background:linear-gradient(135deg,#36526f,#7a95a6 48%,#d4cab9 100%); border-radius:12px; padding:clamp(1rem,2.5vw,1.8rem); text-align:center; margin-bottom:var(--gap);">
-      <div style="font-family:'Barlow',sans-serif; font-weight:800; font-size:clamp(1.4rem,3.5vw,2.6rem); color:white; letter-spacing:0.02em;">"Outdoor Your Way"</div>
-      <div style="font-size:var(--small-size); color:rgba(255,255,255,0.7); margin-top:0.4rem;">Brand Tagline</div>
-    </div>
-    <!-- Use cases -->
-    <div class="grid-4" style="margin-bottom:var(--gap);">
-      <div style="text-align:center; padding:clamp(0.6rem,1.2vw,1rem); background:#f8f9fa; border-radius:8px;">
-        <div style="font-size:clamp(1.4rem,2.5vw,2rem);"></div>
-        <div style="font-family:'Barlow',sans-serif; font-weight:600; font-size:var(--small-size); margin-top:0.3rem; color:var(--navy);">Backyard</div>
+  <div class="slide-content" style="gap:var(--gap);">
+    <div class="tr-banner" style="padding:clamp(1.2rem,2.5vw,2rem); display:grid; grid-template-columns:minmax(0,1fr) auto; gap:var(--gap); align-items:end;">
+      <div style="display:flex; flex-direction:column; gap:0.7rem;">
+        <img src="assets/New_Timber_Ridge_Logo_-_November_2025_Approved.ai.png" alt="Timber Ridge" style="height:clamp(2.8rem,6vw,4.6rem); width:auto; object-fit:contain;">
+        <div class="tr-chip">Outdoor Your Way</div>
+        <h2 style="color:white; margin:0;">Timber Ridge Identity</h2>
+        <p style="color:rgba(255,255,255,0.86); max-width:54ch;">The site presents Timber Ridge as versatile outdoor lifestyle gear, not just camp furniture. The visual system blends cool slate blues, warm neutrals, and collection-oriented merchandising.</p>
       </div>
-      <div style="text-align:center; padding:clamp(0.6rem,1.2vw,1rem); background:#f8f9fa; border-radius:8px;">
-        <div style="font-size:clamp(1.4rem,2.5vw,2rem);"></div>
-        <div style="font-family:'Barlow',sans-serif; font-weight:600; font-size:var(--small-size); margin-top:0.3rem; color:var(--navy);">Sideline</div>
-      </div>
-      <div style="text-align:center; padding:clamp(0.6rem,1.2vw,1rem); background:#f8f9fa; border-radius:8px;">
-        <div style="font-size:clamp(1.4rem,2.5vw,2rem);"></div>
-        <div style="font-family:'Barlow',sans-serif; font-weight:600; font-size:var(--small-size); margin-top:0.3rem; color:var(--navy);">Camping</div>
-      </div>
-      <div style="text-align:center; padding:clamp(0.6rem,1.2vw,1rem); background:#f8f9fa; border-radius:8px;">
-        <div style="font-size:clamp(1.4rem,2.5vw,2rem);"></div>
-        <div style="font-family:'Barlow',sans-serif; font-weight:600; font-size:var(--small-size); margin-top:0.3rem; color:var(--navy);">Outdoor Living</div>
+      <div style="display:flex; gap:0.5rem; flex-wrap:wrap; justify-content:flex-end; align-self:start; max-width:22rem;">
+        <span class="tr-chip" style="background:rgba(255,255,255,0.16); color:white;">Backyard</span>
+        <span class="tr-chip" style="background:rgba(255,255,255,0.16); color:white;">Sideline</span>
+        <span class="tr-chip" style="background:rgba(255,255,255,0.16); color:white;">Camping</span>
+        <span class="tr-chip" style="background:rgba(255,255,255,0.16); color:white;">Outdoor Living</span>
       </div>
     </div>
-    <!-- Brand values -->
-    <div class="values-row" style="justify-content:center;">
-      <div class="value-pill">Premium</div>
-      <div class="value-pill">Accessible</div>
-      <div class="value-pill">Versatile</div>
-      <div class="value-pill">Quality</div>
+    <div class="grid-2" style="flex:1; min-height:0;">
+      <div class="tr-panel" style="padding:1rem; display:flex; flex-direction:column; gap:0.7rem;">
+        <div class="tr-chip">Website cues</div>
+        <h3 style="color:#31495d;">Lifestyle-first premium presentation</h3>
+        <p style="color:#51616f;">The brand feels more premium because the site leads with aspirational use and coordinated product families rather than hard-selling specs first.</p>
+      </div>
+      <div class="tr-panel" style="padding:1rem; display:flex; flex-direction:column; gap:0.7rem;">
+        <div class="tr-chip">Brand behavior</div>
+        <h3 style="color:#31495d;">Color collections as merchandising</h3>
+        <p style="color:#51616f;">Timber Ridge uses color and coordinated product presentation as a visible part of the brand system, not just a variant chooser.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -780,7 +834,7 @@ p { font-size: var(--body-size); line-height: 1.6; }
 <!-- ============================================================ -->
 <!-- SLIDE 10 — WEBSITE STRENGTH (TIMBER RIDGE) -->
 <!-- ============================================================ -->
-<section class="slide" id="slide-10">
+<section class="slide tr-section" id="slide-10">
   <div class="slide-header">
     <div class="logo">
       <img src="assets/WF_logo.ai.png" alt="Westfield Outdoors" style="height:clamp(1rem,1.6vw,1.5rem); width:auto; display:block;">
@@ -858,49 +912,45 @@ p { font-size: var(--body-size); line-height: 1.6; }
 <!-- ============================================================ -->
 <!-- SLIDE 11 — PRODUCT STRATEGY (TIMBER RIDGE) -->
 <!-- ============================================================ -->
-<section class="slide" id="slide-11">
+<section class="slide tr-section" id="slide-11">
   <div class="slide-header">
-    <div class="logo">
-      <img src="assets/WF_logo.ai.png" alt="Westfield Outdoors" style="height:clamp(1rem,1.6vw,1.5rem); width:auto; display:block;">
-    </div>
-    <div class="slide-label">Timber Ridge · Products</div>
+    <div class="logo"><img src="assets/WF_logo.ai.png" alt="Westfield Outdoors" style="height:clamp(1rem,1.6vw,1.5rem); width:auto; display:block;"></div>
+    <div class="slide-label" style="color:#5a7286;">Timber Ridge · Product Strategy</div>
   </div>
-  <div class="slide-content">
-    <h2>Product Strategy</h2>
-    <div class="grid-4" style="flex:1; min-height:0;">
-      <div class="pillar-card">
-        <div class="pillar-icon"></div>
-        <h3>Chairs</h3>
-        <p>Seating for every occasion — camp, sport, backyard</p>
-        <div class="focus">Comfort</div>
+  <div class="slide-content" style="gap:var(--gap);">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:var(--gap);">
+      <div style="flex:1;">
+        <div class="tr-chip">Website assortment read</div>
+        <h2 style="margin-top:0.7rem;">Product Strategy</h2>
+        <p style="color:#5a6774; max-width:58ch;">The website supports a broader outdoor-lifestyle assortment, with furniture, shelter, carry, and coordinated collection thinking presented in a more premium retail frame.</p>
       </div>
-      <div class="pillar-card">
-        <div class="pillar-icon">⛺</div>
-        <h3>Tents &amp; Shelters</h3>
-        <p>Packable, durable protection for outdoor environments</p>
-        <div class="focus">Packability</div>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-icon"></div>
-        <h3>Coolers &amp; Drinkware</h3>
-        <p>Performance cooling and hydration solutions</p>
-        <div class="focus">Insulation</div>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-icon"></div>
-        <h3>Wagons &amp; Carts</h3>
-        <p>Utility transport for gear, kids, and everything else</p>
-        <div class="focus">Utility</div>
-      </div>
+      <img src="assets/New_Timber_Ridge_Logo_-_November_2025_Approved.ai.png" alt="Timber Ridge" style="height:clamp(2.2rem,5vw,3.6rem); width:auto; object-fit:contain; flex-shrink:0;">
     </div>
-    <div style="display:flex; justify-content:center; gap:clamp(1rem,3vw,3rem); margin-top:var(--gap); padding-top:var(--gap); border-top:2px solid #e8ede9;">
-      <span style="font-family:'Barlow',sans-serif; font-weight:600; font-size:var(--small-size); color:#666;">Comfort</span>
-      <span style="color:#ccc;">·</span>
-      <span style="font-family:'Barlow',sans-serif; font-weight:600; font-size:var(--small-size); color:#666;">Ease of Use</span>
-      <span style="color:#ccc;">·</span>
-      <span style="font-family:'Barlow',sans-serif; font-weight:600; font-size:var(--small-size); color:#666;">Portability</span>
-      <span style="color:#ccc;">·</span>
-      <span style="font-family:'Barlow',sans-serif; font-weight:600; font-size:var(--small-size); color:#666;">Innovation</span>
+    <div class="grid-2" style="flex:1; min-height:0;">
+      <div class="tr-site-frame" style="display:grid; grid-template-rows:auto 1fr;">
+        <div class="tr-site-top">
+          <img src="assets/timber_home_logo.png" alt="Timber Ridge site logo" style="height:1.8rem; width:auto; object-fit:contain;">
+          <div style="font-size:var(--small-size); color:#6f8190; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;">Collection-led merchandising</div>
+        </div>
+        <div style="padding:1rem; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0.8rem; align-content:start;">
+          <div class="tr-panel" style="padding:0.9rem;"><h3 style="color:#31495d; margin-bottom:0.35rem;">Chairs</h3><p style="color:#586774;">Hero category with premium seating cues and named products.</p></div>
+          <div class="tr-panel" style="padding:0.9rem;"><h3 style="color:#31495d; margin-bottom:0.35rem;">Shelter</h3><p style="color:#586774;">Tents and shelter extend beyond furniture into broader outdoor use.</p></div>
+          <div class="tr-panel" style="padding:0.9rem;"><h3 style="color:#31495d; margin-bottom:0.35rem;">Carry</h3><p style="color:#586774;">Wagons and utility products reinforce real-life transport use cases.</p></div>
+          <div class="tr-panel" style="padding:0.9rem;"><h3 style="color:#31495d; margin-bottom:0.35rem;">Collections</h3><p style="color:#586774;">Color grouping helps products feel like a family, not isolated SKUs.</p></div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:0.8rem; min-height:0;">
+        <div style="position:relative; border-radius:14px; overflow:hidden; min-height:260px; background:#c8c0b2;">
+          <img src="assets/timber_riva.jpg" alt="Timber Ridge Riva" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+          <div style="position:absolute; inset:auto 0 0 0; padding:1rem; background:linear-gradient(180deg,rgba(15,23,32,0) 0%, rgba(15,23,32,0.72) 100%); color:white;">
+            <div class="tr-chip" style="background:rgba(255,255,255,0.14); color:white;">Named product</div>
+            <div style="font-family:'Barlow',sans-serif; font-weight:800; font-size:var(--h3-size); margin-top:0.45rem;">RIVA™ LUXE MESH CHAIR</div>
+          </div>
+        </div>
+        <div class="tr-panel" style="padding:1rem;">
+          <p style="color:#586774;">This is the key website behavior to borrow: let products feel designed, merchandised, and visually situated in a lifestyle context.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -908,7 +958,7 @@ p { font-size: var(--body-size); line-height: 1.6; }
 <!-- ============================================================ -->
 <!-- SLIDE 12 — COLOR STRATEGY (TIMBER RIDGE) -->
 <!-- ============================================================ -->
-<section class="slide" id="slide-12">
+<section class="slide tr-section" id="slide-12">
   <div class="slide-header">
     <div class="logo">
       <img src="assets/WF_logo.ai.png" alt="Westfield Outdoors" style="height:clamp(1rem,1.6vw,1.5rem); width:auto; display:block;">
@@ -970,7 +1020,7 @@ p { font-size: var(--body-size); line-height: 1.6; }
 <!-- ============================================================ -->
 <!-- SLIDE 13 — WHY TIMBER RIDGE WILL WIN -->
 <!-- ============================================================ -->
-<section class="slide" id="slide-13">
+<section class="slide tr-section" id="slide-13">
   <div class="slide-header">
     <div class="logo">
       <img src="assets/WF_logo.ai.png" alt="Westfield Outdoors" style="height:clamp(1rem,1.6vw,1.5rem); width:auto; display:block;">
@@ -1019,7 +1069,7 @@ p { font-size: var(--body-size); line-height: 1.6; }
 <!-- ============================================================ -->
 <!-- SLIDE 14b — FORGE CREEK MARKET POSITION -->
 <!-- ============================================================ -->
-<section class="slide" id="slide-14b">
+<section class="slide fc-section" id="slide-14b">
   <div class="slide-header">
     <div class="logo"><img src="assets/WF_logo.ai.png" alt="Westfield Outdoors" style="height:clamp(1rem,1.6vw,1.5rem); width:auto; display:block;"></div>
     <div class="slide-label">Forge Creek · Positioning</div>
@@ -1051,55 +1101,29 @@ p { font-size: var(--body-size); line-height: 1.6; }
 <!-- ============================================================ -->
 <!-- SLIDE 15 — BRAND IDENTITY (FORGE CREEK) -->
 <!-- ============================================================ -->
-<section class="slide" id="slide-15">
+<section class="slide fc-section" id="slide-15">
   <div class="slide-header">
-    <div class="logo">
-      <img src="assets/WF_logo.ai.png" alt="Westfield Outdoors" style="height:clamp(1rem,1.6vw,1.5rem); width:auto; display:block;">
-    </div>
-    <div class="slide-label">Forge Creek · Identity</div>
+    <div class="logo"><img src="assets/WF_logo.ai.png" alt="Westfield Outdoors" style="height:clamp(1rem,1.6vw,1.5rem); width:auto; display:block;"></div>
+    <div class="slide-label" style="color:#cba98b;">Forge Creek · Identity</div>
   </div>
-  <div class="slide-content">
-    <h2>Forge Creek Identity</h2>
-    <!-- Brand promise -->
-    <div style="background:linear-gradient(135deg,#15120f,#2c241d 50%,#b46a35 100%); border-radius:12px; padding:clamp(0.8rem,2vw,1.4rem); text-align:center; margin-bottom:var(--gap);">
-      <div style="font-family:'Barlow',sans-serif; font-weight:800; font-size:clamp(1.2rem,3vw,2.2rem); color:white; letter-spacing:0.02em;">"Purpose-Built for the Hunt"</div>
-      <div style="font-size:var(--small-size); color:rgba(255,255,255,0.5); margin-top:0.3rem;">Brand Promise</div>
-    </div>
-    <!-- Brand pillars -->
-    <div class="grid-3" style="margin-bottom:var(--gap);">
-      <div style="text-align:center; padding:clamp(0.8rem,1.5vw,1.2rem); background:#f8f9fa; border-radius:8px; border-top:3px solid #e8730a;">
-        <div style="font-size:clamp(1.4rem,2.5vw,2rem);"></div>
-        <div style="font-family:'Barlow',sans-serif; font-weight:700; font-size:var(--h3-size); margin-top:0.4rem; color:var(--navy);">Authentic</div>
-        <div style="font-size:var(--small-size); color:#666; margin-top:0.3rem;">Built on real hunting culture</div>
+  <div class="slide-content" style="gap:var(--gap);">
+    <div class="fc-panel" style="padding:clamp(1.2rem,2.5vw,2rem); display:grid; grid-template-columns:minmax(0,1fr) auto; gap:var(--gap); align-items:end;">
+      <div style="display:flex; flex-direction:column; gap:0.7rem;">
+        <img src="assets/Forge_Creek_Antler_and_Words_Logo.ai.png" alt="Forge Creek" style="height:clamp(2.8rem,6vw,4.8rem); width:auto; object-fit:contain;">
+        <div class="fc-chip">Hunting-specific brand language</div>
+        <h2 style="color:#f4ede3; margin:0;">Forge Creek Identity</h2>
+        <p style="color:rgba(242,236,226,0.82); max-width:54ch;">Forge Creek’s site feels darker, narrower, and more hunting-specific. It leans on field credibility, stronger contrast, and a tougher merchandising posture than Timber Ridge.</p>
       </div>
-      <div style="text-align:center; padding:clamp(0.8rem,1.5vw,1.2rem); background:#f8f9fa; border-radius:8px; border-top:3px solid #e8730a;">
-        <div style="font-size:clamp(1.4rem,2.5vw,2rem);"></div>
-        <div style="font-family:'Barlow',sans-serif; font-weight:700; font-size:var(--h3-size); margin-top:0.4rem; color:var(--navy);">Rugged</div>
-        <div style="font-size:var(--small-size); color:#666; margin-top:0.3rem;">Built to perform in the field</div>
-      </div>
-      <div style="text-align:center; padding:clamp(0.8rem,1.5vw,1.2rem); background:#f8f9fa; border-radius:8px; border-top:3px solid #e8730a;">
-        <div style="font-size:clamp(1.4rem,2.5vw,2rem);"></div>
-        <div style="font-family:'Barlow',sans-serif; font-weight:700; font-size:var(--h3-size); margin-top:0.4rem; color:var(--navy);">Built for Hunters</div>
-        <div style="font-size:var(--small-size); color:#666; margin-top:0.3rem;">Credibility with the core audience</div>
+      <div style="display:flex; gap:0.5rem; flex-wrap:wrap; justify-content:flex-end; max-width:22rem;">
+        <span class="fc-chip">Tradition</span>
+        <span class="fc-chip">Camaraderie</span>
+        <span class="fc-chip">Legacy</span>
       </div>
     </div>
-    <!-- Brand color swatches -->
-    <div style="display:flex; align-items:center; gap:clamp(1rem,2vw,2rem);">
-      <div style="font-family:'Barlow',sans-serif; font-weight:600; font-size:var(--small-size); color:#666;">Brand Colors:</div>
-      <div style="display:flex; gap:0.8rem; align-items:center;">
-        <div style="display:flex; flex-direction:column; align-items:center; gap:0.3rem;">
-          <div style="width:clamp(2rem,3.5vw,2.8rem); height:clamp(2rem,3.5vw,2.8rem); background:#1a1a1a; border-radius:6px; border:1px solid rgba(0,0,0,0.1);"></div>
-          <span style="font-size:var(--small-size); color:#999;">#1a1a1a</span>
-        </div>
-        <div style="display:flex; flex-direction:column; align-items:center; gap:0.3rem;">
-          <div style="width:clamp(2rem,3.5vw,2.8rem); height:clamp(2rem,3.5vw,2.8rem); background:#3d3d3d; border-radius:6px; border:1px solid rgba(0,0,0,0.1);"></div>
-          <span style="font-size:var(--small-size); color:#999;">#3d3d3d</span>
-        </div>
-        <div style="display:flex; flex-direction:column; align-items:center; gap:0.3rem;">
-          <div style="width:clamp(2rem,3.5vw,2.8rem); height:clamp(2rem,3.5vw,2.8rem); background:#e8730a; border-radius:6px; border:1px solid rgba(0,0,0,0.1);"></div>
-          <span style="font-size:var(--small-size); color:#999;">#e8730a</span>
-        </div>
-      </div>
+    <div class="grid-3" style="flex:1; min-height:0;">
+      <div class="fc-panel" style="padding:1rem;"><h3>Dark visual tone</h3><p>The site uses a darker, warmer field palette with sharper contrast and hunting-specific energy.</p></div>
+      <div class="fc-panel" style="padding:1rem;"><h3>Focused assortment</h3><p>The product mix reads as field gear with purpose, not general outdoor lifestyle assortment.</p></div>
+      <div class="fc-panel" style="padding:1rem;"><h3>Field credibility</h3><p>The site’s language and merchandising work to feel credible with hunters first.</p></div>
     </div>
   </div>
 </section>
@@ -1107,7 +1131,7 @@ p { font-size: var(--body-size); line-height: 1.6; }
 <!-- ============================================================ -->
 <!-- SLIDE 16 — WEBSITE (FORGE CREEK) -->
 <!-- ============================================================ -->
-<section class="slide" id="slide-16">
+<section class="slide fc-section" id="slide-16">
   <div class="slide-header">
     <div class="logo">
       <img src="assets/WF_logo.ai.png" alt="Westfield Outdoors" style="height:clamp(1rem,1.6vw,1.5rem); width:auto; display:block;">
@@ -1180,35 +1204,29 @@ p { font-size: var(--body-size); line-height: 1.6; }
 <!-- ============================================================ -->
 <!-- SLIDE 17 — MARKET ENTRY STRATEGY -->
 <!-- ============================================================ -->
-<section class="slide" id="slide-17">
+<section class="slide fc-section" id="slide-17">
   <div class="slide-header">
-    <div class="logo">
-      <img src="assets/WF_logo.ai.png" alt="Westfield Outdoors" style="height:clamp(1rem,1.6vw,1.5rem); width:auto; display:block;">
-    </div>
-    <div class="slide-label">Forge Creek · Strategy</div>
+    <div class="logo"><img src="assets/WF_logo.ai.png" alt="Westfield Outdoors" style="height:clamp(1rem,1.6vw,1.5rem); width:auto; display:block;"></div>
+    <div class="slide-label" style="color:#cba98b;">Forge Creek · Market Entry</div>
   </div>
-  <div class="slide-content">
-    <h2>Market Entry Strategy</h2>
-    <div style="display:flex; gap:var(--gap); flex:1; min-height:0; align-items:stretch;">
-      <div class="phase-card" style="position:relative; border-left:4px solid var(--green);">
-        <div class="phase-num">1</div>
-        <div class="phase-label">Now</div>
-        <h3>Awareness</h3>
-        <p>SHOT Show &amp; ATA Show presence. Building brand recognition in the hunting community. Trade show relationships forming.</p>
+  <div class="slide-content" style="gap:var(--gap);">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:var(--gap);">
+      <div style="flex:1;">
+        <div class="fc-chip">Website-informed market entry</div>
+        <h2 style="margin-top:0.7rem; color:#f4ede3;">Market Entry Strategy</h2>
+        <p style="max-width:58ch;">Forge Creek should feel like a focused hunting brand build entering the market with discipline. The website supports a narrower, more credible path rather than broad early expansion.</p>
       </div>
-      <div style="display:flex; align-items:center; color:var(--green); font-size:1.5rem; flex-shrink:0;">→</div>
-      <div class="phase-card" style="position:relative; border-left:4px solid #3d6b99;">
-        <div class="phase-num" style="color:#e0e8f0;">2</div>
-        <div class="phase-label" style="color:#3d6b99;">6–12 Months</div>
-        <h3>Credibility Building</h3>
-        <p>Specialty retailer relationships deepening. Repeat buyers signaling product-market fit. Brand reputation compounds with each sale.</p>
+      <img src="assets/Forge_Creek_Antler_and_Words_Logo.ai.png" alt="Forge Creek" style="height:clamp(2.2rem,5vw,3.6rem); width:auto; object-fit:contain; flex-shrink:0;">
+    </div>
+    <div class="fc-site-frame" style="flex:1; min-height:0; display:grid; grid-template-rows:auto 1fr;">
+      <div class="fc-site-top">
+        <img src="assets/forge_logo_site.png" alt="Forge Creek website logo" style="height:1.9rem; width:auto; object-fit:contain;">
+        <div style="font-size:var(--small-size); color:#d5b69a; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;">Focused, field-first rollout</div>
       </div>
-      <div style="display:flex; align-items:center; color:var(--green); font-size:1.5rem; flex-shrink:0;">→</div>
-      <div class="phase-card" style="position:relative; border-left:4px solid #c4956a;">
-        <div class="phase-num" style="color:#f0e8e0;">3</div>
-        <div class="phase-label" style="color:#c4956a;">12–24 Months</div>
-        <h3>Growth</h3>
-        <p>Expanded distribution across specialty channels. Broader product range. Brand loyalty translating to premium margin.</p>
+      <div style="padding:1rem; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0.8rem; align-items:stretch;">
+        <div class="fc-panel" style="padding:1rem;"><div class="fc-chip">Now</div><h3 style="margin-top:0.7rem;">Awareness</h3><p>SHOT and ATA presence build credibility with the right audience before pushing scale.</p></div>
+        <div class="fc-panel" style="padding:1rem;"><div class="fc-chip">Next</div><h3 style="margin-top:0.7rem;">Credibility</h3><p>Use focused field gear and consistent brand presentation to deepen trust and retailer confidence.</p></div>
+        <div class="fc-panel" style="padding:1rem;"><div class="fc-chip">Then</div><h3 style="margin-top:0.7rem;">Growth</h3><p>Expand once the brand language, assortment, and channel fit have proven out in-market.</p></div>
       </div>
     </div>
   </div>
@@ -1217,7 +1235,7 @@ p { font-size: var(--body-size); line-height: 1.6; }
 <!-- ============================================================ -->
 <!-- SLIDE 18 — HONEST ASSESSMENT -->
 <!-- ============================================================ -->
-<section class="slide" id="slide-18">
+<section class="slide fc-section" id="slide-18">
   <div class="slide-header">
     <div class="logo">
       <img src="assets/WF_logo.ai.png" alt="Westfield Outdoors" style="height:clamp(1rem,1.6vw,1.5rem); width:auto; display:block;">
@@ -1251,7 +1269,7 @@ p { font-size: var(--body-size); line-height: 1.6; }
 <!-- ============================================================ -->
 <!-- SLIDE 19 — STRATEGIC VALUE (FORGE CREEK) -->
 <!-- ============================================================ -->
-<section class="slide" id="slide-19">
+<section class="slide fc-section" id="slide-19">
   <div class="slide-header">
     <div class="logo"><img src="assets/WF_logo.ai.png" alt="Westfield Outdoors" style="height:clamp(1rem,1.6vw,1.5rem); width:auto; display:block;"></div>
     <div class="slide-label">Forge Creek · Strategic Value</div>
