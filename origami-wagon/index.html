@@ -659,22 +659,19 @@ h3 {
   <button class="notes-btn toggle-btn" id="toggleNotesBtn">Hide Notes</button>
   <button class="notes-btn save-btn" id="saveNotesBtn">Save Notes</button>
 </div>
-<div class="notes-layer" id="notesLayer"></div>
 <script id="presentation-notes-data" type="application/json">{"notes":[],"hidden":false}</script>
 <script id="portable-sticky-notes-script">
 (function(){
-  const notesLayer = document.getElementById('notesLayer');
   const addNoteBtn = document.getElementById('addNoteBtn');
   const toggleNotesBtn = document.getElementById('toggleNotesBtn');
   const saveNotesBtn = document.getElementById('saveNotesBtn');
   const notesDataEl = document.getElementById('presentation-notes-data');
-  if (!notesLayer || !addNoteBtn || !toggleNotesBtn || !saveNotesBtn || !notesDataEl) return;
+  if (!addNoteBtn || !toggleNotesBtn || !saveNotesBtn || !notesDataEl) return;
   let notesState = { notes: [], hidden: false };
   let notesDirty = false;
   const slides = Array.from(document.querySelectorAll('.slide'));
   let currentSlide = slides[0] || null;
   const getSlideId = () => (currentSlide || slides[0] || {}).id || 'slide-unknown';
-  const getSlideRect = () => { const slide = currentSlide || slides[0]; return slide ? slide.getBoundingClientRect() : {left:0,top:0,width:window.innerWidth,height:window.innerHeight}; };
   function updateCurrentSlide() {
     const chosen = slides.reduce((best, slide) => {
       const r = slide.getBoundingClientRect();
@@ -685,9 +682,11 @@ h3 {
     }, null);
     currentSlide = chosen ? chosen.slide : (currentSlide || slides[0] || null);
   }
+  function getSlideRect(){ const slide=currentSlide||slides[0]; return slide ? slide.getBoundingClientRect() : {left:0,top:0,width:window.innerWidth,height:window.innerHeight}; }
   function loadNotesState(){ try { notesState = JSON.parse(notesDataEl.textContent || '{"notes":[],"hidden":false}'); if (!Array.isArray(notesState.notes)) notesState.notes=[]; } catch { notesState = { notes: [], hidden: false }; } }
   function persist(){ notesDataEl.textContent = JSON.stringify(notesState, null, 2); notesDirty = true; }
-  function render(){ updateCurrentSlide(); const slideId = getSlideId(); const rect = getSlideRect(); notesLayer.innerHTML=''; toggleNotesBtn.textContent = notesState.hidden ? 'Show Notes' : 'Hide Notes'; notesState.notes.filter(n => n.slideId === slideId).forEach(note => { const el=document.createElement('div'); el.className='sticky-note'+(notesState.hidden?' hidden-note':''); el.style.left=(rect.left + note.x)+'px'; el.style.top=(rect.top + note.y)+'px'; el.style.width=note.width+'px'; el.style.height=note.height+'px'; el.style.zIndex=note.z||1; el.innerHTML='<div class="sticky-note-header"><div class="sticky-note-title">'+slideId+'</div><button class="sticky-note-close" aria-label="Delete note">×</button></div><textarea class="sticky-note-body" placeholder="Type note..."></textarea><div class="sticky-note-resize"></div>'; const body=el.querySelector('.sticky-note-body'); body.value=note.text||''; notesLayer.appendChild(el); const close=el.querySelector('.sticky-note-close'); const header=el.querySelector('.sticky-note-header'); const resize=el.querySelector('.sticky-note-resize'); close.addEventListener('click',()=>{ notesState.notes=notesState.notes.filter(n=>n.id!==note.id); persist(); render();}); body.addEventListener('input',()=>{ note.text=body.value; persist();}); header.addEventListener('pointerdown',(e)=>{ if(e.target===close)return; e.preventDefault(); const sx=e.clientX, sy=e.clientY, sl=note.x, st=note.y; const onMove=ev=>{ note.x=Math.max(0,Math.min(rect.width-note.width, sl+ev.clientX-sx)); note.y=Math.max(0,Math.min(rect.height-note.height, st+ev.clientY-sy)); el.style.left=(rect.left + note.x)+'px'; el.style.top=(rect.top + note.y)+'px';}; const onUp=()=>{ window.removeEventListener('pointermove',onMove); window.removeEventListener('pointerup',onUp); persist();}; window.addEventListener('pointermove',onMove); window.addEventListener('pointerup',onUp);}); resize.addEventListener('pointerdown',e=>{ e.preventDefault(); e.stopPropagation(); const sx=e.clientX, sy=e.clientY, sw=note.width, sh=note.height; const onMove=ev=>{ note.width=Math.max(180,Math.min(rect.width-note.x, sw+ev.clientX-sx)); note.height=Math.max(140,Math.min(rect.height-note.y, sh+ev.clientY-sy)); el.style.width=note.width+'px'; el.style.height=note.height+'px';}; const onUp=()=>{ window.removeEventListener('pointermove',onMove); window.removeEventListener('pointerup',onUp); persist();}; window.addEventListener('pointermove',onMove); window.addEventListener('pointerup',onUp);}); }); }
+  function ensureLayer(slide){ let layer = slide.querySelector('.slide-notes-layer'); if (!layer){ layer = document.createElement('div'); layer.className='slide-notes-layer'; layer.style.position='absolute'; layer.style.inset='0'; layer.style.pointerEvents='none'; layer.style.zIndex='2500'; slide.appendChild(layer); } return layer; }
+  function render(){ updateCurrentSlide(); const slideId = getSlideId(); const rect = getSlideRect(); const slide = currentSlide || slides[0]; if (!slide) return; const layer = ensureLayer(slide); layer.innerHTML=''; toggleNotesBtn.textContent = notesState.hidden ? 'Show Notes' : 'Hide Notes'; notesState.notes.filter(n => n.slideId === slideId).forEach(note => { const el=document.createElement('div'); el.className='sticky-note'+(notesState.hidden?' hidden-note':''); el.style.left=note.x+'px'; el.style.top=note.y+'px'; el.style.width=note.width+'px'; el.style.height=note.height+'px'; el.style.zIndex=note.z||1; el.innerHTML='<div class="sticky-note-header"><div class="sticky-note-title">'+slideId+'</div><button class="sticky-note-close" aria-label="Delete note">×</button></div><textarea class="sticky-note-body" placeholder="Type note..."></textarea><div class="sticky-note-resize"></div>'; const body=el.querySelector('.sticky-note-body'); body.value=note.text||''; layer.appendChild(el); const close=el.querySelector('.sticky-note-close'); const header=el.querySelector('.sticky-note-header'); const resize=el.querySelector('.sticky-note-resize'); close.addEventListener('click',()=>{ notesState.notes=notesState.notes.filter(n=>n.id!==note.id); persist(); render();}); body.addEventListener('input',()=>{ note.text=body.value; persist();}); header.addEventListener('pointerdown',(e)=>{ if(e.target===close)return; e.preventDefault(); const sx=e.clientX, sy=e.clientY, sl=note.x, st=note.y; const onMove=ev=>{ note.x=Math.max(0,Math.min(rect.width-note.width, sl+ev.clientX-sx)); note.y=Math.max(0,Math.min(rect.height-note.height, st+ev.clientY-sy)); el.style.left=note.x+'px'; el.style.top=note.y+'px';}; const onUp=()=>{ window.removeEventListener('pointermove',onMove); window.removeEventListener('pointerup',onUp); persist();}; window.addEventListener('pointermove',onMove); window.addEventListener('pointerup',onUp);}); resize.addEventListener('pointerdown',e=>{ e.preventDefault(); e.stopPropagation(); const sx=e.clientX, sy=e.clientY, sw=note.width, sh=note.height; const onMove=ev=>{ note.width=Math.max(180,Math.min(rect.width-note.x, sw+ev.clientX-sx)); note.height=Math.max(140,Math.min(rect.height-note.y, sh+ev.clientY-sy)); el.style.width=note.width+'px'; el.style.height=note.height+'px';}; const onUp=()=>{ window.removeEventListener('pointermove',onMove); window.removeEventListener('pointerup',onUp); persist();}; window.addEventListener('pointermove',onMove); window.addEventListener('pointerup',onUp);}); }); }
   function addNote(){ updateCurrentSlide(); const slideId = getSlideId(); const rect = getSlideRect(); const maxZ = Math.max(1,...notesState.notes.map(n=>n.z||1)); notesState.notes.push({ id:'note-'+Date.now(), slideId, x:Math.max(24, rect.width-320), y:Math.max(24, rect.height-280), width:260, height:220, text:'', z:maxZ+1 }); persist(); render(); }
   async function saveFile(){ persist(); const html=document.documentElement.outerHTML; const blob=new Blob([html],{type:'text/html'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=((document.title||'presentation').replace(/[^a-z0-9]+/gi,'-').toLowerCase())+'-notes.html'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); notesDirty=false; }
   addNoteBtn.addEventListener('click', addNote);
@@ -696,7 +695,6 @@ h3 {
   loadNotesState();
   render();
   window.addEventListener('scroll', ()=>requestAnimationFrame(render), { passive:true });
-  slides.forEach(s => { const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { currentSlide = s; render(); } }); }, { threshold: 0.55 }); io.observe(s); });
   window.addEventListener('resize', ()=>requestAnimationFrame(render));
 })();
 </script>
