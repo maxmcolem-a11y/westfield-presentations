@@ -671,12 +671,70 @@ h3 {
   if (!notesLayer || !addNoteBtn || !toggleNotesBtn || !saveNotesBtn || !notesDataEl) return;
   let notesState = { notes: [], hidden: false };
   let notesDirty = false;
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  let currentSlide = slides[0] || null;
+  function activeSlide(){
+    let best = currentSlide || slides[0] || null;
+    let bestArea = -1;
+    for (const slide of slides) {
+      const r = slide.getBoundingClientRect();
+      const visibleW = Math.max(0, Math.min(r.right, window.innerWidth) - Math.max(r.left, 0));
+      const visibleH = Math.max(0, Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0));
+      const area = visibleW * visibleH;
+      if (area > bestArea) { bestArea = area; best = slide; }
+    }
+    currentSlide = best;
+    return best;
+  }
   function loadNotesState(){ try { notesState = JSON.parse(notesDataEl.textContent || '{"notes":[],"hidden":false}'); if (!Array.isArray(notesState.notes)) notesState.notes=[]; } catch { notesState = { notes: [], hidden: false }; } }
   function persist(){ notesDataEl.textContent = JSON.stringify(notesState, null, 2); notesDirty = true; }
-  function render(){ notesLayer.innerHTML=''; toggleNotesBtn.textContent = notesState.hidden ? 'Show Notes' : 'Hide Notes'; for (const note of notesState.notes){ const el=document.createElement('div'); el.className='sticky-note'+(notesState.hidden?' hidden-note':''); el.style.left=note.x+'px'; el.style.top=note.y+'px'; el.style.width=note.width+'px'; el.style.height=note.height+'px'; el.style.zIndex=note.z||1; el.innerHTML=`<div class="sticky-note-header"><div class="sticky-note-title">Note</div><button class="sticky-note-close" aria-label="Delete note">×</button></div><textarea class="sticky-note-body" placeholder="Type note..."></textarea><div class="sticky-note-resize"></div>`; const body=el.querySelector('.sticky-note-body'); body.value=note.text||''; notesLayer.appendChild(el); const close=el.querySelector('.sticky-note-close'); const header=el.querySelector('.sticky-note-header'); const resize=el.querySelector('.sticky-note-resize'); close.addEventListener('click',()=>{ notesState.notes=notesState.notes.filter(n=>n.id!==note.id); persist(); render();}); body.addEventListener('input',()=>{ note.text=body.value; persist();}); el.addEventListener('pointerdown',()=>{ const maxZ=Math.max(1,...notesState.notes.map(n=>n.z||1)); note.z=maxZ+1; el.style.zIndex=note.z; persist();}); header.addEventListener('pointerdown',(e)=>{ if(e.target===close)return; e.preventDefault(); const sx=e.clientX, sy=e.clientY, sl=note.x, st=note.y; const onMove=(ev)=>{ note.x=Math.max(0,sl+ev.clientX-sx); note.y=Math.max(0,st+ev.clientY-sy); el.style.left=note.x+'px'; el.style.top=note.y+'px';}; const onUp=()=>{ window.removeEventListener('pointermove',onMove); window.removeEventListener('pointerup',onUp); persist();}; window.addEventListener('pointermove',onMove); window.addEventListener('pointerup',onUp);}); resize.addEventListener('pointerdown',(e)=>{ e.preventDefault(); e.stopPropagation(); const sx=e.clientX, sy=e.clientY, sw=note.width, sh=note.height; const onMove=(ev)=>{ note.width=Math.max(180,sw+ev.clientX-sx); note.height=Math.max(140,sh+ev.clientY-sy); el.style.width=note.width+'px'; el.style.height=note.height+'px';}; const onUp=()=>{ window.removeEventListener('pointermove',onMove); window.removeEventListener('pointerup',onUp); persist();}; window.addEventListener('pointermove',onMove); window.addEventListener('pointerup',onUp);}); }}
-  function addNote(){ const maxZ=Math.max(1,...notesState.notes.map(n=>n.z||1)); notesState.notes.push({id:'note-'+Date.now(),x:window.innerWidth-320,y:window.innerHeight-280,width:260,height:220,text:'',z:maxZ+1}); persist(); render(); }
+  function render(){
+    const slide = activeSlide();
+    notesLayer.innerHTML='';
+    toggleNotesBtn.textContent = notesState.hidden ? 'Show Notes' : 'Hide Notes';
+    if (!slide) return;
+    const slideRect = slide.getBoundingClientRect();
+    const slideId = slide.id || 'slide-unknown';
+    const visibleNotes = notesState.notes.filter(n => n.slideId === slideId);
+    for (const note of visibleNotes){
+      const el=document.createElement('div');
+      el.className='sticky-note'+(notesState.hidden?' hidden-note':'');
+      el.style.left=(slideRect.left + note.x)+'px';
+      el.style.top=(slideRect.top + note.y)+'px';
+      el.style.width=note.width+'px';
+      el.style.height=note.height+'px';
+      el.style.zIndex=note.z||1;
+      el.innerHTML=`<div class="sticky-note-header"><div class="sticky-note-title">${slideId}</div><button class="sticky-note-close" aria-label="Delete note">×</button></div><textarea class="sticky-note-body" placeholder="Type note..."></textarea><div class="sticky-note-resize"></div>`;
+      const body=el.querySelector('.sticky-note-body');
+      body.value=note.text||'';
+      notesLayer.appendChild(el);
+      const close=el.querySelector('.sticky-note-close');
+      const header=el.querySelector('.sticky-note-header');
+      const resize=el.querySelector('.sticky-note-resize');
+      close.addEventListener('click',()=>{ notesState.notes=notesState.notes.filter(n=>n.id!==note.id); persist(); render();});
+      body.addEventListener('input',()=>{ note.text=body.value; persist();});
+      el.addEventListener('pointerdown',()=>{ const maxZ=Math.max(1,...notesState.notes.map(n=>n.z||1)); note.z=maxZ+1; el.style.zIndex=note.z; persist();});
+      header.addEventListener('pointerdown',(e)=>{ if(e.target===close)return; e.preventDefault(); const sx=e.clientX, sy=e.clientY, sl=note.x, st=note.y; const onMove=(ev)=>{ note.x=Math.max(0,Math.min(slideRect.width-note.width, sl+ev.clientX-sx)); note.y=Math.max(0,Math.min(slideRect.height-note.height, st+ev.clientY-sy)); el.style.left=(slideRect.left + note.x)+'px'; el.style.top=(slideRect.top + note.y)+'px';}; const onUp=()=>{ window.removeEventListener('pointermove',onMove); window.removeEventListener('pointerup',onUp); persist();}; window.addEventListener('pointermove',onMove); window.addEventListener('pointerup',onUp);});
+      resize.addEventListener('pointerdown',(e)=>{ e.preventDefault(); e.stopPropagation(); const sx=e.clientX, sy=e.clientY, sw=note.width, sh=note.height; const onMove=(ev)=>{ note.width=Math.max(180,Math.min(slideRect.width-note.x, sw+ev.clientX-sx)); note.height=Math.max(140,Math.min(slideRect.height-note.y, sh+ev.clientY-sy)); el.style.width=note.width+'px'; el.style.height=note.height+'px';}; const onUp=()=>{ window.removeEventListener('pointermove',onMove); window.removeEventListener('pointerup',onUp); persist();}; window.addEventListener('pointermove',onMove); window.addEventListener('pointerup',onUp);});
+    }
+  }
+  function addNote(){
+    const slide = activeSlide();
+    if (!slide) return;
+    const slideId = slide.id || 'slide-unknown';
+    const maxZ=Math.max(1,...notesState.notes.map(n=>n.z||1));
+    notesState.notes.push({id:'note-'+Date.now(),slideId,x:Math.max(24, slide.clientWidth-320),y:Math.max(24, slide.clientHeight-280),width:260,height:220,text:'',z:maxZ+1});
+    persist(); render();
+  }
   async function saveFile(){ persist(); const html=document.documentElement.outerHTML; if(window.showSaveFilePicker){ try{ const handle=await window.showSaveFilePicker({ suggestedName:(document.title||'presentation')+'-notes.html', types:[{ description:'HTML Presentation', accept:{'text/html':['.html']} }] }); const writable=await handle.createWritable(); await writable.write(html); await writable.close(); notesDirty=false; return; } catch(e){} } const blob=new Blob([html],{type:'text/html'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=((document.title||'presentation').replace(/[^a-z0-9]+/gi,'-').toLowerCase())+'-notes.html'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); notesDirty=false; }
-  addNoteBtn.addEventListener('click', addNote); toggleNotesBtn.addEventListener('click', ()=>{ notesState.hidden=!notesState.hidden; persist(); render(); }); saveNotesBtn.addEventListener('click', saveFile); loadNotesState(); render(); window.addEventListener('beforeunload',(e)=>{ if(notesDirty){ e.preventDefault(); e.returnValue=''; }});
+  addNoteBtn.addEventListener('click', addNote);
+  toggleNotesBtn.addEventListener('click', ()=>{ notesState.hidden=!notesState.hidden; persist(); render(); });
+  saveNotesBtn.addEventListener('click', saveFile);
+  loadNotesState();
+  render();
+  window.addEventListener('scroll', render, { passive:true });
+  window.addEventListener('resize', render);
+  window.addEventListener('beforeunload',(e)=>{ if(notesDirty){ e.preventDefault(); e.returnValue=''; }});
 })();
 </script>
 
