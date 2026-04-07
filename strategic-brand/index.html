@@ -9,11 +9,11 @@
 :root {
   --green: #1b6b3a;
   --navy: #1a2b4a;
-  --title-size: clamp(1.8rem, 4.8vw, 3.7rem);
-  --h2-size: clamp(1.4rem, 3.3vw, 2.4rem);
-  --h3-size: clamp(1rem, 2.2vw, 1.5rem);
-  --body-size: clamp(0.88rem, 1.55vw, 1.12rem);
-  --small-size: clamp(0.82rem, 1.45vw, 1.08rem);
+  --title-size: clamp(1.9rem, 4.8vw, 3.6rem);
+  --h2-size: clamp(1.45rem, 3.2vw, 2.4rem);
+  --h3-size: clamp(1.05rem, 2.1vw, 1.55rem);
+  --body-size: clamp(0.95rem, 1.55vw, 1.18rem);
+  --small-size: clamp(1rem, 1.45vw, 1.25rem);
   --pad: clamp(1.5rem, 4vw, 4rem);
   --gap: clamp(0.8rem, 2vw, 2rem);
 }
@@ -29,6 +29,30 @@ body { height: 100%; font-family: 'Source Sans 3', sans-serif; background: #fff;
   display: flex;
   flex-direction: column;
   position: relative;
+}
+.slide-number {
+  position: absolute;
+  right: clamp(1rem, 2vw, 1.8rem);
+  bottom: clamp(0.8rem, 1.6vw, 1.4rem);
+  font-family: 'Barlow', sans-serif;
+  font-size: clamp(0.95rem, 1.35vw, 1.15rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: rgba(26,43,74,0.58);
+  z-index: 5;
+}
+.slide[style*="background: var(--navy)"],
+.slide.closing-slide,
+.slide.tr-section,
+.slide.fc-section,
+#slide-14a {
+}
+.slide[style*="background: var(--navy)"] .slide-number,
+.slide.closing-slide .slide-number,
+.slide.tr-section .slide-number,
+.slide.fc-section .slide-number,
+#slide-14a .slide-number {
+  color: rgba(255,255,255,0.72);
 }
 .slide-header {
   display: flex;
@@ -433,15 +457,13 @@ p { font-size: var(--body-size); line-height: 1.6; }
   <!-- Logo -->
   <div style="position:absolute;top:2rem;left:var(--pad);"><img src="assets/WF_logo.ai-white.png" alt="Westfield Outdoors" style="height:clamp(2.1rem,3.8vw,3rem); width:auto; display:block;"></div>
 
-  <div style="position:relative; z-index:1;">
-    <div style="font-family:'Barlow',sans-serif; font-size:clamp(1rem,1.9vw,1.45rem); font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:1rem;">Strategic Brand Executive Update</div>
-    <h1 style="color:white; font-size:clamp(2.2rem,6vw,5rem); line-height:1.1; margin-bottom:0.6rem;">Strategic Brands</h1>
-<<<<<<< HEAD
-    <div style="font-family:'Barlow',sans-serif; font-weight:400; font-size:clamp(1rem,2.5vw,1.8rem); color:rgba(255,255,255,0.7); margin-bottom:1.5rem;">Executive Update</div>
-    <div style="display:flex; align-items:center; justify-content:center; gap:clamp(1rem,3vw,2.5rem); padding:0.9rem 1.4rem; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:24px; backdrop-filter:blur(6px);">
-      <img src="assets/timber-ridge-logo.png" alt="Timber Ridge logo" style="height:clamp(28px,4vw,46px); width:auto; object-fit:contain; filter:drop-shadow(0 2px 10px rgba(0,0,0,0.18));">
-      <div style="width:1px; height:clamp(28px,4vw,42px); background:rgba(255,255,255,0.18);"></div>
-      <img src="assets/forge-creek-logo.png" alt="Forge Creek logo" style="height:clamp(30px,4vw,50px); width:auto; object-fit:contain; filter:drop-shadow(0 2px 10px rgba(0,0,0,0.18));">
+  <div style="position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:clamp(0.9rem,1.8vw,1.3rem);">
+    <div style="font-family:'Barlow',sans-serif; font-size:clamp(1.15rem,1.8vw,1.5rem); font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.62); margin-bottom:0.2rem;">Strategic Brand Executive Update</div>
+    <h1 style="color:white; font-size:clamp(2.8rem,6.6vw,5.6rem); line-height:1.05; margin-bottom:0.15rem;">Strategic Brands</h1>
+    <div style="font-family:'Barlow',sans-serif; font-weight:500; font-size:clamp(1.3rem,2.8vw,2rem); color:rgba(255,255,255,0.78); margin-bottom:0.45rem;">Executive Update</div>
+    <div style="display:flex; align-items:center; justify-content:center; gap:clamp(1.4rem,3vw,2.8rem); flex-wrap:wrap; padding:clamp(0.9rem,1.8vw,1.25rem) clamp(1.2rem,2.4vw,1.8rem); background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:22px;">
+      <img src="assets/New_Timber_Ridge_Logo_-_November_2025_Approved.ai-clean.png" alt="Timber Ridge" style="height:clamp(3.8rem,8vw,5.8rem); width:auto; object-fit:contain; display:block;">
+      <img src="assets/Forge_Creek_Antler_and_Words_Logo.ai-clean.png" alt="Forge Creek" style="height:clamp(3.2rem,7vw,5rem); width:auto; object-fit:contain; display:block;">
     </div>
   </div>
 </section>
@@ -476,31 +498,26 @@ p { font-size: var(--body-size); line-height: 1.6; }
       </div>
     </div>
     <!-- Right: donut chart -->
-    <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:1rem;">
-      <svg width="240" height="240" viewBox="0 0 240 240">
-        <!-- Background circle -->
-        <circle cx="120" cy="120" r="70" fill="none" stroke="#f0f0f0" stroke-width="36"/>
-        <!-- Green arc: 60% = 264/440 of circumference -->
-        <circle cx="120" cy="120" r="70" fill="none" stroke="#1b6b3a" stroke-width="36"
-          stroke-dasharray="264 176" stroke-dashoffset="110"
-          stroke-linecap="butt" transform="rotate(-90 120 120)"/>
-        <!-- Blue arc: 40% = 176/440, offset by 264 -->
-        <circle cx="120" cy="120" r="70" fill="none" stroke="#3d6b99" stroke-width="36"
-          stroke-dasharray="176 264" stroke-dashoffset="-154"
-          stroke-linecap="butt" transform="rotate(-90 120 120)"/>
-        <!-- Center text -->
-        <text x="120" y="112" text-anchor="middle" fill="#1a2b4a" font-family="Barlow" font-weight="800" font-size="32">40%</text>
-        <text x="120" y="134" text-anchor="middle" fill="#666" font-family="Source Sans 3" font-size="11">Brand Opportunity</text>
+    <div style="flex:0 0 36%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.2rem; padding-right:clamp(0.5rem,1.4vw,1rem);">
+      <svg width="380" height="380" viewBox="0 0 320 320" style="max-width:100%; height:auto;">
+        <circle cx="160" cy="160" r="92" fill="none" stroke="#f0f0f0" stroke-width="50"/>
+        <circle cx="160" cy="160" r="92" fill="none" stroke="#1b6b3a" stroke-width="50"
+          stroke-dasharray="347 231" stroke-dashoffset="144"
+          stroke-linecap="butt" transform="rotate(-90 160 160)"/>
+        <circle cx="160" cy="160" r="92" fill="none" stroke="#3d6b99" stroke-width="50"
+          stroke-dasharray="231 347" stroke-dashoffset="-203"
+          stroke-linecap="butt" transform="rotate(-90 160 160)"/>
+        <text x="160" y="154" text-anchor="middle" fill="#1a2b4a" font-family="Barlow" font-weight="800" font-size="52">40%</text>
+        <text x="160" y="186" text-anchor="middle" fill="#666" font-family="Source Sans 3" font-size="19">Brand Opportunity</text>
       </svg>
-      <!-- Legend -->
-      <div style="display:flex; flex-direction:column; gap:0.5rem;">
-        <div style="display:flex; align-items:center; gap:0.6rem; font-size:var(--small-size);">
-          <div style="width:14px; height:14px; background:#1b6b3a; border-radius:3px; flex-shrink:0;"></div>
-          <span style="color:#333; font-weight:500;">Mass + Private Label (60%)</span>
+      <div style="display:flex; flex-direction:column; gap:0.85rem; width:min(100%, 24rem);">
+        <div style="display:flex; align-items:center; gap:0.8rem; font-size:var(--body-size);">
+          <div style="width:18px; height:18px; background:#1b6b3a; border-radius:4px; flex-shrink:0;"></div>
+          <span style="color:#333; font-weight:600;">Mass + Private Label (60%)</span>
         </div>
-        <div style="display:flex; align-items:center; gap:0.6rem; font-size:var(--small-size);">
-          <div style="width:14px; height:14px; background:#3d6b99; border-radius:3px; flex-shrink:0;"></div>
-          <span style="color:#333; font-weight:500;">Strategic Brand Opportunity (40%)</span>
+        <div style="display:flex; align-items:center; gap:0.8rem; font-size:var(--body-size);">
+          <div style="width:18px; height:18px; background:#3d6b99; border-radius:4px; flex-shrink:0;"></div>
+          <span style="color:#333; font-weight:600;">Strategic Brand Opportunity (40%)</span>
         </div>
       </div>
     </div>
@@ -1311,12 +1328,17 @@ p { font-size: var(--body-size); line-height: 1.6; }
 // Build nav dots
 const slides = document.querySelectorAll('.slide');
 const navDots = document.getElementById('navDots');
-slides.forEach((_, i) => {
+slides.forEach((slide, i) => {
   const dot = document.createElement('button');
   dot.className = 'nav-dot';
   dot.setAttribute('aria-label', `Slide ${i+1}`);
   dot.addEventListener('click', () => slides[i].scrollIntoView({behavior:'smooth'}));
   navDots.appendChild(dot);
+
+  const slideNumber = document.createElement('div');
+  slideNumber.className = 'slide-number';
+  slideNumber.textContent = `${i + 1}`;
+  slide.appendChild(slideNumber);
 });
 
 // Update active dot on scroll
