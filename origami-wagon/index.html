@@ -686,11 +686,13 @@ h3 {
     const slide = activeSlide();
     const id = activeId();
     const rect = rectOf(slide);
-    slides.forEach(s => { const layer = s.querySelector('.slide-notes-layer'); if (layer) layer.remove(); });
+    slides.forEach(s => { const layer = s.querySelector('.slide-notes-layer'); if (layer) layer.style.display = 'none'; });
     if (!slide) return;
     toggleNotesBtn.textContent = notesState.hidden ? 'Show Notes' : 'Hide Notes';
     if (notesState.hidden) return;
     const layer = ensureLayer(slide);
+    layer.style.display = 'block';
+    layer.innerHTML = '';
     notesState.notes.filter(n => n.slideId === id).forEach(note => {
       const el = document.createElement('div');
       el.className='sticky-note';
