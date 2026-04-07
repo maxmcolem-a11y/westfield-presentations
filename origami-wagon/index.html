@@ -370,107 +370,6 @@ h3 {
 }
 
 /* ===========================================
-   STICKY NOTES
-   =========================================== */
-.notes-controls {
-    position: fixed;
-    right: 18px;
-    bottom: 18px;
-    display: flex;
-    gap: 10px;
-    z-index: 3000;
-}
-.notes-btn {
-    width: 44px;
-    height: 44px;
-    border: none;
-    border-radius: 999px;
-    background: rgba(24,24,24,0.88);
-    color: #fff;
-    box-shadow: 0 10px 24px rgba(0,0,0,0.24);
-    cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-}
-.notes-btn.toggle-btn,
-.notes-btn.save-btn {
-    width: auto;
-    padding: 0 14px;
-    font-size: 13px;
-    font-weight: 600;
-}
-.notes-btn.save-btn { background: rgba(230,110,37,0.95); }
-.notes-layer {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 2500;
-}
-.sticky-note {
-    position: absolute;
-    min-width: 180px;
-    min-height: 140px;
-    width: 260px;
-    height: 220px;
-    background: #fff2a8;
-    color: #2a2100;
-    border-radius: 14px;
-    box-shadow: 0 18px 40px rgba(0,0,0,0.22);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    pointer-events: auto;
-    border: 1px solid rgba(0,0,0,0.08);
-}
-.sticky-note.hidden-note { display:none; }
-.sticky-note-header {
-    height: 34px;
-    padding: 8px 10px;
-    background: rgba(0,0,0,0.08);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: move;
-    user-select: none;
-    flex-shrink: 0;
-}
-.sticky-note-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-}
-.sticky-note-close {
-    border: none;
-    background: transparent;
-    color: rgba(0,0,0,0.65);
-    font-size: 18px;
-    line-height: 1;
-    cursor: pointer;
-}
-.sticky-note-body {
-    flex: 1;
-    width: 100%;
-    border: none;
-    background: transparent;
-    resize: none;
-    padding: 12px;
-    font: 500 15px/1.4 'Inter', sans-serif;
-    color: inherit;
-    outline: none;
-}
-.sticky-note-resize {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 18px;
-    height: 18px;
-    cursor: nwse-resize;
-    background: linear-gradient(135deg, transparent 0 46%, rgba(0,0,0,0.32) 46% 54%, transparent 54% 62%, rgba(0,0,0,0.32) 62% 70%, transparent 70%);
-}
-
-/* ===========================================
    RESPONSIVE
    =========================================== */
 @media (max-height: 700px) {
@@ -494,6 +393,22 @@ h3 {
     html { scroll-behavior: auto; }
 }
 </style>
+
+<style id="portable-sticky-notes-style">
+.notes-controls { position: fixed; right: 18px; bottom: 18px; display: flex; gap: 10px; z-index: 3000; }
+.notes-btn { width: 44px; height: 44px; border: none; border-radius: 999px; background: rgba(24,24,24,0.88); color: #fff; box-shadow: 0 10px 24px rgba(0,0,0,0.24); cursor: pointer; font-family: Inter, sans-serif; font-size: 22px; font-weight: 700; }
+.notes-btn.toggle-btn, .notes-btn.save-btn { width: auto; padding: 0 14px; font-size: 13px; font-weight: 600; }
+.notes-btn.save-btn { background: rgba(230,110,37,0.95); }
+.notes-layer { position: fixed; inset: 0; pointer-events: none; z-index: 2500; }
+.sticky-note { position: absolute; min-width: 180px; min-height: 140px; width: 260px; height: 220px; background: #fff2a8; color: #2a2100; border-radius: 14px; box-shadow: 0 18px 40px rgba(0,0,0,0.22); display: flex; flex-direction: column; overflow: hidden; pointer-events: auto; border: 1px solid rgba(0,0,0,0.08); }
+.sticky-note.hidden-note { display:none; }
+.sticky-note-header { height: 34px; padding: 8px 10px; background: rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: space-between; cursor: move; user-select: none; flex-shrink: 0; }
+.sticky-note-title { font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.sticky-note-close { border: none; background: transparent; color: rgba(0,0,0,0.65); font-size: 18px; line-height: 1; cursor: pointer; }
+.sticky-note-body { flex: 1; width: 100%; border: none; background: transparent; resize: none; padding: 12px; font: 500 15px/1.4 Inter, sans-serif; color: inherit; outline: none; }
+.sticky-note-resize { position: absolute; right: 0; bottom: 0; width: 18px; height: 18px; cursor: nwse-resize; background: linear-gradient(135deg, transparent 0 46%, rgba(0,0,0,0.32) 46% 54%, transparent 54% 62%, rgba(0,0,0,0.32) 62% 70%, transparent 70%); }
+</style>
+
 </head>
 <body>
 
@@ -695,142 +610,7 @@ h3 {
    SLIDE PRESENTATION CONTROLLER
    =========================================== */
 (function() {
-    
-const NOTES_SCRIPT_ID = 'presentation-notes-data';
-const notesLayer = document.getElementById('notesLayer');
-const addNoteBtn = document.getElementById('addNoteBtn');
-const toggleNotesBtn = document.getElementById('toggleNotesBtn');
-const saveNotesBtn = document.getElementById('saveNotesBtn');
-const notesDataEl = document.getElementById(NOTES_SCRIPT_ID);
-let notesState = { notes: [], hidden: false };
-let notesDirty = false;
-
-function loadNotesState() {
-  try {
-    notesState = JSON.parse(notesDataEl.textContent || '{"notes":[],"hidden":false}');
-    if (!Array.isArray(notesState.notes)) notesState.notes = [];
-  } catch {
-    notesState = { notes: [], hidden: false };
-  }
-}
-function markNotesDirty() { notesDirty = true; }
-function persistNotesJson() {
-  notesDataEl.textContent = JSON.stringify(notesState, null, 2);
-  markNotesDirty();
-}
-function renderNotes() {
-  notesLayer.innerHTML = '';
-  toggleNotesBtn.textContent = notesState.hidden ? 'Show Notes' : 'Hide Notes';
-  for (const note of notesState.notes) {
-    const el = document.createElement('div');
-    el.className = 'sticky-note' + (notesState.hidden ? ' hidden-note' : '');
-    el.style.left = note.x + 'px';
-    el.style.top = note.y + 'px';
-    el.style.width = note.width + 'px';
-    el.style.height = note.height + 'px';
-    el.style.zIndex = note.z || 1;
-    el.dataset.noteId = note.id;
-    el.innerHTML = `<div class="sticky-note-header"><div class="sticky-note-title">Note</div><button class="sticky-note-close" aria-label="Delete note">×</button></div><textarea class="sticky-note-body" placeholder="Type note...">${(note.text||'').replace(/</g,'&lt;')}</textarea><div class="sticky-note-resize"></div>`;
-    notesLayer.appendChild(el);
-
-    const header = el.querySelector('.sticky-note-header');
-    const close = el.querySelector('.sticky-note-close');
-    const body = el.querySelector('.sticky-note-body');
-    const resize = el.querySelector('.sticky-note-resize');
-
-    close.addEventListener('click', () => {
-      notesState.notes = notesState.notes.filter(n => n.id !== note.id);
-      persistNotesJson();
-      renderNotes();
-    });
-    body.addEventListener('input', () => {
-      note.text = body.value;
-      persistNotesJson();
-    });
-    el.addEventListener('pointerdown', () => {
-      const maxZ = Math.max(1, ...notesState.notes.map(n => n.z || 1));
-      note.z = maxZ + 1;
-      el.style.zIndex = note.z;
-      persistNotesJson();
-    });
-
-    header.addEventListener('pointerdown', (e) => {
-      if (e.target === close) return;
-      e.preventDefault();
-      const startX = e.clientX, startY = e.clientY;
-      const startLeft = note.x, startTop = note.y;
-      const onMove = (ev) => {
-        note.x = Math.max(0, startLeft + ev.clientX - startX);
-        note.y = Math.max(0, startTop + ev.clientY - startY);
-        el.style.left = note.x + 'px';
-        el.style.top = note.y + 'px';
-      };
-      const onUp = () => {
-        window.removeEventListener('pointermove', onMove);
-        window.removeEventListener('pointerup', onUp);
-        persistNotesJson();
-      };
-      window.addEventListener('pointermove', onMove);
-      window.addEventListener('pointerup', onUp);
-    });
-
-    resize.addEventListener('pointerdown', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const startX = e.clientX, startY = e.clientY;
-      const startW = note.width, startH = note.height;
-      const onMove = (ev) => {
-        note.width = Math.max(180, startW + ev.clientX - startX);
-        note.height = Math.max(140, startH + ev.clientY - startY);
-        el.style.width = note.width + 'px';
-        el.style.height = note.height + 'px';
-      };
-      const onUp = () => {
-        window.removeEventListener('pointermove', onMove);
-        window.removeEventListener('pointerup', onUp);
-        persistNotesJson();
-      };
-      window.addEventListener('pointermove', onMove);
-      window.addEventListener('pointerup', onUp);
-    });
-  }
-}
-function addNote() {
-  const maxZ = Math.max(1, ...notesState.notes.map(n => n.z || 1));
-  notesState.notes.push({ id: 'note-' + Date.now(), x: window.innerWidth - 320, y: window.innerHeight - 280, width: 260, height: 220, text: '', z: maxZ + 1 });
-  persistNotesJson();
-  renderNotes();
-}
-async function saveNotesToFile() {
-  persistNotesJson();
-  const html = document.documentElement.outerHTML;
-  if (window.showSaveFilePicker) {
-    try {
-      const handle = await window.showSaveFilePicker({ suggestedName: (document.title || 'presentation') + '-notes.html', types: [{ description: 'HTML Presentation', accept: { 'text/html': ['.html'] } }] });
-      const writable = await handle.createWritable();
-      await writable.write(html);
-      await writable.close();
-      notesDirty = false;
-      return;
-    } catch (e) {}
-  }
-  const blob = new Blob([html], { type: 'text/html' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = ((document.title || 'presentation').replace(/[^a-z0-9]+/gi, '-').toLowerCase()) + '-notes.html';
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-  notesDirty = false;
-}
-addNoteBtn.addEventListener('click', addNote);
-toggleNotesBtn.addEventListener('click', () => { notesState.hidden = !notesState.hidden; persistNotesJson(); renderNotes(); });
-saveNotesBtn.addEventListener('click', saveNotesToFile);
-loadNotesState();
-renderNotes();
-window.addEventListener('beforeunload', (e) => { if (notesDirty) { e.preventDefault(); e.returnValue = ''; } });
-const slides = document.querySelectorAll('.slide');
+    const slides = document.querySelectorAll('.slide');
     const progress = document.getElementById('progress');
     const dotsContainer = document.getElementById('navDots');
     const total = slides.length;
@@ -874,13 +654,31 @@ const slides = document.querySelectorAll('.slide');
 })();
 </script>
 
-<div class="notes-controls">
+<div class="notes-controls" id="notesControls">
   <button class="notes-btn" id="addNoteBtn" aria-label="Add note">+</button>
   <button class="notes-btn toggle-btn" id="toggleNotesBtn">Hide Notes</button>
   <button class="notes-btn save-btn" id="saveNotesBtn">Save Notes</button>
 </div>
 <div class="notes-layer" id="notesLayer"></div>
 <script id="presentation-notes-data" type="application/json">{"notes":[],"hidden":false}</script>
+<script id="portable-sticky-notes-script">
+(function(){
+  const notesLayer = document.getElementById('notesLayer');
+  const addNoteBtn = document.getElementById('addNoteBtn');
+  const toggleNotesBtn = document.getElementById('toggleNotesBtn');
+  const saveNotesBtn = document.getElementById('saveNotesBtn');
+  const notesDataEl = document.getElementById('presentation-notes-data');
+  if (!notesLayer || !addNoteBtn || !toggleNotesBtn || !saveNotesBtn || !notesDataEl) return;
+  let notesState = { notes: [], hidden: false };
+  let notesDirty = false;
+  function loadNotesState(){ try { notesState = JSON.parse(notesDataEl.textContent || '{"notes":[],"hidden":false}'); if (!Array.isArray(notesState.notes)) notesState.notes=[]; } catch { notesState = { notes: [], hidden: false }; } }
+  function persist(){ notesDataEl.textContent = JSON.stringify(notesState, null, 2); notesDirty = true; }
+  function render(){ notesLayer.innerHTML=''; toggleNotesBtn.textContent = notesState.hidden ? 'Show Notes' : 'Hide Notes'; for (const note of notesState.notes){ const el=document.createElement('div'); el.className='sticky-note'+(notesState.hidden?' hidden-note':''); el.style.left=note.x+'px'; el.style.top=note.y+'px'; el.style.width=note.width+'px'; el.style.height=note.height+'px'; el.style.zIndex=note.z||1; el.innerHTML=`<div class="sticky-note-header"><div class="sticky-note-title">Note</div><button class="sticky-note-close" aria-label="Delete note">×</button></div><textarea class="sticky-note-body" placeholder="Type note..."></textarea><div class="sticky-note-resize"></div>`; const body=el.querySelector('.sticky-note-body'); body.value=note.text||''; notesLayer.appendChild(el); const close=el.querySelector('.sticky-note-close'); const header=el.querySelector('.sticky-note-header'); const resize=el.querySelector('.sticky-note-resize'); close.addEventListener('click',()=>{ notesState.notes=notesState.notes.filter(n=>n.id!==note.id); persist(); render();}); body.addEventListener('input',()=>{ note.text=body.value; persist();}); el.addEventListener('pointerdown',()=>{ const maxZ=Math.max(1,...notesState.notes.map(n=>n.z||1)); note.z=maxZ+1; el.style.zIndex=note.z; persist();}); header.addEventListener('pointerdown',(e)=>{ if(e.target===close)return; e.preventDefault(); const sx=e.clientX, sy=e.clientY, sl=note.x, st=note.y; const onMove=(ev)=>{ note.x=Math.max(0,sl+ev.clientX-sx); note.y=Math.max(0,st+ev.clientY-sy); el.style.left=note.x+'px'; el.style.top=note.y+'px';}; const onUp=()=>{ window.removeEventListener('pointermove',onMove); window.removeEventListener('pointerup',onUp); persist();}; window.addEventListener('pointermove',onMove); window.addEventListener('pointerup',onUp);}); resize.addEventListener('pointerdown',(e)=>{ e.preventDefault(); e.stopPropagation(); const sx=e.clientX, sy=e.clientY, sw=note.width, sh=note.height; const onMove=(ev)=>{ note.width=Math.max(180,sw+ev.clientX-sx); note.height=Math.max(140,sh+ev.clientY-sy); el.style.width=note.width+'px'; el.style.height=note.height+'px';}; const onUp=()=>{ window.removeEventListener('pointermove',onMove); window.removeEventListener('pointerup',onUp); persist();}; window.addEventListener('pointermove',onMove); window.addEventListener('pointerup',onUp);}); }}
+  function addNote(){ const maxZ=Math.max(1,...notesState.notes.map(n=>n.z||1)); notesState.notes.push({id:'note-'+Date.now(),x:window.innerWidth-320,y:window.innerHeight-280,width:260,height:220,text:'',z:maxZ+1}); persist(); render(); }
+  async function saveFile(){ persist(); const html=document.documentElement.outerHTML; if(window.showSaveFilePicker){ try{ const handle=await window.showSaveFilePicker({ suggestedName:(document.title||'presentation')+'-notes.html', types:[{ description:'HTML Presentation', accept:{'text/html':['.html']} }] }); const writable=await handle.createWritable(); await writable.write(html); await writable.close(); notesDirty=false; return; } catch(e){} } const blob=new Blob([html],{type:'text/html'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=((document.title||'presentation').replace(/[^a-z0-9]+/gi,'-').toLowerCase())+'-notes.html'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); notesDirty=false; }
+  addNoteBtn.addEventListener('click', addNote); toggleNotesBtn.addEventListener('click', ()=>{ notesState.hidden=!notesState.hidden; persist(); render(); }); saveNotesBtn.addEventListener('click', saveFile); loadNotesState(); render(); window.addEventListener('beforeunload',(e)=>{ if(notesDirty){ e.preventDefault(); e.returnValue=''; }});
+})();
+</script>
 
 </body>
 </html>
