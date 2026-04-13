@@ -691,74 +691,81 @@ h3 {
     const centerY = window.innerHeight * 0.5;
     currentSlide = slides.find(slide => { const r = slide.getBoundingClientRect(); return r.top <= centerY && r.bottom >= centerY; }) || currentSlide || slides[0] || null;
   }
-  function viewportRect(){ return { width: window.innerWidth, height: window.innerHeight }; }
+  function slideRect(slide){
+    return slide ? { width: slide.clientWidth || window.innerWidth, height: slide.clientHeight || window.innerHeight } : { width: window.innerWidth, height: window.innerHeight };
+  }
   function loadNotesState(){ try { notesState = JSON.parse(notesDataEl.textContent || '{"notes":[],"hidden":false}'); if (!Array.isArray(notesState.notes)) notesState.notes=[]; } catch { notesState = { notes: [], hidden: false }; } }
   function persist(){ notesDataEl.textContent = JSON.stringify(notesState, null, 2); notesDirty = true; }
-  function ensureLayer(){
-    let layer = document.getElementById('presentationNotesLayer');
+  function ensureLayer(slide){
+    let layer = slide.querySelector('.slide-notes-layer');
     if (!layer){
       layer = document.createElement('div');
-      layer.id = 'presentationNotesLayer';
-      layer.className = 'notes-layer';
-      document.body.appendChild(layer);
+      layer.className = 'slide-notes-layer';
+      layer.style.position = 'absolute';
+      layer.style.inset = '0';
+      layer.style.pointerEvents = 'none';
+      layer.style.zIndex = '2500';
+      layer.style.overflow = 'visible';
+      slide.appendChild(layer);
     }
     return layer;
   }
   function render(){
     updateCurrentSlide();
-    const slide = activeSlide();
-    const id = activeId();
-    const rect = viewportRect();
-    const layer = ensureLayer();
     toggleNotesBtn.textContent = notesState.hidden ? 'Show Notes' : 'Hide Notes';
-    layer.innerHTML = '';
-    layer.style.display = notesState.hidden || !slide ? 'none' : 'block';
-    if (notesState.hidden || !slide) return;
-    notesState.notes.filter(n => n.slideId === id).forEach(note => {
-      const el = document.createElement('div');
-      el.className='sticky-note';
-      el.style.position='absolute';
-      el.style.left = note.x + 'px';
-      el.style.top = note.y + 'px';
-      el.style.width = note.width + 'px';
-      el.style.height = note.height + 'px';
-      el.style.zIndex = note.z || 1;
-      el.innerHTML='<div class="sticky-note-header"><div class="sticky-note-title">'+slideLabel(slide)+'</div><button class="sticky-note-close" aria-label="Delete note">×</button></div><textarea class="sticky-note-body" placeholder="Type note..."></textarea><div class="sticky-note-resize"></div>';
-      const body = el.querySelector('.sticky-note-body'); body.value = note.text || '';
-      layer.appendChild(el);
-      const close = el.querySelector('.sticky-note-close');
-      const header = el.querySelector('.sticky-note-header');
-      const resize = el.querySelector('.sticky-note-resize');
-      close.addEventListener('click', () => { notesState.notes = notesState.notes.filter(n => n.id !== note.id); persist(); render(); });
-      body.addEventListener('input', () => { note.text = body.value; persist(); });
-      header.addEventListener('pointerdown', (e) => {
-        if (e.target === close) return;
-        e.preventDefault();
-        const sx = e.clientX, sy = e.clientY, sl = note.x, st = note.y;
-        const onMove = ev => {
-          const bounds = viewportRect();
-          note.x = Math.max(0, Math.min(bounds.width - note.width, sl + ev.clientX - sx));
-          note.y = Math.max(0, Math.min(bounds.height - note.height, st + ev.clientY - sy));
-          el.style.left = note.x + 'px';
-          el.style.top = note.y + 'px';
-        };
-        const onUp = () => { window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); persist(); };
-        window.addEventListener('pointermove', onMove);
-        window.addEventListener('pointerup', onUp);
-      });
-      resize.addEventListener('pointerdown', (e) => {
-        e.preventDefault(); e.stopPropagation();
-        const sx = e.clientX, sy = e.clientY, sw = note.width, sh = note.height;
-        const onMove = ev => {
-          const bounds = viewportRect();
-          note.width = Math.max(180, Math.min(bounds.width - note.x, sw + ev.clientX - sx));
-          note.height = Math.max(140, Math.min(bounds.height - note.y, sh + ev.clientY - sy));
-          el.style.width = note.width + 'px';
-          el.style.height = note.height + 'px';
-        };
-        const onUp = () => { window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); persist(); };
-        window.addEventListener('pointermove', onMove);
-        window.addEventListener('pointerup', onUp);
+    slides.forEach(slide => {
+      const layer = ensureLayer(slide);
+      layer.innerHTML = '';
+      layer.style.display = notesState.hidden ? 'none' : 'block';
+      if (notesState.hidden) return;
+      const id = slideKey(slide);
+      const rect = slideRect(slide);
+      notesState.notes.filter(n => n.slideId === id).forEach(note => {
+        const el = document.createElement('div');
+        el.className='sticky-note';
+        el.style.position='absolute';
+        el.style.left = note.x + 'px';
+        el.style.top = note.y + 'px';
+        el.style.width = note.width + 'px';
+        el.style.height = note.height + 'px';
+        el.style.zIndex = note.z || 1;
+        el.innerHTML='<div class="sticky-note-header"><div class="sticky-note-title">'+slideLabel(slide)+'</div><button class="sticky-note-close" aria-label="Delete note">×</button></div><textarea class="sticky-note-body" placeholder="Type note..."></textarea><div class="sticky-note-resize"></div>';
+        const body = el.querySelector('.sticky-note-body'); body.value = note.text || '';
+        layer.appendChild(el);
+        const close = el.querySelector('.sticky-note-close');
+        const header = el.querySelector('.sticky-note-header');
+        const resize = el.querySelector('.sticky-note-resize');
+        close.addEventListener('click', () => { notesState.notes = notesState.notes.filter(n => n.id !== note.id); persist(); render(); });
+        body.addEventListener('input', () => { note.text = body.value; persist(); });
+        header.addEventListener('pointerdown', (e) => {
+          if (e.target === close) return;
+          e.preventDefault();
+          const sx = e.clientX, sy = e.clientY, sl = note.x, st = note.y;
+          const onMove = ev => {
+            const bounds = slideRect(slide);
+            note.x = Math.max(0, Math.min(bounds.width - note.width, sl + ev.clientX - sx));
+            note.y = Math.max(0, Math.min(bounds.height - note.height, st + ev.clientY - sy));
+            el.style.left = note.x + 'px';
+            el.style.top = note.y + 'px';
+          };
+          const onUp = () => { window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); persist(); };
+          window.addEventListener('pointermove', onMove);
+          window.addEventListener('pointerup', onUp);
+        });
+        resize.addEventListener('pointerdown', (e) => {
+          e.preventDefault(); e.stopPropagation();
+          const sx = e.clientX, sy = e.clientY, sw = note.width, sh = note.height;
+          const onMove = ev => {
+            const bounds = slideRect(slide);
+            note.width = Math.max(180, Math.min(bounds.width - note.x, sw + ev.clientX - sx));
+            note.height = Math.max(140, Math.min(bounds.height - note.y, sh + ev.clientY - sy));
+            el.style.width = note.width + 'px';
+            el.style.height = note.height + 'px';
+          };
+          const onUp = () => { window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); persist(); };
+          window.addEventListener('pointermove', onMove);
+          window.addEventListener('pointerup', onUp);
+        });
       });
     });
   }
@@ -766,7 +773,7 @@ h3 {
     updateCurrentSlide();
     const slide = activeSlide(); if (!slide) return;
     const id = activeId();
-    const rect = viewportRect();
+    const rect = slideRect(slide);
     const maxZ = Math.max(1, ...notesState.notes.map(n => n.z || 1));
     notesState.notes.push({ id: 'note-' + Date.now(), slideId: id, x: Math.max(24, rect.width - 320), y: Math.max(24, rect.height - 280), width: 260, height: 220, text: '', z: maxZ + 1 });
     persist(); render();
@@ -777,7 +784,7 @@ h3 {
   saveNotesBtn.addEventListener('click', saveFile);
   loadNotesState();
   render();
-  window.addEventListener('scroll', () => requestAnimationFrame(render), { passive: true });
+  window.addEventListener('scroll', () => requestAnimationFrame(updateCurrentSlide), { passive: true });
   window.addEventListener('resize', () => requestAnimationFrame(render));
 })();
 </script>
