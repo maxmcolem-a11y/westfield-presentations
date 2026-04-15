@@ -531,6 +531,90 @@ strong { color: var(--ink); font-weight: 600; }
    =========================================== */
 .center-block { max-width: 62rem; }
 .metrics-band { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: clamp(0.8rem, 1.6vw, 1rem); }
+.precedent-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.65rem, 1.2vw, 0.95rem);
+}
+.precedent-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  text-decoration: none;
+  color: inherit;
+  background: linear-gradient(180deg, rgba(29,35,31,0.96) 0%, rgba(20,24,22,0.93) 100%);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 18px 55px rgba(0,0,0,0.24);
+}
+.precedent-tile:hover {
+  border-color: rgba(199,160,109,0.4);
+  transform: translateY(-2px);
+}
+.tile-image {
+  aspect-ratio: 1.35 / 1;
+  background: rgba(255,255,255,0.05);
+  overflow: hidden;
+}
+.tile-image img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  display: block;
+}
+.tile-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.42rem;
+  padding: 0.9rem 0.95rem 1rem;
+  min-height: 0;
+}
+.tile-kicker {
+  font-size: var(--small-size);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  font-weight: 600;
+}
+.tile-meta h3 {
+  font-size: clamp(1rem, 1.7vw, 1.32rem);
+}
+.tile-meta p {
+  font-size: clamp(0.72rem, 1.05vw, 0.92rem);
+  line-height: 1.45;
+}
+.source-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.65rem, 1.2vw, 0.95rem);
+}
+.source-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-height: 0;
+}
+.source-card h3 {
+  font-size: clamp(1rem, 1.8vw, 1.38rem);
+}
+.source-card p {
+  font-size: clamp(0.72rem, 1.05vw, 0.92rem);
+  line-height: 1.42;
+}
+.source-link {
+  margin-top: auto;
+  color: var(--gold);
+  text-decoration: none;
+  font-size: var(--small-size);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.source-link:hover { color: #e0bc8f; }
 
 /* ===========================================
    Responsive slide layout
@@ -538,11 +622,11 @@ strong { color: var(--ink); font-weight: 600; }
 @media (max-width: 980px) {
   .hero, .compare, .score-grid, .metrics-band { grid-template-columns: 1fr; }
   .compare .vs { justify-self: start; }
-  .grid-4, .grid-3, .grid-2, .kpi-row { grid-template-columns: 1fr 1fr; }
+  .grid-4, .grid-3, .grid-2, .kpi-row, .precedent-gallery, .source-grid { grid-template-columns: 1fr 1fr; }
   .score-list { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
-  .grid-4, .grid-3, .grid-2, .kpi-row { grid-template-columns: 1fr; }
+  .grid-4, .grid-3, .grid-2, .kpi-row, .precedent-gallery, .source-grid { grid-template-columns: 1fr; }
   .nav-dots { display: none; }
 }
   </style>
@@ -895,12 +979,113 @@ strong { color: var(--ink); font-weight: 600; }
   </section>
 
   <!-- ===========================================
-       SLIDE 11 — Main recommendation
+       SLIDE 11 — Visual precedent gallery
+       =========================================== -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand"><span class="brand-dot"></span> Images + links</div>
+      <div class="slide-num">11</div>
+    </div>
+    <div class="slide-content">
+      <div class="eyebrow reveal d1">Visual precedent board</div>
+      <h2 class="reveal d2">The product should sit between cable efficiency, breathable shade, and premium outdoor atmosphere.</h2>
+      <div class="precedent-gallery" style="margin-top:0.75rem;">
+        <a class="precedent-tile reveal d2" href="https://en.wikipedia.org/wiki/Georgia_Dome" target="_blank" rel="noreferrer">
+          <div class="tile-image"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/1996_Georgia_Dome.JPEG/330px-1996_Georgia_Dome.JPEG" alt="Georgia Dome cable-supported roof precedent"></div>
+          <div class="tile-meta">
+            <div class="tile-kicker">Large-span logic</div>
+            <h3>Georgia Dome</h3>
+            <p>Cable-supported roof precedent showing extreme span efficiency and minimal internal obstruction.</p>
+          </div>
+        </a>
+        <a class="precedent-tile reveal d3" href="https://en.wikipedia.org/wiki/Olympic_Gymnastics_Arena" target="_blank" rel="noreferrer">
+          <div class="tile-image"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/85/Olympic_Gymnastics_Arena_-_KSPO_Dome.jpg/330px-Olympic_Gymnastics_Arena_-_KSPO_Dome.jpg" alt="Olympic Gymnastics Arena cable dome precedent"></div>
+          <div class="tile-meta">
+            <div class="tile-kicker">Membrane + dome</div>
+            <h3>Olympic Gymnastics Arena</h3>
+            <p>Useful reference for cable-dome thinking and stable membrane roof behavior at architectural scale.</p>
+          </div>
+        </a>
+        <a class="precedent-tile reveal d4" href="https://en.wikipedia.org/wiki/Shade_sail" target="_blank" rel="noreferrer">
+          <div class="tile-image"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/BaroogaFootballGround%26Playground.JPG/330px-BaroogaFootballGround%26Playground.JPG" alt="Shade sail precedent"></div>
+          <div class="tile-meta">
+            <div class="tile-kicker">Fast baseline</div>
+            <h3>Shade sail</h3>
+            <p>The practical baseline for quick deployment, membrane tension, and why breathable shade beats tarp thinking.</p>
+          </div>
+        </a>
+        <a class="precedent-tile reveal d5" href="https://hoshinoresorts.com/en/hotels/hoshinoyafuji/" target="_blank" rel="noreferrer">
+          <div class="tile-image"><img src="https://media.hoshinoresorts.com/image/authenticated/s--h3mYSlrz--/c_fill,g_auto,h_630,w_1200/f_auto,q_auto/v1744973935/OPG%E5%AF%8C%E5%A3%AB_en_cozrmj.png" alt="Hoshinoya Fuji glamping visual territory"></div>
+          <div class="tile-meta">
+            <div class="tile-kicker">Luxury camping target</div>
+            <h3>HOSHINOYA Fuji</h3>
+            <p>The mood target: quiet premium outdoor architecture, not event-rental kitsch and not backpacking gear.</p>
+          </div>
+        </a>
+      </div>
+      <div class="footer-note reveal d6">Each tile opens a live source so the deck becomes a working research surface, not just a static summary.</div>
+    </div>
+  </section>
+
+  <!-- ===========================================
+       SLIDE 12 — Live research trail
+       =========================================== -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand"><span class="brand-dot"></span> Research trail</div>
+      <div class="slide-num">12</div>
+    </div>
+    <div class="slide-content">
+      <div class="eyebrow reveal d1">Linked source map</div>
+      <h2 class="reveal d2">These are the pages most worth mining while the concept sharpens.</h2>
+      <div class="source-grid" style="margin-top:0.75rem;">
+        <div class="card source-card reveal d2">
+          <div class="mini">TensegrityWiki</div>
+          <h3>Shade Structure</h3>
+          <p>Closest direct precedent bucket, including a 3-strut beach shade structure and outdoor shade-specific logic.</p>
+          <a class="source-link" href="https://tensegritywiki.com/index.php?title=Shade_Structure" target="_blank" rel="noreferrer">Open source ↗</a>
+        </div>
+        <div class="card source-card reveal d3">
+          <div class="mini">TensegrityWiki</div>
+          <h3>Tension</h3>
+          <p>Key pavilion precedent, described as a lightweight tensegrity ring with a tensile membrane and anticlastic surface.</p>
+          <a class="source-link" href="https://tensegritywiki.com/index.php?title=Tension" target="_blank" rel="noreferrer">Open source ↗</a>
+        </div>
+        <div class="card source-card reveal d4">
+          <div class="mini">TensegrityWiki</div>
+          <h3>Deployable Structures</h3>
+          <p>The best page for fast-setup logic and why deployability has to be designed as a system, not improvised in the field.</p>
+          <a class="source-link" href="https://tensegritywiki.com/index.php?title=Deployable_Structures" target="_blank" rel="noreferrer">Open source ↗</a>
+        </div>
+        <div class="card source-card reveal d3">
+          <div class="mini">TensegrityWiki</div>
+          <h3>Underwood Pavilion</h3>
+          <p>Portable pavilion precedent, likely valuable for fabrication, assembly, and how experimental geometry survives real deployment.</p>
+          <a class="source-link" href="https://tensegritywiki.com/index.php?title=Underwood_Pavilion_by_Riether,_Wit,_Putt" target="_blank" rel="noreferrer">Open source ↗</a>
+        </div>
+        <div class="card source-card reveal d4">
+          <div class="mini">TensegrityWiki</div>
+          <h3>Burning Man</h3>
+          <p>Useful because it points toward breathable fabrics like shade cloth and aluminet, and away from tarp-style membranes.</p>
+          <a class="source-link" href="https://tensegritywiki.com/index.php?title=Burning_Man" target="_blank" rel="noreferrer">Open source ↗</a>
+        </div>
+        <div class="card source-card reveal d5">
+          <div class="mini">Brand + market</div>
+          <h3>Snow Peak / GO OUT / HOSHINOYA</h3>
+          <p>Use these to keep the object in premium outdoor architecture territory instead of drifting into expo rigging or raw engineering demo mode.</p>
+          <a class="source-link" href="https://www.heddels.com/2023/06/the-outdoor-brands-of-japan-mont-bell-nanga-goldwin-more/" target="_blank" rel="noreferrer">Open style source ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================================
+       SLIDE 13 — Main recommendation
        =========================================== -->
   <section class="slide">
     <div class="topbar">
       <div class="brand"><span class="brand-dot"></span> Decision</div>
-      <div class="slide-num">11</div>
+      <div class="slide-num">13</div>
     </div>
     <div class="slide-content center-block">
       <div class="eyebrow reveal d1">Recommendation</div>
@@ -917,12 +1102,12 @@ strong { color: var(--ink); font-weight: 600; }
   </section>
 
   <!-- ===========================================
-       SLIDE 12 — Next steps
+       SLIDE 14 — Next steps
        =========================================== -->
   <section class="slide">
     <div class="topbar">
       <div class="brand"><span class="brand-dot"></span> Next steps</div>
-      <div class="slide-num">12</div>
+      <div class="slide-num">14</div>
     </div>
     <div class="slide-content">
       <div class="eyebrow reveal d1">What to do next</div>
@@ -951,7 +1136,7 @@ strong { color: var(--ink); font-weight: 600; }
         <div class="kpi"><strong>Phase 3</strong> Side-span / privacy modules</div>
         <div class="kpi"><strong>Phase 4</strong> Weather envelope only if the shade architecture proves itself</div>
       </div>
-      <div class="footer-note reveal d6">Prepared for Westfield Outdoors, Industrial Design Sprint, SW-032 PROJECT TENSEGRITY. Sources include internal synthesis of market research, academic review, structural typology ranking, and product precedent mapping.</div>
+      <div class="footer-note reveal d6">Prepared for Westfield Outdoors, Industrial Design Sprint, SW-032 PROJECT TENSEGRITY. Sources include internal synthesis of market research, academic review, structural typology ranking, precedent imagery, and linked research references.</div>
     </div>
   </section>
 
