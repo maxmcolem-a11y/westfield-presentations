@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PROJECT TENSEGRITY | Big Shade Direction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+/* ===========================================
+   VIEWPORT FITTING: MANDATORY BASE STYLES
+   Include this ENTIRE file in every presentation.
+   These styles ensure slides fit exactly in the viewport.
+   =========================================== */
+
+/* 1. Lock html/body to viewport */
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+/* 2. Each slide = exact viewport height */
+.slide {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    overflow: hidden; /* CRITICAL: Prevent ANY overflow */
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* 3. Content container with flex for centering */
+.slide-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-height: 100%;
+    overflow: hidden; /* Double-protection against overflow */
+    padding: var(--slide-padding);
+}
+
+/* 4. ALL typography uses clamp() for responsive scaling */
+:root {
+    /* Titles scale from mobile to desktop */
+    --title-size: clamp(1.5rem, 5vw, 4rem);
+    --h2-size: clamp(1.25rem, 3.5vw, 2.5rem);
+    --h3-size: clamp(1rem, 2.5vw, 1.75rem);
+
+    /* Body text */
+    --body-size: clamp(0.75rem, 1.5vw, 1.125rem);
+    --small-size: clamp(0.65rem, 1vw, 0.875rem);
+
+    /* Spacing scales with viewport */
+    --slide-padding: clamp(1rem, 4vw, 4rem);
+    --content-gap: clamp(0.5rem, 2vw, 2rem);
+    --element-gap: clamp(0.25rem, 1vw, 1rem);
+}
+
+/* 5. Cards/containers use viewport-relative max sizes */
+.card, .container, .content-box {
+    max-width: min(90vw, 1000px);
+    max-height: min(80vh, 700px);
+}
+
+/* 6. Lists auto-scale with viewport */
+.feature-list, .bullet-list {
+    gap: clamp(0.4rem, 1vh, 1rem);
+}
+
+.feature-list li, .bullet-list li {
+    font-size: var(--body-size);
+    line-height: 1.4;
+}
+
+/* 7. Grids adapt to available space */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+/* 8. Images constrained to viewport */
+img, .image-container {
+    max-width: 100%;
+    max-height: min(50vh, 400px);
+    object-fit: contain;
+}
+
+/* ===========================================
+   RESPONSIVE BREAKPOINTS
+   Aggressive scaling for smaller viewports
+   =========================================== */
+
+/* Short viewports (< 700px height) */
+@media (max-height: 700px) {
+    :root {
+        --slide-padding: clamp(0.75rem, 3vw, 2rem);
+        --content-gap: clamp(0.4rem, 1.5vw, 1rem);
+        --title-size: clamp(1.25rem, 4.5vw, 2.5rem);
+        --h2-size: clamp(1rem, 3vw, 1.75rem);
+    }
+}
+
+/* Very short viewports (< 600px height) */
+@media (max-height: 600px) {
+    :root {
+        --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem);
+        --content-gap: clamp(0.3rem, 1vw, 0.75rem);
+        --title-size: clamp(1.1rem, 4vw, 2rem);
+        --body-size: clamp(0.7rem, 1.2vw, 0.95rem);
+    }
+
+    /* Hide non-essential elements */
+    .nav-dots, .keyboard-hint, .decorative {
+        display: none;
+    }
+}
+
+/* Extremely short (landscape phones, < 500px height) */
+@media (max-height: 500px) {
+    :root {
+        --slide-padding: clamp(0.4rem, 2vw, 1rem);
+        --title-size: clamp(1rem, 3.5vw, 1.5rem);
+        --h2-size: clamp(0.9rem, 2.5vw, 1.25rem);
+        --body-size: clamp(0.65rem, 1vw, 0.85rem);
+    }
+}
+
+/* Narrow viewports (< 600px width) */
+@media (max-width: 600px) {
+    :root {
+        --title-size: clamp(1.25rem, 7vw, 2.5rem);
+    }
+
+    /* Stack grids vertically */
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===========================================
+   REDUCED MOTION
+   Respect user preferences
+   =========================================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* ===========================================
+   PROJECT TENSEGRITY THEME — Dark Botanical inspired
+   =========================================== */
+:root {
+  --bg-1: #0d1110;
+  --bg-2: #131816;
+  --bg-3: #1b221e;
+  --ink: #f1ece4;
+  --ink-soft: rgba(241,236,228,0.78);
+  --ink-dim: rgba(241,236,228,0.5);
+  --gold: #c7a06d;
+  --gold-soft: rgba(199,160,109,0.18);
+  --sage: #8fa38c;
+  --rose: #cf9fa2;
+  --terracotta: #a96d57;
+  --line: rgba(241,236,228,0.1);
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'IBM Plex Sans', sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --radius-lg: clamp(1rem, 1.8vw, 1.6rem);
+  --radius-md: clamp(0.8rem, 1.2vw, 1.1rem);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  background: radial-gradient(circle at top left, rgba(201,184,150,0.08), transparent 24%), radial-gradient(circle at bottom right, rgba(232,180,184,0.06), transparent 22%), linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 45%, #0f1311 100%);
+  color: var(--ink);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: 0.55;
+}
+
+.slide {
+  background: transparent;
+}
+
+.slide::after {
+  content: '';
+  position: absolute;
+  inset: auto auto calc(-1 * clamp(60px, 7vw, 120px)) calc(-1 * clamp(60px, 6vw, 110px));
+  width: clamp(220px, 28vw, 480px);
+  height: clamp(220px, 28vw, 480px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,180,184,0.12) 0%, rgba(212,165,116,0.04) 42%, transparent 70%);
+  filter: blur(24px);
+  pointer-events: none;
+}
+
+.slide-content {
+  gap: var(--content-gap);
+  position: relative;
+  z-index: 2;
+}
+
+/* ===========================================
+   Reveal system
+   =========================================== */
+.reveal, .reveal-left, .reveal-fade {
+  opacity: 0;
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+}
+.reveal { transform: translateY(20px); }
+.reveal-left { transform: translateX(-22px); }
+.reveal-fade { transform: none; }
+.slide.visible .reveal,
+.slide.visible .reveal-left,
+.slide.visible .reveal-fade {
+  opacity: 1;
+  transform: none;
+}
+.d1 { transition-delay: 0.08s; }
+.d2 { transition-delay: 0.18s; }
+.d3 { transition-delay: 0.28s; }
+.d4 { transition-delay: 0.38s; }
+.d5 { transition-delay: 0.48s; }
+.d6 { transition-delay: 0.58s; }
+
+/* ===========================================
+   Shared components
+   =========================================== */
+.topbar {
+  position: absolute;
+  inset: 0 0 auto 0;
+  padding: clamp(0.9rem, 2.2vw, 1.35rem) var(--slide-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 10;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--ink-soft);
+  font-size: var(--small-size);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.brand-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--rose));
+  box-shadow: 0 0 0 0.35rem rgba(199,160,109,0.12);
+}
+.slide-num {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2vw, 2rem);
+  color: rgba(241,236,228,0.34);
+  line-height: 1;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: var(--small-size);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  font-weight: 600;
+}
+.eyebrow::before {
+  content: '';
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--gold);
+  flex: 0 0 auto;
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 500; letter-spacing: -0.03em; }
+h1 { font-size: clamp(2.35rem, 7vw, 6rem); line-height: 0.9; max-width: 10ch; }
+h2 { font-size: clamp(1.7rem, 4vw, 3.3rem); line-height: 0.95; max-width: 14ch; }
+h3 { font-size: clamp(1rem, 2vw, 1.45rem); line-height: 1.05; }
+p, li { font-size: var(--body-size); line-height: 1.45; color: var(--ink-soft); }
+strong { color: var(--ink); font-weight: 600; }
+.lede {
+  max-width: 54ch;
+  font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.rule {
+  width: clamp(52px, 5vw, 76px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), rgba(199,160,109,0));
+}
+.hero {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  gap: clamp(1rem, 2vw, 2rem);
+  align-items: center;
+  min-height: 0;
+}
+.panel, .card, .metric, .quote-card {
+  position: relative;
+  background: linear-gradient(180deg, rgba(29,35,31,0.92) 0%, rgba(20,24,22,0.9) 100%);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.28);
+  overflow: hidden;
+}
+.panel::before, .card::before, .metric::before, .quote-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(255,255,255,0.05), transparent 40%);
+  pointer-events: none;
+}
+.panel {
+  min-height: min(56vh, 520px);
+  padding: clamp(1.1rem, 2vw, 1.6rem);
+  display: flex;
+  align-items: flex-end;
+}
+.panel-visual {
+  position: absolute;
+  inset: 0;
+}
+.orbit {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(241,236,228,0.08);
+}
+.orbit.o1 { width: 72%; height: 72%; right: 4%; top: 7%; }
+.orbit.o2 { width: 52%; height: 52%; right: 16%; top: 18%; }
+.orbit.o3 { width: 34%; height: 34%; right: 25%; top: 28%; }
+.node {
+  position: absolute;
+  width: clamp(10px, 1vw, 14px);
+  height: clamp(10px, 1vw, 14px);
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f7f1e8, #d7c0a1);
+  box-shadow: 0 0 0 5px rgba(199,160,109,0.15), 0 6px 18px rgba(0,0,0,0.26);
+}
+.node.n1 { left: 14%; top: 64%; }
+.node.n2 { left: 24%; top: 48%; }
+.node.n3 { left: 36%; top: 35%; }
+.node.n4 { left: 50%; top: 24%; }
+.node.n5 { left: 64%; top: 18%; }
+.node.n6 { left: 77%; top: 28%; }
+.node.n7 { left: 84%; top: 44%; }
+.node.n8 { left: 82%; top: 61%; }
+.node.n9 { left: 68%; top: 75%; }
+.node.n10 { left: 49%; top: 80%; }
+.strand {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(199,160,109,0), rgba(199,160,109,0.75), rgba(143,163,140,0.55));
+  transform-origin: left center;
+}
+.strand.s1 { left: 15%; top: 66%; width: 17%; transform: rotate(-35deg); }
+.strand.s2 { left: 25%; top: 49%; width: 18%; transform: rotate(-29deg); }
+.strand.s3 { left: 37%; top: 36%; width: 17%; transform: rotate(-22deg); }
+.strand.s4 { left: 50%; top: 25%; width: 18%; transform: rotate(-4deg); }
+.strand.s5 { left: 65%; top: 19%; width: 16%; transform: rotate(31deg); }
+.strand.s6 { left: 77%; top: 29%; width: 14%; transform: rotate(53deg); }
+.strand.s7 { left: 68%; top: 75%; width: 17%; transform: rotate(-48deg); }
+.strand.s8 { left: 49%; top: 80%; width: 22%; transform: rotate(-12deg); }
+.panel-note {
+  position: relative;
+  max-width: 20rem;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-md);
+  background: rgba(241,236,228,0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(241,236,228,0.12);
+}
+.grid-2, .grid-3, .grid-4 { display: grid; gap: clamp(0.7rem, 1.4vw, 1rem); }
+.grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.card, .metric, .quote-card { padding: clamp(1rem, 1.6vw, 1.3rem); min-height: 0; }
+.card p, .metric p { color: var(--ink-soft); }
+.card .mini, .metric .mini { font-size: var(--small-size); text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); font-weight: 600; }
+.big-stat {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.8vw, 4rem);
+  line-height: 0.9;
+  color: var(--ink);
+}
+.bullet-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.4rem, 1vh, 0.85rem);
+}
+.bullet-list li {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+}
+.bullet-list li::before {
+  content: '';
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--sage));
+  margin-top: 0.45rem;
+  flex: 0 0 auto;
+}
+.compare {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: clamp(0.7rem, 1.4vw, 1rem);
+  align-items: stretch;
+}
+.vs {
+  align-self: center;
+  padding: 0.6rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(199,160,109,0.1);
+  border: 1px solid rgba(199,160,109,0.18);
+  color: var(--gold);
+  font-size: var(--small-size);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.score-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(0.8rem, 1.6vw, 1rem);
+}
+.score-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(0.55rem, 1vw, 0.8rem);
+}
+.score-chip {
+  padding: 0.85rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(241,236,228,0.06);
+  border: 1px solid rgba(241,236,228,0.08);
+  font-size: var(--small-size);
+  color: var(--ink);
+}
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.6rem, 1.2vw, 0.9rem);
+}
+.kpi {
+  padding: clamp(0.85rem, 1.4vw, 1rem);
+  border-radius: var(--radius-md);
+  background: rgba(241,236,228,0.05);
+  border: 1px solid rgba(241,236,228,0.08);
+}
+.kpi strong {
+  display: block;
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  line-height: 1.05;
+  margin-bottom: 0.28rem;
+  color: var(--ink);
+}
+.pull-quote {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5.3vw, 4.8rem);
+  line-height: 0.9;
+  max-width: 9ch;
+  color: var(--ink);
+}
+.footer-note {
+  margin-top: auto;
+  font-size: var(--small-size);
+  color: var(--ink-dim);
+}
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 0;
+  background: linear-gradient(90deg, var(--gold), var(--rose));
+  z-index: 100;
+}
+.nav-dots {
+  position: fixed;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  z-index: 50;
+}
+.nav-dot {
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(241,236,228,0.22);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.nav-dot.active { background: var(--gold); transform: scale(1.3); }
+
+/* ===========================================
+   Slide-specific layout helpers
+   =========================================== */
+.center-block { max-width: 62rem; }
+.metrics-band { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: clamp(0.8rem, 1.6vw, 1rem); }
+
+/* ===========================================
+   Responsive slide layout
+   =========================================== */
+@media (max-width: 980px) {
+  .hero, .compare, .score-grid, .metrics-band { grid-template-columns: 1fr; }
+  .compare .vs { justify-self: start; }
+  .grid-4, .grid-3, .grid-2, .kpi-row { grid-template-columns: 1fr 1fr; }
+  .score-list { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .grid-4, .grid-3, .grid-2, .kpi-row { grid-template-columns: 1fr; }
+  .nav-dots { display: none; }
+}
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+  <nav class="nav-dots" aria-label="Slide navigation"></nav>
+
+  <!-- ===========================================
+       SLIDE 1 — Title / decision frame
+       =========================================== -->
+  <section class="slide visible">
+    <div class="topbar">
+      <div class="brand"><span class="brand-dot"></span> Westfield Outdoors · SW-032</div>
+      <div class="slide-num">01</div>
+    </div>
+    <div class="slide-content">
+      <div class="hero">
+        <div style="display:flex; flex-direction:column; gap:1rem; min-width:0;">
+          <div class="eyebrow reveal d1">Project Tensegrity</div>
+          <h1 class="reveal d2">Big shade.<br>Low weight.<br>Fast setup.</h1>
+          <div class="rule reveal d3"></div>
+          <p class="lede reveal d4">Design review direction: stop treating this like a tensegrity tent and start treating it like <strong>rapid-deploy shade architecture</strong> for glamping, hospitality, event lounge, and premium basecamp use.</p>
+          <div class="panel-note reveal d5">
+            <strong>Decision frame</strong>
+            The lead concept should be the one that creates the <strong>largest calm shaded footprint</strong> with the <strong>least carried structure</strong>, <strong>least setup time</strong>, and <strong>least user confusion</strong>.
+          </div>
+        </div>
+        <div class="panel reveal-left d3" aria-hidden="true">
+          <div class="panel-visual">
+            <div class="orbit o1"></div>
+            <div class="orbit o2"></div>
+            <div class="orbit o3"></div>
+            <div class="strand s1"></div><div class="strand s2"></div><div class="strand s3"></div><div class="strand s4"></div><div class="strand s5"></div><div class="strand s6"></div><div class="strand s7"></div><div class="strand s8"></div>
+            <div class="node n1"></div><div class="node n2"></div><div class="node n3"></div><div class="node n4"></div><div class="node n5"></div><div class="node n6"></div><div class="node n7"></div><div class="node n8"></div><div class="node n9"></div><div class="node n10"></div>
+          </div>
+          <div class="panel-note">
+            <strong>Working definition</strong>
+            A <em>freestanding, rapid-deploy, premium shade pavilion</em> that bridges the gap between event spectacle, basecamp portability, and architectural lightness.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================================
+       SLIDE 2 — Why this direction now
+       =========================================== -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand"><span class="brand-dot"></span> Market pull</div>
+      <div class="slide-num">02</div>
+    </div>
+    <div class="slide-content">
+      <div class="eyebrow reveal d1">Why now</div>
+      <h2 class="reveal d2">The demand is not for more tents. It is for better outdoor living infrastructure.</h2>
+      <div class="grid-4" style="margin-top:0.6rem;">
+        <div class="metric reveal d2"><div class="mini">APAC signal</div><div class="big-stat">18.8%</div><p>Forecast Asia Pacific glamping CAGR, directional proof of category growth.</p></div>
+        <div class="metric reveal d3"><div class="mini">Japan</div><div class="big-stat">$177M → $342M</div><p>Japan glamping market estimate from 2025 to 2034, showing premium lodging momentum.</p></div>
+        <div class="metric reveal d4"><div class="mini">China</div><div class="big-stat">+90% / +117%</div><p>Camping search spikes on major travel platforms, showing social lifestyle pull.</p></div>
+        <div class="metric reveal d5"><div class="mini">Spend signal</div><div class="big-stat">RMB 6,995</div><p>Cited average glamping spend in China, pointing to premium willingness.</p></div>
+      </div>
+      <div class="compare" style="margin-top:0.6rem;">
+        <div class="card reveal d3">
+          <h3>Best-fit use settings</h3>
+          <ul class="bullet-list" style="margin-top:0.7rem;">
+            <li>Glamping operators</li>
+            <li>Hospitality decks and outdoor lounges</li>
+            <li>Brand activations and event social space</li>
+            <li>Premium car-camping basecamps</li>
+          </ul>
+        </div>
+        <div class="vs reveal d4">not</div>
+        <div class="card reveal d5">
+          <h3>What to deprioritize</h3>
+          <ul class="bullet-list" style="margin-top:0.7rem;">
+            <li>Backpacking-first shelter logic</li>
+            <li>Enclosed sleeping tent as the hero concept</li>
+            <li>Furniture-first exploration</li>
+            <li>Pure novelty structures without span advantage</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================================
+       SLIDE 3 — Reframing the product
+       =========================================== -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand"><span class="brand-dot"></span> Category frame</div>
+      <div class="slide-num">03</div>
+    </div>
+    <div class="slide-content">
+      <div class="eyebrow reveal d1">Reframe</div>
+      <div class="metrics-band">
+        <div class="quote-card reveal d2" style="display:flex; flex-direction:column; justify-content:center; gap:0.85rem;">
+          <div class="pull-quote">Not a tent.<br>Not a gazebo.</div>
+          <p class="lede">A <strong>lightweight rapid-deploy shade architecture system</strong> with premium editorial presence and real spatial utility.</p>
+        </div>
+        <div class="card reveal d4" style="display:flex; flex-direction:column; justify-content:center; gap:0.8rem;">
+          <h3>What has to be true</h3>
+          <ul class="bullet-list">
+            <li>Packs unusually small for its deployed footprint</li>
+            <li>Deploys with obvious geometry, not cable puzzle logic</li>
+            <li>Feels calm and trustworthy in open-air wind use</li>
+            <li>Extends into side-shade and weather modules cleanly</li>
+          </ul>
+        </div>
+      </div>
+      <div class="kpi-row reveal d5" style="margin-top:0.5rem;">
+        <div class="kpi"><strong>Shade first</strong> Optimize shaded square footage before enclosure ambitions.</div>
+        <div class="kpi"><strong>Open-air calm</strong> Design for low sway, low flutter, low drama.</div>
+        <div class="kpi"><strong>Human deployable</strong> 2–4 person setup without expert rigging.</div>
+        <div class="kpi"><strong>Premium object</strong> GO OUT / Snow Peak-grade visual refinement, not event rental aesthetics.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================================
+       SLIDE 4 — The user promise
+       =========================================== -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand"><span class="brand-dot"></span> User promise</div>
+      <div class="slide-num">04</div>
+    </div>
+    <div class="slide-content center-block">
+      <div class="eyebrow reveal d1">What success feels like</div>
+      <h2 class="reveal d2">A large social footprint appears fast, with almost no setup anxiety.</h2>
+      <div class="grid-2" style="margin-top:0.8rem;">
+        <div class="card reveal d2">
+          <h3>Packs unusually small</h3>
+          <p>Transport needs to feel closer to an overland or event-softgoods system than a truss rental structure.</p>
+        </div>
+        <div class="card reveal d3">
+          <h3>Goes up unusually fast</h3>
+          <p>Minutes matter. Setup speed is a headline feature, not a technical note buried at the end.</p>
+        </div>
+        <div class="card reveal d4">
+          <h3>Creates a dramatic shaded zone</h3>
+          <p>The transformation from pack to pavilion should be the product’s most memorable moment.</p>
+        </div>
+        <div class="card reveal d5">
+          <h3>Feels calm in use</h3>
+          <p>The structure should read elegant, but the user experience should read obvious, stable, and low-drama.</p>
+        </div>
+      </div>
+      <div class="footer-note reveal d6">This is why dynamic calmness is just as important as static structure.</div>
+    </div>
+  </section>
+
+  <!-- ===========================================
+       SLIDE 5 — Why tensegrity is useful here
+       =========================================== -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand"><span class="brand-dot"></span> Structural logic</div>
+      <div class="slide-num">05</div>
+    </div>
+    <div class="slide-content">
+      <div class="eyebrow reveal d1">Why tensegrity helps</div>
+      <h2 class="reveal d2">Use tensegrity as the load path, not as the user interface.</h2>
+      <div class="score-grid" style="margin-top:0.7rem;">
+        <div class="card reveal d3">
+          <h3>What tensegrity contributes</h3>
+          <ul class="bullet-list" style="margin-top:0.8rem;">
+            <li>Low apparent structural mass</li>
+            <li>Architectural lightness and differentiation</li>
+            <li>Potential for compact deployability</li>
+            <li>A coherent logic for pavilion plus side-span ecosystem</li>
+          </ul>
+        </div>
+        <div class="card reveal d4">
+          <h3>What pure tensegrity gets wrong</h3>
+          <ul class="bullet-list" style="margin-top:0.8rem;">
+            <li>Tuning-sensitive field setup</li>
+            <li>Cable-order confusion and user error risk</li>
+            <li>Harder membrane integration</li>
+            <li>Wind behavior that can feel lively instead of calm</li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel-note reveal d5" style="margin-top:0.7rem; max-width:34rem;">
+        <strong>Best-fit interpretation</strong>
+        The most defensible direction is a <strong>guided hybrid tensegrity pavilion</strong>, where folding geometry choreographs deployment and prestress locks in near the end.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================================
+       SLIDE 6 — Typology ranking
+       =========================================== -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand"><span class="brand-dot"></span> Typologies</div>
+      <div class="slide-num">06</div>
+    </div>
+    <div class="slide-content">
+      <div class="eyebrow reveal d1">Ranked structural options</div>
+      <h2 class="reveal d2">The best overall fit is a tensegrity + fold-guided hybrid.</h2>
+      <div class="grid-3" style="margin-top:0.7rem;">
+        <div class="card reveal d2"><div class="mini">1 · Best overall</div><h3>Tensegrity + fold-guided hybrid</h3><p>Best balance of span-to-weight, compact stowage, and controlled deployment.</p></div>
+        <div class="card reveal d3"><div class="mini">2 · Fast fallback</div><h3>Shade sail + deployable frame</h3><p>Practical and fast to prototype, but less distinctive and often heavier per shaded area.</p></div>
+        <div class="card reveal d4"><div class="mini">3 · Reference class</div><h3>Cable dome / cable-membrane</h3><p>Excellent large-span efficiency, but too anchor-heavy and infrastructure-like for portable deployment.</p></div>
+        <div class="card reveal d3"><div class="mini">4 · Spectacle speed</div><h3>Inflatable / compression hybrid</h3><p>Great deploy speed and pack volume, weaker operational trust in open-air public use.</p></div>
+        <div class="card reveal d4"><div class="mini">5 · Reliability baseline</div><h3>Modular pavilion / space frame</h3><p>Robust and scalable, but heavier and slower than membrane-first systems.</p></div>
+        <div class="card reveal d5"><div class="mini">6 · Research only</div><h3>Pure tensegrity</h3><p>Most elegant in theory, weakest for field simplicity, tuning tolerance, and user confidence.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================================
+       SLIDE 7 — The real constraint
+       =========================================== -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand"><span class="brand-dot"></span> The real challenge</div>
+      <div class="slide-num">07</div>
+    </div>
+    <div class="slide-content">
+      <div class="eyebrow reveal d1">Deployment confidence</div>
+      <div class="compare">
+        <div class="card reveal d2">
+          <h3>Engineering success alone is not enough</h3>
+          <ul class="bullet-list" style="margin-top:0.8rem;">
+            <li>The structure can stand up once and still fail commercially</li>
+            <li>Setup must be obvious on first contact</li>
+            <li>Tensioning has to be tolerant, not perfect-or-bust</li>
+            <li>Membrane behavior has to look deliberate, not nervous</li>
+          </ul>
+        </div>
+        <div class="vs reveal d3">key insight</div>
+        <div class="quote-card reveal d4" style="display:flex; align-items:center; justify-content:center; padding:clamp(1.2rem,2vw,1.7rem);">
+          <div class="pull-quote">Dynamic calmness matters as much as static structure.</div>
+        </div>
+      </div>
+      <div class="score-list reveal d5" style="margin-top:0.7rem;">
+        <div class="score-chip">Obvious setup sequence</div>
+        <div class="score-chip">No manual cable puzzle</div>
+        <div class="score-chip">Low sway and low flutter</div>
+        <div class="score-chip">Quick storm lock-down mode</div>
+        <div class="score-chip">Tolerance to uneven ground</div>
+        <div class="score-chip">Graceful recovery from user error</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================================
+       SLIDE 8 — Recommended concept direction
+       =========================================== -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand"><span class="brand-dot"></span> Recommendation</div>
+      <div class="slide-num">08</div>
+    </div>
+    <div class="slide-content">
+      <div class="eyebrow reveal d1">Lead concept</div>
+      <h2 class="reveal d2">Advance a large communal guided hybrid tensegrity pavilion.</h2>
+      <div class="metrics-band" style="margin-top:0.7rem;">
+        <div class="card reveal d3">
+          <h3>Why this concept first</h3>
+          <ul class="bullet-list" style="margin-top:0.8rem;">
+            <li>Directly tests the project’s true promise: big, light, fast shade</li>
+            <li>Highest relevance for glamping, hospitality, and event lounge use</li>
+            <li>Best frame for judging span-to-weight and setup efficiency honestly</li>
+            <li>Creates a platform for mid-size canopy and side-span derivatives later</li>
+          </ul>
+        </div>
+        <div class="card reveal d4">
+          <h3>Suggested configuration</h3>
+          <ul class="bullet-list" style="margin-top:0.8rem;">
+            <li>Deployable perimeter ring or arcing ribs</li>
+            <li>Tensegrity-derived cable stabilization</li>
+            <li>Guided fold + tension-lock deployment</li>
+            <li>Vented or porous shade membrane</li>
+            <li>Modular edge points for side shades and weather panels</li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel-note reveal d5" style="margin-top:0.6rem; max-width:36rem;">
+        <strong>Design principle</strong>
+        Use tensegrity as the <strong>load path</strong>, but use folding geometry as the <strong>user interface</strong>.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================================
+       SLIDE 9 — Precedent white space
+       =========================================== -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand"><span class="brand-dot"></span> White space</div>
+      <div class="slide-num">09</div>
+    </div>
+    <div class="slide-content">
+      <div class="eyebrow reveal d1">Precedent map</div>
+      <h2 class="reveal d2">Today’s market solves pieces of the stack, not the whole stack.</h2>
+      <div class="grid-3" style="margin-top:0.7rem;">
+        <div class="card reveal d2"><h3>Fast personal deploy</h3><p>Overland awnings prove setup speed and packed-size clarity matter, but footprint and freestanding performance are limited.</p></div>
+        <div class="card reveal d3"><h3>Portable event spectacle</h3><p>Star tent systems prove dramatic form and portability sell, but central poles and layout efficiency are compromises.</p></div>
+        <div class="card reveal d4"><h3>Large-span architecture</h3><p>Clearspan and tensile pavilion systems prove span demand is real, but setup burden is too high and productization too weak.</p></div>
+      </div>
+      <div class="quote-card reveal d5" style="margin-top:0.7rem; display:flex; flex-direction:column; gap:0.75rem;">
+        <div class="mini">White-space thesis</div>
+        <p class="lede">The opportunity is a <strong>freestanding, high-drama, large-span shade pavilion that packs like an overland system, deploys in minutes, and expands with integrated side-shade or weather modules.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================================
+       SLIDE 10 — Scorecard and metrics
+       =========================================== -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand"><span class="brand-dot"></span> Scorecard</div>
+      <div class="slide-num">10</div>
+    </div>
+    <div class="slide-content">
+      <div class="eyebrow reveal d1">How to evaluate concepts</div>
+      <h2 class="reveal d2">Judge every topology against efficiency, calmness, and confidence.</h2>
+      <div class="kpi-row" style="margin-top:0.7rem;">
+        <div class="kpi reveal d2"><strong>Shade / kg</strong> How much protected area each kilogram buys.</div>
+        <div class="kpi reveal d3"><strong>Shade / packed volume</strong> Transport efficiency matters as much as raw mass.</div>
+        <div class="kpi reveal d4"><strong>Shade / setup minute</strong> The best product creates space faster, not just lighter.</div>
+        <div class="kpi reveal d5"><strong>Dynamic calmness</strong> Sway, flutter, noise, and trust under gusts.</div>
+      </div>
+      <div class="grid-2" style="margin-top:0.7rem;">
+        <div class="card reveal d3">
+          <h3>Quantitative proof points to visualize</h3>
+          <ul class="bullet-list" style="margin-top:0.7rem;">
+            <li>4 × 4 m deployable tensegrity grid packed under 1.80 m perimeter</li>
+            <li>Star shade systems showing 10–20 minute deployment stories</li>
+            <li>OVS 270-style packed-size clarity and one-person UX storytelling</li>
+            <li>Cable dome precedents showing extreme span efficiency at architectural scale</li>
+          </ul>
+        </div>
+        <div class="card reveal d4">
+          <h3>Qualitative proof points to visualize</h3>
+          <ul class="bullet-list" style="margin-top:0.7rem;">
+            <li>No central obstruction in the prime social zone</li>
+            <li>Clear load paths and visible structural logic</li>
+            <li>Storm mode versus fair-weather mode</li>
+            <li>Modular side-shade and weather envelope growth path</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================================
+       SLIDE 11 — Main recommendation
+       =========================================== -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand"><span class="brand-dot"></span> Decision</div>
+      <div class="slide-num">11</div>
+    </div>
+    <div class="slide-content center-block">
+      <div class="eyebrow reveal d1">Recommendation</div>
+      <div class="quote-card reveal d2" style="display:flex; flex-direction:column; gap:0.85rem;">
+        <div class="pull-quote">Commit to one lead direction: a premium large-span guided hybrid tensegrity shade pavilion.</div>
+        <p class="lede">Do <strong>not</strong> pursue a pure exposed tensegrity experiment as the first commercial expression. The right balance is elegant structure paired with obvious setup, strong wind logic, and integrated modular expansion.</p>
+      </div>
+      <div class="grid-3" style="margin-top:0.7rem;">
+        <div class="card reveal d3"><h3>Preserve</h3><p>Structural lightness, dramatic transform, and a distinctive premium identity.</p></div>
+        <div class="card reveal d4"><h3>Simplify</h3><p>Deployment choreography, tension cues, part count, and user decisions.</p></div>
+        <div class="card reveal d5"><h3>Prioritize</h3><p>Span, setup speed, calmness, and useful footprint over sculptural purity.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================================
+       SLIDE 12 — Next steps
+       =========================================== -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand"><span class="brand-dot"></span> Next steps</div>
+      <div class="slide-num">12</div>
+    </div>
+    <div class="slide-content">
+      <div class="eyebrow reveal d1">What to do next</div>
+      <h2 class="reveal d2">Build the pavilion first, then earn the right to scale the family.</h2>
+      <div class="grid-2" style="margin-top:0.7rem;">
+        <div class="card reveal d3">
+          <h3>Prototype sequence</h3>
+          <ul class="bullet-list" style="margin-top:0.8rem;">
+            <li>Prototype communal pavilion scale first</li>
+            <li>Compare 2–3 topologies digitally before form refinement</li>
+            <li>Lock a guided deployment path before adding enclosure ambition</li>
+          </ul>
+        </div>
+        <div class="card reveal d4">
+          <h3>Test sequence</h3>
+          <ul class="bullet-list" style="margin-top:0.8rem;">
+            <li>User-error tolerance and first-time setup</li>
+            <li>Wind, flutter, sway, and storm mode</li>
+            <li>Packed-length, packed-volume, and deployment-time benchmarking</li>
+          </ul>
+        </div>
+      </div>
+      <div class="kpi-row reveal d5" style="margin-top:0.7rem;">
+        <div class="kpi"><strong>Phase 1</strong> Communal pavilion</div>
+        <div class="kpi"><strong>Phase 2</strong> Mid-size canopy</div>
+        <div class="kpi"><strong>Phase 3</strong> Side-span / privacy modules</div>
+        <div class="kpi"><strong>Phase 4</strong> Weather envelope only if the shade architecture proves itself</div>
+      </div>
+      <div class="footer-note reveal d6">Prepared for Westfield Outdoors, Industrial Design Sprint, SW-032 PROJECT TENSEGRITY. Sources include internal synthesis of market research, academic review, structural typology ranking, and product precedent mapping.</div>
+    </div>
+  </section>
+
+  <script>
+/* ===========================================
+   Presentation navigation and progress
+   =========================================== */
+const slides = Array.from(document.querySelectorAll('.slide'));
+const nav = document.querySelector('.nav-dots');
+const progress = document.querySelector('.progress');
+let currentIndex = 0;
+
+slides.forEach((_, i) => {
+  const dot = document.createElement('button');
+  dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+  dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+  dot.addEventListener('click', () => goToSlide(i));
+  nav.appendChild(dot);
+});
+
+const dots = Array.from(document.querySelectorAll('.nav-dot'));
+
+function updateUI(index) {
+  currentIndex = index;
+  dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+  const pct = slides.length > 1 ? (index / (slides.length - 1)) * 100 : 0;
+  progress.style.width = `${pct}%`;
+}
+
+function goToSlide(index) {
+  if (index < 0 || index >= slides.length) return;
+  slides[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const idx = slides.indexOf(entry.target);
+      slides[idx].classList.add('visible');
+      updateUI(idx);
+    }
+  });
+}, { threshold: 0.55 });
+
+slides.forEach(slide => observer.observe(slide));
+
+document.addEventListener('keydown', (e) => {
+  if (['ArrowDown', 'ArrowRight', 'PageDown', ' '].includes(e.key)) {
+    e.preventDefault();
+    goToSlide(Math.min(currentIndex + 1, slides.length - 1));
+  }
+  if (['ArrowUp', 'ArrowLeft', 'PageUp'].includes(e.key)) {
+    e.preventDefault();
+    goToSlide(Math.max(currentIndex - 1, 0));
+  }
+  if (e.key === 'Home') {
+    e.preventDefault();
+    goToSlide(0);
+  }
+  if (e.key === 'End') {
+    e.preventDefault();
+    goToSlide(slides.length - 1);
+  }
+});
+
+updateUI(0);
+  </script>
+</body>
+</html>
