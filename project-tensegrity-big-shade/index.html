@@ -615,6 +615,36 @@ strong { color: var(--ink); font-weight: 600; }
   font-weight: 600;
 }
 .source-link:hover { color: #e0bc8f; }
+.compare-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(0.7rem, 1.3vw, 1rem);
+}
+.compare-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.compare-box .mini {
+  font-size: var(--small-size);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  font-weight: 600;
+}
+.compare-statements {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.55rem, 1vw, 0.8rem);
+}
+.compare-pill {
+  padding: 0.8rem 0.9rem;
+  border-radius: 1rem;
+  background: rgba(241,236,228,0.06);
+  border: 1px solid rgba(241,236,228,0.08);
+  font-size: var(--small-size);
+  color: var(--ink);
+}
 
 /* ===========================================
    Responsive slide layout
@@ -622,11 +652,11 @@ strong { color: var(--ink); font-weight: 600; }
 @media (max-width: 980px) {
   .hero, .compare, .score-grid, .metrics-band { grid-template-columns: 1fr; }
   .compare .vs { justify-self: start; }
-  .grid-4, .grid-3, .grid-2, .kpi-row, .precedent-gallery, .source-grid { grid-template-columns: 1fr 1fr; }
+  .grid-4, .grid-3, .grid-2, .kpi-row, .precedent-gallery, .source-grid, .compare-columns, .compare-statements { grid-template-columns: 1fr 1fr; }
   .score-list { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
-  .grid-4, .grid-3, .grid-2, .kpi-row, .precedent-gallery, .source-grid { grid-template-columns: 1fr; }
+  .grid-4, .grid-3, .grid-2, .kpi-row, .precedent-gallery, .source-grid, .compare-columns, .compare-statements { grid-template-columns: 1fr; }
   .nav-dots { display: none; }
 }
   </style>
@@ -1041,12 +1071,54 @@ strong { color: var(--ink); font-weight: 600; }
   </section>
 
   <!-- ===========================================
-       SLIDE 12 — Visual precedent gallery
+       SLIDE 12 — Pure vs hybrid comparison
+       =========================================== -->
+  <section class="slide">
+    <div class="topbar">
+      <div class="brand"><span class="brand-dot"></span> Decision test</div>
+      <div class="slide-num">12</div>
+    </div>
+    <div class="slide-content">
+      <div class="eyebrow reveal d1">Pure vs hybrid</div>
+      <h2 class="reveal d2">The winner is the one that makes tensegrity feel inevitable instead of fragile.</h2>
+      <div class="compare-columns" style="margin-top:0.75rem;">
+        <div class="card compare-box reveal d2">
+          <div class="mini">Pure tensegrity</div>
+          <h3>Best if we can make deployment deterministic</h3>
+          <ul class="bullet-list">
+            <li>Highest conceptual purity and strongest product story</li>
+            <li>Potentially the lightest and most magical transform</li>
+            <li>Only works if geometry self-calibrates without field tuning</li>
+            <li>Failure mode is user distrust if setup feels delicate or mysterious</li>
+          </ul>
+        </div>
+        <div class="card compare-box reveal d3">
+          <div class="mini">Hybrid tensegrity</div>
+          <h3>Best if we need a confident first full-scale result</h3>
+          <ul class="bullet-list">
+            <li>More forgiving packaging, setup, and membrane integration</li>
+            <li>Better odds of a calm first prototype at pavilion scale</li>
+            <li>Still keeps tensegrity in the load path and visual identity</li>
+            <li>Failure mode is drifting too far toward generic deployable shade hardware</li>
+          </ul>
+        </div>
+      </div>
+      <div class="compare-statements reveal d5" style="margin-top:0.7rem;">
+        <div class="compare-pill"><strong>Pure wins if:</strong> hard-stop struts truly eliminate cable tuning</div>
+        <div class="compare-pill"><strong>Hybrid wins if:</strong> the project needs a fast, credible pavilion proof</div>
+        <div class="compare-pill"><strong>Pure loses if:</strong> setup still feels like an engineering ritual</div>
+        <div class="compare-pill"><strong>Hybrid loses if:</strong> it no longer feels unmistakably tensegrity</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================================
+       SLIDE 13 — Visual precedent gallery
        =========================================== -->
   <section class="slide">
     <div class="topbar">
       <div class="brand"><span class="brand-dot"></span> Images + links</div>
-      <div class="slide-num">12</div>
+      <div class="slide-num">13</div>
     </div>
     <div class="slide-content">
       <div class="eyebrow reveal d1">TensegrityWiki precedents</div>
@@ -1084,18 +1156,34 @@ strong { color: var(--ink); font-weight: 600; }
             <p>Useful built precedent for what a more architectural tensegrity aggregation looks like once it becomes occupiable space.</p>
           </div>
         </a>
+        <a class="precedent-tile reveal d4" href="https://web.archive.org/web/20230521012536/https://tensegritywiki.com/index.php?title=Tension_Pavilion_2016_Photo_Gallery" target="_blank" rel="noreferrer">
+          <div class="tile-image"><img src="https://web.archive.org/web/20230527180842im_/https://tensegritywiki.com/thumb.php?f=Tension_Pavilion_closeup_of_struts.jpg&width=500" alt="TensegrityWiki Tension pavilion closeup of struts"></div>
+          <div class="tile-meta">
+            <div class="tile-kicker">Detail logic</div>
+            <h3>Tension strut close-up</h3>
+            <p>Useful detail image for reading node spacing, compression-member character, and how pavilion-scale tensegrity can still feel refined.</p>
+          </div>
+        </a>
+        <a class="precedent-tile reveal d5" href="https://web.archive.org/web/20230521011754/https://tensegritywiki.com/index.php?title=Underwood_Pavilion_Photo_Gallery" target="_blank" rel="noreferrer">
+          <div class="tile-image"><img src="https://web.archive.org/web/20230527175418im_/https://tensegritywiki.com/images/9/96/Underwood-Pav-assembly.jpg" alt="TensegrityWiki Underwood Pavilion assembly"></div>
+          <div class="tile-meta">
+            <div class="tile-kicker">Assembly reality</div>
+            <h3>Underwood assembly</h3>
+            <p>Useful because it shows what pavilion aggregation and dressing actually look like before the finished object starts feeling effortless.</p>
+          </div>
+        </a>
       </div>
       <div class="footer-note reveal d6">These links point to Wayback snapshots because the live TensegrityWiki origin is currently unstable.</div>
     </div>
   </section>
 
   <!-- ===========================================
-       SLIDE 13 — Live research trail
+       SLIDE 14 — Live research trail
        =========================================== -->
   <section class="slide">
     <div class="topbar">
       <div class="brand"><span class="brand-dot"></span> Research trail</div>
-      <div class="slide-num">13</div>
+      <div class="slide-num">14</div>
     </div>
     <div class="slide-content">
       <div class="eyebrow reveal d1">Linked source map</div>
@@ -1142,12 +1230,12 @@ strong { color: var(--ink); font-weight: 600; }
   </section>
 
   <!-- ===========================================
-       SLIDE 14 — Main recommendation
+       SLIDE 15 — Main recommendation
        =========================================== -->
   <section class="slide">
     <div class="topbar">
       <div class="brand"><span class="brand-dot"></span> Decision</div>
-      <div class="slide-num">14</div>
+      <div class="slide-num">15</div>
     </div>
     <div class="slide-content center-block">
       <div class="eyebrow reveal d1">Recommendation</div>
@@ -1164,12 +1252,12 @@ strong { color: var(--ink); font-weight: 600; }
   </section>
 
   <!-- ===========================================
-       SLIDE 15 — Next steps
+       SLIDE 16 — Next steps
        =========================================== -->
   <section class="slide">
     <div class="topbar">
       <div class="brand"><span class="brand-dot"></span> Next steps</div>
-      <div class="slide-num">15</div>
+      <div class="slide-num">16</div>
     </div>
     <div class="slide-content">
       <div class="eyebrow reveal d1">What to do next</div>
