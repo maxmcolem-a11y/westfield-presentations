@@ -16,7 +16,7 @@
 
 /* 1. Lock html/body to viewport */
 html, body {
-    height: 100%;
+    min-height: 100%;
     overflow-x: hidden;
 }
 
@@ -1368,7 +1368,9 @@ function updateUI(index) {
 
 function goToSlide(index) {
   if (index < 0 || index >= slides.length) return;
-  slides[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const target = slides[index];
+  const top = target.offsetTop;
+  window.scrollTo({ top, behavior: 'smooth' });
 }
 
 const observer = new IntersectionObserver((entries) => {
