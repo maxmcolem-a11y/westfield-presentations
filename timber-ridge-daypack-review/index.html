@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timber Ridge Daypack Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Familjen+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+/* ===========================================
+   VIEWPORT FITTING: MANDATORY BASE STYLES
+   Include this ENTIRE file in every presentation.
+   These styles ensure slides fit exactly in the viewport.
+   =========================================== */
+
+/* 1. Lock html/body to viewport */
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+/* 2. Each slide = exact viewport height */
+.slide {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    overflow: hidden; /* CRITICAL: Prevent ANY overflow */
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* 3. Content container with flex for centering */
+.slide-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-height: 100%;
+    overflow: hidden; /* Double-protection against overflow */
+    padding: var(--slide-padding);
+}
+
+/* 4. ALL typography uses clamp() for responsive scaling */
+:root {
+    /* Titles scale from mobile to desktop */
+    --title-size: clamp(1.5rem, 5vw, 4rem);
+    --h2-size: clamp(1.25rem, 3.5vw, 2.5rem);
+    --h3-size: clamp(1rem, 2.5vw, 1.75rem);
+
+    /* Body text */
+    --body-size: clamp(0.75rem, 1.5vw, 1.125rem);
+    --small-size: clamp(0.65rem, 1vw, 0.875rem);
+
+    /* Spacing scales with viewport */
+    --slide-padding: clamp(1rem, 4vw, 4rem);
+    --content-gap: clamp(0.5rem, 2vw, 2rem);
+    --element-gap: clamp(0.25rem, 1vw, 1rem);
+}
+
+/* 5. Cards/containers use viewport-relative max sizes */
+.card, .container, .content-box {
+    max-width: min(90vw, 1000px);
+    max-height: min(80vh, 700px);
+}
+
+/* 6. Lists auto-scale with viewport */
+.feature-list, .bullet-list {
+    gap: clamp(0.4rem, 1vh, 1rem);
+}
+
+.feature-list li, .bullet-list li {
+    font-size: var(--body-size);
+    line-height: 1.4;
+}
+
+/* 7. Grids adapt to available space */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+/* 8. Images constrained to viewport */
+img, .image-container {
+    max-width: 100%;
+    max-height: min(50vh, 400px);
+    object-fit: contain;
+}
+
+/* ===========================================
+   RESPONSIVE BREAKPOINTS
+   Aggressive scaling for smaller viewports
+   =========================================== */
+
+/* Short viewports (< 700px height) */
+@media (max-height: 700px) {
+    :root {
+        --slide-padding: clamp(0.75rem, 3vw, 2rem);
+        --content-gap: clamp(0.4rem, 1.5vw, 1rem);
+        --title-size: clamp(1.25rem, 4.5vw, 2.5rem);
+        --h2-size: clamp(1rem, 3vw, 1.75rem);
+    }
+}
+
+/* Very short viewports (< 600px height) */
+@media (max-height: 600px) {
+    :root {
+        --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem);
+        --content-gap: clamp(0.3rem, 1vw, 0.75rem);
+        --title-size: clamp(1.1rem, 4vw, 2rem);
+        --body-size: clamp(0.7rem, 1.2vw, 0.95rem);
+    }
+
+    /* Hide non-essential elements */
+    .nav-dots, .keyboard-hint, .decorative {
+        display: none;
+    }
+}
+
+/* Extremely short (landscape phones, < 500px height) */
+@media (max-height: 500px) {
+    :root {
+        --slide-padding: clamp(0.4rem, 2vw, 1rem);
+        --title-size: clamp(1rem, 3.5vw, 1.5rem);
+        --h2-size: clamp(0.9rem, 2.5vw, 1.25rem);
+        --body-size: clamp(0.65rem, 1vw, 0.85rem);
+    }
+}
+
+/* Narrow viewports (< 600px width) */
+@media (max-width: 600px) {
+    :root {
+        --title-size: clamp(1.25rem, 7vw, 2.5rem);
+    }
+
+    /* Stack grids vertically */
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===========================================
+   REDUCED MOTION
+   Respect user preferences
+   =========================================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* === THEME === */
+:root {
+  --bg: #f5f1e8;
+  --paper: rgba(255,255,255,0.8);
+  --ink: #17191a;
+  --muted: #53606a;
+  --accent: #6d89b4;
+  --accent-deep: #2f4970;
+  --line: rgba(23,25,26,0.12);
+  --shadow: 0 24px 60px rgba(30, 40, 54, 0.16);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Familjen Grotesk', sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(109,137,180,0.2), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(47,73,112,0.14), transparent 28%),
+    linear-gradient(135deg, #f2ede3 0%, #f8f5ee 48%, #eef3f8 100%);
+}
+
+a { color: inherit; }
+
+/* === GLOBAL COMPONENTS === */
+.eyebrow {
+  font-size: var(--small-size);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  margin-bottom: clamp(0.5rem, 1vh, 0.9rem);
+}
+
+h1, h2, h3, p, ul { margin: 0; }
+
+h1, h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  line-height: 0.95;
+}
+
+h1 { font-size: var(--title-size); }
+h2 { font-size: var(--h2-size); }
+h3 {
+  font-size: var(--h3-size);
+  line-height: 1.1;
+}
+
+p, li {
+  font-size: var(--body-size);
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.muted { color: var(--muted); }
+
+.bottom-note {
+  position: absolute;
+  left: var(--slide-padding);
+  bottom: clamp(0.7rem, 2vh, 1.4rem);
+  font-size: var(--small-size);
+  color: rgba(23,25,26,0.68);
+  letter-spacing: 0.03em;
+}
+
+.slide-number {
+  position: absolute;
+  right: var(--slide-padding);
+  bottom: clamp(0.7rem, 2vh, 1.4rem);
+  font-size: var(--small-size);
+  color: rgba(23,25,26,0.45);
+}
+
+.card {
+  background: var(--paper);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.55);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.label-chip {
+  display: inline-flex;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(47,73,112,0.08);
+  color: var(--accent-deep);
+  font-size: var(--small-size);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.image-frame {
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.5);
+  box-shadow: var(--shadow);
+}
+
+.image-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+}
+
+.quote-line {
+  width: clamp(3rem, 10vw, 8rem);
+  height: 1px;
+  background: rgba(23,25,26,0.25);
+}
+
+.bullet-list {
+  display: grid;
+  padding-left: 1.2em;
+}
+
+/* === TITLE SLIDE === */
+.title-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(1rem, 2vw, 2rem);
+  align-items: stretch;
+  height: 100%;
+}
+
+.title-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(0.8rem, 1.4vw, 1.2rem);
+  min-width: 0;
+}
+
+.title-copy p {
+  max-width: 42ch;
+  color: var(--muted);
+}
+
+.title-collage {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  gap: 0.75rem;
+  min-height: 0;
+}
+
+.title-collage .panel-a { grid-column: 1 / 8; grid-row: 1 / 8; }
+.title-collage .panel-b { grid-column: 8 / 13; grid-row: 1 / 6; }
+.title-collage .panel-c { grid-column: 8 / 13; grid-row: 6 / 13; }
+.title-collage .panel-d { grid-column: 1 / 8; grid-row: 8 / 13; }
+
+/* === BRIEF SLIDE === */
+.split-brief {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+  gap: clamp(1rem, 2vw, 2rem);
+  align-items: center;
+}
+
+.brief-card {
+  padding: clamp(1rem, 2.4vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 1.4vw, 1rem);
+}
+
+.brief-card .grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.mini-metric {
+  padding: clamp(0.8rem, 1vw, 1rem);
+  border-radius: 20px;
+  background: rgba(109,137,180,0.1);
+  border: 1px solid rgba(47,73,112,0.12);
+}
+
+.mini-metric strong {
+  display: block;
+  font-size: var(--small-size);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-deep);
+  margin-bottom: 0.35rem;
+}
+
+/* === IMAGE STORY SLIDES === */
+.story-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+  gap: clamp(1rem, 2vw, 2rem);
+  align-items: center;
+}
+
+.story-copy {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 1.2vw, 1rem);
+  min-width: 0;
+}
+
+.story-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1vw, 1rem);
+}
+
+.story-gallery .wide {
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 8;
+}
+
+.story-gallery .tall {
+  aspect-ratio: 4 / 5;
+}
+
+.story-gallery .mid {
+  aspect-ratio: 5 / 4;
+}
+
+/* === FULL IMAGE SLIDE === */
+.full-image-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
+  gap: clamp(1rem, 2vw, 2rem);
+  align-items: center;
+}
+
+.full-image-layout .image-frame {
+  height: min(58vh, 520px);
+}
+
+.side-notes {
+  display: grid;
+  gap: clamp(0.6rem, 1vh, 0.9rem);
+}
+
+.note-card {
+  padding: clamp(0.85rem, 1.3vw, 1rem);
+  border-radius: 20px;
+  background: rgba(255,255,255,0.62);
+  border: 1px solid rgba(23,25,26,0.08);
+}
+
+.note-card strong {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--accent-deep);
+  font-size: var(--small-size);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* === FEATURE GRID SLIDE === */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1vw, 1rem);
+  align-items: stretch;
+}
+
+.feature-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: clamp(0.8rem, 1vw, 1rem);
+}
+
+.feature-panel .image-frame {
+  height: min(34vh, 300px);
+}
+
+.feature-panel h3 {
+  font-family: 'Familjen Grotesk', sans-serif;
+  font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-deep);
+}
+
+.feature-panel p {
+  font-size: clamp(0.72rem, 1vw, 0.95rem);
+  color: var(--muted);
+}
+
+/* === CLOSE SLIDE === */
+.close-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1rem, 2vw, 2rem);
+  align-items: center;
+}
+
+.close-stack {
+  display: grid;
+  gap: clamp(0.8rem, 1.2vw, 1rem);
+}
+
+.close-stack .card {
+  padding: clamp(1rem, 1.8vw, 1.4rem);
+}
+
+/* === NAVIGATION === */
+.nav-dots {
+  position: fixed;
+  right: clamp(0.75rem, 1.4vw, 1.2rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  z-index: 20;
+}
+
+.nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(23,25,26,0.18);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.nav-dot.active {
+  background: var(--accent-deep);
+  transform: scale(1.15);
+}
+
+.keyboard-hint {
+  position: fixed;
+  right: clamp(1rem, 2vw, 1.5rem);
+  bottom: clamp(1rem, 2vw, 1.5rem);
+  z-index: 20;
+  padding: 0.55rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.74);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(23,25,26,0.08);
+  font-size: var(--small-size);
+  color: var(--muted);
+}
+
+/* === ANIMATION === */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: rise 0.75s ease forwards;
+}
+.reveal.delay-1 { animation-delay: 0.1s; }
+.reveal.delay-2 { animation-delay: 0.2s; }
+.reveal.delay-3 { animation-delay: 0.3s; }
+.reveal.delay-4 { animation-delay: 0.4s; }
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === MOBILE LAYOUT ADJUSTMENTS === */
+@media (max-width: 900px) {
+  .title-grid,
+  .split-brief,
+  .story-layout,
+  .full-image-layout,
+  .close-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .title-collage {
+    min-height: min(46vh, 340px);
+  }
+}
+  </style>
+</head>
+<body>
+  <nav class="nav-dots" aria-label="Slide navigation"></nav>
+  <div class="keyboard-hint">Arrow keys, scroll, or tap dots</div>
+
+  <!-- === SLIDE 1: TITLE === -->
+  <section class="slide">
+    <div class="slide-content">
+      <div class="title-grid">
+        <div class="title-copy">
+          <div class="eyebrow reveal">Timber Ridge · daypack concept review</div>
+          <h1 class="reveal delay-1">A sharper 26L daypack direction, built from the latest three attachments.</h1>
+          <p class="reveal delay-2">This deck combines the current spec brief, the latest CAD view set, and sketch exploration into one image-first review. The brief anchor is the newest file, <em>TimberRidgeDaypack_Specs_041626.pdf</em>.</p>
+          <div class="label-chip reveal delay-3">Image heavy · frontend slides format · GitHub served</div>
+        </div>
+        <div class="title-collage reveal delay-2">
+          <div class="image-frame panel-a"><img src="assets/TimberRidgeDaypack_Specs_041626-p2.png" alt="AI renders of the Timber Ridge daypack concept"></div>
+          <div class="image-frame panel-b"><img src="assets/DaypackSketches_01-p1.png" alt="Early form sketch page for the daypack"></div>
+          <div class="image-frame panel-c"><img src="assets/TR_Daypack_CADs_W5.2.png" alt="CAD side view study of the Timber Ridge daypack"></div>
+          <div class="image-frame panel-d"><img src="assets/TimberRidgeDaypack_Specs_041626-p3.png" alt="3D form inspiration translated into the daypack"></div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-note">Source stack: TimberRidgeDaypack_Specs_041626.pdf · TR Daypack CADs W5.2.png · DaypackSketches_01.pdf</div>
+    <div class="slide-number">01</div>
+  </section>
+
+  <!-- === SLIDE 2: BRIEF === -->
+  <section class="slide">
+    <div class="slide-content">
+      <div class="split-brief">
+        <div class="image-frame reveal"><img src="assets/TimberRidgeDaypack_Specs_041626-p1.png" alt="Front and back concept drawing from the 04.16.26 Timber Ridge spec brief"></div>
+        <div class="brief-card card reveal delay-1">
+          <div class="eyebrow">Brief pulled from the newest attachment</div>
+          <h2>What the 04.16.26 spec is asking for.</h2>
+          <ul class="bullet-list">
+            <li><strong>Unique form.</strong> The asymmetric seam geometry is the identity, not decoration.</li>
+            <li><strong>Panel-load opening.</strong> The main zipper should open wide enough to feel easy and premium.</li>
+            <li><strong>Side stretch mesh pockets + shove pocket.</strong> Exterior utility needs to stay integrated into the faceted body.</li>
+            <li><strong>Color-matched hardware.</strong> Buckles, zipper chain, trims, and webbing should read as one system.</li>
+          </ul>
+          <div class="grid">
+            <div class="mini-metric"><strong>Platform</strong>26L daypack</div>
+            <div class="mini-metric"><strong>Reference brief</strong>TimberRidgeDaypack_Specs_041626.pdf</div>
+            <div class="mini-metric"><strong>Review lens</strong>Form, access, utility, comfort</div>
+            <div class="mini-metric"><strong>Presentation mode</strong>Image-led concept synthesis</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-note">The latest spec attachment becomes the brief baseline for the whole deck.</div>
+    <div class="slide-number">02</div>
+  </section>
+
+  <!-- === SLIDE 3: FORM STORY === -->
+  <section class="slide">
+    <div class="slide-content">
+      <div class="story-layout">
+        <div class="story-copy reveal">
+          <div class="eyebrow">Shape story</div>
+          <h2>The concept is strongest when the sculptural object survives translation into a usable bag.</h2>
+          <div class="quote-line"></div>
+          <p>The spec brief is explicit about first-sample priorities: lock in the overall shape and form first, then layer features once the silhouette feels right.</p>
+          <ul class="bullet-list">
+            <li>The diagonal seam language gives the bag a recognizable face from a distance.</li>
+            <li>The cylinder-derived body softens the technical geometry so it still feels approachable.</li>
+            <li>The front stretch zone works best when it feels native to the form rather than applied on top.</li>
+          </ul>
+        </div>
+        <div class="story-gallery reveal delay-1">
+          <div class="image-frame tall"><img src="assets/TimberRidgeDaypack_Specs_041626-p3.png" alt="Original 3D form inspiration and its translation to the daypack"></div>
+          <div class="image-frame tall"><img src="assets/DaypackSketches_01-p1.png" alt="Shape exploration sketch page"></div>
+          <div class="image-frame wide"><img src="assets/DaypackSketches_01-p8.png" alt="Refined sketch sheet showing final front-panel geometry"></div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-note">Spec page 3 plus sketch pages show a clear object-to-bag lineage.</div>
+    <div class="slide-number">03</div>
+  </section>
+
+  <!-- === SLIDE 4: CAD DIRECTION === -->
+  <section class="slide">
+    <div class="slide-content">
+      <div class="full-image-layout">
+        <div class="image-frame reveal"><img src="assets/TR_Daypack_CADs_W5.2.png" alt="CAD study showing side and open side profile of the daypack"></div>
+        <div class="side-notes reveal delay-1">
+          <div class="eyebrow">CAD direction</div>
+          <h2>Week 5.2 CAD confirms the geometry can stay clean under load.</h2>
+          <div class="note-card"><strong>Line control</strong>The diagonal front divisions stay legible without over-fragmenting the shell.</div>
+          <div class="note-card"><strong>Pack stance</strong>The base reads stable and grounded, which helps the tall body feel intentional rather than top-heavy.</div>
+          <div class="note-card"><strong>Compression</strong>The side straps support the form language instead of fighting it.</div>
+          <div class="note-card"><strong>Opportunity</strong>The lid opening and shoulder transition are the best places to refine perceived quality next.</div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-note">Attachment reference: TR Daypack CADs W5.2.png</div>
+    <div class="slide-number">04</div>
+  </section>
+
+  <!-- === SLIDE 5: FEATURE SYSTEM === -->
+  <section class="slide">
+    <div class="slide-content">
+      <div class="eyebrow reveal">Feature system from the current spec</div>
+      <h2 class="reveal delay-1" style="margin-bottom: clamp(0.8rem, 1.6vw, 1.2rem);">Exterior utility works when the trim story stays disciplined.</h2>
+      <div class="feature-grid reveal delay-2">
+        <div class="feature-panel card">
+          <div class="image-frame"><img src="assets/TimberRidgeDaypack_Specs_041626-p4.png" alt="Annotated front-view feature callouts"></div>
+          <h3>Front face</h3>
+          <p>210D small-check ripstop, seam-integrated webbing, clean elastic finish, and a taut front shove pocket all reinforce the controlled technical look.</p>
+        </div>
+        <div class="feature-panel card">
+          <div class="image-frame"><img src="assets/TimberRidgeDaypack_Specs_041626-p5.png" alt="Annotated back-view feature callouts"></div>
+          <h3>Carry system</h3>
+          <p>Full diamond air mesh, S-shaped straps, and color-matched hardware give the comfort story enough polish to support the premium silhouette.</p>
+        </div>
+        <div class="feature-panel card">
+          <div class="image-frame"><img src="assets/TimberRidgeDaypack_Specs_041626-p6.png" alt="Annotated open-panel organization view"></div>
+          <h3>Inside access</h3>
+          <p>The panel-load opening earns its keep with padded laptop storage, a reservoir sleeve, and underside mesh organization inside the hood.</p>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-note">Spec pages 4 to 6 provide the current exterior, comfort, and organization priorities.</div>
+    <div class="slide-number">05</div>
+  </section>
+
+  <!-- === SLIDE 6: SKETCH TO SAMPLE === -->
+  <section class="slide">
+    <div class="slide-content">
+      <div class="story-layout">
+        <div class="story-gallery reveal">
+          <div class="image-frame mid"><img src="assets/DaypackSketches_01-p4.png" alt="Sketch sheet with colored concept views"></div>
+          <div class="image-frame mid"><img src="assets/TimberRidgeDaypack_Specs_041626-p2.png" alt="Spec sheet showing AI render front, back, and open views"></div>
+          <div class="image-frame wide"><img src="assets/DaypackSketches_01-p8.png" alt="Refined sketch lineup for the front-panel geometry"></div>
+        </div>
+        <div class="story-copy reveal delay-1">
+          <div class="eyebrow">Translation quality</div>
+          <h2>The encouraging part is how little design energy gets lost between sketch, render, and CAD.</h2>
+          <ul class="bullet-list">
+            <li>The main character line system survives across all three attachments.</li>
+            <li>The bag already has one strong recognizable side, which is usually the hardest part.</li>
+            <li>The next step is less about adding ideas and more about editing the seams, proportions, and trim tolerance until the sample matches the promise.</li>
+          </ul>
+          <p class="muted">If this review stays disciplined, the first sample can prove the silhouette, the opening experience, and the comfort package without needing feature creep.</p>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-note">Combined reading of the sketch PDF, latest spec renders, and current CAD snapshot.</div>
+    <div class="slide-number">06</div>
+  </section>
+
+  <!-- === SLIDE 7: RECOMMENDATION === -->
+  <section class="slide">
+    <div class="slide-content">
+      <div class="close-layout">
+        <div class="close-stack reveal">
+          <div class="eyebrow">Recommendation</div>
+          <h2>Keep the faceted silhouette, make the first sample prove the experience.</h2>
+          <div class="card">
+            <ul class="bullet-list">
+              <li>Prioritize shape accuracy before expanding the feature set.</li>
+              <li>Hold the front stretch area taut and integrated, not floppy or visually separate.</li>
+              <li>Use color-matched hardware and clean binding details to keep the concept elevated.</li>
+              <li>Protect the panel-load opening experience, because that is where utility meets perceived quality.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <p><strong>In one line:</strong> the newest brief points to a daypack that wins on form first, then earns credibility through smart access and tidy execution.</p>
+          </div>
+        </div>
+        <div class="image-frame reveal delay-2" style="height: min(58vh, 520px);"><img src="assets/TimberRidgeDaypack_Specs_041626-p2.png" alt="Three-view AI render concept board for the Timber Ridge daypack"></div>
+      </div>
+    </div>
+    <div class="bottom-note">Reference brief: TimberRidgeDaypack_Specs_041626.pdf · built around the three most recent card attachments.</div>
+    <div class="slide-number">07</div>
+  </section>
+
+  <script>
+    /* === NAVIGATION LOGIC === */
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const nav = document.querySelector('.nav-dots');
+    let activeIndex = 0;
+
+    function goToSlide(index) {
+      const clamped = Math.max(0, Math.min(index, slides.length - 1));
+      const top = slides[clamped].offsetTop;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+
+    slides.forEach((_, index) => {
+      const btn = document.createElement('button');
+      btn.className = 'nav-dot' + (index === 0 ? ' active' : '');
+      btn.setAttribute('aria-label', `Go to slide ${index + 1}`);
+      btn.addEventListener('click', () => goToSlide(index));
+      nav.appendChild(btn);
+    });
+
+    function updateActive() {
+      const midpoint = window.scrollY + window.innerHeight * 0.5;
+      let best = 0;
+      slides.forEach((slide, index) => {
+        if (midpoint >= slide.offsetTop) best = index;
+      });
+      activeIndex = best;
+      document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index === activeIndex);
+      });
+    }
+
+    window.addEventListener('scroll', updateActive, { passive: true });
+    window.addEventListener('resize', updateActive);
+    updateActive();
+
+    window.addEventListener('keydown', (event) => {
+      if (['ArrowDown', 'PageDown', ' '].includes(event.key)) {
+        event.preventDefault();
+        goToSlide(activeIndex + 1);
+      }
+      if (['ArrowUp', 'PageUp'].includes(event.key)) {
+        event.preventDefault();
+        goToSlide(activeIndex - 1);
+      }
+      if (event.key === 'Home') {
+        event.preventDefault();
+        goToSlide(0);
+      }
+      if (event.key === 'End') {
+        event.preventDefault();
+        goToSlide(slides.length - 1);
+      }
+    });
+  </script>
+</body>
+</html>
