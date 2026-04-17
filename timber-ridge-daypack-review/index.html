@@ -14,7 +14,6 @@
    These styles ensure slides fit exactly in the viewport.
    =========================================== */
 
-/* 1. Lock html/body to viewport */
 html, body {
     height: 100%;
     overflow-x: hidden;
@@ -25,53 +24,43 @@ html {
     scroll-behavior: smooth;
 }
 
-/* 2. Each slide = exact viewport height */
 .slide {
     width: 100vw;
     height: 100vh;
-    height: 100dvh; /* Dynamic viewport height for mobile browsers */
-    overflow: hidden; /* CRITICAL: Prevent ANY overflow */
+    height: 100dvh;
+    overflow: hidden;
     scroll-snap-align: start;
     display: flex;
     flex-direction: column;
     position: relative;
 }
 
-/* 3. Content container with flex for centering */
 .slide-content {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     max-height: 100%;
-    overflow: hidden; /* Double-protection against overflow */
+    overflow: hidden;
     padding: var(--slide-padding);
 }
 
-/* 4. ALL typography uses clamp() for responsive scaling */
 :root {
-    /* Titles scale from mobile to desktop */
     --title-size: clamp(1.5rem, 5vw, 4rem);
     --h2-size: clamp(1.25rem, 3.5vw, 2.5rem);
     --h3-size: clamp(1rem, 2.5vw, 1.75rem);
-
-    /* Body text */
     --body-size: clamp(0.75rem, 1.5vw, 1.125rem);
     --small-size: clamp(0.65rem, 1vw, 0.875rem);
-
-    /* Spacing scales with viewport */
     --slide-padding: clamp(1rem, 4vw, 4rem);
     --content-gap: clamp(0.5rem, 2vw, 2rem);
     --element-gap: clamp(0.25rem, 1vw, 1rem);
 }
 
-/* 5. Cards/containers use viewport-relative max sizes */
 .card, .container, .content-box {
     max-width: min(90vw, 1000px);
     max-height: min(80vh, 700px);
 }
 
-/* 6. Lists auto-scale with viewport */
 .feature-list, .bullet-list {
     gap: clamp(0.4rem, 1vh, 1rem);
 }
@@ -81,26 +70,18 @@ html {
     line-height: 1.4;
 }
 
-/* 7. Grids adapt to available space */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
     gap: clamp(0.5rem, 1.5vw, 1rem);
 }
 
-/* 8. Images constrained to viewport */
 img, .image-container {
     max-width: 100%;
     max-height: min(50vh, 400px);
     object-fit: contain;
 }
 
-/* ===========================================
-   RESPONSIVE BREAKPOINTS
-   Aggressive scaling for smaller viewports
-   =========================================== */
-
-/* Short viewports (< 700px height) */
 @media (max-height: 700px) {
     :root {
         --slide-padding: clamp(0.75rem, 3vw, 2rem);
@@ -110,7 +91,6 @@ img, .image-container {
     }
 }
 
-/* Very short viewports (< 600px height) */
 @media (max-height: 600px) {
     :root {
         --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem);
@@ -119,13 +99,11 @@ img, .image-container {
         --body-size: clamp(0.7rem, 1.2vw, 0.95rem);
     }
 
-    /* Hide non-essential elements */
     .nav-dots, .keyboard-hint, .decorative {
         display: none;
     }
 }
 
-/* Extremely short (landscape phones, < 500px height) */
 @media (max-height: 500px) {
     :root {
         --slide-padding: clamp(0.4rem, 2vw, 1rem);
@@ -135,22 +113,16 @@ img, .image-container {
     }
 }
 
-/* Narrow viewports (< 600px width) */
 @media (max-width: 600px) {
     :root {
         --title-size: clamp(1.25rem, 7vw, 2.5rem);
     }
 
-    /* Stack grids vertically */
     .grid {
         grid-template-columns: 1fr;
     }
 }
 
-/* ===========================================
-   REDUCED MOTION
-   Respect user preferences
-   =========================================== */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -162,16 +134,14 @@ img, .image-container {
     }
 }
 
-/* === THEME === */
 :root {
-  --bg: #f3f0e8;
-  --ink: #181818;
-  --muted: #5e5a53;
-  --line: rgba(24, 24, 24, 0.12);
-  --paper: rgba(255,255,255,0.76);
-  --accent: #b8572f;
-  --accent-soft: rgba(184, 87, 47, 0.12);
-  --shadow: 0 22px 50px rgba(24, 24, 24, 0.12);
+  --bg: #f5f0e6;
+  --ink: #181513;
+  --muted: #5b554e;
+  --paper: rgba(255,255,255,0.78);
+  --line: rgba(24,21,19,0.10);
+  --accent: #bd5b31;
+  --shadow: 0 24px 52px rgba(24, 21, 19, 0.10);
 }
 
 * { box-sizing: border-box; }
@@ -179,16 +149,14 @@ body {
   margin: 0;
   color: var(--ink);
   font-family: 'Manrope', sans-serif;
-  background:
-    radial-gradient(circle at top left, rgba(184,87,47,0.10), transparent 28%),
-    linear-gradient(180deg, #f8f5ef 0%, #f1ece3 100%);
+  background: radial-gradient(circle at top left, rgba(189,91,49,0.10), transparent 30%), linear-gradient(180deg, #fbf8f2 0%, #f1ebdf 100%);
 }
 
-h1,h2,h3,p,ul { margin: 0; }
-h1,h2 { font-family: 'Fraunces', serif; font-weight: 600; line-height: 0.95; }
+h1, h2, h3, p, ul { margin: 0; }
+h1, h2 { font-family: 'Fraunces', serif; font-weight: 600; line-height: 0.95; }
 h1 { font-size: var(--title-size); }
 h2 { font-size: var(--h2-size); }
-h3 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
+h3 { font-size: clamp(0.95rem, 1.4vw, 1.15rem); line-height: 1.1; }
 p, li { font-size: var(--body-size); line-height: 1.45; }
 
 .eyebrow {
@@ -198,21 +166,19 @@ p, li { font-size: var(--body-size); line-height: 1.45; }
   color: var(--accent);
 }
 
-.muted { color: var(--muted); }
-
 .card {
   background: var(--paper);
-  border: 1px solid rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.75);
   border-radius: 24px;
   box-shadow: var(--shadow);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(14px);
 }
 
 .image-frame {
   border-radius: 22px;
   overflow: hidden;
-  background: rgba(255,255,255,0.72);
-  border: 1px solid rgba(24,24,24,0.08);
+  background: rgba(255,255,255,0.8);
+  border: 1px solid var(--line);
   box-shadow: var(--shadow);
 }
 
@@ -225,12 +191,14 @@ p, li { font-size: var(--body-size); line-height: 1.45; }
   background: white;
 }
 
+.muted { color: var(--muted); }
+
 .slide-number {
   position: absolute;
   right: var(--slide-padding);
   bottom: clamp(0.7rem, 2vh, 1.4rem);
   font-size: var(--small-size);
-  color: rgba(24,24,24,0.44);
+  color: rgba(24,21,19,0.42);
 }
 
 .bottom-note {
@@ -238,7 +206,7 @@ p, li { font-size: var(--body-size); line-height: 1.45; }
   left: var(--slide-padding);
   bottom: clamp(0.7rem, 2vh, 1.4rem);
   font-size: var(--small-size);
-  color: rgba(24,24,24,0.62);
+  color: rgba(24,21,19,0.58);
 }
 
 .nav-dots {
@@ -257,7 +225,7 @@ p, li { font-size: var(--body-size); line-height: 1.45; }
   height: 10px;
   border-radius: 50%;
   border: none;
-  background: rgba(24,24,24,0.18);
+  background: rgba(24,21,19,0.18);
   cursor: pointer;
   transition: transform 0.2s ease, background 0.2s ease;
 }
@@ -275,7 +243,7 @@ p, li { font-size: var(--body-size); line-height: 1.45; }
   padding: 0.55rem 0.8rem;
   border-radius: 999px;
   background: rgba(255,255,255,0.84);
-  border: 1px solid rgba(24,24,24,0.08);
+  border: 1px solid rgba(24,21,19,0.08);
   font-size: var(--small-size);
   color: var(--muted);
 }
@@ -283,20 +251,16 @@ p, li { font-size: var(--body-size); line-height: 1.45; }
 .reveal {
   opacity: 0;
   transform: translateY(18px);
-  animation: rise 0.65s ease forwards;
+  animation: rise 0.6s ease forwards;
 }
 .reveal.delay-1 { animation-delay: 0.08s; }
 .reveal.delay-2 { animation-delay: 0.16s; }
 .reveal.delay-3 { animation-delay: 0.24s; }
+@keyframes rise { to { opacity: 1; transform: translateY(0); } }
 
-@keyframes rise {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* === LAYOUTS === */
 .title-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   gap: clamp(1rem, 2vw, 2rem);
   align-items: center;
   height: 100%;
@@ -304,92 +268,98 @@ p, li { font-size: var(--body-size); line-height: 1.45; }
 
 .title-copy {
   display: grid;
-  gap: clamp(0.7rem, 1.2vw, 1rem);
+  gap: clamp(0.7rem, 1.1vw, 1rem);
   align-content: center;
 }
 
-.thumb-row {
+.title-row {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(0.7rem, 1vw, 1rem);
 }
 
-.thumb-row .image-frame {
-  height: min(42vh, 360px);
+.title-row .image-frame {
+  height: min(46vh, 390px);
 }
 
 .concept-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  grid-template-columns: minmax(250px, 0.42fr) minmax(0, 1fr) minmax(280px, 0.52fr);
   gap: clamp(1rem, 2vw, 2rem);
   align-items: center;
 }
 
-.concept-layout .image-frame {
-  height: min(68vh, 640px);
+.model-card {
+  padding: clamp(0.9rem, 1.2vw, 1rem);
+  display: grid;
+  gap: 0.75rem;
 }
 
-.side-stack {
+.model-card .image-frame {
+  height: min(52vh, 500px);
+}
+
+.board-frame {
+  height: min(62vh, 600px);
+}
+
+.info-stack {
   display: grid;
   gap: clamp(0.8rem, 1vw, 1rem);
 }
 
-.side-stack .card {
-  padding: clamp(1rem, 1.4vw, 1.2rem);
+.info-stack .card {
+  padding: clamp(0.95rem, 1.3vw, 1.15rem);
 }
 
-.side-stack ul {
+.info-stack ul {
   padding-left: 1.1rem;
   display: grid;
   gap: clamp(0.5rem, 0.9vh, 0.75rem);
 }
 
-.precedent-layout {
+.final-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.8fr);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   gap: clamp(1rem, 2vw, 2rem);
-  align-items: center;
+  align-items: start;
 }
 
-.precedent-layout .image-frame {
-  height: min(70vh, 650px);
+.final-layout .image-frame.hero {
+  height: min(60vh, 580px);
 }
 
 .spec-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(0.7rem, 1vw, 1rem);
-  margin-top: clamp(0.9rem, 1.3vw, 1.2rem);
 }
 
-.spec-grid .card {
-  padding: clamp(0.7rem, 1vw, 0.9rem);
+.spec-card {
+  padding: clamp(0.75rem, 1vw, 0.9rem);
   display: grid;
-  gap: 0.65rem;
+  gap: 0.6rem;
 }
 
-.spec-grid .image-frame {
-  height: min(38vh, 310px);
+.spec-card .image-frame {
+  height: min(28vh, 240px);
 }
 
-.spec-grid p {
-  font-size: clamp(0.72rem, 0.95vw, 0.9rem);
-  color: var(--muted);
-}
-
-.summary-box {
+.recommendation {
   margin-top: clamp(0.8rem, 1vw, 1rem);
-  padding: clamp(0.9rem, 1.2vw, 1.1rem);
+  padding: clamp(0.95rem, 1.2vw, 1.1rem);
 }
 
-@media (max-width: 960px) {
-  .title-layout,
+@media (max-width: 1100px) {
   .concept-layout,
-  .precedent-layout {
+  .title-layout,
+  .final-layout {
     grid-template-columns: 1fr;
   }
+}
 
-  .thumb-row,
+@media (max-width: 820px) {
+  .title-row,
   .spec-grid {
     grid-template-columns: 1fr;
   }
@@ -400,145 +370,135 @@ p, li { font-size: var(--body-size); line-height: 1.45; }
   <nav class="nav-dots" aria-label="Slide navigation"></nav>
   <div class="keyboard-hint">Arrow keys, scroll, or tap dots</div>
 
-  <!-- === SLIDE 1 === -->
   <section class="slide">
     <div class="slide-content">
       <div class="title-layout">
         <div class="title-copy">
           <div class="eyebrow reveal">Timber Ridge daypack</div>
-          <h1 class="reveal delay-1">Three concept directions, simplified.</h1>
-          <p class="muted reveal delay-2">This version uses real extracted source images from the sketch and spec PDFs, plus the provided red compression-pack image as the compression reference.</p>
-          <div class="card reveal delay-3" style="padding: clamp(1rem, 1.3vw, 1.1rem);">
-            <p><strong>Deck structure:</strong> Shape 1, Shape 2, Shape 3, compression precedent, and a brief-aligned direction check.</p>
+          <h1 class="reveal delay-1">Three concept directions.</h1>
+          <p class="muted reveal delay-2">A quick read on the early shape studies and where the current brief is landing.</p>
+          <div class="card reveal delay-3" style="padding: clamp(0.95rem, 1.2vw, 1.05rem);">
+            <p>Shape 1 is the boldest, Shape 2 is the smoothest transition, and Shape 3 is the cleanest path to a commercial bag.</p>
           </div>
         </div>
-        <div class="thumb-row reveal delay-2">
-          <div class="image-frame"><img src="assets/concept-1.png" alt="Shape 1 concept sketch sheet"></div>
-          <div class="image-frame"><img src="assets/concept-2.png" alt="Shape 2 concept sketch sheet"></div>
-          <div class="image-frame"><img src="assets/concept-3.png" alt="Shape 3 concept sketch sheet"></div>
+        <div class="title-row reveal delay-2">
+          <div class="image-frame"><img src="assets/concept-1-board.png" alt="Shape 1 sketch lineup"></div>
+          <div class="image-frame"><img src="assets/concept-2-board.png" alt="Shape 2 sketch lineup"></div>
+          <div class="image-frame"><img src="assets/concept-3-board.png" alt="Shape 3 sketch lineup"></div>
         </div>
       </div>
     </div>
-    <div class="bottom-note">Images extracted directly from DaypackSketches_01.pdf and TimberRidgeDaypack_Specs_041626.pdf</div>
+    <div class="bottom-note">Concept sheets 1 to 3</div>
     <div class="slide-number">01</div>
   </section>
 
-  <!-- === SLIDE 2 === -->
   <section class="slide">
     <div class="slide-content">
       <div class="concept-layout">
-        <div class="image-frame reveal"><img src="assets/concept-1.png" alt="Shape 1 concept page with form model and three backpack sketches"></div>
-        <div class="side-stack reveal delay-1">
+        <div class="model-card card reveal">
+          <div class="eyebrow">Shape 1 form</div>
+          <div class="image-frame"><img src="assets/concept-1-model.png" alt="Shape 1 physical model reference"></div>
+        </div>
+        <div class="image-frame board-frame reveal delay-1"><img src="assets/concept-1-board.png" alt="Shape 1 backpack sketch lineup"></div>
+        <div class="info-stack reveal delay-2">
           <div class="eyebrow">Shape 1</div>
-          <h2>Most angular and visibly structural.</h2>
+          <h2>Strongest front graphic.</h2>
           <div class="card">
             <ul>
-              <li>The front graphic reads as a bold X-frame across the body.</li>
-              <li>The concept feels the most technical and outdoors-forward of the three.</li>
-              <li>Best if the goal is a strong identity from a distance, even at the cost of some softness.</li>
+              <li>The X-frame read is immediate and distinctive.</li>
+              <li>The geometry feels the most technical and aggressive.</li>
+              <li>Best fit if the bag needs a strong identity from across the room.</li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-    <div class="bottom-note">Source: extracted image from DaypackSketches_01.pdf, page 1</div>
+    <div class="bottom-note">Source sketch page 1</div>
     <div class="slide-number">02</div>
   </section>
 
-  <!-- === SLIDE 3 === -->
   <section class="slide">
     <div class="slide-content">
       <div class="concept-layout">
-        <div class="image-frame reveal"><img src="assets/concept-2.png" alt="Shape 2 concept page with form model and three backpack sketches"></div>
-        <div class="side-stack reveal delay-1">
+        <div class="model-card card reveal">
+          <div class="eyebrow">Shape 2 form</div>
+          <div class="image-frame"><img src="assets/concept-2-model.png" alt="Shape 2 physical model reference"></div>
+        </div>
+        <div class="image-frame board-frame reveal delay-1"><img src="assets/concept-2-board.png" alt="Shape 2 backpack sketch lineup"></div>
+        <div class="info-stack reveal delay-2">
           <div class="eyebrow">Shape 2</div>
-          <h2>Cleaner sweep, softer stance, stronger zipper story.</h2>
+          <h2>Softest transition into a real pack.</h2>
           <div class="card">
             <ul>
-              <li>The diagonal path feels more continuous and less segmented than Shape 1.</li>
-              <li>The silhouette keeps the faceted influence but reads more approachable.</li>
-              <li>Best if the goal is a balance between concept character and everyday usability.</li>
+              <li>The diagonal sweep feels cleaner and less segmented.</li>
+              <li>The overall stance is friendlier and more everyday.</li>
+              <li>Best fit if the goal is concept character without looking too sharp-edged.</li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-    <div class="bottom-note">Source: extracted image from DaypackSketches_01.pdf, page 2</div>
+    <div class="bottom-note">Source sketch page 2</div>
     <div class="slide-number">03</div>
   </section>
 
-  <!-- === SLIDE 4 === -->
   <section class="slide">
     <div class="slide-content">
       <div class="concept-layout">
-        <div class="image-frame reveal"><img src="assets/concept-3.png" alt="Shape 3 concept page with form model and three backpack sketches"></div>
-        <div class="side-stack reveal delay-1">
+        <div class="model-card card reveal">
+          <div class="eyebrow">Shape 3 form</div>
+          <div class="image-frame"><img src="assets/concept-3-model.png" alt="Shape 3 physical model reference"></div>
+        </div>
+        <div class="image-frame board-frame reveal delay-1"><img src="assets/concept-3-board.png" alt="Shape 3 backpack sketch lineup"></div>
+        <div class="info-stack reveal delay-2">
           <div class="eyebrow">Shape 3</div>
-          <h2>Most rectilinear and closest to a clean commercial daypack.</h2>
+          <h2>Cleanest product path.</h2>
           <div class="card">
             <ul>
-              <li>The panel layout is simpler, calmer, and easier to read quickly.</li>
-              <li>The geometry still carries the concept DNA without feeling overworked.</li>
-              <li>Best if the goal is a fast path from sketch language into a manufacturable product.</li>
+              <li>The panel layout is calmer and easier to manufacture cleanly.</li>
+              <li>The concept DNA is still there without overpowering the bag.</li>
+              <li>Best fit if the team needs the fastest move from sketch to sample.</li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-    <div class="bottom-note">Source: extracted image from DaypackSketches_01.pdf, page 3</div>
+    <div class="bottom-note">Source sketch page 3</div>
     <div class="slide-number">04</div>
   </section>
 
-  <!-- === SLIDE 5 === -->
   <section class="slide">
     <div class="slide-content">
-      <div class="precedent-layout">
-        <div class="image-frame reveal"><img src="assets/red-compression-pack.jpg" alt="Red folding compression backpack prototype"></div>
-        <div class="side-stack reveal delay-1">
+      <div class="final-layout">
+        <div class="reveal">
           <div class="eyebrow">Compression reference</div>
-          <h2>Useful precedent: body compression, not just lid compression.</h2>
-          <div class="card">
-            <ul>
-              <li>The accordion sidewall makes volume change visible and product-defining.</li>
-              <li>Compression happens in the body architecture instead of only pulling down from the top opening.</li>
-              <li>This is the cleanest external reference for a more novel compression story.</li>
-            </ul>
+          <div class="image-frame hero" style="margin-top: clamp(0.75rem, 1vw, 1rem);"><img src="assets/red-compression-pack.jpg" alt="Red folding compression backpack reference"></div>
+        </div>
+        <div class="reveal delay-1">
+          <div class="eyebrow">Current brief</div>
+          <h2>Current direction is already closest to Shape 3.</h2>
+          <div class="spec-grid" style="margin-top: clamp(0.8rem, 1vw, 1rem);">
+            <div class="spec-card card">
+              <div class="image-frame"><img src="assets/spec-front.png" alt="Current brief front view"></div>
+              <h3>Front</h3>
+            </div>
+            <div class="spec-card card">
+              <div class="image-frame"><img src="assets/spec-back.png" alt="Current brief back view"></div>
+              <h3>Back</h3>
+            </div>
+            <div class="spec-card card">
+              <div class="image-frame"><img src="assets/spec-open.png" alt="Current brief open view"></div>
+              <h3>Open</h3>
+            </div>
+          </div>
+          <div class="card recommendation">
+            <p><strong>Recommendation:</strong> stay with the cleaner Shape 3 direction, keep a little of Shape 1’s attitude in the front graphic, and use the red reference only as inspiration for a more visible body-compression story.</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="bottom-note">Source: user-provided red compression pack image</div>
+    <div class="bottom-note">Current brief plus compression reference</div>
     <div class="slide-number">05</div>
-  </section>
-
-  <!-- === SLIDE 6 === -->
-  <section class="slide">
-    <div class="slide-content">
-      <div class="eyebrow reveal">Brief check</div>
-      <h2 class="reveal delay-1">Current brief direction already looks closest to Shape 3, with room to borrow a little more attitude from Shape 1.</h2>
-      <div class="spec-grid reveal delay-2">
-        <div class="card">
-          <div class="image-frame"><img src="assets/spec-front.png" alt="Extracted front-view render from current spec PDF"></div>
-          <h3>Front</h3>
-          <p>The current front view is already cleaner and more productized than the earlier sketch options.</p>
-        </div>
-        <div class="card">
-          <div class="image-frame"><img src="assets/spec-back.png" alt="Extracted back-view render from current spec PDF"></div>
-          <h3>Back</h3>
-          <p>The back panel and shoulder system are aligned with a practical daypack target.</p>
-        </div>
-        <div class="card">
-          <div class="image-frame"><img src="assets/spec-open.png" alt="Extracted open-view render from current spec PDF"></div>
-          <h3>Open</h3>
-          <p>The panel-load opening stays the clearest functional story in the current brief.</p>
-        </div>
-      </div>
-      <div class="card summary-box reveal delay-3">
-        <p><strong>Simple take:</strong> Shape 1 has the strongest graphic identity, Shape 2 is the softest transition, and Shape 3 is the cleanest product path. If this needs to move fast, keep the current brief direction and selectively borrow compression cues from the red precedent rather than rebuilding the whole bag around it.</p>
-      </div>
-    </div>
-    <div class="bottom-note">Spec images extracted directly from TimberRidgeDaypack_Specs_041626.pdf</div>
-    <div class="slide-number">06</div>
   </section>
 
   <script>
