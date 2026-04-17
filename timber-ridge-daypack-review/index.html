@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Timber Ridge Daypack Review</title>
+  <title>Timber Ridge Daypack Concepts</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Familjen+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
 /* ===========================================
    VIEWPORT FITTING: MANDATORY BASE STYLES
@@ -164,102 +164,55 @@ img, .image-container {
 
 /* === THEME === */
 :root {
-  --bg: #f5f1e8;
-  --paper: rgba(255,255,255,0.8);
-  --ink: #17191a;
-  --muted: #53606a;
-  --accent: #6d89b4;
-  --accent-deep: #2f4970;
-  --line: rgba(23,25,26,0.12);
-  --shadow: 0 24px 60px rgba(30, 40, 54, 0.16);
+  --bg: #f3f0e8;
+  --ink: #181818;
+  --muted: #5e5a53;
+  --line: rgba(24, 24, 24, 0.12);
+  --paper: rgba(255,255,255,0.76);
+  --accent: #b8572f;
+  --accent-soft: rgba(184, 87, 47, 0.12);
+  --shadow: 0 22px 50px rgba(24, 24, 24, 0.12);
 }
 
 * { box-sizing: border-box; }
 body {
   margin: 0;
-  font-family: 'Familjen Grotesk', sans-serif;
   color: var(--ink);
+  font-family: 'Manrope', sans-serif;
   background:
-    radial-gradient(circle at top left, rgba(109,137,180,0.2), transparent 32%),
-    radial-gradient(circle at bottom right, rgba(47,73,112,0.14), transparent 28%),
-    linear-gradient(135deg, #f2ede3 0%, #f8f5ee 48%, #eef3f8 100%);
+    radial-gradient(circle at top left, rgba(184,87,47,0.10), transparent 28%),
+    linear-gradient(180deg, #f8f5ef 0%, #f1ece3 100%);
 }
 
-a { color: inherit; }
-
-/* === GLOBAL COMPONENTS === */
-.eyebrow {
-  font-size: var(--small-size);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent-deep);
-  margin-bottom: clamp(0.5rem, 1vh, 0.9rem);
-}
-
-h1, h2, h3, p, ul { margin: 0; }
-
-h1, h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 600;
-  line-height: 0.95;
-}
-
+h1,h2,h3,p,ul { margin: 0; }
+h1,h2 { font-family: 'Fraunces', serif; font-weight: 600; line-height: 0.95; }
 h1 { font-size: var(--title-size); }
 h2 { font-size: var(--h2-size); }
-h3 {
-  font-size: var(--h3-size);
-  line-height: 1.1;
-}
+h3 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
+p, li { font-size: var(--body-size); line-height: 1.45; }
 
-p, li {
-  font-size: var(--body-size);
-  line-height: 1.45;
-  color: var(--ink);
+.eyebrow {
+  font-size: var(--small-size);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent);
 }
 
 .muted { color: var(--muted); }
 
-.bottom-note {
-  position: absolute;
-  left: var(--slide-padding);
-  bottom: clamp(0.7rem, 2vh, 1.4rem);
-  font-size: var(--small-size);
-  color: rgba(23,25,26,0.68);
-  letter-spacing: 0.03em;
-}
-
-.slide-number {
-  position: absolute;
-  right: var(--slide-padding);
-  bottom: clamp(0.7rem, 2vh, 1.4rem);
-  font-size: var(--small-size);
-  color: rgba(23,25,26,0.45);
-}
-
 .card {
   background: var(--paper);
-  backdrop-filter: blur(18px);
-  border: 1px solid rgba(255,255,255,0.55);
-  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 24px;
   box-shadow: var(--shadow);
-}
-
-.label-chip {
-  display: inline-flex;
-  padding: 0.45rem 0.8rem;
-  border-radius: 999px;
-  background: rgba(47,73,112,0.08);
-  color: var(--accent-deep);
-  font-size: var(--small-size);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  backdrop-filter: blur(16px);
 }
 
 .image-frame {
+  border-radius: 22px;
   overflow: hidden;
-  border-radius: 24px;
-  border: 1px solid rgba(255,255,255,0.7);
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(24,24,24,0.08);
   box-shadow: var(--shadow);
 }
 
@@ -268,207 +221,26 @@ p, li {
   width: 100%;
   height: 100%;
   max-height: none;
-  object-fit: cover;
+  object-fit: contain;
+  background: white;
 }
 
-.quote-line {
-  width: clamp(3rem, 10vw, 8rem);
-  height: 1px;
-  background: rgba(23,25,26,0.25);
-}
-
-.bullet-list {
-  display: grid;
-  padding-left: 1.2em;
-}
-
-/* === TITLE SLIDE === */
-.title-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: clamp(1rem, 2vw, 2rem);
-  align-items: stretch;
-  height: 100%;
-}
-
-.title-copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: clamp(0.8rem, 1.4vw, 1.2rem);
-  min-width: 0;
-}
-
-.title-copy p {
-  max-width: 42ch;
-  color: var(--muted);
-}
-
-.title-collage {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(12, 1fr);
-  gap: 0.75rem;
-  min-height: 0;
-}
-
-.title-collage .panel-a { grid-column: 1 / 8; grid-row: 1 / 8; }
-.title-collage .panel-b { grid-column: 8 / 13; grid-row: 1 / 6; }
-.title-collage .panel-c { grid-column: 8 / 13; grid-row: 6 / 13; }
-.title-collage .panel-d { grid-column: 1 / 8; grid-row: 8 / 13; }
-
-/* === BRIEF SLIDE === */
-.split-brief {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
-  gap: clamp(1rem, 2vw, 2rem);
-  align-items: center;
-}
-
-.brief-card {
-  padding: clamp(1rem, 2.4vw, 2rem);
-  display: flex;
-  flex-direction: column;
-  gap: clamp(0.75rem, 1.4vw, 1rem);
-}
-
-.brief-card .grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.mini-metric {
-  padding: clamp(0.8rem, 1vw, 1rem);
-  border-radius: 20px;
-  background: rgba(109,137,180,0.1);
-  border: 1px solid rgba(47,73,112,0.12);
-}
-
-.mini-metric strong {
-  display: block;
+.slide-number {
+  position: absolute;
+  right: var(--slide-padding);
+  bottom: clamp(0.7rem, 2vh, 1.4rem);
   font-size: var(--small-size);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--accent-deep);
-  margin-bottom: 0.35rem;
+  color: rgba(24,24,24,0.44);
 }
 
-/* === IMAGE STORY SLIDES === */
-.story-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
-  gap: clamp(1rem, 2vw, 2rem);
-  align-items: center;
-}
-
-.story-copy {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(0.75rem, 1.2vw, 1rem);
-  min-width: 0;
-}
-
-.story-gallery {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(0.75rem, 1vw, 1rem);
-}
-
-.story-gallery .wide {
-  grid-column: 1 / -1;
-  aspect-ratio: 16 / 8;
-}
-
-.story-gallery .tall {
-  aspect-ratio: 4 / 5;
-}
-
-.story-gallery .mid {
-  aspect-ratio: 5 / 4;
-}
-
-/* === FULL IMAGE SLIDE === */
-.full-image-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
-  gap: clamp(1rem, 2vw, 2rem);
-  align-items: center;
-}
-
-.full-image-layout .image-frame {
-  height: min(58vh, 520px);
-}
-
-.side-notes {
-  display: grid;
-  gap: clamp(0.6rem, 1vh, 0.9rem);
-}
-
-.note-card {
-  padding: clamp(0.85rem, 1.3vw, 1rem);
-  border-radius: 20px;
-  background: rgba(255,255,255,0.62);
-  border: 1px solid rgba(23,25,26,0.08);
-}
-
-.note-card strong {
-  display: block;
-  margin-bottom: 0.3rem;
-  color: var(--accent-deep);
+.bottom-note {
+  position: absolute;
+  left: var(--slide-padding);
+  bottom: clamp(0.7rem, 2vh, 1.4rem);
   font-size: var(--small-size);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  color: rgba(24,24,24,0.62);
 }
 
-/* === FEATURE GRID SLIDE === */
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.75rem, 1vw, 1rem);
-  align-items: stretch;
-}
-
-.feature-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-  padding: clamp(0.8rem, 1vw, 1rem);
-}
-
-.feature-panel .image-frame {
-  height: min(34vh, 300px);
-}
-
-.feature-panel h3 {
-  font-family: 'Familjen Grotesk', sans-serif;
-  font-size: clamp(0.95rem, 1.4vw, 1.2rem);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--accent-deep);
-}
-
-.feature-panel p {
-  font-size: clamp(0.72rem, 1vw, 0.95rem);
-  color: var(--muted);
-}
-
-/* === CLOSE SLIDE === */
-.close-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: clamp(1rem, 2vw, 2rem);
-  align-items: center;
-}
-
-.close-stack {
-  display: grid;
-  gap: clamp(0.8rem, 1.2vw, 1rem);
-}
-
-.close-stack .card {
-  padding: clamp(1rem, 1.8vw, 1.4rem);
-}
-
-/* === NAVIGATION === */
 .nav-dots {
   position: fixed;
   right: clamp(0.75rem, 1.4vw, 1.2rem);
@@ -485,13 +257,13 @@ p, li {
   height: 10px;
   border-radius: 50%;
   border: none;
-  background: rgba(23,25,26,0.18);
+  background: rgba(24,24,24,0.18);
   cursor: pointer;
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .nav-dot.active {
-  background: var(--accent-deep);
+  background: var(--accent);
   transform: scale(1.15);
 }
 
@@ -502,47 +274,124 @@ p, li {
   z-index: 20;
   padding: 0.55rem 0.8rem;
   border-radius: 999px;
-  background: rgba(255,255,255,0.74);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(23,25,26,0.08);
+  background: rgba(255,255,255,0.84);
+  border: 1px solid rgba(24,24,24,0.08);
   font-size: var(--small-size);
   color: var(--muted);
 }
 
-/* === ANIMATION === */
 .reveal {
   opacity: 0;
   transform: translateY(18px);
-  animation: rise 0.75s ease forwards;
+  animation: rise 0.65s ease forwards;
 }
-.reveal.delay-1 { animation-delay: 0.1s; }
-.reveal.delay-2 { animation-delay: 0.2s; }
-.reveal.delay-3 { animation-delay: 0.3s; }
-.reveal.delay-4 { animation-delay: 0.4s; }
+.reveal.delay-1 { animation-delay: 0.08s; }
+.reveal.delay-2 { animation-delay: 0.16s; }
+.reveal.delay-3 { animation-delay: 0.24s; }
 
 @keyframes rise {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* === MOBILE LAYOUT ADJUSTMENTS === */
-@media (max-width: 900px) {
-  .title-grid,
-  .split-brief,
-  .story-layout,
-  .full-image-layout,
-  .close-layout {
+/* === LAYOUTS === */
+.title-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+  gap: clamp(1rem, 2vw, 2rem);
+  align-items: center;
+  height: 100%;
+}
+
+.title-copy {
+  display: grid;
+  gap: clamp(0.7rem, 1.2vw, 1rem);
+  align-content: center;
+}
+
+.thumb-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.7rem, 1vw, 1rem);
+}
+
+.thumb-row .image-frame {
+  height: min(42vh, 360px);
+}
+
+.concept-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: clamp(1rem, 2vw, 2rem);
+  align-items: center;
+}
+
+.concept-layout .image-frame {
+  height: min(68vh, 640px);
+}
+
+.side-stack {
+  display: grid;
+  gap: clamp(0.8rem, 1vw, 1rem);
+}
+
+.side-stack .card {
+  padding: clamp(1rem, 1.4vw, 1.2rem);
+}
+
+.side-stack ul {
+  padding-left: 1.1rem;
+  display: grid;
+  gap: clamp(0.5rem, 0.9vh, 0.75rem);
+}
+
+.precedent-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.8fr);
+  gap: clamp(1rem, 2vw, 2rem);
+  align-items: center;
+}
+
+.precedent-layout .image-frame {
+  height: min(70vh, 650px);
+}
+
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.7rem, 1vw, 1rem);
+  margin-top: clamp(0.9rem, 1.3vw, 1.2rem);
+}
+
+.spec-grid .card {
+  padding: clamp(0.7rem, 1vw, 0.9rem);
+  display: grid;
+  gap: 0.65rem;
+}
+
+.spec-grid .image-frame {
+  height: min(38vh, 310px);
+}
+
+.spec-grid p {
+  font-size: clamp(0.72rem, 0.95vw, 0.9rem);
+  color: var(--muted);
+}
+
+.summary-box {
+  margin-top: clamp(0.8rem, 1vw, 1rem);
+  padding: clamp(0.9rem, 1.2vw, 1.1rem);
+}
+
+@media (max-width: 960px) {
+  .title-layout,
+  .concept-layout,
+  .precedent-layout {
     grid-template-columns: 1fr;
   }
 
-  .feature-grid {
+  .thumb-row,
+  .spec-grid {
     grid-template-columns: 1fr;
-  }
-
-  .title-collage {
-    min-height: min(46vh, 340px);
   }
 }
   </style>
@@ -551,209 +400,155 @@ p, li {
   <nav class="nav-dots" aria-label="Slide navigation"></nav>
   <div class="keyboard-hint">Arrow keys, scroll, or tap dots</div>
 
-  <!-- === SLIDE 1: TITLE === -->
+  <!-- === SLIDE 1 === -->
   <section class="slide">
     <div class="slide-content">
-      <div class="title-grid">
+      <div class="title-layout">
         <div class="title-copy">
-          <div class="eyebrow reveal">Timber Ridge · daypack concept review</div>
-          <h1 class="reveal delay-1">A sharper 26L daypack direction, built from the latest three attachments.</h1>
-          <p class="reveal delay-2">This deck combines the current spec brief, the latest CAD view set, and sketch exploration into one image-first review. The brief anchor is the newest file, <em>TimberRidgeDaypack_Specs_041626.pdf</em>.</p>
-          <div class="label-chip reveal delay-3">Image heavy · frontend slides format · GitHub served</div>
+          <div class="eyebrow reveal">Timber Ridge daypack</div>
+          <h1 class="reveal delay-1">Three concept directions, simplified.</h1>
+          <p class="muted reveal delay-2">This version uses real extracted source images from the sketch and spec PDFs, plus the provided red compression-pack image as the compression reference.</p>
+          <div class="card reveal delay-3" style="padding: clamp(1rem, 1.3vw, 1.1rem);">
+            <p><strong>Deck structure:</strong> Shape 1, Shape 2, Shape 3, compression precedent, and a brief-aligned direction check.</p>
+          </div>
         </div>
-        <div class="title-collage reveal delay-2">
-          <div class="image-frame panel-a"><img src="assets/TimberRidgeDaypack_Specs_041626-p2.png" alt="AI renders of the Timber Ridge daypack concept"></div>
-          <div class="image-frame panel-b"><img src="assets/DaypackSketches_01-p1.png" alt="Early form sketch page for the daypack"></div>
-          <div class="image-frame panel-c"><img src="assets/TR_Daypack_CADs_W5.2.png" alt="CAD side view study of the Timber Ridge daypack"></div>
-          <div class="image-frame panel-d"><img src="assets/TimberRidgeDaypack_Specs_041626-p3.png" alt="3D form inspiration translated into the daypack"></div>
+        <div class="thumb-row reveal delay-2">
+          <div class="image-frame"><img src="assets/concept-1.png" alt="Shape 1 concept sketch sheet"></div>
+          <div class="image-frame"><img src="assets/concept-2.png" alt="Shape 2 concept sketch sheet"></div>
+          <div class="image-frame"><img src="assets/concept-3.png" alt="Shape 3 concept sketch sheet"></div>
         </div>
       </div>
     </div>
-    <div class="bottom-note">Source stack: TimberRidgeDaypack_Specs_041626.pdf · TR Daypack CADs W5.2.png · DaypackSketches_01.pdf</div>
+    <div class="bottom-note">Images extracted directly from DaypackSketches_01.pdf and TimberRidgeDaypack_Specs_041626.pdf</div>
     <div class="slide-number">01</div>
   </section>
 
-  <!-- === SLIDE 2: BRIEF === -->
+  <!-- === SLIDE 2 === -->
   <section class="slide">
     <div class="slide-content">
-      <div class="split-brief">
-        <div class="image-frame reveal"><img src="assets/TimberRidgeDaypack_Specs_041626-p1.png" alt="Front and back concept drawing from the 04.16.26 Timber Ridge spec brief"></div>
-        <div class="brief-card card reveal delay-1">
-          <div class="eyebrow">Brief pulled from the newest attachment</div>
-          <h2>What the 04.16.26 spec is asking for.</h2>
-          <ul class="bullet-list">
-            <li><strong>Unique form.</strong> The asymmetric seam geometry is the identity, not decoration.</li>
-            <li><strong>Panel-load opening.</strong> The main zipper should open wide enough to feel easy and premium.</li>
-            <li><strong>Side stretch mesh pockets + shove pocket.</strong> Exterior utility needs to stay integrated into the faceted body.</li>
-            <li><strong>Color-matched hardware.</strong> Buckles, zipper chain, trims, and webbing should read as one system.</li>
-          </ul>
-          <div class="grid">
-            <div class="mini-metric"><strong>Platform</strong>26L daypack</div>
-            <div class="mini-metric"><strong>Reference brief</strong>TimberRidgeDaypack_Specs_041626.pdf</div>
-            <div class="mini-metric"><strong>Review lens</strong>Form, access, utility, comfort</div>
-            <div class="mini-metric"><strong>Presentation mode</strong>Image-led concept synthesis</div>
+      <div class="concept-layout">
+        <div class="image-frame reveal"><img src="assets/concept-1.png" alt="Shape 1 concept page with form model and three backpack sketches"></div>
+        <div class="side-stack reveal delay-1">
+          <div class="eyebrow">Shape 1</div>
+          <h2>Most angular and visibly structural.</h2>
+          <div class="card">
+            <ul>
+              <li>The front graphic reads as a bold X-frame across the body.</li>
+              <li>The concept feels the most technical and outdoors-forward of the three.</li>
+              <li>Best if the goal is a strong identity from a distance, even at the cost of some softness.</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-    <div class="bottom-note">The latest spec attachment becomes the brief baseline for the whole deck.</div>
+    <div class="bottom-note">Source: extracted image from DaypackSketches_01.pdf, page 1</div>
     <div class="slide-number">02</div>
   </section>
 
-  <!-- === SLIDE 3: FORM STORY === -->
+  <!-- === SLIDE 3 === -->
   <section class="slide">
     <div class="slide-content">
-      <div class="story-layout">
-        <div class="story-copy reveal">
-          <div class="eyebrow">Shape story</div>
-          <h2>The concept is strongest when the sculptural object survives translation into a usable bag.</h2>
-          <div class="quote-line"></div>
-          <p>The spec brief is explicit about first-sample priorities: lock in the overall shape and form first, then layer features once the silhouette feels right.</p>
-          <ul class="bullet-list">
-            <li>The diagonal seam language gives the bag a recognizable face from a distance.</li>
-            <li>The cylinder-derived body softens the technical geometry so it still feels approachable.</li>
-            <li>The front stretch zone works best when it feels native to the form rather than applied on top.</li>
-          </ul>
-        </div>
-        <div class="story-gallery reveal delay-1">
-          <div class="image-frame tall"><img src="assets/TimberRidgeDaypack_Specs_041626-p3.png" alt="Original 3D form inspiration and its translation to the daypack"></div>
-          <div class="image-frame tall"><img src="assets/DaypackSketches_01-p1.png" alt="Shape exploration sketch page"></div>
-          <div class="image-frame wide"><img src="assets/DaypackSketches_01-p8.png" alt="Refined sketch sheet showing final front-panel geometry"></div>
+      <div class="concept-layout">
+        <div class="image-frame reveal"><img src="assets/concept-2.png" alt="Shape 2 concept page with form model and three backpack sketches"></div>
+        <div class="side-stack reveal delay-1">
+          <div class="eyebrow">Shape 2</div>
+          <h2>Cleaner sweep, softer stance, stronger zipper story.</h2>
+          <div class="card">
+            <ul>
+              <li>The diagonal path feels more continuous and less segmented than Shape 1.</li>
+              <li>The silhouette keeps the faceted influence but reads more approachable.</li>
+              <li>Best if the goal is a balance between concept character and everyday usability.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-    <div class="bottom-note">Spec page 3 plus sketch pages show a clear object-to-bag lineage.</div>
+    <div class="bottom-note">Source: extracted image from DaypackSketches_01.pdf, page 2</div>
     <div class="slide-number">03</div>
   </section>
 
-  <!-- === SLIDE 4: CAD DIRECTION === -->
+  <!-- === SLIDE 4 === -->
   <section class="slide">
     <div class="slide-content">
-      <div class="full-image-layout">
-        <div class="image-frame reveal"><img src="assets/TR_Daypack_CADs_W5.2.png" alt="CAD study showing side and open side profile of the daypack"></div>
-        <div class="side-notes reveal delay-1">
-          <div class="eyebrow">CAD direction</div>
-          <h2>Week 5.2 CAD confirms the geometry can stay clean under load.</h2>
-          <div class="note-card"><strong>Line control</strong>The diagonal front divisions stay legible without over-fragmenting the shell.</div>
-          <div class="note-card"><strong>Pack stance</strong>The base reads stable and grounded, which helps the tall body feel intentional rather than top-heavy.</div>
-          <div class="note-card"><strong>Compression</strong>The side straps support the form language instead of fighting it.</div>
-          <div class="note-card"><strong>Opportunity</strong>The lid opening and shoulder transition are the best places to refine perceived quality next.</div>
+      <div class="concept-layout">
+        <div class="image-frame reveal"><img src="assets/concept-3.png" alt="Shape 3 concept page with form model and three backpack sketches"></div>
+        <div class="side-stack reveal delay-1">
+          <div class="eyebrow">Shape 3</div>
+          <h2>Most rectilinear and closest to a clean commercial daypack.</h2>
+          <div class="card">
+            <ul>
+              <li>The panel layout is simpler, calmer, and easier to read quickly.</li>
+              <li>The geometry still carries the concept DNA without feeling overworked.</li>
+              <li>Best if the goal is a fast path from sketch language into a manufacturable product.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-    <div class="bottom-note">Attachment reference: TR Daypack CADs W5.2.png</div>
+    <div class="bottom-note">Source: extracted image from DaypackSketches_01.pdf, page 3</div>
     <div class="slide-number">04</div>
   </section>
 
-  <!-- === SLIDE 5: ORIGAMI COMPRESSION === -->
+  <!-- === SLIDE 5 === -->
   <section class="slide">
     <div class="slide-content">
-      <div class="full-image-layout">
-        <div class="reveal" style="display:flex; align-items:center; justify-content:center; height:min(60vh, 560px);">
-          <img src="assets/origami-bag-cutout-cropped.png" alt="Origami compression bag reference with accordion-fold sidewalls" style="max-height:min(60vh, 560px); max-width:100%; object-fit:contain; filter:drop-shadow(0 26px 36px rgba(23,25,26,0.18));">
-        </div>
-        <div class="side-notes reveal delay-1">
-          <div class="eyebrow">Origami compression reference</div>
-          <h2>A novel method for compression that does not rely on compressing the lid.</h2>
-          <div class="note-card"><strong>Body-led volume change</strong>The accordion sidewall reduces pack depth by collapsing the body itself, rather than pulling everything down from the top opening.</div>
-          <div class="note-card"><strong>Better access</strong>The lid can stay cleaner and more stable because the compression event happens in the side architecture.</div>
-          <div class="note-card"><strong>Strong visual story</strong>The fold pattern turns compression into a visible product feature instead of a hidden strap function.</div>
-          <div class="note-card"><strong>Why it matters here</strong>This gives Timber Ridge a credible path to make compression feel like part of the form language, not an afterthought.</div>
+      <div class="precedent-layout">
+        <div class="image-frame reveal"><img src="assets/red-compression-pack.jpg" alt="Red folding compression backpack prototype"></div>
+        <div class="side-stack reveal delay-1">
+          <div class="eyebrow">Compression reference</div>
+          <h2>Useful precedent: body compression, not just lid compression.</h2>
+          <div class="card">
+            <ul>
+              <li>The accordion sidewall makes volume change visible and product-defining.</li>
+              <li>Compression happens in the body architecture instead of only pulling down from the top opening.</li>
+              <li>This is the cleanest external reference for a more novel compression story.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-    <div class="bottom-note">User-supplied origami bag reference, added as a compression precedent for presentation use.</div>
+    <div class="bottom-note">Source: user-provided red compression pack image</div>
     <div class="slide-number">05</div>
   </section>
 
-  <!-- === SLIDE 6: FEATURE SYSTEM === -->
+  <!-- === SLIDE 6 === -->
   <section class="slide">
     <div class="slide-content">
-      <div class="eyebrow reveal">Feature system from the current spec</div>
-      <h2 class="reveal delay-1" style="margin-bottom: clamp(0.8rem, 1.6vw, 1.2rem);">Exterior utility works when the trim story stays disciplined.</h2>
-      <div class="feature-grid reveal delay-2">
-        <div class="feature-panel card">
-          <div class="image-frame"><img src="assets/TimberRidgeDaypack_Specs_041626-p4.png" alt="Annotated front-view feature callouts"></div>
-          <h3>Front face</h3>
-          <p>210D small-check ripstop, seam-integrated webbing, clean elastic finish, and a taut front shove pocket all reinforce the controlled technical look.</p>
+      <div class="eyebrow reveal">Brief check</div>
+      <h2 class="reveal delay-1">Current brief direction already looks closest to Shape 3, with room to borrow a little more attitude from Shape 1.</h2>
+      <div class="spec-grid reveal delay-2">
+        <div class="card">
+          <div class="image-frame"><img src="assets/spec-front.png" alt="Extracted front-view render from current spec PDF"></div>
+          <h3>Front</h3>
+          <p>The current front view is already cleaner and more productized than the earlier sketch options.</p>
         </div>
-        <div class="feature-panel card">
-          <div class="image-frame"><img src="assets/TimberRidgeDaypack_Specs_041626-p5.png" alt="Annotated back-view feature callouts"></div>
-          <h3>Carry system</h3>
-          <p>Full diamond air mesh, S-shaped straps, and color-matched hardware give the comfort story enough polish to support the premium silhouette.</p>
+        <div class="card">
+          <div class="image-frame"><img src="assets/spec-back.png" alt="Extracted back-view render from current spec PDF"></div>
+          <h3>Back</h3>
+          <p>The back panel and shoulder system are aligned with a practical daypack target.</p>
         </div>
-        <div class="feature-panel card">
-          <div class="image-frame"><img src="assets/TimberRidgeDaypack_Specs_041626-p6.png" alt="Annotated open-panel organization view"></div>
-          <h3>Inside access</h3>
-          <p>The panel-load opening earns its keep with padded laptop storage, a reservoir sleeve, and underside mesh organization inside the hood.</p>
+        <div class="card">
+          <div class="image-frame"><img src="assets/spec-open.png" alt="Extracted open-view render from current spec PDF"></div>
+          <h3>Open</h3>
+          <p>The panel-load opening stays the clearest functional story in the current brief.</p>
         </div>
       </div>
+      <div class="card summary-box reveal delay-3">
+        <p><strong>Simple take:</strong> Shape 1 has the strongest graphic identity, Shape 2 is the softest transition, and Shape 3 is the cleanest product path. If this needs to move fast, keep the current brief direction and selectively borrow compression cues from the red precedent rather than rebuilding the whole bag around it.</p>
+      </div>
     </div>
-    <div class="bottom-note">Spec pages 4 to 6 provide the current exterior, comfort, and organization priorities.</div>
+    <div class="bottom-note">Spec images extracted directly from TimberRidgeDaypack_Specs_041626.pdf</div>
     <div class="slide-number">06</div>
   </section>
 
-  <!-- === SLIDE 7: SKETCH TO SAMPLE === -->
-  <section class="slide">
-    <div class="slide-content">
-      <div class="story-layout">
-        <div class="story-gallery reveal">
-          <div class="image-frame mid"><img src="assets/DaypackSketches_01-p4.png" alt="Sketch sheet with colored concept views"></div>
-          <div class="image-frame mid"><img src="assets/TimberRidgeDaypack_Specs_041626-p2.png" alt="Spec sheet showing AI render front, back, and open views"></div>
-          <div class="image-frame wide"><img src="assets/DaypackSketches_01-p8.png" alt="Refined sketch lineup for the front-panel geometry"></div>
-        </div>
-        <div class="story-copy reveal delay-1">
-          <div class="eyebrow">Translation quality</div>
-          <h2>The encouraging part is how little design energy gets lost between sketch, render, and CAD.</h2>
-          <ul class="bullet-list">
-            <li>The main character line system survives across all three attachments.</li>
-            <li>The bag already has one strong recognizable side, which is usually the hardest part.</li>
-            <li>The next step is less about adding ideas and more about editing the seams, proportions, and trim tolerance until the sample matches the promise.</li>
-          </ul>
-          <p class="muted">If this review stays disciplined, the first sample can prove the silhouette, the opening experience, and the comfort package without needing feature creep.</p>
-        </div>
-      </div>
-    </div>
-    <div class="bottom-note">Combined reading of the sketch PDF, latest spec renders, and current CAD snapshot.</div>
-    <div class="slide-number">07</div>
-  </section>
-
-  <!-- === SLIDE 8: RECOMMENDATION === -->
-  <section class="slide">
-    <div class="slide-content">
-      <div class="close-layout">
-        <div class="close-stack reveal">
-          <div class="eyebrow">Recommendation</div>
-          <h2>Keep the faceted silhouette, make the first sample prove the experience.</h2>
-          <div class="card">
-            <ul class="bullet-list">
-              <li>Prioritize shape accuracy before expanding the feature set.</li>
-              <li>Hold the front stretch area taut and integrated, not floppy or visually separate.</li>
-              <li>Use color-matched hardware and clean binding details to keep the concept elevated.</li>
-              <li>Protect the panel-load opening experience, because that is where utility meets perceived quality.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <p><strong>In one line:</strong> the newest brief points to a daypack that wins on form first, then earns credibility through smart access and tidy execution.</p>
-          </div>
-        </div>
-        <div class="image-frame reveal delay-2" style="height: min(58vh, 520px);"><img src="assets/TimberRidgeDaypack_Specs_041626-p2.png" alt="Three-view AI render concept board for the Timber Ridge daypack"></div>
-      </div>
-    </div>
-    <div class="bottom-note">Reference brief: TimberRidgeDaypack_Specs_041626.pdf · built around the three most recent card attachments.</div>
-    <div class="slide-number">08</div>
-  </section>
-
   <script>
-    /* === NAVIGATION LOGIC === */
     const slides = Array.from(document.querySelectorAll('.slide'));
     const nav = document.querySelector('.nav-dots');
     let activeIndex = 0;
 
     function goToSlide(index) {
       const clamped = Math.max(0, Math.min(index, slides.length - 1));
-      const top = slides[clamped].offsetTop;
-      window.scrollTo({ top, behavior: 'smooth' });
+      window.scrollTo({ top: slides[clamped].offsetTop, behavior: 'smooth' });
     }
 
     slides.forEach((_, index) => {
