@@ -360,6 +360,8 @@
       aspect-ratio: 1 / 1;
       position: relative;
       transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      display: grid;
+      place-items: center;
     }
 
     .thumb-button {
@@ -381,17 +383,19 @@
 
     .thumb-button img {
       display: block;
-      width: 100%;
-      height: 100%;
+      width: 88%;
+      height: 88%;
       object-fit: contain;
       object-position: center;
-      background: #fff;
+      background: transparent;
     }
 
     .thumb-fallback,
     .thumb-slot {
       display: grid;
       place-items: center;
+      width: 100%;
+      height: 100%;
       background:
         linear-gradient(135deg, rgba(255,255,255,0.96), rgba(240,234,224,0.95)),
         repeating-linear-gradient(-45deg, rgba(154,93,54,0.06) 0 12px, rgba(255,255,255,0) 12px 24px);
@@ -462,21 +466,43 @@
       place-items: center;
       text-align: center;
       padding: 1.2rem;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.3), rgba(255,255,255,0.12)),
-        url('assets/TR_Daypack_CADs_W5.2.png') center / contain no-repeat;
+      background: rgba(255,255,255,0.78);
       color: var(--muted);
     }
 
     .viewer-state.hidden { display: none; }
 
     .viewer-state-card {
-      max-width: 35ch;
+      display: grid;
+      place-items: center;
+      gap: 0.8rem;
+      min-width: 180px;
       padding: 1rem 1.1rem;
       border-radius: 18px;
-      background: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.92);
       border: 1px solid rgba(31,23,19,0.08);
       box-shadow: var(--shadow);
+    }
+
+    .viewer-spinner {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 3px solid rgba(214, 59, 47, 0.14);
+      border-top-color: var(--accent);
+      animation: spin 0.9s linear infinite;
+    }
+
+    .viewer-state-title {
+      font-size: var(--small);
+      text-transform: uppercase;
+      letter-spacing: 0.10em;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
     .viewer-meta {
@@ -620,8 +646,8 @@
               <div class="viewer-canvas" id="step-viewer-canvas">
                 <div class="viewer-state" id="step-viewer-state">
                   <div class="viewer-state-card">
-                    <strong>Interactive STEP viewer is wired and waiting.</strong>
-                    <p>Add up to 20 labeled STEP files and matching thumbnails, then click any thumbnail to load that model here.</p>
+                    <div class="viewer-spinner" aria-hidden="true"></div>
+                    <div class="viewer-state-title" id="step-viewer-state-title">Loading model</div>
                   </div>
                 </div>
               </div>
@@ -1024,6 +1050,7 @@
 
     const selectEl = document.getElementById('step-model-select');
     const stateEl = document.getElementById('step-viewer-state');
+    const stateTitleEl = document.getElementById('step-viewer-state-title');
     const statusEl = document.getElementById('step-viewer-status');
     const canvasHost = document.getElementById('step-viewer-canvas');
     const thumbGridEl = document.getElementById('step-thumb-grid');
@@ -1073,8 +1100,9 @@
       camera.updateProjectionMatrix();
     }
 
-    function setStatus(text, showState = true) {
+    function setStatus(text, showState = true, stateTitle = 'Loading model') {
       statusEl.textContent = text;
+      if (stateTitleEl) stateTitleEl.textContent = stateTitle;
       stateEl.classList.toggle('hidden', !showState);
     }
 
@@ -1154,6 +1182,8 @@
     async function renderThumbGrid() {
       thumbGridEl.innerHTML = '';
       const totalSlots = 20;
+      const thumbJobs = [];
+
       for (let i = 0; i < totalSlots; i++) {
         const model = manifest.models[i];
         if (model) {
@@ -1163,23 +1193,25 @@
           button.setAttribute('aria-label', model.label || `Bag ${i + 1}`);
           button.dataset.index = String(i);
 
-          const thumbPath = await resolveThumbnailPath(model, i);
-          if (thumbPath) {
-            const img = document.createElement('img');
-            img.alt = '';
-            img.loading = 'lazy';
-            img.src = thumbPath;
-            button.appendChild(img);
-          } else {
-            const fallback = document.createElement('div');
-            fallback.className = 'thumb-fallback';
-            button.appendChild(fallback);
-          }
+          const fallback = document.createElement('div');
+          fallback.className = 'thumb-fallback';
+          button.appendChild(fallback);
 
           button.addEventListener('click', async () => {
             await loadSelectedModel(i);
           });
           thumbGridEl.appendChild(button);
+
+          thumbJobs.push((async () => {
+            const thumbPath = await resolveThumbnailPath(model, i);
+            if (!thumbPath) return;
+            const img = document.createElement('img');
+            img.alt = '';
+            img.loading = 'lazy';
+            img.src = thumbPath;
+            button.innerHTML = '';
+            button.appendChild(img);
+          })());
         } else {
           const slot = document.createElement('div');
           slot.className = 'thumb-slot';
@@ -1187,6 +1219,8 @@
           thumbGridEl.appendChild(slot);
         }
       }
+
+      await Promise.allSettled(thumbJobs);
     }
 
     function updateActiveThumb(index) {
@@ -1213,7 +1247,7 @@
         selectEl.appendChild(option);
         await renderThumbGrid();
         clearModel();
-        setStatus('Awaiting STEP files', true);
+        setStatus('Awaiting STEP files', true, 'Awaiting model');
         return;
       }
 
@@ -1235,7 +1269,7 @@
 
       selectEl.value = String(index);
       updateActiveThumb(index);
-      setStatus(`Loading ${model.label || model.file}...`, true);
+      setStatus(`Loading ${model.label || model.file}...`, true, 'Loading model');
       clearModel();
 
       try {
@@ -1281,10 +1315,10 @@
         currentGroup = group;
         scene.add(group);
         fitCameraToObject(group);
-        setStatus(model.caption || `${model.label || model.file} loaded`, false);
+        setStatus(model.caption || `${model.label || model.file} loaded`, false, 'Loaded');
       } catch (error) {
         console.error(error);
-        setStatus(`Viewer ready, but ${model.file || 'model'} could not load`, true);
+        setStatus(`Viewer ready, but ${model.file || 'model'} could not load`, true, 'Load error');
       }
     }
 
