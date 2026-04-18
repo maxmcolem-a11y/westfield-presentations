@@ -294,6 +294,76 @@
       height: min(22vh, 190px);
     }
 
+    .step2-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--gap-lg);
+      align-items: start;
+    }
+
+    .step2-item {
+      display: grid;
+      gap: 0.8rem;
+      justify-items: center;
+      align-content: start;
+    }
+
+    .step2-item img {
+      display: block;
+      width: 100%;
+      max-height: min(44vh, 430px);
+      object-fit: contain;
+      border-radius: 2px;
+      background: transparent;
+    }
+
+    .step2-item h3 {
+      text-align: center;
+    }
+
+    .lightboxable-image {
+      cursor: zoom-in;
+    }
+
+    .image-lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: rgba(10, 10, 10, 0.84);
+      z-index: 100;
+    }
+
+    .image-lightbox.open {
+      display: flex;
+    }
+
+    .image-lightbox img {
+      max-width: min(92vw, 1600px);
+      max-height: 90vh;
+      object-fit: contain;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      background: #fff;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.92);
+      color: #111;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    }
+
     .hero-render,
     .media-panel .frame,
     .media-panel .placeholder-visual.large {
@@ -583,6 +653,7 @@
       .mandate-grid,
       .feature-grid,
       .decision-grid,
+      .step2-grid,
       .hero-visuals {
         grid-template-columns: 1fr;
       }
@@ -660,21 +731,21 @@
     <div class="slide-content">
       <div class="stack" style="margin-bottom: var(--gap-lg);">
         <div class="eyebrow">Step 2</div>
-        <h2>We then 3d printed all of the shapes we modeled.</h2>
-        <p class="muted">we passed them around the office for a week and found these three shapes to be the most compelling to people</p>
+        <h2>We then 3D printed all of the shapes we modeled.</h2>
+        <p class="muted">We passed them around the office for a week and found these three shapes to be the most compelling.</p>
       </div>
-      <div class="decision-grid">
-        <div class="decision-card">
+      <div class="step2-grid">
+        <div class="step2-item">
+          <img src="assets/shape-1-3d-print.jpg" alt="Shape 1 3D print">
           <h3>Faceted Pillow</h3>
-          <div class="frame"><img src="assets/shape-1-3d-print.jpg" alt="Shape 1 3D print"></div>
         </div>
-        <div class="decision-card">
+        <div class="step2-item">
+          <img src="assets/shape-2-3d-print.jpg" alt="Shape 2 3D print">
           <h3>Central Teardrop</h3>
-          <div class="frame"><img src="assets/shape-2-3d-print.jpg" alt="Shape 2 3D print"></div>
         </div>
-        <div class="decision-card">
+        <div class="step2-item">
+          <img src="assets/shape-3-3d-print.jpg" alt="Shape 3 3D print">
           <h3>Ordered Spiral</h3>
-          <div class="frame"><img src="assets/shape-3-3d-print.jpg" alt="Shape 3 3D print"></div>
         </div>
       </div>
     </div>
@@ -953,6 +1024,11 @@
     <div class="slide-number">09</div>
   </section>
 
+  <div class="image-lightbox" id="image-lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close image">×</button>
+    <img id="lightbox-image" alt="Expanded image view">
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/occt-import-js@0.0.23/dist/occt-import-js.js"></script>
   <script type="importmap">
     {
@@ -1039,6 +1115,9 @@
     const statusEl = document.getElementById('step-viewer-status');
     const canvasHost = document.getElementById('step-viewer-canvas');
     const thumbGridEl = document.getElementById('step-thumb-grid');
+    const lightboxEl = document.getElementById('image-lightbox');
+    const lightboxImageEl = document.getElementById('lightbox-image');
+    const lightboxCloseEl = document.getElementById('lightbox-close');
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -1109,6 +1188,29 @@
         }
       });
       currentGroup = null;
+    }
+
+    function openLightbox(src, alt = '') {
+      lightboxImageEl.src = src;
+      lightboxImageEl.alt = alt;
+      lightboxEl.classList.add('open');
+      lightboxEl.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeLightbox() {
+      lightboxEl.classList.remove('open');
+      lightboxEl.setAttribute('aria-hidden', 'true');
+      lightboxImageEl.src = '';
+    }
+
+    function bindLightboxImages() {
+      document.querySelectorAll('img').forEach((img) => {
+        if (img.closest('#step-thumb-grid') || img.closest('#image-lightbox')) return;
+        if (img.dataset.lightboxBound === 'true') return;
+        img.dataset.lightboxBound = 'true';
+        img.classList.add('lightboxable-image');
+        img.addEventListener('click', () => openLightbox(img.currentSrc || img.src, img.alt || 'Expanded image'));
+      });
     }
 
     function colorFromArray(color) {
@@ -1335,10 +1437,21 @@
       await loadSelectedModel(Number(selectEl.value || 0));
     });
 
+    lightboxCloseEl.addEventListener('click', closeLightbox);
+    lightboxEl.addEventListener('click', (event) => {
+      if (event.target === lightboxEl) closeLightbox();
+    });
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && lightboxEl.classList.contains('open')) {
+        closeLightbox();
+      }
+    });
+
     window.addEventListener('resize', resizeRenderer);
     resizeRenderer();
     animate();
     await loadManifest();
+    bindLightboxImages();
   </script>
 </body>
 </html>
