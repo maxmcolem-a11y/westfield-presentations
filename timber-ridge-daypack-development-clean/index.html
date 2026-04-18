@@ -452,7 +452,7 @@
       justify-items: center;
     }
 
-    .spec-modal-canvas-wrap {
+    .spec-modal-media-wrap {
       max-width: min(82vw, 820px);
       max-height: 82vh;
       overflow: auto;
@@ -461,10 +461,11 @@
       background: #fff;
     }
 
-    .spec-modal-canvas-wrap canvas {
+    .spec-modal-media-wrap img {
       display: block;
-      width: 100%;
+      max-width: 100%;
       height: auto;
+      background: #fff;
     }
 
     .spec-modal-meta {
@@ -498,26 +499,6 @@
       opacity: 0.38;
       cursor: default;
       transform: none;
-    }
-
-    .image-lightbox {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      background: rgba(10, 10, 10, 0.84);
-      z-index: 100;
-    }
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      background: rgba(10, 10, 10, 0.84);
-      z-index: 100;
     }
 
     .image-lightbox.open {
@@ -1206,8 +1187,8 @@
     <div class="spec-modal-panel">
       <button class="spec-arrow" id="spec-prev" type="button" aria-label="Previous page">‹</button>
       <div class="spec-modal-stage">
-        <div class="spec-modal-canvas-wrap">
-          <canvas id="spec-canvas"></canvas>
+        <div class="spec-modal-media-wrap">
+          <img id="spec-image" alt="Timber Ridge spec sheet page">
         </div>
         <div class="spec-modal-meta" id="spec-page-indicator">Page 1 of 1</div>
       </div>
@@ -1226,7 +1207,6 @@
   <script type="module">
     import * as THREE from 'three';
     import { OrbitControls } from 'https://unpkg.com/three@0.164.1/examples/jsm/controls/OrbitControls.js';
-    import * as pdfjsLib from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.4.168/build/pdf.min.mjs';
 
     const slides = Array.from(document.querySelectorAll('.slide'));
     const nav = document.querySelector('.nav-dots');
@@ -1310,7 +1290,7 @@
     const specModalCloseEl = document.getElementById('spec-modal-close');
     const specPrevEl = document.getElementById('spec-prev');
     const specNextEl = document.getElementById('spec-next');
-    const specCanvasEl = document.getElementById('spec-canvas');
+    const specImageEl = document.getElementById('spec-image');
     const specPageIndicatorEl = document.getElementById('spec-page-indicator');
     const shape1SlideshowEl = document.getElementById('shape1-hero-slideshow');
     const shape1DotsEl = document.getElementById('shape1-hero-dots');
@@ -1352,9 +1332,12 @@
     let manifest = { models: [] };
     let occtReady = null;
     let modelLoadToken = 0;
-    let specPdfDoc = null;
     let specPageNumber = 1;
-    let specRenderTask = null;
+    const specPageImages = [
+      'assets/TimberRidgeDaypack_Spec_Viewer_p1.jpg',
+      'assets/TimberRidgeDaypack_Spec_Viewer_p2.jpg',
+      'assets/TimberRidgeDaypack_Spec_Viewer_p3.jpg'
+    ];
     const ASSET_CACHE_NAME = 'timber-ridge-daypack-assets-v1';
 
     function resizeRenderer() {
@@ -1390,8 +1373,6 @@
       currentGroup = null;
     }
 
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.4.168/build/pdf.worker.min.mjs';
-
     function openLightbox(src, alt = '') {
       lightboxImageEl.src = src;
       lightboxImageEl.alt = alt;
@@ -1405,44 +1386,20 @@
       lightboxImageEl.src = '';
     }
 
-    async function loadSpecPdf() {
-      if (specPdfDoc) return specPdfDoc;
-      specPdfDoc = await pdfjsLib.getDocument('assets/TimberRidgeDaypack_Specs_041626.pdf').promise;
-      return specPdfDoc;
-    }
-
-    async function renderSpecPage(pageNumber) {
-      const pdf = await loadSpecPdf();
-      specPageNumber = Math.max(1, Math.min(pageNumber, pdf.numPages));
-      const page = await pdf.getPage(specPageNumber);
-      const baseViewport = page.getViewport({ scale: 1 });
-      const maxWidth = Math.min(window.innerWidth * 0.78, 820);
-      const scale = maxWidth / baseViewport.width;
-      const viewport = page.getViewport({ scale });
-      const context = specCanvasEl.getContext('2d');
-      specCanvasEl.width = Math.floor(viewport.width);
-      specCanvasEl.height = Math.floor(viewport.height);
-      specCanvasEl.style.width = `${Math.floor(viewport.width)}px`;
-      specCanvasEl.style.height = `${Math.floor(viewport.height)}px`;
-
-      if (specRenderTask) {
-        try { await specRenderTask.cancel(); } catch {}
-      }
-
-      specRenderTask = page.render({ canvasContext: context, viewport });
-      await specRenderTask.promise;
-      specRenderTask = null;
-
-      specPageIndicatorEl.textContent = `Page ${specPageNumber} of ${pdf.numPages}`;
+    function renderSpecPage(pageNumber) {
+      const total = specPageImages.length;
+      specPageNumber = Math.max(1, Math.min(pageNumber, total));
+      specImageEl.src = specPageImages[specPageNumber - 1];
+      specImageEl.alt = `Timber Ridge spec sheet page ${specPageNumber}`;
+      specPageIndicatorEl.textContent = `Page ${specPageNumber} of ${total}`;
       specPrevEl.disabled = specPageNumber <= 1;
-      specNextEl.disabled = specPageNumber >= pdf.numPages;
+      specNextEl.disabled = specPageNumber >= total;
     }
 
-    async function openSpecModal(pageNumber = 1) {
+    function openSpecModal(pageNumber = 1) {
       specModalEl.classList.add('open');
       specModalEl.setAttribute('aria-hidden', 'false');
-      specPageIndicatorEl.textContent = 'Loading…';
-      await renderSpecPage(pageNumber);
+      renderSpecPage(pageNumber);
     }
 
     function closeSpecModal() {
@@ -1452,7 +1409,7 @@
 
     function bindLightboxImages() {
       document.querySelectorAll('img').forEach((img) => {
-        if (img.closest('#step-thumb-grid') || img.closest('#image-lightbox')) return;
+        if (img.closest('#step-thumb-grid') || img.closest('#image-lightbox') || img.closest('#spec-modal')) return;
         if (img.dataset.lightboxBound === 'true') return;
         img.dataset.lightboxBound = 'true';
         img.classList.add('lightboxable-image');
@@ -1462,19 +1419,19 @@
 
     function bindSpecModal() {
       if (!specSheetButtonEl) return;
-      specSheetButtonEl.addEventListener('click', async () => {
-        await openSpecModal(1);
+      specSheetButtonEl.addEventListener('click', () => {
+        openSpecModal(1);
       });
 
       specModalCloseEl.addEventListener('click', closeSpecModal);
       specModalEl.addEventListener('click', (event) => {
         if (event.target === specModalEl) closeSpecModal();
       });
-      specPrevEl.addEventListener('click', async () => {
-        await renderSpecPage(specPageNumber - 1);
+      specPrevEl.addEventListener('click', () => {
+        renderSpecPage(specPageNumber - 1);
       });
-      specNextEl.addEventListener('click', async () => {
-        await renderSpecPage(specPageNumber + 1);
+      specNextEl.addEventListener('click', () => {
+        renderSpecPage(specPageNumber + 1);
       });
     }
 
@@ -1803,28 +1760,22 @@
     lightboxEl.addEventListener('click', (event) => {
       if (event.target === lightboxEl) closeLightbox();
     });
-    window.addEventListener('keydown', async (event) => {
+    window.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
         if (lightboxEl.classList.contains('open')) closeLightbox();
         if (specModalEl.classList.contains('open')) closeSpecModal();
       }
       if (!specModalEl.classList.contains('open')) return;
       if (event.key === 'ArrowLeft' && specPageNumber > 1) {
-        await renderSpecPage(specPageNumber - 1);
+        renderSpecPage(specPageNumber - 1);
       }
-      if (event.key === 'ArrowRight') {
-        const pdf = await loadSpecPdf();
-        if (specPageNumber < pdf.numPages) {
-          await renderSpecPage(specPageNumber + 1);
-        }
+      if (event.key === 'ArrowRight' && specPageNumber < specPageImages.length) {
+        renderSpecPage(specPageNumber + 1);
       }
     });
 
-    window.addEventListener('resize', async () => {
+    window.addEventListener('resize', () => {
       resizeRenderer();
-      if (specModalEl.classList.contains('open')) {
-        await renderSpecPage(specPageNumber);
-      }
     });
     resizeRenderer();
     animate();
