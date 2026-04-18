@@ -449,8 +449,8 @@
       position: relative;
       min-height: min(50vh, 460px);
       background:
-        radial-gradient(circle at top, rgba(255,255,255,0.97), rgba(235,226,211,0.96) 70%),
-        linear-gradient(180deg, #f6efe4 0%, #ece2d3 100%);
+        linear-gradient(180deg, rgba(255,255,255,0.50), rgba(255,255,255,0.22)),
+        linear-gradient(180deg, #f7f7f3 0%, #edede8 100%);
     }
 
     .viewer-canvas canvas {
@@ -557,19 +557,6 @@
       transform: scale(1.16);
     }
 
-    .keyboard-hint {
-      position: fixed;
-      right: clamp(1rem, 2vw, 1.4rem);
-      bottom: clamp(1rem, 2vw, 1.4rem);
-      z-index: 20;
-      padding: 0.55rem 0.78rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid rgba(31,23,19,0.08);
-      color: var(--muted);
-      font-size: var(--small);
-    }
-
     code {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: 0.9em;
@@ -603,14 +590,13 @@
     }
 
     @media (max-height: 720px) {
-      .nav-dots, .keyboard-hint { display: none; }
+      .nav-dots { display: none; }
       :root { --pad: clamp(0.85rem, 2.5vw, 1.8rem); }
     }
   </style>
 </head>
 <body>
   <nav class="nav-dots" aria-label="Slide navigation"></nav>
-  <div class="keyboard-hint">Arrow keys, scroll, or tap dots</div>
 
   <section class="slide">
     <div class="slide-content" style="align-items: center; justify-content: center;">
@@ -638,7 +624,7 @@
       <div class="top-funnel-layout">
         <div class="top-funnel-copy">
           <div class="stack" style="gap:0.45rem; align-content:start;">
-            <div class="eyebrow">Top of funnel</div>
+            <div class="eyebrow">Step 1</div>
             <h2>We started with 3D modeling a variety of unique shapes to evaluate for recognizability, tension, proportion, and structural clarity.</h2>
           </div>
           <div class="top-funnel-browser">
@@ -647,13 +633,12 @@
                 <div class="viewer-state" id="step-viewer-state">
                   <div class="viewer-state-card">
                     <div class="viewer-spinner" aria-hidden="true"></div>
-                    <div class="viewer-state-title" id="step-viewer-state-title">Loading model</div>
+                    <div class="viewer-state-title" id="step-viewer-state-title">Loading</div>
                   </div>
                 </div>
               </div>
               <div class="viewer-meta">
                 <span id="step-viewer-status">Awaiting STEP files</span>
-                <span>Thumbnail click loads the model</span>
               </div>
               <select id="step-model-select" style="display:none;">
                 <option>Looking for manifest...</option>
@@ -662,10 +647,6 @@
           </div>
         </div>
         <div class="thumb-panel">
-          <div class="stack" style="gap:0.35rem;">
-            <div class="eyebrow">Shape set</div>
-            <p class="muted">20 thumbnail slots, no text, each one mapped to its corresponding bag file.</p>
-          </div>
           <div class="thumb-grid" id="step-thumb-grid" aria-label="STEP model thumbnail grid"></div>
         </div>
       </div>
