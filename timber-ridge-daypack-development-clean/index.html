@@ -317,7 +317,8 @@
       border-radius: 16px;
       overflow: hidden;
       line-height: 0;
-      background: transparent;
+      background: #fff;
+      clip-path: inset(0 round 16px);
     }
 
     .step2-item img {
@@ -325,16 +326,20 @@
       width: 100%;
       max-height: min(44vh, 430px);
       object-fit: contain;
-      background: transparent;
+      background: #fff;
+      border-radius: 16px;
+      clip-path: inset(0 round 16px);
     }
 
     .frame img,
+    .hero-slideshow,
     .hero-slide,
     .hero-slide img {
       border-radius: 16px;
       clip-path: inset(0 round 16px);
     }
 
+    .hero-slideshow,
     .hero-slide {
       overflow: hidden;
     }
