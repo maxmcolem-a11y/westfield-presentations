@@ -1179,10 +1179,9 @@
       return null;
     }
 
-    async function renderThumbGrid() {
+    function renderThumbGrid() {
       thumbGridEl.innerHTML = '';
       const totalSlots = 20;
-      const thumbJobs = [];
 
       for (let i = 0; i < totalSlots; i++) {
         const model = manifest.models[i];
@@ -1202,7 +1201,7 @@
           });
           thumbGridEl.appendChild(button);
 
-          thumbJobs.push((async () => {
+          (async () => {
             const thumbPath = await resolveThumbnailPath(model, i);
             if (!thumbPath) return;
             const img = document.createElement('img');
@@ -1211,7 +1210,7 @@
             img.src = thumbPath;
             button.innerHTML = '';
             button.appendChild(img);
-          })());
+          })();
         } else {
           const slot = document.createElement('div');
           slot.className = 'thumb-slot';
@@ -1219,8 +1218,6 @@
           thumbGridEl.appendChild(slot);
         }
       }
-
-      await Promise.allSettled(thumbJobs);
     }
 
     function updateActiveThumb(index) {
@@ -1245,7 +1242,7 @@
         option.textContent = 'No STEP files listed yet';
         option.value = '';
         selectEl.appendChild(option);
-        await renderThumbGrid();
+        renderThumbGrid();
         clearModel();
         setStatus('Awaiting STEP files', true, 'Awaiting model');
         return;
@@ -1258,7 +1255,7 @@
         selectEl.appendChild(option);
       });
 
-      await renderThumbGrid();
+      renderThumbGrid();
       await loadSelectedModel(0);
     }
 
