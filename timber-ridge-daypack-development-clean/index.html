@@ -328,11 +328,23 @@
       background: transparent;
     }
 
-    .slide:nth-of-type(3) .step2-media,
-    .slide:nth-of-type(3) .step2-media img {
+    .step2-media.slide3-rounded {
       border-radius: 24px;
       overflow: hidden;
       clip-path: inset(0 round 24px);
+      -webkit-clip-path: inset(0 round 24px);
+      -webkit-mask-image: -webkit-radial-gradient(white, black);
+      transform: translateZ(0);
+    }
+
+    .step2-media.slide3-rounded img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 0;
+      clip-path: inset(0 round 24px);
+      -webkit-clip-path: inset(0 round 24px);
+      transform: translateZ(0);
     }
 
     .step2-media-bg {
@@ -1000,15 +1012,15 @@
       </div>
       <div class="step2-grid">
         <div class="step2-item">
-          <div class="step2-media"><img src="assets/shape-1-3d-print.jpg" alt="Diamond 3D print"></div>
+          <div class="step2-media slide3-rounded"><img src="assets/shape-1-3d-print.jpg" alt="Diamond 3D print"></div>
           <h3>Diamond</h3>
         </div>
         <div class="step2-item">
-          <div class="step2-media"><img src="assets/shape-2-3d-print.jpg" alt="Teardrop 3D print"></div>
+          <div class="step2-media slide3-rounded"><img src="assets/shape-2-3d-print.jpg" alt="Teardrop 3D print"></div>
           <h3>Teardrop</h3>
         </div>
         <div class="step2-item">
-          <div class="step2-media"><img src="assets/shape-3-3d-print.jpg" alt="Spiral 3D print"></div>
+          <div class="step2-media slide3-rounded"><img src="assets/shape-3-3d-print.jpg" alt="Spiral 3D print"></div>
           <h3>Spiral</h3>
         </div>
       </div>
