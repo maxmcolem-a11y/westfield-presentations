@@ -15,12 +15,12 @@
     }
 
     :root {
-      --bg: #f7f3ea;
-      --bg-2: #efe7d9;
-      --paper: rgba(255,255,255,0.88);
-      --paper-strong: rgba(255,255,255,0.96);
-      --line: rgba(45, 35, 28, 0.12);
-      --line-strong: rgba(45, 35, 28, 0.22);
+      --bg: #f6f0e3;
+      --bg-2: #efe4d1;
+      --paper: rgba(255,252,246,0.94);
+      --paper-strong: rgba(255,255,255,0.98);
+      --line: rgba(73, 57, 45, 0.16);
+      --line-strong: rgba(73, 57, 45, 0.28);
       --ink: #1f1713;
       --muted: #6c6158;
       --accent: #9a5d36;
@@ -29,7 +29,11 @@
       --green-soft: rgba(43, 122, 86, 0.12);
       --red: #a3453b;
       --red-soft: rgba(163, 69, 59, 0.12);
-      --shadow: 0 22px 56px rgba(31, 23, 19, 0.08);
+      --tab-1: #e8b977;
+      --tab-2: #d98973;
+      --tab-3: #88a9c3;
+      --tab-4: #96b88a;
+      --shadow: 0 18px 42px rgba(31, 23, 19, 0.08);
       --title: clamp(2.1rem, 5.4vw, 5rem);
       --h2: clamp(1.5rem, 2.8vw, 2.8rem);
       --h3: clamp(1rem, 1.4vw, 1.2rem);
@@ -38,7 +42,7 @@
       --pad: clamp(1rem, 3.3vw, 3.1rem);
       --gap: clamp(0.9rem, 1.5vw, 1.25rem);
       --gap-lg: clamp(1.1rem, 2vw, 1.8rem);
-      --radius: 24px;
+      --radius: 20px;
     }
 
     * { box-sizing: border-box; }
@@ -47,9 +51,12 @@
       color: var(--ink);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(154,93,54,0.10), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(43,122,86,0.08), transparent 24%),
-        linear-gradient(180deg, #fbf8f2 0%, #f3ecdf 100%);
+        linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0.18)),
+        repeating-linear-gradient(180deg, rgba(127, 172, 214, 0.16) 0 1px, transparent 1px 42px),
+        linear-gradient(90deg, rgba(211, 120, 95, 0.18) 0 2px, transparent 2px 100%),
+        linear-gradient(180deg, #fbf7ef 0%, #f2eadc 100%);
+      background-size: auto, auto, auto, auto;
+      background-position: 0 0, 0 14px, 72px 0, 0 0;
     }
 
     h1, h2, h3, p, ul { margin: 0; }
@@ -111,8 +118,10 @@
       background: var(--paper);
       border: 1px solid rgba(255,255,255,0.72);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(6px);
       border-radius: var(--radius);
+      position: relative;
+      isolation: isolate;
     }
 
     .card,
@@ -121,7 +130,56 @@
     .feature-card,
     .placeholder,
     .media-panel {
-      padding: clamp(0.95rem, 1.35vw, 1.15rem);
+      padding: clamp(1.05rem, 1.45vw, 1.2rem);
+    }
+
+    .viewer-shell,
+    .decision-card,
+    .feature-card,
+    .placeholder,
+    .media-panel,
+    .card,
+    .panel {
+      margin-top: 0.8rem;
+    }
+
+    .viewer-shell::before,
+    .decision-card::before,
+    .feature-card::before,
+    .placeholder::before,
+    .media-panel::before,
+    .card::before,
+    .panel::before {
+      content: "";
+      position: absolute;
+      top: -0.78rem;
+      left: 1rem;
+      width: 6.25rem;
+      height: 1rem;
+      border-radius: 0.95rem 0.95rem 0 0;
+      border: 1px solid var(--line-strong);
+      border-bottom: none;
+      background: var(--tab-1);
+      box-shadow: 0 4px 10px rgba(31, 23, 19, 0.08);
+      z-index: -1;
+    }
+
+    .feature-card:nth-child(2)::before,
+    .decision-card:nth-child(2)::before,
+    .progress-grid > :nth-child(2)::before {
+      background: var(--tab-2);
+    }
+
+    .feature-card:nth-child(3)::before,
+    .decision-card:nth-child(3)::before,
+    .progress-grid > :nth-child(3)::before {
+      background: var(--tab-3);
+    }
+
+    .media-panel::before,
+    .viewer-shell::before,
+    .placeholder::before {
+      background: var(--tab-4);
     }
 
     .frame,
