@@ -331,15 +331,17 @@
 
     .slideshow-panel {
       display: grid;
+      width: 100%;
       gap: 1rem;
       align-content: center;
+      justify-items: center;
     }
 
     .hero-slideshow {
       position: relative;
-      width: min(100%, 430px);
+      width: min(100%, 520px);
       aspect-ratio: 3 / 4;
-      justify-self: end;
+      justify-self: center;
       overflow: hidden;
       background: transparent;
       border: none;
@@ -389,7 +391,7 @@
 
     .spec-sheet-button {
       display: inline-flex;
-      justify-self: end;
+      justify-self: center;
       align-items: center;
       justify-content: center;
       min-height: 48px;
