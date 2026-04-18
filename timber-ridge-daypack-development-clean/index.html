@@ -337,8 +337,14 @@
 
     .hero-slideshow {
       position: relative;
-      min-height: min(60vh, 560px);
+      width: min(100%, 430px);
+      aspect-ratio: 3 / 4;
+      justify-self: end;
       overflow: hidden;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
     }
 
     .hero-slide {
@@ -357,8 +363,9 @@
     .hero-slide img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       display: block;
+      background: transparent;
     }
 
     .slideshow-dots {
@@ -888,7 +895,7 @@
           </div>
         </div>
         <div class="slideshow-panel">
-          <div class="hero-slideshow frame" id="shape1-hero-slideshow" aria-label="Faceted Pillow hero slideshow">
+          <div class="hero-slideshow" id="shape1-hero-slideshow" aria-label="Faceted Pillow hero slideshow">
             <div class="hero-slide active"><img src="assets/faceted-pillow-hero-1.jpg" alt="Faceted Pillow hero render front view"></div>
             <div class="hero-slide"><img src="assets/faceted-pillow-hero-2.jpg" alt="Faceted Pillow hero render back view"></div>
             <div class="hero-slide"><img src="assets/faceted-pillow-hero-3.jpg" alt="Faceted Pillow hero render open access view"></div>
