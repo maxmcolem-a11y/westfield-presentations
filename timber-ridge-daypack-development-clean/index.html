@@ -328,23 +328,15 @@
       background: transparent;
     }
 
-    .step2-media.slide3-rounded {
+    .step2-media.slide3-rounded-bg {
+      width: 100%;
+      aspect-ratio: 5 / 7;
       border-radius: 24px;
       overflow: hidden;
-      clip-path: inset(0 round 24px);
-      -webkit-clip-path: inset(0 round 24px);
-      -webkit-mask-image: -webkit-radial-gradient(white, black);
-      transform: translateZ(0);
-    }
-
-    .step2-media.slide3-rounded img {
-      display: block;
-      width: 100%;
-      height: auto;
-      border-radius: 0;
-      clip-path: inset(0 round 24px);
-      -webkit-clip-path: inset(0 round 24px);
-      transform: translateZ(0);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100% 100%;
+      cursor: zoom-in;
     }
 
     .step2-media-bg {
@@ -1012,15 +1004,15 @@
       </div>
       <div class="step2-grid">
         <div class="step2-item">
-          <div class="step2-media slide3-rounded"><img src="assets/shape-1-3d-print.jpg" alt="Diamond 3D print"></div>
+          <div class="step2-media slide3-rounded-bg" style="background-image: url('assets/shape-1-3d-print.jpg');" data-lightbox-src="assets/shape-1-3d-print.jpg" data-lightbox-alt="Diamond 3D print" aria-label="Diamond 3D print" role="img"></div>
           <h3>Diamond</h3>
         </div>
         <div class="step2-item">
-          <div class="step2-media slide3-rounded"><img src="assets/shape-2-3d-print.jpg" alt="Teardrop 3D print"></div>
+          <div class="step2-media slide3-rounded-bg" style="background-image: url('assets/shape-2-3d-print.jpg');" data-lightbox-src="assets/shape-2-3d-print.jpg" data-lightbox-alt="Teardrop 3D print" aria-label="Teardrop 3D print" role="img"></div>
           <h3>Teardrop</h3>
         </div>
         <div class="step2-item">
-          <div class="step2-media slide3-rounded"><img src="assets/shape-3-3d-print.jpg" alt="Spiral 3D print"></div>
+          <div class="step2-media slide3-rounded-bg" style="background-image: url('assets/shape-3-3d-print.jpg');" data-lightbox-src="assets/shape-3-3d-print.jpg" data-lightbox-alt="Spiral 3D print" aria-label="Spiral 3D print" role="img"></div>
           <h3>Spiral</h3>
         </div>
       </div>
