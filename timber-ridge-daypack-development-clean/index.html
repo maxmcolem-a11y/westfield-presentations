@@ -313,12 +313,23 @@
       width: 100%;
       max-height: min(44vh, 430px);
       object-fit: contain;
-      border-radius: 2px;
+      border-radius: 16px;
       background: transparent;
+    }
+
+    .frame img,
+    .hero-slide img {
+      border-radius: 16px;
     }
 
     .step2-item h3 {
       text-align: center;
+    }
+
+    .step2-item .placeholder-visual {
+      width: 100%;
+      height: min(44vh, 430px);
+      border-radius: 16px;
     }
 
     .shape-final-layout {
@@ -346,7 +357,7 @@
       background: transparent;
       border: none;
       box-shadow: none;
-      border-radius: 0;
+      border-radius: 16px;
     }
 
     .hero-slide {
@@ -368,6 +379,10 @@
       object-fit: cover;
       display: block;
       background: transparent;
+    }
+
+    .hero-slideshow.spiral-preview .hero-slide img {
+      object-fit: contain;
     }
 
     .slideshow-dots {
@@ -902,16 +917,16 @@
       </div>
       <div class="step2-grid">
         <div class="step2-item">
-          <img src="assets/shape-1-3d-print.jpg" alt="Shape 1 3D print">
-          <h3>Faceted Pillow</h3>
+          <img src="assets/shape-1-3d-print.jpg" alt="Diamond 3D print">
+          <h3>Diamond</h3>
         </div>
         <div class="step2-item">
-          <img src="assets/shape-2-3d-print.jpg" alt="Shape 2 3D print">
-          <h3>Central Teardrop</h3>
+          <img src="assets/shape-2-3d-print.jpg" alt="Teardrop 3D print">
+          <h3>Teardrop</h3>
         </div>
         <div class="step2-item">
-          <img src="assets/shape-3-3d-print.jpg" alt="Shape 3 3D print">
-          <h3>Ordered Spiral</h3>
+          <img src="assets/shape-3-3d-print.jpg" alt="Spiral 3D print">
+          <h3>Spiral</h3>
         </div>
       </div>
     </div>
@@ -921,21 +936,21 @@
   <section class="slide">
     <div class="slide-content">
       <div class="stack" style="margin-bottom: var(--gap-lg);">
-        <div class="eyebrow">Faceted Pillow Progression</div>
+        <div class="eyebrow">Diamond Progression</div>
         <h2>The 3D printed shape was then turned into a series of bag concept sketches.</h2>
         <p class="muted">Once we were satisfied with the bag concept, we were ready to create production-ready specifications for it.</p>
       </div>
       <div class="step2-grid">
         <div class="step2-item">
-          <img src="assets/faceted-pillow-3d-print.jpg" alt="Faceted Pillow 3D print">
+          <img src="assets/faceted-pillow-3d-print.jpg" alt="Diamond 3D print">
           <h3>3D Print</h3>
         </div>
         <div class="step2-item">
-          <img src="assets/faceted-pillow-concept-sketch-1.jpg" alt="Faceted Pillow concept sketch 1">
+          <img src="assets/faceted-pillow-concept-sketch-1.jpg" alt="Diamond concept sketch 1">
           <h3>Concept Sketch 1</h3>
         </div>
         <div class="step2-item">
-          <img src="assets/faceted-pillow-concept-sketch-2.jpg" alt="Faceted Pillow concept sketch 2">
+          <img src="assets/faceted-pillow-concept-sketch-2.jpg" alt="Diamond concept sketch 2">
           <h3>Concept Sketch 2</h3>
         </div>
       </div>
@@ -947,8 +962,8 @@
     <div class="slide-content">
       <div class="shape-final-layout">
         <div class="stack">
-          <div class="eyebrow">Faceted Pillow Final Result</div>
-          <h2>The Faceted Pillow end design is unique silhouette with strong graphic potential.</h2>
+          <div class="eyebrow">Diamond Final Result</div>
+          <h2>The Diamond end design is unique silhouette with strong graphic potential.</h2>
           <p class="muted">Diamond and triangular panels, distinctive M profile webbing, and the unique slanted zipper provide strong brand identity though functional, not arbitrary, elements.</p>
           <div class="feature-grid">
             <div class="feature-card">
@@ -966,10 +981,10 @@
           </div>
         </div>
         <div class="slideshow-panel">
-          <div class="hero-slideshow" id="shape1-hero-slideshow" aria-label="Faceted Pillow hero slideshow">
-            <div class="hero-slide active"><img src="assets/faceted-pillow-hero-1.jpg" alt="Faceted Pillow hero render front view"></div>
-            <div class="hero-slide"><img src="assets/faceted-pillow-hero-2.jpg" alt="Faceted Pillow hero render back view"></div>
-            <div class="hero-slide"><img src="assets/faceted-pillow-hero-3.jpg" alt="Faceted Pillow hero render open access view"></div>
+          <div class="hero-slideshow" id="shape1-hero-slideshow" aria-label="Diamond hero slideshow">
+            <div class="hero-slide active"><img src="assets/faceted-pillow-hero-1.jpg" alt="Diamond hero render front view"></div>
+            <div class="hero-slide"><img src="assets/faceted-pillow-hero-2.jpg" alt="Diamond hero render back view"></div>
+            <div class="hero-slide"><img src="assets/faceted-pillow-hero-3.jpg" alt="Diamond hero render open access view"></div>
           </div>
           <div class="slideshow-dots" id="shape1-hero-dots" aria-hidden="true">
             <span class="slideshow-dot active"></span>
@@ -986,34 +1001,32 @@
   <section class="slide">
     <div class="slide-content">
       <div class="stack" style="margin-bottom: var(--gap-lg);">
-        <div class="eyebrow">Shape 3 progression</div>
+        <div class="eyebrow">Spiral Progression</div>
         <h2>Ergonomic evolution from irregular volume into controlled panel motion.</h2>
         <p class="muted">This slide should establish that the curved pentagonal logic is the seed of a coherent panel system, not randomness.</p>
       </div>
-      <div class="progress-grid">
-        <div class="progress-card card">
-          <div class="progress-tag">1/5 print board</div>
-          <div class="frame tall"><img src="assets/DaypackSketches_01-p8.png" alt="Shape 3 reference board"></div>
+      <div class="step2-grid">
+        <div class="step2-item">
+          <img src="assets/DaypackSketches_01-p8.png" alt="Spiral reference board">
+          <h3>Reference Board</h3>
         </div>
-        <div class="progress-card placeholder">
-          <div class="progress-tag">Initial sketch</div>
-          <div class="placeholder-visual tall">
+        <div class="step2-item">
+          <div class="placeholder-visual">
             <div>
-              <strong>Sketch placement pending</strong>
-              <div>Swap in the selected spiral-panel translation sketch for Shape 3.</div>
+              <strong>Concept sketch pending</strong>
+              <div>Swap in the selected spiral-panel translation sketch.</div>
             </div>
           </div>
-          <div class="swap-tag">Placeholder</div>
+          <h3>Concept Sketch</h3>
         </div>
-        <div class="progress-card placeholder">
-          <div class="progress-tag">Final render</div>
-          <div class="placeholder-visual tall">
+        <div class="step2-item">
+          <div class="placeholder-visual">
             <div>
               <strong>Final render pending</strong>
-              <div>Best angle will show the panel flow wrapping into access and carry behavior.</div>
+              <div>Use the angle that best shows panel flow and access.</div>
             </div>
           </div>
-          <div class="swap-tag">Placeholder</div>
+          <h3>Final Render</h3>
         </div>
       </div>
     </div>
@@ -1022,18 +1035,9 @@
 
   <section class="slide">
     <div class="slide-content">
-      <div class="final-grid">
-        <div class="media-panel">
-          <div class="eyebrow">Shape 3 final result</div>
-          <div class="placeholder-visual large">
-            <div>
-              <strong>Shape 3 render set pending</strong>
-              <div>Recommended set: on-body wearability, front access moment, asymmetrical belt detail.</div>
-            </div>
-          </div>
-          <div class="swap-tag">Placeholder visual</div>
-        </div>
+      <div class="shape-final-layout">
         <div class="stack">
+          <div class="eyebrow">Spiral Final Result</div>
           <h2>Hybrid sling and pack logic, driven by a spiral panel architecture.</h2>
           <p class="muted">The value of this concept is the way the panel flow can bridge commuter access, body wrap, and athletic identity without looking tactical.</p>
           <div class="feature-grid">
@@ -1050,131 +1054,15 @@
               <p>The architecture should make front-oriented access feel intentional rather than improvised.</p>
             </div>
           </div>
-          <div class="support-grid">
-            <div class="frame"><img src="assets/DaypackSketches_01-p8.png" alt="Shape 3 source board"></div>
-            <div class="placeholder">
-              <div class="placeholder-visual">
-                <div>
-                  <strong>Wearability view pending</strong>
-                  <div>Show scale, body relationship, and belt path.</div>
-                </div>
-              </div>
-            </div>
-            <div class="placeholder">
-              <div class="placeholder-visual">
-                <div>
-                  <strong>Access view pending</strong>
-                  <div>Show one-hand front opening behavior.</div>
-                </div>
-              </div>
-            </div>
+        </div>
+        <div class="slideshow-panel">
+          <div class="hero-slideshow spiral-preview" aria-label="Spiral concept preview">
+            <div class="hero-slide active"><img src="assets/DaypackSketches_01-p8.png" alt="Spiral concept board"></div>
           </div>
         </div>
       </div>
     </div>
     <div class="slide-number">07</div>
-  </section>
-
-  <section class="slide">
-    <div class="slide-content">
-      <div class="stack" style="margin-bottom: var(--gap-lg);">
-        <div class="eyebrow">Concertina box progression</div>
-        <h2>Mechanical structure slide, ready for the print-sequence imagery.</h2>
-        <p class="muted">This page is set up for the progression from small-scale proof, through iterative mechanics, into a full-scale printed body.</p>
-      </div>
-      <div class="progress-grid">
-        <div class="progress-card placeholder">
-          <div class="progress-tag">1/5 print</div>
-          <div class="placeholder-visual tall">
-            <div>
-              <strong>1/5 print pending</strong>
-              <div>Drop in the smallest model that best shows the fold logic.</div>
-            </div>
-          </div>
-        </div>
-        <div class="progress-card placeholder">
-          <div class="progress-tag">Iterative test prints</div>
-          <div class="placeholder-visual tall">
-            <div>
-              <strong>Iteration sequence pending</strong>
-              <div>Best version is a staged sequence showing panel refinement and ring behavior.</div>
-            </div>
-          </div>
-        </div>
-        <div class="progress-card placeholder">
-          <div class="progress-tag">Full-scale printed model</div>
-          <div class="placeholder-visual tall">
-            <div>
-              <strong>Full-scale print pending</strong>
-              <div>Use a clean studio view with the concertina body partially deployed.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="slide-number">08</div>
-  </section>
-
-  <section class="slide">
-    <div class="slide-content">
-      <div class="final-grid">
-        <div class="media-panel">
-          <div class="eyebrow">Concertina box final result</div>
-          <div class="placeholder-visual large">
-            <div>
-              <strong>Photo or video sequence pending</strong>
-              <div>Preferred content: compressed state, expanded state, and lid access while compressed.</div>
-            </div>
-          </div>
-          <div class="swap-tag">Supports either stills or video</div>
-        </div>
-        <div class="stack">
-          <h2>Volumetric control becomes the headline, not a hidden mechanism.</h2>
-          <p class="muted">The technical story here is the semi-rigid top and bottom ring structure working with concertina side panels and an adjustable strap system that preserves force-free lid access at any compression state.</p>
-          <div class="feature-grid">
-            <div class="feature-card">
-              <h3>Ring architecture</h3>
-              <p>Semi-rigid top and bottom rings stabilize the opening and preserve the body geometry through compression.</p>
-            </div>
-            <div class="feature-card">
-              <h3>Concertina body</h3>
-              <p>Side panels create a visible, mechanically legible method of volume reduction instead of relying on crushed fabric.</p>
-            </div>
-            <div class="feature-card">
-              <h3>Mechanical advantage</h3>
-              <p>The adjustable strap system permits lid access without fighting the compression state, which is the key differentiator.</p>
-            </div>
-          </div>
-          <div class="support-grid">
-            <div class="placeholder">
-              <div class="placeholder-visual">
-                <div>
-                  <strong>Compressed lid-open view</strong>
-                  <div>Show force-free access claim clearly.</div>
-                </div>
-              </div>
-            </div>
-            <div class="placeholder">
-              <div class="placeholder-visual">
-                <div>
-                  <strong>Expanded state view</strong>
-                  <div>Show the body at maximum usable volume.</div>
-                </div>
-              </div>
-            </div>
-            <div class="placeholder">
-              <div class="placeholder-visual">
-                <div>
-                  <strong>Ring and panel detail</strong>
-                  <div>Close-up of how the top and bottom structure governs the fold.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="slide-number">09</div>
   </section>
 
   <div class="image-lightbox" id="image-lightbox" aria-hidden="true">
