@@ -63,6 +63,7 @@
     const app = document.getElementById('app');
     const params = new URLSearchParams(window.location.search);
     const modelParam = params.get('model');
+    const rotateYDeg = Number(params.get('rotateYDeg') || '180');
     const zoom = Number(params.get('zoom') || '1.42');
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
@@ -173,7 +174,7 @@
         });
 
         group.rotation.x = -Math.PI / 2;
-        group.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), Math.PI);
+        group.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), THREE.MathUtils.degToRad(rotateYDeg));
         scene.add(group);
         fitCameraToObject(group);
         renderer.render(scene, camera);

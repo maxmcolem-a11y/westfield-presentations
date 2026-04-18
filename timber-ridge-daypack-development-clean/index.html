@@ -1374,7 +1374,8 @@
       });
 
       group.rotation.x = -Math.PI / 2;
-      group.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), Math.PI);
+      const rotateYDeg = Number.isFinite(Number(model.rotateYDeg)) ? Number(model.rotateYDeg) : 180;
+      group.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), THREE.MathUtils.degToRad(rotateYDeg));
       return group;
     }
 

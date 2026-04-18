@@ -65,13 +65,15 @@
       "label": "Bag 11",
       "file": "bag-11.step",
       "thumbnail": "thumbnails/bag-11.png",
-      "caption": "Bag 11"
+      "caption": "Bag 11",
+      "rotateYDeg": 0
     },
     {
       "label": "Bag 12",
       "file": "bag-12.step",
       "thumbnail": "thumbnails/bag-12.png",
-      "caption": "Bag 12"
+      "caption": "Bag 12",
+      "rotateYDeg": 0
     },
     {
       "label": "Bag 13",
