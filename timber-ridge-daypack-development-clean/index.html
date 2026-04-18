@@ -1144,6 +1144,7 @@
     let manifest = { models: [] };
     let occtReady = null;
     let modelLoadToken = 0;
+    const ASSET_CACHE_NAME = 'timber-ridge-daypack-assets-v1';
 
     function resizeRenderer() {
       const width = Math.max(canvasHost.clientWidth, 10);
@@ -1238,6 +1239,47 @@
         .replace(/^-+|-+$/g, '');
     }
 
+    function canUseAssetCache() {
+      return typeof caches !== 'undefined' && location.protocol.startsWith('http');
+    }
+
+    async function openAssetCache() {
+      if (!canUseAssetCache()) return null;
+      return caches.open(ASSET_CACHE_NAME);
+    }
+
+    async function getCachedAsset(url) {
+      const cache = await openAssetCache();
+      if (!cache) return null;
+      return cache.match(url);
+    }
+
+    async function fetchAndCacheAsset(url) {
+      const response = await fetch(url, { cache: 'no-store' });
+      if (response.ok) {
+        const cache = await openAssetCache();
+        if (cache) await cache.put(url, response.clone());
+      }
+      return response;
+    }
+
+    async function fetchAsset(url) {
+      const cached = await getCachedAsset(url);
+      if (cached) return cached;
+      return fetchAndCacheAsset(url);
+    }
+
+    async function warmAsset(url) {
+      try {
+        const cached = await getCachedAsset(url);
+        if (cached) return true;
+        const response = await fetchAndCacheAsset(url);
+        return response.ok;
+      } catch {
+        return false;
+      }
+    }
+
     async function resolveThumbnailPath(model, index) {
       const candidates = [];
       if (model.thumbnail) candidates.push(`assets/models/${model.thumbnail}`);
@@ -1247,12 +1289,41 @@
       });
 
       for (const candidate of candidates) {
+        const cached = await getCachedAsset(candidate);
+        if (cached && cached.ok) {
+          const blob = await cached.blob();
+          return URL.createObjectURL(blob);
+        }
+      }
+
+      for (const candidate of candidates) {
         try {
           const response = await fetch(candidate, { method: 'HEAD', cache: 'no-store' });
-          if (response.ok) return candidate;
+          if (response.ok) {
+            warmAsset(candidate);
+            return candidate;
+          }
         } catch {}
       }
       return null;
+    }
+
+    function scheduleBackgroundPrefetch(activeIndex) {
+      const run = async () => {
+        const modelsToWarm = manifest.models.filter((_, index) => index !== activeIndex);
+        for (const model of modelsToWarm) {
+          await warmAsset(`assets/models/${model.file}`);
+          if (model.thumbnail) {
+            await warmAsset(`assets/models/${model.thumbnail}`);
+          }
+        }
+      };
+
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => { run(); }, { timeout: 2500 });
+      } else {
+        window.setTimeout(() => { run(); }, 1200);
+      }
     }
 
     function renderThumbGrid() {
@@ -1332,12 +1403,14 @@
       });
 
       renderThumbGrid();
-      await loadSelectedModel(Math.min(5, manifest.models.length - 1));
+      const initialIndex = Math.min(5, manifest.models.length - 1);
+      await loadSelectedModel(initialIndex);
+      scheduleBackgroundPrefetch(initialIndex);
     }
 
     async function buildModelGroup(model) {
       const occt = await getOcct();
-      const response = await fetch(`assets/models/${model.file}`, { cache: 'no-store' });
+      const response = await fetchAsset(`assets/models/${model.file}`);
       if (!response.ok) throw new Error(`Could not fetch ${model.file}`);
       const buffer = new Uint8Array(await response.arrayBuffer());
       const params = {
