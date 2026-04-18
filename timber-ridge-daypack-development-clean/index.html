@@ -886,6 +886,16 @@
       .nav-dots { display: none; }
       :root { --pad: clamp(0.85rem, 2.5vw, 1.8rem); }
     }
+
+    @media (hover: none) and (pointer: coarse) {
+      html, body {
+        scroll-snap-type: none;
+      }
+
+      .slide {
+        scroll-snap-align: none;
+      }
+    }
   </style>
 </head>
 <body>
