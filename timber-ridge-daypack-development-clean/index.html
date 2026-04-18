@@ -328,10 +328,39 @@
       background: transparent;
     }
 
-    .slide:nth-of-type(6) .step2-media,
-    .slide:nth-of-type(6) .step2-item img {
+    .slide:nth-of-type(3) .step2-media,
+    .slide:nth-of-type(3) .step2-media img {
       border-radius: 24px;
+      overflow: hidden;
       clip-path: inset(0 round 24px);
+    }
+
+    .step2-media-bg {
+      height: min(44vh, 430px);
+      border-radius: 24px;
+      overflow: hidden;
+      background-image: var(--step2-image);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      cursor: zoom-in;
+    }
+
+    .slide:nth-of-type(6) .step2-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: clamp(1.6rem, 2vw, 2.6rem);
+    }
+
+    .slide:nth-of-type(6) .step2-item {
+      flex: 0 0 auto;
+    }
+
+    .slide:nth-of-type(6) .step2-media-bg {
+      width: auto;
+      aspect-ratio: var(--step2-aspect);
+      background-size: 100% 100%;
     }
 
     .frame img,
@@ -1061,15 +1090,15 @@
       </div>
       <div class="step2-grid">
         <div class="step2-item">
-          <div class="step2-media"><img src="assets/spiral-3d-print.jpg" alt="Spiral 3D print"></div>
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/spiral-3d-print.jpg'); --step2-aspect: 0.7141833811;" data-lightbox-src="assets/spiral-3d-print.jpg" data-lightbox-alt="Spiral 3D print"></div>
           <h3>3D Print</h3>
         </div>
         <div class="step2-item">
-          <div class="step2-media"><img src="assets/spiral-concept-sketch-1.jpg" alt="Spiral concept sketch 1"></div>
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/spiral-concept-sketch-1.jpg'); --step2-aspect: 0.7998500750;" data-lightbox-src="assets/spiral-concept-sketch-1.jpg" data-lightbox-alt="Spiral concept sketch 1"></div>
           <h3>Concept Sketch 1</h3>
         </div>
         <div class="step2-item">
-          <div class="step2-media"><img src="assets/spiral-concept-sketch-2.jpg" alt="Spiral concept sketch 2"></div>
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/spiral-concept-sketch-2.jpg'); --step2-aspect: 0.8004032258;" data-lightbox-src="assets/spiral-concept-sketch-2.jpg" data-lightbox-alt="Spiral concept sketch 2"></div>
           <h3>Concept Sketch 2</h3>
         </div>
       </div>
@@ -1379,6 +1408,12 @@
         img.dataset.lightboxBound = 'true';
         img.classList.add('lightboxable-image');
         img.addEventListener('click', () => openLightbox(img.currentSrc || img.src, img.alt || 'Expanded image'));
+      });
+
+      document.querySelectorAll('[data-lightbox-src]').forEach((el) => {
+        if (el.dataset.lightboxBound === 'true') return;
+        el.dataset.lightboxBound = 'true';
+        el.addEventListener('click', () => openLightbox(el.dataset.lightboxSrc, el.dataset.lightboxAlt || 'Expanded image'));
       });
     }
 
