@@ -381,7 +381,7 @@
       background: transparent;
     }
 
-    .hero-slideshow.spiral-preview .hero-slide img {
+    .hero-slideshow#spiral-hero-slideshow .hero-slide img {
       object-fit: contain;
     }
 
@@ -1007,26 +1007,16 @@
       </div>
       <div class="step2-grid">
         <div class="step2-item">
-          <img src="assets/DaypackSketches_01-p8.png" alt="Spiral reference board">
-          <h3>Reference Board</h3>
+          <img src="assets/spiral-3d-print.jpg" alt="Spiral 3D print">
+          <h3>3D Print</h3>
         </div>
         <div class="step2-item">
-          <div class="placeholder-visual">
-            <div>
-              <strong>Concept sketch pending</strong>
-              <div>Swap in the selected spiral-panel translation sketch.</div>
-            </div>
-          </div>
-          <h3>Concept Sketch</h3>
+          <img src="assets/spiral-concept-sketch-1.jpg" alt="Spiral concept sketch 1">
+          <h3>Concept Sketch 1</h3>
         </div>
         <div class="step2-item">
-          <div class="placeholder-visual">
-            <div>
-              <strong>Final render pending</strong>
-              <div>Use the angle that best shows panel flow and access.</div>
-            </div>
-          </div>
-          <h3>Final Render</h3>
+          <img src="assets/spiral-concept-sketch-2.jpg" alt="Spiral concept sketch 2">
+          <h3>Concept Sketch 2</h3>
         </div>
       </div>
     </div>
@@ -1056,8 +1046,15 @@
           </div>
         </div>
         <div class="slideshow-panel">
-          <div class="hero-slideshow spiral-preview" aria-label="Spiral concept preview">
-            <div class="hero-slide active"><img src="assets/DaypackSketches_01-p8.png" alt="Spiral concept board"></div>
+          <div class="hero-slideshow" id="spiral-hero-slideshow" aria-label="Spiral slideshow">
+            <div class="hero-slide active"><img src="assets/spiral-3d-print.jpg" alt="Spiral 3D print"></div>
+            <div class="hero-slide"><img src="assets/spiral-concept-sketch-1.jpg" alt="Spiral concept sketch 1"></div>
+            <div class="hero-slide"><img src="assets/spiral-concept-sketch-2.jpg" alt="Spiral concept sketch 2"></div>
+          </div>
+          <div class="slideshow-dots" id="spiral-hero-dots" aria-hidden="true">
+            <span class="slideshow-dot active"></span>
+            <span class="slideshow-dot"></span>
+            <span class="slideshow-dot"></span>
           </div>
         </div>
       </div>
@@ -1182,6 +1179,8 @@
     const specPageIndicatorEl = document.getElementById('spec-page-indicator');
     const shape1SlideshowEl = document.getElementById('shape1-hero-slideshow');
     const shape1DotsEl = document.getElementById('shape1-hero-dots');
+    const spiralSlideshowEl = document.getElementById('spiral-hero-slideshow');
+    const spiralDotsEl = document.getElementById('spiral-hero-dots');
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -1330,10 +1329,10 @@
       });
     }
 
-    function startHeroSlideshow() {
-      if (!shape1SlideshowEl) return;
-      const slides = [...shape1SlideshowEl.querySelectorAll('.hero-slide')];
-      const dots = shape1DotsEl ? [...shape1DotsEl.querySelectorAll('.slideshow-dot')] : [];
+    function startSingleSlideshow(slideshowEl, dotsEl) {
+      if (!slideshowEl) return;
+      const slides = [...slideshowEl.querySelectorAll('.hero-slide')];
+      const dots = dotsEl ? [...dotsEl.querySelectorAll('.slideshow-dot')] : [];
       if (slides.length <= 1) return;
 
       let activeIndex = slides.findIndex((slide) => slide.classList.contains('active'));
@@ -1352,6 +1351,11 @@
       window.setInterval(() => {
         showSlide((activeIndex + 1) % slides.length);
       }, 10000);
+    }
+
+    function startHeroSlideshow() {
+      startSingleSlideshow(shape1SlideshowEl, shape1DotsEl);
+      startSingleSlideshow(spiralSlideshowEl, spiralDotsEl);
     }
 
     function colorFromArray(color) {
