@@ -321,7 +321,94 @@
       text-align: center;
     }
 
+    .shape-final-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: var(--gap-lg);
+      align-items: center;
+      height: 100%;
+    }
+
+    .slideshow-panel {
+      display: grid;
+      gap: 1rem;
+      align-content: center;
+    }
+
+    .hero-slideshow {
+      position: relative;
+      min-height: min(60vh, 560px);
+      overflow: hidden;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      pointer-events: none;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .slideshow-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.45rem;
+    }
+
+    .slideshow-dot {
+      width: 0.52rem;
+      height: 0.52rem;
+      border-radius: 999px;
+      background: rgba(31, 23, 19, 0.2);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .slideshow-dot.active {
+      background: var(--accent);
+      transform: scale(1.15);
+    }
+
+    .spec-sheet-button {
+      display: inline-flex;
+      justify-self: end;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.85rem 1.2rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      box-shadow: 0 12px 24px rgba(31, 23, 19, 0.14);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .spec-sheet-button:hover,
+    .spec-sheet-button:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(31, 23, 19, 0.18);
+      background: #8c5231;
+      outline: none;
+    }
+
     .lightboxable-image {
+      cursor: zoom-in;
+    }
       cursor: zoom-in;
     }
 
@@ -654,7 +741,8 @@
       .feature-grid,
       .decision-grid,
       .step2-grid,
-      .hero-visuals {
+      .hero-visuals,
+      .shape-final-layout {
         grid-template-columns: 1fr;
       }
       .hero-visuals .frame:first-child { grid-column: auto; }
@@ -779,18 +867,9 @@
 
   <section class="slide">
     <div class="slide-content">
-      <div class="final-grid">
-        <div class="media-panel">
-          <div class="eyebrow">Shape 1 final result</div>
-          <div class="placeholder-visual large">
-            <div>
-              <strong>Shape 1 hero renders pending</strong>
-              <div>Recommended set: front three-quarter, zipper access, and lower webbing read.</div>
-            </div>
-          </div>
-          <div class="swap-tag">Placeholder visual</div>
-        </div>
+      <div class="shape-final-layout">
         <div class="stack">
+          <div class="eyebrow">Shape 1 final result</div>
           <h2>The Faceted Pillow becomes a strong front graphic and access system.</h2>
           <p class="muted">The final read should focus on how the triangular panels, lower M-shape webbing, and slanted zipper line work together as both identity and function.</p>
           <div class="feature-grid">
@@ -807,11 +886,19 @@
               <p>Laptop carry and quick-access organization stay embedded in the form rather than diluting it.</p>
             </div>
           </div>
-          <div class="support-grid">
-            <div class="frame"><img src="assets/TimberRidgeDaypack_Specs_041626-p4.png" alt="Feature callout page"></div>
-            <div class="frame"><img src="assets/TimberRidgeDaypack_Specs_041626-p5.png" alt="Back panel callout page"></div>
-            <div class="frame"><img src="assets/TimberRidgeDaypack_Specs_041626-p6.png" alt="Interior callout page"></div>
+        </div>
+        <div class="slideshow-panel">
+          <div class="hero-slideshow frame" id="shape1-hero-slideshow" aria-label="Faceted Pillow hero slideshow">
+            <div class="hero-slide active"><img src="assets/faceted-pillow-hero-1.jpg" alt="Faceted Pillow hero render front view"></div>
+            <div class="hero-slide"><img src="assets/faceted-pillow-hero-2.jpg" alt="Faceted Pillow hero render back view"></div>
+            <div class="hero-slide"><img src="assets/faceted-pillow-hero-3.jpg" alt="Faceted Pillow hero render open access view"></div>
           </div>
+          <div class="slideshow-dots" id="shape1-hero-dots" aria-hidden="true">
+            <span class="slideshow-dot active"></span>
+            <span class="slideshow-dot"></span>
+            <span class="slideshow-dot"></span>
+          </div>
+          <a class="spec-sheet-button" href="assets/TimberRidgeDaypack_Specs_041626.pdf" target="_blank" rel="noopener noreferrer">Click to Expand Full Spec Sheet</a>
         </div>
       </div>
     </div>
@@ -1106,6 +1193,8 @@
     const lightboxEl = document.getElementById('image-lightbox');
     const lightboxImageEl = document.getElementById('lightbox-image');
     const lightboxCloseEl = document.getElementById('lightbox-close');
+    const shape1SlideshowEl = document.getElementById('shape1-hero-slideshow');
+    const shape1DotsEl = document.getElementById('shape1-hero-dots');
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -1200,6 +1289,30 @@
         img.classList.add('lightboxable-image');
         img.addEventListener('click', () => openLightbox(img.currentSrc || img.src, img.alt || 'Expanded image'));
       });
+    }
+
+    function startHeroSlideshow() {
+      if (!shape1SlideshowEl) return;
+      const slides = [...shape1SlideshowEl.querySelectorAll('.hero-slide')];
+      const dots = shape1DotsEl ? [...shape1DotsEl.querySelectorAll('.slideshow-dot')] : [];
+      if (slides.length <= 1) return;
+
+      let activeIndex = slides.findIndex((slide) => slide.classList.contains('active'));
+      if (activeIndex < 0) activeIndex = 0;
+
+      const showSlide = (index) => {
+        slides.forEach((slide, slideIndex) => {
+          slide.classList.toggle('active', slideIndex === index);
+        });
+        dots.forEach((dot, dotIndex) => {
+          dot.classList.toggle('active', dotIndex === index);
+        });
+        activeIndex = index;
+      };
+
+      window.setInterval(() => {
+        showSlide((activeIndex + 1) % slides.length);
+      }, 10000);
     }
 
     function colorFromArray(color) {
@@ -1514,6 +1627,7 @@
     animate();
     await loadManifest();
     bindLightboxImages();
+    startHeroSlideshow();
   </script>
 </body>
 </html>
