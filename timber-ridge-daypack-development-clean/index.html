@@ -558,8 +558,9 @@
     .viewer-shell {
       padding: 0;
       display: grid;
-      gap: 0.85rem;
-      min-height: min(54vh, 500px);
+      gap: 0;
+      height: 100%;
+      min-height: 0;
       background: transparent;
       border: none;
       box-shadow: none;
@@ -567,37 +568,50 @@
     }
 
     .top-funnel-layout {
-      align-items: center;
+      align-items: stretch;
       min-height: 100%;
     }
 
     .top-funnel-copy {
       display: grid;
-      gap: var(--gap-lg);
-      min-height: auto;
-      align-content: center;
-    }
-
-    .top-funnel-copy h2 {
-      max-width: none;
+      min-height: 0;
+      height: 100%;
     }
 
     .top-funnel-browser {
       display: grid;
-      gap: 0.8rem;
-      align-content: center;
+      min-height: 0;
+      height: 100%;
+    }
+
+    .viewer-overlay-copy {
+      position: absolute;
+      inset: 0 0 auto 0;
+      z-index: 2;
+      display: grid;
+      gap: 0.45rem;
+      align-content: start;
+      padding: 1.2rem 1.25rem 3rem;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,0.76) 0%, rgba(255,255,255,0.38) 42%, rgba(255,255,255,0) 100%);
+    }
+
+    .viewer-overlay-copy h2 {
+      max-width: 16ch;
+      margin: 0;
     }
 
     .thumb-panel {
       padding: 0;
       display: grid;
       gap: 0.85rem;
-      min-height: auto;
+      min-height: 0;
+      height: 100%;
       background: transparent;
       border: none;
       box-shadow: none;
       margin-top: 0;
-      align-content: center;
+      align-content: stretch;
     }
 
     .thumb-grid {
@@ -705,7 +719,8 @@
 
     .viewer-canvas {
       position: relative;
-      min-height: min(50vh, 460px);
+      height: 100%;
+      min-height: min(62vh, 640px);
       background:
         linear-gradient(180deg, rgba(255,255,255,0.50), rgba(255,255,255,0.22)),
         linear-gradient(180deg, #f7f7f3 0%, #edede8 100%);
@@ -879,13 +894,13 @@
     <div class="slide-content">
       <div class="top-funnel-layout">
         <div class="top-funnel-copy">
-          <div class="stack" style="gap:0.45rem; align-content:start;">
-            <div class="eyebrow">Step 1</div>
-            <h2>We started with 3D modeling a variety of unique shapes to evaluate for recognizability, tension, proportion, and structural clarity.</h2>
-          </div>
           <div class="top-funnel-browser">
             <div class="viewer-shell">
               <div class="viewer-canvas" id="step-viewer-canvas">
+                <div class="viewer-overlay-copy">
+                  <div class="eyebrow">Step 1</div>
+                  <h2>We started with 3D modeling a variety of unique shapes to evaluate for recognizability, tension, proportion, and structural clarity.</h2>
+                </div>
                 <div class="viewer-state" id="step-viewer-state">
                   <div class="viewer-state-card">
                     <div class="viewer-spinner" aria-hidden="true"></div>
