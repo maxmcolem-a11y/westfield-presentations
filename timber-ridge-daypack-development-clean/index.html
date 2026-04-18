@@ -373,7 +373,7 @@
     }
 
     .top-funnel-copy h2 {
-      max-width: 14ch;
+      max-width: none;
     }
 
     .top-funnel-browser {
@@ -664,10 +664,6 @@
           </div>
           <div class="top-funnel-browser">
             <div class="viewer-shell">
-              <div class="viewer-toolbar" style="grid-template-columns: 1fr auto;">
-                <div class="eyebrow" style="align-self:end;">3D viewer</div>
-                <button id="step-reload" type="button">Reload models</button>
-              </div>
               <div class="viewer-canvas" id="step-viewer-canvas">
                 <div class="viewer-state" id="step-viewer-state">
                   <div class="viewer-state-card">
@@ -1074,7 +1070,6 @@
     });
 
     const selectEl = document.getElementById('step-model-select');
-    const reloadEl = document.getElementById('step-reload');
     const stateEl = document.getElementById('step-viewer-state');
     const statusEl = document.getElementById('step-viewer-status');
     const canvasHost = document.getElementById('step-viewer-canvas');
@@ -1328,6 +1323,8 @@
           group.add(mesh);
         });
 
+        group.rotation.x = -Math.PI / 2;
+
         currentGroup = group;
         scene.add(group);
         fitCameraToObject(group);
@@ -1340,10 +1337,6 @@
 
     selectEl.addEventListener('change', async () => {
       await loadSelectedModel(Number(selectEl.value || 0));
-    });
-
-    reloadEl.addEventListener('click', async () => {
-      await loadManifest();
     });
 
     window.addEventListener('resize', resizeRenderer);
