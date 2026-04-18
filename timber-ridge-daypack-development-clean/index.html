@@ -1386,7 +1386,7 @@
       });
 
       group.rotation.x = -Math.PI / 2;
-      group.rotation.y = Math.PI;
+      group.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), Math.PI);
       return group;
     }
 
