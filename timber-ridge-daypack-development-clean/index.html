@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timber Ridge 26L Daypack Development</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+      background: #f7f3ea;
+    }
+
+    :root {
+      --bg: #f7f3ea;
+      --bg-2: #efe7d9;
+      --paper: rgba(255,255,255,0.88);
+      --paper-strong: rgba(255,255,255,0.96);
+      --line: rgba(45, 35, 28, 0.12);
+      --line-strong: rgba(45, 35, 28, 0.22);
+      --ink: #1f1713;
+      --muted: #6c6158;
+      --accent: #9a5d36;
+      --accent-soft: rgba(154, 93, 54, 0.12);
+      --green: #2b7a56;
+      --green-soft: rgba(43, 122, 86, 0.12);
+      --red: #a3453b;
+      --red-soft: rgba(163, 69, 59, 0.12);
+      --shadow: 0 22px 56px rgba(31, 23, 19, 0.08);
+      --title: clamp(2.1rem, 5.4vw, 5rem);
+      --h2: clamp(1.5rem, 2.8vw, 2.8rem);
+      --h3: clamp(1rem, 1.4vw, 1.2rem);
+      --body: clamp(0.94rem, 1.18vw, 1.08rem);
+      --small: clamp(0.72rem, 0.85vw, 0.84rem);
+      --pad: clamp(1rem, 3.3vw, 3.1rem);
+      --gap: clamp(0.9rem, 1.5vw, 1.25rem);
+      --gap-lg: clamp(1.1rem, 2vw, 1.8rem);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(154,93,54,0.10), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(43,122,86,0.08), transparent 24%),
+        linear-gradient(180deg, #fbf8f2 0%, #f3ecdf 100%);
+    }
+
+    h1, h2, h3, p, ul { margin: 0; }
+    h1, h2 {
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+      font-weight: 700;
+      line-height: 0.94;
+      letter-spacing: -0.03em;
+    }
+    h1 { font-size: var(--title); }
+    h2 { font-size: var(--h2); }
+    h3 {
+      font-size: var(--h3);
+      line-height: 1.12;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    p, li, button, select, label { font-size: var(--body); line-height: 1.45; }
+
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      scroll-snap-align: start;
+      overflow: hidden;
+    }
+
+    .slide-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--pad);
+      max-height: 100%;
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      font-size: var(--small);
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .muted { color: var(--muted); }
+
+    .card,
+    .panel,
+    .viewer-shell,
+    .placeholder,
+    .chip,
+    .decision-card,
+    .feature-card,
+    .media-panel {
+      background: var(--paper);
+      border: 1px solid rgba(255,255,255,0.72);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+    }
+
+    .card,
+    .panel,
+    .decision-card,
+    .feature-card,
+    .placeholder,
+    .media-panel {
+      padding: clamp(0.95rem, 1.35vw, 1.15rem);
+    }
+
+    .frame,
+    .placeholder-visual,
+    .viewer-canvas {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(239,231,217,0.92));
+    }
+
+    .frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .placeholder {
+      background: rgba(255,255,255,0.76);
+      border: 1px dashed var(--line-strong);
+    }
+
+    .placeholder-visual {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 1.15rem;
+      color: var(--muted);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.95), rgba(240,234,224,0.95)),
+        repeating-linear-gradient(-45deg, rgba(154,93,54,0.06) 0 14px, rgba(255,255,255,0) 14px 28px);
+    }
+
+    .placeholder-visual strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+
+    .grid-2,
+    .hero-grid,
+    .final-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+      gap: var(--gap-lg);
+      align-items: center;
+      height: 100%;
+    }
+
+    .grid-3,
+    .progress-grid,
+    .support-grid,
+    .mandate-grid,
+    .feature-grid,
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--gap);
+      align-items: stretch;
+    }
+
+    .stack { display: grid; gap: var(--gap); }
+
+    .hero-visuals {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--gap);
+      align-items: stretch;
+    }
+
+    .hero-visuals .frame:first-child {
+      grid-column: 1 / span 2;
+      height: min(36vh, 330px);
+    }
+
+    .hero-visuals .frame:not(:first-child) {
+      height: min(24vh, 220px);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .chip {
+      padding: 0.52rem 0.78rem;
+      box-shadow: none;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid var(--line);
+      font-size: var(--small);
+      font-weight: 800;
+    }
+
+    .decision-card {
+      display: grid;
+      gap: 0.75rem;
+      min-height: min(66vh, 600px);
+      align-content: start;
+    }
+
+    .decision-card.yes {
+      background: linear-gradient(180deg, rgba(242,249,245,0.94), rgba(231,244,236,0.92));
+      border: 1px solid rgba(43,122,86,0.18);
+    }
+
+    .decision-card.no {
+      background: linear-gradient(180deg, rgba(251,243,242,0.94), rgba(246,233,231,0.92));
+      border: 1px solid rgba(163,69,59,0.18);
+    }
+
+    .decision-pill,
+    .progress-tag,
+    .swap-tag {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.38rem 0.62rem;
+      border-radius: 999px;
+      font-size: var(--small);
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .decision-card.yes .decision-pill {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .decision-card.no .decision-pill {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .progress-tag { background: rgba(31,23,19,0.07); color: var(--muted); }
+    .swap-tag { background: var(--accent-soft); color: var(--accent); }
+
+    .decision-card .frame,
+    .progress-card .frame,
+    .progress-card .placeholder-visual,
+    .media-panel .placeholder-visual {
+      height: min(43vh, 390px);
+    }
+
+    .progress-card,
+    .feature-card,
+    .media-panel {
+      display: grid;
+      gap: 0.8rem;
+      align-content: start;
+    }
+
+    .support-grid .frame,
+    .support-grid .placeholder-visual {
+      height: min(22vh, 190px);
+    }
+
+    .hero-render,
+    .media-panel .frame,
+    .media-panel .placeholder-visual.large {
+      height: min(56vh, 540px);
+    }
+
+    .frame.tall,
+    .placeholder-visual.tall {
+      height: min(50vh, 460px);
+    }
+
+    .viewer-shell {
+      padding: 1rem;
+      display: grid;
+      gap: 0.85rem;
+      min-height: min(68vh, 620px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(245,239,230,0.95));
+    }
+
+    .viewer-toolbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.7rem;
+      align-items: end;
+    }
+
+    .viewer-toolbar label {
+      display: grid;
+      gap: 0.35rem;
+      color: var(--muted);
+      font-size: var(--small);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+    }
+
+    .viewer-toolbar select,
+    .viewer-toolbar button {
+      border-radius: 14px;
+      border: 1px solid var(--line-strong);
+      padding: 0.72rem 0.85rem;
+      background: rgba(255,255,255,0.95);
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .viewer-toolbar button {
+      cursor: pointer;
+      background: var(--accent);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .viewer-canvas {
+      position: relative;
+      min-height: min(50vh, 460px);
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.97), rgba(235,226,211,0.96) 70%),
+        linear-gradient(180deg, #f6efe4 0%, #ece2d3 100%);
+    }
+
+    .viewer-canvas canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .viewer-state {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 1.2rem;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.3), rgba(255,255,255,0.12)),
+        url('assets/TR_Daypack_CADs_W5.2.png') center / contain no-repeat;
+      color: var(--muted);
+    }
+
+    .viewer-state.hidden { display: none; }
+
+    .viewer-state-card {
+      max-width: 35ch;
+      padding: 1rem 1.1rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(31,23,19,0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .viewer-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: var(--small);
+    }
+
+    ul {
+      padding-left: 1.1rem;
+      display: grid;
+      gap: 0.42rem;
+    }
+
+    .slide-number,
+    .bottom-note {
+      position: absolute;
+      bottom: clamp(0.7rem, 2vh, 1.3rem);
+      font-size: var(--small);
+      color: rgba(31,23,19,0.52);
+    }
+
+    .slide-number { right: var(--pad); }
+    .bottom-note { left: var(--pad); }
+
+    .nav-dots {
+      position: fixed;
+      top: 50%;
+      right: clamp(0.65rem, 1.2vw, 1rem);
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      z-index: 20;
+    }
+
+    .nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(31,23,19,0.16);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .nav-dot.active {
+      background: var(--accent);
+      transform: scale(1.16);
+    }
+
+    .keyboard-hint {
+      position: fixed;
+      right: clamp(1rem, 2vw, 1.4rem);
+      bottom: clamp(1rem, 2vw, 1.4rem);
+      z-index: 20;
+      padding: 0.55rem 0.78rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(31,23,19,0.08);
+      color: var(--muted);
+      font-size: var(--small);
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 1180px) {
+      .slide {
+        height: auto;
+        min-height: 100vh;
+      }
+      .slide-content { overflow: visible; }
+      .grid-2,
+      .hero-grid,
+      .final-grid,
+      .grid-3,
+      .progress-grid,
+      .support-grid,
+      .mandate-grid,
+      .feature-grid,
+      .decision-grid,
+      .hero-visuals {
+        grid-template-columns: 1fr;
+      }
+      .hero-visuals .frame:first-child { grid-column: auto; }
+    }
+
+    @media (max-height: 720px) {
+      .nav-dots, .keyboard-hint { display: none; }
+      :root { --pad: clamp(0.85rem, 2.5vw, 1.8rem); }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav-dots" aria-label="Slide navigation"></nav>
+  <div class="keyboard-hint">Arrow keys, scroll, or tap dots</div>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="hero-grid">
+        <div class="stack">
+          <div class="eyebrow">Timber Ridge 26L daypack development</div>
+          <h1>The mandate is a recognizable Timber Ridge silhouette, not just another daypack.</h1>
+          <p class="muted">The workstream is aimed at a structured 26L pack with one ownable signature move, tuned for the designed middle and balanced between trail credibility and everyday carry.</p>
+          <div class="chip-row">
+            <div class="chip">26L target volume</div>
+            <div class="chip">$79 to $100 designed middle</div>
+            <div class="chip">Trail to office crossover</div>
+            <div class="chip">15 inch laptop sleeve</div>
+          </div>
+          <div class="mandate-grid">
+            <div class="feature-card">
+              <h3>The core mandate</h3>
+              <p>Design an iconic, highly structured silhouette anchored by one signature element visible from across the room.</p>
+            </div>
+            <div class="feature-card">
+              <h3>The market position</h3>
+              <p>Deliver a premium-feeling aesthetic without drifting out of Timber Ridge’s value-conscious zone.</p>
+            </div>
+            <div class="feature-card">
+              <h3>The aesthetic and function</h3>
+              <p>Clean, athletic, intentional, with laptop and quick-access utility, while avoiding blobby or over-tactical reads.</p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visuals">
+          <div class="frame"><img src="assets/TimberRidgeDaypack_Specs_041626-p1.png" alt="Timber Ridge brief page"></div>
+          <div class="frame"><img src="assets/TimberRidgeDaypack_Specs_041626-p2.png" alt="AI render brief page"></div>
+          <div class="frame"><img src="assets/TimberRidgeDaypack_Specs_041626-p3.png" alt="Form inspiration brief page"></div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-note">Slide 01 · The mandate and constraints</div>
+    <div class="slide-number">01</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="grid-2">
+        <div class="viewer-shell">
+          <div class="stack" style="gap:0.35rem;">
+            <div class="eyebrow">Top of funnel</div>
+            <h2>Volumetric generation should be reviewed as live form, not flattened evidence.</h2>
+          </div>
+          <div class="viewer-toolbar">
+            <label>
+              STEP model
+              <select id="step-model-select">
+                <option>Looking for manifest...</option>
+              </select>
+            </label>
+            <button id="step-reload" type="button">Reload models</button>
+          </div>
+          <div class="viewer-canvas" id="step-viewer-canvas">
+            <div class="viewer-state" id="step-viewer-state">
+              <div class="viewer-state-card">
+                <strong>Interactive STEP viewer is wired and waiting.</strong>
+                <p>Add <code>.step</code> or <code>.stp</code> files to <code>assets/models</code> and list them in <code>manifest.json</code> to turn this slide into a rotatable 3D review surface.</p>
+              </div>
+            </div>
+          </div>
+          <div class="viewer-meta">
+            <span id="step-viewer-status">Awaiting STEP files</span>
+            <span>Orbit, pan, and zoom enabled</span>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="eyebrow">Narrative</div>
+          <h2>Early exploration is about stance, aspect ratio, and structural attitude.</h2>
+          <p class="muted">This phase is deliberately freed from pattern constraints. The goal is to discover raw silhouette families first, then use physical and visual filtering to narrow the field.</p>
+          <div class="feature-card">
+            <h3>What the slide needs to say</h3>
+            <ul>
+              <li>20 to 30 initial CAD bodies are being judged as volume proposals, not finished bags.</li>
+              <li>The selection criteria are recognizability, tension, proportion, and structural clarity.</li>
+              <li>The 3D viewer makes the shape logic legible from every angle, which is the point of the funnel.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-note">Slide 02 · Interactive STEP viewer for top-of-funnel form review</div>
+    <div class="slide-number">02</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="stack" style="margin-bottom: var(--gap-lg);">
+        <div class="eyebrow">Mid funnel</div>
+        <h2>Physical filtering reduces the field to the forms worth translating.</h2>
+        <p class="muted">The decision here is not about detail. It is about which forms carry enough identity, consensus, and structural viability to survive into true bag development.</p>
+      </div>
+      <div class="decision-grid">
+        <div class="decision-card yes">
+          <div class="decision-pill">Yes · shape 1</div>
+          <h3>Faceted Pillow</h3>
+          <div class="frame"><img src="assets/DaypackSketches_01-p1.png" alt="Shape 1 source sheet"></div>
+          <p>Strongest graphic read and the clearest opportunity for a signature front architecture.</p>
+        </div>
+        <div class="decision-card no">
+          <div class="decision-pill">No · shape 2</div>
+          <h3>Central Teardrop</h3>
+          <div class="frame"><img src="assets/DaypackSketches_01-p4.png" alt="Shape 2 source sheet"></div>
+          <p>Cleaner and softer, but less ownable and less structurally charged than the winning directions.</p>
+        </div>
+        <div class="decision-card yes">
+          <div class="decision-pill">Yes · shape 3</div>
+          <h3>Ordered Chaos</h3>
+          <div class="frame"><img src="assets/DaypackSketches_01-p8.png" alt="Shape 3 source sheet"></div>
+          <p>Unconventional but controlled, with a panel logic that can mature into a distinct system.</p>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-note">Slide 03 · Shape selection after physical and visual filtering</div>
+    <div class="slide-number">03</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="stack" style="margin-bottom: var(--gap-lg);">
+        <div class="eyebrow">Shape 1 progression</div>
+        <h2>Geometric translation from raw volume into pack-ready architecture.</h2>
+        <p class="muted">This is a visual continuity slide. It should show the jump from abstract print to usable pack language without over-explaining it.</p>
+      </div>
+      <div class="progress-grid">
+        <div class="progress-card card">
+          <div class="progress-tag">1/5 print board</div>
+          <div class="frame tall"><img src="assets/DaypackSketches_01-p1.png" alt="Shape 1 reference board"></div>
+        </div>
+        <div class="progress-card placeholder">
+          <div class="progress-tag">Initial sketch</div>
+          <div class="placeholder-visual tall">
+            <div>
+              <strong>Sketch placement pending</strong>
+              <div>Swap in the selected left-to-right translation sketch for Shape 1.</div>
+            </div>
+          </div>
+          <div class="swap-tag">Placeholder</div>
+        </div>
+        <div class="progress-card placeholder">
+          <div class="progress-tag">Final render</div>
+          <div class="placeholder-visual tall">
+            <div>
+              <strong>Final render pending</strong>
+              <div>Use the hero angle that best shows triangular paneling and zipper projection.</div>
+            </div>
+          </div>
+          <div class="swap-tag">Placeholder</div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-note">Slide 04 · Shape 1 progression</div>
+    <div class="slide-number">04</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="final-grid">
+        <div class="media-panel">
+          <div class="eyebrow">Shape 1 final result</div>
+          <div class="placeholder-visual large">
+            <div>
+              <strong>Shape 1 hero renders pending</strong>
+              <div>Recommended set: front three-quarter, zipper access, and lower webbing read.</div>
+            </div>
+          </div>
+          <div class="swap-tag">Placeholder visual</div>
+        </div>
+        <div class="stack">
+          <h2>The Faceted Pillow becomes a strong front graphic and access system.</h2>
+          <p class="muted">The final read should focus on how the triangular panels, lower M-shape webbing, and slanted zipper line work together as both identity and function.</p>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h3>Signature read</h3>
+              <p>Prominent triangular panels create the immediate structured silhouette.</p>
+            </div>
+            <div class="feature-card">
+              <h3>Functional geometry</h3>
+              <p>The lower M-shape webbing projects the inner V into a slanted zipper access story.</p>
+            </div>
+            <div class="feature-card">
+              <h3>Utility integration</h3>
+              <p>Laptop carry and quick-access organization stay embedded in the form rather than diluting it.</p>
+            </div>
+          </div>
+          <div class="support-grid">
+            <div class="frame"><img src="assets/TimberRidgeDaypack_Specs_041626-p4.png" alt="Feature callout page"></div>
+            <div class="frame"><img src="assets/TimberRidgeDaypack_Specs_041626-p5.png" alt="Back panel callout page"></div>
+            <div class="frame"><img src="assets/TimberRidgeDaypack_Specs_041626-p6.png" alt="Interior callout page"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-note">Slide 05 · Shape 1 final result and feature breakdown</div>
+    <div class="slide-number">05</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="stack" style="margin-bottom: var(--gap-lg);">
+        <div class="eyebrow">Shape 3 progression</div>
+        <h2>Ergonomic evolution from irregular volume into controlled panel motion.</h2>
+        <p class="muted">This slide should establish that the curved pentagonal logic is the seed of a coherent panel system, not randomness.</p>
+      </div>
+      <div class="progress-grid">
+        <div class="progress-card card">
+          <div class="progress-tag">1/5 print board</div>
+          <div class="frame tall"><img src="assets/DaypackSketches_01-p8.png" alt="Shape 3 reference board"></div>
+        </div>
+        <div class="progress-card placeholder">
+          <div class="progress-tag">Initial sketch</div>
+          <div class="placeholder-visual tall">
+            <div>
+              <strong>Sketch placement pending</strong>
+              <div>Swap in the selected spiral-panel translation sketch for Shape 3.</div>
+            </div>
+          </div>
+          <div class="swap-tag">Placeholder</div>
+        </div>
+        <div class="progress-card placeholder">
+          <div class="progress-tag">Final render</div>
+          <div class="placeholder-visual tall">
+            <div>
+              <strong>Final render pending</strong>
+              <div>Best angle will show the panel flow wrapping into access and carry behavior.</div>
+            </div>
+          </div>
+          <div class="swap-tag">Placeholder</div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-note">Slide 06 · Shape 3 progression</div>
+    <div class="slide-number">06</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="final-grid">
+        <div class="media-panel">
+          <div class="eyebrow">Shape 3 final result</div>
+          <div class="placeholder-visual large">
+            <div>
+              <strong>Shape 3 render set pending</strong>
+              <div>Recommended set: on-body wearability, front access moment, asymmetrical belt detail.</div>
+            </div>
+          </div>
+          <div class="swap-tag">Placeholder visual</div>
+        </div>
+        <div class="stack">
+          <h2>Hybrid sling and pack logic, driven by a spiral panel architecture.</h2>
+          <p class="muted">The value of this concept is the way the panel flow can bridge commuter access, body wrap, and athletic identity without looking tactical.</p>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h3>Signature system</h3>
+              <p>The spiral panels create a recognizable motion language that reads from multiple angles.</p>
+            </div>
+            <div class="feature-card">
+              <h3>Wearability bridge</h3>
+              <p>An asymmetrical hip belt can split the gap between sling immediacy and backpack stability.</p>
+            </div>
+            <div class="feature-card">
+              <h3>Access logic</h3>
+              <p>The architecture should make front-oriented access feel intentional rather than improvised.</p>
+            </div>
+          </div>
+          <div class="support-grid">
+            <div class="frame"><img src="assets/DaypackSketches_01-p8.png" alt="Shape 3 source board"></div>
+            <div class="placeholder">
+              <div class="placeholder-visual">
+                <div>
+                  <strong>Wearability view pending</strong>
+                  <div>Show scale, body relationship, and belt path.</div>
+                </div>
+              </div>
+            </div>
+            <div class="placeholder">
+              <div class="placeholder-visual">
+                <div>
+                  <strong>Access view pending</strong>
+                  <div>Show one-hand front opening behavior.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-note">Slide 07 · Shape 3 final result</div>
+    <div class="slide-number">07</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="stack" style="margin-bottom: var(--gap-lg);">
+        <div class="eyebrow">Concertina box progression</div>
+        <h2>Mechanical structure slide, ready for the print-sequence imagery.</h2>
+        <p class="muted">This page is set up for the progression from small-scale proof, through iterative mechanics, into a full-scale printed body.</p>
+      </div>
+      <div class="progress-grid">
+        <div class="progress-card placeholder">
+          <div class="progress-tag">1/5 print</div>
+          <div class="placeholder-visual tall">
+            <div>
+              <strong>1/5 print pending</strong>
+              <div>Drop in the smallest model that best shows the fold logic.</div>
+            </div>
+          </div>
+        </div>
+        <div class="progress-card placeholder">
+          <div class="progress-tag">Iterative test prints</div>
+          <div class="placeholder-visual tall">
+            <div>
+              <strong>Iteration sequence pending</strong>
+              <div>Best version is a staged sequence showing panel refinement and ring behavior.</div>
+            </div>
+          </div>
+        </div>
+        <div class="progress-card placeholder">
+          <div class="progress-tag">Full-scale printed model</div>
+          <div class="placeholder-visual tall">
+            <div>
+              <strong>Full-scale print pending</strong>
+              <div>Use a clean studio view with the concertina body partially deployed.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-note">Slide 08 · Concertina box progression</div>
+    <div class="slide-number">08</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="final-grid">
+        <div class="media-panel">
+          <div class="eyebrow">Concertina box final result</div>
+          <div class="placeholder-visual large">
+            <div>
+              <strong>Photo or video sequence pending</strong>
+              <div>Preferred content: compressed state, expanded state, and lid access while compressed.</div>
+            </div>
+          </div>
+          <div class="swap-tag">Supports either stills or video</div>
+        </div>
+        <div class="stack">
+          <h2>Volumetric control becomes the headline, not a hidden mechanism.</h2>
+          <p class="muted">The technical story here is the semi-rigid top and bottom ring structure working with concertina side panels and an adjustable strap system that preserves force-free lid access at any compression state.</p>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h3>Ring architecture</h3>
+              <p>Semi-rigid top and bottom rings stabilize the opening and preserve the body geometry through compression.</p>
+            </div>
+            <div class="feature-card">
+              <h3>Concertina body</h3>
+              <p>Side panels create a visible, mechanically legible method of volume reduction instead of relying on crushed fabric.</p>
+            </div>
+            <div class="feature-card">
+              <h3>Mechanical advantage</h3>
+              <p>The adjustable strap system permits lid access without fighting the compression state, which is the key differentiator.</p>
+            </div>
+          </div>
+          <div class="support-grid">
+            <div class="placeholder">
+              <div class="placeholder-visual">
+                <div>
+                  <strong>Compressed lid-open view</strong>
+                  <div>Show force-free access claim clearly.</div>
+                </div>
+              </div>
+            </div>
+            <div class="placeholder">
+              <div class="placeholder-visual">
+                <div>
+                  <strong>Expanded state view</strong>
+                  <div>Show the body at maximum usable volume.</div>
+                </div>
+              </div>
+            </div>
+            <div class="placeholder">
+              <div class="placeholder-visual">
+                <div>
+                  <strong>Ring and panel detail</strong>
+                  <div>Close-up of how the top and bottom structure governs the fold.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-note">Slide 09 · Concertina box final result and mechanical advantage</div>
+    <div class="slide-number">09</div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/occt-import-js@0.0.23/dist/occt-import-js.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.164.1/build/three.module.js"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'https://unpkg.com/three@0.164.1/examples/jsm/controls/OrbitControls.js';
+
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const nav = document.querySelector('.nav-dots');
+    let activeIndex = 0;
+
+    function goToSlide(index) {
+      const clamped = Math.max(0, Math.min(index, slides.length - 1));
+      window.scrollTo({ top: slides[clamped].offsetTop, behavior: 'smooth' });
+    }
+
+    slides.forEach((_, index) => {
+      const btn = document.createElement('button');
+      btn.className = 'nav-dot' + (index === 0 ? ' active' : '');
+      btn.setAttribute('aria-label', `Go to slide ${index + 1}`);
+      btn.addEventListener('click', () => goToSlide(index));
+      nav.appendChild(btn);
+    });
+
+    function updateActive() {
+      const midpoint = window.scrollY + window.innerHeight * 0.5;
+      let best = 0;
+      slides.forEach((slide, index) => {
+        if (midpoint >= slide.offsetTop) best = index;
+      });
+      activeIndex = best;
+      document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index === activeIndex);
+      });
+    }
+
+    window.addEventListener('scroll', updateActive, { passive: true });
+    window.addEventListener('resize', updateActive);
+    updateActive();
+
+    window.addEventListener('keydown', (event) => {
+      if (['ArrowDown', 'PageDown', ' '].includes(event.key)) {
+        event.preventDefault();
+        goToSlide(activeIndex + 1);
+      }
+      if (['ArrowUp', 'PageUp'].includes(event.key)) {
+        event.preventDefault();
+        goToSlide(activeIndex - 1);
+      }
+      if (event.key === 'Home') {
+        event.preventDefault();
+        goToSlide(0);
+      }
+      if (event.key === 'End') {
+        event.preventDefault();
+        goToSlide(slides.length - 1);
+      }
+    });
+
+    const selectEl = document.getElementById('step-model-select');
+    const reloadEl = document.getElementById('step-reload');
+    const stateEl = document.getElementById('step-viewer-state');
+    const statusEl = document.getElementById('step-viewer-status');
+    const canvasHost = document.getElementById('step-viewer-canvas');
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.04;
+    canvasHost.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 1000);
+    camera.position.set(2.8, 2.1, 3.2);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.8;
+    controls.target.set(0, 0, 0);
+
+    scene.add(new THREE.HemisphereLight(0xffffff, 0xdcc9af, 1.45));
+    const key = new THREE.DirectionalLight(0xffffff, 1.2);
+    key.position.set(4, 6, 5);
+    scene.add(key);
+    const fill = new THREE.DirectionalLight(0xf6ebdc, 0.7);
+    fill.position.set(-5, 3, -4);
+    scene.add(fill);
+
+    const ground = new THREE.Mesh(
+      new THREE.CircleGeometry(10, 64),
+      new THREE.MeshBasicMaterial({ color: 0xe7ddcf, transparent: true, opacity: 0.55 })
+    );
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -0.75;
+    scene.add(ground);
+
+    let currentGroup = null;
+    let manifest = { models: [] };
+    let occtReady = null;
+
+    function resizeRenderer() {
+      const width = Math.max(canvasHost.clientWidth, 10);
+      const height = Math.max(canvasHost.clientHeight, 10);
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    }
+
+    function setStatus(text, showState = true) {
+      statusEl.textContent = text;
+      stateEl.classList.toggle('hidden', !showState);
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+
+    function clearModel() {
+      if (!currentGroup) return;
+      scene.remove(currentGroup);
+      currentGroup.traverse((child) => {
+        if (child.geometry) child.geometry.dispose();
+        if (child.material) {
+          if (Array.isArray(child.material)) child.material.forEach((m) => m.dispose());
+          else child.material.dispose();
+        }
+      });
+      currentGroup = null;
+    }
+
+    function colorFromArray(color) {
+      if (!Array.isArray(color) || color.length < 3) return new THREE.Color('#c48b67');
+      const normalize = color.some((v) => v > 1) ? 255 : 1;
+      return new THREE.Color(color[0] / normalize, color[1] / normalize, color[2] / normalize);
+    }
+
+    function fitCameraToObject(object) {
+      const box = new THREE.Box3().setFromObject(object);
+      if (box.isEmpty()) return;
+      const center = box.getCenter(new THREE.Vector3());
+      const size = box.getSize(new THREE.Vector3());
+      const maxSize = Math.max(size.x, size.y, size.z) || 1;
+      const distance = maxSize * 1.8;
+      camera.position.copy(center.clone().add(new THREE.Vector3(distance, distance * 0.72, distance)));
+      camera.near = Math.max(maxSize / 1000, 0.01);
+      camera.far = Math.max(maxSize * 50, 100);
+      camera.updateProjectionMatrix();
+      controls.target.copy(center);
+      controls.update();
+      ground.position.y = box.min.y - Math.max(size.y * 0.08, 0.05);
+    }
+
+    async function getOcct() {
+      if (!window.occtimportjs) throw new Error('occt-import-js failed to load');
+      if (!occtReady) occtReady = window.occtimportjs();
+      return occtReady;
+    }
+
+    async function loadManifest() {
+      try {
+        const response = await fetch('assets/models/manifest.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error('manifest missing');
+        const json = await response.json();
+        manifest = Array.isArray(json.models) ? json : { models: [] };
+      } catch {
+        manifest = { models: [] };
+      }
+
+      selectEl.innerHTML = '';
+      if (!manifest.models.length) {
+        const option = document.createElement('option');
+        option.textContent = 'No STEP files listed yet';
+        option.value = '';
+        selectEl.appendChild(option);
+        clearModel();
+        setStatus('Awaiting STEP files', true);
+        return;
+      }
+
+      manifest.models.forEach((model, index) => {
+        const option = document.createElement('option');
+        option.value = String(index);
+        option.textContent = model.label || model.file || `Model ${index + 1}`;
+        selectEl.appendChild(option);
+      });
+
+      await loadSelectedModel(0);
+    }
+
+    async function loadSelectedModel(index) {
+      if (!manifest.models.length) return;
+      const model = manifest.models[index];
+      if (!model) return;
+
+      setStatus(`Loading ${model.label || model.file}...`, true);
+      clearModel();
+
+      try {
+        const occt = await getOcct();
+        const response = await fetch(`assets/models/${model.file}`);
+        if (!response.ok) throw new Error(`Could not fetch ${model.file}`);
+        const buffer = new Uint8Array(await response.arrayBuffer());
+        const params = {
+          linearUnit: 'millimeter',
+          linearDeflectionType: 'bounding_box_ratio',
+          linearDeflection: 0.0015,
+          angularDeflection: 0.4
+        };
+        const result = occt.ReadStepFile(buffer, params);
+        if (!result.success) throw new Error('STEP import failed');
+
+        const group = new THREE.Group();
+        result.meshes.forEach((meshData, meshIndex) => {
+          const geometry = new THREE.BufferGeometry();
+          const positions = meshData.attributes?.position?.array || [];
+          const normals = meshData.attributes?.normal?.array || [];
+          const indices = meshData.index?.array || [];
+          geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+          if (normals.length) geometry.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
+          else geometry.computeVertexNormals();
+          if (indices.length) geometry.setIndex(indices);
+          geometry.computeBoundingSphere();
+
+          const material = new THREE.MeshStandardMaterial({
+            color: colorFromArray(meshData.color),
+            roughness: 0.68,
+            metalness: 0.08,
+            side: THREE.DoubleSide
+          });
+
+          const mesh = new THREE.Mesh(geometry, material);
+          mesh.name = meshData.name || `mesh-${meshIndex + 1}`;
+          group.add(mesh);
+        });
+
+        currentGroup = group;
+        scene.add(group);
+        fitCameraToObject(group);
+        setStatus(model.caption || `${model.label || model.file} loaded`, false);
+      } catch (error) {
+        console.error(error);
+        setStatus(`Viewer ready, but ${model.file || 'model'} could not load`, true);
+      }
+    }
+
+    selectEl.addEventListener('change', async () => {
+      await loadSelectedModel(Number(selectEl.value || 0));
+    });
+
+    reloadEl.addEventListener('click', async () => {
+      await loadManifest();
+    });
+
+    window.addEventListener('resize', resizeRenderer);
+    resizeRenderer();
+    animate();
+    await loadManifest();
+  </script>
+</body>
+</html>
