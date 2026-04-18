@@ -439,8 +439,19 @@
       background: transparent;
     }
 
+    .hero-slideshow#spiral-hero-slideshow .hero-slide {
+      display: grid;
+      place-items: center;
+    }
+
     .hero-slideshow#spiral-hero-slideshow .hero-slide img {
-      object-fit: contain;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: unset;
+      border-radius: 24px;
+      clip-path: inset(0 round 24px);
     }
 
     .slideshow-dots {
