@@ -616,9 +616,11 @@
 
     .thumb-grid {
       display: grid;
+      height: 100%;
       grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-rows: repeat(5, minmax(0, 1fr));
       gap: 0.75rem;
-      align-content: start;
+      align-content: stretch;
     }
 
     .thumb-button,
@@ -629,7 +631,8 @@
       padding: 0;
       background: rgba(255,255,255,0.82);
       overflow: hidden;
-      aspect-ratio: 1 / 1;
+      min-height: 0;
+      height: 100%;
       position: relative;
       transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
       display: grid;
