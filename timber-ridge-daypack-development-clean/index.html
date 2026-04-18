@@ -969,9 +969,18 @@
     const nav = document.querySelector('.nav-dots');
     let activeIndex = 0;
 
+    slides.forEach((slide, index) => {
+      slide.id = `slide-${index + 1}`;
+    });
+
+    function getScrollTop() {
+      return document.body.scrollTop || document.documentElement.scrollTop || window.scrollY || 0;
+    }
+
     function goToSlide(index) {
       const clamped = Math.max(0, Math.min(index, slides.length - 1));
-      window.scrollTo({ top: slides[clamped].offsetTop, behavior: 'smooth' });
+      document.body.scrollTo({ top: slides[clamped].offsetTop, behavior: 'smooth' });
+      document.documentElement.scrollTo({ top: slides[clamped].offsetTop, behavior: 'smooth' });
     }
 
     slides.forEach((_, index) => {
@@ -983,10 +992,15 @@
     });
 
     function updateActive() {
-      const midpoint = window.scrollY + window.innerHeight * 0.5;
+      const scrollTop = getScrollTop();
       let best = 0;
+      let bestDistance = Infinity;
       slides.forEach((slide, index) => {
-        if (midpoint >= slide.offsetTop) best = index;
+        const distance = Math.abs(slide.offsetTop - scrollTop);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          best = index;
+        }
       });
       activeIndex = best;
       document.querySelectorAll('.nav-dot').forEach((dot, index) => {
@@ -995,6 +1009,8 @@
     }
 
     window.addEventListener('scroll', updateActive, { passive: true });
+    document.addEventListener('scroll', updateActive, { passive: true, capture: true });
+    document.body.addEventListener('scroll', updateActive, { passive: true });
     window.addEventListener('resize', updateActive);
     updateActive();
 
@@ -1060,6 +1076,7 @@
     let currentGroup = null;
     let manifest = { models: [] };
     let occtReady = null;
+    let modelLoadToken = 0;
 
     function resizeRenderer() {
       const width = Math.max(canvasHost.clientWidth, 10);
@@ -1228,64 +1245,90 @@
       await loadSelectedModel(0);
     }
 
+    async function buildModelGroup(model) {
+      const occt = await getOcct();
+      const response = await fetch(`assets/models/${model.file}`, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`Could not fetch ${model.file}`);
+      const buffer = new Uint8Array(await response.arrayBuffer());
+      const params = {
+        linearUnit: 'millimeter',
+        linearDeflectionType: 'bounding_box_ratio',
+        linearDeflection: 0.0015,
+        angularDeflection: 0.4
+      };
+      const result = occt.ReadStepFile(buffer, params);
+      if (!result.success) throw new Error('STEP import failed');
+
+      const group = new THREE.Group();
+      result.meshes.forEach((meshData, meshIndex) => {
+        const geometry = new THREE.BufferGeometry();
+        const positions = meshData.attributes?.position?.array || [];
+        const normals = meshData.attributes?.normal?.array || [];
+        const indices = meshData.index?.array || [];
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+        if (normals.length) geometry.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
+        else geometry.computeVertexNormals();
+        if (indices.length) geometry.setIndex(indices);
+        geometry.computeBoundingSphere();
+
+        const material = new THREE.MeshStandardMaterial({
+          color: colorFromArray(meshData.color),
+          roughness: 0.68,
+          metalness: 0.08,
+          side: THREE.DoubleSide
+        });
+
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.name = meshData.name || `mesh-${meshIndex + 1}`;
+        group.add(mesh);
+      });
+
+      group.rotation.x = -Math.PI / 2;
+      group.rotation.y = Math.PI;
+      return group;
+    }
+
     async function loadSelectedModel(index) {
       if (!manifest.models.length) return;
       const model = manifest.models[index];
       if (!model) return;
 
+      const thisLoadToken = ++modelLoadToken;
       selectEl.value = String(index);
       updateActiveThumb(index);
       setStatus(`Loading ${model.label || model.file}...`, true, 'Loading model');
       clearModel();
 
-      try {
-        const occt = await getOcct();
-        const response = await fetch(`assets/models/${model.file}`);
-        if (!response.ok) throw new Error(`Could not fetch ${model.file}`);
-        const buffer = new Uint8Array(await response.arrayBuffer());
-        const params = {
-          linearUnit: 'millimeter',
-          linearDeflectionType: 'bounding_box_ratio',
-          linearDeflection: 0.0015,
-          angularDeflection: 0.4
-        };
-        const result = occt.ReadStepFile(buffer, params);
-        if (!result.success) throw new Error('STEP import failed');
+      let lastError = null;
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          const group = await buildModelGroup(model);
+          if (thisLoadToken !== modelLoadToken) {
+            group.traverse((child) => {
+              if (child.geometry) child.geometry.dispose();
+              if (child.material) {
+                if (Array.isArray(child.material)) child.material.forEach((m) => m.dispose());
+                else child.material.dispose();
+              }
+            });
+            return;
+          }
 
-        const group = new THREE.Group();
-        result.meshes.forEach((meshData, meshIndex) => {
-          const geometry = new THREE.BufferGeometry();
-          const positions = meshData.attributes?.position?.array || [];
-          const normals = meshData.attributes?.normal?.array || [];
-          const indices = meshData.index?.array || [];
-          geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-          if (normals.length) geometry.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
-          else geometry.computeVertexNormals();
-          if (indices.length) geometry.setIndex(indices);
-          geometry.computeBoundingSphere();
-
-          const material = new THREE.MeshStandardMaterial({
-            color: colorFromArray(meshData.color),
-            roughness: 0.68,
-            metalness: 0.08,
-            side: THREE.DoubleSide
-          });
-
-          const mesh = new THREE.Mesh(geometry, material);
-          mesh.name = meshData.name || `mesh-${meshIndex + 1}`;
-          group.add(mesh);
-        });
-
-        group.rotation.x = -Math.PI / 2;
-
-        currentGroup = group;
-        scene.add(group);
-        fitCameraToObject(group);
-        setStatus(model.caption || `${model.label || model.file} loaded`, false, 'Loaded');
-      } catch (error) {
-        console.error(error);
-        setStatus(`Viewer ready, but ${model.file || 'model'} could not load`, true, 'Load error');
+          currentGroup = group;
+          scene.add(group);
+          fitCameraToObject(group);
+          setStatus(model.caption || `${model.label || model.file} loaded`, false, 'Loaded');
+          return;
+        } catch (error) {
+          lastError = error;
+          if (attempt === 0) {
+            await new Promise((resolve) => setTimeout(resolve, 250));
+          }
+        }
       }
+
+      console.error(lastError);
+      setStatus(`Viewer ready, but ${model.file || 'model'} could not load`, true, 'Load error');
     }
 
     selectEl.addEventListener('change', async () => {
