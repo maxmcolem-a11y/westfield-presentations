@@ -223,7 +223,8 @@
 
     .grid-2,
     .hero-grid,
-    .final-grid {
+    .final-grid,
+    .top-funnel-layout {
       display: grid;
       grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
       gap: var(--gap-lg);
@@ -356,8 +357,101 @@
       padding: 1rem;
       display: grid;
       gap: 0.85rem;
+      min-height: min(60vh, 560px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(245,239,230,0.95));
+    }
+
+    .top-funnel-layout {
+      align-items: stretch;
+    }
+
+    .top-funnel-copy {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: var(--gap-lg);
+      min-height: 100%;
+    }
+
+    .top-funnel-copy h2 {
+      max-width: 14ch;
+    }
+
+    .top-funnel-browser {
+      display: grid;
+      gap: 0.8rem;
+      align-content: start;
+    }
+
+    .thumb-panel {
+      padding: 1rem;
+      display: grid;
+      gap: 0.85rem;
       min-height: min(68vh, 620px);
       background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(245,239,230,0.95));
+    }
+
+    .thumb-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+      align-content: start;
+    }
+
+    .thumb-button,
+    .thumb-slot {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0;
+      background: rgba(255,255,255,0.82);
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      position: relative;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .thumb-button {
+      cursor: pointer;
+    }
+
+    .thumb-button:hover,
+    .thumb-button:focus-visible {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 8px 18px rgba(31, 23, 19, 0.10);
+      outline: none;
+    }
+
+    .thumb-button.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(154, 93, 54, 0.18), 0 10px 20px rgba(31, 23, 19, 0.10);
+    }
+
+    .thumb-button img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #fff;
+    }
+
+    .thumb-fallback,
+    .thumb-slot {
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.96), rgba(240,234,224,0.95)),
+        repeating-linear-gradient(-45deg, rgba(154,93,54,0.06) 0 12px, rgba(255,255,255,0) 12px 24px);
+    }
+
+    .thumb-fallback::before,
+    .thumb-slot::before {
+      content: "";
+      width: 42%;
+      height: 42%;
+      border-radius: 12px;
+      border: 1px dashed rgba(73, 57, 45, 0.35);
+      background: rgba(255,255,255,0.45);
     }
 
     .viewer-toolbar {
@@ -511,6 +605,7 @@
       .grid-2,
       .hero-grid,
       .final-grid,
+      .top-funnel-layout,
       .grid-3,
       .progress-grid,
       .support-grid,
@@ -521,6 +616,11 @@
         grid-template-columns: 1fr;
       }
       .hero-visuals .frame:first-child { grid-column: auto; }
+      .thumb-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 720px) {
+      .thumb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-height: 720px) {
@@ -556,50 +656,46 @@
 
   <section class="slide">
     <div class="slide-content">
-      <div class="grid-2">
-        <div class="viewer-shell">
-          <div class="stack" style="gap:0.35rem;">
+      <div class="top-funnel-layout">
+        <div class="top-funnel-copy">
+          <div class="stack" style="gap:0.45rem; align-content:start;">
             <div class="eyebrow">Top of funnel</div>
-            <h2>Volumetric generation should be reviewed as live form, not flattened evidence.</h2>
+            <h2>We started with 3D modeling a variety of unique shapes to evaluate for recognizability, tension, proportion, and structural clarity.</h2>
           </div>
-          <div class="viewer-toolbar">
-            <label>
-              STEP model
-              <select id="step-model-select">
+          <div class="top-funnel-browser">
+            <div class="viewer-shell">
+              <div class="viewer-toolbar" style="grid-template-columns: 1fr auto;">
+                <div class="eyebrow" style="align-self:end;">3D viewer</div>
+                <button id="step-reload" type="button">Reload models</button>
+              </div>
+              <div class="viewer-canvas" id="step-viewer-canvas">
+                <div class="viewer-state" id="step-viewer-state">
+                  <div class="viewer-state-card">
+                    <strong>Interactive STEP viewer is wired and waiting.</strong>
+                    <p>Add up to 20 labeled STEP files and matching thumbnails, then click any thumbnail to load that model here.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="viewer-meta">
+                <span id="step-viewer-status">Awaiting STEP files</span>
+                <span>Thumbnail click loads the model</span>
+              </div>
+              <select id="step-model-select" style="display:none;">
                 <option>Looking for manifest...</option>
               </select>
-            </label>
-            <button id="step-reload" type="button">Reload models</button>
-          </div>
-          <div class="viewer-canvas" id="step-viewer-canvas">
-            <div class="viewer-state" id="step-viewer-state">
-              <div class="viewer-state-card">
-                <strong>Interactive STEP viewer is wired and waiting.</strong>
-                <p>Add <code>.step</code> or <code>.stp</code> files to <code>assets/models</code> and list them in <code>manifest.json</code> to turn this slide into a rotatable 3D review surface.</p>
-              </div>
             </div>
           </div>
-          <div class="viewer-meta">
-            <span id="step-viewer-status">Awaiting STEP files</span>
-            <span>Orbit, pan, and zoom enabled</span>
-          </div>
         </div>
-        <div class="stack">
-          <div class="eyebrow">Narrative</div>
-          <h2>Early exploration is about stance, aspect ratio, and structural attitude.</h2>
-          <p class="muted">This phase is deliberately freed from pattern constraints. The goal is to discover raw silhouette families first, then use physical and visual filtering to narrow the field.</p>
-          <div class="feature-card">
-            <h3>What the slide needs to say</h3>
-            <ul>
-              <li>20 to 30 initial CAD bodies are being judged as volume proposals, not finished bags.</li>
-              <li>The selection criteria are recognizability, tension, proportion, and structural clarity.</li>
-              <li>The 3D viewer makes the shape logic legible from every angle, which is the point of the funnel.</li>
-            </ul>
+        <div class="thumb-panel">
+          <div class="stack" style="gap:0.35rem;">
+            <div class="eyebrow">Shape set</div>
+            <p class="muted">20 thumbnail slots, no text, each one mapped to its corresponding bag file.</p>
           </div>
+          <div class="thumb-grid" id="step-thumb-grid" aria-label="STEP model thumbnail grid"></div>
         </div>
       </div>
     </div>
-    <div class="bottom-note">Slide 02 · Interactive STEP viewer for top-of-funnel form review</div>
+    <div class="bottom-note">Slide 02 · Thumbnail-driven top-of-funnel model review</div>
     <div class="slide-number">02</div>
   </section>
 
@@ -982,6 +1078,7 @@
     const stateEl = document.getElementById('step-viewer-state');
     const statusEl = document.getElementById('step-viewer-status');
     const canvasHost = document.getElementById('step-viewer-canvas');
+    const thumbGridEl = document.getElementById('step-thumb-grid');
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -1080,6 +1177,76 @@
       return occtReady;
     }
 
+    function slugifyModel(model, index) {
+      const raw = model.slug || model.label || model.file || `bag-${index + 1}`;
+      return String(raw)
+        .toLowerCase()
+        .replace(/\.[a-z0-9]+$/i, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    async function resolveThumbnailPath(model, index) {
+      const candidates = [];
+      if (model.thumbnail) candidates.push(`assets/models/${model.thumbnail}`);
+      const slug = slugifyModel(model, index);
+      ['png', 'jpg', 'jpeg', 'webp'].forEach((ext) => {
+        candidates.push(`assets/models/thumbnails/${slug}.${ext}`);
+      });
+
+      for (const candidate of candidates) {
+        try {
+          const response = await fetch(candidate, { method: 'HEAD', cache: 'no-store' });
+          if (response.ok) return candidate;
+        } catch {}
+      }
+      return null;
+    }
+
+    async function renderThumbGrid() {
+      thumbGridEl.innerHTML = '';
+      const totalSlots = 20;
+      for (let i = 0; i < totalSlots; i++) {
+        const model = manifest.models[i];
+        if (model) {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'thumb-button';
+          button.setAttribute('aria-label', model.label || `Bag ${i + 1}`);
+          button.dataset.index = String(i);
+
+          const thumbPath = await resolveThumbnailPath(model, i);
+          if (thumbPath) {
+            const img = document.createElement('img');
+            img.alt = '';
+            img.loading = 'lazy';
+            img.src = thumbPath;
+            button.appendChild(img);
+          } else {
+            const fallback = document.createElement('div');
+            fallback.className = 'thumb-fallback';
+            button.appendChild(fallback);
+          }
+
+          button.addEventListener('click', async () => {
+            await loadSelectedModel(i);
+          });
+          thumbGridEl.appendChild(button);
+        } else {
+          const slot = document.createElement('div');
+          slot.className = 'thumb-slot';
+          slot.setAttribute('aria-hidden', 'true');
+          thumbGridEl.appendChild(slot);
+        }
+      }
+    }
+
+    function updateActiveThumb(index) {
+      thumbGridEl.querySelectorAll('.thumb-button').forEach((button) => {
+        button.classList.toggle('active', Number(button.dataset.index) === index);
+      });
+    }
+
     async function loadManifest() {
       try {
         const response = await fetch('assets/models/manifest.json', { cache: 'no-store' });
@@ -1096,6 +1263,7 @@
         option.textContent = 'No STEP files listed yet';
         option.value = '';
         selectEl.appendChild(option);
+        await renderThumbGrid();
         clearModel();
         setStatus('Awaiting STEP files', true);
         return;
@@ -1108,6 +1276,7 @@
         selectEl.appendChild(option);
       });
 
+      await renderThumbGrid();
       await loadSelectedModel(0);
     }
 
@@ -1116,6 +1285,8 @@
       const model = manifest.models[index];
       if (!model) return;
 
+      selectEl.value = String(index);
+      updateActiveThumb(index);
       setStatus(`Loading ${model.label || model.file}...`, true);
       clearModel();
 
