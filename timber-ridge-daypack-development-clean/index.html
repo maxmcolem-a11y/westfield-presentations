@@ -314,21 +314,19 @@
 
     .step2-media {
       width: 100%;
+      height: min(44vh, 430px);
       border-radius: 16px;
       overflow: hidden;
       line-height: 0;
       background: transparent;
-      clip-path: inset(0 round 16px);
     }
 
     .step2-item img {
       display: block;
       width: 100%;
-      max-height: min(44vh, 430px);
-      object-fit: contain;
+      height: 100%;
+      object-fit: cover;
       background: transparent;
-      border-radius: 16px;
-      clip-path: inset(0 round 16px);
     }
 
     .frame img,
@@ -404,7 +402,7 @@
     }
 
     .hero-slideshow#spiral-hero-slideshow .hero-slide img {
-      object-fit: contain;
+      object-fit: cover;
     }
 
     .slideshow-dots {
