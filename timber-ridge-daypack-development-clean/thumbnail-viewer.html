@@ -63,7 +63,7 @@
     const app = document.getElementById('app');
     const params = new URLSearchParams(window.location.search);
     const modelParam = params.get('model');
-    const zoom = Number(params.get('zoom') || '1.2');
+    const zoom = Number(params.get('zoom') || '1.24');
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
