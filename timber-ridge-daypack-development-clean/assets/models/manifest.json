@@ -2,9 +2,124 @@
   "title": "Timber Ridge top-of-funnel volumetric models",
   "models": [
     {
-      "label": "Bag 0",
-      "file": "bag-0.step",
-      "caption": "Viewer test model"
+      "label": "Bag 1",
+      "file": "bag-1.step",
+      "thumbnail": "thumbnails/bag-1.png",
+      "caption": "Bag 1"
+    },
+    {
+      "label": "Bag 2",
+      "file": "bag-2.step",
+      "thumbnail": "thumbnails/bag-2.png",
+      "caption": "Bag 2"
+    },
+    {
+      "label": "Bag 3",
+      "file": "bag-3.step",
+      "thumbnail": "thumbnails/bag-3.png",
+      "caption": "Bag 3"
+    },
+    {
+      "label": "Bag 4",
+      "file": "bag-4.step",
+      "thumbnail": "thumbnails/bag-4.png",
+      "caption": "Bag 4"
+    },
+    {
+      "label": "Bag 5",
+      "file": "bag-5.step",
+      "thumbnail": "thumbnails/bag-5.png",
+      "caption": "Bag 5"
+    },
+    {
+      "label": "Bag 6",
+      "file": "bag-6.step",
+      "thumbnail": "thumbnails/bag-6.png",
+      "caption": "Bag 6"
+    },
+    {
+      "label": "Bag 7",
+      "file": "bag-7.step",
+      "thumbnail": "thumbnails/bag-7.png",
+      "caption": "Bag 7"
+    },
+    {
+      "label": "Bag 8",
+      "file": "bag-8.step",
+      "thumbnail": "thumbnails/bag-8.png",
+      "caption": "Bag 8"
+    },
+    {
+      "label": "Bag 9",
+      "file": "bag-9.step",
+      "thumbnail": "thumbnails/bag-9.png",
+      "caption": "Bag 9"
+    },
+    {
+      "label": "Bag 10",
+      "file": "bag-10.step",
+      "thumbnail": "thumbnails/bag-10.png",
+      "caption": "Bag 10"
+    },
+    {
+      "label": "Bag 11",
+      "file": "bag-11.step",
+      "thumbnail": "thumbnails/bag-11.png",
+      "caption": "Bag 11"
+    },
+    {
+      "label": "Bag 12",
+      "file": "bag-12.step",
+      "thumbnail": "thumbnails/bag-12.png",
+      "caption": "Bag 12"
+    },
+    {
+      "label": "Bag 13",
+      "file": "bag-13.step",
+      "thumbnail": "thumbnails/bag-13.png",
+      "caption": "Bag 13"
+    },
+    {
+      "label": "Bag 14",
+      "file": "bag-14.step",
+      "thumbnail": "thumbnails/bag-14.png",
+      "caption": "Bag 14"
+    },
+    {
+      "label": "Bag 15",
+      "file": "bag-15.step",
+      "thumbnail": "thumbnails/bag-15.png",
+      "caption": "Bag 15"
+    },
+    {
+      "label": "Bag 16",
+      "file": "bag-16.step",
+      "thumbnail": "thumbnails/bag-16.png",
+      "caption": "Bag 16"
+    },
+    {
+      "label": "Bag 17",
+      "file": "bag-17.step",
+      "thumbnail": "thumbnails/bag-17.png",
+      "caption": "Bag 17"
+    },
+    {
+      "label": "Bag 18",
+      "file": "bag-18.step",
+      "thumbnail": "thumbnails/bag-18.png",
+      "caption": "Bag 18"
+    },
+    {
+      "label": "Bag 19",
+      "file": "bag-19.step",
+      "thumbnail": "thumbnails/bag-19.png",
+      "caption": "Bag 19"
+    },
+    {
+      "label": "Bag 20",
+      "file": "bag-20.step",
+      "thumbnail": "thumbnails/bag-20.png",
+      "caption": "Bag 20"
     }
   ]
 }
