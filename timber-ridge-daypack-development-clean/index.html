@@ -15,25 +15,21 @@
     }
 
     :root {
-      --bg: #f7f3f8;
-      --bg-2: #eef4fb;
-      --paper: rgba(255,255,255,0.86);
-      --paper-strong: rgba(255,255,255,0.96);
-      --line: rgba(70, 66, 88, 0.16);
-      --line-strong: rgba(70, 66, 88, 0.28);
-      --ink: #221c29;
-      --muted: #696277;
-      --accent: #9b6fb0;
-      --accent-soft: rgba(155, 111, 176, 0.14);
-      --green: #5f9e86;
-      --green-soft: rgba(95, 158, 134, 0.14);
-      --red: #c07c8c;
-      --red-soft: rgba(192, 124, 140, 0.14);
-      --tab-1: #f2c9d2;
-      --tab-2: #f4dfb5;
-      --tab-3: #c7dbf4;
-      --tab-4: #cfe7d6;
-      --shadow: 0 18px 42px rgba(34, 28, 41, 0.08);
+      --bg: #f4f4f1;
+      --bg-2: #ecece7;
+      --paper: rgba(255,255,255,0.96);
+      --paper-strong: rgba(255,255,255,0.99);
+      --line: rgba(24, 24, 22, 0.10);
+      --line-strong: rgba(24, 24, 22, 0.20);
+      --ink: #121212;
+      --muted: #5d5d58;
+      --accent: #d63b2f;
+      --accent-soft: rgba(214, 59, 47, 0.10);
+      --green: #1f6e52;
+      --green-soft: rgba(31, 110, 82, 0.10);
+      --red: #b3352d;
+      --red-soft: rgba(179, 53, 45, 0.10);
+      --shadow: 0 12px 30px rgba(18, 18, 18, 0.05);
       --title: clamp(2.1rem, 5.4vw, 5rem);
       --h2: clamp(1.5rem, 2.8vw, 2.8rem);
       --h3: clamp(1rem, 1.4vw, 1.2rem);
@@ -42,28 +38,25 @@
       --pad: clamp(1rem, 3.3vw, 3.1rem);
       --gap: clamp(0.9rem, 1.5vw, 1.25rem);
       --gap-lg: clamp(1.1rem, 2vw, 1.8rem);
-      --radius: 20px;
+      --radius: 8px;
     }
 
     * { box-sizing: border-box; }
 
     body {
       color: var(--ink);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: Inter, Arial, Helvetica, sans-serif;
       background:
-        linear-gradient(90deg, rgba(242, 201, 210, 0.58) 0%, rgba(242, 201, 210, 0.58) 49.5%, rgba(199, 219, 244, 0.58) 50.5%, rgba(199, 219, 244, 0.58) 100%),
-        linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0.12)),
-        repeating-linear-gradient(180deg, rgba(255,255,255,0.18) 0 1px, transparent 1px 42px);
-      background-size: auto, auto, auto;
-      background-position: 0 0, 0 0, 0 14px;
+        linear-gradient(180deg, rgba(255,255,255,0.50), rgba(255,255,255,0.22)),
+        linear-gradient(180deg, #f7f7f3 0%, #edede8 100%);
     }
 
     h1, h2, h3, p, ul { margin: 0; }
     h1, h2 {
-      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
-      font-weight: 700;
-      line-height: 0.94;
-      letter-spacing: -0.03em;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: -0.05em;
     }
     h1 { font-size: var(--title); }
     h2 { font-size: var(--h2); }
@@ -99,7 +92,7 @@
     .eyebrow {
       font-size: var(--small);
       font-weight: 800;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
     }
@@ -115,9 +108,8 @@
     .feature-card,
     .media-panel {
       background: var(--paper);
-      border: 1px solid rgba(255,255,255,0.72);
+      border: 1px solid var(--line);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(6px);
       border-radius: var(--radius);
       position: relative;
       isolation: isolate;
@@ -139,55 +131,16 @@
     .media-panel,
     .card,
     .panel {
-      margin-top: 0.8rem;
-    }
-
-    .viewer-shell::before,
-    .decision-card::before,
-    .feature-card::before,
-    .placeholder::before,
-    .media-panel::before,
-    .card::before,
-    .panel::before {
-      content: "";
-      position: absolute;
-      top: -0.78rem;
-      left: 1rem;
-      width: 6.25rem;
-      height: 1rem;
-      border-radius: 0.95rem 0.95rem 0 0;
-      border: 1px solid var(--line-strong);
-      border-bottom: none;
-      background: var(--tab-1);
-      box-shadow: 0 4px 10px rgba(31, 23, 19, 0.08);
-      z-index: -1;
-    }
-
-    .feature-card:nth-child(2)::before,
-    .decision-card:nth-child(2)::before,
-    .progress-grid > :nth-child(2)::before {
-      background: var(--tab-2);
-    }
-
-    .feature-card:nth-child(3)::before,
-    .decision-card:nth-child(3)::before,
-    .progress-grid > :nth-child(3)::before {
-      background: var(--tab-3);
-    }
-
-    .media-panel::before,
-    .viewer-shell::before,
-    .placeholder::before {
-      background: var(--tab-4);
+      margin-top: 0.2rem;
     }
 
     .frame,
     .placeholder-visual,
     .viewer-canvas {
-      border-radius: 18px;
+      border-radius: 4px;
       overflow: hidden;
       border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(239,231,217,0.92));
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(243,243,239,0.96));
     }
 
     .frame img {
@@ -357,7 +310,7 @@
       display: grid;
       gap: 0.85rem;
       min-height: min(60vh, 560px);
-      background: linear-gradient(180deg, rgba(255,249,252,0.96), rgba(247,239,245,0.96));
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,246,242,0.98));
     }
 
     .top-funnel-layout {
@@ -386,7 +339,7 @@
       display: grid;
       gap: 0.85rem;
       min-height: min(68vh, 620px);
-      background: linear-gradient(180deg, rgba(248,252,255,0.96), rgba(239,246,253,0.96));
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,246,242,0.98));
     }
 
     .thumb-grid {
