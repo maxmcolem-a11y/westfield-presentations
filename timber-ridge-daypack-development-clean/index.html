@@ -1396,6 +1396,13 @@
       specNextEl.disabled = specPageNumber >= total;
     }
 
+    function preloadSpecImages() {
+      specPageImages.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+    }
+
     function openSpecModal(pageNumber = 1) {
       specModalEl.classList.add('open');
       specModalEl.setAttribute('aria-hidden', 'false');
@@ -1573,6 +1580,9 @@
           if (model.thumbnail) {
             await warmAsset(`assets/models/${model.thumbnail}`);
           }
+        }
+        for (const specImage of specPageImages) {
+          await warmAsset(specImage);
         }
       };
 
@@ -1782,6 +1792,7 @@
     await loadManifest();
     bindLightboxImages();
     bindSpecModal();
+    preloadSpecImages();
     startHeroSlideshow();
   </script>
 </body>
