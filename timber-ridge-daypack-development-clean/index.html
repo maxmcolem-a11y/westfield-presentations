@@ -1037,7 +1037,7 @@
             <span class="slideshow-dot"></span>
             <span class="slideshow-dot"></span>
           </div>
-          <button class="spec-sheet-button" id="spec-sheet-button" type="button">Full Spec Sheet</button>
+          <button class="spec-sheet-button" data-spec-set="diamond" type="button">Full Spec Sheet</button>
         </div>
       </div>
     </div>
@@ -1085,6 +1085,7 @@
             <span class="slideshow-dot"></span>
             <span class="slideshow-dot"></span>
           </div>
+          <button class="spec-sheet-button" data-spec-set="spiral" type="button">Full Spec Sheet</button>
         </div>
         <div class="stack">
           <div class="eyebrow">Spiral Final Result</div>
@@ -1218,7 +1219,7 @@
     const lightboxEl = document.getElementById('image-lightbox');
     const lightboxImageEl = document.getElementById('lightbox-image');
     const lightboxCloseEl = document.getElementById('lightbox-close');
-    const specSheetButtonEl = document.getElementById('spec-sheet-button');
+    const specSheetButtonEls = Array.from(document.querySelectorAll('[data-spec-set]'));
     const specModalEl = document.getElementById('spec-modal');
     const specModalCloseEl = document.getElementById('spec-modal-close');
     const specPrevEl = document.getElementById('spec-prev');
@@ -1268,11 +1269,21 @@
     let occtReady = null;
     let modelLoadToken = 0;
     let specPageNumber = 1;
-    const specPageImages = [
-      'assets/TimberRidgeDaypack_Spec_Viewer_p1.jpg',
-      'assets/TimberRidgeDaypack_Spec_Viewer_p2.jpg',
-      'assets/TimberRidgeDaypack_Spec_Viewer_p3.jpg'
-    ];
+    let activeSpecSet = 'diamond';
+    const specPageImageSets = {
+      diamond: [
+        'assets/TimberRidgeDaypack_Spec_Viewer_p1.jpg',
+        'assets/TimberRidgeDaypack_Spec_Viewer_p2.jpg',
+        'assets/TimberRidgeDaypack_Spec_Viewer_p3.jpg'
+      ],
+      spiral: [
+        'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p1.jpg',
+        'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p2.jpg',
+        'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p3.jpg',
+        'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p4.jpg',
+        'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p5.jpg'
+      ]
+    };
     const ASSET_CACHE_NAME = 'timber-ridge-daypack-assets-v1';
 
     function resizeRenderer() {
@@ -1321,7 +1332,12 @@
       lightboxImageEl.src = '';
     }
 
+    function getActiveSpecImages() {
+      return specPageImageSets[activeSpecSet] || specPageImageSets.diamond;
+    }
+
     function renderSpecPage(pageNumber) {
+      const specPageImages = getActiveSpecImages();
       const total = specPageImages.length;
       specPageNumber = Math.max(1, Math.min(pageNumber, total));
       specImageEl.src = specPageImages[specPageNumber - 1];
@@ -1332,13 +1348,14 @@
     }
 
     function preloadSpecImages() {
-      specPageImages.forEach((src) => {
+      Object.values(specPageImageSets).flat().forEach((src) => {
         const img = new Image();
         img.src = src;
       });
     }
 
-    function openSpecModal(pageNumber = 1) {
+    function openSpecModal(pageNumber = 1, specSet = activeSpecSet) {
+      activeSpecSet = specSet;
       specModalEl.classList.add('open');
       specModalEl.setAttribute('aria-hidden', 'false');
       renderSpecPage(pageNumber);
@@ -1360,9 +1377,10 @@
     }
 
     function bindSpecModal() {
-      if (!specSheetButtonEl) return;
-      specSheetButtonEl.addEventListener('click', () => {
-        openSpecModal(1);
+      specSheetButtonEls.forEach((buttonEl) => {
+        buttonEl.addEventListener('click', () => {
+          openSpecModal(1, buttonEl.dataset.specSet || 'diamond');
+        });
       });
 
       specModalCloseEl.addEventListener('click', closeSpecModal);
@@ -1521,7 +1539,7 @@
             await warmAsset(`assets/models/${model.thumbnail}`);
           }
         }
-        for (const specImage of specPageImages) {
+        for (const specImage of Object.values(specPageImageSets).flat()) {
           await warmAsset(specImage);
         }
       };
@@ -1719,7 +1737,7 @@
       if (event.key === 'ArrowLeft' && specPageNumber > 1) {
         renderSpecPage(specPageNumber - 1);
       }
-      if (event.key === 'ArrowRight' && specPageNumber < specPageImages.length) {
+      if (event.key === 'ArrowRight' && specPageNumber < getActiveSpecImages().length) {
         renderSpecPage(specPageNumber + 1);
       }
     });
