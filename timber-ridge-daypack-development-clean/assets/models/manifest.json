@@ -1,4 +1,10 @@
 {
   "title": "Timber Ridge top-of-funnel volumetric models",
-  "models": []
+  "models": [
+    {
+      "label": "Bag 0",
+      "file": "bag-0.step",
+      "caption": "Viewer test model"
+    }
+  ]
 }
