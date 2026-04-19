@@ -461,16 +461,25 @@
     }
 
     .slideshow-dot {
+      appearance: none;
+      border: none;
+      padding: 0;
       width: 0.52rem;
       height: 0.52rem;
       border-radius: 999px;
       background: rgba(31, 23, 19, 0.2);
+      cursor: pointer;
       transition: transform 0.2s ease, background 0.2s ease;
     }
 
     .slideshow-dot.active {
       background: var(--accent);
       transform: scale(1.15);
+    }
+
+    .slideshow-dot:focus-visible {
+      outline: 2px solid rgba(31, 23, 19, 0.45);
+      outline-offset: 3px;
     }
 
     .spec-sheet-button {
@@ -589,12 +598,61 @@
       display: flex;
     }
 
+    .image-lightbox-panel {
+      position: relative;
+      width: 98vw;
+      max-height: 96vh;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .image-lightbox-stage {
+      display: grid;
+      gap: 0.75rem;
+      justify-items: center;
+    }
+
     .image-lightbox img {
       max-width: min(92vw, 1600px);
       max-height: 90vh;
       object-fit: contain;
       box-shadow: 0 20px 60px rgba(0,0,0,0.35);
       background: #fff;
+    }
+
+    .image-lightbox-meta {
+      color: rgba(255,255,255,0.88);
+      font-size: var(--small);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .lightbox-arrow {
+      width: 52px;
+      height: 52px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.92);
+      color: #111;
+      font-size: 1.7rem;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    .lightbox-arrow:hover,
+    .lightbox-arrow:focus-visible {
+      transform: scale(1.03);
+      outline: none;
+    }
+
+    .lightbox-arrow:disabled {
+      opacity: 0.38;
+      cursor: default;
+      transform: none;
     }
 
     .lightbox-close {
@@ -1084,10 +1142,10 @@
             <div class="hero-slide"><img src="assets/faceted-pillow-hero-2.jpg" alt="Diamond hero render back view"></div>
             <div class="hero-slide"><img src="assets/faceted-pillow-hero-3.jpg" alt="Diamond hero render open access view"></div>
           </div>
-          <div class="slideshow-dots" id="shape1-hero-dots" aria-hidden="true">
-            <span class="slideshow-dot active"></span>
-            <span class="slideshow-dot"></span>
-            <span class="slideshow-dot"></span>
+          <div class="slideshow-dots" id="shape1-hero-dots" aria-label="Diamond hero slideshow navigation">
+            <button class="slideshow-dot active" type="button" aria-label="Show diamond hero image 1"></button>
+            <button class="slideshow-dot" type="button" aria-label="Show diamond hero image 2"></button>
+            <button class="slideshow-dot" type="button" aria-label="Show diamond hero image 3"></button>
           </div>
           <button class="spec-sheet-button" data-spec-set="diamond" type="button">Full Spec Sheet</button>
         </div>
@@ -1130,10 +1188,10 @@
             <div class="hero-slide"><img src="assets/spiral-hero-2.jpg" alt="Spiral hero side view"></div>
             <div class="hero-slide"><img src="assets/spiral-hero-3.jpg" alt="Spiral hero open interior view"></div>
           </div>
-          <div class="slideshow-dots" id="spiral-hero-dots" aria-hidden="true">
-            <span class="slideshow-dot active"></span>
-            <span class="slideshow-dot"></span>
-            <span class="slideshow-dot"></span>
+          <div class="slideshow-dots" id="spiral-hero-dots" aria-label="Spiral hero slideshow navigation">
+            <button class="slideshow-dot active" type="button" aria-label="Show spiral hero image 1"></button>
+            <button class="slideshow-dot" type="button" aria-label="Show spiral hero image 2"></button>
+            <button class="slideshow-dot" type="button" aria-label="Show spiral hero image 3"></button>
           </div>
           <button class="spec-sheet-button" data-spec-set="spiral" type="button">Full Spec Sheet</button>
         </div>
@@ -1163,7 +1221,14 @@
 
   <div class="image-lightbox" id="image-lightbox" aria-hidden="true">
     <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close image">×</button>
-    <img id="lightbox-image" alt="Expanded image view">
+    <div class="image-lightbox-panel">
+      <button class="lightbox-arrow" id="lightbox-prev" type="button" aria-label="Previous image">‹</button>
+      <div class="image-lightbox-stage">
+        <img id="lightbox-image" alt="Expanded image view">
+        <div class="image-lightbox-meta" id="lightbox-page-indicator"></div>
+      </div>
+      <button class="lightbox-arrow" id="lightbox-next" type="button" aria-label="Next image">›</button>
+    </div>
   </div>
 
   <div class="spec-modal" id="spec-modal" aria-hidden="true">
@@ -1269,6 +1334,9 @@
     const lightboxEl = document.getElementById('image-lightbox');
     const lightboxImageEl = document.getElementById('lightbox-image');
     const lightboxCloseEl = document.getElementById('lightbox-close');
+    const lightboxPrevEl = document.getElementById('lightbox-prev');
+    const lightboxNextEl = document.getElementById('lightbox-next');
+    const lightboxPageIndicatorEl = document.getElementById('lightbox-page-indicator');
     const specSheetButtonEls = Array.from(document.querySelectorAll('[data-spec-set]'));
     const specModalEl = document.getElementById('spec-modal');
     const specModalCloseEl = document.getElementById('spec-modal-close');
@@ -1318,6 +1386,8 @@
     let manifest = { models: [] };
     let occtReady = null;
     let modelLoadToken = 0;
+    let lightboxItems = [];
+    let lightboxIndex = 0;
     let specPageNumber = 1;
     let activeSpecSet = 'diamond';
     const specPageImageSets = {
@@ -1369,9 +1439,31 @@
       currentGroup = null;
     }
 
-    function openLightbox(src, alt = '') {
-      lightboxImageEl.src = src;
-      lightboxImageEl.alt = alt;
+    function renderLightboxItem(index) {
+      const total = lightboxItems.length;
+      if (!total) return;
+      lightboxIndex = Math.max(0, Math.min(index, total - 1));
+      const activeItem = lightboxItems[lightboxIndex] || {};
+      lightboxImageEl.src = activeItem.src || '';
+      lightboxImageEl.alt = activeItem.alt || 'Expanded image';
+      const grouped = total > 1;
+      lightboxPrevEl.hidden = !grouped;
+      lightboxNextEl.hidden = !grouped;
+      lightboxPageIndicatorEl.hidden = !grouped;
+      lightboxPageIndicatorEl.textContent = grouped ? `Image ${lightboxIndex + 1} of ${total}` : '';
+      lightboxPrevEl.disabled = lightboxIndex <= 0;
+      lightboxNextEl.disabled = lightboxIndex >= total - 1;
+    }
+
+    function openLightbox(itemsOrSrc, altOrIndex = '', maybeIndex = 0) {
+      if (Array.isArray(itemsOrSrc)) {
+        lightboxItems = itemsOrSrc;
+        lightboxIndex = Number(altOrIndex) || 0;
+      } else {
+        lightboxItems = [{ src: itemsOrSrc, alt: altOrIndex || 'Expanded image' }];
+        lightboxIndex = maybeIndex;
+      }
+      renderLightboxItem(lightboxIndex);
       lightboxEl.classList.add('open');
       lightboxEl.setAttribute('aria-hidden', 'false');
     }
@@ -1380,6 +1472,14 @@
       lightboxEl.classList.remove('open');
       lightboxEl.setAttribute('aria-hidden', 'true');
       lightboxImageEl.src = '';
+      lightboxItems = [];
+      lightboxIndex = 0;
+      lightboxPageIndicatorEl.textContent = '';
+    }
+
+    function stepLightbox(direction) {
+      if (!lightboxItems.length) return;
+      renderLightboxItem(lightboxIndex + direction);
     }
 
     function getActiveSpecImages() {
@@ -1422,7 +1522,19 @@
         if (img.dataset.lightboxBound === 'true') return;
         img.dataset.lightboxBound = 'true';
         img.classList.add('lightboxable-image');
-        img.addEventListener('click', () => openLightbox(img.currentSrc || img.src, img.alt || 'Expanded image'));
+        img.addEventListener('click', () => {
+          const slideshowEl = img.closest('.hero-slideshow');
+          if (slideshowEl) {
+            const slideshowImages = [...slideshowEl.querySelectorAll('img')].map((slideImg) => ({
+              src: slideImg.currentSrc || slideImg.src,
+              alt: slideImg.alt || 'Expanded image'
+            }));
+            const slideshowIndex = [...slideshowEl.querySelectorAll('img')].indexOf(img);
+            openLightbox(slideshowImages, slideshowIndex);
+            return;
+          }
+          openLightbox(img.currentSrc || img.src, img.alt || 'Expanded image');
+        });
       });
 
       document.querySelectorAll('[data-lightbox-src]').forEach((el) => {
@@ -1466,9 +1578,18 @@
         });
         dots.forEach((dot, dotIndex) => {
           dot.classList.toggle('active', dotIndex === index);
+          dot.setAttribute('aria-pressed', String(dotIndex === index));
         });
         activeIndex = index;
       };
+
+      dots.forEach((dot, dotIndex) => {
+        dot.addEventListener('click', () => {
+          showSlide(dotIndex);
+        });
+      });
+
+      showSlide(activeIndex);
 
       window.setInterval(() => {
         showSlide((activeIndex + 1) % slides.length);
@@ -1781,6 +1902,8 @@
     });
 
     lightboxCloseEl.addEventListener('click', closeLightbox);
+    lightboxPrevEl.addEventListener('click', () => stepLightbox(-1));
+    lightboxNextEl.addEventListener('click', () => stepLightbox(1));
     lightboxEl.addEventListener('click', (event) => {
       if (event.target === lightboxEl) closeLightbox();
     });
@@ -1788,6 +1911,14 @@
       if (event.key === 'Escape') {
         if (lightboxEl.classList.contains('open')) closeLightbox();
         if (specModalEl.classList.contains('open')) closeSpecModal();
+      }
+      if (lightboxEl.classList.contains('open')) {
+        if (event.key === 'ArrowLeft' && lightboxIndex > 0) {
+          renderLightboxItem(lightboxIndex - 1);
+        }
+        if (event.key === 'ArrowRight' && lightboxIndex < lightboxItems.length - 1) {
+          renderLightboxItem(lightboxIndex + 1);
+        }
       }
       if (!specModalEl.classList.contains('open')) return;
       if (event.key === 'ArrowLeft' && specPageNumber > 1) {
