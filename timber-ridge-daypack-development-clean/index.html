@@ -508,6 +508,34 @@
       outline: none;
     }
 
+    .language-toggle {
+      position: fixed;
+      left: 1rem;
+      bottom: 1rem;
+      z-index: 130;
+      min-width: 68px;
+      min-height: 40px;
+      padding: 0.55rem 0.85rem;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.94);
+      color: #111;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.18);
+      backdrop-filter: blur(8px);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .language-toggle:hover,
+    .language-toggle:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.22);
+      outline: none;
+    }
+
     .lightboxable-image {
       cursor: zoom-in;
     }
@@ -1010,20 +1038,21 @@
 </head>
 <body>
   <nav class="nav-dots" aria-label="Slide navigation"></nav>
+  <button class="language-toggle" id="language-toggle" type="button" aria-label="Switch deck to Chinese" title="Switch deck to Chinese">中文</button>
 
   <section class="slide">
     <div class="slide-content" style="align-items: center; justify-content: center;">
       <div class="stack" style="width: min(980px, 100%); gap: 1.2rem;">
-        <div class="eyebrow">Timber Ridge 26L Daypack Development</div>
-        <h1 style="max-width: 11ch;">Timber Ridge 26L Daypack Development</h1>
+        <div class="eyebrow" data-i18n="sheet1Eyebrow">Timber Ridge 26L Daypack Development</div>
+        <h1 style="max-width: 11ch;" data-i18n="sheet1Title">Timber Ridge 26L Daypack Development</h1>
         <div class="grid-2" style="height: auto; align-items: start;">
           <div class="feature-card">
-            <h3>Mandate</h3>
-            <p>Design an iconic, highly structured 26L silhouette anchored by a single signature element, ensuring immediate Timber Ridge brand recognition from 20 feet away.</p>
+            <h3 data-i18n="mandateHeader">Mandate</h3>
+            <p data-i18n="mandateBody">Design an iconic, highly structured 26L silhouette anchored by a single signature element, ensuring immediate Timber Ridge brand recognition from 20 feet away.</p>
           </div>
           <div class="feature-card">
-            <h3>Position</h3>
-            <p>Capture the $79 to $100 "designed middle" market segment. Deliver a premium, considered aesthetic that bridges the gap between commodity bags and premium outdoor brands.</p>
+            <h3 data-i18n="positionHeader">Position</h3>
+            <p data-i18n="positionBody">Capture the $79 to $100 "designed middle" market segment. Deliver a premium, considered aesthetic that bridges the gap between commodity bags and premium outdoor brands.</p>
           </div>
         </div>
       </div>
@@ -1039,8 +1068,8 @@
             <div class="viewer-shell">
               <div class="viewer-canvas" id="step-viewer-canvas">
                 <div class="viewer-overlay-copy">
-                  <div class="eyebrow">Step 1</div>
-                  <h2>The initial phase utilized 3D modeling to generate a variety of unique volumetric shapes, evaluating them for recognizability, tension, proportion, and structural clarity.</h2>
+                  <div class="eyebrow" data-i18n="step1Eyebrow">Step 1</div>
+                  <h2 data-i18n="step1Header">The initial phase utilized 3D modeling to generate a variety of unique volumetric shapes, evaluating them for recognizability, tension, proportion, and structural clarity.</h2>
                 </div>
                 <div class="viewer-state" id="step-viewer-state">
                   <div class="viewer-state-card">
@@ -1067,22 +1096,22 @@
   <section class="slide">
     <div class="slide-content">
       <div class="stack" style="margin-bottom: var(--gap-lg);">
-        <div class="eyebrow">Step 2</div>
-        <h2>All modeled shapes were 3D printed at 1/5 scale for physical evaluation.</h2>
-        <p class="muted">The scale models underwent a week of internal tactile and visual review. Based on consensus regarding structural viability and immediate visual appeal, these three shapes advanced.</p>
+        <div class="eyebrow" data-i18n="step2Eyebrow">Step 2</div>
+        <h2 data-i18n="step2Header">All modeled shapes were 3D printed at 1/5 scale for physical evaluation.</h2>
+        <p class="muted" data-i18n="step2Body">The scale models underwent a week of internal tactile and visual review. Based on consensus regarding structural viability and immediate visual appeal, these three shapes advanced.</p>
       </div>
       <div class="step2-grid">
         <div class="step2-item">
           <div class="step2-media rounded-media-bg" style="background-image: url('assets/shape-1-3d-print.jpg'); --rounded-aspect: 0.7142857143;" data-lightbox-src="assets/shape-1-3d-print.jpg" data-lightbox-alt="Diamond 3D print" aria-label="Diamond 3D print" role="img"></div>
-          <h3>Diamond</h3>
+          <h3 data-i18n="labelDiamond">Diamond</h3>
         </div>
         <div class="step2-item">
           <div class="step2-media rounded-media-bg" style="background-image: url('assets/shape-2-3d-print.jpg'); --rounded-aspect: 0.7142499374;" data-lightbox-src="assets/shape-2-3d-print.jpg" data-lightbox-alt="Teardrop 3D print" aria-label="Teardrop 3D print" role="img"></div>
-          <h3>Teardrop</h3>
+          <h3 data-i18n="labelTeardrop">Teardrop</h3>
         </div>
         <div class="step2-item">
           <div class="step2-media rounded-media-bg" style="background-image: url('assets/shape-3-3d-print.jpg'); --rounded-aspect: 0.7141833811;" data-lightbox-src="assets/shape-3-3d-print.jpg" data-lightbox-alt="Spiral 3D print" aria-label="Spiral 3D print" role="img"></div>
-          <h3>Spiral</h3>
+          <h3 data-i18n="labelSpiral">Spiral</h3>
         </div>
       </div>
     </div>
@@ -1092,22 +1121,22 @@
   <section class="slide">
     <div class="slide-content">
       <div class="stack" style="margin-bottom: var(--gap-lg);">
-        <div class="eyebrow">Diamond Progression</div>
-        <h2>The selected 1/5 scale print was translated into functional bag concept sketches.</h2>
-        <p class="muted">After finalizing the geometric transition and feature integration in the sketching phase, the concept moved directly into production-ready specifications.</p>
+        <div class="eyebrow" data-i18n="diamondProgEyebrow">Diamond Progression</div>
+        <h2 data-i18n="diamondProgHeader">The selected 1/5 scale print was translated into functional bag concept sketches.</h2>
+        <p class="muted" data-i18n="diamondProgBody">After finalizing the geometric transition and feature integration in the sketching phase, the concept moved directly into production-ready specifications.</p>
       </div>
       <div class="step2-grid">
         <div class="step2-item">
           <div class="step2-media rounded-media-bg" style="background-image: url('assets/faceted-pillow-3d-print.jpg'); --rounded-aspect: 0.7142857143;" data-lightbox-src="assets/faceted-pillow-3d-print.jpg" data-lightbox-alt="Diamond 3D print" aria-label="Diamond 3D print" role="img"></div>
-          <h3>3D Print</h3>
+          <h3 data-i18n="label3dPrint">3D Print</h3>
         </div>
         <div class="step2-item">
           <div class="step2-media rounded-media-bg" style="background-image: url('assets/faceted-pillow-concept-sketch-1.jpg'); --rounded-aspect: 0.8;" data-lightbox-src="assets/faceted-pillow-concept-sketch-1.jpg" data-lightbox-alt="Diamond concept sketch 1" aria-label="Diamond concept sketch 1" role="img"></div>
-          <h3>Concept Sketch 1</h3>
+          <h3 data-i18n="labelConcept1">Concept Sketch 1</h3>
         </div>
         <div class="step2-item">
           <div class="step2-media rounded-media-bg" style="background-image: url('assets/faceted-pillow-concept-sketch-2.jpg'); --rounded-aspect: 0.8;" data-lightbox-src="assets/faceted-pillow-concept-sketch-2.jpg" data-lightbox-alt="Diamond concept sketch 2" aria-label="Diamond concept sketch 2" role="img"></div>
-          <h3>Concept Sketch 2</h3>
+          <h3 data-i18n="labelConcept2">Concept Sketch 2</h3>
         </div>
       </div>
     </div>
@@ -1118,21 +1147,21 @@
     <div class="slide-content">
       <div class="shape-final-layout">
         <div class="stack">
-          <div class="eyebrow">Diamond Final Result</div>
-          <h2>The Diamond final design yields a highly structured silhouette with strong graphic potential.</h2>
-          <p class="muted">Diamond and triangular panels, distinctive M-profile webbing, and a unique slanted zipper establish a strong brand identity through functional, rather than arbitrary, design elements.</p>
+          <div class="eyebrow" data-i18n="diamondFinalEyebrow">Diamond Final Result</div>
+          <h2 data-i18n="diamondFinalHeader">The Diamond final design yields a highly structured silhouette with strong graphic potential.</h2>
+          <p class="muted" data-i18n="diamondFinalBody">Diamond and triangular panels, distinctive M-profile webbing, and a unique slanted zipper establish a strong brand identity through functional, rather than arbitrary, design elements.</p>
           <div class="feature-grid">
             <div class="feature-card">
-              <h3>Signature Read</h3>
-              <p>Prominent triangular panels dictate the immediate structured silhouette.</p>
+              <h3 data-i18n="signatureReadHeader">Signature Read</h3>
+              <p data-i18n="signatureReadBody">Prominent triangular panels dictate the immediate structured silhouette.</p>
             </div>
             <div class="feature-card">
-              <h3>Functional Geometry</h3>
-              <p>The lower M-shape webbing projects its inner V upward to create the slanted zipper access point.</p>
+              <h3 data-i18n="functionalGeometryHeader">Functional Geometry</h3>
+              <p data-i18n="functionalGeometryBody">The lower M-shape webbing projects its inner V upward to create the slanted zipper access point.</p>
             </div>
             <div class="feature-card">
-              <h3>Utility Integration</h3>
-              <p>Laptop storage and quick-access organization are embedded into the existing form to maintain architectural integrity.</p>
+              <h3 data-i18n="utilityIntegrationHeader">Utility Integration</h3>
+              <p data-i18n="utilityIntegrationBody">Laptop storage and quick-access organization are embedded into the existing form to maintain architectural integrity.</p>
             </div>
           </div>
         </div>
@@ -1147,7 +1176,7 @@
             <button class="slideshow-dot" type="button" aria-label="Show diamond hero image 2"></button>
             <button class="slideshow-dot" type="button" aria-label="Show diamond hero image 3"></button>
           </div>
-          <button class="spec-sheet-button" data-spec-set="diamond" type="button">Full Spec Sheet</button>
+          <button class="spec-sheet-button" data-spec-set="diamond" data-i18n="fullSpecSheet" type="button">Full Spec Sheet</button>
         </div>
       </div>
     </div>
@@ -1157,22 +1186,22 @@
   <section class="slide">
     <div class="slide-content">
       <div class="stack" style="margin-bottom: var(--gap-lg);">
-        <div class="eyebrow">Spiral Progression</div>
-        <h2>Ergonomic evolution transitioning from irregular volume into controlled panel motion.</h2>
-        <p class="muted">Initial sketches established that the curved pentagonal logic functions as the foundation of a highly coherent panel system, providing ordered structure rather than randomness.</p>
+        <div class="eyebrow" data-i18n="spiralProgEyebrow">Spiral Progression</div>
+        <h2 data-i18n="spiralProgHeader">Ergonomic evolution transitioning from irregular volume into controlled panel motion.</h2>
+        <p class="muted" data-i18n="spiralProgBody">Initial sketches established that the curved pentagonal logic functions as the foundation of a highly coherent panel system, providing ordered structure rather than randomness.</p>
       </div>
       <div class="step2-grid">
         <div class="step2-item">
           <div class="step2-media step2-media-bg" style="--step2-image: url('assets/spiral-3d-print.jpg'); --step2-aspect: 0.7141833811;" data-lightbox-src="assets/spiral-3d-print.jpg" data-lightbox-alt="Spiral 3D print"></div>
-          <h3>3D Print</h3>
+          <h3 data-i18n="label3dPrint">3D Print</h3>
         </div>
         <div class="step2-item">
           <div class="step2-media step2-media-bg" style="--step2-image: url('assets/spiral-concept-sketch-1.jpg'); --step2-aspect: 0.7998500750;" data-lightbox-src="assets/spiral-concept-sketch-1.jpg" data-lightbox-alt="Spiral concept sketch 1"></div>
-          <h3>Concept Sketch 1</h3>
+          <h3 data-i18n="labelConcept1">Concept Sketch 1</h3>
         </div>
         <div class="step2-item">
           <div class="step2-media step2-media-bg" style="--step2-image: url('assets/spiral-concept-sketch-2.jpg'); --step2-aspect: 0.8004032258;" data-lightbox-src="assets/spiral-concept-sketch-2.jpg" data-lightbox-alt="Spiral concept sketch 2"></div>
-          <h3>Concept Sketch 2</h3>
+          <h3 data-i18n="labelConcept2">Concept Sketch 2</h3>
         </div>
       </div>
     </div>
@@ -1193,24 +1222,24 @@
             <button class="slideshow-dot" type="button" aria-label="Show spiral hero image 2"></button>
             <button class="slideshow-dot" type="button" aria-label="Show spiral hero image 3"></button>
           </div>
-          <button class="spec-sheet-button" data-spec-set="spiral" type="button">Full Spec Sheet</button>
+          <button class="spec-sheet-button" data-spec-set="spiral" data-i18n="fullSpecSheet" type="button">Full Spec Sheet</button>
         </div>
         <div class="stack">
-          <div class="eyebrow">Spiral Final Result</div>
-          <h2>Hybrid sling and pack functionality, driven by a spiral panel architecture.</h2>
-          <p class="muted">The panel flow bridges the gap between commuter access, ergonomic body wrap, and an athletic identity, strictly avoiding a tactical appearance.</p>
+          <div class="eyebrow" data-i18n="spiralFinalEyebrow">Spiral Final Result</div>
+          <h2 data-i18n="spiralFinalHeader">Hybrid sling and pack functionality, driven by a spiral panel architecture.</h2>
+          <p class="muted" data-i18n="spiralFinalBody">The panel flow bridges the gap between commuter access, ergonomic body wrap, and an athletic identity, strictly avoiding a tactical appearance.</p>
           <div class="feature-grid">
             <div class="feature-card">
-              <h3>Signature System</h3>
-              <p>The spiral panels create a highly recognizable motion language visible from multiple angles.</p>
+              <h3 data-i18n="signatureSystemHeader">Signature System</h3>
+              <p data-i18n="signatureSystemBody">The spiral panels create a highly recognizable motion language visible from multiple angles.</p>
             </div>
             <div class="feature-card">
-              <h3>Wearability Bridge</h3>
-              <p>An asymmetrical hip belt balances the immediate access of a sling with the load stability of a traditional backpack.</p>
+              <h3 data-i18n="wearabilityBridgeHeader">Wearability Bridge</h3>
+              <p data-i18n="wearabilityBridgeBody">An asymmetrical hip belt balances the immediate access of a sling with the load stability of a traditional backpack.</p>
             </div>
             <div class="feature-card">
-              <h3>Access Logic</h3>
-              <p>The spiral architecture ensures that front-oriented access is an intentional, integrated function rather than an improvised feature.</p>
+              <h3 data-i18n="accessLogicHeader">Access Logic</h3>
+              <p data-i18n="accessLogicBody">The spiral architecture ensures that front-oriented access is an intentional, integrated function rather than an improvised feature.</p>
             </div>
           </div>
         </div>
@@ -1259,6 +1288,7 @@
 
     const slides = Array.from(document.querySelectorAll('.slide'));
     const nav = document.querySelector('.nav-dots');
+    const languageToggleEl = document.getElementById('language-toggle');
     let activeIndex = 0;
 
     slides.forEach((slide, index) => {
@@ -1349,6 +1379,97 @@
     const spiralSlideshowEl = document.getElementById('spiral-hero-slideshow');
     const spiralDotsEl = document.getElementById('spiral-hero-dots');
 
+    const translations = {
+      en: {
+        sheet1Eyebrow: 'Timber Ridge 26L Daypack Development',
+        sheet1Title: 'Timber Ridge 26L Daypack Development',
+        mandateHeader: 'Mandate',
+        mandateBody: 'Design an iconic, highly structured 26L silhouette anchored by a single signature element, ensuring immediate Timber Ridge brand recognition from 20 feet away.',
+        positionHeader: 'Position',
+        positionBody: 'Capture the $79 to $100 "designed middle" market segment. Deliver a premium, considered aesthetic that bridges the gap between commodity bags and premium outdoor brands.',
+        step1Eyebrow: 'Step 1',
+        step1Header: 'The initial phase utilized 3D modeling to generate a variety of unique volumetric shapes, evaluating them for recognizability, tension, proportion, and structural clarity.',
+        step2Eyebrow: 'Step 2',
+        step2Header: 'All modeled shapes were 3D printed at 1/5 scale for physical evaluation.',
+        step2Body: 'The scale models underwent a week of internal tactile and visual review. Based on consensus regarding structural viability and immediate visual appeal, these three shapes advanced.',
+        labelDiamond: 'Diamond',
+        labelTeardrop: 'Teardrop',
+        labelSpiral: 'Spiral',
+        diamondProgEyebrow: 'Diamond Progression',
+        diamondProgHeader: 'The selected 1/5 scale print was translated into functional bag concept sketches.',
+        diamondProgBody: 'After finalizing the geometric transition and feature integration in the sketching phase, the concept moved directly into production-ready specifications.',
+        label3dPrint: '3D Print',
+        labelConcept1: 'Concept Sketch 1',
+        labelConcept2: 'Concept Sketch 2',
+        diamondFinalEyebrow: 'Diamond Final Result',
+        diamondFinalHeader: 'The Diamond final design yields a highly structured silhouette with strong graphic potential.',
+        diamondFinalBody: 'Diamond and triangular panels, distinctive M-profile webbing, and a unique slanted zipper establish a strong brand identity through functional, rather than arbitrary, design elements.',
+        signatureReadHeader: 'Signature Read',
+        signatureReadBody: 'Prominent triangular panels dictate the immediate structured silhouette.',
+        functionalGeometryHeader: 'Functional Geometry',
+        functionalGeometryBody: 'The lower M-shape webbing projects its inner V upward to create the slanted zipper access point.',
+        utilityIntegrationHeader: 'Utility Integration',
+        utilityIntegrationBody: 'Laptop storage and quick-access organization are embedded into the existing form to maintain architectural integrity.',
+        fullSpecSheet: 'Full Spec Sheet',
+        spiralProgEyebrow: 'Spiral Progression',
+        spiralProgHeader: 'Ergonomic evolution transitioning from irregular volume into controlled panel motion.',
+        spiralProgBody: 'Initial sketches established that the curved pentagonal logic functions as the foundation of a highly coherent panel system, providing ordered structure rather than randomness.',
+        spiralFinalEyebrow: 'Spiral Final Result',
+        spiralFinalHeader: 'Hybrid sling and pack functionality, driven by a spiral panel architecture.',
+        spiralFinalBody: 'The panel flow bridges the gap between commuter access, ergonomic body wrap, and an athletic identity, strictly avoiding a tactical appearance.',
+        signatureSystemHeader: 'Signature System',
+        signatureSystemBody: 'The spiral panels create a highly recognizable motion language visible from multiple angles.',
+        wearabilityBridgeHeader: 'Wearability Bridge',
+        wearabilityBridgeBody: 'An asymmetrical hip belt balances the immediate access of a sling with the load stability of a traditional backpack.',
+        accessLogicHeader: 'Access Logic',
+        accessLogicBody: 'The spiral architecture ensures that front-oriented access is an intentional, integrated function rather than an improvised feature.'
+      },
+      zh: {
+        sheet1Eyebrow: 'Timber Ridge 26L 日用背包开发',
+        sheet1Title: 'Timber Ridge 26L 日用背包开发',
+        mandateHeader: '任务',
+        mandateBody: '打造一个极具标志性且高度结构化的 26L 轮廓，以单一签名式设计元素为核心，确保在 20 英尺外也能立刻识别为 Timber Ridge。',
+        positionHeader: '定位',
+        positionBody: '锁定 $79 至 $100 的“设计中段”市场，交付一种高级而经过考量的美学表达，填补大众化包款与高端户外品牌之间的空白。',
+        step1Eyebrow: '步骤 1',
+        step1Header: '初始阶段通过 3D 建模生成多种独特的体量形态，并从辨识度、张力、比例和结构清晰度几个维度进行评估。',
+        step2Eyebrow: '步骤 2',
+        step2Header: '所有建模形态均以 1/5 比例进行 3D 打印，以便进行实体评估。',
+        step2Body: '这些比例模型经历了一周的内部触感与视觉评审。基于对结构可行性与第一眼视觉吸引力的共识，这三个方向进入下一阶段。',
+        labelDiamond: '菱形',
+        labelTeardrop: '水滴',
+        labelSpiral: '螺旋',
+        diamondProgEyebrow: '菱形演进',
+        diamondProgHeader: '选定的 1/5 比例打印件被转译成功能性包款概念草图。',
+        diamondProgBody: '在草图阶段完成几何过渡与功能整合后，该概念便直接进入可用于生产的规格开发。',
+        label3dPrint: '3D 打印',
+        labelConcept1: '概念草图 1',
+        labelConcept2: '概念草图 2',
+        diamondFinalEyebrow: '菱形最终结果',
+        diamondFinalHeader: '菱形最终设计形成了一个高度结构化、具备强烈图形潜力的轮廓。',
+        diamondFinalBody: '菱形与三角面片、鲜明的 M 形织带，以及独特的斜向拉链，共同通过功能性而非任意装饰性的设计元素建立起强烈的品牌识别。',
+        signatureReadHeader: '识别特征',
+        signatureReadBody: '显著的三角面片定义了第一眼即可识别的结构化轮廓。',
+        functionalGeometryHeader: '功能几何',
+        functionalGeometryBody: '下部 M 形织带将内部 V 形视觉向上延展，形成斜向拉链开口。',
+        utilityIntegrationHeader: '功能整合',
+        utilityIntegrationBody: '笔电收纳与快速取用组织被嵌入现有形体之中，以保持整体建筑式完整性。',
+        fullSpecSheet: '完整规格书',
+        spiralProgEyebrow: '螺旋演进',
+        spiralProgHeader: '从不规则体量过渡到有控制的面片运动的人体工学演化。',
+        spiralProgBody: '初步草图证明，弯曲的五边形逻辑构成了一个高度连贯的面片系统基础，带来有序结构而非随机感。',
+        spiralFinalEyebrow: '螺旋最终结果',
+        spiralFinalHeader: '由螺旋面片结构驱动的混合式单肩与双肩功能。',
+        spiralFinalBody: '面片流向在通勤取用、贴身包裹的人体工学，以及运动感身份之间建立平衡，同时严格避免战术风格外观。',
+        signatureSystemHeader: '标志系统',
+        signatureSystemBody: '螺旋面片创造出从多个角度都高度可识别的动态语言。',
+        wearabilityBridgeHeader: '佩戴桥接',
+        wearabilityBridgeBody: '非对称腰翼在单肩包的即取即用感与传统双肩包的负重稳定性之间取得平衡。',
+        accessLogicHeader: '取用逻辑',
+        accessLogicBody: '螺旋结构确保前向取用是一项有意且完整整合的功能，而非临时拼凑的特性。'
+      }
+    };
+
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -1388,23 +1509,71 @@
     let modelLoadToken = 0;
     let lightboxItems = [];
     let lightboxIndex = 0;
+    let currentLanguage = window.localStorage.getItem('timber-ridge-deck-language') === 'zh' ? 'zh' : 'en';
     let specPageNumber = 1;
     let activeSpecSet = 'diamond';
     const specPageImageSets = {
-      diamond: [
-        'assets/TimberRidgeDaypack_Spec_Viewer_p1.jpg',
-        'assets/TimberRidgeDaypack_Spec_Viewer_p2.jpg',
-        'assets/TimberRidgeDaypack_Spec_Viewer_p3.jpg'
-      ],
-      spiral: [
-        'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p1.jpg',
-        'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p2.jpg',
-        'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p3.jpg',
-        'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p4.jpg',
-        'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p5.jpg'
-      ]
+      en: {
+        diamond: [
+          'assets/TimberRidgeDaypack_Spec_Viewer_p1.jpg',
+          'assets/TimberRidgeDaypack_Spec_Viewer_p2.jpg',
+          'assets/TimberRidgeDaypack_Spec_Viewer_p3.jpg'
+        ],
+        spiral: [
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p1.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p2.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p3.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p4.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p5.jpg'
+        ]
+      },
+      zh: {
+        diamond: [
+          'assets/TimberRidgeDaypack_Spec_Viewer_p1_zh.jpg',
+          'assets/TimberRidgeDaypack_Spec_Viewer_p2_zh.jpg',
+          'assets/TimberRidgeDaypack_Spec_Viewer_p3_zh.jpg'
+        ],
+        spiral: [
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p1_zh.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p2_zh.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p3_zh.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p4_zh.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p5_zh.jpg'
+        ]
+      }
     };
     const ASSET_CACHE_NAME = 'timber-ridge-daypack-assets-v1';
+
+    function translate(key) {
+      return translations[currentLanguage][key] || translations.en[key] || '';
+    }
+
+    function formatLightboxIndicator(current, total) {
+      return currentLanguage === 'zh' ? `图片 ${current} / ${total}` : `Image ${current} of ${total}`;
+    }
+
+    function formatSpecIndicator(current, total) {
+      return currentLanguage === 'zh' ? `第 ${current} 页，共 ${total} 页` : `Page ${current} of ${total}`;
+    }
+
+    function applyLanguage(lang) {
+      currentLanguage = lang === 'zh' ? 'zh' : 'en';
+      window.localStorage.setItem('timber-ridge-deck-language', currentLanguage);
+      document.documentElement.lang = currentLanguage === 'zh' ? 'zh-CN' : 'en';
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.dataset.i18n;
+        el.textContent = translate(key);
+      });
+      if (languageToggleEl) {
+        const toggleLabel = currentLanguage === 'zh' ? 'EN' : '中文';
+        const toggleAria = currentLanguage === 'zh' ? '切换到英文' : 'Switch deck to Chinese';
+        languageToggleEl.textContent = toggleLabel;
+        languageToggleEl.setAttribute('aria-label', toggleAria);
+        languageToggleEl.setAttribute('title', toggleAria);
+      }
+      if (specModalEl.classList.contains('open')) renderSpecPage(specPageNumber);
+      if (lightboxEl.classList.contains('open')) renderLightboxItem(lightboxIndex);
+    }
 
     function resizeRenderer() {
       const width = Math.max(canvasHost.clientWidth, 10);
@@ -1450,7 +1619,7 @@
       lightboxPrevEl.hidden = !grouped;
       lightboxNextEl.hidden = !grouped;
       lightboxPageIndicatorEl.hidden = !grouped;
-      lightboxPageIndicatorEl.textContent = grouped ? `Image ${lightboxIndex + 1} of ${total}` : '';
+      lightboxPageIndicatorEl.textContent = grouped ? formatLightboxIndicator(lightboxIndex + 1, total) : '';
       lightboxPrevEl.disabled = lightboxIndex <= 0;
       lightboxNextEl.disabled = lightboxIndex >= total - 1;
     }
@@ -1483,7 +1652,7 @@
     }
 
     function getActiveSpecImages() {
-      return specPageImageSets[activeSpecSet] || specPageImageSets.diamond;
+      return specPageImageSets[currentLanguage]?.[activeSpecSet] || specPageImageSets.en[activeSpecSet] || specPageImageSets.en.diamond;
     }
 
     function renderSpecPage(pageNumber) {
@@ -1491,14 +1660,14 @@
       const total = specPageImages.length;
       specPageNumber = Math.max(1, Math.min(pageNumber, total));
       specImageEl.src = specPageImages[specPageNumber - 1];
-      specImageEl.alt = `Timber Ridge spec sheet page ${specPageNumber}`;
-      specPageIndicatorEl.textContent = `Page ${specPageNumber} of ${total}`;
+      specImageEl.alt = currentLanguage === 'zh' ? `Timber Ridge 规格页第 ${specPageNumber} 页` : `Timber Ridge spec sheet page ${specPageNumber}`;
+      specPageIndicatorEl.textContent = formatSpecIndicator(specPageNumber, total);
       specPrevEl.disabled = specPageNumber <= 1;
       specNextEl.disabled = specPageNumber >= total;
     }
 
     function preloadSpecImages() {
-      Object.values(specPageImageSets).flat().forEach((src) => {
+      Object.values(specPageImageSets).flatMap((group) => Object.values(group).flat()).forEach((src) => {
         const img = new Image();
         img.src = src;
       });
@@ -1901,6 +2070,10 @@
       await loadSelectedModel(Number(selectEl.value || 0));
     });
 
+    languageToggleEl.addEventListener('click', () => {
+      applyLanguage(currentLanguage === 'zh' ? 'en' : 'zh');
+    });
+
     lightboxCloseEl.addEventListener('click', closeLightbox);
     lightboxPrevEl.addEventListener('click', () => stepLightbox(-1));
     lightboxNextEl.addEventListener('click', () => stepLightbox(1));
@@ -1932,6 +2105,7 @@
     window.addEventListener('resize', () => {
       resizeRenderer();
     });
+    applyLanguage(currentLanguage);
     resizeRenderer();
     animate();
     await loadManifest();
