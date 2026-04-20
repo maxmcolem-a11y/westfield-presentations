@@ -408,6 +408,25 @@
       border-radius: 16px;
     }
 
+    .cover-logo {
+      position: absolute;
+      top: var(--pad);
+      right: var(--pad);
+      width: clamp(132px, 16vw, 220px);
+      display: flex;
+      justify-content: flex-end;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .cover-logo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 0;
+    }
+
     .shape-final-layout {
       display: grid;
       grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
@@ -1070,6 +1089,9 @@
   <button class="language-toggle" id="language-toggle" type="button" aria-label="Switch deck to Chinese" title="Switch deck to Chinese">中文</button>
 
   <section class="slide">
+    <div class="cover-logo" aria-hidden="true">
+      <img src="assets/timber-ridge-logo.jpg" alt="Timber Ridge logo">
+    </div>
     <div class="slide-content" style="align-items: center; justify-content: center;">
       <div class="stack" style="width: min(980px, 100%); gap: 1.2rem;">
         <div class="eyebrow" data-i18n="sheet1Eyebrow">Timber Ridge 26L Daypack Development</div>
