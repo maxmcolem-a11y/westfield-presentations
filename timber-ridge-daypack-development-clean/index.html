@@ -350,6 +350,7 @@
       cursor: zoom-in;
     }
 
+    .slide:nth-of-type(3) .step2-grid,
     .slide:nth-of-type(4) .step2-grid,
     .slide:nth-of-type(6) .step2-grid {
       display: flex;
@@ -358,19 +359,25 @@
       gap: clamp(1.6rem, 2vw, 2.6rem);
     }
 
+    .slide:nth-of-type(3) .step2-item,
     .slide:nth-of-type(4) .step2-item,
     .slide:nth-of-type(6) .step2-item {
       flex: 0 0 auto;
     }
 
-    .slide:nth-of-type(4) .step2-grid {
+    .slide:nth-of-type(3) .step2-grid,
+    .slide:nth-of-type(4) .step2-grid,
+    .slide:nth-of-type(6) .step2-grid {
       gap: clamp(0.8rem, 1.2vw, 1.25rem);
     }
 
-    .slide:nth-of-type(4) .step2-media-bg {
+    .slide:nth-of-type(3) .step2-media-bg,
+    .slide:nth-of-type(4) .step2-media-bg,
+    .slide:nth-of-type(6) .step2-media-bg {
       height: min(53vh, 520px);
     }
 
+    .slide:nth-of-type(3) .step2-media-bg,
     .slide:nth-of-type(4) .step2-media-bg,
     .slide:nth-of-type(6) .step2-media-bg {
       width: auto;
@@ -1113,15 +1120,15 @@
       </div>
       <div class="step2-grid">
         <div class="step2-item">
-          <div class="step2-media rounded-media-bg" style="background-image: url('assets/shape-1-3d-print.jpg'); --rounded-aspect: 0.7142857143;" data-lightbox-src="assets/shape-1-3d-print.jpg" data-lightbox-alt="Diamond 3D print" aria-label="Diamond 3D print" role="img"></div>
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/shape-1-3d-print.jpg'); --step2-aspect: 0.7142857143;" data-lightbox-src="assets/shape-1-3d-print.jpg" data-lightbox-alt="Diamond 3D print" aria-label="Diamond 3D print" role="img"></div>
           <h3 data-i18n="labelDiamond">Diamond</h3>
         </div>
         <div class="step2-item">
-          <div class="step2-media rounded-media-bg" style="background-image: url('assets/shape-2-3d-print.jpg'); --rounded-aspect: 0.7142499374;" data-lightbox-src="assets/shape-2-3d-print.jpg" data-lightbox-alt="Teardrop 3D print" aria-label="Teardrop 3D print" role="img"></div>
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/shape-2-3d-print.jpg'); --step2-aspect: 0.7142499374;" data-lightbox-src="assets/shape-2-3d-print.jpg" data-lightbox-alt="Teardrop 3D print" aria-label="Teardrop 3D print" role="img"></div>
           <h3 data-i18n="labelTeardrop">Teardrop</h3>
         </div>
         <div class="step2-item">
-          <div class="step2-media rounded-media-bg" style="background-image: url('assets/shape-3-3d-print.jpg'); --rounded-aspect: 0.7141833811;" data-lightbox-src="assets/shape-3-3d-print.jpg" data-lightbox-alt="Spiral 3D print" aria-label="Spiral 3D print" role="img"></div>
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/shape-3-3d-print.jpg'); --step2-aspect: 0.7141833811;" data-lightbox-src="assets/shape-3-3d-print.jpg" data-lightbox-alt="Spiral 3D print" aria-label="Spiral 3D print" role="img"></div>
           <h3 data-i18n="labelSpiral">Spiral</h3>
         </div>
       </div>
