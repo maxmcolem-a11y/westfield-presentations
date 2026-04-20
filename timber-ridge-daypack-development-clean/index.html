@@ -427,6 +427,52 @@
       border-radius: 0;
     }
 
+    .closing-slide-layout {
+      width: min(1100px, 100%);
+      margin: 0 auto;
+      display: grid;
+      gap: clamp(1rem, 2vw, 1.6rem);
+      align-content: center;
+    }
+
+    .closing-copy {
+      display: grid;
+      gap: 0.95rem;
+    }
+
+    .closing-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--gap);
+    }
+
+    .closing-meta .feature-card {
+      margin-top: 0;
+    }
+
+    .closing-logos {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: clamp(1rem, 3vw, 2rem);
+      margin-top: clamp(0.5rem, 1vw, 1rem);
+    }
+
+    .closing-logos img {
+      display: block;
+      height: auto;
+      object-fit: contain;
+      border-radius: 0;
+    }
+
+    .closing-logos img:first-child {
+      width: clamp(150px, 18vw, 250px);
+    }
+
+    .closing-logos img:last-child {
+      width: clamp(190px, 24vw, 320px);
+    }
+
     .shape-final-layout {
       display: grid;
       grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
@@ -1062,6 +1108,11 @@
       }
       .hero-visuals .frame:first-child { grid-column: auto; }
       .thumb-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .closing-meta { grid-template-columns: 1fr; }
+      .closing-logos {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
 
     @media (max-width: 720px) {
@@ -1299,6 +1350,38 @@
     <div class="slide-number">07</div>
   </section>
 
+  <section class="slide">
+    <div class="slide-content">
+      <div class="closing-slide-layout">
+        <div class="closing-copy">
+          <div class="eyebrow" data-i18n="closingEyebrow">Confidential</div>
+          <h2 data-i18n="closingHeader">Confidentiality and Ownership Notice</h2>
+          <div class="feature-card">
+            <p data-i18n="closingBody1">This document contains sensitive and proprietary information intended solely for Westfield Outdoors and authorized review partners. Unauthorized use, disclosure, distribution, or reproduction of any portion of this document is prohibited.</p>
+          </div>
+          <div class="feature-card">
+            <p data-i18n="closingBody2">This presentation, including all concepts, renderings, specifications, and development materials contained herein, is the property of Westfield Outdoors.</p>
+          </div>
+        </div>
+        <div class="closing-meta">
+          <div class="feature-card">
+            <h3 data-i18n="closingUpdatedLabel">Last Edited</h3>
+            <p data-i18n="closingUpdatedValue">April 20, 2026</p>
+          </div>
+          <div class="feature-card">
+            <h3 data-i18n="closingAuthorLabel">Author</h3>
+            <p data-i18n="closingAuthorValue">Max Moore, Director of Industrial Design</p>
+          </div>
+        </div>
+        <div class="closing-logos">
+          <img src="assets/timber-ridge-logo.jpg" alt="Timber Ridge logo">
+          <img src="assets/westfield-outdoors-logo.jpg" alt="Westfield Outdoors logo">
+        </div>
+      </div>
+    </div>
+    <div class="slide-number">08</div>
+  </section>
+
   <div class="image-lightbox" id="image-lightbox" aria-hidden="true">
     <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close image">×</button>
     <div class="image-lightbox-panel">
@@ -1473,7 +1556,15 @@
         wearabilityBridgeHeader: 'Wearability Bridge',
         wearabilityBridgeBody: 'An asymmetrical hip belt balances the immediate access of a sling with the load stability of a traditional backpack.',
         accessLogicHeader: 'Access Logic',
-        accessLogicBody: 'The spiral architecture ensures that front-oriented access is an intentional, integrated function rather than an improvised feature.'
+        accessLogicBody: 'The spiral architecture ensures that front-oriented access is an intentional, integrated function rather than an improvised feature.',
+        closingEyebrow: 'Confidential',
+        closingHeader: 'Confidentiality and Ownership Notice',
+        closingBody1: 'This document contains sensitive and proprietary information intended solely for Westfield Outdoors and authorized review partners. Unauthorized use, disclosure, distribution, or reproduction of any portion of this document is prohibited.',
+        closingBody2: 'This presentation, including all concepts, renderings, specifications, and development materials contained herein, is the property of Westfield Outdoors.',
+        closingUpdatedLabel: 'Last Edited',
+        closingUpdatedValue: 'April 20, 2026',
+        closingAuthorLabel: 'Author',
+        closingAuthorValue: 'Max Moore, Director of Industrial Design'
       },
       zh: {
         sheet1Eyebrow: 'Timber Ridge 26L 日用背包开发',
@@ -1517,7 +1608,15 @@
         wearabilityBridgeHeader: '佩戴桥接',
         wearabilityBridgeBody: '非对称腰翼在单肩包的即取即用感与传统双肩包的负重稳定性之间取得平衡。',
         accessLogicHeader: '取用逻辑',
-        accessLogicBody: '螺旋结构确保前向取用是一项有意且完整整合的功能，而非临时拼凑的特性。'
+        accessLogicBody: '螺旋结构确保前向取用是一项有意且完整整合的功能，而非临时拼凑的特性。',
+        closingEyebrow: '机密',
+        closingHeader: '保密与所有权声明',
+        closingBody1: '本文件包含敏感且专有的信息，仅供 Westfield Outdoors 及获授权的评审合作方使用。未经授权，严禁使用、披露、分发或复制本文件的任何部分。',
+        closingBody2: '本演示文稿以及其中包含的所有概念、效果图、规格和开发材料，均为 Westfield Outdoors 的财产。',
+        closingUpdatedLabel: '最后编辑',
+        closingUpdatedValue: '2026年4月20日',
+        closingAuthorLabel: '作者',
+        closingAuthorValue: 'Max Moore，工业设计总监'
       }
     };
 
