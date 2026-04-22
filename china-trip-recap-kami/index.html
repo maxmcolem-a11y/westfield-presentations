@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maxwell Moore China Trip Recap · April 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5f4ed;
+    --ivory: #faf9f5;
+    --near-black: #141413;
+    --dark-warm: #3d3d3a;
+    --olive: #5e5d59;
+    --stone: #87867f;
+    --brand: #1B365D;
+    --border: #e8e6dc;
+    --serif: "Newsreader", Georgia, serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--parchment);
+    color: var(--near-black);
+    font-family: var(--serif);
+    padding: 32px 18px;
+  }
+  .page {
+    max-width: 880px;
+    margin: 0 auto;
+    background: transparent;
+  }
+  .header {
+    border-left: 3px solid var(--brand);
+    padding-left: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: end;
+  }
+  .eyebrow {
+    font: 500 12px/1.2 var(--sans);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brand);
+    margin-bottom: 6px;
+  }
+  h1 {
+    font: 500 clamp(34px, 5vw, 52px)/1.05 var(--serif);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    font: 400 18px/1.45 var(--sans);
+    color: var(--olive);
+    max-width: 620px;
+  }
+  .meta {
+    font: 400 13px/1.5 var(--sans);
+    color: var(--stone);
+    text-align: right;
+    white-space: nowrap;
+  }
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    border-bottom: 1px dotted var(--border);
+    padding: 8px 0 12px;
+    margin-bottom: 20px;
+  }
+  .metric {
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+  }
+  .metric-value {
+    font: 500 34px/1 var(--serif);
+    color: var(--brand);
+  }
+  .metric-label {
+    font: 400 12px/1.3 var(--sans);
+    color: var(--olive);
+  }
+  .lead {
+    font: 400 20px/1.5 var(--serif);
+    color: var(--dark-warm);
+    margin-bottom: 20px;
+  }
+  .hl { color: var(--brand); font-weight: 500; }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 22px;
+  }
+  section { break-inside: avoid; }
+  h2 {
+    font: 500 22px/1.2 var(--serif);
+    border-left: 3px solid var(--brand);
+    padding-left: 10px;
+    margin-bottom: 8px;
+  }
+  p {
+    font: 400 16px/1.5 var(--serif);
+    margin-bottom: 8px;
+  }
+  ul {
+    list-style: none;
+  }
+  li {
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 6px;
+    font: 400 15px/1.5 var(--serif);
+  }
+  li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: var(--brand);
+  }
+  .timeline-wrap { margin-bottom: 18px; }
+  .sub {
+    font: 400 12px/1.2 var(--sans);
+    color: var(--stone);
+    margin-left: 6px;
+  }
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 8px;
+  }
+  .tl-year {
+    font: 500 18px/1.2 var(--serif);
+    color: var(--brand);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .tl-head {
+    font: 500 14px/1.35 var(--sans);
+    margin-bottom: 4px;
+  }
+  .tl-body {
+    font: 400 13px/1.45 var(--sans);
+    color: var(--olive);
+  }
+  .callout {
+    border-left: 2px solid var(--brand);
+    padding: 6px 0 6px 14px;
+    margin: 12px 0 22px;
+    font: 400 16px/1.55 var(--serif);
+    color: var(--olive);
+  }
+  .footer {
+    border-top: 1px dotted var(--border);
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font: 400 12px/1.4 var(--sans);
+    color: var(--stone);
+  }
+  @media (max-width: 760px) {
+    body { padding: 20px 14px; }
+    .header, .two-col, .timeline, .metrics, .footer { grid-template-columns: 1fr; display: grid; }
+    .header { align-items: start; }
+    .meta { text-align: left; white-space: normal; }
+    .metric { align-items: center; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div>
+      <div class="eyebrow">Executive Summary · Trip Recap</div>
+      <h1>China Trip Recap · HF Working Session</h1>
+      <div class="subtitle">A 10-day working trip to HF's Nora office reset sample ownership, tightened cross-team alignment, and produced updated sampling plans across five active programs.</div>
+    </div>
+    <div class="meta">
+      Maxwell Moore<br>
+      2026.04.21<br>
+      Draft v1
+    </div>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><div class="metric-value">10</div><div class="metric-label">days from arrival to departure<br>Apr 14 to Apr 23</div></div>
+    <div class="metric"><div class="metric-value">5</div><div class="metric-label">active programs reviewed<br>with samples in hand</div></div>
+    <div class="metric"><div class="metric-value">3</div><div class="metric-label">samples retained by HF<br>for continued work</div></div>
+    <div class="metric"><div class="metric-value">2</div><div class="metric-label">samples returning to WF<br>after working session</div></div>
+  </div>
+
+  <div class="lead">The trip was most valuable as an <span class="hl">alignment and execution reset</span>, not as a single breakthrough event. Materials training, charter reviews, supplier interaction, and samples working sessions all fed into one concrete outcome: each tracked program left with a clearer next-round sampling path.</div>
+
+  <div class="two-col">
+    <section>
+      <h2>Meeting arc</h2>
+      <p>The schedule moved from foundational context into program-specific working sessions, then into recap and collaboration alignment.</p>
+      <ul>
+        <li>Materials and tubes introduction, plus process training, opened the trip.</li>
+        <li>Tent, future softgoods, innovation, and furniture charter meetings established shared priorities.</li>
+        <li>A combined <span class="hl">supplier visit / samples working session</span> on Apr 17 became the operational center of the trip.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Program status</h2>
+      <p>Samples were brought for Hawkeye V2, Gram Chair, FlowMotion V2, Swing Chair, and the Daypack project.</p>
+      <ul>
+        <li>HF is retaining Gram Chair, FlowMotion V2, and Swing Chair samples for continued development.</li>
+        <li>HF is returning Hawkeye V2 and Daypack samples.</li>
+        <li>All five programs had productive reviews and now have updated sampling plans.</li>
+      </ul>
+    </section>
+  </div>
+
+  <section class="timeline-wrap">
+    <h2>Trip sequence <span class="sub">three-step working arc</span></h2>
+    <div class="timeline">
+      <div>
+        <div class="tl-year">Phase 1</div>
+        <div class="tl-head">Context and charter alignment</div>
+        <div class="tl-body">Materials/process training, tent and softgoods reviews, innovation sessions, and furniture charter discussion.</div>
+      </div>
+      <div>
+        <div class="tl-year">Phase 2</div>
+        <div class="tl-head">Supplier and sample decisions</div>
+        <div class="tl-body">Supplier visit plus hands-on sample working session clarified what HF should keep moving and what should return.</div>
+      </div>
+      <div>
+        <div class="tl-year">Phase 3</div>
+        <div class="tl-head">Recap and operating cadence</div>
+        <div class="tl-body">Trip recap, patio update, and design-method exchange turned the visit into explicit follow-up rather than loose conversation.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="callout">The clearest takeaway is simple: <span class="hl">the trip reduced ambiguity</span>. Sample custody is now explicit, the active programs are named, and the next sampling rounds have been updated rather than left as informal verbal follow-up.</div>
+
+  <div class="footer">
+    <span>Internal draft · HF / WF trip recap</span>
+    <span>Next: add project-specific findings and owner-by-owner action items</span>
+  </div>
+</div>
+</body>
+</html>
