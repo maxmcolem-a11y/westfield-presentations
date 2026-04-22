@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Timber Ridge Daypack, Kami Test</title>
+  <style>
+    :root {
+      --bg: #f5f4ed;
+      --card: #faf9f5;
+      --ink: #141413;
+      --muted: #5e5d59;
+      --brand: #1b365d;
+      --border: #e8e6dc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 20px 20px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .eyebrow {
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+    h1 {
+      font-family: Newsreader, Georgia, serif;
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.05;
+      margin: 0 0 8px;
+      font-weight: 500;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      max-width: 720px;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .btn.primary {
+      background: var(--brand);
+      color: white;
+      border-color: var(--brand);
+    }
+    .viewer {
+      margin-top: 18px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--card);
+      box-shadow: 0 8px 30px rgba(20,20,19,0.06);
+    }
+    iframe {
+      display: block;
+      width: 100%;
+      height: min(78vh, 900px);
+      border: 0;
+      background: white;
+    }
+    .fallback {
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .preview {
+      margin-top: 22px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--card);
+    }
+    .preview img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <div>
+        <div class="eyebrow">Kami format test</div>
+        <h1>Timber Ridge Daypack Presentation</h1>
+        <p>A browser view of the Kami-style test deck generated from the approved Timber Ridge 26L daypack development presentation.</p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fmaxmcolem-a11y.github.io%2Fwestfield-presentations%2Ftimber-ridge-daypack-kami-test%2Ftimber-ridge-daypack-kami-test.pptx" target="_blank" rel="noopener">Open full viewer</a>
+        <a class="btn" href="./timber-ridge-daypack-kami-test.pptx">Download PPTX</a>
+        <a class="btn" href="https://github.com/maxmcolem-a11y/westfield-presentations/tree/main/timber-ridge-daypack-kami-test" target="_blank" rel="noopener">GitHub folder</a>
+      </div>
+    </div>
+
+    <div class="viewer">
+      <iframe
+        title="Timber Ridge Daypack Kami Test"
+        src="https://view.officeapps.live.com/op/embed.aspx?src=https%3A%2F%2Fmaxmcolem-a11y.github.io%2Fwestfield-presentations%2Ftimber-ridge-daypack-kami-test%2Ftimber-ridge-daypack-kami-test.pptx"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="fallback">
+      If the embedded viewer hangs, use <a href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fmaxmcolem-a11y.github.io%2Fwestfield-presentations%2Ftimber-ridge-daypack-kami-test%2Ftimber-ridge-daypack-kami-test.pptx" target="_blank" rel="noopener">Open full viewer</a>.
+    </div>
+
+    <div class="preview">
+      <img src="./preview.png" alt="Preview of the Timber Ridge Daypack Kami test deck">
+    </div>
+  </div>
+</body>
+</html>
