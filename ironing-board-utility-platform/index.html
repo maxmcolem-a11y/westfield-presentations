@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ironing Board Utility Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f0e6; --ink: #181513; --muted: #5b554e; --paper: rgba(255,255,255,0.78);
+      --line: rgba(24,21,19,0.10); --accent: #bd5b31; --accent2:#496044;
+      --shadow: 0 24px 52px rgba(24, 21, 19, 0.10); --slide-padding: clamp(1.2rem, 4vw, 4.2rem);
+      --title-size: clamp(2.2rem, 5.6vw, 5.4rem); --h2-size: clamp(1.45rem, 3vw, 2.7rem); --body-size: clamp(.82rem, 1.32vw, 1.1rem); --small-size: clamp(.68rem, .95vw, .86rem);
+    }
+    * { box-sizing:border-box; }
+    html,body { margin:0; height:100%; overflow-x:hidden; }
+    html { scroll-snap-type:y mandatory; scroll-behavior:smooth; }
+    body { color:var(--ink); font-family:'Manrope',sans-serif; background: radial-gradient(circle at top left, rgba(189,91,49,.13), transparent 30%), linear-gradient(180deg,#fbf8f2 0%,#f1ebdf 100%); }
+    h1,h2,h3,p,ul { margin:0; }
+    h1,h2 { font-family:'Fraunces',serif; font-weight:600; line-height:.96; letter-spacing:-.035em; }
+    h1 { font-size:var(--title-size); }
+    p,li { font-size:var(--body-size); line-height:1.42; }
+    ul { padding-left:1.1rem; display:grid; gap:.34rem; }
+    strong { color:var(--ink); font-weight:700; }
+    .slide { width:100vw; height:100vh; height:100dvh; overflow:hidden; scroll-snap-align:start; display:flex; flex-direction:column; position:relative; }
+    .slide-content { flex:1; padding:var(--slide-padding); display:flex; align-items:center; justify-content:center; gap:clamp(1.2rem,3vw,3rem); }
+    .two-col { display:grid; grid-template-columns: minmax(0,1.04fr) minmax(300px,.86fr); }
+    .cover-grid { display:grid; grid-template-columns: minmax(0,1.05fr) minmax(320px,.95fr); }
+    .copy-block { display:grid; gap:clamp(.65rem,1.35vh,1rem); max-width:900px; }
+    .copy-block h1:first-child::before { content:'Industrial Design Research'; display:block; font-family:'Manrope',sans-serif; font-size:var(--small-size); text-transform:uppercase; letter-spacing:.16em; color:var(--accent); margin-bottom:1rem; font-weight:700; }
+    .copy-block p { color:var(--muted); }
+    .copy-block .standalone-strong { color:var(--ink); font-size:clamp(.95rem,1.55vw,1.25rem); }
+    .visual-card { min-height:min(58vh,520px); width:100%; border-radius:28px; border:1px solid rgba(255,255,255,.75); background:linear-gradient(135deg, rgba(255,255,255,.86), rgba(246,239,227,.68)); box-shadow:var(--shadow); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:clamp(1rem,3vw,2.6rem); position:relative; overflow:hidden; }
+    .visual-card::before { content:''; position:absolute; inset:18px; border:1px dashed rgba(24,21,19,.20); border-radius:22px; }
+    .visual-card::after { content:''; position:absolute; width:70%; height:42%; border-radius:999px; background:radial-gradient(circle, rgba(189,91,49,.16), transparent 68%); transform:rotate(-10deg); }
+    .placeholder-icon { font-size:clamp(2.8rem,8vw,6rem); color:rgba(189,91,49,.72); z-index:1; line-height:1; }
+    .placeholder-title { z-index:1; margin-top:1rem; font-weight:800; text-transform:uppercase; letter-spacing:.14em; color:var(--accent2); font-size:var(--small-size); }
+    .placeholder-copy { z-index:1; margin-top:.65rem; color:var(--muted); max-width:32ch; font-size:var(--small-size); line-height:1.45; }
+    .slide-number,.bottom-note { position:absolute; bottom:clamp(.8rem,2vh,1.4rem); font-size:var(--small-size); color:rgba(24,21,19,.46); }
+    .slide-number { right:var(--slide-padding); } .bottom-note { left:var(--slide-padding); }
+    .nav-dots { position:fixed; right:clamp(.75rem,1.4vw,1.2rem); top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:.45rem; z-index:20; }
+    .nav-dot { width:10px; height:10px; border-radius:50%; border:none; background:rgba(24,21,19,.18); cursor:pointer; transition:.2s ease; }
+    .nav-dot.active { background:var(--accent); transform:scale(1.15); }
+    .keyboard-hint { position:fixed; right:clamp(1rem,2vw,1.5rem); bottom:clamp(1rem,2vw,1.5rem); z-index:20; padding:.55rem .8rem; border-radius:999px; background:rgba(255,255,255,.84); border:1px solid rgba(24,21,19,.08); font-size:var(--small-size); color:var(--muted); }
+    .reveal { opacity:0; transform:translateY(18px); animation:rise .6s ease forwards; } .delay-2 { animation-delay:.14s; } @keyframes rise { to { opacity:1; transform:translateY(0); } }
+    @media(max-width:900px) { .two-col,.cover-grid { grid-template-columns:1fr; } .visual-card { min-height:30vh; } .slide { overflow:auto; } }
+    @media(max-height:720px) { :root { --slide-padding:clamp(.8rem,3vw,2.2rem); --title-size:clamp(1.7rem,4.4vw,3.2rem); --body-size:clamp(.72rem,1.1vw,.92rem); } .visual-card { min-height:42vh; } .keyboard-hint { display:none; } }
+  </style>
+</head>
+<body>
+  <nav class="nav-dots" aria-label="Slide navigation"><button class="nav-dot" data-slide="1" aria-label="Go to slide 1"></button>
+<button class="nav-dot" data-slide="2" aria-label="Go to slide 2"></button>
+<button class="nav-dot" data-slide="3" aria-label="Go to slide 3"></button>
+<button class="nav-dot" data-slide="4" aria-label="Go to slide 4"></button>
+<button class="nav-dot" data-slide="5" aria-label="Go to slide 5"></button>
+<button class="nav-dot" data-slide="6" aria-label="Go to slide 6"></button>
+<button class="nav-dot" data-slide="7" aria-label="Go to slide 7"></button>
+<button class="nav-dot" data-slide="8" aria-label="Go to slide 8"></button>
+<button class="nav-dot" data-slide="9" aria-label="Go to slide 9"></button>
+<button class="nav-dot" data-slide="10" aria-label="Go to slide 10"></button>
+<button class="nav-dot" data-slide="11" aria-label="Go to slide 11"></button>
+<button class="nav-dot" data-slide="12" aria-label="Go to slide 12"></button>
+<button class="nav-dot" data-slide="13" aria-label="Go to slide 13"></button>
+<button class="nav-dot" data-slide="14" aria-label="Go to slide 14"></button>
+<button class="nav-dot" data-slide="15" aria-label="Go to slide 15"></button></nav>
+  <div class="keyboard-hint">Use ↑ ↓ keys</div>
+  <section class="slide cover" id="slide-1">
+  <div class="slide-content cover-grid">
+    <div class="copy-block reveal"><h1>From Ironing Board to Outdoor Utility Platform</h1>
+<p>A mechanism study inspired by Belgian outdoor social behavior and translated into Westfield-relevant product opportunities.</p>
+<p><strong>Focus:</strong> camp utility, dual-use home/outdoor products, fold-flat furniture, and wagon-compatible surfaces.</p></div>
+    <div class="reveal delay-2"><div class="visual-card">
+      <div class="placeholder-icon">✦</div>
+      <div class="placeholder-title">Image placeholder</div>
+      <div class="placeholder-copy">Belgian street-party ironing board use / abstract opener</div>
+    </div></div>
+  </div>
+  <div class="bottom-note">Westfield Outdoors · Industrial Design Sprint</div>
+  <div class="slide-number">01 / 15</div>
+</section><section class="slide" id="slide-2">
+  <div class="slide-content two-col">
+    <div class="copy-block wide reveal"><h1>A Strange but Useful Behavior</h1>
+<p>In Belgium, especially around student-city outdoor gatherings, people have been seen carrying ironing boards to parks, street parties, festivals, and raves.</p>
+<p>They are not ironing clothes.</p>
+<p>They are using the boards as quick outdoor tables for drinks, food, bags, phones, and social gathering points.</p>
+<p>The behavior looks funny at first, but the product logic is surprisingly strong.</p></div>
+    <div class="reveal delay-2"><div class="visual-card">
+      <div class="placeholder-icon">▧</div>
+      <div class="placeholder-title">Image placeholder</div>
+      <div class="placeholder-copy">people using an ironing board outdoors as an improvised table</div>
+    </div></div>
+  </div>
+  <div class="slide-number">02 / 15</div>
+</section><section class="slide" id="slide-3">
+  <div class="slide-content two-col">
+    <div class="copy-block wide reveal"><h1>What We Know So Far</h1>
+<p>The phenomenon is real enough to study, but it is currently social-media-led rather than formally documented.</p>
+<p class="standalone-strong"><strong>Strongest signals:</strong></p>
+<ul>
+<li>Instagram reels showing people carrying ironing boards through Belgian/Ghent street-party contexts</li>
+<li>Lifestyle/media pickup describing Belgian youths using ironing boards as outdoor tables</li>
+<li>Repeated association with parks, festivals, raves, and student gatherings</li>
+<li>Broader cultural fit with Belgian public socializing and beer culture</li>
+</ul>
+<p class="standalone-strong"><strong>Caution:</strong></p>
+<p>This should not be treated as a validated mass-market behavior by itself. It is better used as a prompt: people are improvising because existing portable surfaces are not solving the job well enough.</p></div>
+    <div class="reveal delay-2"><div class="visual-card">
+      <div class="placeholder-icon">▧</div>
+      <div class="placeholder-title">Image placeholder</div>
+      <div class="placeholder-copy">source/evidence collage</div>
+    </div></div>
+  </div>
+  <div class="slide-number">03 / 15</div>
+</section><section class="slide" id="slide-4">
+  <div class="slide-content two-col">
+    <div class="copy-block wide reveal"><h1>Why an Ironing Board Works Outdoors</h1>
+<p>The object succeeds because it already has several outdoor-product attributes:</p>
+<ul>
+<li>Folds nearly flat</li>
+<li>Carries more easily than a normal table</li>
+<li>Adjusts from seated to standing height</li>
+<li>Creates a long, narrow usable surface</li>
+<li>Stores well in small apartments, cars, dorms, or utility rooms</li>
+<li>Uses mostly metal construction</li>
+<li>Often has a perforated metal or mesh top under the fabric cover</li>
+<li>Can shed spills instead of pooling liquid when the fabric cover is removed</li>
+<li>Has a familiar low-cost mechanism</li>
+<li>Feels casual, improvised, and socially approachable</li>
+</ul>
+<p>For outdoor social use, people are not relying on the padded fabric ironing surface. The fabric cover is removed or ignored, revealing a more outdoor-friendly metal structure underneath.</p>
+<p>That metal/mesh construction matters: it is durable, weather-tolerant, easy to wipe down, and lets spilled beer or rain pass through instead of sitting on the surface.</p>
+<p>The insight is not “make a party ironing board.”</p>
+<p>The insight is: <strong>a fold-flat, height-adjustable, long/narrow metal utility surface has more outdoor use cases than the category currently acknowledges.</strong></p></div>
+    <div class="reveal delay-2"><div class="visual-card">
+      <div class="placeholder-icon">▧</div>
+      <div class="placeholder-title">Image placeholder</div>
+      <div class="placeholder-copy">exploded view of ironing board without fabric cover, showing mesh/metal top and folding legs</div>
+    </div></div>
+  </div>
+  <div class="slide-number">04 / 15</div>
+</section><section class="slide" id="slide-5">
+  <div class="slide-content two-col">
+    <div class="copy-block wide reveal"><h1>Translating the Behavior Into Our Business</h1>
+<p>Westfield is not primarily in novelty festival furniture.</p>
+<p>The relevant lanes are:</p>
+<ul>
+<li>Outdoor furniture and chair-adjacent accessories</li>
+<li>Wagons, carts, and portable utility systems</li>
+<li>Camp, hunt, fish, garden, beach, and tailgate gear</li>
+<li>Coolers and food/drink support</li>
+<li>Packs, bags, storage, and transport</li>
+<li>Skunk Works mechanism exploration</li>
+<li>VA/VE-ready folding product architecture</li>
+</ul>
+<p>So the opportunity is to use the ironing-board mechanism as a <strong>platform</strong>, not a punchline.</p></div>
+    <div class="reveal delay-2"><div class="visual-card">
+      <div class="placeholder-icon">▧</div>
+      <div class="placeholder-title">Image placeholder</div>
+      <div class="placeholder-copy">Westfield outdoor category collage — chair, wagon, cooler, camp utility</div>
+    </div></div>
+  </div>
+  <div class="slide-number">05 / 15</div>
+</section><section class="slide" id="slide-6">
+  <div class="slide-content two-col">
+    <div class="copy-block wide reveal"><h1>What the Mechanism Gives Us</h1>
+<p>An ironing-board-style leg system offers a useful combination:</p>
+<ul>
+<li>Flat-folding storage</li>
+<li>Fast setup</li>
+<li>Multiple height positions</li>
+<li>Long-span support</li>
+<li>Familiar metal tube construction</li>
+<li>Simple lock architecture</li>
+<li>Potential for low-cost manufacturing</li>
+</ul>
+<p>But it also brings risks:</p>
+<ul>
+<li>Side-load instability</li>
+<li>Pinch points</li>
+<li>Accidental collapse</li>
+<li>Small feet sinking into grass or sand</li>
+<li>Narrow tops tipping under uneven loads</li>
+<li>Seating loads if adapted into benches or stools</li>
+</ul>
+<p>The concept work should preserve the strengths while correcting the weaknesses.</p></div>
+    <div class="reveal delay-2"><div class="visual-card">
+      <div class="placeholder-icon">▧</div>
+      <div class="placeholder-title">Image placeholder</div>
+      <div class="placeholder-copy">mechanism diagram showing X/scissor legs, lock, height positions, feet</div>
+    </div></div>
+  </div>
+  <div class="slide-number">06 / 15</div>
+</section><section class="slide" id="slide-7">
+  <div class="slide-content two-col">
+    <div class="copy-block reveal"><h1>Camp / Field Utility Board</h1>
+<p class="standalone-strong"><strong>Lead concept.</strong></p>
+<p>A hard-top, height-adjustable utility surface for camp prep, hunting, fishing, gardening, range work, and wagon-side organization.</p>
+<p>This is the cleanest translation of the behavior into Westfield territory.</p>
+<p>Instead of asking, “How do we make a better party table?” this asks:</p>
+<p class="standalone-strong"><strong>How do we make a better portable outdoor work surface?</strong></p>
+<p>Potential use cases:</p>
+<ul>
+<li>Camp kitchen prep surface</li>
+<li>Coffee / stove / lantern platform</li>
+<li>Fishing tackle and bait station</li>
+<li>Fish-cleaning or pier-side gear table</li>
+<li>Hunting field-cleaning support</li>
+<li>Range and gunsmithing station</li>
+<li>Garden potting or harvest surface</li>
+<li>Tailgate food and drink staging</li>
+<li>Wagon-side organization surface</li>
+</ul>
+<p>The product should feel less like furniture and more like <strong>portable outdoor infrastructure</strong>.</p></div>
+    <div class="reveal delay-2"><div class="visual-card">
+      <div class="placeholder-icon">▧</div>
+      <div class="placeholder-title">Image placeholder</div>
+      <div class="placeholder-copy">camp/field utility board in use beside a wagon or campsite</div>
+    </div></div>
+  </div>
+  <div class="slide-number">07 / 15</div>
+</section><section class="slide" id="slide-8">
+  <div class="slide-content two-col">
+    <div class="copy-block wide reveal"><h1>Built for Real Outdoor Work</h1>
+<p>Recommended features:</p>
+<ul>
+<li>Hard, wipeable, waterproof or perforated metal top</li>
+<li>Raised lip, shallow tray edge, or modular insert system</li>
+<li>Adjustable standing and seated heights</li>
+<li>Oversized feet for grass, sand, dirt, and gravel</li>
+<li>Positive lock with clear open/closed feedback</li>
+<li>Bag hook or trash-bag clip</li>
+<li>Tool / towel / lantern hooks</li>
+<li>Optional cupholder or bottle groove</li>
+<li>Fold-flat carry profile</li>
+<li>Wagon-compatible storage or attachment points</li>
+</ul>
+<p>This should be designed to look credible in a campsite, garden, pier, range, or tailgate — not like a novelty bar prop.</p></div>
+    <div class="reveal delay-2"><div class="visual-card">
+      <div class="placeholder-icon">▧</div>
+      <div class="placeholder-title">Image placeholder</div>
+      <div class="placeholder-copy">product detail render with callouts</div>
+    </div></div>
+  </div>
+  <div class="slide-number">08 / 15</div>
+</section><section class="slide" id="slide-9">
+  <div class="slide-content two-col">
+    <div class="copy-block reveal"><h1>Dual-Use Ironing Board / Outdoor Utility Hybrid</h1>
+<p class="standalone-strong"><strong>Second concept. More speculative, but strategically interesting.</strong></p>
+<p>This version still works as a legitimate ironing board, but gains a second life as an outdoor utility surface.</p>
+<p>It could serve small-space living, RVs, dorms, apartments, camping, backyard gatherings, and tailgates.</p>
+<p>The proposition:</p>
+<p class="standalone-strong"><strong>One household utility product that can leave the laundry room.</strong></p>
+<p>The hybrid should not compromise the core ironing function. It needs to be a real ironing board first, then convert cleanly into a useful outdoor platform.</p>
+<p>Possible features:</p>
+<ul>
+<li>Heat-safe ironing surface</li>
+<li>Removable hard outdoor topper or exposed metal utility mode</li>
+<li>Hidden or removable cup rail</li>
+<li>Integrated side tray</li>
+<li>Better outdoor feet</li>
+<li>Carry handle or shoulder strap</li>
+<li>Lockable height positions</li>
+<li>Compact storage profile</li>
+<li>Replaceable cover system</li>
+</ul>
+<p>The goal is not to decorate an ironing board. The goal is to design a product that legitimately earns two storage occasions.</p></div>
+    <div class="reveal delay-2"><div class="visual-card">
+      <div class="placeholder-icon">▧</div>
+      <div class="placeholder-title">Image placeholder</div>
+      <div class="placeholder-copy">dual-mode ironing board showing home ironing mode and outdoor utility mode</div>
+    </div></div>
+  </div>
+  <div class="slide-number">09 / 15</div>
+</section><section class="slide" id="slide-10">
+  <div class="slide-content two-col">
+    <div class="copy-block reveal"><h1>Fold-Flat Social Side Table</h1>
+<p class="standalone-strong"><strong>Third concept. Most directly related to the original behavior.</strong></p>
+<p>A compact outdoor table using the same fold-flat, height-adjustable leg logic, designed for chairs, beach, patio, tailgate, and camp use.</p>
+<p>This is the most approachable consumer product in the set.</p>
+<p>It can pair with chairs, coolers, wagons, and outdoor seating collections.</p>
+<p>Recommended features:</p>
+<ul>
+<li>Narrow top sized for drinks, phone, snacks, speaker, lantern, or book</li>
+<li>Cupholder / bottle groove options</li>
+<li>Height positions for low chair, standard chair, and standing use</li>
+<li>Flat-folding carry profile</li>
+<li>Strap or handle</li>
+<li>Anti-tip feet</li>
+<li>Soft-touch corners</li>
+<li>Clip-on compatibility with chair bags or wagons</li>
+<li>Optional cooler-side or beach-chair integration</li>
+</ul>
+<p>This concept should feel like a Westfield outdoor accessory, not a household object cosplay.</p></div>
+    <div class="reveal delay-2"><div class="visual-card">
+      <div class="placeholder-icon">▧</div>
+      <div class="placeholder-title">Image placeholder</div>
+      <div class="placeholder-copy">fold-flat side table beside outdoor chair / cooler</div>
+    </div></div>
+  </div>
+  <div class="slide-number">10 / 15</div>
+</section><section class="slide" id="slide-11">
+  <div class="slide-content two-col">
+    <div class="copy-block wide reveal"><h1>Mechanism-Family Table System</h1>
+<p>Once the mechanism is understood, it can scale into a small family.</p>
+<p>Potential sizes:</p>
+<ul>
+<li>Chair-side mini table</li>
+<li>Low picnic table</li>
+<li>Beach / patio side table</li>
+<li>Camp kitchen board</li>
+<li>Tailgate serving board</li>
+<li>Wagon-side deployable board</li>
+</ul>
+<p>The family approach matters because it creates shared parts:</p>
+<ul>
+<li>Common tubing</li>
+<li>Common hinges</li>
+<li>Common locks</li>
+<li>Common feet</li>
+<li>Common carry/storage logic</li>
+</ul>
+<p>That gives the idea a better VA/VE and manufacturing path.</p></div>
+    <div class="reveal delay-2"><div class="visual-card">
+      <div class="placeholder-icon">▧</div>
+      <div class="placeholder-title">Image placeholder</div>
+      <div class="placeholder-copy">family lineup of multiple table sizes sharing same leg mechanism</div>
+    </div></div>
+  </div>
+  <div class="slide-number">11 / 15</div>
+</section><section class="slide" id="slide-12">
+  <div class="slide-content two-col">
+    <div class="copy-block reveal"><h1>Seating + Wagon Integration</h1>
+<h2>Bench / Stool / Ottoman Mechanism Exploration</h2>
+<p>The same folding leg language may translate into seating, but this is a higher-risk track.</p>
+<p>A table only needs to hold objects. A bench or stool has to survive people sitting, leaning, shifting weight, and side-loading the structure.</p>
+<p>Possible directions:</p>
+<ul>
+<li>Fold-flat camp stool</li>
+<li>Narrow bench</li>
+<li>Ottoman / footrest</li>
+<li>Chair-adjacent platform</li>
+<li>Wagon-side temporary seat</li>
+</ul>
+<p>This track should be treated as a mechanism study first, not an immediate SKU.</p>
+<h2>Wagon-Integrated Deployable Table</h2>
+<p>A flat surface could store against the wagon wall, under the wagon floor, or inside a side panel, then deploy as a working surface.</p>
+<p>Potential uses:</p>
+<ul>
+<li>Beach drinks and snacks</li>
+<li>Garden tools and harvest</li>
+<li>Fishing tackle and bait</li>
+<li>Camp kitchen prep</li>
+<li>Tailgate serving</li>
+<li>Kids’ sports sideline organization</li>
+</ul>
+<p>This may become either a dedicated wagon accessory or an extension of the Camp / Field Utility Board concept.</p></div>
+    <div class="reveal delay-2"><div class="visual-card">
+      <div class="placeholder-icon">▧</div>
+      <div class="placeholder-title">Image placeholder</div>
+      <div class="placeholder-copy">split image — fold-flat stool/bench concept + wagon-integrated table concept</div>
+    </div></div>
+  </div>
+  <div class="slide-number">12 / 15</div>
+</section><section class="slide" id="slide-13">
+  <div class="slide-content two-col">
+    <div class="copy-block wide reveal"><h1>Which Tracks Deserve Priority?</h1>
+<p class="standalone-strong"><strong>Highest priority:</strong></p>
+<p>1. <strong>Camp / Field Utility Board</strong>  </p>
+<p>Best fit with outdoor utility, hunt/fish/garden/camp, and wagon-side use.</p>
+<p>2. <strong>Dual-Use Ironing Board / Outdoor Utility Hybrid</strong>  </p>
+<p>Most distinctive story; useful as a speculative product and image-generation anchor.</p>
+<p>3. <strong>Fold-Flat Social Side Table</strong>  </p>
+<p>Most straightforward consumer-facing accessory.</p>
+<p class="standalone-strong"><strong>Secondary exploration:</strong></p>
+<p>4. <strong>Mechanism-family table system</strong>  </p>
+<p>Useful after the core mechanism is validated.</p>
+<p>5. <strong>Bench / stool / ottoman</strong>  </p>
+<p>Interesting but safety-sensitive.</p>
+<p>6. <strong>Wagon-integrated deployable table</strong>  </p>
+<p>Strong business fit; may become either its own concept or an extension of Track 1.</p></div>
+    <div class="reveal delay-2"><div class="visual-card">
+      <div class="placeholder-icon">▧</div>
+      <div class="placeholder-title">Image placeholder</div>
+      <div class="placeholder-copy">concept comparison matrix</div>
+    </div></div>
+  </div>
+  <div class="slide-number">13 / 15</div>
+</section><section class="slide" id="slide-14">
+  <div class="slide-content two-col">
+    <div class="copy-block wide reveal"><h1>What We Need to Learn</h1>
+<p>Key questions:</p>
+<ul>
+<li>Does the leg geometry remain stable on grass, sand, gravel, pavement, and cobblestones?</li>
+<li>What foot design prevents sinking and tipping?</li>
+<li>What lock design prevents accidental collapse?</li>
+<li>Can the mechanism avoid dangerous pinch points?</li>
+<li>What folded thickness is acceptable?</li>
+<li>Can it store on or inside a wagon?</li>
+<li>Is height adjustability worth the cost and complexity?</li>
+<li>Can existing Westfield tubing, feet, hinges, or table parts be reused?</li>
+<li>Does the surface need to be flat, tray-like, perforated, or modular?</li>
+</ul>
+<p>The next step is not styling. The next step is mechanism proof.</p></div>
+    <div class="reveal delay-2"><div class="visual-card">
+      <div class="placeholder-icon">▧</div>
+      <div class="placeholder-title">Image placeholder</div>
+      <div class="placeholder-copy">rough prototype / mechanism test rig</div>
+    </div></div>
+  </div>
+  <div class="slide-number">14 / 15</div>
+</section><section class="slide" id="slide-15">
+  <div class="slide-content two-col">
+    <div class="copy-block reveal"><h1>Recommended Direction</h1>
+<p>Move forward with a presentation that leads with utility, not novelty.</p>
+<p>Priority order:</p>
+<p>1. Camp / Field Utility Board</p>
+<p>2. Dual-Use Ironing Board / Outdoor Utility Hybrid</p>
+<p>3. Fold-Flat Social Side Table</p>
+<p>4. Mechanism-family table system</p>
+<p>5. Bench / stool / ottoman mechanism exploration</p>
+<p>6. Wagon-integrated deployable table</p>
+<p>The Belgian ironing-board behavior stays in the story as the spark.</p>
+<p>The product direction becomes Westfield: practical, portable, fold-flat outdoor utility.</p></div>
+    <div class="reveal delay-2"><div class="visual-card">
+      <div class="placeholder-icon">▧</div>
+      <div class="placeholder-title">Image placeholder</div>
+      <div class="placeholder-copy">final hero render of the lead Camp / Field Utility Board concept</div>
+    </div></div>
+  </div>
+  <div class="slide-number">15 / 15</div>
+</section>
+  <script>
+    const slides=[...document.querySelectorAll('.slide')]; const dots=[...document.querySelectorAll('.nav-dot')];
+    function go(i){ const s=slides[Math.max(0,Math.min(slides.length-1,i))]; s.scrollIntoView({behavior:'smooth'}); }
+    dots.forEach((d,i)=>d.addEventListener('click',()=>go(i)));
+    const obs=new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){ const i=slides.indexOf(e.target); dots.forEach((d,j)=>d.classList.toggle('active',i===j)); } }); },{threshold:.55});
+    slides.forEach(s=>obs.observe(s));
+    document.addEventListener('keydown',e=>{ const current=dots.findIndex(d=>d.classList.contains('active')); if(e.key==='ArrowDown'||e.key==='PageDown') go(current+1); if(e.key==='ArrowUp'||e.key==='PageUp') go(current-1); });
+  </script>
+</body>
+</html>
