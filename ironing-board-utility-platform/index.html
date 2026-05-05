@@ -16,7 +16,7 @@
 <button class="nav-dot" data-slide="14" aria-label="Go to slide 14"></button>
 <button class="nav-dot" data-slide="15" aria-label="Go to slide 15"></button>
 <button class="nav-dot" data-slide="16" aria-label="Go to slide 16"></button></nav><div class="keyboard-hint">Use ↑ ↓ keys</div><section class="slide cover" id="slide-1">
-  <div class="slide-content"><div class='cover-logo' aria-hidden='true'><img src='assets/westfield-outdoors-logo.jpg' alt='Westfield Outdoors logo'></div><div class='cover-layout'><div class='copy-block hero-copy'><h1>From Ironing Board to Outdoor Utility Platform</h1>
+  <div class="slide-content"><div class='cover-logo' aria-hidden='true'><img src='assets/westfield-outdoors-logo.png' alt='Westfield Outdoors logo'></div><div class='cover-layout'><div class='copy-block hero-copy'><h1>From Ironing Board to Outdoor Utility Platform</h1>
 <p>A Belgian street habit reframed as a Westfield mechanism study.</p>
 <p>Focus: fold-flat outdoor utility, camp work surfaces, dual-use products, and wagon-compatible platforms.</p></div><button class="image-card fullscreen-trigger hero-visual" type="button" data-fullscreen-src="assets/slide01-hero.png" data-fullscreen-alt="Belgian street-party ironing board use / abstract opener"><img src="assets/slide01-hero.png" alt="Belgian street-party ironing board use / abstract opener"></button></div><div class='bottom-note'>Westfield Outdoors · Industrial Design Sprint</div></div>
   <div class="slide-number">01 / 16</div>
@@ -200,7 +200,7 @@
     <div class="legal-card"><h3>Last Edited</h3><p>May 5, 2026</p></div>
     <div class="legal-card"><h3>Author</h3><p>Max Moore, Director of Industrial Design</p></div>
   </div>
-  <div class="closing-logos"><img src="assets/westfield-outdoors-logo.jpg" alt="Westfield Outdoors logo"></div>
+  <div class="closing-logos"><img src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo"></div>
 </div></div>
   <div class="slide-number">16 / 16</div>
 </section><div class="lightbox" id="lightbox" aria-hidden="true"><button class="lightbox-close" type="button" aria-label="Close fullscreen image">×</button><img alt=""></div><script>const slides=[...document.querySelectorAll('.slide')],dots=[...document.querySelectorAll('.nav-dot')];function go(i){slides[Math.max(0,Math.min(slides.length-1,i))].scrollIntoView({behavior:'smooth'})}dots.forEach((d,i)=>d.addEventListener('click',()=>go(i)));const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const i=slides.indexOf(e.target);dots.forEach((d,j)=>d.classList.toggle('active',i===j))}})},{threshold:.55});slides.forEach(s=>obs.observe(s));const lb=document.getElementById('lightbox'),lbImg=lb.querySelector('img');function closeLb(){lb.classList.remove('open');lb.setAttribute('aria-hidden','true');lbImg.removeAttribute('src')}document.querySelectorAll('.fullscreen-trigger').forEach(el=>el.addEventListener('click',()=>{lbImg.src=el.dataset.fullscreenSrc;lbImg.alt=el.dataset.fullscreenAlt||'';lb.classList.add('open');lb.setAttribute('aria-hidden','false')}));lb.querySelector('.lightbox-close').addEventListener('click',closeLb);lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.classList.contains('open'))closeLb();const c=dots.findIndex(d=>d.classList.contains('active'));if(!lb.classList.contains('open')&&(e.key==='ArrowDown'||e.key==='PageDown'))go(c+1);if(!lb.classList.contains('open')&&(e.key==='ArrowUp'||e.key==='PageUp'))go(c-1)});</script></body></html>
