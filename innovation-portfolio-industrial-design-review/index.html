@@ -1204,6 +1204,15 @@
 
         setupKeyboardNav() {
             document.addEventListener('keydown', (e) => {
+                const lightbox = document.getElementById('imageLightbox');
+                if (lightbox?.classList.contains('open')) {
+                    if (e.key === 'Escape') {
+                        e.preventDefault();
+                        this.closeImageLightbox();
+                    }
+                    return;
+                }
+
                 if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
                     e.preventDefault();
                     const next = Math.min(this.currentSlide + 1, this.slides.length - 1);
@@ -1214,6 +1223,50 @@
                     this.slides[prev].scrollIntoView({ behavior: 'smooth' });
                 }
             });
+        }
+
+        setupImageLightbox() {
+            this.lightbox = document.getElementById('imageLightbox');
+            this.lightboxImage = document.getElementById('imageLightboxImg');
+            this.lightboxCaption = document.getElementById('imageLightboxCaption');
+            this.lightboxClose = document.getElementById('imageLightboxClose');
+
+            if (!this.lightbox || !this.lightboxImage || !this.lightboxClose) return;
+
+            document.querySelectorAll('.slide img:not(.logo)').forEach((img) => {
+                if (img.closest('.image-lightbox')) return;
+                img.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    this.openImageLightbox(img.currentSrc || img.src, img.alt || 'Expanded image');
+                });
+            });
+
+            this.lightboxClose.addEventListener('click', () => this.closeImageLightbox());
+            this.lightbox.addEventListener('click', (event) => {
+                if (event.target === this.lightbox || event.target === this.lightboxImage) {
+                    this.closeImageLightbox();
+                }
+            });
+        }
+
+        openImageLightbox(src, caption) {
+            if (!this.lightbox || !this.lightboxImage) return;
+            this.lightboxImage.src = src;
+            this.lightboxImage.alt = caption;
+            if (this.lightboxCaption) this.lightboxCaption.textContent = caption;
+            this.lightbox.classList.add('open');
+            this.lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        closeImageLightbox() {
+            if (!this.lightbox || !this.lightboxImage) return;
+            this.lightbox.classList.remove('open');
+            this.lightbox.setAttribute('aria-hidden', 'true');
+            this.lightboxImage.src = '';
+            if (this.lightboxCaption) this.lightboxCaption.textContent = '';
+            document.body.style.overflow = '';
         }
 
         updateProgress() {
