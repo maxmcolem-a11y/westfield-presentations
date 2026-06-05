@@ -276,6 +276,8 @@
       display: grid;
       gap: clamp(.75rem, 1.2vw, 1rem);
       padding-left: clamp(.8rem, 1.4vw, 1.2rem);
+      width: min(100%, 720px);
+      justify-self: end;
     }
     .motion-rail:before {
       content: "";
@@ -299,10 +301,8 @@
       box-shadow: var(--shadow);
       padding: clamp(.85rem, 1.5vw, 1.2rem);
       min-height: 104px;
+      width: 100%;
     }
-    .motion-step:nth-child(2) { margin-left: clamp(1rem, 4vw, 3.2rem); }
-    .motion-step:nth-child(3) { margin-left: clamp(.5rem, 2vw, 1.7rem); }
-    .motion-step:nth-child(4) { margin-left: clamp(1.4rem, 5vw, 4rem); }
     .motion-index {
       width: clamp(48px, 5vw, 70px);
       aspect-ratio: 1;
@@ -393,7 +393,7 @@
       .two-col, .reverse, .deploy-layout, .mechanism-page { grid-template-columns: 1fr; }
       .slide { overflow: auto; }
       .metric-grid, .steps, .lane-grid { grid-template-columns: 1fr; }
-      .motion-step, .motion-step:nth-child(2), .motion-step:nth-child(3), .motion-step:nth-child(4) { margin-left: 0; }
+      .motion-rail { justify-self: stretch; }
       .visual, .wide-visual { min-height: 38vh; height: auto; }
     }
   </style>
