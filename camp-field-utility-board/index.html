@@ -189,6 +189,40 @@
       line-height: 1.18;
       font-size: clamp(.94rem, 1.18vw, 1.1rem);
     }
+    .question-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(.6rem, 1vw, .9rem);
+    }
+    .question {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: .75rem;
+      align-items: start;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      padding: clamp(.75rem, 1.1vw, 1rem);
+      min-height: 92px;
+    }
+    .question span {
+      width: 2rem;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: var(--green);
+      color: white;
+      font-size: .8rem;
+      font-weight: 900;
+    }
+    .question p {
+      color: var(--ink);
+      font-weight: 850;
+      line-height: 1.2;
+      font-size: clamp(.9rem, 1.08vw, 1.04rem);
+    }
     .metric {
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -414,7 +448,7 @@
     @media (max-width: 900px) {
       .two-col, .reverse, .deploy-layout, .mechanism-page { grid-template-columns: 1fr; }
       .slide { overflow: auto; }
-      .metric-grid, .steps, .lane-grid, .critical-path { grid-template-columns: 1fr; }
+      .metric-grid, .steps, .lane-grid, .critical-path, .question-list { grid-template-columns: 1fr; }
       .motion-rail { justify-self: stretch; }
       .visual, .wide-visual { min-height: 38vh; height: auto; }
     }
@@ -600,15 +634,17 @@
     <div class="slide-content">
       <div class="copy">
         <p class="eyebrow" data-i18n="factoryEyebrow">Factory Visit</p>
-        <h2 data-i18n="factoryTitle">Questions that decide whether August is realistic.</h2>
+        <h2 data-i18n="factoryTitle">Ask these questions at the factory today.</h2>
       </div>
-      <div class="lane-grid">
-        <div class="lane"><span data-i18n="factory1K">Frame</span><p data-i18n="factory1">Which existing ironing-board frame is cheapest, strongest, and easiest to modify?</p></div>
-        <div class="lane"><span data-i18n="factory2K">Reuse</span><p data-i18n="factory2">What can be sampled from existing tube, rivet, hinge, lock, and adjustment parts?</p></div>
-        <div class="lane"><span data-i18n="factory3K">Stance</span><p data-i18n="factory3">Can the leg spread or foot geometry improve outdoor stability without new tooling?</p></div>
-        <div class="lane"><span data-i18n="factory4K">Top</span><p data-i18n="factory4">What low-cost hard top can they fabricate fast: sheet, composite, perforated metal, or panel?</p></div>
-        <div class="lane"><span data-i18n="factory5K">Sample</span><p data-i18n="factory5">What is the fastest path to 2-3 working samples in July?</p></div>
-        <div class="lane"><span data-i18n="factory6K">Cost</span><p data-i18n="factory6">What changes protect the low BOM, and which changes immediately trigger tooling or MOQ risk?</p></div>
+      <div class="question-list">
+        <div class="question"><span>01</span><p data-i18n="factory1">What existing ironing-board frame gets closest to this use case?</p></div>
+        <div class="question"><span>02</span><p data-i18n="factory2">What is the current frame BOM cost, MOQ, and normal lead time?</p></div>
+        <div class="question"><span>03</span><p data-i18n="factory3">What are the weak points when the frame is side-loaded or used on rough ground?</p></div>
+        <div class="question"><span>04</span><p data-i18n="factory4">Can they widen the stance or change the feet without new tooling?</p></div>
+        <div class="question"><span>05</span><p data-i18n="factory5">Can the height range include table height and bar / gathering height?</p></div>
+        <div class="question"><span>06</span><p data-i18n="factory6">What hard-top materials can they already source, fabricate, or sample quickly?</p></div>
+        <div class="question"><span>07</span><p data-i18n="factory7">Which changes require tooling, and which can be hand-sampled first?</p></div>
+        <div class="question"><span>08</span><p data-i18n="factory8">What is the fastest path to 2-3 working samples in July?</p></div>
       </div>
     </div>
     <div class="note" data-i18n="legal">Confidential · Westfield Outdoors · Industrial Design</div>
@@ -712,19 +748,15 @@
         closeBody: '营地 / 野外多功能工作台是熨衣板机构最干净、最适合 Westfield 的转化方向。它避开猎奇感，聚焦实际户外用途。',
         closeBody2: '围绕这一张工作台，先验证框架、高度调节、锁定、脚垫和硬质台面，再增加复杂度。',
         factoryEyebrow: '工厂拜访',
-        factoryTitle: '这些问题决定八月样机是否现实。',
-        factory1K: '框架',
-        factory1: '哪一个现有熨衣板框架最便宜、最强、也最容易修改？',
-        factory2K: '复用',
-        factory2: '哪些管材、铆钉、铰链、锁定和调节零件可以直接用于打样？',
-        factory3K: '支撑',
-        factory3: '能否在不开发新模具的情况下改善支腿展开宽度或脚垫几何？',
-        factory4K: '台面',
-        factory4: '他们最快能制作哪种低成本硬质台面：板材、复合板、冲孔金属或面板？',
-        factory5K: '样机',
-        factory5: '七月拿到 2-3 个可工作样机的最快路径是什么？',
-        factory6K: '成本',
-        factory6: '哪些修改能保护低 BOM，哪些修改会立刻带来模具或 MOQ 风险？',
+        factoryTitle: '今天在工厂直接问这些问题。',
+        factory1: '哪个现有熨衣板框架最接近这个使用场景？',
+        factory2: '当前框架的 BOM 成本、MOQ 和正常交期是多少？',
+        factory3: '框架在侧向受力或粗糙地面使用时，薄弱点在哪里？',
+        factory4: '能否在不开发新模具的情况下加宽支撑或修改脚垫？',
+        factory5: '高度范围能否覆盖普通桌高和吧台 / 聚集桌高度？',
+        factory6: '他们已经能采购、加工或快速打样哪些硬质台面材料？',
+        factory7: '哪些修改需要开模，哪些可以先手工打样？',
+        factory8: '七月拿到 2-3 个可工作样机的最快路径是什么？',
         legal: '保密 · Westfield Outdoors · 工业设计'
       }
     };
