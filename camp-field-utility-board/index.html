@@ -160,6 +160,35 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: clamp(.8rem, 1.4vw, 1.2rem);
     }
+    .lane-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(.8rem, 1.4vw, 1.2rem);
+    }
+    .lane {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      padding: clamp(.95rem, 1.55vw, 1.25rem);
+      min-height: 118px;
+      display: grid;
+      align-content: start;
+      gap: .55rem;
+    }
+    .lane span {
+      color: var(--accent);
+      font-size: var(--small);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .lane p {
+      color: var(--ink);
+      font-weight: 800;
+      line-height: 1.18;
+      font-size: clamp(.94rem, 1.18vw, 1.1rem);
+    }
     .metric {
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -242,7 +271,7 @@
     @media (max-width: 900px) {
       .two-col, .reverse { grid-template-columns: 1fr; }
       .slide { overflow: auto; }
-      .metric-grid, .steps { grid-template-columns: 1fr; }
+      .metric-grid, .steps, .lane-grid { grid-template-columns: 1fr; }
       .visual, .wide-visual { min-height: 38vh; height: auto; }
     }
   </style>
@@ -259,6 +288,7 @@
     <button type="button" data-slide="6" aria-label="Go to slide 7"></button>
     <button type="button" data-slide="7" aria-label="Go to slide 8"></button>
     <button type="button" data-slide="8" aria-label="Go to slide 9"></button>
+    <button type="button" data-slide="9" aria-label="Go to slide 10"></button>
   </nav>
 
   <section class="slide hero" id="slide-1">
@@ -274,25 +304,49 @@
       </button>
     </div>
     <div class="note" data-i18n="noteSprint">Westfield Outdoors · Camp / Field Utility Board</div>
-    <div class="slide-number">01 / 09</div>
+    <div class="slide-number">01 / 10</div>
   </section>
 
   <section class="slide" id="slide-2">
     <div class="slide-content reverse">
-      <button class="visual wide-visual zoom" type="button" data-src="assets/slide01-hero.png" data-alt="Ironing board source behavior">
-        <img src="assets/slide01-hero.png" alt="Ironing board source behavior">
+      <button class="visual wide-visual zoom" type="button" data-src="assets/slide02-spark.png" data-alt="People using an ironing board outdoors as an improvised table">
+        <img src="assets/slide02-spark.png" alt="People using an ironing board outdoors as an improvised table">
       </button>
       <div class="copy">
-        <p class="eyebrow" data-i18n="sparkEyebrow">The Useful Part of the Hack</p>
-        <h2 data-i18n="sparkTitle">This is not about making a novelty table.</h2>
-        <p data-i18n="sparkBody">The useful insight is simpler: people already understand how to carry, deploy, adjust, and trust this kind of folding surface.</p>
-        <p data-i18n="sparkBody2">For Westfield, the strongest translation is not a party ironing board. It is a rugged outdoor work surface that deploys instantly.</p>
+        <p class="eyebrow" data-i18n="sparkEyebrow">Trend Signal</p>
+        <h2 data-i18n="sparkTitle">A strange behavior showed us a useful product logic.</h2>
+        <p data-i18n="sparkBody">People in Belgium have been carrying ironing boards into parks, street parties, student gatherings, and raves, then using them as shared outdoor tables.</p>
+        <p data-i18n="sparkBody2">We are not treating that as validated demand. We are treating it as early evidence that a fold-flat, height-adjustable surface already makes sense outside the laundry room.</p>
+        <ul>
+          <li data-i18n="spark1">The behavior is social-media-documented and repeatedly visible enough to study.</li>
+          <li data-i18n="spark2">The table use is practical: drinks, food, phones, and shared group surface area.</li>
+          <li data-i18n="spark3">The real insight is the mechanism, not the novelty of the object.</li>
+        </ul>
       </div>
     </div>
-    <div class="slide-number">02 / 09</div>
+    <div class="slide-number">02 / 10</div>
   </section>
 
   <section class="slide band" id="slide-3">
+    <div class="slide-content">
+      <div class="copy">
+        <p class="eyebrow" data-i18n="planEyebrow">Westfield Plan</p>
+        <h2 data-i18n="planTitle">Translate the hack into a simple outdoor utility platform.</h2>
+        <p data-i18n="planBody">The plan is not to build a better party ironing board. It is to take the architecture seriously and move it into Westfield territory: outdoor furniture, camp utility, wagons, carts, coolers, and field work.</p>
+      </div>
+      <div class="lane-grid">
+        <div class="lane"><span data-i18n="plan1K">Lead concept</span><p data-i18n="plan1">Camp / Field Utility Board as the first and cleanest product expression.</p></div>
+        <div class="lane"><span data-i18n="plan2K">Mechanism proof</span><p data-i18n="plan2">Validate fold-flat deployment, infinite height adjustment, locking, feet, and loaded stability.</p></div>
+        <div class="lane"><span data-i18n="plan3K">Outdoor fit</span><p data-i18n="plan3">Use a hard top, field-ready feet, carry logic, and wagon-compatible storage.</p></div>
+        <div class="lane"><span data-i18n="plan4K">Business lanes</span><p data-i18n="plan4">Camp, hunt, fish, garden, tailgate, range, coolers, drink support, and utility systems.</p></div>
+        <div class="lane"><span data-i18n="plan5K">VA / VE path</span><p data-i18n="plan5">Reuse tubing, hinges, locks, feet, handles, and table components where possible.</p></div>
+        <div class="lane"><span data-i18n="plan6K">Future family</span><p data-i18n="plan6">If the mechanism proves out, extend into wagon-side surfaces and related fold-flat table formats.</p></div>
+      </div>
+    </div>
+    <div class="slide-number">03 / 10</div>
+  </section>
+
+  <section class="slide band" id="slide-4">
     <div class="slide-content">
       <div class="copy">
         <p class="eyebrow" data-i18n="deployEyebrow">Deployment</p>
@@ -306,10 +360,10 @@
         <div class="step"><b data-i18n="deployStep4K">04 Use</b><p data-i18n="deployStep4">The user gets instant counter space without building, unfolding, or clipping together a camp table.</p></div>
       </div>
     </div>
-    <div class="slide-number">03 / 09</div>
+    <div class="slide-number">04 / 10</div>
   </section>
 
-  <section class="slide" id="slide-4">
+  <section class="slide" id="slide-5">
     <div class="slide-content two-col">
       <div class="copy">
         <p class="eyebrow" data-i18n="adjustEyebrow">Adjustment</p>
@@ -323,10 +377,10 @@
         <div class="metric"><span data-i18n="height3K">Low</span><p data-i18n="height3">Coffee-table height for chairs, coolers, kids, or lounge use.</p></div>
       </div>
     </div>
-    <div class="slide-number">04 / 09</div>
+    <div class="slide-number">05 / 10</div>
   </section>
 
-  <section class="slide" id="slide-5">
+  <section class="slide" id="slide-6">
     <div class="slide-content reverse">
       <button class="visual contain zoom" type="button" data-src="assets/slide04-anatomy.png" data-alt="Ironing board mechanism anatomy">
         <img src="assets/slide04-anatomy.png" alt="Ironing board mechanism anatomy">
@@ -338,10 +392,10 @@
         <p data-i18n="simpleBody2">That means fewer components, fewer failure points, and a better path to a durable outdoor version that still feels obvious to use.</p>
       </div>
     </div>
-    <div class="slide-number">05 / 09</div>
+    <div class="slide-number">06 / 10</div>
   </section>
 
-  <section class="slide band" id="slide-6">
+  <section class="slide band" id="slide-7">
     <div class="slide-content">
       <div class="copy">
         <p class="eyebrow" data-i18n="whyEyebrow">Why This Works</p>
@@ -354,10 +408,10 @@
         <div class="metric"><span data-i18n="why3K">Familiar</span><p data-i18n="why3">The motion is already understood by millions of users.</p></div>
       </div>
     </div>
-    <div class="slide-number">06 / 09</div>
+    <div class="slide-number">07 / 10</div>
   </section>
 
-  <section class="slide" id="slide-7">
+  <section class="slide" id="slide-8">
     <div class="slide-content two-col">
       <div class="copy">
         <p class="eyebrow" data-i18n="outdoorEyebrow">Outdoor Translation</p>
@@ -374,10 +428,10 @@
         <img src="assets/slide08-feature-directions.png" alt="Feature directions for field utility board">
       </button>
     </div>
-    <div class="slide-number">07 / 09</div>
+    <div class="slide-number">08 / 10</div>
   </section>
 
-  <section class="slide" id="slide-8">
+  <section class="slide" id="slide-9">
     <div class="slide-content">
       <div class="copy">
         <p class="eyebrow" data-i18n="proveEyebrow">Prototype Focus</p>
@@ -390,10 +444,10 @@
         <div class="step"><b data-i18n="prove4K">Packout</b><p data-i18n="prove4">Confirm folded thickness, carry comfort, and wagon compatibility.</p></div>
       </div>
     </div>
-    <div class="slide-number">08 / 09</div>
+    <div class="slide-number">09 / 10</div>
   </section>
 
-  <section class="slide" id="slide-9">
+  <section class="slide" id="slide-10">
     <div class="slide-content">
       <div class="copy">
         <p class="eyebrow" data-i18n="closeEyebrow">Recommendation</p>
@@ -403,7 +457,7 @@
       </div>
     </div>
     <div class="note" data-i18n="legal">Confidential · Westfield Outdoors · Industrial Design</div>
-    <div class="slide-number">09 / 09</div>
+    <div class="slide-number">10 / 10</div>
   </section>
 
   <div class="lightbox" id="lightbox" aria-hidden="true">
@@ -418,10 +472,28 @@
         coverTitle: '营地 / 野外多功能工作台',
         coverSub: '一个聚焦的产品方向：把熨衣板机构转化为可快速展开的户外工作台面。',
         noteSprint: 'Westfield Outdoors · 营地 / 野外多功能工作台',
-        sparkEyebrow: '这个民间用法真正有价值的部分',
-        sparkTitle: '这不是要做一个猎奇桌子。',
-        sparkBody: '真正有用的洞察更简单：人们已经理解如何搬运、展开、调节并信任这种折叠台面。',
-        sparkBody2: '对 Westfield 来说，最强的转化方向不是派对熨衣板，而是一个能瞬间展开的坚固户外工作台。',
+        sparkEyebrow: '趋势信号',
+        sparkTitle: '一个奇怪行为，暴露出有价值的产品逻辑。',
+        sparkBody: '在比利时，人们把熨衣板带到公园、街头派对、学生聚会和电音活动中，并把它当作共享户外桌面使用。',
+        sparkBody2: '我们不是把它当作已经验证的市场需求，而是把它当作早期证据：一个可平折、高度可调的台面，在洗衣房之外也有合理用途。',
+        spark1: '这个行为已在社交媒体上被记录，并反复出现到值得研究的程度。',
+        spark2: '桌面用途很实际：饮料、食物、手机，以及多人共享台面。',
+        spark3: '真正的洞察是机构逻辑，而不是物件本身的猎奇感。',
+        planEyebrow: 'Westfield 计划',
+        planTitle: '把这个民间用法转化为简单的户外工具平台。',
+        planBody: '我们的计划不是做一个更好的派对熨衣板，而是认真看待这个结构，并把它移到 Westfield 的业务领域：户外家具、营地工具、营地车、推车、冷藏箱和野外工作场景。',
+        plan1K: '主推概念',
+        plan1: '营地 / 野外多功能工作台，是第一个、也是最干净的产品表达。',
+        plan2K: '机构验证',
+        plan2: '验证平折展开、无级高度调节、锁定、脚垫和载物稳定性。',
+        plan3K: '户外适配',
+        plan3: '采用硬质台面、适合野外的脚垫、携带逻辑和营地车兼容收纳。',
+        plan4K: '业务场景',
+        plan4: '露营、狩猎、钓鱼、园艺、尾门聚会、靶场、冷藏箱、饮料支撑和工具系统。',
+        plan5K: 'VA / VE 路径',
+        plan5: '尽可能复用管材、铰链、锁扣、脚垫、把手和桌面部件。',
+        plan6K: '未来家族',
+        plan6: '如果机构验证成功，可延展到营地车侧边台面和相关平折桌类产品。',
         deployEyebrow: '展开方式',
         deployTitle: '走到位置。弹开支腿。马上可用。',
         deployBody: '熨衣板有一个很少见的设置行为：一个人把它拿到使用位置，用手臂的快速动作打开支腿，立刻得到一个可用台面。',
