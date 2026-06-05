@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camp / Field Utility Board</title>
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #f4f4f0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      background: #f4f4f0;
+    }
+    .status {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      color: #131313;
+      text-align: center;
+    }
+    .status p {
+      max-width: 34rem;
+      color: #565650;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <div class="status" id="status">
+    <p>Loading Camp / Field Utility Board presentation...</p>
+  </div>
+  <iframe id="deck" title="Camp / Field Utility Board presentation"></iframe>
+  <script>
+    const deck = document.getElementById('deck');
+    const statusEl = document.getElementById('status');
+    const repoPath = 'maxmcolem-a11y/westfield-presentations';
+    const deckPath = 'camp-field-utility-board/';
+    const assetBase = `https://fastly.jsdelivr.net/gh/${repoPath}@main/${deckPath}`;
+    const assetFallbacks = [
+      `https://fastly.jsdelivr.net/gh/${repoPath}@main/${deckPath}`,
+      `https://gcore.jsdelivr.net/gh/${repoPath}@main/${deckPath}`,
+      `https://cdn.jsdelivr.net/gh/${repoPath}@main/${deckPath}`,
+      `https://raw.githack.com/${repoPath}/main/${deckPath}`,
+      `https://maxmcolem-a11y.github.io/westfield-presentations/${deckPath}`
+    ];
+    const sources = [
+      `https://raw.githack.com/${repoPath}/main/${deckPath}index.html`,
+      `https://cdn.jsdelivr.net/gh/${repoPath}@main/${deckPath}index.html`,
+      `https://maxmcolem-a11y.github.io/westfield-presentations/${deckPath}`
+    ];
+
+    function prepare(html) {
+      const baseTag = `<base href="${assetBase}">`;
+      const fallbackScript = `<script>
+        (() => {
+          const bases = ${JSON.stringify(assetFallbacks)};
+          const nextUrl = (current, nextIndex) => {
+            const match = current.match(/assets\\\\/[^"'?#]+/);
+            if (!match || nextIndex >= bases.length) return null;
+            return bases[nextIndex] + match[0];
+          };
+          document.querySelectorAll('img').forEach((img) => {
+            img.dataset.mirrorIndex = '0';
+            img.addEventListener('error', () => {
+              const nextIndex = Number(img.dataset.mirrorIndex || 0) + 1;
+              const url = nextUrl(img.src, nextIndex);
+              if (!url) return;
+              img.dataset.mirrorIndex = String(nextIndex);
+              img.src = url;
+            });
+          });
+          document.querySelectorAll('[data-src]').forEach((el) => {
+            const src = el.getAttribute('data-src');
+            if (src && src.startsWith('assets/')) el.setAttribute('data-src', bases[0] + src);
+          });
+        })();
+      <\\/script>`;
+      return html
+        .replace(/<head([^>]*)>/i, `<head$1>${baseTag}`)
+        .replace(/<\/body>/i, `${fallbackScript}</body>`);
+    }
+
+    async function loadDeck() {
+      const errors = [];
+      for (const source of sources) {
+        try {
+          const response = await fetch(source, { cache: 'no-store' });
+          if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+          const html = await response.text();
+          if (!html.includes('Camp / Field Utility Board')) {
+            throw new Error('Unexpected deck content');
+          }
+          deck.srcdoc = prepare(html);
+          statusEl.style.display = 'none';
+          return;
+        } catch (error) {
+          errors.push(`${source}: ${error.message}`);
+        }
+      }
+      statusEl.innerHTML = `<p>Could not load the mirrored deck. Try the GitHub Pages version or refresh this page.<br><br>${errors.join('<br>')}</p>`;
+    }
+
+    loadDeck();
+  </script>
+</body>
+</html>
