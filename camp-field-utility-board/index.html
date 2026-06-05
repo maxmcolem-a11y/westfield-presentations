@@ -385,9 +385,15 @@
       font-size: clamp(.95rem, 1.25vw, 1.14rem);
     }
     .mechanism-page {
-      grid-template-columns: minmax(0, .78fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, .66fr) minmax(0, 1.24fr);
       gap: clamp(1.2rem, 2.6vw, 3rem);
       align-items: center;
+    }
+    .mechanism-panels {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(.75rem, 1.2vw, 1rem);
+      align-items: stretch;
     }
     .mechanism-list {
       display: grid;
@@ -406,7 +412,7 @@
       color: var(--ink);
       font-weight: 850;
       line-height: 1.16;
-      font-size: clamp(1rem, 1.38vw, 1.24rem);
+      font-size: clamp(.92rem, 1.16vw, 1.1rem);
     }
     .mechanism-kicker {
       color: var(--accent);
@@ -446,7 +452,7 @@
       cursor: pointer;
     }
     @media (max-width: 900px) {
-      .two-col, .reverse, .deploy-layout, .mechanism-page { grid-template-columns: 1fr; }
+      .two-col, .reverse, .deploy-layout, .mechanism-page, .mechanism-panels { grid-template-columns: 1fr; }
       .slide { overflow: auto; }
       .metric-grid, .steps, .lane-grid, .critical-path, .question-list { grid-template-columns: 1fr; }
       .motion-rail { justify-self: stretch; }
@@ -465,7 +471,6 @@
     <button type="button" data-slide="5" aria-label="Go to slide 6"></button>
     <button type="button" data-slide="6" aria-label="Go to slide 7"></button>
     <button type="button" data-slide="7" aria-label="Go to slide 8"></button>
-    <button type="button" data-slide="8" aria-label="Go to slide 9"></button>
   </nav>
 
   <section class="slide hero" id="slide-1">
@@ -481,7 +486,7 @@
       </button>
     </div>
     <div class="note" data-i18n="noteSprint">Westfield Outdoors · Camp / Field Utility Board</div>
-    <div class="slide-number">01 / 09</div>
+    <div class="slide-number">01 / 08</div>
   </section>
 
   <section class="slide" id="slide-2">
@@ -501,7 +506,7 @@
         </ul>
       </div>
     </div>
-    <div class="slide-number">02 / 09</div>
+    <div class="slide-number">02 / 08</div>
   </section>
 
   <section class="slide band" id="slide-3">
@@ -520,7 +525,7 @@
         <div class="lane"><span data-i18n="plan6K">Prototype goal</span><p data-i18n="plan6">Build the simplest credible version and test whether the user behavior feels immediate.</p></div>
       </div>
     </div>
-    <div class="slide-number">03 / 09</div>
+    <div class="slide-number">03 / 08</div>
   </section>
 
   <section class="slide band" id="slide-4">
@@ -538,48 +543,39 @@
         <div class="motion-step"><span class="motion-index">04</span><div><b data-i18n="deployStep4K">Use</b><p data-i18n="deployStep4">The user gets instant counter space without building, unfolding, or clipping together a camp table.</p></div></div>
       </div>
     </div>
-    <div class="slide-number">04 / 09</div>
+    <div class="slide-number">04 / 08</div>
   </section>
 
   <section class="slide" id="slide-5">
     <div class="slide-content mechanism-page">
       <div class="copy">
         <p class="eyebrow" data-i18n="mechanismGoodEyebrow">Mechanism Anatomy</p>
-        <h2 data-i18n="mechanismGoodTitle">What the mechanism gets right.</h2>
-        <p data-i18n="mechanismGoodBody">The reason this is worth studying is that the base architecture already solves a lot of portable-surface problems before we redesign anything.</p>
+        <h2 data-i18n="mechanismGoodTitle">What the mechanism gets right — and where outdoor use exposes it.</h2>
+        <p data-i18n="mechanismGoodBody">The design challenge is keeping the low-cost simplicity while correcting the failure points that show up outside flat indoor flooring.</p>
       </div>
-      <div class="mechanism-list">
-        <p class="mechanism-kicker" data-i18n="mechanismGoodKicker">Where it earns its keep</p>
-        <div class="mechanism-card"><p data-i18n="mechanismGood1">Folds flat for storage and transport</p></div>
-        <div class="mechanism-card"><p data-i18n="mechanismGood2">Fast to set up and break down</p></div>
-        <div class="mechanism-card"><p data-i18n="mechanismGood3">Multiple height positions</p></div>
-        <div class="mechanism-card"><p data-i18n="mechanismGood4">Simple, low-cost metal tube construction</p></div>
-        <div class="mechanism-card"><p data-i18n="mechanismGood5">Familiar lock architecture</p></div>
-      </div>
-    </div>
-    <div class="slide-number">05 / 09</div>
-  </section>
-
-  <section class="slide band" id="slide-6">
-    <div class="slide-content mechanism-page">
-      <div class="copy">
-        <p class="eyebrow" data-i18n="mechanismRiskEyebrow">Outdoor Failure Points</p>
-        <h2 data-i18n="mechanismRiskTitle">Where outdoor use exposes it.</h2>
-        <p data-i18n="mechanismRiskBody">The design challenge is keeping the useful simplicity while correcting the risks that show up once the board leaves flat indoor flooring.</p>
-      </div>
-      <div class="mechanism-list">
-        <p class="mechanism-kicker" data-i18n="mechanismRiskKicker">What the Camp / Field version must solve</p>
-        <div class="mechanism-card risk"><p data-i18n="mechanismRisk1">Wobble and tip risk under real outdoor loads</p></div>
-        <div class="mechanism-card risk"><p data-i18n="mechanismRisk2">Indoor surface is not field-durable</p></div>
-        <div class="mechanism-card risk"><p data-i18n="mechanismRisk3">Small feet that sink in soft ground</p></div>
-        <div class="mechanism-card risk"><p data-i18n="mechanismRisk4">Accidental collapse risk</p></div>
-        <div class="mechanism-card risk"><p data-i18n="mechanismRisk5">Narrow stance on rough ground</p></div>
+      <div class="mechanism-panels">
+        <div class="mechanism-list">
+          <p class="mechanism-kicker" data-i18n="mechanismGoodKicker">Where it earns its keep</p>
+          <div class="mechanism-card"><p data-i18n="mechanismGood1">Folds flat for storage and transport</p></div>
+          <div class="mechanism-card"><p data-i18n="mechanismGood2">Fast to set up and break down</p></div>
+          <div class="mechanism-card"><p data-i18n="mechanismGood3">Multiple height positions</p></div>
+          <div class="mechanism-card"><p data-i18n="mechanismGood4">Simple, low-cost metal tube construction</p></div>
+          <div class="mechanism-card"><p data-i18n="mechanismGood5">Familiar lock architecture</p></div>
+        </div>
+        <div class="mechanism-list">
+          <p class="mechanism-kicker" data-i18n="mechanismRiskKicker">What the Camp / Field version must solve</p>
+          <div class="mechanism-card risk"><p data-i18n="mechanismRisk1">Side-load wobble under real outdoor use</p></div>
+          <div class="mechanism-card risk"><p data-i18n="mechanismRisk2">Indoor surface is not field-durable</p></div>
+          <div class="mechanism-card risk"><p data-i18n="mechanismRisk3">Small feet that sink in soft ground</p></div>
+          <div class="mechanism-card risk"><p data-i18n="mechanismRisk4">Accidental collapse risk</p></div>
+          <div class="mechanism-card risk"><p data-i18n="mechanismRisk5">Narrow stance on rough ground</p></div>
+        </div>
       </div>
     </div>
-    <div class="slide-number">06 / 09</div>
+    <div class="slide-number">05 / 08</div>
   </section>
 
-  <section class="slide" id="slide-7">
+  <section class="slide" id="slide-6">
     <div class="slide-content two-col">
       <div class="copy">
         <p class="eyebrow" data-i18n="outdoorEyebrow">Outdoor Translation</p>
@@ -596,10 +592,10 @@
         <img src="assets/slide07-field-board-reference.jpg" alt="Outdoor folding board prototype reference">
       </button>
     </div>
-    <div class="slide-number">07 / 09</div>
+    <div class="slide-number">06 / 08</div>
   </section>
 
-  <section class="slide" id="slide-8">
+  <section class="slide" id="slide-7">
     <div class="slide-content">
       <div class="copy">
         <p class="eyebrow" data-i18n="proveEyebrow">MVP Path</p>
@@ -614,10 +610,10 @@
         <div class="step"><small data-i18n="prove6T">Late July / August</small><b data-i18n="prove6K">Review sample decision</b><p data-i18n="prove6">Deliver 2-3 credible samples with target BOM, open issues, and go/no-go recommendation: continue into product development, simplify further, or stop if the mechanism cannot meet the use case.</p></div>
       </div>
     </div>
-    <div class="slide-number">08 / 09</div>
+    <div class="slide-number">07 / 08</div>
   </section>
 
-  <section class="slide band" id="slide-9">
+  <section class="slide band" id="slide-8">
     <div class="slide-content">
       <div class="copy">
         <p class="eyebrow" data-i18n="factoryEyebrow">Factory Visit</p>
@@ -635,7 +631,7 @@
       </div>
     </div>
     <div class="note" data-i18n="legal">Confidential · Westfield Outdoors · Industrial Design</div>
-    <div class="slide-number">09 / 09</div>
+    <div class="slide-number">08 / 08</div>
   </section>
 
   <div class="lightbox" id="lightbox" aria-hidden="true">
@@ -686,8 +682,8 @@
         deployStep4K: '使用',
         deployStep4: '用户立即获得台面空间，不需要搭建、插接或组装营地桌。',
         mechanismGoodEyebrow: '机构结构',
-        mechanismGoodTitle: '这个机构做对了什么。',
-        mechanismGoodBody: '它值得研究，是因为基础结构在重新设计之前，就已经解决了很多便携台面的核心问题。',
+        mechanismGoodTitle: '这个机构做对了什么，以及户外使用会暴露什么问题。',
+        mechanismGoodBody: '设计挑战是保留它低成本的简单性，同时修正离开平整室内地面后出现的失效点。',
         mechanismGoodKicker: '它有价值的地方',
         mechanismGood1: '可平折，便于收纳和运输',
         mechanismGood2: '展开和收起都很快',
@@ -698,7 +694,7 @@
         mechanismRiskTitle: '户外使用会暴露的问题。',
         mechanismRiskBody: '设计挑战是保留它有用的简单性，同时修正离开平整室内地面后出现的风险。',
         mechanismRiskKicker: '营地 / 野外版本必须解决的问题',
-        mechanismRisk1: '真实户外受力下会晃动或倾倒',
+        mechanismRisk1: '真实户外使用中，侧向受力会晃动',
         mechanismRisk2: '室内台面不适合野外使用',
         mechanismRisk3: '小脚垫会陷入软地面',
         mechanismRisk4: '有意外折叠风险',
