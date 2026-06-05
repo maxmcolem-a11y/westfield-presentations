@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camp / Field Utility Board</title>
+  <style>
+    :root {
+      --bg: #f4f4f0;
+      --paper: rgba(255,255,255,.94);
+      --ink: #131313;
+      --muted: #565650;
+      --line: rgba(20,20,18,.13);
+      --accent: #d43f32;
+      --green: #1f6e52;
+      --shadow: 0 18px 48px rgba(18,18,18,.09);
+      --pad: clamp(1rem, 3.2vw, 3rem);
+      --title: clamp(2.35rem, 5.8vw, 5.8rem);
+      --h2: clamp(1.75rem, 3.6vw, 3.8rem);
+      --body: clamp(1rem, 1.34vw, 1.28rem);
+      --small: clamp(.74rem, .92vw, .9rem);
+      --radius: 8px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; overflow-x: hidden; }
+    html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+    body {
+      color: var(--ink);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.16)),
+        linear-gradient(180deg, #f7f7f3 0%, #e9e9e3 100%);
+    }
+    h1, h2, h3, p, ul { margin: 0; }
+    h1, h2 { font-weight: 850; line-height: .96; letter-spacing: 0; }
+    h1 { font-size: var(--title); }
+    h2 { font-size: var(--h2); }
+    p, li { font-size: var(--body); line-height: 1.42; color: var(--muted); }
+    ul { padding-left: 1.1rem; display: grid; gap: .45rem; }
+    strong { color: var(--ink); }
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      scroll-snap-align: start;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide-content {
+      height: 100%;
+      padding: var(--pad);
+      display: grid;
+      align-items: center;
+      gap: clamp(1rem, 2vw, 2rem);
+    }
+    .two-col {
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1fr);
+    }
+    .reverse {
+      grid-template-columns: minmax(0, 1fr) minmax(0, .85fr);
+    }
+    .copy {
+      display: grid;
+      gap: clamp(.8rem, 1.4vw, 1.2rem);
+      max-width: 860px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: var(--small);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+    .hero h1 { max-width: 980px; }
+    .logo {
+      position: absolute;
+      top: var(--pad);
+      right: var(--pad);
+      width: clamp(130px, 16vw, 230px);
+      z-index: 5;
+    }
+    .logo img { width: 100%; height: auto; display: block; }
+    .visual {
+      width: 100%;
+      min-height: min(58vh, 560px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      padding: 0;
+      cursor: zoom-in;
+    }
+    .visual img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      object-fit: cover;
+    }
+    .hero-visual { min-height: min(62vh, 620px); }
+    .wide-visual { height: 72vh; }
+    .contain img { object-fit: contain; background: #f3f3ee; }
+    .note {
+      position: absolute;
+      left: var(--pad);
+      bottom: clamp(.75rem, 2vh, 1.3rem);
+      font-size: var(--small);
+      color: rgba(18,18,18,.52);
+    }
+    .slide-number {
+      position: absolute;
+      right: var(--pad);
+      bottom: clamp(.75rem, 2vh, 1.3rem);
+      font-size: var(--small);
+      color: rgba(18,18,18,.48);
+    }
+    .nav {
+      position: fixed;
+      right: clamp(.7rem, 1.3vw, 1.1rem);
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: .42rem;
+      z-index: 30;
+    }
+    .nav button {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(18,18,18,.2);
+      cursor: pointer;
+    }
+    .nav button.active { background: var(--accent); transform: scale(1.18); }
+    .lang {
+      position: fixed;
+      left: 1rem;
+      bottom: 1rem;
+      z-index: 60;
+      min-width: 68px;
+      min-height: 40px;
+      padding: .55rem .85rem;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,.94);
+      color: #111;
+      font-size: .85rem;
+      font-weight: 850;
+      cursor: pointer;
+      box-shadow: 0 10px 26px rgba(0,0,0,.18);
+      backdrop-filter: blur(8px);
+    }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(.8rem, 1.4vw, 1.2rem);
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      padding: clamp(1rem, 1.8vw, 1.45rem);
+      min-height: 150px;
+      display: grid;
+      align-content: space-between;
+      gap: .85rem;
+    }
+    .metric span {
+      color: var(--accent);
+      font-size: var(--small);
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .metric p {
+      color: var(--ink);
+      font-weight: 850;
+      line-height: 1.14;
+      font-size: clamp(1.05rem, 1.55vw, 1.42rem);
+    }
+    .band {
+      background: rgba(31,110,82,.08);
+      border-top: 1px solid rgba(31,110,82,.18);
+      border-bottom: 1px solid rgba(31,110,82,.18);
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(.8rem, 1.4vw, 1.2rem);
+    }
+    .step {
+      border-left: 5px solid var(--green);
+      background: var(--paper);
+      padding: clamp(1rem, 1.7vw, 1.35rem);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      min-height: 160px;
+    }
+    .step b {
+      color: var(--accent);
+      font-size: var(--small);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: .6rem;
+    }
+    .step p { color: var(--ink); font-weight: 800; line-height: 1.18; }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      z-index: 100;
+      background: rgba(18,18,18,.88);
+      padding: clamp(1rem, 3vw, 2.5rem);
+    }
+    .lightbox.open { display: grid; }
+    .lightbox img {
+      max-width: 96vw;
+      max-height: 92vh;
+      object-fit: contain;
+      background: white;
+      box-shadow: 0 24px 60px rgba(0,0,0,.35);
+    }
+    .close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.12);
+      color: white;
+      border-radius: 999px;
+      width: 42px;
+      height: 42px;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+    @media (max-width: 900px) {
+      .two-col, .reverse { grid-template-columns: 1fr; }
+      .slide { overflow: auto; }
+      .metric-grid, .steps { grid-template-columns: 1fr; }
+      .visual, .wide-visual { min-height: 38vh; height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <button class="lang" id="language-toggle" type="button" aria-label="Switch deck to Chinese" title="Switch deck to Chinese">中文</button>
+  <nav class="nav" aria-label="Slide navigation">
+    <button type="button" data-slide="0" aria-label="Go to slide 1"></button>
+    <button type="button" data-slide="1" aria-label="Go to slide 2"></button>
+    <button type="button" data-slide="2" aria-label="Go to slide 3"></button>
+    <button type="button" data-slide="3" aria-label="Go to slide 4"></button>
+    <button type="button" data-slide="4" aria-label="Go to slide 5"></button>
+    <button type="button" data-slide="5" aria-label="Go to slide 6"></button>
+    <button type="button" data-slide="6" aria-label="Go to slide 7"></button>
+    <button type="button" data-slide="7" aria-label="Go to slide 8"></button>
+    <button type="button" data-slide="8" aria-label="Go to slide 9"></button>
+  </nav>
+
+  <section class="slide hero" id="slide-1">
+    <div class="logo"><img src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo"></div>
+    <div class="slide-content two-col">
+      <div class="copy">
+        <p class="eyebrow" data-i18n="eyebrow">Industrial Design Sprint</p>
+        <h1 data-i18n="coverTitle">Camp / Field Utility Board</h1>
+        <p data-i18n="coverSub">A focused product case for turning ironing-board mechanics into a fast-deploying outdoor work surface.</p>
+      </div>
+      <button class="visual hero-visual zoom" type="button" data-src="assets/slide07-camp-field.png" data-alt="Camp field utility board concept">
+        <img src="assets/slide07-camp-field.png" alt="Camp field utility board concept">
+      </button>
+    </div>
+    <div class="note" data-i18n="noteSprint">Westfield Outdoors · Camp / Field Utility Board</div>
+    <div class="slide-number">01 / 09</div>
+  </section>
+
+  <section class="slide" id="slide-2">
+    <div class="slide-content reverse">
+      <button class="visual wide-visual zoom" type="button" data-src="assets/slide01-hero.png" data-alt="Ironing board source behavior">
+        <img src="assets/slide01-hero.png" alt="Ironing board source behavior">
+      </button>
+      <div class="copy">
+        <p class="eyebrow" data-i18n="sparkEyebrow">The Useful Part of the Hack</p>
+        <h2 data-i18n="sparkTitle">This is not about making a novelty table.</h2>
+        <p data-i18n="sparkBody">The useful insight is simpler: people already understand how to carry, deploy, adjust, and trust this kind of folding surface.</p>
+        <p data-i18n="sparkBody2">For Westfield, the strongest translation is not a party ironing board. It is a rugged outdoor work surface that deploys instantly.</p>
+      </div>
+    </div>
+    <div class="slide-number">02 / 09</div>
+  </section>
+
+  <section class="slide band" id="slide-3">
+    <div class="slide-content">
+      <div class="copy">
+        <p class="eyebrow" data-i18n="deployEyebrow">Deployment</p>
+        <h2 data-i18n="deployTitle">Walk it over. Pop the legs out. It is ready.</h2>
+        <p data-i18n="deployBody">An ironing board has a rare setup behavior: one person carries it to the spot, swings the legs open with a quick arm motion, and immediately has a usable surface.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><b data-i18n="deployStep1K">01 Carry</b><p data-i18n="deployStep1">Flat profile moves easily through a house, campsite, garage, dock, or tailgate area.</p></div>
+        <div class="step"><b data-i18n="deployStep2K">02 Swing</b><p data-i18n="deployStep2">The leg system opens in one familiar motion instead of requiring assembly.</p></div>
+        <div class="step"><b data-i18n="deployStep3K">03 Lock</b><p data-i18n="deployStep3">The same handle action puts the frame into a working position.</p></div>
+        <div class="step"><b data-i18n="deployStep4K">04 Use</b><p data-i18n="deployStep4">The user gets instant counter space without building, unfolding, or clipping together a camp table.</p></div>
+      </div>
+    </div>
+    <div class="slide-number">03 / 09</div>
+  </section>
+
+  <section class="slide" id="slide-4">
+    <div class="slide-content two-col">
+      <div class="copy">
+        <p class="eyebrow" data-i18n="adjustEyebrow">Adjustment</p>
+        <h2 data-i18n="adjustTitle">Infinite height adjustment is the real unlock.</h2>
+        <p data-i18n="adjustBody">A simple one-touch lever lets the surface move to the user's body, task, terrain, and chair height. It is not locked into two or three preset positions.</p>
+        <p data-i18n="adjustBody2">The important behavior: it can be adjusted even with items already sitting on the table, because the user is lifting the surface rather than rebuilding the product.</p>
+      </div>
+      <div class="metric-grid">
+        <div class="metric"><span data-i18n="height1K">Standing</span><p data-i18n="height1">Prep, grilling, fishing, range work, garden tasks.</p></div>
+        <div class="metric"><span data-i18n="height2K">Table / Desk</span><p data-i18n="height2">Camp meals, laptop work, drink station, gear staging.</p></div>
+        <div class="metric"><span data-i18n="height3K">Low</span><p data-i18n="height3">Coffee-table height for chairs, coolers, kids, or lounge use.</p></div>
+      </div>
+    </div>
+    <div class="slide-number">04 / 09</div>
+  </section>
+
+  <section class="slide" id="slide-5">
+    <div class="slide-content reverse">
+      <button class="visual contain zoom" type="button" data-src="assets/slide04-anatomy.png" data-alt="Ironing board mechanism anatomy">
+        <img src="assets/slide04-anatomy.png" alt="Ironing board mechanism anatomy">
+      </button>
+      <div class="copy">
+        <p class="eyebrow" data-i18n="simpleEyebrow">Simplicity</p>
+        <h2 data-i18n="simpleTitle">One spring can do both jobs.</h2>
+        <p data-i18n="simpleBody">The mechanism is valuable because it is not clever in an expensive way. The handle spring can support both adjustment and locking behavior.</p>
+        <p data-i18n="simpleBody2">That means fewer components, fewer failure points, and a better path to a durable outdoor version that still feels obvious to use.</p>
+      </div>
+    </div>
+    <div class="slide-number">05 / 09</div>
+  </section>
+
+  <section class="slide band" id="slide-6">
+    <div class="slide-content">
+      <div class="copy">
+        <p class="eyebrow" data-i18n="whyEyebrow">Why This Works</p>
+        <h2 data-i18n="whyTitle">It solves a real outdoor problem with a mechanism people already understand.</h2>
+        <p data-i18n="whyBody">Camp and field users constantly need temporary surface area. Existing solutions are often too low, too slow to assemble, too flimsy, or too specialized.</p>
+      </div>
+      <div class="metric-grid">
+        <div class="metric"><span data-i18n="why1K">Fast</span><p data-i18n="why1">Set up takes seconds, not parts or poles.</p></div>
+        <div class="metric"><span data-i18n="why2K">Flexible</span><p data-i18n="why2">One table covers standing, seated, and low use cases.</p></div>
+        <div class="metric"><span data-i18n="why3K">Familiar</span><p data-i18n="why3">The motion is already understood by millions of users.</p></div>
+      </div>
+    </div>
+    <div class="slide-number">06 / 09</div>
+  </section>
+
+  <section class="slide" id="slide-7">
+    <div class="slide-content two-col">
+      <div class="copy">
+        <p class="eyebrow" data-i18n="outdoorEyebrow">Outdoor Translation</p>
+        <h2 data-i18n="outdoorTitle">Keep the mechanism. Rebuild the surface and feet for the field.</h2>
+        <p data-i18n="outdoorBody">The concept should not inherit the weak parts of a household ironing board. It should preserve the deployment logic while correcting the outdoor failure points.</p>
+        <ul>
+          <li data-i18n="outdoor1">Rigid wipeable or perforated hard top</li>
+          <li data-i18n="outdoor2">Oversized feet for grass, gravel, dirt, and sand</li>
+          <li data-i18n="outdoor3">Positive lock feedback and pinch-point protection</li>
+          <li data-i18n="outdoor4">Carry handle, wagon storage, and tie-down logic</li>
+        </ul>
+      </div>
+      <button class="visual zoom" type="button" data-src="assets/slide08-feature-directions.png" data-alt="Feature directions for field utility board">
+        <img src="assets/slide08-feature-directions.png" alt="Feature directions for field utility board">
+      </button>
+    </div>
+    <div class="slide-number">07 / 09</div>
+  </section>
+
+  <section class="slide" id="slide-8">
+    <div class="slide-content">
+      <div class="copy">
+        <p class="eyebrow" data-i18n="proveEyebrow">Prototype Focus</p>
+        <h2 data-i18n="proveTitle">The next step is not styling. It is proving the mechanism in field conditions.</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><b data-i18n="prove1K">Stability</b><p data-i18n="prove1">Test side loads, uneven ground, and loaded-table adjustment.</p></div>
+        <div class="step"><b data-i18n="prove2K">Feet</b><p data-i18n="prove2">Find a foot geometry that resists sinking without becoming bulky.</p></div>
+        <div class="step"><b data-i18n="prove3K">Lock</b><p data-i18n="prove3">Validate a simple handle/spring lock that feels safe and immediate.</p></div>
+        <div class="step"><b data-i18n="prove4K">Packout</b><p data-i18n="prove4">Confirm folded thickness, carry comfort, and wagon compatibility.</p></div>
+      </div>
+    </div>
+    <div class="slide-number">08 / 09</div>
+  </section>
+
+  <section class="slide" id="slide-9">
+    <div class="slide-content">
+      <div class="copy">
+        <p class="eyebrow" data-i18n="closeEyebrow">Recommendation</p>
+        <h2 data-i18n="closeTitle">Build the simplest version first.</h2>
+        <p data-i18n="closeBody">A Camp / Field Utility Board is the cleanest, most Westfield-ready translation of the ironing-board mechanism. It avoids the novelty trap and focuses on practical outdoor utility.</p>
+        <p data-i18n="closeBody2">Prototype the frame, adjustment, lock, feet, and hard top before expanding into any broader product family.</p>
+      </div>
+    </div>
+    <div class="note" data-i18n="legal">Confidential · Westfield Outdoors · Industrial Design</div>
+    <div class="slide-number">09 / 09</div>
+  </section>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="close" id="close-lightbox" type="button" aria-label="Close image">×</button>
+    <img alt="">
+  </div>
+
+  <script>
+    const translations = {
+      zh: {
+        eyebrow: '工业设计冲刺',
+        coverTitle: '营地 / 野外多功能工作台',
+        coverSub: '一个聚焦的产品方向：把熨衣板机构转化为可快速展开的户外工作台面。',
+        noteSprint: 'Westfield Outdoors · 营地 / 野外多功能工作台',
+        sparkEyebrow: '这个民间用法真正有价值的部分',
+        sparkTitle: '这不是要做一个猎奇桌子。',
+        sparkBody: '真正有用的洞察更简单：人们已经理解如何搬运、展开、调节并信任这种折叠台面。',
+        sparkBody2: '对 Westfield 来说，最强的转化方向不是派对熨衣板，而是一个能瞬间展开的坚固户外工作台。',
+        deployEyebrow: '展开方式',
+        deployTitle: '走到位置。弹开支腿。马上可用。',
+        deployBody: '熨衣板有一个很少见的设置行为：一个人把它拿到使用位置，用手臂的快速动作打开支腿，立刻得到一个可用台面。',
+        deployStep1K: '01 搬运',
+        deployStep1: '平折形态可以轻松穿过室内、营地、车库、码头或尾门区域。',
+        deployStep2K: '02 摆开',
+        deployStep2: '支腿系统用一个熟悉动作打开，而不是需要组装。',
+        deployStep3K: '03 锁定',
+        deployStep3: '同一个手柄动作让框架进入工作状态。',
+        deployStep4K: '04 使用',
+        deployStep4: '用户立即获得台面空间，不需要搭建、插接或组装营地桌。',
+        adjustEyebrow: '高度调节',
+        adjustTitle: '无级高度调节是真正的关键。',
+        adjustBody: '一个简单的一键手柄，让台面可以适应使用者身体、任务、地形和椅子高度，而不是被限制在两三个固定档位。',
+        adjustBody2: '重要行为是：即使台面上已经放了东西，也可以继续调节，因为用户是在提升台面，而不是重新组装产品。',
+        height1K: '站立高度',
+        height1: '备餐、烧烤、钓鱼、靶场、园艺任务。',
+        height2K: '桌面 / 书桌高度',
+        height2: '营地用餐、电脑工作、饮料站、装备整理。',
+        height3K: '低位高度',
+        height3: '适合椅旁、冷藏箱旁、儿童或休闲使用的茶几高度。',
+        simpleEyebrow: '机构简洁性',
+        simpleTitle: '一根弹簧可以完成两个任务。',
+        simpleBody: '这个机构有价值，是因为它不是昂贵的聪明设计。手柄弹簧可以同时支持高度调节和锁定行为。',
+        simpleBody2: '这意味着更少零件、更少失效点，也更容易发展成耐用的户外版本，同时保持直观易用。',
+        whyEyebrow: '为什么可行',
+        whyTitle: '它用用户已经理解的机构，解决真实户外问题。',
+        whyBody: '营地和野外用户经常需要临时台面。现有方案往往太低、组装太慢、太单薄，或用途太单一。',
+        why1K: '快速',
+        why1: '展开只需几秒，不需要零件或支杆。',
+        why2K: '灵活',
+        why2: '一张桌覆盖站立、坐姿和低位使用场景。',
+        why3K: '熟悉',
+        why3: '这个动作已经被大量用户理解。',
+        outdoorEyebrow: '户外转化',
+        outdoorTitle: '保留机构，重新设计台面和脚垫以适应野外。',
+        outdoorBody: '这个概念不应该继承家用熨衣板的弱点。它应该保留展开逻辑，同时修正户外失效点。',
+        outdoor1: '刚性、可擦洗或冲孔硬质台面',
+        outdoor2: '适合草地、碎石、泥土和沙地的大脚垫',
+        outdoor3: '明确锁定反馈和防夹手保护',
+        outdoor4: '把手、营地车收纳和绑带固定逻辑',
+        proveEyebrow: '样机重点',
+        proveTitle: '下一步不是造型，而是在野外条件下验证机构。',
+        prove1K: '稳定性',
+        prove1: '测试侧向载荷、不平地面，以及载物状态下的高度调节。',
+        prove2K: '脚垫',
+        prove2: '找到既防下陷又不笨重的脚垫几何。',
+        prove3K: '锁定',
+        prove3: '验证一个简单、安全、反应直接的手柄 / 弹簧锁定结构。',
+        prove4K: '收纳',
+        prove4: '确认折叠厚度、携带舒适性和营地车兼容性。',
+        closeEyebrow: '建议',
+        closeTitle: '先做最简单的版本。',
+        closeBody: '营地 / 野外多功能工作台是熨衣板机构最干净、最适合 Westfield 的转化方向。它避开猎奇感，聚焦实际户外用途。',
+        closeBody2: '先验证框架、高度调节、锁定、脚垫和硬质台面，再扩展到更大的产品家族。',
+        legal: '保密 · Westfield Outdoors · 工业设计'
+      }
+    };
+    const langButton = document.getElementById('language-toggle');
+    const i18nEls = [...document.querySelectorAll('[data-i18n]')];
+    i18nEls.forEach((el) => { el.dataset.en = el.textContent; });
+    function applyLanguage(lang) {
+      const isZh = lang === 'zh';
+      document.documentElement.lang = isZh ? 'zh-CN' : 'en';
+      window.localStorage.setItem('camp-field-board-language', isZh ? 'zh' : 'en');
+      document.title = isZh ? '营地 / 野外多功能工作台' : 'Camp / Field Utility Board';
+      i18nEls.forEach((el) => {
+        const key = el.dataset.i18n;
+        el.textContent = isZh ? translations.zh[key] : el.dataset.en;
+      });
+      langButton.textContent = isZh ? 'EN' : '中文';
+      const label = isZh ? '切换到英文' : 'Switch deck to Chinese';
+      langButton.setAttribute('aria-label', label);
+      langButton.setAttribute('title', label);
+    }
+    langButton.addEventListener('click', () => {
+      applyLanguage(document.documentElement.lang === 'zh-CN' ? 'en' : 'zh');
+    });
+    applyLanguage(window.localStorage.getItem('camp-field-board-language') === 'zh' ? 'zh' : 'en');
+
+    const slides = [...document.querySelectorAll('.slide')];
+    const dots = [...document.querySelectorAll('.nav button')];
+    function go(index) {
+      slides[Math.max(0, Math.min(slides.length - 1, index))].scrollIntoView({ behavior: 'smooth' });
+    }
+    dots.forEach((dot) => dot.addEventListener('click', () => go(Number(dot.dataset.slide))));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const index = slides.indexOf(entry.target);
+        dots.forEach((dot, dotIndex) => dot.classList.toggle('active', dotIndex === index));
+      });
+    }, { threshold: .55 });
+    slides.forEach((slide) => observer.observe(slide));
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightboxImg.removeAttribute('src');
+    }
+    document.querySelectorAll('.zoom').forEach((button) => {
+      button.addEventListener('click', () => {
+        lightboxImg.src = button.dataset.src;
+        lightboxImg.alt = button.dataset.alt || '';
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+      });
+    });
+    document.getElementById('close-lightbox').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (event) => { if (event.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+      if (lightbox.classList.contains('open')) return;
+      const current = dots.findIndex((dot) => dot.classList.contains('active'));
+      if (event.key === 'ArrowDown' || event.key === 'PageDown') go(current + 1);
+      if (event.key === 'ArrowUp' || event.key === 'PageUp') go(current - 1);
+    });
+  </script>
+</body>
+</html>
