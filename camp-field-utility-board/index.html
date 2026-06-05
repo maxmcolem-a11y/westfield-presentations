@@ -328,6 +328,37 @@
       line-height: 1.18;
       font-size: clamp(.95rem, 1.25vw, 1.14rem);
     }
+    .mechanism-page {
+      grid-template-columns: minmax(0, .78fr) minmax(0, 1fr);
+      gap: clamp(1.2rem, 2.6vw, 3rem);
+      align-items: center;
+    }
+    .mechanism-list {
+      display: grid;
+      gap: clamp(.75rem, 1.2vw, 1rem);
+    }
+    .mechanism-card {
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--green);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      padding: clamp(.9rem, 1.55vw, 1.2rem);
+    }
+    .mechanism-card.risk { border-left-color: var(--accent); }
+    .mechanism-card p {
+      color: var(--ink);
+      font-weight: 850;
+      line-height: 1.16;
+      font-size: clamp(1rem, 1.38vw, 1.24rem);
+    }
+    .mechanism-kicker {
+      color: var(--accent);
+      font-size: var(--small);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
     .lightbox {
       position: fixed;
       inset: 0;
@@ -359,7 +390,7 @@
       cursor: pointer;
     }
     @media (max-width: 900px) {
-      .two-col, .reverse, .deploy-layout { grid-template-columns: 1fr; }
+      .two-col, .reverse, .deploy-layout, .mechanism-page { grid-template-columns: 1fr; }
       .slide { overflow: auto; }
       .metric-grid, .steps, .lane-grid { grid-template-columns: 1fr; }
       .motion-step, .motion-step:nth-child(2), .motion-step:nth-child(3), .motion-step:nth-child(4) { margin-left: 0; }
@@ -473,31 +504,38 @@
   </section>
 
   <section class="slide" id="slide-6">
-    <div class="slide-content reverse">
-      <button class="visual contain zoom" type="button" data-src="assets/slide04-anatomy.png" data-alt="Ironing board mechanism anatomy">
-        <img src="assets/slide04-anatomy.png" alt="Ironing board mechanism anatomy">
-      </button>
+    <div class="slide-content mechanism-page">
       <div class="copy">
-        <p class="eyebrow" data-i18n="simpleEyebrow">Simplicity</p>
-        <h2 data-i18n="simpleTitle">One spring can do both jobs.</h2>
-        <p data-i18n="simpleBody">The mechanism is valuable because it is not clever in an expensive way. The handle spring can support both adjustment and locking behavior.</p>
-        <p data-i18n="simpleBody2">That means fewer components, fewer failure points, and a better path to a durable outdoor version that still feels obvious to use.</p>
+        <p class="eyebrow" data-i18n="mechanismGoodEyebrow">Mechanism Anatomy</p>
+        <h2 data-i18n="mechanismGoodTitle">What the mechanism gets right.</h2>
+        <p data-i18n="mechanismGoodBody">The reason this is worth studying is that the base architecture already solves a lot of portable-surface problems before we redesign anything.</p>
+      </div>
+      <div class="mechanism-list">
+        <p class="mechanism-kicker" data-i18n="mechanismGoodKicker">Where it earns its keep</p>
+        <div class="mechanism-card"><p data-i18n="mechanismGood1">Folds flat for storage and transport</p></div>
+        <div class="mechanism-card"><p data-i18n="mechanismGood2">Fast to set up and break down</p></div>
+        <div class="mechanism-card"><p data-i18n="mechanismGood3">Multiple height positions</p></div>
+        <div class="mechanism-card"><p data-i18n="mechanismGood4">Simple, low-cost metal tube construction</p></div>
+        <div class="mechanism-card"><p data-i18n="mechanismGood5">Familiar lock architecture</p></div>
       </div>
     </div>
     <div class="slide-number">06 / 10</div>
   </section>
 
   <section class="slide band" id="slide-7">
-    <div class="slide-content">
+    <div class="slide-content mechanism-page">
       <div class="copy">
-        <p class="eyebrow" data-i18n="whyEyebrow">Why This Works</p>
-        <h2 data-i18n="whyTitle">It solves a real outdoor problem with a mechanism people already understand.</h2>
-        <p data-i18n="whyBody">Camp and field users constantly need temporary surface area. Existing solutions are often too low, too slow to assemble, too flimsy, or too specialized.</p>
+        <p class="eyebrow" data-i18n="mechanismRiskEyebrow">Outdoor Failure Points</p>
+        <h2 data-i18n="mechanismRiskTitle">Where outdoor use exposes it.</h2>
+        <p data-i18n="mechanismRiskBody">The design challenge is keeping the useful simplicity while correcting the risks that show up once the board leaves flat indoor flooring.</p>
       </div>
-      <div class="metric-grid">
-        <div class="metric"><span data-i18n="why1K">Fast</span><p data-i18n="why1">Set up takes seconds, not parts or poles.</p></div>
-        <div class="metric"><span data-i18n="why2K">Flexible</span><p data-i18n="why2">One table covers standing, seated, and low use cases.</p></div>
-        <div class="metric"><span data-i18n="why3K">Familiar</span><p data-i18n="why3">The motion is already understood by millions of users.</p></div>
+      <div class="mechanism-list">
+        <p class="mechanism-kicker" data-i18n="mechanismRiskKicker">What the Camp / Field version must solve</p>
+        <div class="mechanism-card risk"><p data-i18n="mechanismRisk1">Unstable under side loads</p></div>
+        <div class="mechanism-card risk"><p data-i18n="mechanismRisk2">Pinch points throughout</p></div>
+        <div class="mechanism-card risk"><p data-i18n="mechanismRisk3">Small feet that sink in soft ground</p></div>
+        <div class="mechanism-card risk"><p data-i18n="mechanismRisk4">Accidental collapse risk</p></div>
+        <div class="mechanism-card risk"><p data-i18n="mechanismRisk5">Tipping on uneven surfaces</p></div>
       </div>
     </div>
     <div class="slide-number">07 / 10</div>
@@ -609,19 +647,24 @@
         height2: '营地用餐、电脑工作、饮料站、装备整理。',
         height3K: '低位高度',
         height3: '适合椅旁、冷藏箱旁、儿童或休闲使用的茶几高度。',
-        simpleEyebrow: '机构简洁性',
-        simpleTitle: '一根弹簧可以完成两个任务。',
-        simpleBody: '这个机构有价值，是因为它不是昂贵的聪明设计。手柄弹簧可以同时支持高度调节和锁定行为。',
-        simpleBody2: '这意味着更少零件、更少失效点，也更容易发展成耐用的户外版本，同时保持直观易用。',
-        whyEyebrow: '为什么可行',
-        whyTitle: '它用用户已经理解的机构，解决真实户外问题。',
-        whyBody: '营地和野外用户经常需要临时台面。现有方案往往太低、组装太慢、太单薄，或用途太单一。',
-        why1K: '快速',
-        why1: '展开只需几秒，不需要零件或支杆。',
-        why2K: '灵活',
-        why2: '一张桌覆盖站立、坐姿和低位使用场景。',
-        why3K: '熟悉',
-        why3: '这个动作已经被大量用户理解。',
+        mechanismGoodEyebrow: '机构结构',
+        mechanismGoodTitle: '这个机构做对了什么。',
+        mechanismGoodBody: '它值得研究，是因为基础结构在重新设计之前，就已经解决了很多便携台面的核心问题。',
+        mechanismGoodKicker: '它有价值的地方',
+        mechanismGood1: '可平折，便于收纳和运输',
+        mechanismGood2: '展开和收起都很快',
+        mechanismGood3: '多个高度档位',
+        mechanismGood4: '简单、低成本的金属管结构',
+        mechanismGood5: '用户熟悉的锁定结构',
+        mechanismRiskEyebrow: '户外失效点',
+        mechanismRiskTitle: '户外使用会暴露的问题。',
+        mechanismRiskBody: '设计挑战是保留它有用的简单性，同时修正离开平整室内地面后出现的风险。',
+        mechanismRiskKicker: '营地 / 野外版本必须解决的问题',
+        mechanismRisk1: '侧向受力时不稳定',
+        mechanismRisk2: '多处夹手风险',
+        mechanismRisk3: '小脚垫会陷入软地面',
+        mechanismRisk4: '有意外折叠风险',
+        mechanismRisk5: '不平地面上容易倾倒',
         outdoorEyebrow: '户外转化',
         outdoorTitle: '保留机构，重新设计台面和脚垫以适应野外。',
         outdoorBody: '这个概念不应该继承家用熨衣板的弱点。它应该保留展开逻辑，同时修正户外失效点。',
