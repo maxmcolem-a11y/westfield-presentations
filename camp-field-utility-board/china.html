@@ -46,6 +46,7 @@
     const statusEl = document.getElementById('status');
     const repoPath = 'maxmcolem-a11y/westfield-presentations';
     const deckPath = 'camp-field-utility-board/';
+    const version = new URLSearchParams(window.location.search).get('v') || String(Date.now());
     const assetBase = `https://fastly.jsdelivr.net/gh/${repoPath}@main/${deckPath}`;
     const assetFallbacks = [
       `https://fastly.jsdelivr.net/gh/${repoPath}@main/${deckPath}`,
@@ -95,7 +96,8 @@
       const errors = [];
       for (const source of sources) {
         try {
-          const response = await fetch(source, { cache: 'no-store' });
+          const cacheBustedSource = source.includes('?') ? `${source}&v=${version}` : `${source}?v=${version}`;
+          const response = await fetch(cacheBustedSource, { cache: 'no-store' });
           if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
           const html = await response.text();
           if (!html.includes('Camp / Field Utility Board')) {
