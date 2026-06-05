@@ -238,6 +238,28 @@
       margin-bottom: .6rem;
     }
     .step p { color: var(--ink); font-weight: 800; line-height: 1.18; }
+    .critical-path {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(.65rem, 1.05vw, 1rem);
+    }
+    .critical-path .step {
+      min-height: 188px;
+      padding: clamp(.85rem, 1.25vw, 1.15rem);
+      display: grid;
+      align-content: start;
+      gap: .45rem;
+    }
+    .step small {
+      color: var(--green);
+      font-size: clamp(.7rem, .84vw, .82rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .critical-path .step p {
+      font-size: clamp(.82rem, .98vw, 1rem);
+      line-height: 1.24;
+    }
     .deploy-layout {
       grid-template-columns: minmax(0, .82fr) minmax(0, 1fr);
       gap: clamp(1.4rem, 3vw, 3.5rem);
@@ -392,7 +414,7 @@
     @media (max-width: 900px) {
       .two-col, .reverse, .deploy-layout, .mechanism-page { grid-template-columns: 1fr; }
       .slide { overflow: auto; }
-      .metric-grid, .steps, .lane-grid { grid-template-columns: 1fr; }
+      .metric-grid, .steps, .lane-grid, .critical-path { grid-template-columns: 1fr; }
       .motion-rail { justify-self: stretch; }
       .visual, .wide-visual { min-height: 38vh; height: auto; }
     }
@@ -548,13 +570,15 @@
     <div class="slide-content">
       <div class="copy">
         <p class="eyebrow" data-i18n="proveEyebrow">MVP Path</p>
-        <h2 data-i18n="proveTitle">The August goal is a low-cost working sample, not a finished product.</h2>
+        <h2 data-i18n="proveTitle">Critical path to an August low-cost working sample.</h2>
       </div>
-      <div class="steps">
-        <div class="step"><b data-i18n="prove1K">Today</b><p data-i18n="prove1">Identify the closest existing factory frame and what can be reused without tooling.</p></div>
-        <div class="step"><b data-i18n="prove2K">Mid-June</b><p data-i18n="prove2">Freeze the MVP: hard top, wider feet, lock feel, folded size, and target cost.</p></div>
-        <div class="step"><b data-i18n="prove3K">Late June</b><p data-i18n="prove3">Build the first rough sample to prove stance, deployment, height range, and load behavior.</p></div>
-        <div class="step"><b data-i18n="prove4K">July</b><p data-i18n="prove4">Revise into an August-ready review sample with credible construction and pricing logic.</p></div>
+      <div class="steps critical-path">
+        <div class="step"><small data-i18n="prove1T">Factory visit · now</small><b data-i18n="prove1K">Choose the donor frame</b><p data-i18n="prove1">Find the closest existing ironing-board frame: cheapest, strongest, widest stance, and easiest to modify. Capture folded size, height range, tube sizes, lock style, rivets, hinges, and current BOM.</p></div>
+        <div class="step"><small data-i18n="prove2T">This week</small><b data-i18n="prove2K">Freeze the MVP scope</b><p data-i18n="prove2">One board only: existing folding frame, hard outdoor top, wider feet, usable carry/packout, and lock feedback. Exclude styling, product family ideas, and anything that triggers tooling before proof.</p></div>
+        <div class="step"><small data-i18n="prove3T">Mid-June</small><b data-i18n="prove3K">DFM and quote check</b><p data-i18n="prove3">Separate reuse from new work. Confirm what can be sampled from existing tube, hinge, lock, and assembly processes. Price the top, feet, labor, MOQ risk, and any unavoidable tooling.</p></div>
+        <div class="step"><small data-i18n="prove4T">Late June</small><b data-i18n="prove4K">First rough prototype</b><p data-i18n="prove4">Build ugly if needed. It only has to stand, fold, adjust, lock, and hold load. Test side load, rough ground, foot sinking, height positions, carry feel, and folded thickness.</p></div>
+        <div class="step"><small data-i18n="prove5T">July</small><b data-i18n="prove5K">Correct the weak points</b><p data-i18n="prove5">Revise stance, top stiffness, foot geometry, lock feel, and packout. Decide whether the mechanism is strong enough for outdoor use before investing in cosmetic refinement.</p></div>
+        <div class="step"><small data-i18n="prove6T">Late July / August</small><b data-i18n="prove6K">Review sample decision</b><p data-i18n="prove6">Deliver 2-3 credible samples with target BOM, open issues, and go/no-go recommendation: continue into product development, simplify further, or stop if the mechanism cannot meet the use case.</p></div>
       </div>
     </div>
     <div class="slide-number">08 / 10</div>
@@ -664,15 +688,25 @@
         outdoor3: '承重状态下也有明确锁定反馈',
         outdoor4: '把手、营地车收纳和绑带固定逻辑',
         proveEyebrow: 'MVP 路径',
-        proveTitle: '八月目标是低成本工作样机，而不是完成版产品。',
-        prove1K: '今天',
-        prove1: '确定最接近的现有工厂框架，以及哪些部分可以不开发模具直接复用。',
-        prove2K: '六月中旬',
-        prove2: '冻结 MVP：硬质台面、大脚垫、锁定手感、折叠尺寸和目标成本。',
-        prove3K: '六月下旬',
-        prove3: '制作第一版粗样，验证支撑、展开、高度范围和承重表现。',
-        prove4K: '七月',
-        prove4: '修正为八月可评审样机，具备可信结构和成本逻辑。',
+        proveTitle: '通往八月低成本工作样机的关键路径。',
+        prove1T: '工厂拜访 · 现在',
+        prove1K: '选择基础框架',
+        prove1: '找到最接近的现有熨衣板框架：最低成本、最高强度、支撑最宽、最容易修改。记录折叠尺寸、高度范围、管径、锁定方式、铆钉、铰链和现有 BOM。',
+        prove2T: '本周',
+        prove2K: '冻结 MVP 范围',
+        prove2: '只做一张工作台：现有折叠框架、户外硬质台面、大脚垫、可用的携带 / 收纳，以及锁定反馈。排除造型、产品系列想法，以及验证前会触发模具的内容。',
+        prove3T: '六月中旬',
+        prove3K: 'DFM 和报价检查',
+        prove3: '区分可复用和新增工作。确认哪些管材、铰链、锁定和装配流程可直接打样。核算台面、脚垫、人工、MOQ 风险和不可避免的模具。',
+        prove4T: '六月下旬',
+        prove4K: '第一版粗样',
+        prove4: '可以很粗糙。只需要能站立、折叠、调高、锁定和承重。测试侧向受力、粗糙地面、脚垫下陷、高度档位、携带感和折叠厚度。',
+        prove5T: '七月',
+        prove5K: '修正薄弱点',
+        prove5: '修正支撑宽度、台面刚性、脚垫几何、锁定手感和收纳。先判断机构是否足够适合户外，再投入外观精修。',
+        prove6T: '七月下旬 / 八月',
+        prove6K: '评审样机决策',
+        prove6: '交付 2-3 个可信样机，带目标 BOM、未解决问题和推进建议：进入产品开发、继续简化，或在机构无法满足用途时停止。',
         closeEyebrow: '建议',
         closeTitle: '先做最简单的版本。',
         closeBody: '营地 / 野外多功能工作台是熨衣板机构最干净、最适合 Westfield 的转化方向。它避开猎奇感，聚焦实际户外用途。',
