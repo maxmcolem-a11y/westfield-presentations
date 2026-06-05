@@ -238,6 +238,96 @@
       margin-bottom: .6rem;
     }
     .step p { color: var(--ink); font-weight: 800; line-height: 1.18; }
+    .deploy-layout {
+      grid-template-columns: minmax(0, .82fr) minmax(0, 1fr);
+      gap: clamp(1.4rem, 3vw, 3.5rem);
+      align-items: center;
+    }
+    .deploy-claim {
+      display: grid;
+      gap: clamp(.8rem, 1.4vw, 1.25rem);
+      max-width: 720px;
+    }
+    .deploy-claim h2 { max-width: 760px; }
+    .deploy-stat {
+      width: min(100%, 430px);
+      border: 1px solid rgba(31,110,82,.28);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.74);
+      box-shadow: var(--shadow);
+      padding: clamp(1rem, 2vw, 1.6rem);
+      display: grid;
+      gap: .25rem;
+    }
+    .deploy-stat strong {
+      color: var(--green);
+      font-size: clamp(2.7rem, 7vw, 6.7rem);
+      font-weight: 900;
+      line-height: .86;
+    }
+    .deploy-stat span {
+      color: var(--ink);
+      font-size: clamp(.95rem, 1.35vw, 1.18rem);
+      font-weight: 850;
+      line-height: 1.18;
+    }
+    .motion-rail {
+      position: relative;
+      display: grid;
+      gap: clamp(.75rem, 1.2vw, 1rem);
+      padding-left: clamp(.8rem, 1.4vw, 1.2rem);
+    }
+    .motion-rail:before {
+      content: "";
+      position: absolute;
+      left: clamp(.2rem, .65vw, .45rem);
+      top: 1.1rem;
+      bottom: 1.1rem;
+      width: 3px;
+      background: linear-gradient(180deg, var(--accent), var(--green));
+      border-radius: 999px;
+    }
+    .motion-step {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: clamp(.8rem, 1.2vw, 1rem);
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      padding: clamp(.85rem, 1.5vw, 1.2rem);
+      min-height: 104px;
+    }
+    .motion-step:nth-child(2) { margin-left: clamp(1rem, 4vw, 3.2rem); }
+    .motion-step:nth-child(3) { margin-left: clamp(.5rem, 2vw, 1.7rem); }
+    .motion-step:nth-child(4) { margin-left: clamp(1.4rem, 5vw, 4rem); }
+    .motion-index {
+      width: clamp(48px, 5vw, 70px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: white;
+      font-weight: 900;
+      font-size: clamp(1rem, 1.6vw, 1.5rem);
+      box-shadow: 0 12px 24px rgba(31,110,82,.18);
+    }
+    .motion-step b {
+      display: block;
+      color: var(--accent);
+      font-size: var(--small);
+      text-transform: uppercase;
+      margin-bottom: .35rem;
+    }
+    .motion-step p {
+      color: var(--ink);
+      font-weight: 800;
+      line-height: 1.18;
+      font-size: clamp(.95rem, 1.25vw, 1.14rem);
+    }
     .lightbox {
       position: fixed;
       inset: 0;
@@ -269,9 +359,10 @@
       cursor: pointer;
     }
     @media (max-width: 900px) {
-      .two-col, .reverse { grid-template-columns: 1fr; }
+      .two-col, .reverse, .deploy-layout { grid-template-columns: 1fr; }
       .slide { overflow: auto; }
       .metric-grid, .steps, .lane-grid { grid-template-columns: 1fr; }
+      .motion-step, .motion-step:nth-child(2), .motion-step:nth-child(3), .motion-step:nth-child(4) { margin-left: 0; }
       .visual, .wide-visual { min-height: 38vh; height: auto; }
     }
   </style>
@@ -347,17 +438,18 @@
   </section>
 
   <section class="slide band" id="slide-4">
-    <div class="slide-content">
-      <div class="copy">
+    <div class="slide-content deploy-layout">
+      <div class="deploy-claim">
         <p class="eyebrow" data-i18n="deployEyebrow">Deployment</p>
         <h2 data-i18n="deployTitle">Walk it over. Pop the legs out. It is ready.</h2>
         <p data-i18n="deployBody">An ironing board has a rare setup behavior: one person carries it to the spot, swings the legs open with a quick arm motion, and immediately has a usable surface.</p>
+        <div class="deploy-stat"><strong data-i18n="deployStatK">Seconds</strong><span data-i18n="deployStat">The value is instant setup, not a table that asks the user to assemble parts.</span></div>
       </div>
-      <div class="steps">
-        <div class="step"><b data-i18n="deployStep1K">01 Carry</b><p data-i18n="deployStep1">Flat profile moves easily through a house, campsite, garage, dock, or tailgate area.</p></div>
-        <div class="step"><b data-i18n="deployStep2K">02 Swing</b><p data-i18n="deployStep2">The leg system opens in one familiar motion instead of requiring assembly.</p></div>
-        <div class="step"><b data-i18n="deployStep3K">03 Lock</b><p data-i18n="deployStep3">The same handle action puts the frame into a working position.</p></div>
-        <div class="step"><b data-i18n="deployStep4K">04 Use</b><p data-i18n="deployStep4">The user gets instant counter space without building, unfolding, or clipping together a camp table.</p></div>
+      <div class="motion-rail">
+        <div class="motion-step"><span class="motion-index">01</span><div><b data-i18n="deployStep1K">Carry</b><p data-i18n="deployStep1">Flat profile moves easily through a house, campsite, garage, dock, or tailgate area.</p></div></div>
+        <div class="motion-step"><span class="motion-index">02</span><div><b data-i18n="deployStep2K">Pop</b><p data-i18n="deployStep2">A quick arm motion swings the leg system open instead of asking for assembly.</p></div></div>
+        <div class="motion-step"><span class="motion-index">03</span><div><b data-i18n="deployStep3K">Lock</b><p data-i18n="deployStep3">The handle action puts the frame into a working position with obvious feedback.</p></div></div>
+        <div class="motion-step"><span class="motion-index">04</span><div><b data-i18n="deployStep4K">Use</b><p data-i18n="deployStep4">The user gets instant counter space without building, unfolding, or clipping together a camp table.</p></div></div>
       </div>
     </div>
     <div class="slide-number">04 / 10</div>
@@ -497,13 +589,15 @@
         deployEyebrow: '展开方式',
         deployTitle: '走到位置。弹开支腿。马上可用。',
         deployBody: '熨衣板有一个很少见的设置行为：一个人把它拿到使用位置，用手臂的快速动作打开支腿，立刻得到一个可用台面。',
-        deployStep1K: '01 搬运',
+        deployStatK: '几秒',
+        deployStat: '价值在于即时展开，而不是让用户组装零件。',
+        deployStep1K: '搬运',
         deployStep1: '平折形态可以轻松穿过室内、营地、车库、码头或尾门区域。',
-        deployStep2K: '02 摆开',
-        deployStep2: '支腿系统用一个熟悉动作打开，而不是需要组装。',
-        deployStep3K: '03 锁定',
-        deployStep3: '同一个手柄动作让框架进入工作状态。',
-        deployStep4K: '04 使用',
+        deployStep2K: '弹开',
+        deployStep2: '一个快速手臂动作打开支腿系统，而不是让用户进行组装。',
+        deployStep3K: '锁定',
+        deployStep3: '手柄动作让框架进入工作状态，并提供清楚反馈。',
+        deployStep4K: '使用',
         deployStep4: '用户立即获得台面空间，不需要搭建、插接或组装营地桌。',
         adjustEyebrow: '高度调节',
         adjustTitle: '无级高度调节是真正的关键。',
