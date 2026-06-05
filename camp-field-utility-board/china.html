@@ -47,6 +47,7 @@
     const repoPath = 'maxmcolem-a11y/westfield-presentations';
     const deckPath = 'camp-field-utility-board/';
     const version = new URLSearchParams(window.location.search).get('v') || String(Date.now());
+    const expectedMarker = 'Factory visit reset the critical path';
     const assetBase = `https://fastly.jsdelivr.net/gh/${repoPath}@main/${deckPath}`;
     const assetFallbacks = [
       `https://fastly.jsdelivr.net/gh/${repoPath}@main/${deckPath}`,
@@ -100,7 +101,7 @@
           const response = await fetch(cacheBustedSource, { cache: 'no-store' });
           if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
           const html = await response.text();
-          if (!html.includes('Camp / Field Utility Board')) {
+          if (!html.includes('Camp / Field Utility Board') || !html.includes(expectedMarker)) {
             throw new Error('Unexpected deck content');
           }
           deck.srcdoc = prepare(html);
