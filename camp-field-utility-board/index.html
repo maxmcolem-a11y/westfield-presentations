@@ -98,7 +98,10 @@
       min-height: inherit;
       object-fit: cover;
     }
-    .hero-visual { min-height: min(62vh, 620px); }
+    .hero-visual {
+      min-height: 0;
+      aspect-ratio: 81 / 53;
+    }
     .wide-visual { height: 72vh; }
     .contain img { object-fit: contain; background: #f3f3ee; }
     .note {
