@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spiral Daypack</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+      background: #f7f3ea;
+    }
+
+    :root {
+      --bg: #f4f4f1;
+      --bg-2: #ecece7;
+      --paper: rgba(255,255,255,0.96);
+      --paper-strong: rgba(255,255,255,0.99);
+      --line: rgba(24, 24, 22, 0.10);
+      --line-strong: rgba(24, 24, 22, 0.20);
+      --ink: #121212;
+      --muted: #5d5d58;
+      --accent: #d63b2f;
+      --accent-soft: rgba(214, 59, 47, 0.10);
+      --green: #1f6e52;
+      --green-soft: rgba(31, 110, 82, 0.10);
+      --red: #b3352d;
+      --red-soft: rgba(179, 53, 45, 0.10);
+      --shadow: 0 12px 30px rgba(18, 18, 18, 0.05);
+      --title: clamp(2.1rem, 5.4vw, 5rem);
+      --h2: clamp(1.5rem, 2.8vw, 2.8rem);
+      --h3: clamp(1rem, 1.4vw, 1.2rem);
+      --body: clamp(0.94rem, 1.18vw, 1.08rem);
+      --small: clamp(0.72rem, 0.85vw, 0.84rem);
+      --pad: clamp(1rem, 3.3vw, 3.1rem);
+      --gap: clamp(0.9rem, 1.5vw, 1.25rem);
+      --gap-lg: clamp(1.1rem, 2vw, 1.8rem);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      color: var(--ink);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.50), rgba(255,255,255,0.22)),
+        linear-gradient(180deg, #f7f7f3 0%, #edede8 100%);
+    }
+
+    h1, h2, h3, p, ul { margin: 0; }
+    h1, h2 {
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+    }
+    h1 { font-size: var(--title); }
+    h2 { font-size: var(--h2); }
+    h3 {
+      font-size: var(--h3);
+      line-height: 1.12;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    p, li, button, select, label { font-size: var(--body); line-height: 1.45; }
+
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      scroll-snap-align: start;
+      overflow: hidden;
+    }
+
+    .slide-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--pad);
+      max-height: 100%;
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      font-size: var(--small);
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .muted { color: var(--muted); }
+
+    .card,
+    .panel,
+    .viewer-shell,
+    .placeholder,
+    .chip,
+    .decision-card,
+    .feature-card,
+    .media-panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      position: relative;
+      isolation: isolate;
+    }
+
+    .card,
+    .panel,
+    .decision-card,
+    .feature-card,
+    .placeholder,
+    .media-panel {
+      padding: clamp(1.05rem, 1.45vw, 1.2rem);
+    }
+
+    .viewer-shell,
+    .decision-card,
+    .feature-card,
+    .placeholder,
+    .media-panel,
+    .card,
+    .panel {
+      margin-top: 0.2rem;
+    }
+
+    .frame,
+    .placeholder-visual,
+    .viewer-canvas {
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(243,243,239,0.96));
+    }
+
+    img {
+      border-radius: 16px;
+    }
+
+    .frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .placeholder {
+      background: rgba(255,255,255,0.76);
+      border: 1px dashed var(--line-strong);
+    }
+
+    .placeholder-visual {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 1.15rem;
+      color: var(--muted);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.95), rgba(240,234,224,0.95)),
+        repeating-linear-gradient(-45deg, rgba(154,93,54,0.06) 0 14px, rgba(255,255,255,0) 14px 28px);
+    }
+
+    .placeholder-visual strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+
+    .grid-2,
+    .hero-grid,
+    .final-grid,
+    .top-funnel-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+      gap: var(--gap-lg);
+      align-items: center;
+      height: 100%;
+    }
+
+    .grid-3,
+    .progress-grid,
+    .support-grid,
+    .mandate-grid,
+    .feature-grid,
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--gap);
+      align-items: stretch;
+    }
+
+    .stack { display: grid; gap: var(--gap); }
+
+    .hero-visuals {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--gap);
+      align-items: stretch;
+    }
+
+    .hero-visuals .frame:first-child {
+      grid-column: 1 / span 2;
+      height: min(36vh, 330px);
+    }
+
+    .hero-visuals .frame:not(:first-child) {
+      height: min(24vh, 220px);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .chip {
+      padding: 0.52rem 0.78rem;
+      box-shadow: none;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid var(--line);
+      font-size: var(--small);
+      font-weight: 800;
+    }
+
+    .decision-card {
+      display: grid;
+      gap: 0.75rem;
+      min-height: min(66vh, 600px);
+      align-content: start;
+    }
+
+    .decision-card.yes {
+      background: linear-gradient(180deg, rgba(242,249,245,0.94), rgba(231,244,236,0.92));
+      border: 1px solid rgba(43,122,86,0.18);
+    }
+
+    .decision-card.no {
+      background: linear-gradient(180deg, rgba(251,243,242,0.94), rgba(246,233,231,0.92));
+      border: 1px solid rgba(163,69,59,0.18);
+    }
+
+    .decision-pill,
+    .progress-tag,
+    .swap-tag {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.38rem 0.62rem;
+      border-radius: 999px;
+      font-size: var(--small);
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .decision-card.yes .decision-pill {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .decision-card.no .decision-pill {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .progress-tag { background: rgba(31,23,19,0.07); color: var(--muted); }
+    .swap-tag { background: var(--accent-soft); color: var(--accent); }
+
+    .decision-card .frame,
+    .progress-card .frame,
+    .progress-card .placeholder-visual,
+    .media-panel .placeholder-visual {
+      height: min(43vh, 390px);
+    }
+
+    .progress-card,
+    .feature-card,
+    .media-panel {
+      display: grid;
+      gap: 0.8rem;
+      align-content: start;
+    }
+
+    .support-grid .frame,
+    .support-grid .placeholder-visual {
+      height: min(22vh, 190px);
+    }
+
+    .step2-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--gap-lg);
+      align-items: start;
+    }
+
+    .step2-item {
+      display: grid;
+      gap: 0.8rem;
+      justify-items: center;
+      align-content: start;
+    }
+
+    .step2-media {
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      line-height: 0;
+      background: transparent;
+    }
+
+    .step2-item img {
+      display: block;
+      width: 100%;
+      max-height: min(44vh, 430px);
+      object-fit: contain;
+      background: transparent;
+    }
+
+    .step2-media.rounded-media-bg {
+      width: 100%;
+      aspect-ratio: var(--rounded-aspect, 5 / 7);
+      border-radius: 24px;
+      overflow: hidden;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100% 100%;
+      cursor: zoom-in;
+    }
+
+    .step2-media-bg {
+      height: min(44vh, 430px);
+      border-radius: 24px;
+      overflow: hidden;
+      background-image: var(--step2-image);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      cursor: zoom-in;
+    }
+
+    .slide:nth-of-type(3) .step2-grid,
+    .slide:nth-of-type(4) .step2-grid,
+    .slide:nth-of-type(6) .step2-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: clamp(1.6rem, 2vw, 2.6rem);
+    }
+
+    .slide:nth-of-type(3) .step2-item,
+    .slide:nth-of-type(4) .step2-item,
+    .slide:nth-of-type(6) .step2-item {
+      flex: 0 0 auto;
+    }
+
+    .slide:nth-of-type(3) .step2-grid,
+    .slide:nth-of-type(4) .step2-grid,
+    .slide:nth-of-type(6) .step2-grid {
+      gap: clamp(0.8rem, 1.2vw, 1.25rem);
+    }
+
+    .slide:nth-of-type(3) .step2-media-bg,
+    .slide:nth-of-type(4) .step2-media-bg,
+    .slide:nth-of-type(6) .step2-media-bg {
+      height: min(53vh, 520px);
+    }
+
+    .slide:nth-of-type(3) .step2-media-bg,
+    .slide:nth-of-type(4) .step2-media-bg,
+    .slide:nth-of-type(6) .step2-media-bg {
+      width: auto;
+      aspect-ratio: var(--step2-aspect);
+      background-size: 100% 100%;
+    }
+
+    .frame img,
+    .hero-slideshow,
+    .hero-slide,
+    .hero-slide img {
+      border-radius: 16px;
+      clip-path: inset(0 round 16px);
+    }
+
+    .hero-slideshow,
+    .hero-slide {
+      overflow: hidden;
+    }
+
+    .step2-item h3 {
+      text-align: center;
+    }
+
+    .step2-item .placeholder-visual {
+      width: 100%;
+      height: min(44vh, 430px);
+      border-radius: 16px;
+    }
+
+    .cover-logo {
+      position: absolute;
+      top: var(--pad);
+      right: var(--pad);
+      width: clamp(66px, 8vw, 110px);
+      display: flex;
+      justify-content: flex-end;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .cover-logo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 0;
+    }
+
+    .closing-slide-layout {
+      width: min(1100px, 100%);
+      margin: 0 auto;
+      display: grid;
+      gap: clamp(1rem, 2vw, 1.6rem);
+      align-content: center;
+    }
+
+    .closing-copy {
+      display: grid;
+      gap: 0.95rem;
+    }
+
+    .closing-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--gap);
+    }
+
+    .closing-meta .feature-card {
+      margin-top: 0;
+    }
+
+    .closing-logos {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: clamp(1rem, 3vw, 2rem);
+      margin-top: clamp(0.5rem, 1vw, 1rem);
+    }
+
+    .closing-logos img {
+      display: block;
+      height: auto;
+      object-fit: contain;
+      border-radius: 0;
+    }
+
+    .closing-logos img:first-child {
+      width: clamp(150px, 18vw, 250px);
+    }
+
+    .closing-logos img:last-child {
+      width: clamp(190px, 24vw, 320px);
+    }
+
+    .shape-final-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: var(--gap-lg);
+      align-items: center;
+      height: 100%;
+    }
+
+    .slideshow-panel {
+      display: grid;
+      width: 100%;
+      gap: 1rem;
+      align-content: center;
+      justify-items: center;
+    }
+
+    .hero-slideshow {
+      position: relative;
+      width: min(100%, 520px);
+      aspect-ratio: 3 / 4;
+      justify-self: center;
+      overflow: hidden;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      border-radius: 16px;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      pointer-events: none;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: transparent;
+    }
+
+    .hero-slideshow#spiral-hero-slideshow .hero-slide {
+      display: grid;
+      place-items: center;
+    }
+
+    .hero-slideshow#spiral-hero-slideshow .hero-slide img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: unset;
+      border-radius: 24px;
+      clip-path: inset(0 round 24px);
+    }
+
+    .slideshow-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.45rem;
+    }
+
+    .slideshow-dot {
+      appearance: none;
+      border: none;
+      padding: 0;
+      width: 0.52rem;
+      height: 0.52rem;
+      border-radius: 999px;
+      background: rgba(31, 23, 19, 0.2);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .slideshow-dot.active {
+      background: var(--accent);
+      transform: scale(1.15);
+    }
+
+    .slideshow-dot:focus-visible {
+      outline: 2px solid rgba(31, 23, 19, 0.45);
+      outline-offset: 3px;
+    }
+
+    .spec-sheet-button {
+      display: inline-flex;
+      justify-self: center;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.85rem 1.2rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      box-shadow: 0 12px 24px rgba(31, 23, 19, 0.14);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .spec-sheet-button:hover,
+    .spec-sheet-button:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(31, 23, 19, 0.18);
+      background: #8c5231;
+      outline: none;
+    }
+
+    .language-toggle {
+      position: fixed;
+      left: 1rem;
+      bottom: 1rem;
+      z-index: 130;
+      min-width: 68px;
+      min-height: 40px;
+      padding: 0.55rem 0.85rem;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.94);
+      color: #111;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.18);
+      backdrop-filter: blur(8px);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .language-toggle:hover,
+    .language-toggle:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.22);
+      outline: none;
+    }
+
+    .lightboxable-image {
+      cursor: zoom-in;
+    }
+
+    .image-lightbox,
+    .spec-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem;
+      background: rgba(10, 10, 10, 0.84);
+      z-index: 100;
+    }
+
+    .image-lightbox.open,
+    .spec-modal.open {
+      display: flex;
+    }
+
+    .spec-modal-panel {
+      position: relative;
+      width: 98vw;
+      max-height: 96vh;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .spec-modal-stage {
+      display: grid;
+      gap: 0.75rem;
+      justify-items: center;
+    }
+
+    .spec-modal-media-wrap {
+      width: min(92vw, 1400px);
+      max-height: 90vh;
+      overflow: auto;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      background: #fff;
+    }
+
+    .spec-modal-media-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #fff;
+    }
+
+    .spec-modal-meta {
+      color: rgba(255,255,255,0.88);
+      font-size: var(--small);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .spec-arrow {
+      width: 52px;
+      height: 52px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.92);
+      color: #111;
+      font-size: 1.7rem;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    .spec-arrow:hover,
+    .spec-arrow:focus-visible {
+      transform: scale(1.03);
+      outline: none;
+    }
+
+    .spec-arrow:disabled {
+      opacity: 0.38;
+      cursor: default;
+      transform: none;
+    }
+
+    .image-lightbox.open {
+      display: flex;
+    }
+
+    .image-lightbox-panel {
+      position: relative;
+      width: min(98vw, 1704px);
+      max-height: 96vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-lightbox-stage {
+      display: grid;
+      gap: 0.75rem;
+      justify-items: center;
+      margin: 0 auto;
+    }
+
+    .image-lightbox img {
+      max-width: min(92vw, 1600px);
+      max-height: 90vh;
+      object-fit: contain;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      background: #fff;
+    }
+
+    .image-lightbox-meta {
+      color: rgba(255,255,255,0.88);
+      font-size: var(--small);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .lightbox-arrow {
+      position: absolute;
+      top: 50%;
+      width: 52px;
+      height: 52px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.92);
+      color: #111;
+      font-size: 1.7rem;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      transform: translateY(-50%);
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    .lightbox-arrow:hover,
+    .lightbox-arrow:focus-visible {
+      transform: translateY(-50%) scale(1.03);
+      outline: none;
+    }
+
+    .lightbox-arrow:disabled {
+      opacity: 0.38;
+      cursor: default;
+      transform: translateY(-50%);
+    }
+
+    #lightbox-prev {
+      left: 0;
+    }
+
+    #lightbox-next {
+      right: 0;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.92);
+      color: #111;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      z-index: 20;
+    }
+
+    .hero-render,
+    .media-panel .frame,
+    .media-panel .placeholder-visual.large {
+      height: min(56vh, 540px);
+    }
+
+    .frame.tall,
+    .placeholder-visual.tall {
+      height: min(50vh, 460px);
+    }
+
+    .viewer-shell {
+      padding: 0;
+      display: grid;
+      gap: 0;
+      height: 100%;
+      min-height: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      margin-top: 0;
+    }
+
+    .top-funnel-layout {
+      align-items: stretch;
+      min-height: 100%;
+    }
+
+    .top-funnel-copy {
+      display: grid;
+      min-height: 0;
+      height: 100%;
+    }
+
+    .top-funnel-browser {
+      display: grid;
+      min-height: 0;
+      height: 100%;
+    }
+
+    .viewer-overlay-copy {
+      position: absolute;
+      inset: 0 0 auto 0;
+      z-index: 2;
+      display: grid;
+      gap: 0.45rem;
+      align-content: start;
+      padding: 1.2rem 1.25rem 3rem;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,0.76) 0%, rgba(255,255,255,0.38) 42%, rgba(255,255,255,0) 100%);
+    }
+
+    .viewer-overlay-copy h2 {
+      max-width: none;
+      margin: 0;
+    }
+
+    .thumb-panel {
+      padding: 0;
+      display: grid;
+      gap: 0.85rem;
+      min-height: 0;
+      height: 100%;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      margin-top: 0;
+      align-content: stretch;
+    }
+
+    .thumb-grid {
+      display: grid;
+      height: 100%;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-rows: repeat(5, minmax(0, 1fr));
+      gap: 0.75rem;
+      align-content: stretch;
+    }
+
+    .thumb-button,
+    .thumb-slot {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0;
+      background: rgba(255,255,255,0.82);
+      overflow: hidden;
+      min-height: 0;
+      height: 100%;
+      position: relative;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      display: grid;
+      place-items: center;
+    }
+
+    .thumb-button {
+      cursor: pointer;
+    }
+
+    .thumb-button:hover,
+    .thumb-button:focus-visible {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 8px 18px rgba(31, 23, 19, 0.10);
+      outline: none;
+    }
+
+    .thumb-button.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(154, 93, 54, 0.18), 0 10px 20px rgba(31, 23, 19, 0.10);
+    }
+
+    .thumb-button img {
+      display: block;
+      width: 88%;
+      height: 88%;
+      object-fit: contain;
+      object-position: center;
+      background: transparent;
+    }
+
+    .thumb-fallback,
+    .thumb-slot {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.96), rgba(240,234,224,0.95)),
+        repeating-linear-gradient(-45deg, rgba(154,93,54,0.06) 0 12px, rgba(255,255,255,0) 12px 24px);
+    }
+
+    .thumb-fallback::before,
+    .thumb-slot::before {
+      content: "";
+      width: 42%;
+      height: 42%;
+      border-radius: 12px;
+      border: 1px dashed rgba(73, 57, 45, 0.35);
+      background: rgba(255,255,255,0.45);
+    }
+
+    .viewer-toolbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.7rem;
+      align-items: end;
+    }
+
+    .viewer-toolbar label {
+      display: grid;
+      gap: 0.35rem;
+      color: var(--muted);
+      font-size: var(--small);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+    }
+
+    .viewer-toolbar select,
+    .viewer-toolbar button {
+      border-radius: 14px;
+      border: 1px solid var(--line-strong);
+      padding: 0.72rem 0.85rem;
+      background: rgba(255,255,255,0.95);
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .viewer-toolbar button {
+      cursor: pointer;
+      background: var(--accent);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .viewer-canvas {
+      position: relative;
+      height: 100%;
+      min-height: min(62vh, 640px);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.50), rgba(255,255,255,0.22)),
+        linear-gradient(180deg, #f7f7f3 0%, #edede8 100%);
+    }
+
+    .viewer-canvas canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .viewer-state {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 1.2rem;
+      background: rgba(255,255,255,0.78);
+      color: var(--muted);
+    }
+
+    .viewer-state.hidden { display: none; }
+
+    .viewer-state-card {
+      display: grid;
+      place-items: center;
+      gap: 0.8rem;
+      min-width: 180px;
+      padding: 1rem 1.1rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(31,23,19,0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .viewer-spinner {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 3px solid rgba(214, 59, 47, 0.14);
+      border-top-color: var(--accent);
+      animation: spin 0.9s linear infinite;
+    }
+
+    .viewer-state-title {
+      font-size: var(--small);
+      text-transform: uppercase;
+      letter-spacing: 0.10em;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .viewer-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: var(--small);
+    }
+
+    ul {
+      padding-left: 1.1rem;
+      display: grid;
+      gap: 0.42rem;
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: clamp(0.7rem, 2vh, 1.3rem);
+      right: var(--pad);
+      font-size: var(--small);
+      color: rgba(31,23,19,0.52);
+    }
+
+    .nav-dots {
+      position: fixed;
+      top: 50%;
+      right: clamp(0.65rem, 1.2vw, 1rem);
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      z-index: 20;
+    }
+
+    .nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(31,23,19,0.16);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .nav-dot.active {
+      background: var(--accent);
+      transform: scale(1.16);
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 1180px) {
+      .slide {
+        height: auto;
+        min-height: 100vh;
+      }
+      .slide-content { overflow: visible; }
+      .grid-2,
+      .hero-grid,
+      .final-grid,
+      .top-funnel-layout,
+      .grid-3,
+      .progress-grid,
+      .support-grid,
+      .mandate-grid,
+      .feature-grid,
+      .decision-grid,
+      .step2-grid,
+      .hero-visuals,
+      .shape-final-layout {
+        grid-template-columns: 1fr;
+      }
+      .hero-visuals .frame:first-child { grid-column: auto; }
+      .thumb-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .closing-meta { grid-template-columns: 1fr; }
+      .closing-logos {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .thumb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-height: 720px) {
+      .nav-dots { display: none; }
+      :root { --pad: clamp(0.85rem, 2.5vw, 1.8rem); }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      html, body {
+        scroll-snap-type: none;
+      }
+
+      .slide {
+        scroll-snap-align: none;
+      }
+    }
+  
+    .split-source-note {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: var(--small);
+      max-width: 68ch;
+    }
+    .single-concept-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.95fr) minmax(320px, 1.1fr);
+      gap: var(--gap-lg);
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+    .single-concept-grid .slideshow-panel { height: min(72vh, 760px); }
+    @media (max-width: 900px) {
+      .single-concept-grid { grid-template-columns: 1fr; }
+      .single-concept-grid .slideshow-panel { height: min(46vh, 520px); }
+    }
+</style>
+</head>
+<body>
+  <nav class="nav-dots" aria-label="Slide navigation"></nav>
+  <button class="language-toggle" id="language-toggle" type="button" aria-label="Switch deck to Chinese" title="Switch deck to Chinese">中文</button>
+
+  <section class="slide">
+    <div class="cover-logo" aria-hidden="true"><img src="assets/timber-ridge-logo-cover.png" alt="Timber Ridge logo"></div>
+    <div class="slide-content" style="align-items: center; justify-content: center;">
+      <div class="stack" style="width: min(980px, 100%); gap: 1.2rem;">
+        <div class="eyebrow" data-i18n="sheet1Eyebrow">Timber Ridge 26L Daypack</div>
+        <h1 style="max-width: 11ch;" data-i18n="sheet1Title">Spiral Daypack</h1>
+        <div class="grid-2" style="height: auto; align-items: start;">
+          <div class="feature-card"><h3 data-i18n="mandateHeader">Mandate</h3><p data-i18n="mandateBody">Design an iconic, highly structured 26L silhouette anchored by one signature design language.</p></div>
+          <div class="feature-card"><h3 data-i18n="positionHeader">Position</h3><p data-i18n="positionBody">Hybrid sling and pack concept driven by spiral panel architecture, front-oriented access, and athletic body-wrap ergonomics.</p></div>
+        </div>
+        <p class="split-source-note" data-i18n="sourceNote">Focused sample-room deck split from the full Timber Ridge 26L Daypack Development presentation.</p>
+      </div>
+    </div>
+    <div class="slide-number">01</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="stack" style="margin-bottom: var(--gap-lg);">
+        <div class="eyebrow" data-i18n="progressEyebrow">Spiral Progression</div>
+        <h2 data-i18n="progressHeader">Ergonomic evolution transitioning from irregular volume into controlled panel motion.</h2>
+        <p class="muted" data-i18n="progressBody">Initial sketches established that the curved pentagonal logic can become a coherent panel system, bringing ordered structure rather than randomness.</p>
+      </div>
+      <div class="step2-grid">
+        <div class="step2-item">
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/spiral-3d-print.jpg'); --step2-aspect: 0.75;" data-lightbox-src="assets/spiral-3d-print.jpg" data-lightbox-alt="3D Print" role="img" aria-label="3D Print"></div>
+          <h3 data-i18n="label3dPrint">3D Print</h3>
+        </div>
+        <div class="step2-item">
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/spiral-concept-sketch-1.jpg'); --step2-aspect: 0.75;" data-lightbox-src="assets/spiral-concept-sketch-1.jpg" data-lightbox-alt="Concept Sketch 1" role="img" aria-label="Concept Sketch 1"></div>
+          <h3 data-i18n="labelConcept1">Concept Sketch 1</h3>
+        </div>
+        <div class="step2-item">
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/spiral-concept-sketch-2.jpg'); --step2-aspect: 0.75;" data-lightbox-src="assets/spiral-concept-sketch-2.jpg" data-lightbox-alt="Concept Sketch 2" role="img" aria-label="Concept Sketch 2"></div>
+          <h3 data-i18n="labelConcept2">Concept Sketch 2</h3>
+        </div>
+      </div>
+    </div>
+    <div class="slide-number">02</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="single-concept-grid">
+        <div class="stack">
+          <div class="eyebrow" data-i18n="finalEyebrow">Spiral Final Result</div>
+          <h2 data-i18n="finalHeader">Hybrid sling and pack functionality, driven by a spiral panel architecture.</h2>
+          <p class="muted" data-i18n="finalBody">The panel flow bridges commuter access, ergonomic body wrap, and athletic identity while avoiding a tactical appearance.</p>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h3 data-i18n="feature1Header">Signature System</h3>
+              <p data-i18n="feature1Body">The spiral panels create a recognizable motion language visible from multiple angles.</p>
+            </div>
+            <div class="feature-card">
+              <h3 data-i18n="feature2Header">Wearability Bridge</h3>
+              <p data-i18n="feature2Body">An asymmetrical hip belt balances sling-style access with traditional backpack load stability.</p>
+            </div>
+            <div class="feature-card">
+              <h3 data-i18n="feature3Header">Access Logic</h3>
+              <p data-i18n="feature3Body">The spiral architecture makes front-oriented access intentional and integrated rather than improvised.</p>
+            </div>
+          </div>
+        </div>
+        <div class="slideshow-panel">
+          <div class="hero-slideshow" id="hero-slideshow" aria-label="Spiral Daypack slideshow">
+            <div class="hero-slide active"><img src="assets/spiral-hero-1.jpg" alt="Spiral Daypack hero image 1"></div>
+            <div class="hero-slide"><img src="assets/spiral-hero-2.jpg" alt="Spiral Daypack hero image 2"></div>
+            <div class="hero-slide"><img src="assets/spiral-hero-3.jpg" alt="Spiral Daypack hero image 3"></div>
+          </div>
+          <div class="slideshow-dots" id="hero-dots" aria-label="Hero slideshow navigation">
+            <button class="slideshow-dot active" type="button" aria-label="Show hero image 1"></button>
+            <button class="slideshow-dot" type="button" aria-label="Show hero image 2"></button>
+            <button class="slideshow-dot" type="button" aria-label="Show hero image 3"></button>
+          </div>
+          <button class="spec-sheet-button" data-i18n="fullSpecSheet" type="button">Full Spec Sheet</button>
+        </div>
+      </div>
+    </div>
+    <div class="slide-number">03</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="closing-slide-layout">
+        <div class="closing-copy">
+          <div class="eyebrow" data-i18n="closingEyebrow">Confidential</div>
+          <h2 data-i18n="closingHeader">Confidentiality and Ownership Notice</h2>
+          <div class="feature-card"><p data-i18n="closingBody1">This document contains sensitive and proprietary information intended solely for Westfield Outdoors and authorized review partners. Unauthorized use, disclosure, distribution, or reproduction of any portion of this document is prohibited.</p></div>
+          <div class="feature-card"><p data-i18n="closingBody2">This presentation, including all concepts, renderings, specifications, and development materials contained herein, is the property of Westfield Outdoors.</p></div>
+        </div>
+        <div class="closing-meta">
+          <div class="feature-card"><h3 data-i18n="closingUpdatedLabel">Last Edited</h3><p data-i18n="closingUpdatedValue">June 9, 2026</p></div>
+          <div class="feature-card"><h3 data-i18n="closingAuthorLabel">Author</h3><p data-i18n="closingAuthorValue">Max Moore, Director of Industrial Design</p></div>
+        </div>
+        <div class="closing-logos"><img src="assets/timber-ridge-logo.jpg" alt="Timber Ridge logo"><img src="assets/westfield-outdoors-logo.jpg" alt="Westfield Outdoors logo"></div>
+      </div>
+    </div>
+    <div class="slide-number">04</div>
+  </section>
+
+  <div class="image-lightbox" id="image-lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close image">×</button>
+    <div class="image-lightbox-panel"><button class="lightbox-arrow" id="lightbox-prev" type="button" aria-label="Previous image">‹</button><div class="image-lightbox-stage"><img id="lightbox-image" alt="Expanded image view"><div class="image-lightbox-meta" id="lightbox-page-indicator"></div></div><button class="lightbox-arrow" id="lightbox-next" type="button" aria-label="Next image">›</button></div>
+  </div>
+  <div class="spec-modal" id="spec-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Spec sheet viewer">
+    <button class="spec-close" id="spec-close" type="button" aria-label="Close spec sheet">×</button>
+    <div class="spec-modal-panel"><button class="spec-arrow" id="spec-prev" type="button" aria-label="Previous spec page">‹</button><div class="spec-stage"><img id="spec-image" alt="Spec sheet page"><div class="spec-page-indicator" id="spec-page-indicator"></div></div><button class="spec-arrow" id="spec-next" type="button" aria-label="Next spec page">›</button></div>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        sheet1Eyebrow: 'Timber Ridge 26L Daypack', sheet1Title: 'Spiral Daypack', mandateHeader: 'Mandate', mandateBody: 'Design an iconic, highly structured 26L silhouette anchored by one signature design language.', positionHeader: 'Position', positionBody: 'Hybrid sling and pack concept driven by spiral panel architecture, front-oriented access, and athletic body-wrap ergonomics.', sourceNote: 'Focused sample-room deck split from the full Timber Ridge 26L Daypack Development presentation.', progressEyebrow: 'Spiral Progression', progressHeader: 'Ergonomic evolution transitioning from irregular volume into controlled panel motion.', progressBody: 'Initial sketches established that the curved pentagonal logic can become a coherent panel system, bringing ordered structure rather than randomness.', label3dPrint: '3D Print', labelConcept1: 'Concept Sketch 1', labelConcept2: 'Concept Sketch 2', finalEyebrow: 'Spiral Final Result', finalHeader: 'Hybrid sling and pack functionality, driven by a spiral panel architecture.', finalBody: 'The panel flow bridges commuter access, ergonomic body wrap, and athletic identity while avoiding a tactical appearance.',
+        feature1Header: 'Signature System',
+        feature1Body: 'The spiral panels create a recognizable motion language visible from multiple angles.',
+        feature2Header: 'Wearability Bridge',
+        feature2Body: 'An asymmetrical hip belt balances sling-style access with traditional backpack load stability.',
+        feature3Header: 'Access Logic',
+        feature3Body: 'The spiral architecture makes front-oriented access intentional and integrated rather than improvised.',
+        fullSpecSheet: 'Full Spec Sheet', closingEyebrow: 'Confidential', closingHeader: 'Confidentiality and Ownership Notice', closingBody1: 'This document contains sensitive and proprietary information intended solely for Westfield Outdoors and authorized review partners. Unauthorized use, disclosure, distribution, or reproduction of any portion of this document is prohibited.', closingBody2: 'This presentation, including all concepts, renderings, specifications, and development materials contained herein, is the property of Westfield Outdoors.', closingUpdatedLabel: 'Last Edited', closingUpdatedValue: 'June 9, 2026', closingAuthorLabel: 'Author', closingAuthorValue: 'Max Moore, Director of Industrial Design'
+      },
+      zh: {
+        sheet1Eyebrow: 'Timber Ridge 26L 日用背包', sheet1Title: '螺旋日用背包', mandateHeader: '任务', mandateBody: '打造一个极具标志性且高度结构化的 26L 轮廓，以单一签名式设计语言为核心。', positionHeader: '定位', positionBody: '由螺旋面片结构驱动的混合式单肩/双肩概念，强调前向取用与运动化贴身人体工学。', sourceNote: '从完整 Timber Ridge 26L 日用背包开发演示中拆分出的样品室专用版本。', progressEyebrow: '螺旋演进', progressHeader: '从不规则体量过渡到有控制面片运动的人体工学演化。', progressBody: '初步草图证明，弯曲的五边形逻辑可形成连贯面片系统，带来有序结构而非随机感。', label3dPrint: '3D 打印', labelConcept1: '概念草图 1', labelConcept2: '概念草图 2', finalEyebrow: '螺旋最终结果', finalHeader: '由螺旋面片结构驱动的混合式单肩与双肩功能。', finalBody: '面片流向在通勤取用、贴身人体工学和运动感身份之间建立平衡，同时避免战术风格外观。',
+        feature1Header: '标志系统',
+        feature1Body: '螺旋面片创造出从多个角度都高度可识别的动态语言。',
+        feature2Header: '佩戴桥接',
+        feature2Body: '非对称腰翼在单肩包的即取即用感与传统双肩包的负重稳定性之间取得平衡。',
+        feature3Header: '取用逻辑',
+        feature3Body: '螺旋结构确保前向取用是有意且完整整合的功能，而非临时拼凑的特性。',
+        fullSpecSheet: '完整规格书', closingEyebrow: '机密', closingHeader: '保密与所有权声明', closingBody1: '本文件包含敏感且专有的信息，仅供 Westfield Outdoors 及获授权的评审合作方使用。未经授权，严禁使用、披露、分发或复制本文件的任何部分。', closingBody2: '本演示文稿以及其中包含的所有概念、效果图、规格和开发材料，均为 Westfield Outdoors 的财产。', closingUpdatedLabel: '最后编辑', closingUpdatedValue: '2026年6月9日', closingAuthorLabel: '作者', closingAuthorValue: 'Max Moore，工业设计总监'
+      }
+    };
+    const slides = [...document.querySelectorAll('.slide')];
+    const nav = document.querySelector('.nav-dots');
+    const languageToggle = document.getElementById('language-toggle');
+    let currentLanguage = localStorage.getItem('spiral-daypack-language') === 'zh' ? 'zh' : 'en';
+    function applyLanguage() {
+      document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.dataset.i18n; el.textContent = translations[currentLanguage][key] || translations.en[key] || el.textContent; });
+      document.documentElement.lang = currentLanguage === 'zh' ? 'zh-CN' : 'en';
+      languageToggle.textContent = currentLanguage === 'zh' ? 'EN' : '中文';
+      languageToggle.setAttribute('aria-label', currentLanguage === 'zh' ? 'Switch deck to English' : 'Switch deck to Chinese');
+      updateSpec();
+    }
+    languageToggle.addEventListener('click', () => { currentLanguage = currentLanguage === 'zh' ? 'en' : 'zh'; localStorage.setItem('spiral-daypack-language', currentLanguage); applyLanguage(); });
+    slides.forEach((_, index) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', `Go to slide ${index + 1}`); b.addEventListener('click', () => slides[index].scrollIntoView({behavior:'smooth'})); nav.appendChild(b); });
+    const navButtons = [...nav.querySelectorAll('button')];
+    function updateNav() { const scrollTop = document.scrollingElement.scrollTop; let active = 0; slides.forEach((s,i)=>{ if (Math.abs(s.offsetTop-scrollTop) < Math.abs(slides[active].offsetTop-scrollTop)) active=i; }); navButtons.forEach((b,i)=>b.classList.toggle('active', i===active)); }
+    document.addEventListener('scroll', updateNav, {passive:true}); updateNav();
+    const heroSlides = [...document.querySelectorAll('#hero-slideshow .hero-slide')];
+    const heroDots = [...document.querySelectorAll('#hero-dots .slideshow-dot')];
+    function showHero(index) { heroSlides.forEach((s,i)=>s.classList.toggle('active', i===index)); heroDots.forEach((d,i)=>d.classList.toggle('active', i===index)); }
+    heroDots.forEach((dot,index)=>dot.addEventListener('click',()=>showHero(index)));
+    setInterval(() => { const current = heroSlides.findIndex(s=>s.classList.contains('active')); showHero((current + 1) % heroSlides.length); }, 4500);
+    const lightbox = document.getElementById('image-lightbox'); const lightboxImg = document.getElementById('lightbox-image'); const lightboxMeta = document.getElementById('lightbox-page-indicator');
+    let lightboxItems = []; let lightboxIndex = 0;
+    function openLightbox(items, index) { lightboxItems = items; lightboxIndex = index; updateLightbox(); lightbox.classList.add('active'); lightbox.setAttribute('aria-hidden','false'); }
+    function updateLightbox() { const item = lightboxItems[lightboxIndex]; if (!item) return; lightboxImg.src = item.src; lightboxImg.alt = item.alt || ''; lightboxMeta.textContent = currentLanguage === 'zh' ? `图片 ${lightboxIndex+1} / ${lightboxItems.length}` : `Image ${lightboxIndex+1} of ${lightboxItems.length}`; }
+    function closeLightbox() { lightbox.classList.remove('active'); lightbox.setAttribute('aria-hidden','true'); }
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-prev').addEventListener('click', () => { lightboxIndex = (lightboxIndex - 1 + lightboxItems.length) % lightboxItems.length; updateLightbox(); });
+    document.getElementById('lightbox-next').addEventListener('click', () => { lightboxIndex = (lightboxIndex + 1) % lightboxItems.length; updateLightbox(); });
+    document.querySelectorAll('[data-lightbox-src]').forEach(el => el.addEventListener('click', () => openLightbox([{src: el.dataset.lightboxSrc, alt: el.dataset.lightboxAlt}], 0)));
+    const heroImgs = [...document.querySelectorAll('.hero-slideshow img')];
+    heroImgs.forEach(img => img.addEventListener('click', () => openLightbox(heroImgs.map(i => ({src:i.src, alt:i.alt})), heroImgs.indexOf(img))));
+    const specSets = { en: ['assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p1.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p2.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p3.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p4.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p5.jpg'], zh: ['assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p1_zh.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p2_zh.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p3_zh.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p4_zh.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p5_zh.jpg'] };
+    const specModal = document.getElementById('spec-modal'); const specImage = document.getElementById('spec-image'); const specIndicator = document.getElementById('spec-page-indicator'); let specIndex = 0;
+    function updateSpec() { const pages = specSets[currentLanguage]; specImage.src = pages[specIndex % pages.length]; specIndicator.textContent = currentLanguage === 'zh' ? `规格页 ${specIndex+1} / ${pages.length}` : `Spec page ${specIndex+1} of ${pages.length}`; }
+    document.querySelector('.spec-sheet-button').addEventListener('click', () => { specIndex = 0; updateSpec(); specModal.classList.add('active'); specModal.setAttribute('aria-hidden','false'); });
+    document.getElementById('spec-close').addEventListener('click', () => { specModal.classList.remove('active'); specModal.setAttribute('aria-hidden','true'); });
+    document.getElementById('spec-prev').addEventListener('click', () => { const pages = specSets[currentLanguage]; specIndex = (specIndex - 1 + pages.length) % pages.length; updateSpec(); });
+    document.getElementById('spec-next').addEventListener('click', () => { const pages = specSets[currentLanguage]; specIndex = (specIndex + 1) % pages.length; updateSpec(); });
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { closeLightbox(); specModal.classList.remove('active'); } });
+    applyLanguage();
+  </script>
+</body>
+</html>
