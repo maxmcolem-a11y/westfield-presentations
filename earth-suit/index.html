@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Earth Suit - Liquid-Cooled Personal Climate System</title>
+  <style>
+    :root {
+      --bg: #f3f1ec;
+      --paper: rgba(255, 255, 255, 0.94);
+      --ink: #161615;
+      --muted: #68645d;
+      --line: rgba(22, 22, 21, 0.12);
+      --line-strong: rgba(22, 22, 21, 0.24);
+      --blue: #1677b9;
+      --blue-soft: rgba(22, 119, 185, 0.12);
+      --red: #ca3b30;
+      --red-soft: rgba(202, 59, 48, 0.11);
+      --green: #1e7554;
+      --green-soft: rgba(30, 117, 84, 0.11);
+      --amber: #b87521;
+      --amber-soft: rgba(184, 117, 33, 0.12);
+      --shadow: 0 16px 38px rgba(18, 18, 18, 0.07);
+      --title: clamp(2.45rem, 5.6vw, 5.8rem);
+      --h2: clamp(1.68rem, 3.2vw, 3.2rem);
+      --h3: clamp(1.02rem, 1.45vw, 1.24rem);
+      --body: clamp(0.95rem, 1.12vw, 1.08rem);
+      --small: clamp(0.72rem, 0.82vw, 0.84rem);
+      --pad: clamp(1.1rem, 3.3vw, 3.2rem);
+      --gap: clamp(0.85rem, 1.5vw, 1.3rem);
+      --gap-lg: clamp(1.1rem, 2.2vw, 2rem);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      min-height: 100%;
+      margin: 0;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      color: var(--ink);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #f8f7f3 0%, #e8ecea 100%);
+    }
+
+    h1, h2, h3, p, ul { margin: 0; }
+
+    h1, h2 {
+      font-weight: 850;
+      line-height: 0.92;
+      letter-spacing: 0;
+    }
+
+    h1 { font-size: var(--title); }
+    h2 { font-size: var(--h2); }
+
+    h3 {
+      font-size: var(--h3);
+      line-height: 1.14;
+      font-weight: 820;
+    }
+
+    p, li { font-size: var(--body); line-height: 1.44; }
+    ul { padding-left: 1.05rem; }
+    li + li { margin-top: 0.38rem; }
+    a { color: inherit; }
+
+    .slide {
+      min-height: 100vh;
+      min-height: 100dvh;
+      width: 100%;
+      display: flex;
+      scroll-snap-align: start;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .content {
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: var(--pad);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--gap-lg);
+    }
+
+    .slide:not(.cover) .content {
+      padding-top: clamp(1rem, 2.4vw, 2.35rem);
+      padding-bottom: clamp(1rem, 2.4vw, 2.35rem);
+    }
+
+    .cover {
+      color: #fff;
+      background: #151515;
+    }
+
+    .cover::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(10,10,10,0.84) 0%, rgba(10,10,10,0.50) 38%, rgba(10,10,10,0.06) 74%),
+        url("assets/earth-suit-field-hero.png") center / cover no-repeat;
+      transform: scale(1.01);
+    }
+
+    .cover .content {
+      max-width: 58rem;
+      position: relative;
+      justify-content: flex-end;
+      padding-bottom: clamp(2.4rem, 7vw, 6rem);
+    }
+
+    .logo {
+      position: absolute;
+      top: var(--pad);
+      right: var(--pad);
+      width: clamp(96px, 12vw, 162px);
+      border-radius: 0;
+      opacity: 0.92;
+    }
+
+    .eyebrow {
+      color: var(--red);
+      font-size: var(--small);
+      font-weight: 850;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .cover .eyebrow { color: #65bff6; }
+    .muted { color: var(--muted); }
+    .cover .muted { color: rgba(255,255,255,0.76); }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--gap-lg);
+      align-items: center;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--gap);
+      align-items: stretch;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--gap);
+      align-items: stretch;
+    }
+
+    .stack { display: grid; gap: var(--gap); }
+    .tight { gap: 0.65rem; }
+
+    .panel, .card, .metric, .source-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(1rem, 1.5vw, 1.28rem);
+    }
+
+    .dark-panel {
+      background: #1a1b1a;
+      color: #fff;
+      border-color: rgba(255,255,255,0.14);
+    }
+
+    .image-panel {
+      min-height: 0;
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: #151515;
+      box-shadow: var(--shadow);
+    }
+
+    .image-panel img {
+      width: 100%;
+      height: 100%;
+      min-height: min(52vh, 500px);
+      display: block;
+      object-fit: cover;
+    }
+
+    .compressor img {
+      object-fit: contain;
+      min-height: min(44vh, 410px);
+      background: #f7f7f2;
+      padding: 1rem;
+    }
+
+    .compressor-slide .image-panel {
+      height: min(62vh, 560px);
+      align-self: center;
+    }
+
+    .compressor-slide .metric {
+      min-height: 6.6rem;
+    }
+
+    .compressor-slide .stack {
+      gap: 0.8rem;
+    }
+
+    .metric {
+      display: grid;
+      gap: 0.38rem;
+      min-height: 7.8rem;
+    }
+
+    .metric strong {
+      font-size: clamp(1.6rem, 3.6vw, 3.1rem);
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+
+    .pill-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.38rem 0.62rem;
+      font-size: var(--small);
+      font-weight: 800;
+      background: rgba(255,255,255,0.72);
+    }
+
+    .pill.blue { color: var(--blue); background: var(--blue-soft); border-color: rgba(22,119,185,0.18); }
+    .pill.green { color: var(--green); background: var(--green-soft); border-color: rgba(30,117,84,0.18); }
+    .pill.red { color: var(--red); background: var(--red-soft); border-color: rgba(202,59,48,0.18); }
+    .pill.amber { color: var(--amber); background: var(--amber-soft); border-color: rgba(184,117,33,0.2); }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: 0.92fr 0.28fr 0.92fr;
+      gap: var(--gap);
+      align-items: center;
+    }
+
+    .system-box {
+      min-height: 23rem;
+      display: grid;
+      gap: 0.75rem;
+      align-content: start;
+      border-top: 5px solid var(--blue);
+    }
+
+    .arrow {
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      font-weight: 900;
+    }
+
+    .path {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 0.55rem;
+      align-items: stretch;
+    }
+
+    .step {
+      min-height: 14rem;
+      display: grid;
+      gap: 0.6rem;
+      align-content: start;
+      border-top: 5px solid var(--blue);
+    }
+
+    .step strong {
+      font-size: clamp(1.75rem, 4vw, 3rem);
+      line-height: 0.9;
+      letter-spacing: 0;
+    }
+
+    .competitor {
+      display: grid;
+      gap: 0.7rem;
+      min-height: 18rem;
+      align-content: start;
+    }
+
+    .competitor.faded { opacity: 0.72; }
+
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.55rem;
+    }
+
+    .source-card {
+      box-shadow: none;
+      padding: 0.72rem;
+      display: grid;
+      gap: 0.3rem;
+      font-size: var(--small);
+      line-height: 1.25;
+    }
+
+    .source-card strong {
+      font-size: var(--small);
+      line-height: 1.16;
+    }
+
+    .source-card span {
+      color: var(--muted);
+      font-size: calc(var(--small) * 0.92);
+      line-height: 1.25;
+    }
+
+    .footer {
+      position: absolute;
+      left: var(--pad);
+      bottom: calc(var(--pad) * 0.55);
+      color: var(--muted);
+      font-size: var(--small);
+      font-weight: 700;
+    }
+
+    .cover .footer { color: rgba(255,255,255,0.64); }
+
+    @media (max-width: 920px) {
+      html, body { scroll-snap-type: none; }
+      .slide, .content { min-height: auto; }
+      .content { padding: 1.1rem; }
+      .cover .content { min-height: 100dvh; }
+      .grid-2, .grid-3, .grid-4, .architecture, .path, .source-grid {
+        grid-template-columns: 1fr;
+      }
+      .arrow { transform: rotate(90deg); }
+      .image-panel img { min-height: 22rem; }
+      .logo { width: 94px; }
+      .footer { position: static; padding: 0 1.1rem 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <section class="slide cover">
+    <img class="logo" src="assets/westfield-outdoors-logo.jpg" alt="Westfield Outdoors" />
+    <div class="content">
+      <div class="stack">
+        <p class="eyebrow">Innovation S28 / Industrial Design</p>
+        <h1>Earth Suit</h1>
+        <p class="muted">Liquid-cooled personal climate system for doing useful work on a hotter planet.</p>
+        <div class="pill-row">
+          <span class="pill blue">Compressor backpack</span>
+          <span class="pill green">Liquid-cooled vest</span>
+          <span class="pill amber">800-1,200 BTU/hr target</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer">Westfield Outdoors / June 2026</div>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <div class="grid-2">
+        <div class="stack">
+          <p class="eyebrow">Product Thesis</p>
+          <h2>Cool the person, not the environment.</h2>
+          <p>Fixed air conditioning cools buildings. Fans lose effectiveness in high heat and humidity. Evaporative cooling fails when wet-bulb conditions make sweat evaporation unreliable.</p>
+          <p>Earth Suit is personal climate gear: a mobile thermal system that removes body heat directly from the highest-value cooling zones.</p>
+          <div class="pill-row">
+            <span class="pill blue">Outdoor work</span>
+            <span class="pill blue">Field teams</span>
+            <span class="pill blue">Factories</span>
+            <span class="pill blue">Travel and outdoor recreation</span>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="metric"><strong>300-400</strong><p>BTU/hr from a resting person.</p></div>
+          <div class="metric"><strong>700-1,200</strong><p>BTU/hr during active physical work.</p></div>
+          <div class="metric"><strong>2-4 hr</strong><p>Initial runtime target with swappable battery strategy.</p></div>
+          <div class="metric"><strong>8-14 lb</strong><p>Backpack weight target for a professional V1.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">Core claim: personal climate support, not invincibility.</div>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <div class="stack">
+        <div class="stack tight">
+          <p class="eyebrow">Architecture</p>
+          <h2>Backpack refrigeration, garment heat pickup.</h2>
+        </div>
+        <div class="architecture">
+          <div class="panel system-box">
+            <span class="pill blue">Backpack cooling plant</span>
+            <h3>Do the heavy thermal work off-body.</h3>
+            <ul>
+              <li>Mini vapor-compression compressor</li>
+              <li>Condenser and high-flow exhaust fan</li>
+              <li>Liquid chiller heat exchanger</li>
+              <li>Pump, battery, control electronics</li>
+              <li>Condensate and safety sensor package</li>
+            </ul>
+          </div>
+          <div class="arrow">-></div>
+          <div class="panel system-box">
+            <span class="pill green">Wearable cooling layer</span>
+            <h3>Move heat out of the body through liquid.</h3>
+            <ul>
+              <li>Washable vest shell</li>
+              <li>Removable tube network</li>
+              <li>Quick-disconnect ports at lower back</li>
+              <li>Insulated coolant lines</li>
+              <li>Upper back, chest, neck, underarm zones</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">No ducts. Liquid is the right transfer medium.</div>
+  </section>
+
+  <section class="slide compressor-slide">
+    <div class="content">
+      <div class="grid-2">
+        <div class="image-panel compressor">
+          <img src="assets/st19dc12h-compressor.jpg" alt="ST19DC12H mini compressor reference" />
+        </div>
+        <div class="stack">
+          <p class="eyebrow">Why Compressor</p>
+          <h2>This is the unlock.</h2>
+          <p>Thermoelectric modules can create a cool touch, but they do not efficiently remove working-human heat loads. Vapor compression moves heat with a real refrigeration cycle, so the system can deliver useful BTUs from a battery-sized package.</p>
+          <div class="grid-2">
+            <div class="metric"><strong>130-360 W</strong><p>Estimated cooling range from the reference compressor class.</p></div>
+            <div class="metric"><strong>440-1,230</strong><p>BTU/hr equivalent capacity range.</p></div>
+          </div>
+          <div class="panel">
+            <h3>Reference unit</h3>
+            <p class="muted">Purswave / Hangzhou Purswave Technology ST19DC12H, DC 12V nominal, 9V-16V input, R134a, BLDCM, 2000-6000 RPM.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">Working product target: roughly 900-1,100 BTU/hr in a strong professional build.</div>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <div class="stack">
+        <div class="stack tight">
+          <p class="eyebrow">Technology Choice</p>
+          <h2>Why not Peltier, piezo, or ducted air?</h2>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <span class="pill red">Peltier / TEC</span>
+            <h3>Battery and heat rejection collapse the idea.</h3>
+            <p class="muted">Low efficiency means the system must dump body heat plus substantial electrical waste heat. Heat sinks, fans, and battery mass grow fast.</p>
+          </div>
+          <div class="card">
+            <span class="pill amber">Fan / evaporative</span>
+            <h3>Useful comfort, weak wet-bulb solution.</h3>
+            <p class="muted">Airflow and mist feel good in moderate conditions, but they rely on evaporation and ambient air that may already be hostile.</p>
+          </div>
+          <div class="card">
+            <span class="pill blue">Ducted air</span>
+            <h3>Too bulky and leaky for workwear.</h3>
+            <p class="muted">Ducts add volume, noise, routing issues, and poor sealing under motion. Liquid carries more heat in less space.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">Peltier can be a small localized feature later, not the main thermal engine.</div>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <div class="stack">
+        <div class="stack tight">
+          <p class="eyebrow">Market Landscape</p>
+          <h2>The market is trying, but most products stop short of real refrigeration.</h2>
+        </div>
+        <div class="grid-4">
+          <div class="card competitor">
+            <span class="pill amber">Ice water loop</span>
+            <h3>AlphaCool, Gerbing, TechNiche, Compcooler</h3>
+            <p class="muted">Real liquid transfer, but depends on frozen water or ice. Strong for short sessions, weak as a professional all-day platform.</p>
+          </div>
+          <div class="card competitor">
+            <span class="pill red">Fan / mist / plate</span>
+            <h3>Shark ChillPill, Sony REON, fan vests</h3>
+            <p class="muted">Convenient consumer cooling, but not designed to remove active-worker BTU loads from the torso.</p>
+          </div>
+          <div class="card competitor">
+            <span class="pill blue">Compressor claims</span>
+            <h3>CoolingTechFactory, Coolwair</h3>
+            <p class="muted">Closest technical direction. Current visibility suggests early or narrow products, not a broad outdoor/work platform yet.</p>
+          </div>
+          <div class="card competitor">
+            <span class="pill green">Earth Suit gap</span>
+            <h3>Rugged personal AC system</h3>
+            <p class="muted">Professional industrial design, validated BTU output, small backpack, washable vest, and honest wet-bulb positioning.</p>
+          </div>
+        </div>
+        <div class="source-grid">
+          <a class="source-card" href="https://alphacoolproducts.com/collections/cooling-vests-for-men/products/alphacool-7v-circulatory-cooling-vest-system"><strong>AlphaCool 7V</strong><span>Frozen bladder and pump loop.</span></a>
+          <a class="source-card" href="https://www.gerbing.com/products/gerbing-7v-circulatory-cooling-vest"><strong>Gerbing 7V</strong><span>Battery pump circulatory vest.</span></a>
+          <a class="source-card" href="https://www.techniche-europe.com/products/techniche-circulatory-cooling-vests-with-backpack-6429b"><strong>TechNiche 6429B</strong><span>Backpack reservoir circulatory system.</span></a>
+          <a class="source-card" href="https://www.coolwair.com/"><strong>Coolwair</strong><span>Compressor vest for riders.</span></a>
+          <a class="source-card" href="https://comebecool.com/"><strong>Come Be Cool</strong><span>Portable personal cooling backpack.</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer">Competitor status checked June 9, 2026.</div>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <div class="grid-2">
+        <div class="stack">
+          <p class="eyebrow">Product Direction</p>
+          <h2>Small backpack, serious field language.</h2>
+          <p>The backpack should read closer to a compact hydration or battery pack than a camping backpack. The visual target is rugged, serviceable, and credible, with visible condenser exhaust treated as a performance feature.</p>
+          <div class="grid-2">
+            <div class="card"><h3>Keep</h3><p class="muted">Compact vertical chassis, shoulder harness integration, lower-back coolant ports, clear battery status, and durable exterior.</p></div>
+            <div class="card"><h3>Avoid</h3><p class="muted">Sci-fi armor, bulky ducting, oversized pack volume, hidden airflow, and lifestyle-only cooling claims.</p></div>
+          </div>
+        </div>
+        <div class="image-panel">
+          <img src="assets/earth-suit-field-hero.png" alt="Earth Suit concept in field work setting" />
+        </div>
+      </div>
+    </div>
+    <div class="footer">The first product is a vest/backpack platform. The full suit comes after proof.</div>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <div class="stack">
+        <div class="stack tight">
+          <p class="eyebrow">Critical Path</p>
+          <h2>Kickoff steps to make this real.</h2>
+        </div>
+        <div class="path">
+          <div class="panel step"><strong>01</strong><h3>Compressor facts</h3><p class="muted">Confirm exact model, angle tolerance, refrigerant, capacity curve, input power, duty cycle, and supplier support.</p></div>
+          <div class="panel step"><strong>02</strong><h3>Thermal loop</h3><p class="muted">Build benchtop compressor, condenser, chiller, pump, reservoir, and simulated human heat load.</p></div>
+          <div class="panel step"><strong>03</strong><h3>BTU validation</h3><p class="muted">Measure actual heat removal, battery draw, condenser temperature, noise, and orientation sensitivity.</p></div>
+          <div class="panel step"><strong>04</strong><h3>Vest layout</h3><p class="muted">Prototype removable tube network across upper back, chest, neck, and underarms.</p></div>
+          <div class="panel step"><strong>05</strong><h3>Backpack ID</h3><p class="muted">Package compressor, fan path, battery, controls, service access, harness, and coolant ports.</p></div>
+          <div class="panel step"><strong>06</strong><h3>User test</h3><p class="muted">Run hot-room or outdoor trials against fan, ice bladder, and passive cooling references.</p></div>
+          <div class="panel step"><strong>07</strong><h3>Sample brief</h3><p class="muted">Lock V1 target specs, BOM direction, supplier brief, and safety language for first professional sample.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">Decision gate: prove BTUs and wearable comfort before expensive tooling.</div>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <div class="grid-2">
+        <div class="stack">
+          <p class="eyebrow">Honest Compromises</p>
+          <h2>The constraints are manageable if we design around them early.</h2>
+          <p>The refrigeration path is the only path with enough useful capacity, but it creates real product work. These should be framed as engineering gates, not hidden issues.</p>
+        </div>
+        <div class="grid-2">
+          <div class="card"><span class="pill amber">Orientation</span><h3>Broadly upright operation</h3><p class="muted">Backpack behavior needs defined operating angles and shutdown logic.</p></div>
+          <div class="card"><span class="pill amber">Airflow</span><h3>Condenser exhaust is mandatory</h3><p class="muted">The pack must reject more heat than the vest removes.</p></div>
+          <div class="card"><span class="pill amber">Condensation</span><h3>Moisture must be controlled</h3><p class="muted">Cold surfaces, tubing, and vest comfort need drain or insulation strategy.</p></div>
+          <div class="card"><span class="pill amber">Battery</span><h3>Runtime drives weight and cost</h3><p class="muted">Swappable battery architecture should be part of the first sample plan.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">The upside is real BTU capacity. That is the product.</div>
+  </section>
+
+  <section class="slide cover">
+    <div class="content">
+      <div class="stack">
+        <p class="eyebrow">Recommendation</p>
+        <h1>Proceed to thermal proof.</h1>
+        <p class="muted">Build the benchtop loop first, then develop the vest and backpack around measured cooling performance. If the system proves 900-1,100 BTU/hr in a wearable package, Earth Suit becomes a credible new platform for extreme-heat adaptation.</p>
+        <div class="pill-row">
+          <span class="pill blue">Owner: Westfield Outdoors</span>
+          <span class="pill green">Deck: Earth Suit V1</span>
+          <span class="pill amber">Last edited: June 9, 2026</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer">Confidential concept development deck.</div>
+  </section>
+</body>
+</html>
