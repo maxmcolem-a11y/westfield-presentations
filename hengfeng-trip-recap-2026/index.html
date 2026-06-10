@@ -37,7 +37,7 @@
 
     body {
       color: var(--ink);
-      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-family: Inter, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", Arial, Helvetica, sans-serif;
       background: linear-gradient(180deg, #faf9f5 0%, #e9ece8 100%);
       overflow-x: hidden;
     }
@@ -402,6 +402,37 @@
 
     .nav button.active { background: var(--red); transform: scale(1.18); }
 
+    .lang-toggle {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 30;
+      display: flex;
+      gap: 0.25rem;
+      padding: 0.25rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.88);
+      border: 1px solid rgba(23,23,22,0.16);
+      box-shadow: 0 8px 22px rgba(20,20,18,0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .lang-toggle button {
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 900;
+      padding: 0.42rem 0.65rem;
+      cursor: pointer;
+    }
+
+    .lang-toggle button.active {
+      background: var(--ink);
+      color: #fff;
+    }
+
     .lightbox {
       position: fixed;
       inset: 0;
@@ -450,10 +481,16 @@
       .image-panel img, .hero-img img { min-height: 300px; }
       .thumb-card { grid-template-rows: 220px minmax(0, 1fr); }
       .nav { display: none; }
+      .lang-toggle { top: 0.75rem; left: 0.75rem; }
     }
   </style>
 </head>
 <body>
+  <div class="lang-toggle" aria-label="Language">
+    <button type="button" data-lang="en" class="active">EN</button>
+    <button type="button" data-lang="zh">中文</button>
+  </div>
+
   <nav class="nav" aria-label="Slide navigation"></nav>
 
   <section class="slide cover" id="slide-1">
@@ -862,6 +899,210 @@
   </div>
 
   <script>
+    const translations = {
+      zh: {
+        "HengFeng / Westfield Trip Recap": "恒丰 / Westfield 出差复盘",
+        "HengFeng / Westfield working review": "恒丰 / Westfield 工作复盘",
+        "Trip Recap: What Worked, What Needs To Improve": "出差复盘：有效成果与需要改进的事项",
+        "English review draft for the HengFeng recap meeting. Focus: sample execution, operating discipline, and concrete next steps after the June 2026 China trip.": "恒丰复盘会议用工作稿。重点是样品执行、工作纪律，以及 2026 年 6 月中国出差后的具体下一步。",
+        "Westfield Outdoors": "Westfield Outdoors",
+        "June 2026": "2026 年 6 月",
+        "Meeting objective": "会议目标",
+        "The goal is a better next sample cycle.": "目标是建立更好的下一轮样品周期。",
+        "This meeting is not a blame session. The trip showed real progress and real operating gaps. The immediate need is to convert both into a clearer way of working.": "这次会议不是追责会。本次出差既看到了真实进展，也暴露了实际工作缺口。当前最重要的是把这两点转化为更清晰的协作方式。",
+        "Primary intent": "主要目的",
+        "Review": "评审",
+        "Evaluate physical samples while Max was in China.": "在 Max 到中国期间评审实物样品。",
+        "Business need": "业务需要",
+        "Decide": "决策",
+        "Make faster calls on what proceeds, what changes, and what stops.": "更快决定哪些继续推进、哪些需要调整、哪些应该停止。",
+        "Process need": "流程需要",
+        "Correct": "纠正",
+        "Fix sample drift before it becomes a finished physical sample.": "在样品做成实物前纠正与方向偏离的问题。",
+        "Resource need": "资源需要",
+        "Own": "负责",
+        "Put Hangzhou-side ownership behind daily follow-through.": "在杭州端建立日常跟进责任人。",
+        "Trip recap meeting": "出差复盘会议",
+        "Executive readout": "管理层摘要",
+        "The relationship and opportunity are strong.": "合作关系和机会都很强。",
+        "The operating gap is sample control: Max's time in China needs to create review and correction cycles, not first discovery of avoidable sample issues.": "当前的运营缺口是样品控制：Max 在中国的时间应当用于评审和修正循环，而不是第一次发现本可避免的样品问题。",
+        "What worked": "有效成果",
+        "Direct access to HF leadership, factory teams, sample rooms, and photo review created real momentum.": "能够直接接触恒丰管理层、工厂团队、样品室和拍摄评审，形成了真实推进力。",
+        "What did not work": "无效之处",
+        "Late, incomplete, or off-direction samples turned review time into avoidable issue discovery.": "迟到、不完整或方向偏离的样品，让评审时间变成了本可避免的问题发现时间。",
+        "What changes next": "下一步改变",
+        "Approved CAD/spec direction controls the sample. Any deviation is flagged before build.": "经批准的 CAD / 规格方向控制样品。任何偏离都必须在制作前提出。",
+        "Core message": "核心信息",
+        "There were clear wins from being together in person.": "面对面协作带来了明确成果。",
+        "Leadership access": "管理层沟通",
+        "Direct conversations with Ben, Sunny, Jeff, Eva, and the working teams helped surface process issues quickly.": "与 Ben、Sunny、Jeff、Eva 及工作团队直接沟通，帮助快速发现流程问题。",
+        "Factory learning": "工厂学习",
+        "The Utility Board path became more practical after reviewing donor mechanisms and factory options.": "在评审现有机构和工厂方案后，Utility Board 的路径变得更实际。",
+        "Sample-room momentum": "样品室推进",
+        "Several product workstreams moved from broad ideas into specific card-level decisions and follow-up actions.": "多个产品工作流从宽泛想法推进到具体卡片层面的决策和后续行动。",
+        "Documentation discipline": "文档纪律",
+        "Photos, PDFs, measurements, and Trello comments created a stronger record for the next sample cycle.": "照片、PDF、尺寸测量和 Trello 评论，为下一轮样品周期建立了更强记录。",
+        "Positive outcomes": "正向成果",
+        "Product wins": "产品进展",
+        "Several workstreams have credible paths forward.": "多个工作流已经有可信的推进路径。",
+        "Utility Board": "Utility Board",
+        "Moved from concept to practical donor-frame path with cost, size, height, and sample timing defined.": "从概念推进到可执行的现有框架路径，并明确了成本、尺寸、高度和样品时间。",
+        "Suspend Chair": "Suspend Chair",
+        "Comfort direction is promising; motion and webbing structure still need iteration.": "舒适性方向有潜力；运动方式和织带结构仍需迭代。",
+        "Diamond Daypack": "Diamond Daypack",
+        "Strong first sample with limited revisions around straps, bottle pockets, and panel/fabric expression.": "第一版样品很强，只需围绕肩带、水瓶袋和片区/面料表达做有限修改。",
+        "Spiral Daypack": "Spiral Daypack",
+        "High-quality first sample; revisions are targeted rather than a full reset.": "第一版样品质量高；修改是针对性调整，不是全面重做。",
+        "Product progress": "产品进展",
+        "Where the trip lost value": "出差价值损失点",
+        "Late or incomplete samples reduce the value of being in China.": "迟到或不完整的样品会降低在中国现场评审的价值。",
+        "The samples were delivered while Max was here, but the missed end-of-May timing removed the best review cycle: day-1 review, revision, and a second look during the same trip.": "样品是在 Max 到中国期间交付的，但错过了 5 月底承诺时间，导致失去了最佳评审循环：第一天评审、修改、并在同一次出差中再次复审。",
+        "Incomplete samples": "样品不完整",
+        "Samples shown without final upholstery, cushions, or complete functional details cannot receive a full review.": "如果样品没有最终软包、坐垫或完整功能细节，就无法进行完整评审。",
+        "Spec drift": "规格偏离",
+        "When a sample does not follow approved CAD/spec direction, the meeting becomes a reset instead of a refinement.": "当样品没有遵循已批准的 CAD / 规格方向时，会议就会变成重置，而不是优化。",
+        "Lost correction cycle": "失去修正周期",
+        "If samples arrive during the trip instead of before it, the visit becomes first review instead of review plus correction.": "如果样品是在出差期间才到，而不是出差前到，现场访问就变成第一次评审，而不是评审加修正。",
+        "Business impact": "业务影响",
+        "Main process failure pattern": "主要流程失效模式",
+        "Physical samples became the first interpretation review.": "实物样品变成了第一次理解偏差评审。",
+        "Approved direction exists": "已有批准方向",
+        "CAD, PDFs, Trello comments, and sample notes define what should be built.": "CAD、PDF、Trello 评论和样品备注已经定义了应当制作的内容。",
+        "HF interprets during build": "恒丰在制作中自行理解",
+        "Construction or mechanism decisions are made without enough early review.": "结构或机构决策在缺少充分前期评审的情况下被做出。",
+        "Sample arrives different": "样品交付后出现偏差",
+        "WF discovers major differences only after the physical sample is complete.": "Westfield 只有在实物样品完成后才发现重大差异。",
+        "Travel time is consumed": "出差时间被消耗",
+        "The review turns into issue discovery instead of final refinement and approval.": "评审变成问题发现，而不是最终优化和批准。",
+        "Required correction": "必须纠正",
+        "CAD/spec review has to catch interpretation issues before physical sampling. Once approved, CAD/spec direction controls the sample unless WF approves a change.": "CAD / 规格评审必须在实物打样前发现理解偏差。一旦批准，CAD / 规格方向就控制样品，除非 Westfield 批准变更。",
+        "Process diagnosis": "流程诊断",
+        "Case study: Instant Indoor": "案例：Instant Indoor",
+        "Frame continues. Soft goods reset.": "框架继续推进。软包系统重做。",
+        "Frame acceptable": "框架可接受",
+        "Slipcover total loss": "外套完全重做",
+        "Cushions total loss": "坐垫完全重做",
+        "Timeline needed today": "今天需要时间表",
+        "Frame:": "框架：",
+        "acceptable to continue with revision.": "可接受，可在修改后继续推进。",
+        "Slipcover:": "外套：",
+        "not built as a true slipcover system with underlying foam.": "没有按照带底层泡棉的真正外套系统制作。",
+        "Cushions:": "坐垫：",
+        "simple foam rectangles, not approved construction.": "只是简单泡棉方块，不是批准的结构。",
+        "Fabric:": "面料：",
+        "black nylon, not approved indoor fabric direction.": "使用黑色尼龙，不是批准的室内面料方向。",
+        "Suspension:": "承托：",
+        "too loose; tightening straps from the dog-bed base were missing.": "太松；缺少原狗床底座的收紧带。",
+        "Takedown:": "拆装：",
+        "clunky; suspension stays permanently attached and two-part seat tubes are eliminated.": "操作笨重；承托应永久连接在框架上，并取消两段式座管。",
+        "Instant Indoor reset": "Instant Indoor 重置",
+        "Other sample gaps": "其他样品缺口",
+        "Other projects showed where the review loop needs to tighten.": "其他项目也显示评审循环需要收紧。",
+        "Flow-Motion V2": "Flow-Motion V2",
+        "The sample needs to stay tied to the wedge, tube profile, and bounce-plate intent before physical build.": "在实物制作前，样品必须保持与楔形结构、管型和弹跳板意图一致。",
+        "Auto Quad": "Auto Quad",
+        "The gas-spring assist did not yet create meaningful auto or assist behavior, so force/leverage needs earlier validation.": "气弹簧辅助还没有形成有效的自动或助力效果，因此力值和杠杆关系需要更早验证。",
+        "Daypacks": "日用背包",
+        "Diamond and Spiral were strong samples, but end-of-May delivery would have allowed day-1 review and a same-trip revision cycle.": "Diamond 和 Spiral 都是强样品，但如果 5 月底交付，就可以第一天评审，并在同一次出差中完成修改循环。",
+        "Sample correction themes": "样品修正主题",
+        "Working model going forward": "后续工作模式",
+        "CAD is Sample 1. The physical sample executes the approved direction.": "CAD 就是 Sample 1。实物样品执行已批准方向。",
+        "CAD / spec review": "CAD / 规格评审",
+        "WF and HF review geometry, mechanism logic, materials, and construction before sampling.": "Westfield 与恒丰在打样前评审几何、机构逻辑、材料和结构。",
+        "Deviation flag": "偏离预警",
+        "HF flags any construction or manufacturing change before the sample is built.": "恒丰在样品制作前提出任何结构或制造变更。",
+        "Sample-readiness check": "样品准备度检查",
+        "Before travel-critical review, confirm frame, soft goods, finish, and full assembly are ready.": "在关键出差评审前，确认框架、软包、表面处理和完整装配已经准备好。",
+        "Physical review": "实物评审",
+        "Max reviews a complete sample and decides proceed, revise, ship, or stop.": "Max 评审完整样品，并决定继续、修改、发货或停止。",
+        "Operating standard": "运营标准",
+        "Approved CAD/spec direction controls the physical sample. Changes are documented before build, not explained after review.": "已批准的 CAD / 规格方向控制实物样品。变更必须在制作前记录，而不是评审后解释。",
+        "Sample discipline": "样品纪律",
+        "Hangzhou design-side support": "杭州设计端支持",
+        "Max needs 1-2 new hires in Hangzhou.": "Max 需要在杭州新增 1-2 名员工。",
+        "These roles should be part of Westfield Industrial Design, just like Ben and Lia are part of the Industrial Design team. They support HF coordination from Hangzhou, but they are evaluated against Westfield standards.": "这些岗位应属于 Westfield 工业设计团队，就像 Ben 和 Lia 一样。他们在杭州支持与恒丰的协调，但按照 Westfield 标准进行评估。",
+        "Why this matters": "为什么重要",
+        "Local design-side ownership makes the CAD/spec/sample discipline stick when Max is not physically in China.": "本地设计端负责人可以在 Max 不在中国现场时，让 CAD / 规格 / 样品纪律真正落地。",
+        "Confirm headcount": "确认人数",
+        "Decide whether the first hiring need is one person or two people.": "决定第一阶段需要招聘 1 人还是 2 人。",
+        "Define the role": "定义岗位",
+        "Hire Hangzhou-based Industrial Design team members who report into Max's workstream.": "招聘位于杭州、纳入 Max 工作流的工业设计团队成员。",
+        "Set Westfield standards": "设定 Westfield 标准",
+        "Performance review and evaluation use Westfield Industrial Design expectations, not HengFeng-only standards.": "绩效评审和评价使用 Westfield 工业设计期望，而不是仅使用恒丰内部标准。",
+        "Assign operating ownership": "分配运营责任",
+        "CAD coordination, sample-readiness checks, Trello/photo evidence, supplier questions, and corrected-sample timelines.": "负责 CAD 协调、样品准备度检查、Trello / 照片证据、供应商问题和修正样品时间表。",
+        "Allow bridge hours": "允许衔接工时",
+        "Flexible hours may be required for engineering/design bridge meetings at 9 or 10 PM Hangzhou time.": "为了参加杭州时间晚上 9 点或 10 点的工程 / 设计衔接会议，可能需要灵活工作时间。",
+        "Resource decision": "资源决策",
+        "Meeting decision points": "会议决策点",
+        "This meeting needs concrete operating answers.": "本次会议需要给出具体运营答案。",
+        "Instant Indoor timeline": "Instant Indoor 时间表",
+        "Confirm frame/suspension timing, corrected slipcover and cushion timing, and complete corrected sample review timing.": "确认框架 / 承托时间、修正外套和坐垫时间，以及完整修正样品评审时间。",
+        "Sample-control standard": "样品控制标准",
+        "Agree that approved CAD/spec direction controls the physical sample unless Westfield approves a change.": "确认已批准的 CAD / 规格方向控制实物样品，除非 Westfield 批准变更。",
+        "CAD-review loop": "CAD 评审循环",
+        "Define who sends CAD, where comments live, who approves changes, and what signoff means before sampling.": "明确谁发送 CAD、评论放在哪里、谁批准变更，以及打样前的签核含义。",
+        "Hangzhou new hires": "杭州新员工",
+        "Confirm 1-2 Industrial Design direct reports, hiring path, Westfield evaluation standards, and bridge-hours expectation.": "确认 1-2 名工业设计直属员工、招聘路径、Westfield 评价标准和衔接工时期望。",
+        "Sample-readiness gate": "样品准备度关口",
+        "Define what must be complete before a sample is scheduled for travel-critical review.": "明确样品在安排关键出差评审前必须完成哪些内容。",
+        "Trello evidence standard": "Trello 证据标准",
+        "Photos, PDFs, measurements, comments, and decisions stay attached to the relevant S28 card.": "照片、PDF、测量、评论和决策都保留在对应的 S28 卡片上。",
+        "Decision list": "决策清单",
+        "Close": "结尾",
+        "The opportunity is strong. The operating discipline has to improve.": "机会很强。运营纪律必须提升。",
+        "Westfield and HengFeng can move faster together when approved direction is treated as the control point, samples are complete before travel-critical review, and Hangzhou support owns daily follow-through.": "当已批准方向被视为控制点、样品在关键出差评审前完整、杭州支持团队负责日常跟进时，Westfield 和恒丰可以更快协同推进。",
+        "Meeting outcome": "会议产出",
+        "Agree on the sample-control standard.": "确认样品控制标准。",
+        "Confirm corrected-sample timelines.": "确认修正样品时间表。",
+        "Define the Hangzhou Industrial Design hiring path.": "明确杭州工业设计招聘路径。",
+        "Set the CAD review and sample-readiness loop.": "建立 CAD 评审和样品准备度循环。"
+      }
+    };
+
+    const originalText = new Map();
+    const originalTitle = document.title;
+    const textNodes = [];
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        if (node.parentElement.closest('script, style')) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    while (walker.nextNode()) {
+      textNodes.push(walker.currentNode);
+      originalText.set(walker.currentNode, walker.currentNode.nodeValue);
+    }
+
+    const languageButtons = Array.from(document.querySelectorAll('.lang-toggle button'));
+    const setLanguage = (lang) => {
+      const table = translations[lang] || {};
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      document.title = lang === 'zh' ? table[originalTitle] || originalTitle : originalTitle;
+      textNodes.forEach((node) => {
+        const original = originalText.get(node);
+        const leading = original.match(/^\s*/)[0];
+        const trailing = original.match(/\s*$/)[0];
+        const key = original.trim();
+        node.nodeValue = leading + (lang === 'zh' ? table[key] || key : key) + trailing;
+      });
+      languageButtons.forEach((button) => button.classList.toggle('active', button.dataset.lang === lang));
+      localStorage.setItem('hengfengTripRecapLang', lang);
+      const url = new URL(window.location.href);
+      if (lang === 'zh') url.searchParams.set('lang', 'zh');
+      else url.searchParams.delete('lang');
+      history.replaceState(null, '', url);
+    };
+
+    languageButtons.forEach((button) => {
+      button.addEventListener('click', () => setLanguage(button.dataset.lang));
+    });
+
+    const initialUrl = new URL(window.location.href);
+    const initialLang = initialUrl.searchParams.get('lang') || localStorage.getItem('hengfengTripRecapLang') || 'en';
+    setLanguage(initialLang === 'zh' ? 'zh' : 'en');
+
     const slides = Array.from(document.querySelectorAll('.slide'));
     const nav = document.querySelector('.nav');
     slides.forEach((slide, index) => {
