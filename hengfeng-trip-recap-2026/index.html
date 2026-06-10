@@ -136,6 +136,14 @@
       align-items: stretch;
     }
 
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: 1fr;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
     .stack { display: grid; gap: 1rem; }
     .tight { gap: 0.65rem; }
 
@@ -183,7 +191,8 @@
     .hero-img img { min-height: 570px; }
 
     .metric {
-      min-height: 8.2rem;
+      min-height: 9.3rem;
+      height: 100%;
       display: grid;
       gap: 0.42rem;
       align-content: start;
@@ -215,6 +224,21 @@
     .card.warn { border-top: 5px solid var(--amber); }
     .card.bad { border-top: 5px solid var(--red); }
     .card.info { border-top: 5px solid var(--blue); }
+
+    .executive-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .executive-grid .card {
+      min-height: 15rem;
+    }
+
+    .lead-statement {
+      max-width: 1040px;
+    }
 
     .thumb-card {
       overflow: hidden;
@@ -329,6 +353,16 @@
       padding: 0.42rem 0.65rem;
     }
 
+    .tag.good {
+      background: var(--green-soft);
+      color: #15513d;
+    }
+
+    .tag.warn {
+      background: var(--amber-soft);
+      color: #704715;
+    }
+
     .footer {
       position: absolute;
       left: var(--pad);
@@ -411,7 +445,7 @@
       .content { padding-top: 4.3rem; padding-bottom: 4rem; }
       .cover .content { min-height: 100vh; padding-bottom: 4rem; }
       .logo { width: 118px; }
-      .grid-2, .grid-3, .grid-4, .process, .decision-grid { grid-template-columns: 1fr; }
+      .grid-2, .grid-3, .grid-4, .metric-grid, .executive-grid, .process, .decision-grid { grid-template-columns: 1fr; }
       .image-panel img, .hero-img img { min-height: 300px; }
       .thumb-card { grid-template-rows: 220px minmax(0, 1fr); }
       .nav { display: none; }
@@ -439,7 +473,7 @@
           <h2>The goal is a better next sample cycle.</h2>
           <p>This meeting is not a blame session. The trip showed real progress and real operating gaps. The immediate need is to convert both into a clearer way of working.</p>
         </div>
-        <div class="grid-2">
+        <div class="metric-grid">
           <div class="metric">
             <div class="label">Primary intent</div>
             <div class="num">Review</div>
@@ -469,22 +503,22 @@
   <section class="slide" id="slide-3">
     <div class="content">
       <div class="eyebrow">Executive readout</div>
-      <div class="grid-2">
-        <div class="quote">
-          <p><strong>The relationship and opportunity are strong.</strong> The sample process needs more discipline so Max's time in China creates full review and correction cycles, not first discovery of avoidable sample issues.</p>
+      <div class="stack">
+        <div class="quote lead-statement">
+          <p><strong>The relationship and opportunity are strong.</strong> The operating gap is sample control: Max's time in China needs to create review and correction cycles, not first discovery of avoidable sample issues.</p>
         </div>
-        <div class="stack">
+        <div class="executive-grid">
           <div class="card good">
             <h3>What worked</h3>
-            <p>Open access to HF leadership, factory teams, samples, and photo review created useful momentum.</p>
+            <p>Direct access to HF leadership, factory teams, sample rooms, and photo review created real momentum.</p>
           </div>
           <div class="card bad">
             <h3>What did not work</h3>
-            <p>Several samples were late, incomplete, or not built to the approved direction, reducing the value of the trip.</p>
+            <p>Late, incomplete, or off-direction samples turned review time into avoidable issue discovery.</p>
           </div>
           <div class="card info">
             <h3>What changes next</h3>
-            <p>Approved CAD/spec direction controls the sample. Deviations are flagged before build, not discovered after build.</p>
+            <p>Approved CAD/spec direction controls the sample. Any deviation is flagged before build.</p>
           </div>
         </div>
       </div>
@@ -627,10 +661,10 @@
         <div class="stack">
           <h2>Frame continues. Soft goods reset.</h2>
           <div class="tag-row">
-            <span class="tag">Frame acceptable</span>
+            <span class="tag good">Frame acceptable</span>
             <span class="tag">Slipcover total loss</span>
             <span class="tag">Cushions total loss</span>
-            <span class="tag">Timeline needed today</span>
+            <span class="tag warn">Timeline needed today</span>
           </div>
           <ul>
             <li><strong>Frame:</strong> acceptable to continue with revision.</li>
@@ -649,34 +683,27 @@
   <section class="slide" id="slide-9">
     <div class="content">
       <div class="eyebrow">Other sample gaps</div>
-      <h2>The same pattern appeared across other projects.</h2>
-      <div class="grid-4">
+      <h2>Other projects showed where the review loop needs to tighten.</h2>
+      <div class="grid-3">
         <div class="card thumb-card warn">
           <img src="assets/flow-hero.png" alt="Flow-Motion V2 reference" />
           <div class="thumb-copy">
             <h3>Flow-Motion V2</h3>
-            <p>Sample direction needs to stay tied to the wedge, tube profile, and bounce-plate intent.</p>
+            <p>The sample needs to stay tied to the wedge, tube profile, and bounce-plate intent before physical build.</p>
           </div>
         </div>
         <div class="card thumb-card warn">
           <img src="assets/auto-quad.png" alt="Auto Quad reference" />
           <div class="thumb-copy">
             <h3>Auto Quad</h3>
-            <p>Gas-spring assist did not yet create meaningful auto or assist behavior.</p>
-          </div>
-        </div>
-        <div class="card thumb-card info">
-          <img src="assets/quadlock.jpg" alt="Quadlock reference" />
-          <div class="thumb-copy">
-            <h3>Quadlock</h3>
-            <p>Connection strength is promising; user experience and cost path need confirmation.</p>
+            <p>The gas-spring assist did not yet create meaningful auto or assist behavior, so force/leverage needs earlier validation.</p>
           </div>
         </div>
         <div class="card thumb-card warn">
-          <img src="assets/hawkeye-sample.jpg" alt="Hawkeye sample" />
+          <img src="assets/suspend-chair.jpg" alt="Suspend Chair sample" />
           <div class="thumb-copy">
-            <h3>Hawkeye</h3>
-            <p>V2 stopped; V3 continues with clearer motion and spring-material test strategy.</p>
+            <h3>Suspend Chair</h3>
+            <p>The comfort direction is good, but webbing attachment and motion tuning need complete validation before the next sample path is locked.</p>
           </div>
         </div>
       </div>
@@ -723,11 +750,11 @@
       <div class="eyebrow">Hangzhou design-side support</div>
       <div class="decision-grid">
         <div class="stack">
-          <h2>Max needs 1-2 direct reports in Hangzhou.</h2>
-          <p>This is an operating requirement, not a generic staffing request. Local design-side ownership is what makes the CAD/spec/sample discipline stick when Max is not physically in China.</p>
+          <h2>Max needs 1-2 new hires in Hangzhou.</h2>
+          <p>These roles should be part of Westfield Industrial Design, just like Ben and Lia are part of the Industrial Design team. They support HF coordination from Hangzhou, but they are evaluated against Westfield standards.</p>
           <div class="callout">
             <h3>Why this matters</h3>
-            <p>One local owner has to chase open questions, verify CAD interpretation, confirm sample readiness, and keep Trello evidence current before problems become finished samples.</p>
+            <p>Local design-side ownership makes the CAD/spec/sample discipline stick when Max is not physically in China.</p>
           </div>
         </div>
         <div class="decision-list">
@@ -735,35 +762,35 @@
             <span>1</span>
             <div>
               <h3>Confirm headcount</h3>
-              <p>Decide whether support is one person or two people.</p>
+              <p>Decide whether the first hiring need is one person or two people.</p>
             </div>
           </div>
           <div class="decision">
             <span>2</span>
             <div>
-              <h3>Name candidates</h3>
-              <p>Identify who can support Max's Industrial Design workstream from Hangzhou.</p>
+              <h3>Define the role</h3>
+              <p>Hire Hangzhou-based Industrial Design team members who report into Max's workstream.</p>
             </div>
           </div>
           <div class="decision">
             <span>3</span>
             <div>
-              <h3>Define reporting rhythm</h3>
-              <p>Functionally report into Max's workstream with a clear weekly and daily communication loop.</p>
+              <h3>Set Westfield standards</h3>
+              <p>Performance review and evaluation use Westfield Industrial Design expectations, not HengFeng-only standards.</p>
             </div>
           </div>
           <div class="decision">
             <span>4</span>
             <div>
-              <h3>Assign ownership</h3>
-              <p>CAD review coordination, sample-readiness checks, Trello/photo evidence, supplier questions, and corrected-sample timelines.</p>
+              <h3>Assign operating ownership</h3>
+              <p>CAD coordination, sample-readiness checks, Trello/photo evidence, supplier questions, and corrected-sample timelines.</p>
             </div>
           </div>
           <div class="decision">
             <span>5</span>
             <div>
-              <h3>Start before Max leaves</h3>
-              <p>Set the first operating check-in while Max is still in China.</p>
+              <h3>Allow bridge hours</h3>
+              <p>Flexible hours may be required for engineering/design bridge meetings at 9 or 10 PM Hangzhou time.</p>
             </div>
           </div>
         </div>
@@ -774,28 +801,28 @@
 
   <section class="slide" id="slide-12">
     <div class="content">
-      <div class="eyebrow">Immediate decisions</div>
-      <h2>Tomorrow's meeting needs concrete answers.</h2>
+      <div class="eyebrow">Meeting decision points</div>
+      <h2>This meeting needs concrete operating answers.</h2>
       <div class="grid-3">
         <div class="card bad">
           <h3>Instant Indoor timeline</h3>
           <p>Confirm frame/suspension timing, corrected slipcover and cushion timing, and complete corrected sample review timing.</p>
         </div>
-        <div class="card warn">
-          <h3>Trip-extension decision</h3>
-          <p>Confirm which corrected samples Max can realistically review in Hangzhou before deciding whether to extend travel.</p>
-        </div>
         <div class="card info">
-          <h3>Shipping decisions</h3>
-          <p>Confirm which samples ship to Indianapolis now, which stay at HF for Sample 2, and which require CAD correction first.</p>
+          <h3>Sample-control standard</h3>
+          <p>Agree that approved CAD/spec direction controls the physical sample unless Westfield approves a change.</p>
         </div>
         <div class="card info">
           <h3>CAD-review loop</h3>
           <p>Define who sends CAD, where comments live, who approves changes, and what signoff means before sampling.</p>
         </div>
         <div class="card good">
-          <h3>Hangzhou support</h3>
-          <p>Confirm 1-2 direct reports, candidate names, ownership, working rhythm, and start date.</p>
+          <h3>Hangzhou new hires</h3>
+          <p>Confirm 1-2 Industrial Design direct reports, hiring path, Westfield evaluation standards, and bridge-hours expectation.</p>
+        </div>
+        <div class="card warn">
+          <h3>Sample-readiness gate</h3>
+          <p>Define what must be complete before a sample is scheduled for travel-critical review.</p>
         </div>
         <div class="card warn">
           <h3>Trello evidence standard</h3>
@@ -819,8 +846,8 @@
           <ul>
             <li>Agree on the sample-control standard.</li>
             <li>Confirm corrected-sample timelines.</li>
-            <li>Name the Hangzhou design-side support path.</li>
-            <li>Decide what Max can review before leaving China.</li>
+            <li>Define the Hangzhou Industrial Design hiring path.</li>
+            <li>Set the CAD review and sample-readiness loop.</li>
           </ul>
         </div>
       </div>
