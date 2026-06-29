@@ -1,0 +1,2295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Development Recap | July 2026</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+      background: #f7f3ea;
+    }
+
+    :root {
+      --bg: #f4f4f1;
+      --bg-2: #ecece7;
+      --paper: rgba(255,255,255,0.96);
+      --paper-strong: rgba(255,255,255,0.99);
+      --line: rgba(24, 24, 22, 0.10);
+      --line-strong: rgba(24, 24, 22, 0.20);
+      --ink: #121212;
+      --muted: #5d5d58;
+      --accent: #d63b2f;
+      --accent-soft: rgba(214, 59, 47, 0.10);
+      --green: #1f6e52;
+      --green-soft: rgba(31, 110, 82, 0.10);
+      --red: #b3352d;
+      --red-soft: rgba(179, 53, 45, 0.10);
+      --shadow: 0 12px 30px rgba(18, 18, 18, 0.05);
+      --title: clamp(2.1rem, 5.4vw, 5rem);
+      --h2: clamp(1.5rem, 2.8vw, 2.8rem);
+      --h3: clamp(1rem, 1.4vw, 1.2rem);
+      --body: clamp(0.94rem, 1.18vw, 1.08rem);
+      --small: clamp(0.72rem, 0.85vw, 0.84rem);
+      --pad: clamp(1rem, 3.3vw, 3.1rem);
+      --gap: clamp(0.9rem, 1.5vw, 1.25rem);
+      --gap-lg: clamp(1.1rem, 2vw, 1.8rem);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      color: var(--ink);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.50), rgba(255,255,255,0.22)),
+        linear-gradient(180deg, #f7f7f3 0%, #edede8 100%);
+    }
+
+    h1, h2, h3, p, ul { margin: 0; }
+    h1, h2 {
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+    }
+    h1 { font-size: var(--title); }
+    h2 { font-size: var(--h2); }
+    h3 {
+      font-size: var(--h3);
+      line-height: 1.12;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    p, li, button, select, label { font-size: var(--body); line-height: 1.45; }
+
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      scroll-snap-align: start;
+      overflow: hidden;
+    }
+
+    .slide-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--pad);
+      max-height: 100%;
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      font-size: var(--small);
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .muted { color: var(--muted); }
+
+    .card,
+    .panel,
+    .viewer-shell,
+    .placeholder,
+    .chip,
+    .decision-card,
+    .feature-card,
+    .media-panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      position: relative;
+      isolation: isolate;
+    }
+
+    .card,
+    .panel,
+    .decision-card,
+    .feature-card,
+    .placeholder,
+    .media-panel {
+      padding: clamp(1.05rem, 1.45vw, 1.2rem);
+    }
+
+    .viewer-shell,
+    .decision-card,
+    .feature-card,
+    .placeholder,
+    .media-panel,
+    .card,
+    .panel {
+      margin-top: 0.2rem;
+    }
+
+    .frame,
+    .placeholder-visual,
+    .viewer-canvas {
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(243,243,239,0.96));
+    }
+
+    img {
+      border-radius: 16px;
+    }
+
+    .frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .placeholder {
+      background: rgba(255,255,255,0.76);
+      border: 1px dashed var(--line-strong);
+    }
+
+    .placeholder-visual {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 1.15rem;
+      color: var(--muted);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.95), rgba(240,234,224,0.95)),
+        repeating-linear-gradient(-45deg, rgba(154,93,54,0.06) 0 14px, rgba(255,255,255,0) 14px 28px);
+    }
+
+    .placeholder-visual strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+
+    .grid-2,
+    .hero-grid,
+    .final-grid,
+    .top-funnel-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+      gap: var(--gap-lg);
+      align-items: center;
+      height: 100%;
+    }
+
+    .grid-3,
+    .progress-grid,
+    .support-grid,
+    .mandate-grid,
+    .feature-grid,
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--gap);
+      align-items: stretch;
+    }
+
+    .stack { display: grid; gap: var(--gap); }
+
+    .hero-visuals {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--gap);
+      align-items: stretch;
+    }
+
+    .hero-visuals .frame:first-child {
+      grid-column: 1 / span 2;
+      height: min(36vh, 330px);
+    }
+
+    .hero-visuals .frame:not(:first-child) {
+      height: min(24vh, 220px);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .chip {
+      padding: 0.52rem 0.78rem;
+      box-shadow: none;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid var(--line);
+      font-size: var(--small);
+      font-weight: 800;
+    }
+
+    .decision-card {
+      display: grid;
+      gap: 0.75rem;
+      min-height: min(66vh, 600px);
+      align-content: start;
+    }
+
+    .decision-card.yes {
+      background: linear-gradient(180deg, rgba(242,249,245,0.94), rgba(231,244,236,0.92));
+      border: 1px solid rgba(43,122,86,0.18);
+    }
+
+    .decision-card.no {
+      background: linear-gradient(180deg, rgba(251,243,242,0.94), rgba(246,233,231,0.92));
+      border: 1px solid rgba(163,69,59,0.18);
+    }
+
+    .decision-pill,
+    .progress-tag,
+    .swap-tag {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.38rem 0.62rem;
+      border-radius: 999px;
+      font-size: var(--small);
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .decision-card.yes .decision-pill {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .decision-card.no .decision-pill {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .progress-tag { background: rgba(31,23,19,0.07); color: var(--muted); }
+    .swap-tag { background: var(--accent-soft); color: var(--accent); }
+
+    .decision-card .frame,
+    .progress-card .frame,
+    .progress-card .placeholder-visual,
+    .media-panel .placeholder-visual {
+      height: min(43vh, 390px);
+    }
+
+    .progress-card,
+    .feature-card,
+    .media-panel {
+      display: grid;
+      gap: 0.8rem;
+      align-content: start;
+    }
+
+    .support-grid .frame,
+    .support-grid .placeholder-visual {
+      height: min(22vh, 190px);
+    }
+
+    .step2-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--gap-lg);
+      align-items: start;
+    }
+
+    .step2-item {
+      display: grid;
+      gap: 0.8rem;
+      justify-items: center;
+      align-content: start;
+    }
+
+    .step2-media {
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      line-height: 0;
+      background: transparent;
+    }
+
+    .step2-item img {
+      display: block;
+      width: 100%;
+      max-height: min(44vh, 430px);
+      object-fit: contain;
+      background: transparent;
+    }
+
+    .step2-media.rounded-media-bg {
+      width: 100%;
+      aspect-ratio: var(--rounded-aspect, 5 / 7);
+      border-radius: 24px;
+      overflow: hidden;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100% 100%;
+      cursor: zoom-in;
+    }
+
+    .step2-media-bg {
+      height: min(44vh, 430px);
+      border-radius: 24px;
+      overflow: hidden;
+      background-image: var(--step2-image);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      cursor: zoom-in;
+    }
+
+    .slide:nth-of-type(3) .step2-grid,
+    .slide:nth-of-type(4) .step2-grid,
+    .slide:nth-of-type(6) .step2-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: clamp(1.6rem, 2vw, 2.6rem);
+    }
+
+    .slide:nth-of-type(3) .step2-item,
+    .slide:nth-of-type(4) .step2-item,
+    .slide:nth-of-type(6) .step2-item {
+      flex: 0 0 auto;
+    }
+
+    .slide:nth-of-type(3) .step2-grid,
+    .slide:nth-of-type(4) .step2-grid,
+    .slide:nth-of-type(6) .step2-grid {
+      gap: clamp(0.8rem, 1.2vw, 1.25rem);
+    }
+
+    .slide:nth-of-type(3) .step2-media-bg,
+    .slide:nth-of-type(4) .step2-media-bg,
+    .slide:nth-of-type(6) .step2-media-bg {
+      height: min(53vh, 520px);
+    }
+
+    .slide:nth-of-type(3) .step2-media-bg,
+    .slide:nth-of-type(4) .step2-media-bg,
+    .slide:nth-of-type(6) .step2-media-bg {
+      width: auto;
+      aspect-ratio: var(--step2-aspect);
+      background-size: 100% 100%;
+    }
+
+    .frame img,
+    .hero-slideshow,
+    .hero-slide,
+    .hero-slide img {
+      border-radius: 16px;
+      clip-path: inset(0 round 16px);
+    }
+
+    .hero-slideshow,
+    .hero-slide {
+      overflow: hidden;
+    }
+
+    .step2-item h3 {
+      text-align: center;
+    }
+
+    .step2-item .placeholder-visual {
+      width: 100%;
+      height: min(44vh, 430px);
+      border-radius: 16px;
+    }
+
+    .cover-logo {
+      position: absolute;
+      top: var(--pad);
+      right: var(--pad);
+      width: clamp(66px, 8vw, 110px);
+      display: flex;
+      justify-content: flex-end;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .cover-logo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 0;
+    }
+
+    .closing-slide-layout {
+      width: min(1100px, 100%);
+      margin: 0 auto;
+      display: grid;
+      gap: clamp(1rem, 2vw, 1.6rem);
+      align-content: center;
+    }
+
+    .closing-copy {
+      display: grid;
+      gap: 0.95rem;
+    }
+
+    .closing-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--gap);
+    }
+
+    .closing-meta .feature-card {
+      margin-top: 0;
+    }
+
+    .closing-logos {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: clamp(1rem, 3vw, 2rem);
+      margin-top: clamp(0.5rem, 1vw, 1rem);
+    }
+
+    .closing-logos img {
+      display: block;
+      height: auto;
+      object-fit: contain;
+      border-radius: 0;
+    }
+
+    .closing-logos img:first-child {
+      width: clamp(150px, 18vw, 250px);
+    }
+
+    .closing-logos img:last-child {
+      width: clamp(190px, 24vw, 320px);
+    }
+
+    .shape-final-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: var(--gap-lg);
+      align-items: center;
+      height: 100%;
+    }
+
+    .slideshow-panel {
+      display: grid;
+      width: 100%;
+      gap: 1rem;
+      align-content: center;
+      justify-items: center;
+    }
+
+    .hero-slideshow {
+      position: relative;
+      width: min(100%, 520px);
+      aspect-ratio: 3 / 4;
+      justify-self: center;
+      overflow: hidden;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      border-radius: 16px;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      pointer-events: none;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: transparent;
+    }
+
+    .hero-slideshow#spiral-hero-slideshow .hero-slide {
+      display: grid;
+      place-items: center;
+    }
+
+    .hero-slideshow#spiral-hero-slideshow .hero-slide img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: unset;
+      border-radius: 24px;
+      clip-path: inset(0 round 24px);
+    }
+
+    .slideshow-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.45rem;
+    }
+
+    .slideshow-dot {
+      appearance: none;
+      border: none;
+      padding: 0;
+      width: 0.52rem;
+      height: 0.52rem;
+      border-radius: 999px;
+      background: rgba(31, 23, 19, 0.2);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .slideshow-dot.active {
+      background: var(--accent);
+      transform: scale(1.15);
+    }
+
+    .slideshow-dot:focus-visible {
+      outline: 2px solid rgba(31, 23, 19, 0.45);
+      outline-offset: 3px;
+    }
+
+    .spec-sheet-button {
+      display: inline-flex;
+      justify-self: center;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.85rem 1.2rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      box-shadow: 0 12px 24px rgba(31, 23, 19, 0.14);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .spec-sheet-button:hover,
+    .spec-sheet-button:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(31, 23, 19, 0.18);
+      background: #8c5231;
+      outline: none;
+    }
+
+    .language-toggle {
+      position: fixed;
+      left: 1rem;
+      bottom: 1rem;
+      z-index: 130;
+      min-width: 68px;
+      min-height: 40px;
+      padding: 0.55rem 0.85rem;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.94);
+      color: #111;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.18);
+      backdrop-filter: blur(8px);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .language-toggle:hover,
+    .language-toggle:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.22);
+      outline: none;
+    }
+
+    .lightboxable-image {
+      cursor: zoom-in;
+    }
+
+    .image-lightbox,
+    .spec-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem;
+      background: rgba(10, 10, 10, 0.84);
+      z-index: 100;
+    }
+
+    .image-lightbox.open,
+    .spec-modal.open {
+      display: flex;
+    }
+
+    .spec-modal-panel {
+      position: relative;
+      width: 98vw;
+      max-height: 96vh;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .spec-modal-stage {
+      display: grid;
+      gap: 0.75rem;
+      justify-items: center;
+    }
+
+    .spec-modal-media-wrap {
+      width: min(92vw, 1400px);
+      max-height: 90vh;
+      overflow: auto;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      background: #fff;
+    }
+
+    .spec-modal-media-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #fff;
+    }
+
+    .spec-modal-meta {
+      color: rgba(255,255,255,0.88);
+      font-size: var(--small);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .spec-arrow {
+      width: 52px;
+      height: 52px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.92);
+      color: #111;
+      font-size: 1.7rem;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    .spec-arrow:hover,
+    .spec-arrow:focus-visible {
+      transform: scale(1.03);
+      outline: none;
+    }
+
+    .spec-arrow:disabled {
+      opacity: 0.38;
+      cursor: default;
+      transform: none;
+    }
+
+    .image-lightbox.open {
+      display: flex;
+    }
+
+    .image-lightbox-panel {
+      position: relative;
+      width: min(98vw, 1704px);
+      max-height: 96vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-lightbox-stage {
+      display: grid;
+      gap: 0.75rem;
+      justify-items: center;
+      margin: 0 auto;
+    }
+
+    .image-lightbox img {
+      max-width: min(92vw, 1600px);
+      max-height: 90vh;
+      object-fit: contain;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      background: #fff;
+    }
+
+    .image-lightbox-meta {
+      color: rgba(255,255,255,0.88);
+      font-size: var(--small);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .lightbox-arrow {
+      position: absolute;
+      top: 50%;
+      width: 52px;
+      height: 52px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.92);
+      color: #111;
+      font-size: 1.7rem;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      transform: translateY(-50%);
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    .lightbox-arrow:hover,
+    .lightbox-arrow:focus-visible {
+      transform: translateY(-50%) scale(1.03);
+      outline: none;
+    }
+
+    .lightbox-arrow:disabled {
+      opacity: 0.38;
+      cursor: default;
+      transform: translateY(-50%);
+    }
+
+    #lightbox-prev {
+      left: 0;
+    }
+
+    #lightbox-next {
+      right: 0;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.92);
+      color: #111;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      z-index: 20;
+    }
+
+    .hero-render,
+    .media-panel .frame,
+    .media-panel .placeholder-visual.large {
+      height: min(56vh, 540px);
+    }
+
+    .frame.tall,
+    .placeholder-visual.tall {
+      height: min(50vh, 460px);
+    }
+
+    .viewer-shell {
+      padding: 0;
+      display: grid;
+      gap: 0;
+      height: 100%;
+      min-height: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      margin-top: 0;
+    }
+
+    .top-funnel-layout {
+      align-items: stretch;
+      min-height: 100%;
+    }
+
+    .top-funnel-copy {
+      display: grid;
+      min-height: 0;
+      height: 100%;
+    }
+
+    .top-funnel-browser {
+      display: grid;
+      min-height: 0;
+      height: 100%;
+    }
+
+    .viewer-overlay-copy {
+      position: absolute;
+      inset: 0 0 auto 0;
+      z-index: 2;
+      display: grid;
+      gap: 0.45rem;
+      align-content: start;
+      padding: 1.2rem 1.25rem 3rem;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,0.76) 0%, rgba(255,255,255,0.38) 42%, rgba(255,255,255,0) 100%);
+    }
+
+    .viewer-overlay-copy h2 {
+      max-width: none;
+      margin: 0;
+    }
+
+    .thumb-panel {
+      padding: 0;
+      display: grid;
+      gap: 0.85rem;
+      min-height: 0;
+      height: 100%;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      margin-top: 0;
+      align-content: stretch;
+    }
+
+    .thumb-grid {
+      display: grid;
+      height: 100%;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-rows: repeat(5, minmax(0, 1fr));
+      gap: 0.75rem;
+      align-content: stretch;
+    }
+
+    .thumb-button,
+    .thumb-slot {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0;
+      background: rgba(255,255,255,0.82);
+      overflow: hidden;
+      min-height: 0;
+      height: 100%;
+      position: relative;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      display: grid;
+      place-items: center;
+    }
+
+    .thumb-button {
+      cursor: pointer;
+    }
+
+    .thumb-button:hover,
+    .thumb-button:focus-visible {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 8px 18px rgba(31, 23, 19, 0.10);
+      outline: none;
+    }
+
+    .thumb-button.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(154, 93, 54, 0.18), 0 10px 20px rgba(31, 23, 19, 0.10);
+    }
+
+    .thumb-button img {
+      display: block;
+      width: 88%;
+      height: 88%;
+      object-fit: contain;
+      object-position: center;
+      background: transparent;
+    }
+
+    .thumb-fallback,
+    .thumb-slot {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.96), rgba(240,234,224,0.95)),
+        repeating-linear-gradient(-45deg, rgba(154,93,54,0.06) 0 12px, rgba(255,255,255,0) 12px 24px);
+    }
+
+    .thumb-fallback::before,
+    .thumb-slot::before {
+      content: "";
+      width: 42%;
+      height: 42%;
+      border-radius: 12px;
+      border: 1px dashed rgba(73, 57, 45, 0.35);
+      background: rgba(255,255,255,0.45);
+    }
+
+    .viewer-toolbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.7rem;
+      align-items: end;
+    }
+
+    .viewer-toolbar label {
+      display: grid;
+      gap: 0.35rem;
+      color: var(--muted);
+      font-size: var(--small);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+    }
+
+    .viewer-toolbar select,
+    .viewer-toolbar button {
+      border-radius: 14px;
+      border: 1px solid var(--line-strong);
+      padding: 0.72rem 0.85rem;
+      background: rgba(255,255,255,0.95);
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .viewer-toolbar button {
+      cursor: pointer;
+      background: var(--accent);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .viewer-canvas {
+      position: relative;
+      height: 100%;
+      min-height: min(62vh, 640px);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.50), rgba(255,255,255,0.22)),
+        linear-gradient(180deg, #f7f7f3 0%, #edede8 100%);
+    }
+
+    .viewer-canvas canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .viewer-state {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 1.2rem;
+      background: rgba(255,255,255,0.78);
+      color: var(--muted);
+    }
+
+    .viewer-state.hidden { display: none; }
+
+    .viewer-state-card {
+      display: grid;
+      place-items: center;
+      gap: 0.8rem;
+      min-width: 180px;
+      padding: 1rem 1.1rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(31,23,19,0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .viewer-spinner {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 3px solid rgba(214, 59, 47, 0.14);
+      border-top-color: var(--accent);
+      animation: spin 0.9s linear infinite;
+    }
+
+    .viewer-state-title {
+      font-size: var(--small);
+      text-transform: uppercase;
+      letter-spacing: 0.10em;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .viewer-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: var(--small);
+    }
+
+    ul {
+      padding-left: 1.1rem;
+      display: grid;
+      gap: 0.42rem;
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: clamp(0.7rem, 2vh, 1.3rem);
+      right: var(--pad);
+      font-size: var(--small);
+      color: rgba(31,23,19,0.52);
+    }
+
+    .nav-dots {
+      position: fixed;
+      top: 50%;
+      right: clamp(0.65rem, 1.2vw, 1rem);
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      z-index: 20;
+    }
+
+    .nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(31,23,19,0.16);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .nav-dot.active {
+      background: var(--accent);
+      transform: scale(1.16);
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 1180px) {
+      .slide {
+        height: auto;
+        min-height: 100vh;
+      }
+      .slide-content { overflow: visible; }
+      .grid-2,
+      .hero-grid,
+      .final-grid,
+      .top-funnel-layout,
+      .grid-3,
+      .progress-grid,
+      .support-grid,
+      .mandate-grid,
+      .feature-grid,
+      .decision-grid,
+      .step2-grid,
+      .hero-visuals,
+      .shape-final-layout {
+        grid-template-columns: 1fr;
+      }
+      .hero-visuals .frame:first-child { grid-column: auto; }
+      .thumb-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .closing-meta { grid-template-columns: 1fr; }
+      .closing-logos {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .thumb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-height: 720px) {
+      .nav-dots { display: none; }
+      :root { --pad: clamp(0.85rem, 2.5vw, 1.8rem); }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      html, body {
+        scroll-snap-type: none;
+      }
+
+      .slide {
+        scroll-snap-align: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav-dots" aria-label="Slide navigation"></nav>
+  <button class="language-toggle" id="language-toggle" type="button" aria-label="Switch deck to Chinese" title="Switch deck to Chinese">中文</button>
+
+  <section class="slide">
+    <div class="cover-logo" aria-hidden="true">
+      <img src="assets/westfield-outdoors-logo.jpg" alt="Westfield Outdoors logo">
+    </div>
+    <div class="slide-content" style="align-items: center; justify-content: center;">
+      <div class="stack" style="width: min(980px, 100%); gap: 1.2rem;">
+        <div class="eyebrow" data-i18n="sheet1Eyebrow">June / Early July 2026</div>
+        <h1 style="max-width: 12ch;" data-i18n="sheet1Title">Product Development Recap</h1>
+        <p class="muted" style="max-width: 760px; font-size: clamp(1.05rem, 1.45vw, 1.35rem); line-height: 1.35;" data-i18n="sheet1Subtitle">Complete samples, stronger product stories, and the path to the August development event.</p>
+        <div class="grid-2" style="height: auto; align-items: start;">
+          <div class="feature-card">
+            <h3 data-i18n="mandateHeader">Purpose</h3>
+            <p data-i18n="mandateBody">Show the strongest product-development progress from the last month, with each concept framed around what it is, why it matters, and what must be ready by August.</p>
+          </div>
+          <div class="feature-card">
+            <h3 data-i18n="positionHeader">Meeting Frame</h3>
+            <p data-i18n="positionBody">Treat August as a product development event: complete samples where possible, Core 30 as a half-scale mockup, and clear decisions on what advances next.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-number">01</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="stack" style="width: min(1120px, 100%); margin: 0 auto;">
+        <div class="stack" style="gap: 0.7rem;">
+          <div class="eyebrow" data-i18n="step1Eyebrow">Portfolio Snapshot</div>
+          <h2 style="max-width: 900px;" data-i18n="step1Header">The month moved several concepts from loose ideas into sample, CAD, prototype, or engineering-review decisions.</h2>
+          <p class="muted" style="max-width: 760px;" data-i18n="step1Body">The August meeting should focus on product readiness: what can be shown physically, what still needs correction, and which concepts deserve the next development push.</p>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="eyebrow" data-i18n="snapshotCard1Eyebrow">Complete Samples</div>
+            <h3 data-i18n="snapshotCard1Header">Primary meeting target</h3>
+            <p data-i18n="snapshotCard1Body">Utility Board, GRAM Chair, Instant Indoor, Daypacks, Flow-Motion V2, Suspend Chair, Adventure Tote / Pack, and Hard Liners if timing allows.</p>
+          </div>
+          <div class="feature-card">
+            <div class="eyebrow" data-i18n="snapshotCard2Eyebrow">Prototype / Process</div>
+            <h3 data-i18n="snapshotCard2Header">Show the platform logic</h3>
+            <p data-i18n="snapshotCard2Body">Systems Wagon / Project Atlas, Origami Wagon, and Concertina Cooler should make the larger product-platform opportunity visible, even if not fully polished.</p>
+          </div>
+          <div class="feature-card">
+            <div class="eyebrow" data-i18n="snapshotCard3Eyebrow">Decision Point</div>
+            <h3 data-i18n="snapshotCard3Header">Separate signal from activity</h3>
+            <p data-i18n="snapshotCard3Body">Core 30 is the planned half-scale mockup. Every section should end with a clear advance, correct, hold, or sample-next decision.</p>
+          </div>
+        </div>
+      </div>
+      <div style="position:absolute; width:1px; height:1px; overflow:hidden; opacity:0; pointer-events:none;" aria-hidden="true">
+        <div id="step-viewer-canvas"></div>
+        <div id="step-viewer-state" class="hidden"><div id="step-viewer-state-title">Loading</div></div>
+        <span id="step-viewer-status">Awaiting STEP files</span>
+        <select id="step-model-select"><option>Looking for manifest...</option></select>
+        <div id="step-thumb-grid"></div>
+      </div>
+    </div>
+    <div class="slide-number">02</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="stack" style="margin-bottom: var(--gap-lg);">
+        <div class="eyebrow" data-i18n="step2Eyebrow">Step 2</div>
+        <h2 data-i18n="step2Header">All modeled shapes were 3D printed at 1/5 scale for physical evaluation.</h2>
+        <p class="muted" data-i18n="step2Body">The scale models underwent a week of internal tactile and visual review. Based on consensus regarding structural viability and immediate visual appeal, these three shapes advanced.</p>
+      </div>
+      <div class="step2-grid">
+        <div class="step2-item">
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/shape-1-3d-print.jpg'); --step2-aspect: 0.7142857143;" data-lightbox-src="assets/shape-1-3d-print.jpg" data-lightbox-alt="Diamond 3D print" aria-label="Diamond 3D print" role="img"></div>
+          <h3 data-i18n="labelDiamond">Diamond</h3>
+        </div>
+        <div class="step2-item">
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/shape-2-3d-print.jpg'); --step2-aspect: 0.7142499374;" data-lightbox-src="assets/shape-2-3d-print.jpg" data-lightbox-alt="Teardrop 3D print" aria-label="Teardrop 3D print" role="img"></div>
+          <h3 data-i18n="labelTeardrop">Teardrop</h3>
+        </div>
+        <div class="step2-item">
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/shape-3-3d-print.jpg'); --step2-aspect: 0.7141833811;" data-lightbox-src="assets/shape-3-3d-print.jpg" data-lightbox-alt="Spiral 3D print" aria-label="Spiral 3D print" role="img"></div>
+          <h3 data-i18n="labelSpiral">Spiral</h3>
+        </div>
+      </div>
+    </div>
+    <div class="slide-number">03</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="stack" style="margin-bottom: var(--gap-lg);">
+        <div class="eyebrow" data-i18n="diamondProgEyebrow">Diamond Progression</div>
+        <h2 data-i18n="diamondProgHeader">The selected 1/5 scale print was translated into functional bag concept sketches.</h2>
+        <p class="muted" data-i18n="diamondProgBody">After finalizing the geometric transition and feature integration in the sketching phase, the concept moved directly into production-ready specifications.</p>
+      </div>
+      <div class="step2-grid">
+        <div class="step2-item">
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/faceted-pillow-3d-print.jpg'); --step2-aspect: 0.7142857143;" data-lightbox-src="assets/faceted-pillow-3d-print.jpg" data-lightbox-alt="Diamond 3D print" aria-label="Diamond 3D print" role="img"></div>
+          <h3 data-i18n="label3dPrint">3D Print</h3>
+        </div>
+        <div class="step2-item">
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/faceted-pillow-concept-sketch-1.jpg'); --step2-aspect: 0.8;" data-lightbox-src="assets/faceted-pillow-concept-sketch-1.jpg" data-lightbox-alt="Diamond concept sketch 1" aria-label="Diamond concept sketch 1" role="img"></div>
+          <h3 data-i18n="labelConcept1">Concept Sketch 1</h3>
+        </div>
+        <div class="step2-item">
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/faceted-pillow-concept-sketch-2.jpg'); --step2-aspect: 0.8;" data-lightbox-src="assets/faceted-pillow-concept-sketch-2.jpg" data-lightbox-alt="Diamond concept sketch 2" aria-label="Diamond concept sketch 2" role="img"></div>
+          <h3 data-i18n="labelConcept2">Concept Sketch 2</h3>
+        </div>
+      </div>
+    </div>
+    <div class="slide-number">04</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="shape-final-layout">
+        <div class="stack">
+          <div class="eyebrow" data-i18n="diamondFinalEyebrow">Diamond Final Result</div>
+          <h2 data-i18n="diamondFinalHeader">The Diamond final design yields a highly structured silhouette with strong graphic potential.</h2>
+          <p class="muted" data-i18n="diamondFinalBody">Diamond and triangular panels, distinctive M-profile webbing, and a unique slanted zipper establish a strong brand identity through functional, rather than arbitrary, design elements.</p>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h3 data-i18n="signatureReadHeader">Signature Read</h3>
+              <p data-i18n="signatureReadBody">Prominent triangular panels dictate the immediate structured silhouette.</p>
+            </div>
+            <div class="feature-card">
+              <h3 data-i18n="functionalGeometryHeader">Functional Geometry</h3>
+              <p data-i18n="functionalGeometryBody">The lower M-shape webbing projects its inner V upward to create the slanted zipper access point.</p>
+            </div>
+            <div class="feature-card">
+              <h3 data-i18n="utilityIntegrationHeader">Utility Integration</h3>
+              <p data-i18n="utilityIntegrationBody">Laptop storage and quick-access organization are embedded into the existing form to maintain architectural integrity.</p>
+            </div>
+          </div>
+        </div>
+        <div class="slideshow-panel">
+          <div class="hero-slideshow" id="shape1-hero-slideshow" aria-label="Diamond hero slideshow">
+            <div class="hero-slide active"><img src="assets/faceted-pillow-hero-1.jpg" alt="Diamond hero render front view"></div>
+            <div class="hero-slide"><img src="assets/faceted-pillow-hero-2.jpg" alt="Diamond hero render back view"></div>
+            <div class="hero-slide"><img src="assets/faceted-pillow-hero-3.jpg" alt="Diamond hero render open access view"></div>
+          </div>
+          <div class="slideshow-dots" id="shape1-hero-dots" aria-label="Diamond hero slideshow navigation">
+            <button class="slideshow-dot active" type="button" aria-label="Show diamond hero image 1"></button>
+            <button class="slideshow-dot" type="button" aria-label="Show diamond hero image 2"></button>
+            <button class="slideshow-dot" type="button" aria-label="Show diamond hero image 3"></button>
+          </div>
+          <button class="spec-sheet-button" data-spec-set="diamond" data-i18n="fullSpecSheet" type="button">Full Spec Sheet</button>
+        </div>
+      </div>
+    </div>
+    <div class="slide-number">05</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="stack" style="margin-bottom: var(--gap-lg);">
+        <div class="eyebrow" data-i18n="spiralProgEyebrow">Spiral Progression</div>
+        <h2 data-i18n="spiralProgHeader">Ergonomic evolution transitioning from irregular volume into controlled panel motion.</h2>
+        <p class="muted" data-i18n="spiralProgBody">Initial sketches established that the curved pentagonal logic functions as the foundation of a highly coherent panel system, providing ordered structure rather than randomness.</p>
+      </div>
+      <div class="step2-grid">
+        <div class="step2-item">
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/spiral-3d-print.jpg'); --step2-aspect: 0.7141833811;" data-lightbox-src="assets/spiral-3d-print.jpg" data-lightbox-alt="Spiral 3D print"></div>
+          <h3 data-i18n="label3dPrint">3D Print</h3>
+        </div>
+        <div class="step2-item">
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/spiral-concept-sketch-1.jpg'); --step2-aspect: 0.7998500750;" data-lightbox-src="assets/spiral-concept-sketch-1.jpg" data-lightbox-alt="Spiral concept sketch 1"></div>
+          <h3 data-i18n="labelConcept1">Concept Sketch 1</h3>
+        </div>
+        <div class="step2-item">
+          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/spiral-concept-sketch-2.jpg'); --step2-aspect: 0.8004032258;" data-lightbox-src="assets/spiral-concept-sketch-2.jpg" data-lightbox-alt="Spiral concept sketch 2"></div>
+          <h3 data-i18n="labelConcept2">Concept Sketch 2</h3>
+        </div>
+      </div>
+    </div>
+    <div class="slide-number">06</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="shape-final-layout">
+        <div class="slideshow-panel">
+          <div class="hero-slideshow" id="spiral-hero-slideshow" aria-label="Spiral slideshow">
+            <div class="hero-slide active"><img src="assets/spiral-hero-1.jpg" alt="Spiral hero front three-quarter view"></div>
+            <div class="hero-slide"><img src="assets/spiral-hero-2.jpg" alt="Spiral hero side view"></div>
+            <div class="hero-slide"><img src="assets/spiral-hero-3.jpg" alt="Spiral hero open interior view"></div>
+          </div>
+          <div class="slideshow-dots" id="spiral-hero-dots" aria-label="Spiral hero slideshow navigation">
+            <button class="slideshow-dot active" type="button" aria-label="Show spiral hero image 1"></button>
+            <button class="slideshow-dot" type="button" aria-label="Show spiral hero image 2"></button>
+            <button class="slideshow-dot" type="button" aria-label="Show spiral hero image 3"></button>
+          </div>
+          <button class="spec-sheet-button" data-spec-set="spiral" data-i18n="fullSpecSheet" type="button">Full Spec Sheet</button>
+        </div>
+        <div class="stack">
+          <div class="eyebrow" data-i18n="spiralFinalEyebrow">Spiral Final Result</div>
+          <h2 data-i18n="spiralFinalHeader">Hybrid sling and pack functionality, driven by a spiral panel architecture.</h2>
+          <p class="muted" data-i18n="spiralFinalBody">The panel flow bridges the gap between commuter access, ergonomic body wrap, and an athletic identity, strictly avoiding a tactical appearance.</p>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h3 data-i18n="signatureSystemHeader">Signature System</h3>
+              <p data-i18n="signatureSystemBody">The spiral panels create a highly recognizable motion language visible from multiple angles.</p>
+            </div>
+            <div class="feature-card">
+              <h3 data-i18n="wearabilityBridgeHeader">Wearability Bridge</h3>
+              <p data-i18n="wearabilityBridgeBody">An asymmetrical hip belt balances the immediate access of a sling with the load stability of a traditional backpack.</p>
+            </div>
+            <div class="feature-card">
+              <h3 data-i18n="accessLogicHeader">Access Logic</h3>
+              <p data-i18n="accessLogicBody">The spiral architecture ensures that front-oriented access is an intentional, integrated function rather than an improvised feature.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-number">07</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="closing-slide-layout">
+        <div class="closing-copy">
+          <div class="eyebrow" data-i18n="closingEyebrow">Confidential</div>
+          <h2 data-i18n="closingHeader">Confidentiality and Ownership Notice</h2>
+          <div class="feature-card">
+            <p data-i18n="closingBody1">This document contains sensitive and proprietary information intended solely for Westfield Outdoors and authorized review partners. Unauthorized use, disclosure, distribution, or reproduction of any portion of this document is prohibited.</p>
+          </div>
+          <div class="feature-card">
+            <p data-i18n="closingBody2">This presentation, including all concepts, renderings, specifications, and development materials contained herein, is the property of Westfield Outdoors.</p>
+          </div>
+        </div>
+        <div class="closing-meta">
+          <div class="feature-card">
+            <h3 data-i18n="closingUpdatedLabel">Last Edited</h3>
+            <p data-i18n="closingUpdatedValue">April 20, 2026</p>
+          </div>
+          <div class="feature-card">
+            <h3 data-i18n="closingAuthorLabel">Author</h3>
+            <p data-i18n="closingAuthorValue">Max Moore, Director of Industrial Design</p>
+          </div>
+        </div>
+        <div class="closing-logos">
+          <img src="assets/timber-ridge-logo.jpg" alt="Timber Ridge logo">
+          <img src="assets/westfield-outdoors-logo.jpg" alt="Westfield Outdoors logo">
+        </div>
+      </div>
+    </div>
+    <div class="slide-number">08</div>
+  </section>
+
+  <div class="image-lightbox" id="image-lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close image">×</button>
+    <div class="image-lightbox-panel">
+      <button class="lightbox-arrow" id="lightbox-prev" type="button" aria-label="Previous image">‹</button>
+      <div class="image-lightbox-stage">
+        <img id="lightbox-image" alt="Expanded image view">
+        <div class="image-lightbox-meta" id="lightbox-page-indicator"></div>
+      </div>
+      <button class="lightbox-arrow" id="lightbox-next" type="button" aria-label="Next image">›</button>
+    </div>
+  </div>
+
+  <div class="spec-modal" id="spec-modal" aria-hidden="true">
+    <button class="lightbox-close" id="spec-modal-close" type="button" aria-label="Close spec sheet">×</button>
+    <div class="spec-modal-panel">
+      <button class="spec-arrow" id="spec-prev" type="button" aria-label="Previous page">‹</button>
+      <div class="spec-modal-stage">
+        <div class="spec-modal-media-wrap">
+          <img id="spec-image" alt="Timber Ridge spec sheet page">
+        </div>
+        <div class="spec-modal-meta" id="spec-page-indicator">Page 1 of 1</div>
+      </div>
+      <button class="spec-arrow" id="spec-next" type="button" aria-label="Next page">›</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/occt-import-js@0.0.23/dist/occt-import-js.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.164.1/build/three.module.js"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'https://unpkg.com/three@0.164.1/examples/jsm/controls/OrbitControls.js';
+
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const nav = document.querySelector('.nav-dots');
+    const languageToggleEl = document.getElementById('language-toggle');
+    let activeIndex = 0;
+
+    slides.forEach((slide, index) => {
+      slide.id = `slide-${index + 1}`;
+    });
+
+    function getScrollTop() {
+      return document.body.scrollTop || document.documentElement.scrollTop || window.scrollY || 0;
+    }
+
+    function goToSlide(index) {
+      const clamped = Math.max(0, Math.min(index, slides.length - 1));
+      document.body.scrollTo({ top: slides[clamped].offsetTop, behavior: 'smooth' });
+      document.documentElement.scrollTo({ top: slides[clamped].offsetTop, behavior: 'smooth' });
+    }
+
+    slides.forEach((_, index) => {
+      const btn = document.createElement('button');
+      btn.className = 'nav-dot' + (index === 0 ? ' active' : '');
+      btn.setAttribute('aria-label', `Go to slide ${index + 1}`);
+      btn.addEventListener('click', () => goToSlide(index));
+      nav.appendChild(btn);
+    });
+
+    function updateActive() {
+      const scrollTop = getScrollTop();
+      let best = 0;
+      let bestDistance = Infinity;
+      slides.forEach((slide, index) => {
+        const distance = Math.abs(slide.offsetTop - scrollTop);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          best = index;
+        }
+      });
+      activeIndex = best;
+      document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index === activeIndex);
+      });
+    }
+
+    window.addEventListener('scroll', updateActive, { passive: true });
+    document.addEventListener('scroll', updateActive, { passive: true, capture: true });
+    document.body.addEventListener('scroll', updateActive, { passive: true });
+    window.addEventListener('resize', updateActive);
+    updateActive();
+
+    window.addEventListener('keydown', (event) => {
+      if (['ArrowDown', 'PageDown', ' '].includes(event.key)) {
+        event.preventDefault();
+        goToSlide(activeIndex + 1);
+      }
+      if (['ArrowUp', 'PageUp'].includes(event.key)) {
+        event.preventDefault();
+        goToSlide(activeIndex - 1);
+      }
+      if (event.key === 'Home') {
+        event.preventDefault();
+        goToSlide(0);
+      }
+      if (event.key === 'End') {
+        event.preventDefault();
+        goToSlide(slides.length - 1);
+      }
+    });
+
+    const selectEl = document.getElementById('step-model-select');
+    const stateEl = document.getElementById('step-viewer-state');
+    const stateTitleEl = document.getElementById('step-viewer-state-title');
+    const statusEl = document.getElementById('step-viewer-status');
+    const canvasHost = document.getElementById('step-viewer-canvas');
+    const thumbGridEl = document.getElementById('step-thumb-grid');
+    const lightboxEl = document.getElementById('image-lightbox');
+    const lightboxImageEl = document.getElementById('lightbox-image');
+    const lightboxCloseEl = document.getElementById('lightbox-close');
+    const lightboxPrevEl = document.getElementById('lightbox-prev');
+    const lightboxNextEl = document.getElementById('lightbox-next');
+    const lightboxPageIndicatorEl = document.getElementById('lightbox-page-indicator');
+    const specSheetButtonEls = Array.from(document.querySelectorAll('[data-spec-set]'));
+    const specModalEl = document.getElementById('spec-modal');
+    const specModalCloseEl = document.getElementById('spec-modal-close');
+    const specPrevEl = document.getElementById('spec-prev');
+    const specNextEl = document.getElementById('spec-next');
+    const specImageEl = document.getElementById('spec-image');
+    const specPageIndicatorEl = document.getElementById('spec-page-indicator');
+    const shape1SlideshowEl = document.getElementById('shape1-hero-slideshow');
+    const shape1DotsEl = document.getElementById('shape1-hero-dots');
+    const spiralSlideshowEl = document.getElementById('spiral-hero-slideshow');
+    const spiralDotsEl = document.getElementById('spiral-hero-dots');
+
+    const translations = {
+      en: {
+        sheet1Eyebrow: 'June / Early July 2026',
+        sheet1Title: 'Product Development Recap',
+        sheet1Subtitle: 'Complete samples, stronger product stories, and the path to the August development event.',
+        mandateHeader: 'Purpose',
+        mandateBody: 'Show the strongest product-development progress from the last month, with each concept framed around what it is, why it matters, and what must be ready by August.',
+        positionHeader: 'Meeting Frame',
+        positionBody: 'Treat August as a product development event: complete samples where possible, Core 30 as a half-scale mockup, and clear decisions on what advances next.',
+        step1Eyebrow: 'Portfolio Snapshot',
+        step1Header: 'The month moved several concepts from loose ideas into sample, CAD, prototype, or engineering-review decisions.',
+        step1Body: 'The August meeting should focus on product readiness: what can be shown physically, what still needs correction, and which concepts deserve the next development push.',
+        snapshotCard1Eyebrow: 'Complete Samples',
+        snapshotCard1Header: 'Primary meeting target',
+        snapshotCard1Body: 'Utility Board, GRAM Chair, Instant Indoor, Daypacks, Flow-Motion V2, Suspend Chair, Adventure Tote / Pack, and Hard Liners if timing allows.',
+        snapshotCard2Eyebrow: 'Prototype / Process',
+        snapshotCard2Header: 'Show the platform logic',
+        snapshotCard2Body: 'Systems Wagon / Project Atlas, Origami Wagon, and Concertina Cooler should make the larger product-platform opportunity visible, even if not fully polished.',
+        snapshotCard3Eyebrow: 'Decision Point',
+        snapshotCard3Header: 'Separate signal from activity',
+        snapshotCard3Body: 'Core 30 is the planned half-scale mockup. Every section should end with a clear advance, correct, hold, or sample-next decision.',
+        step2Eyebrow: 'Step 2',
+        step2Header: 'All modeled shapes were 3D printed at 1/5 scale for physical evaluation.',
+        step2Body: 'The scale models underwent a week of internal tactile and visual review. Based on consensus regarding structural viability and immediate visual appeal, these three shapes advanced.',
+        labelDiamond: 'Diamond',
+        labelTeardrop: 'Teardrop',
+        labelSpiral: 'Spiral',
+        diamondProgEyebrow: 'Diamond Progression',
+        diamondProgHeader: 'The selected 1/5 scale print was translated into functional bag concept sketches.',
+        diamondProgBody: 'After finalizing the geometric transition and feature integration in the sketching phase, the concept moved directly into production-ready specifications.',
+        label3dPrint: '3D Print',
+        labelConcept1: 'Concept Sketch 1',
+        labelConcept2: 'Concept Sketch 2',
+        diamondFinalEyebrow: 'Diamond Final Result',
+        diamondFinalHeader: 'The Diamond final design yields a highly structured silhouette with strong graphic potential.',
+        diamondFinalBody: 'Diamond and triangular panels, distinctive M-profile webbing, and a unique slanted zipper establish a strong brand identity through functional, rather than arbitrary, design elements.',
+        signatureReadHeader: 'Signature Read',
+        signatureReadBody: 'Prominent triangular panels dictate the immediate structured silhouette.',
+        functionalGeometryHeader: 'Functional Geometry',
+        functionalGeometryBody: 'The lower M-shape webbing projects its inner V upward to create the slanted zipper access point.',
+        utilityIntegrationHeader: 'Utility Integration',
+        utilityIntegrationBody: 'Laptop storage and quick-access organization are embedded into the existing form to maintain architectural integrity.',
+        fullSpecSheet: 'Full Spec Sheet',
+        spiralProgEyebrow: 'Spiral Progression',
+        spiralProgHeader: 'Ergonomic evolution transitioning from irregular volume into controlled panel motion.',
+        spiralProgBody: 'Initial sketches established that the curved pentagonal logic functions as the foundation of a highly coherent panel system, providing ordered structure rather than randomness.',
+        spiralFinalEyebrow: 'Spiral Final Result',
+        spiralFinalHeader: 'Hybrid sling and pack functionality, driven by a spiral panel architecture.',
+        spiralFinalBody: 'The panel flow bridges the gap between commuter access, ergonomic body wrap, and an athletic identity, strictly avoiding a tactical appearance.',
+        signatureSystemHeader: 'Signature System',
+        signatureSystemBody: 'The spiral panels create a highly recognizable motion language visible from multiple angles.',
+        wearabilityBridgeHeader: 'Wearability Bridge',
+        wearabilityBridgeBody: 'An asymmetrical hip belt balances the immediate access of a sling with the load stability of a traditional backpack.',
+        accessLogicHeader: 'Access Logic',
+        accessLogicBody: 'The spiral architecture ensures that front-oriented access is an intentional, integrated function rather than an improvised feature.',
+        closingEyebrow: 'Confidential',
+        closingHeader: 'Confidentiality and Ownership Notice',
+        closingBody1: 'This document contains sensitive and proprietary information intended solely for Westfield Outdoors and authorized review partners. Unauthorized use, disclosure, distribution, or reproduction of any portion of this document is prohibited.',
+        closingBody2: 'This presentation, including all concepts, renderings, specifications, and development materials contained herein, is the property of Westfield Outdoors.',
+        closingUpdatedLabel: 'Last Edited',
+        closingUpdatedValue: 'April 20, 2026',
+        closingAuthorLabel: 'Author',
+        closingAuthorValue: 'Max Moore, Director of Industrial Design'
+      },
+      zh: {
+        sheet1Eyebrow: '2026 年 6 月 / 7 月初',
+        sheet1Title: '产品开发回顾',
+        sheet1Subtitle: '完整样品、更清晰的产品故事，以及通往八月开发会议的路径。',
+        mandateHeader: '目的',
+        mandateBody: '展示过去一个月最重要的产品开发进展，并围绕每个概念说明它是什么、为什么重要、八月前需要准备什么。',
+        positionHeader: '会议定位',
+        positionBody: '把八月会议作为产品开发节点：尽可能展示完整样品，Core 30 展示半比例模型，并明确下一步推进决策。',
+        step1Eyebrow: '产品组合概览',
+        step1Header: '过去一个月，多项概念已经从松散想法推进到样品、CAD、原型或工程评审决策阶段。',
+        step1Body: '八月会议应聚焦产品准备度：哪些可以展示实物、哪些仍需修正、哪些概念值得进入下一轮开发。',
+        snapshotCard1Eyebrow: '完整样品',
+        snapshotCard1Header: '主要会议目标',
+        snapshotCard1Body: 'Utility Board、GRAM Chair、Instant Indoor、Daypacks、Flow-Motion V2、Suspend Chair、Adventure Tote / Pack，以及时间允许情况下的 Hard Liners。',
+        snapshotCard2Eyebrow: '原型 / 工艺验证',
+        snapshotCard2Header: '展示平台逻辑',
+        snapshotCard2Body: 'Systems Wagon / Project Atlas、Origami Wagon 和 Concertina Cooler 应展示更大的产品平台机会，即使样品还未完全精修。',
+        snapshotCard3Eyebrow: '决策节点',
+        snapshotCard3Header: '区分有效进展与单纯活动',
+        snapshotCard3Body: 'Core 30 计划展示半比例模型。每个产品章节都应以明确的推进、修正、暂停或下一轮样品决策收尾。',
+        step2Eyebrow: '步骤 2',
+        step2Header: '所有建模形态均以 1/5 比例进行 3D 打印，以便进行实体评估。',
+        step2Body: '这些比例模型经历了一周的内部触感与视觉评审。基于对结构可行性与第一眼视觉吸引力的共识，这三个方向进入下一阶段。',
+        labelDiamond: '菱形',
+        labelTeardrop: '水滴',
+        labelSpiral: '螺旋',
+        diamondProgEyebrow: '菱形演进',
+        diamondProgHeader: '选定的 1/5 比例打印件被转译成功能性包款概念草图。',
+        diamondProgBody: '在草图阶段完成几何过渡与功能整合后，该概念便直接进入可用于生产的规格开发。',
+        label3dPrint: '3D 打印',
+        labelConcept1: '概念草图 1',
+        labelConcept2: '概念草图 2',
+        diamondFinalEyebrow: '菱形最终结果',
+        diamondFinalHeader: '菱形最终设计形成了一个高度结构化、具备强烈图形潜力的轮廓。',
+        diamondFinalBody: '菱形与三角面片、鲜明的 M 形织带，以及独特的斜向拉链，共同通过功能性而非任意装饰性的设计元素建立起强烈的品牌识别。',
+        signatureReadHeader: '识别特征',
+        signatureReadBody: '显著的三角面片定义了第一眼即可识别的结构化轮廓。',
+        functionalGeometryHeader: '功能几何',
+        functionalGeometryBody: '下部 M 形织带将内部 V 形视觉向上延展，形成斜向拉链开口。',
+        utilityIntegrationHeader: '功能整合',
+        utilityIntegrationBody: '笔电收纳与快速取用组织被嵌入现有形体之中，以保持整体建筑式完整性。',
+        fullSpecSheet: '完整规格书',
+        spiralProgEyebrow: '螺旋演进',
+        spiralProgHeader: '从不规则体量过渡到有控制的面片运动的人体工学演化。',
+        spiralProgBody: '初步草图证明，弯曲的五边形逻辑构成了一个高度连贯的面片系统基础，带来有序结构而非随机感。',
+        spiralFinalEyebrow: '螺旋最终结果',
+        spiralFinalHeader: '由螺旋面片结构驱动的混合式单肩与双肩功能。',
+        spiralFinalBody: '面片流向在通勤取用、贴身包裹的人体工学，以及运动感身份之间建立平衡，同时严格避免战术风格外观。',
+        signatureSystemHeader: '标志系统',
+        signatureSystemBody: '螺旋面片创造出从多个角度都高度可识别的动态语言。',
+        wearabilityBridgeHeader: '佩戴桥接',
+        wearabilityBridgeBody: '非对称腰翼在单肩包的即取即用感与传统双肩包的负重稳定性之间取得平衡。',
+        accessLogicHeader: '取用逻辑',
+        accessLogicBody: '螺旋结构确保前向取用是一项有意且完整整合的功能，而非临时拼凑的特性。',
+        closingEyebrow: '机密',
+        closingHeader: '保密与所有权声明',
+        closingBody1: '本文件包含敏感且专有的信息，仅供 Westfield Outdoors 及获授权的评审合作方使用。未经授权，严禁使用、披露、分发或复制本文件的任何部分。',
+        closingBody2: '本演示文稿以及其中包含的所有概念、效果图、规格和开发材料，均为 Westfield Outdoors 的财产。',
+        closingUpdatedLabel: '最后编辑',
+        closingUpdatedValue: '2026年4月20日',
+        closingAuthorLabel: '作者',
+        closingAuthorValue: 'Max Moore，工业设计总监'
+      }
+    };
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.04;
+    canvasHost.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 1000);
+    camera.position.set(2.8, 2.1, 3.2);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.8;
+    controls.target.set(0, 0, 0);
+
+    scene.add(new THREE.HemisphereLight(0xffffff, 0xdcc9af, 1.45));
+    const key = new THREE.DirectionalLight(0xffffff, 1.2);
+    key.position.set(4, 6, 5);
+    scene.add(key);
+    const fill = new THREE.DirectionalLight(0xf6ebdc, 0.7);
+    fill.position.set(-5, 3, -4);
+    scene.add(fill);
+
+    const ground = new THREE.Mesh(
+      new THREE.CircleGeometry(10, 64),
+      new THREE.MeshBasicMaterial({ color: 0xe7ddcf, transparent: true, opacity: 0.55 })
+    );
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -0.75;
+    scene.add(ground);
+
+    let currentGroup = null;
+    let manifest = { models: [] };
+    let occtReady = null;
+    let modelLoadToken = 0;
+    let lightboxItems = [];
+    let lightboxIndex = 0;
+    let currentLanguage = window.localStorage.getItem('timber-ridge-deck-language') === 'zh' ? 'zh' : 'en';
+    let specPageNumber = 1;
+    let activeSpecSet = 'diamond';
+    const specPageImageSets = {
+      en: {
+        diamond: [
+          'assets/TimberRidgeDaypack_Spec_Viewer_p1.jpg',
+          'assets/TimberRidgeDaypack_Spec_Viewer_p2.jpg',
+          'assets/TimberRidgeDaypack_Spec_Viewer_p3.jpg'
+        ],
+        spiral: [
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p1.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p2.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p3.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p4.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p5.jpg'
+        ]
+      },
+      zh: {
+        diamond: [
+          'assets/TimberRidgeDaypack_Spec_Viewer_p1_zh.jpg',
+          'assets/TimberRidgeDaypack_Spec_Viewer_p2_zh.jpg',
+          'assets/TimberRidgeDaypack_Spec_Viewer_p3_zh.jpg'
+        ],
+        spiral: [
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p1_zh.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p2_zh.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p3_zh.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p4_zh.jpg',
+          'assets/TimberRidgeDaypack_Spiral_Spec_Viewer_p5_zh.jpg'
+        ]
+      }
+    };
+    const ASSET_CACHE_NAME = 'timber-ridge-daypack-assets-v1';
+
+    function translate(key) {
+      return translations[currentLanguage][key] || translations.en[key] || '';
+    }
+
+    function formatLightboxIndicator(current, total) {
+      return currentLanguage === 'zh' ? `图片 ${current} / ${total}` : `Image ${current} of ${total}`;
+    }
+
+    function formatSpecIndicator(current, total) {
+      return currentLanguage === 'zh' ? `第 ${current} 页，共 ${total} 页` : `Page ${current} of ${total}`;
+    }
+
+    function applyLanguage(lang) {
+      currentLanguage = lang === 'zh' ? 'zh' : 'en';
+      window.localStorage.setItem('timber-ridge-deck-language', currentLanguage);
+      document.documentElement.lang = currentLanguage === 'zh' ? 'zh-CN' : 'en';
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.dataset.i18n;
+        el.textContent = translate(key);
+      });
+      if (languageToggleEl) {
+        const toggleLabel = currentLanguage === 'zh' ? 'EN' : '中文';
+        const toggleAria = currentLanguage === 'zh' ? '切换到英文' : 'Switch deck to Chinese';
+        languageToggleEl.textContent = toggleLabel;
+        languageToggleEl.setAttribute('aria-label', toggleAria);
+        languageToggleEl.setAttribute('title', toggleAria);
+      }
+      if (specModalEl.classList.contains('open')) renderSpecPage(specPageNumber);
+      if (lightboxEl.classList.contains('open')) renderLightboxItem(lightboxIndex);
+    }
+
+    function resizeRenderer() {
+      const width = Math.max(canvasHost.clientWidth, 10);
+      const height = Math.max(canvasHost.clientHeight, 10);
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    }
+
+    function setStatus(text, showState = true, stateTitle = 'Loading model') {
+      statusEl.textContent = text;
+      if (stateTitleEl) stateTitleEl.textContent = stateTitle;
+      stateEl.classList.toggle('hidden', !showState);
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+
+    function clearModel() {
+      if (!currentGroup) return;
+      scene.remove(currentGroup);
+      currentGroup.traverse((child) => {
+        if (child.geometry) child.geometry.dispose();
+        if (child.material) {
+          if (Array.isArray(child.material)) child.material.forEach((m) => m.dispose());
+          else child.material.dispose();
+        }
+      });
+      currentGroup = null;
+    }
+
+    function renderLightboxItem(index) {
+      const total = lightboxItems.length;
+      if (!total) return;
+      lightboxIndex = Math.max(0, Math.min(index, total - 1));
+      const activeItem = lightboxItems[lightboxIndex] || {};
+      lightboxImageEl.src = activeItem.src || '';
+      lightboxImageEl.alt = activeItem.alt || 'Expanded image';
+      const grouped = total > 1;
+      lightboxPrevEl.hidden = !grouped;
+      lightboxNextEl.hidden = !grouped;
+      lightboxPageIndicatorEl.hidden = !grouped;
+      lightboxPageIndicatorEl.textContent = grouped ? formatLightboxIndicator(lightboxIndex + 1, total) : '';
+      lightboxPrevEl.disabled = lightboxIndex <= 0;
+      lightboxNextEl.disabled = lightboxIndex >= total - 1;
+    }
+
+    function openLightbox(itemsOrSrc, altOrIndex = '', maybeIndex = 0) {
+      if (Array.isArray(itemsOrSrc)) {
+        lightboxItems = itemsOrSrc;
+        lightboxIndex = Number(altOrIndex) || 0;
+      } else {
+        lightboxItems = [{ src: itemsOrSrc, alt: altOrIndex || 'Expanded image' }];
+        lightboxIndex = maybeIndex;
+      }
+      renderLightboxItem(lightboxIndex);
+      lightboxEl.classList.add('open');
+      lightboxEl.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeLightbox() {
+      lightboxEl.classList.remove('open');
+      lightboxEl.setAttribute('aria-hidden', 'true');
+      lightboxImageEl.src = '';
+      lightboxItems = [];
+      lightboxIndex = 0;
+      lightboxPageIndicatorEl.textContent = '';
+    }
+
+    function stepLightbox(direction) {
+      if (!lightboxItems.length) return;
+      renderLightboxItem(lightboxIndex + direction);
+    }
+
+    function getActiveSpecImages() {
+      return specPageImageSets[currentLanguage]?.[activeSpecSet] || specPageImageSets.en[activeSpecSet] || specPageImageSets.en.diamond;
+    }
+
+    function renderSpecPage(pageNumber) {
+      const specPageImages = getActiveSpecImages();
+      const total = specPageImages.length;
+      specPageNumber = Math.max(1, Math.min(pageNumber, total));
+      specImageEl.src = specPageImages[specPageNumber - 1];
+      specImageEl.alt = currentLanguage === 'zh' ? `Timber Ridge 规格页第 ${specPageNumber} 页` : `Timber Ridge spec sheet page ${specPageNumber}`;
+      specPageIndicatorEl.textContent = formatSpecIndicator(specPageNumber, total);
+      specPrevEl.disabled = specPageNumber <= 1;
+      specNextEl.disabled = specPageNumber >= total;
+    }
+
+    function preloadSpecImages() {
+      Object.values(specPageImageSets).flatMap((group) => Object.values(group).flat()).forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+    }
+
+    function openSpecModal(pageNumber = 1, specSet = activeSpecSet) {
+      activeSpecSet = specSet;
+      specModalEl.classList.add('open');
+      specModalEl.setAttribute('aria-hidden', 'false');
+      renderSpecPage(pageNumber);
+    }
+
+    function closeSpecModal() {
+      specModalEl.classList.remove('open');
+      specModalEl.setAttribute('aria-hidden', 'true');
+    }
+
+    function bindLightboxImages() {
+      document.querySelectorAll('img').forEach((img) => {
+        if (img.closest('#step-thumb-grid') || img.closest('#image-lightbox') || img.closest('#spec-modal')) return;
+        if (img.dataset.lightboxBound === 'true') return;
+        img.dataset.lightboxBound = 'true';
+        img.classList.add('lightboxable-image');
+        img.addEventListener('click', () => {
+          const slideshowEl = img.closest('.hero-slideshow');
+          if (slideshowEl) {
+            const slideshowImages = [...slideshowEl.querySelectorAll('img')].map((slideImg) => ({
+              src: slideImg.currentSrc || slideImg.src,
+              alt: slideImg.alt || 'Expanded image'
+            }));
+            const slideshowIndex = [...slideshowEl.querySelectorAll('img')].indexOf(img);
+            openLightbox(slideshowImages, slideshowIndex);
+            return;
+          }
+          openLightbox(img.currentSrc || img.src, img.alt || 'Expanded image');
+        });
+      });
+
+      document.querySelectorAll('[data-lightbox-src]').forEach((el) => {
+        if (el.dataset.lightboxBound === 'true') return;
+        el.dataset.lightboxBound = 'true';
+        el.addEventListener('click', () => openLightbox(el.dataset.lightboxSrc, el.dataset.lightboxAlt || 'Expanded image'));
+      });
+    }
+
+    function bindSpecModal() {
+      specSheetButtonEls.forEach((buttonEl) => {
+        buttonEl.addEventListener('click', () => {
+          openSpecModal(1, buttonEl.dataset.specSet || 'diamond');
+        });
+      });
+
+      specModalCloseEl.addEventListener('click', closeSpecModal);
+      specModalEl.addEventListener('click', (event) => {
+        if (event.target === specModalEl) closeSpecModal();
+      });
+      specPrevEl.addEventListener('click', () => {
+        renderSpecPage(specPageNumber - 1);
+      });
+      specNextEl.addEventListener('click', () => {
+        renderSpecPage(specPageNumber + 1);
+      });
+    }
+
+    function startSingleSlideshow(slideshowEl, dotsEl) {
+      if (!slideshowEl) return;
+      const slides = [...slideshowEl.querySelectorAll('.hero-slide')];
+      const dots = dotsEl ? [...dotsEl.querySelectorAll('.slideshow-dot')] : [];
+      if (slides.length <= 1) return;
+
+      let activeIndex = slides.findIndex((slide) => slide.classList.contains('active'));
+      if (activeIndex < 0) activeIndex = 0;
+
+      const showSlide = (index) => {
+        slides.forEach((slide, slideIndex) => {
+          slide.classList.toggle('active', slideIndex === index);
+        });
+        dots.forEach((dot, dotIndex) => {
+          dot.classList.toggle('active', dotIndex === index);
+          dot.setAttribute('aria-pressed', String(dotIndex === index));
+        });
+        activeIndex = index;
+      };
+
+      dots.forEach((dot, dotIndex) => {
+        dot.addEventListener('click', () => {
+          showSlide(dotIndex);
+        });
+      });
+
+      showSlide(activeIndex);
+
+      window.setInterval(() => {
+        showSlide((activeIndex + 1) % slides.length);
+      }, 10000);
+    }
+
+    function startHeroSlideshow() {
+      startSingleSlideshow(shape1SlideshowEl, shape1DotsEl);
+      startSingleSlideshow(spiralSlideshowEl, spiralDotsEl);
+    }
+
+    function colorFromArray(color) {
+      if (!Array.isArray(color) || color.length < 3) return new THREE.Color('#c48b67');
+      const normalize = color.some((v) => v > 1) ? 255 : 1;
+      return new THREE.Color(color[0] / normalize, color[1] / normalize, color[2] / normalize);
+    }
+
+    function fitCameraToObject(object) {
+      const box = new THREE.Box3().setFromObject(object);
+      if (box.isEmpty()) return;
+      const center = box.getCenter(new THREE.Vector3());
+      const size = box.getSize(new THREE.Vector3());
+      const maxSize = Math.max(size.x, size.y, size.z) || 1;
+      const distance = maxSize * 1.68;
+      camera.position.copy(center.clone().add(new THREE.Vector3(distance, distance * 0.72, distance)));
+      camera.near = Math.max(maxSize / 1000, 0.01);
+      camera.far = Math.max(maxSize * 50, 100);
+      camera.updateProjectionMatrix();
+      controls.target.copy(center);
+      controls.update();
+      ground.position.y = box.min.y - Math.max(size.y * 0.08, 0.05);
+    }
+
+    async function getOcct() {
+      if (!window.occtimportjs) throw new Error('occt-import-js failed to load');
+      if (!occtReady) occtReady = window.occtimportjs();
+      return occtReady;
+    }
+
+    function slugifyModel(model, index) {
+      const raw = model.slug || model.label || model.file || `bag-${index + 1}`;
+      return String(raw)
+        .toLowerCase()
+        .replace(/\.[a-z0-9]+$/i, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    function canUseAssetCache() {
+      return typeof caches !== 'undefined' && location.protocol.startsWith('http');
+    }
+
+    async function openAssetCache() {
+      if (!canUseAssetCache()) return null;
+      return caches.open(ASSET_CACHE_NAME);
+    }
+
+    async function getCachedAsset(url) {
+      const cache = await openAssetCache();
+      if (!cache) return null;
+      return cache.match(url);
+    }
+
+    async function fetchAndCacheAsset(url) {
+      const response = await fetch(url, { cache: 'no-store' });
+      if (response.ok) {
+        const cache = await openAssetCache();
+        if (cache) await cache.put(url, response.clone());
+      }
+      return response;
+    }
+
+    async function fetchAsset(url) {
+      const cached = await getCachedAsset(url);
+      if (cached) return cached;
+      return fetchAndCacheAsset(url);
+    }
+
+    async function warmAsset(url) {
+      try {
+        const cached = await getCachedAsset(url);
+        if (cached) return true;
+        const response = await fetchAndCacheAsset(url);
+        return response.ok;
+      } catch {
+        return false;
+      }
+    }
+
+    async function resolveThumbnailPath(model, index) {
+      const candidates = [];
+      if (model.thumbnail) candidates.push(`assets/models/${model.thumbnail}`);
+      const slug = slugifyModel(model, index);
+      ['png', 'jpg', 'jpeg', 'webp'].forEach((ext) => {
+        candidates.push(`assets/models/thumbnails/${slug}.${ext}`);
+      });
+
+      for (const candidate of candidates) {
+        const cached = await getCachedAsset(candidate);
+        if (cached && cached.ok) {
+          const blob = await cached.blob();
+          return URL.createObjectURL(blob);
+        }
+      }
+
+      for (const candidate of candidates) {
+        try {
+          const response = await fetch(candidate, { method: 'HEAD', cache: 'no-store' });
+          if (response.ok) {
+            warmAsset(candidate);
+            return candidate;
+          }
+        } catch {}
+      }
+      return null;
+    }
+
+    function scheduleBackgroundPrefetch(activeIndex) {
+      const run = async () => {
+        const modelsToWarm = manifest.models.filter((_, index) => index !== activeIndex);
+        for (const model of modelsToWarm) {
+          await warmAsset(`assets/models/${model.file}`);
+          if (model.thumbnail) {
+            await warmAsset(`assets/models/${model.thumbnail}`);
+          }
+        }
+        for (const specImage of Object.values(specPageImageSets).flat()) {
+          await warmAsset(specImage);
+        }
+      };
+
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => { run(); }, { timeout: 2500 });
+      } else {
+        window.setTimeout(() => { run(); }, 1200);
+      }
+    }
+
+    function renderThumbGrid() {
+      thumbGridEl.innerHTML = '';
+      const totalSlots = 20;
+
+      for (let i = 0; i < totalSlots; i++) {
+        const model = manifest.models[i];
+        if (model) {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'thumb-button';
+          button.setAttribute('aria-label', model.label || `Bag ${i + 1}`);
+          button.dataset.index = String(i);
+
+          const fallback = document.createElement('div');
+          fallback.className = 'thumb-fallback';
+          button.appendChild(fallback);
+
+          button.addEventListener('click', async () => {
+            await loadSelectedModel(i);
+          });
+          thumbGridEl.appendChild(button);
+
+          (async () => {
+            const thumbPath = await resolveThumbnailPath(model, i);
+            if (!thumbPath) return;
+            const img = document.createElement('img');
+            img.alt = '';
+            img.loading = 'lazy';
+            img.src = thumbPath;
+            button.innerHTML = '';
+            button.appendChild(img);
+          })();
+        } else {
+          const slot = document.createElement('div');
+          slot.className = 'thumb-slot';
+          slot.setAttribute('aria-hidden', 'true');
+          thumbGridEl.appendChild(slot);
+        }
+      }
+    }
+
+    function updateActiveThumb(index) {
+      thumbGridEl.querySelectorAll('.thumb-button').forEach((button) => {
+        button.classList.toggle('active', Number(button.dataset.index) === index);
+      });
+    }
+
+    async function loadManifest() {
+      try {
+        const response = await fetch('assets/models/manifest.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error('manifest missing');
+        const json = await response.json();
+        manifest = Array.isArray(json.models) ? json : { models: [] };
+      } catch {
+        manifest = { models: [] };
+      }
+
+      selectEl.innerHTML = '';
+      if (!manifest.models.length) {
+        const option = document.createElement('option');
+        option.textContent = 'No STEP files listed yet';
+        option.value = '';
+        selectEl.appendChild(option);
+        renderThumbGrid();
+        clearModel();
+        setStatus('Awaiting STEP files', true, 'Awaiting model');
+        return;
+      }
+
+      manifest.models.forEach((model, index) => {
+        const option = document.createElement('option');
+        option.value = String(index);
+        option.textContent = model.label || model.file || `Model ${index + 1}`;
+        selectEl.appendChild(option);
+      });
+
+      renderThumbGrid();
+      const initialIndex = Math.min(5, manifest.models.length - 1);
+      await loadSelectedModel(initialIndex);
+      scheduleBackgroundPrefetch(initialIndex);
+    }
+
+    async function buildModelGroup(model) {
+      const occt = await getOcct();
+      const response = await fetchAsset(`assets/models/${model.file}`);
+      if (!response.ok) throw new Error(`Could not fetch ${model.file}`);
+      const buffer = new Uint8Array(await response.arrayBuffer());
+      const params = {
+        linearUnit: 'millimeter',
+        linearDeflectionType: 'bounding_box_ratio',
+        linearDeflection: 0.0015,
+        angularDeflection: 0.4
+      };
+      const result = occt.ReadStepFile(buffer, params);
+      if (!result.success) throw new Error('STEP import failed');
+
+      const group = new THREE.Group();
+      result.meshes.forEach((meshData, meshIndex) => {
+        const geometry = new THREE.BufferGeometry();
+        const positions = meshData.attributes?.position?.array || [];
+        const normals = meshData.attributes?.normal?.array || [];
+        const indices = meshData.index?.array || [];
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+        if (normals.length) geometry.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
+        else geometry.computeVertexNormals();
+        if (indices.length) geometry.setIndex(indices);
+        geometry.computeBoundingSphere();
+
+        const material = new THREE.MeshStandardMaterial({
+          color: colorFromArray(meshData.color),
+          roughness: 0.68,
+          metalness: 0.08,
+          side: THREE.DoubleSide
+        });
+
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.name = meshData.name || `mesh-${meshIndex + 1}`;
+        group.add(mesh);
+      });
+
+      group.rotation.x = -Math.PI / 2;
+      const rotateYDeg = Number.isFinite(Number(model.rotateYDeg)) ? Number(model.rotateYDeg) : 180;
+      group.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), THREE.MathUtils.degToRad(rotateYDeg));
+      return group;
+    }
+
+    async function loadSelectedModel(index) {
+      if (!manifest.models.length) return;
+      const model = manifest.models[index];
+      if (!model) return;
+
+      const thisLoadToken = ++modelLoadToken;
+      selectEl.value = String(index);
+      updateActiveThumb(index);
+      setStatus(`Loading ${model.label || model.file}...`, true, 'Loading model');
+      clearModel();
+
+      let lastError = null;
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          const group = await buildModelGroup(model);
+          if (thisLoadToken !== modelLoadToken) {
+            group.traverse((child) => {
+              if (child.geometry) child.geometry.dispose();
+              if (child.material) {
+                if (Array.isArray(child.material)) child.material.forEach((m) => m.dispose());
+                else child.material.dispose();
+              }
+            });
+            return;
+          }
+
+          currentGroup = group;
+          scene.add(group);
+          fitCameraToObject(group);
+          setStatus(model.caption || `${model.label || model.file} loaded`, false, 'Loaded');
+          return;
+        } catch (error) {
+          lastError = error;
+          if (attempt === 0) {
+            await new Promise((resolve) => setTimeout(resolve, 250));
+          }
+        }
+      }
+
+      console.error(lastError);
+      setStatus(`Viewer ready, but ${model.file || 'model'} could not load`, true, 'Load error');
+    }
+
+    selectEl.addEventListener('change', async () => {
+      await loadSelectedModel(Number(selectEl.value || 0));
+    });
+
+    languageToggleEl.addEventListener('click', () => {
+      applyLanguage(currentLanguage === 'zh' ? 'en' : 'zh');
+    });
+
+    lightboxCloseEl.addEventListener('click', closeLightbox);
+    lightboxPrevEl.addEventListener('click', () => stepLightbox(-1));
+    lightboxNextEl.addEventListener('click', () => stepLightbox(1));
+    lightboxEl.addEventListener('click', (event) => {
+      if (event.target === lightboxEl) closeLightbox();
+    });
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        if (lightboxEl.classList.contains('open')) closeLightbox();
+        if (specModalEl.classList.contains('open')) closeSpecModal();
+      }
+      if (lightboxEl.classList.contains('open')) {
+        if (event.key === 'ArrowLeft' && lightboxIndex > 0) {
+          renderLightboxItem(lightboxIndex - 1);
+        }
+        if (event.key === 'ArrowRight' && lightboxIndex < lightboxItems.length - 1) {
+          renderLightboxItem(lightboxIndex + 1);
+        }
+      }
+      if (!specModalEl.classList.contains('open')) return;
+      if (event.key === 'ArrowLeft' && specPageNumber > 1) {
+        renderSpecPage(specPageNumber - 1);
+      }
+      if (event.key === 'ArrowRight' && specPageNumber < getActiveSpecImages().length) {
+        renderSpecPage(specPageNumber + 1);
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      resizeRenderer();
+    });
+    applyLanguage(currentLanguage);
+    resizeRenderer();
+    animate();
+    await loadManifest();
+    bindLightboxImages();
+    bindSpecModal();
+    preloadSpecImages();
+    startHeroSlideshow();
+  </script>
+</body>
+</html>
