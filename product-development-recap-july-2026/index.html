@@ -54,17 +54,17 @@
     h1, h2, h3, p, ul { margin: 0; }
     h1, h2 {
       font-family: Inter, Arial, Helvetica, sans-serif;
-      font-weight: 800;
-      line-height: 0.92;
-      letter-spacing: -0.05em;
+      font-weight: 680;
+      line-height: 0.98;
+      letter-spacing: -0.025em;
     }
     h1 { font-size: var(--title); }
     h2 { font-size: var(--h2); }
     h3 {
       font-size: var(--h3);
       line-height: 1.12;
-      font-weight: 800;
-      letter-spacing: -0.02em;
+      font-weight: 720;
+      letter-spacing: 0;
     }
     p, li, button, select, label { font-size: var(--body); line-height: 1.45; }
 
@@ -1202,23 +1202,32 @@
 
   <section class="slide">
     <div class="slide-content">
-      <div class="stack" style="margin-bottom: var(--gap-lg);">
-        <div class="eyebrow" data-i18n="step2Eyebrow">Step 2</div>
-        <h2 data-i18n="step2Header">All modeled shapes were 3D printed at 1/5 scale for physical evaluation.</h2>
-        <p class="muted" data-i18n="step2Body">The scale models underwent a week of internal tactile and visual review. Based on consensus regarding structural viability and immediate visual appeal, these three shapes advanced.</p>
-      </div>
-      <div class="step2-grid">
-        <div class="step2-item">
-          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/shape-1-3d-print.jpg'); --step2-aspect: 0.7142857143;" data-lightbox-src="assets/shape-1-3d-print.jpg" data-lightbox-alt="Diamond 3D print" aria-label="Diamond 3D print" role="img"></div>
-          <h3 data-i18n="labelDiamond">Diamond</h3>
+      <div class="stack" style="width: min(1120px, 100%); margin: 0 auto;">
+        <div class="stack" style="gap: 0.7rem;">
+          <div class="eyebrow" data-i18n="step2Eyebrow">August Readiness Map</div>
+          <h2 style="max-width: 900px;" data-i18n="step2Header">Organize the meeting around what each product is ready to prove.</h2>
+          <p class="muted" style="max-width: 820px;" data-i18n="step2Body">The deck should keep every project tied to a visible August deliverable and a clear development question.</p>
         </div>
-        <div class="step2-item">
-          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/shape-2-3d-print.jpg'); --step2-aspect: 0.7142499374;" data-lightbox-src="assets/shape-2-3d-print.jpg" data-lightbox-alt="Teardrop 3D print" aria-label="Teardrop 3D print" role="img"></div>
-          <h3 data-i18n="labelTeardrop">Teardrop</h3>
+        <div class="decision-grid">
+          <div class="decision-card yes" style="min-height: 0;">
+            <span class="decision-pill" data-i18n="readiness1Pill">Sample Ready</span>
+            <h3 data-i18n="readiness1Header">Complete or corrected samples</h3>
+            <p data-i18n="readiness1Body">Use these sections to evaluate form, construction, stability, comfort, usability, and whether the concept can advance.</p>
+          </div>
+          <div class="decision-card" style="min-height: 0;">
+            <span class="decision-pill" data-i18n="readiness2Pill">Prototype Ready</span>
+            <h3 data-i18n="readiness2Header">Platform demonstrators</h3>
+            <p data-i18n="readiness2Body">Use these sections to show the bigger system logic: modular wagons, new folding structures, wheel modules, and manufacturable mechanisms.</p>
+          </div>
+          <div class="decision-card no" style="min-height: 0;">
+            <span class="decision-pill" data-i18n="readiness3Pill">Decision Needed</span>
+            <h3 data-i18n="readiness3Header">Follow-up before August</h3>
+            <p data-i18n="readiness3Body">Call out gaps early: sample timing, CAD revisions, soft-goods construction, stability fixes, and which owner has the next action.</p>
+          </div>
         </div>
-        <div class="step2-item">
-          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/shape-3-3d-print.jpg'); --step2-aspect: 0.7141833811;" data-lightbox-src="assets/shape-3-3d-print.jpg" data-lightbox-alt="Spiral 3D print" aria-label="Spiral 3D print" role="img"></div>
-          <h3 data-i18n="labelSpiral">Spiral</h3>
+        <div class="feature-card" style="margin-top: 0;">
+          <h3 data-i18n="readinessFooterHeader">Meeting discipline</h3>
+          <p data-i18n="readinessFooterBody">Each product section should end with one practical decision: advance, correct, hold, or request the next sample.</p>
         </div>
       </div>
     </div>
@@ -1227,23 +1236,28 @@
 
   <section class="slide">
     <div class="slide-content">
-      <div class="stack" style="margin-bottom: var(--gap-lg);">
-        <div class="eyebrow" data-i18n="diamondProgEyebrow">Diamond Progression</div>
-        <h2 data-i18n="diamondProgHeader">The selected 1/5 scale print was translated into functional bag concept sketches.</h2>
-        <p class="muted" data-i18n="diamondProgBody">After finalizing the geometric transition and feature integration in the sketching phase, the concept moved directly into production-ready specifications.</p>
-      </div>
-      <div class="step2-grid">
-        <div class="step2-item">
-          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/faceted-pillow-3d-print.jpg'); --step2-aspect: 0.7142857143;" data-lightbox-src="assets/faceted-pillow-3d-print.jpg" data-lightbox-alt="Diamond 3D print" aria-label="Diamond 3D print" role="img"></div>
-          <h3 data-i18n="label3dPrint">3D Print</h3>
+      <div class="stack" style="width: min(1120px, 100%); margin: 0 auto;">
+        <div class="stack" style="gap: 0.7rem;">
+          <div class="eyebrow" data-i18n="diamondProgEyebrow">Utility Board</div>
+          <h2 style="max-width: 940px;" data-i18n="diamondProgHeader">A fast-deploying outdoor work surface built around a simple, familiar folding mechanism.</h2>
+          <p class="muted" style="max-width: 820px;" data-i18n="diamondProgBody">The Belgium use case gives the product a clear origin story: people constantly need a stable hard surface outside, and they need it to appear quickly, store flat, and feel rugged enough for real field use.</p>
         </div>
-        <div class="step2-item">
-          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/faceted-pillow-concept-sketch-1.jpg'); --step2-aspect: 0.8;" data-lightbox-src="assets/faceted-pillow-concept-sketch-1.jpg" data-lightbox-alt="Diamond concept sketch 1" aria-label="Diamond concept sketch 1" role="img"></div>
-          <h3 data-i18n="labelConcept1">Concept Sketch 1</h3>
-        </div>
-        <div class="step2-item">
-          <div class="step2-media step2-media-bg" style="--step2-image: url('assets/faceted-pillow-concept-sketch-2.jpg'); --step2-aspect: 0.8;" data-lightbox-src="assets/faceted-pillow-concept-sketch-2.jpg" data-lightbox-alt="Diamond concept sketch 2" aria-label="Diamond concept sketch 2" role="img"></div>
-          <h3 data-i18n="labelConcept2">Concept Sketch 2</h3>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="eyebrow" data-i18n="utilityCard1Eyebrow">Product Idea</div>
+            <h3 data-i18n="utilityCard1Header">Outdoor utility surface</h3>
+            <p data-i18n="utilityCard1Body">Reposition an ironing-board-style folding platform for camp prep, fishing, hunting, gardening, tailgating, range days, and wagon-side work.</p>
+          </div>
+          <div class="feature-card">
+            <div class="eyebrow" data-i18n="utilityCard2Eyebrow">Why It Matters</div>
+            <h3 data-i18n="utilityCard2Header">Low-cost, high-utility story</h3>
+            <p data-i18n="utilityCard2Body">The value is not decoration. It is instant setup, fold-flat storage, field-ready feet, a hard outdoor top, and clear lock feedback.</p>
+          </div>
+          <div class="feature-card">
+            <div class="eyebrow" data-i18n="utilityCard3Eyebrow">August Goal</div>
+            <h3 data-i18n="utilityCard3Header">Complete sample in hand</h3>
+            <p data-i18n="utilityCard3Body">Use the current HengFeng sample to review stability, furniture fit, and part-interface improvements before deciding the next sample path.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1539,15 +1553,35 @@
         snapshotCard3Eyebrow: 'Decision Point',
         snapshotCard3Header: 'Separate signal from activity',
         snapshotCard3Body: 'Core 30 is the planned half-scale mockup. Every section should end with a clear advance, correct, hold, or sample-next decision.',
-        step2Eyebrow: 'Step 2',
-        step2Header: 'All modeled shapes were 3D printed at 1/5 scale for physical evaluation.',
-        step2Body: 'The scale models underwent a week of internal tactile and visual review. Based on consensus regarding structural viability and immediate visual appeal, these three shapes advanced.',
+        step2Eyebrow: 'August Readiness Map',
+        step2Header: 'Organize the meeting around what each product is ready to prove.',
+        step2Body: 'The deck should keep every project tied to a visible August deliverable and a clear development question.',
+        readiness1Pill: 'Sample Ready',
+        readiness1Header: 'Complete or corrected samples',
+        readiness1Body: 'Use these sections to evaluate form, construction, stability, comfort, usability, and whether the concept can advance.',
+        readiness2Pill: 'Prototype Ready',
+        readiness2Header: 'Platform demonstrators',
+        readiness2Body: 'Use these sections to show the bigger system logic: modular wagons, new folding structures, wheel modules, and manufacturable mechanisms.',
+        readiness3Pill: 'Decision Needed',
+        readiness3Header: 'Follow-up before August',
+        readiness3Body: 'Call out gaps early: sample timing, CAD revisions, soft-goods construction, stability fixes, and which owner has the next action.',
+        readinessFooterHeader: 'Meeting discipline',
+        readinessFooterBody: 'Each product section should end with one practical decision: advance, correct, hold, or request the next sample.',
         labelDiamond: 'Diamond',
         labelTeardrop: 'Teardrop',
         labelSpiral: 'Spiral',
-        diamondProgEyebrow: 'Diamond Progression',
-        diamondProgHeader: 'The selected 1/5 scale print was translated into functional bag concept sketches.',
-        diamondProgBody: 'After finalizing the geometric transition and feature integration in the sketching phase, the concept moved directly into production-ready specifications.',
+        diamondProgEyebrow: 'Utility Board',
+        diamondProgHeader: 'A fast-deploying outdoor work surface built around a simple, familiar folding mechanism.',
+        diamondProgBody: 'The Belgium use case gives the product a clear origin story: people constantly need a stable hard surface outside, and they need it to appear quickly, store flat, and feel rugged enough for real field use.',
+        utilityCard1Eyebrow: 'Product Idea',
+        utilityCard1Header: 'Outdoor utility surface',
+        utilityCard1Body: 'Reposition an ironing-board-style folding platform for camp prep, fishing, hunting, gardening, tailgating, range days, and wagon-side work.',
+        utilityCard2Eyebrow: 'Why It Matters',
+        utilityCard2Header: 'Low-cost, high-utility story',
+        utilityCard2Body: 'The value is not decoration. It is instant setup, fold-flat storage, field-ready feet, a hard outdoor top, and clear lock feedback.',
+        utilityCard3Eyebrow: 'August Goal',
+        utilityCard3Header: 'Complete sample in hand',
+        utilityCard3Body: 'Use the current HengFeng sample to review stability, furniture fit, and part-interface improvements before deciding the next sample path.',
         label3dPrint: '3D Print',
         labelConcept1: 'Concept Sketch 1',
         labelConcept2: 'Concept Sketch 2',
@@ -1602,15 +1636,35 @@
         snapshotCard3Eyebrow: '决策节点',
         snapshotCard3Header: '区分有效进展与单纯活动',
         snapshotCard3Body: 'Core 30 计划展示半比例模型。每个产品章节都应以明确的推进、修正、暂停或下一轮样品决策收尾。',
-        step2Eyebrow: '步骤 2',
-        step2Header: '所有建模形态均以 1/5 比例进行 3D 打印，以便进行实体评估。',
-        step2Body: '这些比例模型经历了一周的内部触感与视觉评审。基于对结构可行性与第一眼视觉吸引力的共识，这三个方向进入下一阶段。',
+        step2Eyebrow: '八月准备度地图',
+        step2Header: '围绕每个产品在八月需要证明什么来组织会议。',
+        step2Body: '整套演示应让每个项目都对应一个可见的八月交付物和一个明确的开发问题。',
+        readiness1Pill: '样品准备',
+        readiness1Header: '完整或修正后的样品',
+        readiness1Body: '这些章节用于评估外形、结构、稳定性、舒适度、使用体验，以及概念是否值得推进。',
+        readiness2Pill: '原型准备',
+        readiness2Header: '平台验证模型',
+        readiness2Body: '这些章节用于展示更大的系统逻辑：模块化 wagon、新折叠结构、轮组模块和可制造机构。',
+        readiness3Pill: '需要决策',
+        readiness3Header: '八月前的跟进事项',
+        readiness3Body: '提前指出缺口：样品时间、CAD 修正、软包结构、稳定性改进，以及下一步负责人。',
+        readinessFooterHeader: '会议纪律',
+        readinessFooterBody: '每个产品章节都应以一个实际决策收尾：推进、修正、暂停，或要求下一轮样品。',
         labelDiamond: '菱形',
         labelTeardrop: '水滴',
         labelSpiral: '螺旋',
-        diamondProgEyebrow: '菱形演进',
-        diamondProgHeader: '选定的 1/5 比例打印件被转译成功能性包款概念草图。',
-        diamondProgBody: '在草图阶段完成几何过渡与功能整合后，该概念便直接进入可用于生产的规格开发。',
+        diamondProgEyebrow: 'Utility Board',
+        diamondProgHeader: '围绕一个简单、熟悉的折叠机构打造的快速展开户外工作台面。',
+        diamondProgBody: '比利时使用场景给了这个产品清晰的起点：人在户外经常需要稳定的硬质台面，而且需要它快速展开、扁平收纳，并足够坚固适合真实场景。',
+        utilityCard1Eyebrow: '产品想法',
+        utilityCard1Header: '户外实用工作面',
+        utilityCard1Body: '将熨衣板式折叠平台重新定位为露营备餐、钓鱼、狩猎、园艺、尾门活动、靶场和 wagon 旁使用的工作面。',
+        utilityCard2Eyebrow: '重要性',
+        utilityCard2Header: '低成本、高实用性的故事',
+        utilityCard2Body: '价值不在装饰，而在快速展开、扁平收纳、适合户外地面的脚部、硬质台面和清晰的锁定反馈。',
+        utilityCard3Eyebrow: '八月目标',
+        utilityCard3Header: '拿到完整样品',
+        utilityCard3Body: '用当前 HengFeng 样品评估稳定性、家具适配和零件接口改进，再决定下一轮样品路径。',
         label3dPrint: '3D 打印',
         labelConcept1: '概念草图 1',
         labelConcept2: '概念草图 2',
