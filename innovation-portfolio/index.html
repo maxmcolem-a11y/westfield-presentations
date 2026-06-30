@@ -215,6 +215,15 @@
             font-weight: 600;
             text-align: center;
         }
+        #slide-adventure-bags-product .paired-hero-grid img {
+            height: min(52vh, 460px);
+        }
+        #slide-adventure-bags-product .slide-content.fill {
+            gap: 0.65rem;
+        }
+        #slide-adventure-bags-product .section-label {
+            margin-bottom: 0;
+        }
 
         /* ===========================================
            FEATURE PILLS
@@ -314,25 +323,82 @@
             color: var(--accent-dark);
         }
         .comp-table .highlight td { border-bottom-color: rgba(27,107,58,0.15); }
-        #slide-summary .slide-content.fill { gap: 0.35rem; }
-        #slide-summary .slide-title { margin-bottom: 0.35rem !important; }
-        #slide-summary .comp-table {
-            font-size: clamp(0.54rem, 0.72vw, 0.66rem);
+        #slide-summary .slide-content.fill {
+            justify-content: center;
+            gap: clamp(0.75rem, 1.8vw, 1.35rem);
         }
-        #slide-summary .comp-table th,
-        #slide-summary .comp-table td {
-            padding: 0.28em 0.5em;
-            line-height: 1.18;
+        #slide-summary .slide-title {
+            text-align: center;
+            margin-bottom: 0 !important;
         }
-        #slide-summary .callout-box {
-            padding: 0.55rem;
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: clamp(0.6rem, 1.2vw, 1rem);
         }
-        #slide-summary .callout-title {
-            margin-bottom: 0.2rem;
+        .summary-card {
+            min-height: 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-card);
+            padding: clamp(0.75rem, 1.2vw, 1rem);
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
         }
-        #slide-summary .callout-text {
-            font-size: 0.65rem;
-            line-height: 1.25;
+        .summary-card-title {
+            font-family: var(--font-display);
+            font-size: clamp(0.78rem, 1vw, 0.95rem);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .summary-card-kicker {
+            font-size: clamp(0.56rem, 0.72vw, 0.66rem);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+        .summary-card ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            color: var(--text-secondary);
+            font-size: clamp(0.64rem, 0.82vw, 0.78rem);
+            line-height: 1.32;
+        }
+        .summary-card li {
+            padding-left: 0.75rem;
+            position: relative;
+        }
+        .summary-card li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.55em;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+        .summary-card.warm li::before { background: var(--accent-warm); }
+        .summary-card.blue li::before { background: var(--accent-blue); }
+        .summary-card.purple li::before { background: var(--accent-purple); }
+        .priority-strip {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: clamp(0.75rem, 1.4vw, 1.1rem);
+            max-width: 980px;
+            margin: 0 auto;
+        }
+        .priority-strip .callout-box {
+            padding: clamp(0.75rem, 1.2vw, 1rem);
+            border-radius: 8px;
+        }
+        .priority-strip .callout-text {
+            font-size: clamp(0.68rem, 0.86vw, 0.78rem);
+            line-height: 1.36;
         }
 
         /* ===========================================
@@ -489,6 +555,10 @@
             .col-img { max-height: 35vh; }
             .col-img img { max-height: 30vh; }
             .paired-hero-grid img { height: 26vh; }
+            .summary-grid, .priority-strip { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 1100px) and (min-width: 769px) {
+            .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
         @media (prefers-reduced-motion: reduce) {
             .reveal { transition-duration: 0.2s; transform: none; }
@@ -1478,34 +1548,53 @@
 
 <section class="slide slide-alt" id="slide-summary">
     <div class="slide-content fill">
-        <h2 class="slide-title reveal" style="text-align: center; margin-bottom: var(--content-gap);">Portfolio At a Glance</h2>
-        <table class="comp-table reveal" style="max-width: 980px; margin: 0 auto;">
-            <thead>
-                <tr><th>Concept</th><th>Current Trello Stage</th><th>Development Signal</th><th>Next Decision</th></tr>
-            </thead>
-            <tbody>
-                <tr><td><strong>Instant Indoor</strong></td><td>Sample Room</td><td>Frame reuse plan is approved; corrected upholstery direction is improving, but final soft goods remain the blocker.</td><td>Review complete corrected sample and final photo package once soft cover/cushions are finished.</td></tr>
-                <tr><td><strong>Origami Wagon</strong></td><td>HF R&amp;D</td><td>One-third-scale composite model and 1-to-1 hand-formed sample are documented; material durability and full-scale function remain unproven.</td><td>Choose the material/process path and decide what must be built full-scale for August validation.</td></tr>
-                <tr><td><strong>Systems Wagon</strong></td><td>WF Industrial Design</td><td>CAD/spec assets exist and prototype tasks are partly checked off; range-kit inserts and final prototype validation are still open.</td><td>Validate welded assembly, crate/lid/accessory fit, and range-kit direction.</td></tr>
-                <tr><td><strong>Suspend Chair</strong></td><td>WF Industrial Design</td><td>First-round sample arrived in Indianapolis; revised second-round sample is still 2-3 weeks out and depends on the smoother pivot/hook direction.</td><td>Physically review sample one, then lock feedback for the second-round revision.</td></tr>
-                <tr><td><strong>GRAM Chair</strong></td><td>Sample Room</td><td>Factory flagged TPU/soft-corner behavior risk; angled and non-angled STEP files are attached for next comparison.</td><td>Compare rocking comfort and stability, then decide whether the compliant corner mechanism is viable.</td></tr>
-                <tr><td><strong>Flow Motion v2</strong></td><td>Sample Room</td><td>First HF sample missed the controlled design; revised STEP and approved-as-revised file are attached for the next sample path.</td><td>Validate the wedge, tube profile, motion feel, pinch gap, and soft-goods execution on the corrected sample.</td></tr>
-                <tr><td><strong>Core 30</strong></td><td>WF Industrial Design</td><td>Compact suspended-seat chair direction is defined around a continuous tube profile and simplified fabric panels.</td><td>Validate comfort, stability, bend feasibility, fold path, and under-seat brace load path.</td></tr>
-                <tr><td><strong>Spiral + Diamond Daypack</strong></td><td>Sample Room</td><td>Both first samples were reviewed; approved redline PDFs are attached, and the current next-sample ETA is July 20.</td><td>Review revised samples side by side and choose the lead direction after construction, access, comfort, and shelf-read comparison.</td></tr>
-                <tr><td><strong>Adventure Pack + Tote</strong></td><td>WF Industrial Design / Blocked</td><td>Cards show brief/P&amp;L assets and new cover images, but initial CAD/sample checklist items are still incomplete.</td><td>Assign owner, unblock initial CADs, and define shared materials, trim, hardware, and sample timing.</td></tr>
-                <tr><td><strong>Camp / Field Utility Board</strong></td><td>WF Industrial Design</td><td>External factory had sample requirements and expected samples to HF by June 27; real-use validation is not yet closed.</td><td>Validate height-locking bar, notch positions, 70 lb load target, connected feet, finish, and folded package.</td></tr>
-                <tr><td><strong>Hard Liners</strong></td><td>WF Industrial Design</td><td>Spec is attached, but Trello discussion still points to feasibility proof through 3D print before further development.</td><td>3D print or otherwise prove the cube liner mechanism before committing to molded living-hinge development.</td></tr>
-                <tr><td><strong>Concertina Cooler</strong></td><td>WF Industrial Design</td><td>Trello says it is on track for a 3D-printed August sample; no completed first printed sample is documented yet.</td><td>Get the printed sample built, then validate fold panels, liner strategy, compression hardware, and carry behavior.</td></tr>
-            </tbody>
-        </table>
-        <div style="display: flex; gap: var(--content-gap); justify-content: center; margin-top: clamp(1rem, 2vw, 2rem); flex-wrap: wrap;" class="reveal">
-            <div class="callout-box" style="flex: 1; min-width: 200px; max-width: 430px;">
-                <div class="callout-title">Common Thread</div>
-                <div class="callout-text">The active portfolio is now split between samples already in hand, samples expected before August, and concepts still blocked before physical proof.</div>
+        <h2 class="slide-title reveal">August Meeting Readiness</h2>
+        <div class="summary-grid reveal">
+            <div class="summary-card">
+                <div class="summary-card-kicker">Ready To Review</div>
+                <div class="summary-card-title">Samples In Hand</div>
+                <ul>
+                    <li>Suspend Chair first-round sample is in Indianapolis.</li>
+                    <li>Spiral and Diamond daypack first samples were reviewed with redlines attached.</li>
+                    <li>Origami has documented scale and hand-formed material samples.</li>
+                </ul>
             </div>
-            <div class="callout-box purple" style="flex: 1; min-width: 200px; max-width: 430px;">
-                <div class="callout-title">Next Steps</div>
-                <div class="callout-text">Organize the August meeting around Trello-backed deliverables: review what physically exists, chase incoming samples, and call out risks where CAD, owner, mechanism, or material proof is still missing.</div>
+            <div class="summary-card warm">
+                <div class="summary-card-kicker">Chase Before August</div>
+                <div class="summary-card-title">Incoming Sample Paths</div>
+                <ul>
+                    <li>Daypack revised samples are tracking toward the July 20 next-sample date.</li>
+                    <li>Camp / Field Utility Board supplier samples were expected to reach HF by June 27.</li>
+                    <li>Flow Motion v2 is waiting on the corrected sample path from revised files.</li>
+                </ul>
+            </div>
+            <div class="summary-card purple">
+                <div class="summary-card-kicker">Needs Ownership</div>
+                <div class="summary-card-title">Blocked Physical Proof</div>
+                <ul>
+                    <li>Adventure Pack + Tote still need initial CAD/sample work unblocked.</li>
+                    <li>Hard Liners need a cube mechanism proof before molded-liner commitment.</li>
+                    <li>Concertina Cooler needs the August 3D print completed and documented.</li>
+                </ul>
+            </div>
+            <div class="summary-card blue">
+                <div class="summary-card-kicker">Decision Risks</div>
+                <div class="summary-card-title">What Must Be Validated</div>
+                <ul>
+                    <li>Mechanisms: chair motion, height locks, folds, hinges, and compression behavior.</li>
+                    <li>Materials: Origami durability, cooler liner strategy, bag trims, and soft goods.</li>
+                    <li>Usability: carry comfort, stability, cleanability, folded package, and shelf read.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="priority-strip reveal">
+            <div class="callout-box">
+                <div class="callout-title">Meeting Structure</div>
+                <div class="callout-text">Lead with what can physically be handled in the room, then separate incoming samples from concepts that still need CAD, owner, mechanism, or material proof.</div>
+            </div>
+            <div class="callout-box purple">
+                <div class="callout-title">Immediate Follow-Up</div>
+                <div class="callout-text">Confirm which expected samples have arrived, document them back to Trello, and keep the August narrative tied to physical deliverables rather than inferred status.</div>
             </div>
         </div>
     </div>
