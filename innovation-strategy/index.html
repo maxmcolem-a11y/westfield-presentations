@@ -361,8 +361,7 @@ tr:last-child td { border-bottom: 0; }
   border: 3px solid rgba(214, 59, 47, 0.18);
   border-radius: 50%;
 }
-.loop::after {
-  content: "Great product";
+.loop-center {
   position: absolute;
   inset: 31%;
   display: grid;
@@ -377,6 +376,7 @@ tr:last-child td { border-bottom: 0; }
   line-height: 0.95;
   font-weight: 900;
   letter-spacing: -0.055em;
+  z-index: 3;
 }
 .loop-node {
   position: absolute;
@@ -478,6 +478,32 @@ tr:last-child td { border-bottom: 0; }
 }
 .nav-dot.active { background: var(--accent); transform: scale(1.35); }
 .dark + .nav-dots .nav-dot { background: rgba(255,255,255,0.4); }
+.language-toggle {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 1300;
+  min-width: 68px;
+  min-height: 40px;
+  padding: 0.55rem 0.85rem;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.94);
+  color: #111;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.18);
+  backdrop-filter: blur(8px);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.language-toggle:hover,
+.language-toggle:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.22);
+  outline: none;
+}
 @media (max-width: 860px) {
   .slide { min-height: auto; }
   .content { min-height: 100vh; min-height: 100dvh; padding: 4rem 1.25rem 3.5rem; width: 100%; max-width: 100vw; overflow: hidden; }
@@ -501,15 +527,16 @@ tr:last-child td { border-bottom: 0; }
 </head>
 <body>
 <nav class="nav-dots" aria-label="Slide navigation"></nav>
+<button class="language-toggle" id="language-toggle" type="button" aria-label="Switch deck to Chinese" title="Switch deck to Chinese">中文</button>
 
 <section class="slide dark cover" id="slide-1">
   <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
   <div class="content">
-    <div class="eyebrow">Westfield Outdoors</div>
-    <h1>Building Westfield's Innovation Engine</h1>
+    <div class="eyebrow" data-i18n="coverEyebrow">Westfield Outdoors</div>
+    <h1 data-i18n="coverTitle">Building Westfield's Innovation Engine</h1>
     <div class="rule"></div>
-    <p class="subtitle">Driving hero innovation through Strategic Brands while keeping Westfield a strong private label partner for retailers.</p>
-    <p class="lede">Innovation is the capability that lets Westfield consistently create differentiated products, strengthen Strategic Brands, and deliver proven value-driven innovation to retail partners.</p>
+    <p class="subtitle" data-i18n="coverSubtitle">Driving hero innovation through Strategic Brands while keeping Westfield a strong private label partner for retailers.</p>
+    <p class="lede" data-i18n="coverLede">Innovation is the capability that lets Westfield consistently create differentiated products, strengthen Strategic Brands, and deliver proven value-driven innovation to retail partners.</p>
   </div>
   <div class="slide-number">01</div>
 </section>
@@ -518,15 +545,15 @@ tr:last-child td { border-bottom: 0; }
   <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
   <div class="content split">
     <div>
-      <div class="eyebrow">Why it matters</div>
-      <h2>Retail partners are asking for more than line extensions.</h2>
-      <p class="lede">Innovation has to become a repeatable operating capability, not a one-off creative push.</p>
+      <div class="eyebrow" data-i18n="s2Eyebrow">Why it matters</div>
+      <h2 data-i18n="s2Title">Retail partners are asking for more than line extensions.</h2>
+      <p class="lede" data-i18n="s2Lede">Innovation has to become a repeatable operating capability, not a one-off creative push.</p>
     </div>
     <div class="grid-2">
-      <div class="card green"><h3>Retail expectations</h3><p>Retailers increasingly expect meaningful innovation that gives them a reason to reset, feature, and defend margin.</p></div>
-      <div class="card green"><h3>Consumer pull</h3><p>Consumers reward products that solve real problems in clear, understandable ways.</p></div>
-      <div class="card green"><h3>Portfolio differentiation</h3><p>Innovation differentiates both Strategic Brands and Private Label.</p></div>
-      <div class="card green"><h3>Competitive advantage</h3><p>Westfield's advantage is product innovation, not advertising spend.</p></div>
+      <div class="card green"><h3 data-i18n="s2Card1Title">Retail expectations</h3><p data-i18n="s2Card1Body">Retailers increasingly expect meaningful innovation that gives them a reason to reset, feature, and defend margin.</p></div>
+      <div class="card green"><h3 data-i18n="s2Card2Title">Consumer pull</h3><p data-i18n="s2Card2Body">Consumers reward products that solve real problems in clear, understandable ways.</p></div>
+      <div class="card green"><h3 data-i18n="s2Card3Title">Portfolio differentiation</h3><p data-i18n="s2Card3Body">Innovation differentiates both Strategic Brands and Private Label.</p></div>
+      <div class="card green"><h3 data-i18n="s2Card4Title">Competitive advantage</h3><p data-i18n="s2Card4Body">Westfield's advantage is product innovation, not advertising spend.</p></div>
     </div>
   </div>
   <div class="slide-number">02</div>
@@ -535,15 +562,15 @@ tr:last-child td { border-bottom: 0; }
 <section class="slide alt" id="slide-3">
   <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
   <div class="content">
-    <div class="eyebrow">Company model</div>
-    <h2>Westfield is a product-led durable goods company.</h2>
+    <div class="eyebrow" data-i18n="s3Eyebrow">Company model</div>
+    <h2 data-i18n="s3Title">Westfield is a product-led durable goods company.</h2>
     <div class="grid-4">
-      <div class="card green"><h3>Product Management</h3><p>Define customer, retailer, margin, and lifecycle priorities.</p></div>
-      <div class="card green"><h3>Industrial Design</h3><p>Translate use cases into differentiated physical product experiences.</p></div>
-      <div class="card green"><h3>Engineering</h3><p>Turn concepts into reliable, manufacturable durable goods.</p></div>
-      <div class="card green"><h3>Retail Partnerships</h3><p>Match innovation to channel needs, price points, and launch timing.</p></div>
+      <div class="card green"><h3 data-i18n="s3Card1Title">Product Management</h3><p data-i18n="s3Card1Body">Define customer, retailer, margin, and lifecycle priorities.</p></div>
+      <div class="card green"><h3 data-i18n="s3Card2Title">Industrial Design</h3><p data-i18n="s3Card2Body">Translate use cases into differentiated physical product experiences.</p></div>
+      <div class="card green"><h3 data-i18n="s3Card3Title">Engineering</h3><p data-i18n="s3Card3Body">Turn concepts into reliable, manufacturable durable goods.</p></div>
+      <div class="card green"><h3 data-i18n="s3Card4Title">Retail Partnerships</h3><p data-i18n="s3Card4Body">Match innovation to channel needs, price points, and launch timing.</p></div>
     </div>
-    <div class="quote">Better Products > Stronger Retail Partnerships > Sustainable Growth</div>
+    <div class="quote" data-i18n="s3Quote">Better Products > Stronger Retail Partnerships > Sustainable Growth</div>
   </div>
   <div class="slide-number">03</div>
 </section>
@@ -552,18 +579,18 @@ tr:last-child td { border-bottom: 0; }
   <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
   <div class="content split">
     <div>
-      <div class="eyebrow">Two routes to value</div>
-      <h2>Innovation creates value through both Strategic Brands and Private Label.</h2>
-      <p class="lede">The same capability can support breakthrough brand-building work and lower-risk retailer programs.</p>
+      <div class="eyebrow" data-i18n="s4Eyebrow">Two routes to value</div>
+      <h2 data-i18n="s4Title">Innovation creates value through both Strategic Brands and Private Label.</h2>
+      <p class="lede" data-i18n="s4Lede">The same capability can support breakthrough brand-building work and lower-risk retailer programs.</p>
     </div>
     <div class="grid-2">
       <div class="card green">
-        <h3>Strategic Brands</h3>
-        <p>Hero innovation creates consumer demand, brand equity, proof points, and retailer excitement.</p>
+        <h3 data-i18n="strategicBrands">Strategic Brands</h3>
+        <p data-i18n="s4Card1Body">Hero innovation creates consumer demand, brand equity, proof points, and retailer excitement.</p>
       </div>
       <div class="card blue">
-        <h3>Private Label</h3>
-        <p>Validated innovation transfers into proven features, lower-risk programs, and value-oriented solutions.</p>
+        <h3 data-i18n="privateLabel">Private Label</h3>
+        <p data-i18n="s4Card2Body">Validated innovation transfers into proven features, lower-risk programs, and value-oriented solutions.</p>
       </div>
     </div>
   </div>
@@ -573,16 +600,16 @@ tr:last-child td { border-bottom: 0; }
 <section class="slide alt" id="slide-5">
   <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
   <div class="content">
-    <div class="eyebrow">Capability view</div>
-    <h2>Innovation is a capability with several connected parts.</h2>
+    <div class="eyebrow" data-i18n="s5Eyebrow">Capability view</div>
+    <h2 data-i18n="s5Title">Innovation is a capability with several connected parts.</h2>
     <table>
-      <thead><tr><th>Capability</th><th>Role</th><th>Current gap</th></tr></thead>
+      <thead><tr><th data-i18n="capability">Capability</th><th data-i18n="role">Role</th><th data-i18n="currentGap">Current gap</th></tr></thead>
       <tbody>
-        <tr><td>Consumer Research</td><td>Discover unmet needs and behavior patterns.</td><td><span class="status s-red">Limited</span></td></tr>
-        <tr><td>Market Insights</td><td>Guide investment, category focus, and retailer positioning.</td><td><span class="status s-red">Limited</span></td></tr>
-        <tr><td>AI</td><td>Accelerate research, concept development, visualization, and knowledge work.</td><td><span class="status s-yellow">Low -> Medium</span></td></tr>
-        <tr><td>Rapid Prototyping</td><td>Validate ideas quickly before tooling and program commitment.</td><td><span class="status s-yellow">Moderate</span></td></tr>
-        <tr><td>Knowledge Management</td><td>Capture learning, decisions, testing, and product history.</td><td><span class="status s-green">Growing</span></td></tr>
+        <tr><td data-i18n="consumerResearch">Consumer Research</td><td data-i18n="s5Role1">Discover unmet needs and behavior patterns.</td><td><span class="status s-red" data-i18n="limited">Limited</span></td></tr>
+        <tr><td data-i18n="marketInsights">Market Insights</td><td data-i18n="s5Role2">Guide investment, category focus, and retailer positioning.</td><td><span class="status s-red" data-i18n="limited">Limited</span></td></tr>
+        <tr><td data-i18n="ai">AI</td><td data-i18n="s5Role3">Accelerate research, concept development, visualization, and knowledge work.</td><td><span class="status s-yellow" data-i18n="lowMedium">Low -> Medium</span></td></tr>
+        <tr><td data-i18n="rapidPrototyping">Rapid Prototyping</td><td data-i18n="s5Role4">Validate ideas quickly before tooling and program commitment.</td><td><span class="status s-yellow" data-i18n="moderate">Moderate</span></td></tr>
+        <tr><td data-i18n="knowledgeManagement">Knowledge Management</td><td data-i18n="s5Role5">Capture learning, decisions, testing, and product history.</td><td><span class="status s-green" data-i18n="growing">Growing</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -593,14 +620,14 @@ tr:last-child td { border-bottom: 0; }
   <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
   <div class="content split">
     <div>
-      <div class="eyebrow">Platform strategy</div>
-      <h2>Fewer core platforms, more meaningful differentiation.</h2>
-      <p class="lede">Platform discipline gives the company better leverage while still allowing retailer-specific customization.</p>
+      <div class="eyebrow" data-i18n="s6Eyebrow">Platform strategy</div>
+      <h2 data-i18n="s6Title">Fewer core platforms, more meaningful differentiation.</h2>
+      <p class="lede" data-i18n="s6Lede">Platform discipline gives the company better leverage while still allowing retailer-specific customization.</p>
     </div>
     <div class="platform-stack">
-      <div class="platform"><strong>Core frames</strong><span>Develop fewer platforms and optimize each for a specific use case.</span></div>
-      <div class="platform"><strong>Visible differentiation</strong><span>Differentiate through softgoods, accessories, finishes, and feature packages.</span></div>
-      <div class="platform"><strong>Business benefits</strong><span>Lower tooling cost, higher purchasing leverage, better margins, faster development, easier retailer customization.</span></div>
+      <div class="platform"><strong data-i18n="s6Item1Title">Core frames</strong><span data-i18n="s6Item1Body">Develop fewer platforms and optimize each for a specific use case.</span></div>
+      <div class="platform"><strong data-i18n="s6Item2Title">Visible differentiation</strong><span data-i18n="s6Item2Body">Differentiate through softgoods, accessories, finishes, and feature packages.</span></div>
+      <div class="platform"><strong data-i18n="s6Item3Title">Business benefits</strong><span data-i18n="s6Item3Body">Lower tooling cost, higher purchasing leverage, better margins, faster development, easier retailer customization.</span></div>
     </div>
   </div>
   <div class="slide-number">06</div>
@@ -609,19 +636,19 @@ tr:last-child td { border-bottom: 0; }
 <section class="slide alt" id="slide-7">
   <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
   <div class="content">
-    <div class="eyebrow">Current assessment</div>
-    <h2>Most innovation inputs exist, but they are underdeveloped.</h2>
+    <div class="eyebrow" data-i18n="s7Eyebrow">Current assessment</div>
+    <h2 data-i18n="s7Title">Most innovation inputs exist, but they are underdeveloped.</h2>
     <table>
-      <thead><tr><th>Capability</th><th>Status</th><th>Implication</th></tr></thead>
+      <thead><tr><th data-i18n="capability">Capability</th><th data-i18n="status">Status</th><th data-i18n="implication">Implication</th></tr></thead>
       <tbody>
-        <tr><td>Consumer Research</td><td><span class="status s-yellow">Low -> Medium</span></td><td>Needs more systematic discovery.</td></tr>
-        <tr><td>Market Insights</td><td><span class="status s-yellow">Low -> Medium</span></td><td>Investment choices need stronger evidence.</td></tr>
-        <tr><td>AI Tools</td><td><span class="status s-yellow">Low -> Medium</span></td><td>Major acceleration opportunity already moving in the right direction.</td></tr>
-        <tr><td>Rapid Prototyping</td><td><span class="status s-yellow">Low -> Medium</span></td><td>Validation can happen earlier and faster.</td></tr>
-        <tr><td>Testing</td><td><span class="status s-yellow">Low -> Medium</span></td><td>More repeatable learning loops needed.</td></tr>
-        <tr><td>Knowledge Management</td><td><span class="status s-green">Medium -> Stronger</span></td><td>Foundation is improving with Trello but still developing.</td></tr>
-        <tr><td>Product Quality</td><td><span class="status s-red">Inconsistent -> Controlled</span></td><td>Documented changes reduce avoidable risk.</td></tr>
-        <tr><td>US / China Execution</td><td><span class="status s-green">Opportunity -> Advantage</span></td><td>Better alignment can improve speed and quality.</td></tr>
+        <tr><td data-i18n="consumerResearch">Consumer Research</td><td><span class="status s-yellow" data-i18n="lowMedium">Low -> Medium</span></td><td data-i18n="s7Imp1">Needs more systematic discovery.</td></tr>
+        <tr><td data-i18n="marketInsights">Market Insights</td><td><span class="status s-yellow" data-i18n="lowMedium">Low -> Medium</span></td><td data-i18n="s7Imp2">Investment choices need stronger evidence.</td></tr>
+        <tr><td data-i18n="aiTools">AI Tools</td><td><span class="status s-yellow" data-i18n="lowMedium">Low -> Medium</span></td><td data-i18n="s7Imp3">Major acceleration opportunity already moving in the right direction.</td></tr>
+        <tr><td data-i18n="rapidPrototyping">Rapid Prototyping</td><td><span class="status s-yellow" data-i18n="lowMedium">Low -> Medium</span></td><td data-i18n="s7Imp4">Validation can happen earlier and faster.</td></tr>
+        <tr><td data-i18n="testing">Testing</td><td><span class="status s-yellow" data-i18n="lowMedium">Low -> Medium</span></td><td data-i18n="s7Imp5">More repeatable learning loops needed.</td></tr>
+        <tr><td data-i18n="knowledgeManagement">Knowledge Management</td><td><span class="status s-green" data-i18n="mediumStronger">Medium -> Stronger</span></td><td data-i18n="s7Imp6">Foundation is improving with Trello but still developing.</td></tr>
+        <tr><td data-i18n="productQuality">Product Quality</td><td><span class="status s-red" data-i18n="inconsistentControlled">Inconsistent -> Controlled</span></td><td data-i18n="s7Imp7">Documented changes reduce avoidable risk.</td></tr>
+        <tr><td data-i18n="usChinaExecution">US / China Execution</td><td><span class="status s-green" data-i18n="opportunityAdvantage">Opportunity -> Advantage</span></td><td data-i18n="s7Imp8">Better alignment can improve speed and quality.</td></tr>
       </tbody>
     </table>
   </div>
@@ -632,27 +659,28 @@ tr:last-child td { border-bottom: 0; }
   <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
   <div class="content flywheel-visual">
     <div>
-      <div class="eyebrow">Flywheel</div>
-      <h2>One great product starts the engine.</h2>
-      <p class="lede">The first hero product is not just an output. It is the proof point that creates retailer confidence, unlocks investment, and gives the organization energy to build the next one faster.</p>
+      <div class="eyebrow" data-i18n="s8Eyebrow">Flywheel</div>
+      <h2 data-i18n="s8Title">One great product starts the engine.</h2>
+      <p class="lede" data-i18n="s8Lede">The first hero product is not just an output. It is the proof point that creates retailer confidence, unlocks investment, and gives the organization energy to build the next one faster.</p>
       <div class="loop-note">
-        <strong>The strategy starts with a product people can see, want, and sell.</strong>
-        <p>That win powers the capability flywheel behind both Strategic Brands and Private Label.</p>
+        <strong data-i18n="s8NoteTitle">The strategy starts with a product people can see, want, and sell.</strong>
+        <p data-i18n="s8NoteBody">That win powers the capability flywheel behind both Strategic Brands and Private Label.</p>
       </div>
     </div>
     <div class="loop" aria-label="Innovation flywheel loop">
+      <div class="loop-center" data-i18n="s8Center">Great product</div>
       <span class="loop-arrow a1">→</span>
       <span class="loop-arrow a2">→</span>
       <span class="loop-arrow a3">→</span>
       <span class="loop-arrow a4">→</span>
       <span class="loop-arrow a5">→</span>
       <span class="loop-arrow a6">→</span>
-      <div class="loop-node">Hero Product</div>
-      <div class="loop-node">Retail Win</div>
-      <div class="loop-node">Investment</div>
-      <div class="loop-node">Capability</div>
-      <div class="loop-node">Insights</div>
-      <div class="loop-node">Next Product</div>
+      <div class="loop-node" data-i18n="s8Node1">Hero Product</div>
+      <div class="loop-node" data-i18n="s8Node2">Retail Win</div>
+      <div class="loop-node" data-i18n="s8Node3">Investment</div>
+      <div class="loop-node" data-i18n="s8Node4">Capability</div>
+      <div class="loop-node" data-i18n="s8Node5">Insights</div>
+      <div class="loop-node" data-i18n="s8Node6">Next Product</div>
     </div>
   </div>
   <div class="slide-number">08</div>
@@ -661,15 +689,15 @@ tr:last-child td { border-bottom: 0; }
 <section class="slide" id="slide-9">
   <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
   <div class="content">
-    <div class="eyebrow">Build the capability</div>
-    <h2>Five capability investments matter most.</h2>
+    <div class="eyebrow" data-i18n="s9Eyebrow">Build the capability</div>
+    <h2 data-i18n="s9Title">Five capability investments matter most.</h2>
     <div class="grid-3">
-      <div class="card green"><h3>Consumer & Market Insights</h3><p>Dedicated discovery and category intelligence to guide product bets.</p></div>
-      <div class="card green"><h3>AI-Enabled Development</h3><p>AI tools for research, ideation, visualization, analysis, and documentation.</p></div>
-      <div class="card green"><h3>Rapid Prototyping & Testing</h3><p>Faster validation before large tooling, sourcing, or retail commitments.</p></div>
-      <div class="card green"><h3>US / HF Alignment</h3><p>Clear handoffs, documented changes, and dedicated resources across teams.</p></div>
-      <div class="card green"><h3>Strategic Brand Investment</h3><p>Brand-led innovation supported by consumer validation and portfolio discipline.</p></div>
-      <div class="card green"><h3>Knowledge Capture</h3><p>Learning compounds when decisions, tests, and product history are preserved.</p></div>
+      <div class="card green"><h3 data-i18n="s9Card1Title">Consumer & Market Insights</h3><p data-i18n="s9Card1Body">Dedicated discovery and category intelligence to guide product bets.</p></div>
+      <div class="card green"><h3 data-i18n="s9Card2Title">AI-Enabled Development</h3><p data-i18n="s9Card2Body">AI tools for research, ideation, visualization, analysis, and documentation.</p></div>
+      <div class="card green"><h3 data-i18n="s9Card3Title">Rapid Prototyping & Testing</h3><p data-i18n="s9Card3Body">Faster validation before large tooling, sourcing, or retail commitments.</p></div>
+      <div class="card green"><h3 data-i18n="s9Card4Title">US / HF Alignment</h3><p data-i18n="s9Card4Body">Clear handoffs, documented changes, and dedicated resources across teams.</p></div>
+      <div class="card green"><h3 data-i18n="s9Card5Title">Strategic Brand Investment</h3><p data-i18n="s9Card5Body">Brand-led innovation supported by consumer validation and portfolio discipline.</p></div>
+      <div class="card green"><h3 data-i18n="s9Card6Title">Knowledge Capture</h3><p data-i18n="s9Card6Body">Learning compounds when decisions, tests, and product history are preserved.</p></div>
     </div>
   </div>
   <div class="slide-number">09</div>
@@ -679,16 +707,16 @@ tr:last-child td { border-bottom: 0; }
   <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
   <div class="content split">
     <div>
-      <div class="eyebrow">Operating capability</div>
-      <h2>The process needs clear ownership and repeatable decision points.</h2>
-      <p class="lede">Better tools only matter if the operating model reduces overlap and captures learning.</p>
+      <div class="eyebrow" data-i18n="s10Eyebrow">Operating capability</div>
+      <h2 data-i18n="s10Title">The process needs clear ownership and repeatable decision points.</h2>
+      <p class="lede" data-i18n="s10Lede">Better tools only matter if the operating model reduces overlap and captures learning.</p>
     </div>
     <ul class="list">
-      <li>Clear roles and responsibilities with less overlap.</li>
-      <li>Portfolio planning that makes tradeoffs visible.</li>
-      <li>A decision framework for investment and launch readiness.</li>
-      <li>Continuous improvement after each development cycle.</li>
-      <li>Knowledge capture across teams, vendors, and product generations.</li>
+      <li data-i18n="s10Item1">Clear roles and responsibilities with less overlap.</li>
+      <li data-i18n="s10Item2">Portfolio planning that makes tradeoffs visible.</li>
+      <li data-i18n="s10Item3">A decision framework for investment and launch readiness.</li>
+      <li data-i18n="s10Item4">Continuous improvement after each development cycle.</li>
+      <li data-i18n="s10Item5">Knowledge capture across teams, vendors, and product generations.</li>
     </ul>
   </div>
   <div class="slide-number">10</div>
@@ -697,20 +725,20 @@ tr:last-child td { border-bottom: 0; }
 <section class="slide" id="slide-11">
   <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
   <div class="content">
-    <div class="eyebrow">Business impact</div>
-    <h2>The same capability strengthens all three business layers.</h2>
+    <div class="eyebrow" data-i18n="s11Eyebrow">Business impact</div>
+    <h2 data-i18n="s11Title">The same capability strengthens all three business layers.</h2>
     <div class="impact">
       <div class="card green">
-        <h3>Strategic Brands</h3>
-        <ul><li>One great hero product</li><li>Consumer demand</li><li>Brand equity</li></ul>
+        <h3 data-i18n="strategicBrands">Strategic Brands</h3>
+        <ul><li data-i18n="s11Sb1">One great hero product</li><li data-i18n="s11Sb2">Consumer demand</li><li data-i18n="s11Sb3">Brand equity</li></ul>
       </div>
       <div class="card blue">
-        <h3>Private Label</h3>
-        <ul><li>Validated innovation</li><li>Retail confidence</li><li>Value engineering</li></ul>
+        <h3 data-i18n="privateLabel">Private Label</h3>
+        <ul><li data-i18n="s11Pl1">Validated innovation</li><li data-i18n="s11Pl2">Retail confidence</li><li data-i18n="s11Pl3">Value engineering</li></ul>
       </div>
       <div class="card amber">
-        <h3>Westfield</h3>
-        <ul><li>Higher ROI</li><li>Faster execution</li><li>Competitive advantage</li></ul>
+        <h3 data-i18n="westfield">Westfield</h3>
+        <ul><li data-i18n="s11Wf1">Higher ROI</li><li data-i18n="s11Wf2">Faster execution</li><li data-i18n="s11Wf3">Competitive advantage</li></ul>
       </div>
     </div>
   </div>
@@ -721,14 +749,14 @@ tr:last-child td { border-bottom: 0; }
   <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
   <div class="content split">
     <div>
-      <div class="eyebrow">Near-term priorities</div>
-      <h2>Focus first on the gaps that unlock better product decisions.</h2>
+      <div class="eyebrow" data-i18n="s12Eyebrow">Near-term priorities</div>
+      <h2 data-i18n="s12Title">Focus first on the gaps that unlock better product decisions.</h2>
     </div>
     <div class="grid-2">
-      <div class="card red"><h3>1. AI tools</h3><p>Make product development faster, clearer, and better documented.</p></div>
-      <div class="card amber"><h3>2. Insights</h3><p>Build a stronger base of consumer and market evidence before investment.</p></div>
-      <div class="card amber"><h3>3. Prototyping</h3><p>Validate physical ideas earlier in the development process.</p></div>
-      <div class="card amber"><h3>4. Quality loop</h3><p>Reduce undocumented changes and preserve product learning.</p></div>
+      <div class="card red"><h3 data-i18n="s12Card1Title">1. AI tools</h3><p data-i18n="s12Card1Body">Make product development faster, clearer, and better documented.</p></div>
+      <div class="card amber"><h3 data-i18n="s12Card2Title">2. Insights</h3><p data-i18n="s12Card2Body">Build a stronger base of consumer and market evidence before investment.</p></div>
+      <div class="card amber"><h3 data-i18n="s12Card3Title">3. Prototyping</h3><p data-i18n="s12Card3Body">Validate physical ideas earlier in the development process.</p></div>
+      <div class="card amber"><h3 data-i18n="s12Card4Title">4. Quality loop</h3><p data-i18n="s12Card4Body">Reduce undocumented changes and preserve product learning.</p></div>
     </div>
   </div>
   <div class="slide-number">12</div>
@@ -737,15 +765,15 @@ tr:last-child td { border-bottom: 0; }
 <section class="slide" id="slide-13">
   <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
   <div class="content">
-    <div class="eyebrow">What good looks like</div>
-    <h2>A stronger innovation engine should be visible in the work.</h2>
+    <div class="eyebrow" data-i18n="s13Eyebrow">What good looks like</div>
+    <h2 data-i18n="s13Title">A stronger innovation engine should be visible in the work.</h2>
     <div class="grid-3">
-      <div class="card green"><h3>Fewer, better bets</h3><p>Portfolio discipline directs attention to the highest-value problems and platforms.</p></div>
-      <div class="card green"><h3>More evidence</h3><p>Consumer, market, prototype, and testing inputs shape decisions earlier.</p></div>
-      <div class="card green"><h3>Cleaner handoffs</h3><p>US/HF execution improves through clearer requirements, changes, and ownership.</p></div>
-      <div class="card green"><h3>Hero-product momentum</h3><p>One visible win creates the internal confidence and retailer proof needed to keep investing.</p></div>
-      <div class="card green"><h3>Better transfer</h3><p>Strategic Brand hero-product learnings become lower-risk Private Label innovation.</p></div>
-      <div class="card green"><h3>Compounding learning</h3><p>Knowledge capture prevents the same issues from being rediscovered every season.</p></div>
+      <div class="card green"><h3 data-i18n="s13Card1Title">Fewer, better bets</h3><p data-i18n="s13Card1Body">Portfolio discipline directs attention to the highest-value problems and platforms.</p></div>
+      <div class="card green"><h3 data-i18n="s13Card2Title">More evidence</h3><p data-i18n="s13Card2Body">Consumer, market, prototype, and testing inputs shape decisions earlier.</p></div>
+      <div class="card green"><h3 data-i18n="s13Card3Title">Cleaner handoffs</h3><p data-i18n="s13Card3Body">US/HF execution improves through clearer requirements, changes, and ownership.</p></div>
+      <div class="card green"><h3 data-i18n="s13Card4Title">Hero-product momentum</h3><p data-i18n="s13Card4Body">One visible win creates the internal confidence and retailer proof needed to keep investing.</p></div>
+      <div class="card green"><h3 data-i18n="s13Card5Title">Better transfer</h3><p data-i18n="s13Card5Body">Strategic Brand hero-product learnings become lower-risk Private Label innovation.</p></div>
+      <div class="card green"><h3 data-i18n="s13Card6Title">Compounding learning</h3><p data-i18n="s13Card6Body">Knowledge capture prevents the same issues from being rediscovered every season.</p></div>
     </div>
   </div>
   <div class="slide-number">13</div>
@@ -754,13 +782,196 @@ tr:last-child td { border-bottom: 0; }
 <section class="slide dark" id="slide-14">
   <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
   <div class="content">
-    <div class="eyebrow">Vision</div>
-    <p class="quote">The goal is to create one great product that starts the flywheel, then build the capability to make great products repeatable across Strategic Brands and Private Label.</p>
+    <div class="eyebrow" data-i18n="s14Eyebrow">Vision</div>
+    <p class="quote" data-i18n="s14Quote">The goal is to create one great product that starts the flywheel, then build the capability to make great products repeatable across Strategic Brands and Private Label.</p>
   </div>
   <div class="slide-number">14</div>
 </section>
 
 <script>
+const translations = {
+  en: {},
+  zh: {
+    coverEyebrow: "Westfield Outdoors",
+    coverTitle: "构建 Westfield 的创新引擎",
+    coverSubtitle: "通过 Strategic Brands 推动英雄产品创新，同时让 Westfield 继续成为零售商可靠的自有品牌伙伴。",
+    coverLede: "创新是一种能力：它让 Westfield 能持续创造差异化产品，强化 Strategic Brands，并向零售伙伴交付经过验证、以价值为导向的创新。",
+    s2Eyebrow: "为什么重要",
+    s2Title: "零售伙伴需要的不只是产品线延伸。",
+    s2Lede: "创新必须成为可重复的运营能力，而不是一次性的创意冲刺。",
+    s2Card1Title: "零售期待",
+    s2Card1Body: "零售商越来越需要真正有意义的创新，让他们有理由重置货架、重点陈列并守住利润。",
+    s2Card2Title: "消费者拉力",
+    s2Card2Body: "消费者会奖励那些用清晰、容易理解的方式解决真实问题的产品。",
+    s2Card3Title: "产品组合差异化",
+    s2Card3Body: "创新同时区分 Strategic Brands 和 Private Label。",
+    s2Card4Title: "竞争优势",
+    s2Card4Body: "Westfield 的优势来自产品创新，而不是广告投入。",
+    s3Eyebrow: "公司模式",
+    s3Title: "Westfield 是一家产品驱动的耐用品公司。",
+    s3Card1Title: "产品管理",
+    s3Card1Body: "定义客户、零售商、利润和生命周期优先级。",
+    s3Card2Title: "工业设计",
+    s3Card2Body: "把使用场景转化为有差异化的实体产品体验。",
+    s3Card3Title: "工程",
+    s3Card3Body: "把概念转化为可靠、可制造的耐用品。",
+    s3Card4Title: "零售合作",
+    s3Card4Body: "让创新匹配渠道需求、价格带和上市节奏。",
+    s3Quote: "更好的产品 > 更强的零售合作 > 可持续增长",
+    s4Eyebrow: "两条价值路径",
+    s4Title: "创新通过 Strategic Brands 和 Private Label 同时创造价值。",
+    s4Lede: "同一套能力既能支持突破性的品牌建设，也能支持风险更低的零售商项目。",
+    strategicBrands: "Strategic Brands",
+    privateLabel: "Private Label",
+    s4Card1Body: "英雄产品创新创造消费者需求、品牌资产、证明点和零售商兴奋度。",
+    s4Card2Body: "经过验证的创新可以转化为成熟功能、更低风险的项目和价值型解决方案。",
+    s5Eyebrow: "能力视角",
+    s5Title: "创新是一套由多个部分连接起来的能力。",
+    capability: "能力",
+    role: "作用",
+    currentGap: "当前差距",
+    consumerResearch: "消费者研究",
+    marketInsights: "市场洞察",
+    ai: "AI",
+    rapidPrototyping: "快速原型",
+    knowledgeManagement: "知识管理",
+    s5Role1: "发现未被满足的需求和行为模式。",
+    s5Role2: "指导投资、品类重点和零售商定位。",
+    s5Role3: "加速研究、概念开发、可视化和知识工作。",
+    s5Role4: "在开模和项目承诺前快速验证想法。",
+    s5Role5: "沉淀学习、决策、测试和产品历史。",
+    limited: "有限",
+    lowMedium: "低 → 中",
+    moderate: "中等",
+    growing: "成长中",
+    s6Eyebrow: "平台策略",
+    s6Title: "更少的核心平台，更有意义的差异化。",
+    s6Lede: "平台纪律能提升公司杠杆，同时仍支持零售商定制。",
+    s6Item1Title: "核心框架",
+    s6Item1Body: "开发更少的平台，并围绕明确使用场景优化每个平台。",
+    s6Item2Title: "可见差异化",
+    s6Item2Body: "通过软体、配件、表面处理和功能包实现差异化。",
+    s6Item3Title: "业务收益",
+    s6Item3Body: "降低模具成本、提升采购杠杆、改善利润、加快开发，并更容易支持零售商定制。",
+    s7Eyebrow: "当前评估",
+    s7Title: "大多数创新输入已经存在，但还没有充分发展。",
+    status: "状态",
+    implication: "影响",
+    aiTools: "AI 工具",
+    testing: "测试",
+    productQuality: "产品质量",
+    usChinaExecution: "美国 / 中国执行",
+    mediumStronger: "中等 → 更强",
+    inconsistentControlled: "不稳定 → 可控",
+    opportunityAdvantage: "机会 → 优势",
+    s7Imp1: "需要更系统的需求发现。",
+    s7Imp2: "投资选择需要更强的证据基础。",
+    s7Imp3: "这是重大提速机会，而且已经开始朝正确方向移动。",
+    s7Imp4: "验证可以更早、更快发生。",
+    s7Imp5: "需要更可重复的学习循环。",
+    s7Imp6: "Trello 正在改善基础，但体系仍在发展中。",
+    s7Imp7: "记录变更可以降低可避免的风险。",
+    s7Imp8: "更好的协同能提升速度和质量。",
+    s8Eyebrow: "飞轮",
+    s8Title: "一个伟大的产品启动引擎。",
+    s8Lede: "第一个英雄产品不只是产出。它是证明点：创造零售商信心、解锁投资，并让组织有能量更快做出下一个产品。",
+    s8NoteTitle: "策略从一个人们能看见、想要、也能卖出去的产品开始。",
+    s8NoteBody: "这个胜利会推动 Strategic Brands 和 Private Label 背后的能力飞轮。",
+    s8Center: "伟大产品",
+    s8Node1: "英雄产品",
+    s8Node2: "零售胜利",
+    s8Node3: "投资",
+    s8Node4: "能力",
+    s8Node5: "洞察",
+    s8Node6: "下一个产品",
+    s9Eyebrow: "建设能力",
+    s9Title: "五类能力投资最关键。",
+    s9Card1Title: "消费者与市场洞察",
+    s9Card1Body: "用专门的需求发现和品类情报指导产品下注。",
+    s9Card2Title: "AI 赋能开发",
+    s9Card2Body: "用 AI 工具支持研究、创意、可视化、分析和文档沉淀。",
+    s9Card3Title: "快速原型与测试",
+    s9Card3Body: "在大额开模、采购或零售承诺前更快验证。",
+    s9Card4Title: "美国 / HF 协同",
+    s9Card4Body: "明确交接、记录变更，并在团队之间配置专门资源。",
+    s9Card5Title: "Strategic Brand 投资",
+    s9Card5Body: "以消费者验证和产品组合纪律支持品牌主导的创新。",
+    s9Card6Title: "知识沉淀",
+    s9Card6Body: "当决策、测试和产品历史被保存下来，学习才会复利增长。",
+    s10Eyebrow: "运营能力",
+    s10Title: "流程需要清晰所有权和可重复的决策点。",
+    s10Lede: "更好的工具只有在运营模式减少重叠并沉淀学习时才有意义。",
+    s10Item1: "清晰角色和职责，减少重叠。",
+    s10Item2: "让取舍可见的产品组合规划。",
+    s10Item3: "用于投资和上市准备度的决策框架。",
+    s10Item4: "每个开发周期后的持续改进。",
+    s10Item5: "跨团队、供应商和产品世代的知识沉淀。",
+    s11Eyebrow: "业务影响",
+    s11Title: "同一套能力会强化三层业务。",
+    westfield: "Westfield",
+    s11Sb1: "一个伟大的英雄产品",
+    s11Sb2: "消费者需求",
+    s11Sb3: "品牌资产",
+    s11Pl1: "经过验证的创新",
+    s11Pl2: "零售信心",
+    s11Pl3: "价值工程",
+    s11Wf1: "更高 ROI",
+    s11Wf2: "更快执行",
+    s11Wf3: "竞争优势",
+    s12Eyebrow: "近期优先事项",
+    s12Title: "先聚焦能解锁更好产品决策的差距。",
+    s12Card1Title: "1. AI 工具",
+    s12Card1Body: "让产品开发更快、更清晰，并更好地文档化。",
+    s12Card2Title: "2. 洞察",
+    s12Card2Body: "在投资前建立更强的消费者和市场证据基础。",
+    s12Card3Title: "3. 原型",
+    s12Card3Body: "在开发流程更早阶段验证实体产品想法。",
+    s12Card4Title: "4. 质量闭环",
+    s12Card4Body: "减少未记录变更，并保留产品学习。",
+    s13Eyebrow: "理想状态",
+    s13Title: "更强的创新引擎应该体现在日常工作中。",
+    s13Card1Title: "更少、更好的下注",
+    s13Card1Body: "产品组合纪律把注意力集中到最高价值的问题和平台上。",
+    s13Card2Title: "更多证据",
+    s13Card2Body: "消费者、市场、原型和测试输入更早影响决策。",
+    s13Card3Title: "更清晰的交接",
+    s13Card3Body: "通过更清晰的需求、变更和所有权改善美国 / HF 执行。",
+    s13Card4Title: "英雄产品动能",
+    s13Card4Body: "一个可见的胜利会创造持续投资所需的内部信心和零售证明。",
+    s13Card5Title: "更好的转化",
+    s13Card5Body: "Strategic Brand 英雄产品的学习会转化为风险更低的 Private Label 创新。",
+    s13Card6Title: "复利学习",
+    s13Card6Body: "知识沉淀避免每个季节重复发现同样的问题。",
+    s14Eyebrow: "愿景",
+    s14Quote: "目标是创造一个伟大的产品来启动飞轮，然后建立能力，让优秀产品在 Strategic Brands 和 Private Label 中可重复地产生。"
+  }
+};
+document.querySelectorAll("[data-i18n]").forEach((el) => {
+  translations.en[el.dataset.i18n] = el.textContent;
+});
+const languageToggleEl = document.getElementById("language-toggle");
+let currentLanguage = window.localStorage.getItem("westfield-innovation-strategy-language") === "zh" ? "zh" : "en";
+function applyLanguage(lang) {
+  currentLanguage = lang === "zh" ? "zh" : "en";
+  window.localStorage.setItem("westfield-innovation-strategy-language", currentLanguage);
+  document.documentElement.lang = currentLanguage === "zh" ? "zh-CN" : "en";
+  document.documentElement.classList.toggle("zh", currentLanguage === "zh");
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const key = el.dataset.i18n;
+    el.textContent = translations[currentLanguage][key] || translations.en[key] || "";
+  });
+  if (languageToggleEl) {
+    const toggleLabel = currentLanguage === "zh" ? "EN" : "中文";
+    const toggleAria = currentLanguage === "zh" ? "Switch deck to English" : "Switch deck to Chinese";
+    languageToggleEl.textContent = toggleLabel;
+    languageToggleEl.setAttribute("aria-label", toggleAria);
+    languageToggleEl.setAttribute("title", toggleAria);
+  }
+}
+languageToggleEl?.addEventListener("click", () => {
+  applyLanguage(currentLanguage === "zh" ? "en" : "zh");
+});
+applyLanguage(currentLanguage);
 const slides = [...document.querySelectorAll(".slide")];
 const nav = document.querySelector(".nav-dots");
 slides.forEach((slide, index) => {
