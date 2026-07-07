@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building Westfield's Innovation Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4f4f1;
+  --bg-2: #ecece7;
+  --paper: rgba(255,255,255,0.96);
+  --paper-strong: rgba(255,255,255,0.99);
+  --line: rgba(24, 24, 22, 0.10);
+  --line-strong: rgba(24, 24, 22, 0.20);
+  --ink: #121212;
+  --muted: #5d5d58;
+  --accent: #d63b2f;
+  --accent-soft: rgba(214, 59, 47, 0.10);
+  --green: #1f6e52;
+  --green-soft: rgba(31, 110, 82, 0.10);
+  --red: #b3352d;
+  --red-soft: rgba(179, 53, 45, 0.10);
+  --blue: #2c6588;
+  --blue-soft: rgba(44, 101, 136, 0.10);
+  --amber: #9a5d36;
+  --amber-soft: rgba(154, 93, 54, 0.10);
+  --shadow: 0 12px 30px rgba(18, 18, 18, 0.05);
+  --pad: clamp(1rem, 3.3vw, 3.1rem);
+  --gap: clamp(0.9rem, 1.5vw, 1.25rem);
+  --title: clamp(2.1rem, 5.4vw, 5rem);
+  --h2: clamp(1.5rem, 2.8vw, 2.8rem);
+  --h3: clamp(1rem, 1.4vw, 1.2rem);
+  --body: clamp(0.94rem, 1.18vw, 1.08rem);
+  --small: clamp(0.72rem, 0.85vw, 0.84rem);
+  --radius: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+body {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.50), rgba(255,255,255,0.22)),
+    linear-gradient(180deg, #f7f7f3 0%, #edede8 100%);
+  overflow-x: hidden;
+}
+.slide {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100vw;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+}
+.slide.alt { background: rgba(236,236,231,0.72); }
+.slide.dark {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.50), rgba(255,255,255,0.22)),
+    linear-gradient(180deg, #f7f7f3 0%, #edede8 100%);
+  color: var(--ink);
+}
+.slide.dark .eyebrow,
+.slide.dark .slide-number,
+.slide.dark .kicker { color: var(--accent); }
+.slide.dark p,
+.slide.dark .lede { color: var(--muted); }
+.logo {
+  position: absolute;
+  right: clamp(1rem, 2.5vw, 2.2rem);
+  top: clamp(0.8rem, 1.8vw, 1.4rem);
+  height: clamp(28px, 3.2vw, 44px);
+  width: auto;
+  opacity: 0.82;
+  z-index: 10;
+}
+.dark .logo { opacity: 0.92; }
+.slide-number {
+  position: absolute;
+  right: clamp(1rem, 2vw, 1.8rem);
+  bottom: clamp(0.8rem, 1.5vw, 1.2rem);
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: rgba(24,42,69,0.46);
+  font-size: var(--small);
+}
+.content {
+  flex: 1;
+  padding: var(--pad);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--gap);
+}
+.cover .content { max-width: 1060px; }
+.eyebrow {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: var(--small);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.kicker {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: var(--small);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1, h2, h3 {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  letter-spacing: -0.05em;
+}
+.dark h1, .dark h2, .dark h3 { color: var(--ink); }
+h1 {
+  font-size: var(--title);
+  line-height: 0.92;
+  font-weight: 900;
+  max-width: 12ch;
+}
+h2 {
+  font-size: var(--h2);
+  line-height: 0.92;
+  font-weight: 800;
+  max-width: 16ch;
+}
+h3 {
+  font-size: var(--h3);
+  line-height: 1.12;
+  font-weight: 800;
+}
+p, li {
+  font-size: var(--body);
+  line-height: 1.45;
+}
+.lede {
+  max-width: 760px;
+  color: var(--muted);
+  font-size: clamp(1.06rem, 1.9vw, 1.42rem);
+  line-height: 1.42;
+}
+.subtitle {
+  max-width: 940px;
+  font-size: clamp(1.15rem, 2.25vw, 1.8rem);
+  line-height: 1.28;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+.rule {
+  width: 84px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+.dark .rule { background: var(--accent); opacity: 1; }
+.grid-2, .grid-3, .grid-4 {
+  display: grid;
+  gap: var(--gap);
+}
+.grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.split {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: clamp(1.3rem, 4vw, 4rem);
+  align-items: center;
+}
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(1rem, 2vw, 1.55rem);
+  min-height: 100%;
+}
+.alt .card { background: var(--paper); }
+.card.green { border-top: 4px solid var(--green); background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(242,249,245,0.88)); }
+.card.blue { border-top: 4px solid var(--blue); background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(238,247,252,0.88)); }
+.card.amber { border-top: 4px solid var(--amber); background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,242,233,0.88)); }
+.card.red { border-top: 4px solid var(--red); background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(251,243,242,0.88)); }
+.card h3 { margin-bottom: 0.45rem; }
+.card p { color: var(--muted); }
+.list {
+  list-style: none;
+  display: grid;
+  gap: 0.78rem;
+}
+.list li {
+  position: relative;
+  padding-left: 1.45rem;
+  color: var(--ink);
+  font-weight: 600;
+}
+.list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.dark .list li { color: var(--ink); }
+.dark .list li::before { background: var(--accent); }
+.quote {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: clamp(1.2rem, 2.35vw, 2.05rem);
+  line-height: 0.98;
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  color: var(--ink);
+  max-width: 980px;
+}
+.dark .quote { color: var(--ink); }
+#slide-3 .quote {
+  font-size: clamp(1rem, 1.9vw, 1.6rem);
+  line-height: 1.05;
+}
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+.tag {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 999px;
+  padding: 0.42rem 0.8rem;
+  font-size: var(--small);
+  font-weight: 800;
+  color: var(--ink);
+}
+.platform-stack {
+  display: grid;
+  gap: 0.7rem;
+}
+.platform {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 1rem;
+  align-items: center;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--green);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 0.9rem 1rem;
+}
+.platform strong {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: var(--h3);
+  color: var(--ink);
+}
+.platform span {
+  color: var(--muted);
+  font-size: var(--small);
+  font-weight: 650;
+}
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-strong);
+  font-size: var(--small);
+  box-shadow: var(--shadow);
+}
+th, td {
+  padding: clamp(0.55rem, 1.25vw, 0.95rem);
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+th {
+  background: var(--ink);
+  color: #fff;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.92em;
+}
+tr:last-child td { border-bottom: 0; }
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-radius: 999px;
+  padding: 0.22rem 0.65rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.s-yellow { color: var(--amber); background: var(--amber-soft); }
+.s-red { color: var(--red); background: var(--red-soft); }
+.s-green { color: var(--green); background: var(--green-soft); }
+.flywheel {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+.wheel-step {
+  position: relative;
+  min-height: 132px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.wheel-step::after {
+  content: ">";
+  position: absolute;
+  right: -0.72rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent);
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-weight: 900;
+  font-size: 1.45rem;
+}
+.wheel-step:nth-child(4)::after,
+.wheel-step:nth-child(8)::after { display: none; }
+.wheel-step strong {
+  display: block;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  font-size: var(--h3);
+  line-height: 1.12;
+  margin-bottom: 0.35rem;
+}
+.wheel-step span { color: var(--muted); font-size: var(--small); line-height: 1.25; display: block; }
+.flywheel-visual {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(460px, 1.1fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: center;
+}
+.loop {
+  position: relative;
+  width: min(54vh, 520px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+.loop::before {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  border: 3px solid rgba(214, 59, 47, 0.18);
+  border-radius: 50%;
+}
+.loop::after {
+  content: "Great product";
+  position: absolute;
+  inset: 31%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--paper-strong);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  color: var(--ink);
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: -0.055em;
+}
+.loop-node {
+  position: absolute;
+  width: 34%;
+  min-height: 74px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 0.7rem;
+  border-radius: var(--radius);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  font-size: var(--small);
+  font-weight: 900;
+  line-height: 1.05;
+}
+.loop-node { border-top: 4px solid var(--ink); }
+.loop-node:nth-of-type(1) { top: 0; left: 33%; }
+.loop-node:nth-of-type(2) { top: 19%; right: 0; }
+.loop-node:nth-of-type(3) { bottom: 19%; right: 0; }
+.loop-node:nth-of-type(4) { bottom: 0; left: 33%; }
+.loop-node:nth-of-type(5) { bottom: 19%; left: 0; }
+.loop-node:nth-of-type(6) { top: 19%; left: 0; }
+.loop-arrow {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 900;
+  box-shadow: var(--shadow);
+  z-index: 4;
+}
+.loop-arrow.a1 { top: 13%; right: 23%; transform: rotate(45deg); }
+.loop-arrow.a2 { top: 47%; right: 8%; transform: rotate(96deg); }
+.loop-arrow.a3 { bottom: 12%; right: 27%; transform: rotate(145deg); }
+.loop-arrow.a4 { bottom: 12%; left: 27%; transform: rotate(214deg); }
+.loop-arrow.a5 { top: 47%; left: 8%; transform: rotate(265deg); }
+.loop-arrow.a6 { top: 13%; left: 23%; transform: rotate(318deg); }
+.loop-note {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--accent);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(1rem, 1.6vw, 1.4rem);
+}
+.loop-note strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: var(--h3);
+  letter-spacing: -0.04em;
+}
+.impact {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+  align-items: stretch;
+}
+.impact .card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.impact ul {
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+  margin-top: auto;
+}
+.impact li {
+  font-size: var(--body);
+  color: var(--muted);
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--line);
+}
+.nav-dots {
+  position: fixed;
+  z-index: 1000;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.nav-dot {
+  width: 8px;
+  height: 8px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(24,42,69,0.2);
+  cursor: pointer;
+}
+.nav-dot.active { background: var(--accent); transform: scale(1.35); }
+.dark + .nav-dots .nav-dot { background: rgba(255,255,255,0.4); }
+@media (max-width: 860px) {
+  .slide { min-height: auto; }
+  .content { min-height: 100vh; min-height: 100dvh; padding: 4rem 1.25rem 3.5rem; width: 100%; max-width: 100vw; overflow: hidden; }
+  .logo { left: 1.25rem; right: auto; top: 1rem; width: 128px; height: auto; }
+  .split, .grid-2, .grid-3, .grid-4, .impact, .flywheel, .flywheel-visual { grid-template-columns: 1fr; }
+  h1 { font-size: clamp(2.15rem, 10vw, 2.8rem); max-width: 9.8ch; line-height: 1; }
+  h2 { max-width: 100%; }
+  .cover .content { justify-content: center; }
+  .subtitle { font-size: 1.08rem; max-width: 330px; }
+  .lede { font-size: 1rem; max-width: 330px; }
+  .platform { grid-template-columns: 1fr; }
+  .wheel-step::after { display: none; }
+  .loop { width: min(86vw, 420px); }
+  .loop-node { font-size: 0.68rem; min-height: 58px; padding: 0.45rem; }
+  .loop-arrow { width: 22px; height: 22px; font-size: 0.9rem; }
+  .nav-dots { display: none; }
+  table { font-size: 0.82rem; }
+  th, td { padding: 0.5rem; }
+}
+</style>
+</head>
+<body>
+<nav class="nav-dots" aria-label="Slide navigation"></nav>
+
+<section class="slide dark cover" id="slide-1">
+  <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
+  <div class="content">
+    <div class="eyebrow">Westfield Outdoors</div>
+    <h1>Building Westfield's Innovation Engine</h1>
+    <div class="rule"></div>
+    <p class="subtitle">Driving hero innovation through Strategic Brands while keeping Westfield a strong private label partner for retailers.</p>
+    <p class="lede">Innovation is the capability that lets Westfield consistently create differentiated products, strengthen Strategic Brands, and deliver proven value-driven innovation to retail partners.</p>
+  </div>
+  <div class="slide-number">01</div>
+</section>
+
+<section class="slide" id="slide-2">
+  <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
+  <div class="content split">
+    <div>
+      <div class="eyebrow">Why it matters</div>
+      <h2>Retail partners are asking for more than line extensions.</h2>
+      <p class="lede">Innovation has to become a repeatable operating capability, not a one-off creative push.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card green"><h3>Retail expectations</h3><p>Retailers increasingly expect meaningful innovation that gives them a reason to reset, feature, and defend margin.</p></div>
+      <div class="card green"><h3>Consumer pull</h3><p>Consumers reward products that solve real problems in clear, understandable ways.</p></div>
+      <div class="card green"><h3>Portfolio differentiation</h3><p>Innovation differentiates both Strategic Brands and Private Label.</p></div>
+      <div class="card green"><h3>Competitive advantage</h3><p>Westfield's advantage is product innovation, not advertising spend.</p></div>
+    </div>
+  </div>
+  <div class="slide-number">02</div>
+</section>
+
+<section class="slide alt" id="slide-3">
+  <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
+  <div class="content">
+    <div class="eyebrow">Company model</div>
+    <h2>Westfield is a product-led durable goods company.</h2>
+    <div class="grid-4">
+      <div class="card green"><h3>Product Management</h3><p>Define customer, retailer, margin, and lifecycle priorities.</p></div>
+      <div class="card green"><h3>Industrial Design</h3><p>Translate use cases into differentiated physical product experiences.</p></div>
+      <div class="card green"><h3>Engineering</h3><p>Turn concepts into reliable, manufacturable durable goods.</p></div>
+      <div class="card green"><h3>Retail Partnerships</h3><p>Match innovation to channel needs, price points, and launch timing.</p></div>
+    </div>
+    <div class="quote">Better Products > Stronger Retail Partnerships > Sustainable Growth</div>
+  </div>
+  <div class="slide-number">03</div>
+</section>
+
+<section class="slide" id="slide-4">
+  <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
+  <div class="content split">
+    <div>
+      <div class="eyebrow">Two routes to value</div>
+      <h2>Innovation creates value through both Strategic Brands and Private Label.</h2>
+      <p class="lede">The same capability can support breakthrough brand-building work and lower-risk retailer programs.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card green">
+        <h3>Strategic Brands</h3>
+        <p>Hero innovation creates consumer demand, brand equity, proof points, and retailer excitement.</p>
+      </div>
+      <div class="card blue">
+        <h3>Private Label</h3>
+        <p>Validated innovation transfers into proven features, lower-risk programs, and value-oriented solutions.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">04</div>
+</section>
+
+<section class="slide alt" id="slide-5">
+  <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
+  <div class="content">
+    <div class="eyebrow">Capability view</div>
+    <h2>Innovation is a capability with several connected parts.</h2>
+    <table>
+      <thead><tr><th>Capability</th><th>Role</th><th>Current gap</th></tr></thead>
+      <tbody>
+        <tr><td>Consumer Research</td><td>Discover unmet needs and behavior patterns.</td><td><span class="status s-red">Limited</span></td></tr>
+        <tr><td>Market Insights</td><td>Guide investment, category focus, and retailer positioning.</td><td><span class="status s-red">Limited</span></td></tr>
+        <tr><td>AI</td><td>Accelerate research, concept development, visualization, and knowledge work.</td><td><span class="status s-yellow">Low -> Medium</span></td></tr>
+        <tr><td>Rapid Prototyping</td><td>Validate ideas quickly before tooling and program commitment.</td><td><span class="status s-yellow">Moderate</span></td></tr>
+        <tr><td>Knowledge Management</td><td>Capture learning, decisions, testing, and product history.</td><td><span class="status s-green">Growing</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="slide-number">05</div>
+</section>
+
+<section class="slide" id="slide-6">
+  <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
+  <div class="content split">
+    <div>
+      <div class="eyebrow">Platform strategy</div>
+      <h2>Fewer core platforms, more meaningful differentiation.</h2>
+      <p class="lede">Platform discipline gives the company better leverage while still allowing retailer-specific customization.</p>
+    </div>
+    <div class="platform-stack">
+      <div class="platform"><strong>Core frames</strong><span>Develop fewer platforms and optimize each for a specific use case.</span></div>
+      <div class="platform"><strong>Visible differentiation</strong><span>Differentiate through softgoods, accessories, finishes, and feature packages.</span></div>
+      <div class="platform"><strong>Business benefits</strong><span>Lower tooling cost, higher purchasing leverage, better margins, faster development, easier retailer customization.</span></div>
+    </div>
+  </div>
+  <div class="slide-number">06</div>
+</section>
+
+<section class="slide alt" id="slide-7">
+  <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
+  <div class="content">
+    <div class="eyebrow">Current assessment</div>
+    <h2>Most innovation inputs exist, but they are underdeveloped.</h2>
+    <table>
+      <thead><tr><th>Capability</th><th>Status</th><th>Implication</th></tr></thead>
+      <tbody>
+        <tr><td>Consumer Research</td><td><span class="status s-yellow">Low -> Medium</span></td><td>Needs more systematic discovery.</td></tr>
+        <tr><td>Market Insights</td><td><span class="status s-yellow">Low -> Medium</span></td><td>Investment choices need stronger evidence.</td></tr>
+        <tr><td>AI Tools</td><td><span class="status s-yellow">Low -> Medium</span></td><td>Major acceleration opportunity already moving in the right direction.</td></tr>
+        <tr><td>Rapid Prototyping</td><td><span class="status s-yellow">Low -> Medium</span></td><td>Validation can happen earlier and faster.</td></tr>
+        <tr><td>Testing</td><td><span class="status s-yellow">Low -> Medium</span></td><td>More repeatable learning loops needed.</td></tr>
+        <tr><td>Knowledge Management</td><td><span class="status s-green">Medium -> Stronger</span></td><td>Foundation is improving with Trello but still developing.</td></tr>
+        <tr><td>Product Quality</td><td><span class="status s-red">Inconsistent -> Controlled</span></td><td>Documented changes reduce avoidable risk.</td></tr>
+        <tr><td>US / China Execution</td><td><span class="status s-green">Opportunity -> Advantage</span></td><td>Better alignment can improve speed and quality.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="slide-number">07</div>
+</section>
+
+<section class="slide dark" id="slide-8">
+  <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
+  <div class="content flywheel-visual">
+    <div>
+      <div class="eyebrow">Flywheel</div>
+      <h2>One great product starts the engine.</h2>
+      <p class="lede">The first hero product is not just an output. It is the proof point that creates retailer confidence, unlocks investment, and gives the organization energy to build the next one faster.</p>
+      <div class="loop-note">
+        <strong>The strategy starts with a product people can see, want, and sell.</strong>
+        <p>That win powers the capability flywheel behind both Strategic Brands and Private Label.</p>
+      </div>
+    </div>
+    <div class="loop" aria-label="Innovation flywheel loop">
+      <span class="loop-arrow a1">→</span>
+      <span class="loop-arrow a2">→</span>
+      <span class="loop-arrow a3">→</span>
+      <span class="loop-arrow a4">→</span>
+      <span class="loop-arrow a5">→</span>
+      <span class="loop-arrow a6">→</span>
+      <div class="loop-node">Hero Product</div>
+      <div class="loop-node">Retail Win</div>
+      <div class="loop-node">Investment</div>
+      <div class="loop-node">Capability</div>
+      <div class="loop-node">Insights</div>
+      <div class="loop-node">Next Product</div>
+    </div>
+  </div>
+  <div class="slide-number">08</div>
+</section>
+
+<section class="slide" id="slide-9">
+  <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
+  <div class="content">
+    <div class="eyebrow">Build the capability</div>
+    <h2>Five capability investments matter most.</h2>
+    <div class="grid-3">
+      <div class="card green"><h3>Consumer & Market Insights</h3><p>Dedicated discovery and category intelligence to guide product bets.</p></div>
+      <div class="card green"><h3>AI-Enabled Development</h3><p>AI tools for research, ideation, visualization, analysis, and documentation.</p></div>
+      <div class="card green"><h3>Rapid Prototyping & Testing</h3><p>Faster validation before large tooling, sourcing, or retail commitments.</p></div>
+      <div class="card green"><h3>US / HF Alignment</h3><p>Clear handoffs, documented changes, and dedicated resources across teams.</p></div>
+      <div class="card green"><h3>Strategic Brand Investment</h3><p>Brand-led innovation supported by consumer validation and portfolio discipline.</p></div>
+      <div class="card green"><h3>Knowledge Capture</h3><p>Learning compounds when decisions, tests, and product history are preserved.</p></div>
+    </div>
+  </div>
+  <div class="slide-number">09</div>
+</section>
+
+<section class="slide alt" id="slide-10">
+  <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
+  <div class="content split">
+    <div>
+      <div class="eyebrow">Operating capability</div>
+      <h2>The process needs clear ownership and repeatable decision points.</h2>
+      <p class="lede">Better tools only matter if the operating model reduces overlap and captures learning.</p>
+    </div>
+    <ul class="list">
+      <li>Clear roles and responsibilities with less overlap.</li>
+      <li>Portfolio planning that makes tradeoffs visible.</li>
+      <li>A decision framework for investment and launch readiness.</li>
+      <li>Continuous improvement after each development cycle.</li>
+      <li>Knowledge capture across teams, vendors, and product generations.</li>
+    </ul>
+  </div>
+  <div class="slide-number">10</div>
+</section>
+
+<section class="slide" id="slide-11">
+  <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
+  <div class="content">
+    <div class="eyebrow">Business impact</div>
+    <h2>The same capability strengthens all three business layers.</h2>
+    <div class="impact">
+      <div class="card green">
+        <h3>Strategic Brands</h3>
+        <ul><li>One great hero product</li><li>Consumer demand</li><li>Brand equity</li></ul>
+      </div>
+      <div class="card blue">
+        <h3>Private Label</h3>
+        <ul><li>Validated innovation</li><li>Retail confidence</li><li>Value engineering</li></ul>
+      </div>
+      <div class="card amber">
+        <h3>Westfield</h3>
+        <ul><li>Higher ROI</li><li>Faster execution</li><li>Competitive advantage</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">11</div>
+</section>
+
+<section class="slide alt" id="slide-12">
+  <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
+  <div class="content split">
+    <div>
+      <div class="eyebrow">Near-term priorities</div>
+      <h2>Focus first on the gaps that unlock better product decisions.</h2>
+    </div>
+    <div class="grid-2">
+      <div class="card red"><h3>1. AI tools</h3><p>Make product development faster, clearer, and better documented.</p></div>
+      <div class="card amber"><h3>2. Insights</h3><p>Build a stronger base of consumer and market evidence before investment.</p></div>
+      <div class="card amber"><h3>3. Prototyping</h3><p>Validate physical ideas earlier in the development process.</p></div>
+      <div class="card amber"><h3>4. Quality loop</h3><p>Reduce undocumented changes and preserve product learning.</p></div>
+    </div>
+  </div>
+  <div class="slide-number">12</div>
+</section>
+
+<section class="slide" id="slide-13">
+  <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
+  <div class="content">
+    <div class="eyebrow">What good looks like</div>
+    <h2>A stronger innovation engine should be visible in the work.</h2>
+    <div class="grid-3">
+      <div class="card green"><h3>Fewer, better bets</h3><p>Portfolio discipline directs attention to the highest-value problems and platforms.</p></div>
+      <div class="card green"><h3>More evidence</h3><p>Consumer, market, prototype, and testing inputs shape decisions earlier.</p></div>
+      <div class="card green"><h3>Cleaner handoffs</h3><p>US/HF execution improves through clearer requirements, changes, and ownership.</p></div>
+      <div class="card green"><h3>Hero-product momentum</h3><p>One visible win creates the internal confidence and retailer proof needed to keep investing.</p></div>
+      <div class="card green"><h3>Better transfer</h3><p>Strategic Brand hero-product learnings become lower-risk Private Label innovation.</p></div>
+      <div class="card green"><h3>Compounding learning</h3><p>Knowledge capture prevents the same issues from being rediscovered every season.</p></div>
+    </div>
+  </div>
+  <div class="slide-number">13</div>
+</section>
+
+<section class="slide dark" id="slide-14">
+  <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
+  <div class="content">
+    <div class="eyebrow">Vision</div>
+    <p class="quote">The goal is to create one great product that starts the flywheel, then build the capability to make great products repeatable across Strategic Brands and Private Label.</p>
+  </div>
+  <div class="slide-number">14</div>
+</section>
+
+<script>
+const slides = [...document.querySelectorAll(".slide")];
+const nav = document.querySelector(".nav-dots");
+slides.forEach((slide, index) => {
+  const button = document.createElement("button");
+  button.className = "nav-dot";
+  button.type = "button";
+  button.setAttribute("aria-label", `Go to slide ${index + 1}`);
+  button.addEventListener("click", () => slide.scrollIntoView({ behavior: "smooth" }));
+  nav.appendChild(button);
+});
+const dots = [...document.querySelectorAll(".nav-dot")];
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const index = slides.indexOf(entry.target);
+    dots.forEach(dot => dot.classList.remove("active"));
+    dots[index]?.classList.add("active");
+  });
+}, { threshold: 0.58 });
+slides.forEach(slide => observer.observe(slide));
+document.addEventListener("keydown", event => {
+  const active = dots.findIndex(dot => dot.classList.contains("active"));
+  if (["ArrowDown", "PageDown", " "].includes(event.key)) {
+    event.preventDefault();
+    slides[Math.min(active + 1, slides.length - 1)]?.scrollIntoView({ behavior: "smooth" });
+  }
+  if (["ArrowUp", "PageUp"].includes(event.key)) {
+    event.preventDefault();
+    slides[Math.max(active - 1, 0)]?.scrollIntoView({ behavior: "smooth" });
+  }
+});
+</script>
+</body>
+</html>
