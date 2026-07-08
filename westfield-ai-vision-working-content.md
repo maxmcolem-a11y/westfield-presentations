@@ -132,8 +132,8 @@ Example: A Product Management Agent could review Trello every morning, identify 
 
 **Subtitle:** An agentic system is a group of specialized AI agents working from shared information, each focused on a different function of the business.
 
-- Industrial Design / Engineering AI
 - Sales / PM AI
+- Industrial Design / Engineering AI
 - Creative Services AI
 - Executive / Operations AI
 - Shared Westfield Knowledge Layer: Trello • Documents • Meeting Notes • Testing • NetSuite • Sales • Design Files • Technical References • Factory Updates
@@ -147,265 +147,13 @@ The power is not one AI tool. The power is multiple specialists using the same b
 
 **Subtitle:** A system that helps every function work with better information while giving leadership a clearer view of company health.
 
-- **1. Four AI Work Lanes:** Agents built around four operating lanes: Industrial Design / Engineering, Sales / PM, Creative Services, and Executive / Operations.
+- **1. Four AI Work Lanes:** Agents built around four operating lanes: Sales / PM, Industrial Design / Engineering, Creative Services, and Executive / Operations.
 - **2. Shared Knowledge Layer:** Trello becomes a key source of truth for project status, decisions, ownership, and action history.
 - **3. Executive Intelligence:** Leadership gets company-health snapshots, risks, bottlenecks, and recommendations without waiting for someone to prepare a report.
 
 **Speaker Note:** This is the core operating model.
 
-## Slide 11: Industrial Design Is a Practical AI Pilot Already Underway
-
-**Eyebrow:** Industrial Design Proof Point
-
-**Subtitle:** Westfield does not need to imagine AI from zero. Industrial Design is already using AI across real product-development work.
-
-Industrial Design is a strong pilot function because it sits at the intersection of creative direction, technical feasibility, vendor communication, project visibility, presentations, and executive alignment.
-
-AI is already helping the team move faster through the surrounding work: research, synthesis, visualization, documentation, communication, tracking, translation, and memory.
-
-The opportunity is not to replace design judgment. The opportunity is to support, structure, and scale the working pattern that already exists.
-
-**Speaker Note:** This slide should make the strategy tangible. The point is that Industrial Design is not asking leadership to bet on a theory. It is showing a practical model that is already operating inside Westfield.
-
-## Slide 12: What Industrial Design Is Already Doing With AI
-
-**Eyebrow:** Current Use Cases
-
-**Subtitle:** AI is already supporting a wide range of Industrial Design and product-development workflows.
-
-- **Concept exploration:** Rapid product ideas, styling directions, form language studies, usage scenarios, mood boards, sketch prompts, and early visual territories.
-- **Technical and design research:** Comparable product construction, mechanisms, materials, assembly methods, folding systems, storage approaches, durability details, comfort details, manufacturability references, patents, prior art, teardown references, and design precedents.
-- **CAD and visualization support:** Early geometry studies, STEP/CAD support, part inspection, dimensional review, assembly thinking, snapshots, and visual review links.
-- **Presentation building:** Internal decks, customer-facing decks, design-review layouts, revised slide copy, Chinese translation when needed, template standards, logo consistency, and GitHub Pages publishing.
-- **Project and Trello visibility:** Project status, blockers, overdue items, open questions, next steps, owners, daily/weekly reports, and operating visibility.
-- **Feedback synthesis:** Review comments, chat threads, meeting notes, decisions, open questions, risks, revision paths, and action items.
-- **Cross-functional translation:** Reframing design work for PM, engineering, sourcing, factories, and leadership.
-- **China and vendor communication support:** Chinese translation, factory handoff notes, sample feedback summaries, revision requests, and open-question tracking.
-- **Product-development memory:** Prior concepts, presentation standards, sample feedback, technical decisions, research findings, and lessons learned.
-- **Repeatable workflow automation:** Deck creation, translation, CAD snapshots, Trello summaries, weekly reports, file organization, technical reference gathering, and presentation publishing.
-
-**Speaker Note:** Keep this grounded in work that is already happening. The research language should stay focused on technical and design research.
-
-## Slide 13: Where This Could Go With More Adoption and Support
-
-**Eyebrow:** Expansion Opportunity
-
-**Subtitle:** The next step is to make the current AI-supported workflow more structured, repeatable, and useful across product development.
-
-- **Formal Industrial Design AI workspace:** One connected workspace for concepts, CAD references, technical research, project status, presentations, sample feedback, and design memory.
-- **Structured product-development memory:** Searchable history of concepts, materials, mechanisms, factory lessons, engineering decisions, sample issues, CAD references, and presentation outputs.
-- **Consistent project visibility:** Automated project health summaries, risk flags, missing-information alerts, and weekly ID / product-development leadership views.
-- **Reusable AI-assisted workflows:** Standard workflows for concept briefs, technical research, design reviews, CAD review, deck creation, Chinese translation, sample feedback, and Trello reporting.
-- **Better cross-functional adoption:** Extend the same working model into PM, engineering, sourcing, compliance, operations, and executive reporting by building around each function's real workflow.
-- **Executive intelligence from real work:** Leadership can see active concepts, blocked work, resource needs, recurring issues, and product opportunities gaining traction.
-
-**Speaker Note:** This slide separates current reality from future potential. The message is support and scale, not speculative reinvention.
-
-## Slide 14: The Strategic Point
-
-**Eyebrow:** From Pilot to Capability
-
-**Subtitle:** Industrial Design is already proving that AI can create leverage without removing human ownership.
-
-The designer still owns taste, judgment, product intent, customer empathy, physical evaluation, and final direction.
-
-AI helps with speed, organization, memory, iteration, communication, and visibility.
-
-That is the model Westfield can scale: good people using better information inside better workflows.
-
-**Industrial Design is already functioning as a practical Westfield AI pilot; the next step is to support, structure, and scale the workflows that are already improving speed, visibility, communication, and product-development memory.**
-
-**Speaker Note:** This should be the bridge back to the broader enterprise deck. It connects Darin's company-wide AI vision to one real proof point inside Industrial Design, while leaving room for the PM / Chuck workflow and Darin's executive role as parallel examples of AI already operating across Westfield.
-
-## Slide 15: Why Trello Matters
-
-**Eyebrow:** Trello as the Nervous System
-
-**Subtitle:** Trello can become more than a task board. It can become a structured operating layer for project information.
-
-- **Project Charter:** Problem, retailer, target, value proposition
-- **Timeline:** Milestones, owners, due dates
-- **Samples:** Status, pictures, decisions, factory notes
-- **Engineering:** Risks, tests, specifications
-- **Compliance:** Requirements, open questions, certifications
-- **Buyer Feedback:** Line review notes, objections, next steps
-When Trello is maintained consistently, AI can turn project activity into dashboards, alerts, and decision support.
-
-**Speaker Note:** Important: the system will only be as good as the process discipline. Trello creates structure for AI to read.
-
-## Slide 16: The Four Work Lanes
-
-**Eyebrow:** Across Functions
-
-**Subtitle:** The same AI architecture can support four very different operating lanes.
-
-- **Industrial Design / Engineering**
-  - Concept exploration
-  - Technical and design research
-  - CAD / STEP support
-  - Engineering questions
-  - Sample and prototype feedback
-  - Design-development memory
-- **Sales / PM**
-  - Product charters
-  - Line review readiness
-  - AI-powered buyer presentation building
-  - Account and project status
-  - Trello card data, product photos, specs, pricing, and buyer-comment history
-  - Buyer feedback summaries
-  - Next-action tracking
-  - Cross-functional follow-up
-- **Creative Services**
-  - Presentation support
-  - Brand and product storytelling
-  - Video request ingest and response
-  - High-volume Trello automation
-  - Image and asset preparation
-  - Translation-ready content
-  - Template and layout consistency
-  - Launch / review material support
-- **Executive / Operations**
-  - Company and project health
-  - Risk escalation
-  - Bottleneck visibility
-  - Operating summaries
-  - Production and sample follow-up
-  - Leadership briefings
-
-**Speaker Note:** The important point is that these lanes share an architecture, but they do not operate the same way. Industrial Design / Engineering needs technical memory and visual workflow support. Sales / PM needs account, line review, and project action support. Creative Services needs asset, deck, and story consistency. Executive / Operations needs visibility, escalation, and operating rhythm.
-
-## Slide 17: The First Practical Agent Structure
-
-**Eyebrow:** Initial System
-
-**Subtitle:** Start with four lanes that share the same architecture but support different kinds of work.
-
-- **Industrial Design / Engineering Agent**
-  - Concept exploration
-  - Technical and design research
-  - CAD and visualization support
-  - Engineering questions
-  - Sample feedback
-  - Design memory
-- **Sales / PM Agent**
-  - Product charters
-  - Line review readiness
-  - Buyer presentation generation
-  - Project status
-  - Buyer feedback
-  - Product data, photos, pricing, and comments pulled from Trello
-  - Open decisions
-  - Next actions
-- **Creative Services Agent**
-  - Presentation decks
-  - Video request workflows
-  - Product storytelling
-  - Asset prep
-  - Trello request ingest and response
-  - Template consistency
-  - Translation support
-  - Launch / review materials
-- **Executive / Operations Agent**
-  - Company health snapshots
-  - Risk escalation
-  - Bottleneck summaries
-  - Sample / production follow-up
-  - Department summaries
-  - Morning briefings
-
-**Speaker Note:** This directly reflects the intended four-lane model. The architecture is common across lanes: connect approved information, maintain workflow memory, summarize changes, flag issues, prepare outputs, and keep humans in control.
-
-## Slide 18: Executive Intelligence: What Leadership Could See
-
-**Eyebrow:** CEO View
-
-**Subtitle:** The executive agent should not simply display numbers. It should explain what changed, why it matters, and where attention is needed.
-
-- **Projects at Risk:** 12 - 3 need leadership attention this week
-- **Upcoming Line Reviews:** 8 - 2 require updated samples
-- **Sample Delays:** 17 - 5 tied to Costco / Walmart timing
-- **Innovation Pipeline:** 42 - 9 ready for Gate review
-- **Margin Watch:** 6 - Cost changes above threshold
-- **Compliance Open Items:** 14 - 4 need decision support
-AI summary: The issue is not that 12 projects are at risk. The issue is that 3 of them could impact major account timing if not addressed this week.
-
-**Speaker Note:** Use example numbers only. The key is the executive summary: not just status, but attention guidance.
-
-## Slide 19: From Dashboard to Decision Support
-
-**Eyebrow:** Better Management System
-
-**Subtitle:** The dashboard should tell leadership where to spend time.
-
-- **Traditional Dashboard**
-  - Lots of metrics
-  - Requires interpretation
-  - Can become noise
-  - Often stale
-- **AI Executive Dashboard**
-  - What changed?
-  - Why does it matter?
-  - Who owns it?
-  - What happens if we do nothing?
-  - What decision is needed?
-
-**Speaker Note:** This is a powerful distinction. AI should reduce ambiguity, not create more reporting.
-
-## Slide 20: A Daily CEO Briefing
-
-**Eyebrow:** Executive Example
-
-**Subtitle:** One page every morning: what changed, what is at risk, and what needs attention.
-
-### Good Morning Leadership
-- **1. Items needing attention today:** Costco hard-arm chair sample risk requires decision on frame direction by Friday.
-- **2. Product development health:** Softlines has 4 projects with no sample update in 10+ days; Engineering is waiting for 2 revised CAD files.
-- **3. Commercial opportunity:** Three accounts are showing repeated interest in compact seating platforms; similar requests are appearing across Costco, Target, and DSG notes.
-- **4. Risk to watch:** Two projects have compliance questions that may affect import or labeling requirements.
-
-**Speaker Note:** This is the kind of output Leadership can immediately understand. It is not technical. It is useful.
-
-## Slide 21: Institutional Knowledge Becomes a Company Asset
-
-**Eyebrow:** Company Memory
-
-**Subtitle:** Today, much of our knowledge lives inside people. AI can help make it searchable, reusable, and durable.
-
-- Meeting notes
-- Buyer feedback
-- Factory learnings
-- Engineering solutions
-- Testing history
-- Product wins/losses
-- Costing lessons
-- Compliance decisions
-**Every project should make the next project smarter.**
-When an employee leaves, changes roles, or is unavailable, the knowledge should not disappear. AI can help Westfield preserve lessons learned and apply them consistently across future projects.
-
-**Speaker Note:** Leadership should appreciate this as a company health and continuity issue.
-
-## Slide 22: Product Development Example: A Costco Chair Request
-
-**Eyebrow:** Westfield Scenario
-
-**Subtitle:** AI should make the team start more informed, not replace the team’s judgment.
-
-**Retailer asks: “Can Westfield build a better hard-arm chair platform?”**
-- Previous Costco feedback
-- Competitive chair comparison
-- Past sample history
-- Engineering constraints
-- Factory capability
-- Target price bands
-- Margin concerns
-- Patent watch
-- Consumer trend signals
-- Accessory opportunities
-**The team begins with a complete brief instead of starting from memory and scattered files.**
-
-**Speaker Note:** This example connects directly to Westfield business and makes the AI practical.
-
-## Slide 23: What This Means for Product Management
+## Slide 11: What This Means for Product Management
 
 **Eyebrow:** Product Management Focus
 
@@ -430,7 +178,7 @@ When an employee leaves, changes roles, or is unavailable, the knowledge should 
 
 **Speaker Note:** This supports the part others will write, but keeps the general thesis clear.
 
-## Slide 24: Sales / PM Proof Point: Chuck
+## Slide 12: Sales / PM Proof Point: Chuck
 
 **Eyebrow:** Product Management Proof Point
 
@@ -461,6 +209,258 @@ When an employee leaves, changes roles, or is unavailable, the knowledge should 
 - Weekly account and line-review auto-briefings: "what changed since last week."
 
 **Speaker Note:** This is the Sales / PM counterpart to the Industrial Design proof point. It is not theoretical: it shows the same Westfield AI model working on a PM workflow that already consumes time and coordination. Keep the message practical: Trello becomes structured source material, Chuck builds the first pass, and PM owns the final business story.
+
+## Slide 13: Industrial Design Is a Practical AI Pilot Already Underway
+
+**Eyebrow:** Industrial Design Proof Point
+
+**Subtitle:** Westfield does not need to imagine AI from zero. Industrial Design is already using AI across real product-development work.
+
+Industrial Design is a strong pilot function because it sits at the intersection of creative direction, technical feasibility, vendor communication, project visibility, presentations, and executive alignment.
+
+AI is already helping the team move faster through the surrounding work: research, synthesis, visualization, documentation, communication, tracking, translation, and memory.
+
+The opportunity is not to replace design judgment. The opportunity is to support, structure, and scale the working pattern that already exists.
+
+**Speaker Note:** This slide should make the strategy tangible. The point is that Industrial Design is not asking leadership to bet on a theory. It is showing a practical model that is already operating inside Westfield.
+
+## Slide 14: What Industrial Design Is Already Doing With AI
+
+**Eyebrow:** Current Use Cases
+
+**Subtitle:** AI is already supporting a wide range of Industrial Design and product-development workflows.
+
+- **Concept exploration:** Rapid product ideas, styling directions, form language studies, usage scenarios, mood boards, sketch prompts, and early visual territories.
+- **Technical and design research:** Comparable product construction, mechanisms, materials, assembly methods, folding systems, storage approaches, durability details, comfort details, manufacturability references, patents, prior art, teardown references, and design precedents.
+- **CAD and visualization support:** Early geometry studies, STEP/CAD support, part inspection, dimensional review, assembly thinking, snapshots, and visual review links.
+- **Presentation building:** Internal decks, customer-facing decks, design-review layouts, revised slide copy, Chinese translation when needed, template standards, logo consistency, and GitHub Pages publishing.
+- **Project and Trello visibility:** Project status, blockers, overdue items, open questions, next steps, owners, daily/weekly reports, and operating visibility.
+- **Feedback synthesis:** Review comments, chat threads, meeting notes, decisions, open questions, risks, revision paths, and action items.
+- **Cross-functional translation:** Reframing design work for PM, engineering, sourcing, factories, and leadership.
+- **China and vendor communication support:** Chinese translation, factory handoff notes, sample feedback summaries, revision requests, and open-question tracking.
+- **Product-development memory:** Prior concepts, presentation standards, sample feedback, technical decisions, research findings, and lessons learned.
+- **Repeatable workflow automation:** Deck creation, translation, CAD snapshots, Trello summaries, weekly reports, file organization, technical reference gathering, and presentation publishing.
+
+**Speaker Note:** Keep this grounded in work that is already happening. The research language should stay focused on technical and design research.
+
+## Slide 15: Where This Could Go With More Adoption and Support
+
+**Eyebrow:** Expansion Opportunity
+
+**Subtitle:** The next step is to make the current AI-supported workflow more structured, repeatable, and useful across product development.
+
+- **Formal Industrial Design AI workspace:** One connected workspace for concepts, CAD references, technical research, project status, presentations, sample feedback, and design memory.
+- **Structured product-development memory:** Searchable history of concepts, materials, mechanisms, factory lessons, engineering decisions, sample issues, CAD references, and presentation outputs.
+- **Consistent project visibility:** Automated project health summaries, risk flags, missing-information alerts, and weekly ID / product-development leadership views.
+- **Reusable AI-assisted workflows:** Standard workflows for concept briefs, technical research, design reviews, CAD review, deck creation, Chinese translation, sample feedback, and Trello reporting.
+- **Better cross-functional adoption:** Extend the same working model into PM, engineering, sourcing, compliance, operations, and executive reporting by building around each function's real workflow.
+- **Executive intelligence from real work:** Leadership can see active concepts, blocked work, resource needs, recurring issues, and product opportunities gaining traction.
+
+**Speaker Note:** This slide separates current reality from future potential. The message is support and scale, not speculative reinvention.
+
+## Slide 16: The Strategic Point
+
+**Eyebrow:** From Pilot to Capability
+
+**Subtitle:** Industrial Design is already proving that AI can create leverage without removing human ownership.
+
+The designer still owns taste, judgment, product intent, customer empathy, physical evaluation, and final direction.
+
+AI helps with speed, organization, memory, iteration, communication, and visibility.
+
+That is the model Westfield can scale: good people using better information inside better workflows.
+
+**Industrial Design is already functioning as a practical Westfield AI pilot; the next step is to support, structure, and scale the workflows that are already improving speed, visibility, communication, and product-development memory.**
+
+**Speaker Note:** This should be the bridge back to the broader enterprise deck. It connects Darin's company-wide AI vision to one real proof point inside Industrial Design, while leaving room for the PM / Chuck workflow and Darin's executive role as parallel examples of AI already operating across Westfield.
+
+## Slide 17: Why Trello Matters
+
+**Eyebrow:** Trello as the Nervous System
+
+**Subtitle:** Trello can become more than a task board. It can become a structured operating layer for project information.
+
+- **Project Charter:** Problem, retailer, target, value proposition
+- **Timeline:** Milestones, owners, due dates
+- **Samples:** Status, pictures, decisions, factory notes
+- **Engineering:** Risks, tests, specifications
+- **Compliance:** Requirements, open questions, certifications
+- **Buyer Feedback:** Line review notes, objections, next steps
+When Trello is maintained consistently, AI can turn project activity into dashboards, alerts, and decision support.
+
+**Speaker Note:** Important: the system will only be as good as the process discipline. Trello creates structure for AI to read.
+
+## Slide 18: The Four Work Lanes
+
+**Eyebrow:** Across Functions
+
+**Subtitle:** The same AI architecture can support four very different operating lanes.
+
+- **Sales / PM**
+  - Product charters
+  - Line review readiness
+  - AI-powered buyer presentation building
+  - Account and project status
+  - Trello card data, product photos, specs, pricing, and buyer-comment history
+  - Buyer feedback summaries
+  - Next-action tracking
+  - Cross-functional follow-up
+- **Industrial Design / Engineering**
+  - Concept exploration
+  - Technical and design research
+  - CAD / STEP support
+  - Engineering questions
+  - Sample and prototype feedback
+  - Design-development memory
+- **Creative Services**
+  - Presentation support
+  - Brand and product storytelling
+  - Video request ingest and response
+  - High-volume Trello automation
+  - Image and asset preparation
+  - Translation-ready content
+  - Template and layout consistency
+  - Launch / review material support
+- **Executive / Operations**
+  - Company and project health
+  - Risk escalation
+  - Bottleneck visibility
+  - Operating summaries
+  - Production and sample follow-up
+  - Leadership briefings
+
+**Speaker Note:** The important point is that these lanes share an architecture, but they do not operate the same way. Industrial Design / Engineering needs technical memory and visual workflow support. Sales / PM needs account, line review, and project action support. Creative Services needs asset, deck, and story consistency. Executive / Operations needs visibility, escalation, and operating rhythm.
+
+## Slide 19: The First Practical Agent Structure
+
+**Eyebrow:** Initial System
+
+**Subtitle:** Start with four lanes that share the same architecture but support different kinds of work.
+
+- **Sales / PM Agent**
+  - Product charters
+  - Line review readiness
+  - Buyer presentation generation
+  - Project status
+  - Buyer feedback
+  - Product data, photos, pricing, and comments pulled from Trello
+  - Open decisions
+  - Next actions
+- **Industrial Design / Engineering Agent**
+  - Concept exploration
+  - Technical and design research
+  - CAD and visualization support
+  - Engineering questions
+  - Sample feedback
+  - Design memory
+- **Creative Services Agent**
+  - Presentation decks
+  - Video request workflows
+  - Product storytelling
+  - Asset prep
+  - Trello request ingest and response
+  - Template consistency
+  - Translation support
+  - Launch / review materials
+- **Executive / Operations Agent**
+  - Company health snapshots
+  - Risk escalation
+  - Bottleneck summaries
+  - Sample / production follow-up
+  - Department summaries
+  - Morning briefings
+
+**Speaker Note:** This directly reflects the intended four-lane model. The architecture is common across lanes: connect approved information, maintain workflow memory, summarize changes, flag issues, prepare outputs, and keep humans in control.
+
+## Slide 20: Executive Intelligence: What Leadership Could See
+
+**Eyebrow:** CEO View
+
+**Subtitle:** The executive agent should not simply display numbers. It should explain what changed, why it matters, and where attention is needed.
+
+- **Projects at Risk:** 12 - 3 need leadership attention this week
+- **Upcoming Line Reviews:** 8 - 2 require updated samples
+- **Sample Delays:** 17 - 5 tied to Costco / Walmart timing
+- **Innovation Pipeline:** 42 - 9 ready for Gate review
+- **Margin Watch:** 6 - Cost changes above threshold
+- **Compliance Open Items:** 14 - 4 need decision support
+AI summary: The issue is not that 12 projects are at risk. The issue is that 3 of them could impact major account timing if not addressed this week.
+
+**Speaker Note:** Use example numbers only. The key is the executive summary: not just status, but attention guidance.
+
+## Slide 21: From Dashboard to Decision Support
+
+**Eyebrow:** Better Management System
+
+**Subtitle:** The dashboard should tell leadership where to spend time.
+
+- **Traditional Dashboard**
+  - Lots of metrics
+  - Requires interpretation
+  - Can become noise
+  - Often stale
+- **AI Executive Dashboard**
+  - What changed?
+  - Why does it matter?
+  - Who owns it?
+  - What happens if we do nothing?
+  - What decision is needed?
+
+**Speaker Note:** This is a powerful distinction. AI should reduce ambiguity, not create more reporting.
+
+## Slide 22: A Daily CEO Briefing
+
+**Eyebrow:** Executive Example
+
+**Subtitle:** One page every morning: what changed, what is at risk, and what needs attention.
+
+### Good Morning Leadership
+- **1. Items needing attention today:** Costco hard-arm chair sample risk requires decision on frame direction by Friday.
+- **2. Product development health:** Softlines has 4 projects with no sample update in 10+ days; Engineering is waiting for 2 revised CAD files.
+- **3. Commercial opportunity:** Three accounts are showing repeated interest in compact seating platforms; similar requests are appearing across Costco, Target, and DSG notes.
+- **4. Risk to watch:** Two projects have compliance questions that may affect import or labeling requirements.
+
+**Speaker Note:** This is the kind of output Leadership can immediately understand. It is not technical. It is useful.
+
+## Slide 23: Institutional Knowledge Becomes a Company Asset
+
+**Eyebrow:** Company Memory
+
+**Subtitle:** Today, much of our knowledge lives inside people. AI can help make it searchable, reusable, and durable.
+
+- Meeting notes
+- Buyer feedback
+- Factory learnings
+- Engineering solutions
+- Testing history
+- Product wins/losses
+- Costing lessons
+- Compliance decisions
+**Every project should make the next project smarter.**
+When an employee leaves, changes roles, or is unavailable, the knowledge should not disappear. AI can help Westfield preserve lessons learned and apply them consistently across future projects.
+
+**Speaker Note:** Leadership should appreciate this as a company health and continuity issue.
+
+## Slide 24: Product Development Example: A Costco Chair Request
+
+**Eyebrow:** Westfield Scenario
+
+**Subtitle:** AI should make the team start more informed, not replace the team’s judgment.
+
+**Retailer asks: “Can Westfield build a better hard-arm chair platform?”**
+- Previous Costco feedback
+- Competitive chair comparison
+- Past sample history
+- Engineering constraints
+- Factory capability
+- Target price bands
+- Margin concerns
+- Patent watch
+- Consumer trend signals
+- Accessory opportunities
+**The team begins with a complete brief instead of starting from memory and scattered files.**
+
+**Speaker Note:** This example connects directly to Westfield business and makes the AI practical.
 
 ## Slide 25: What This Means for Design and Engineering
 
@@ -628,7 +628,7 @@ The first phase should focus on workflows that are already painful, high-value, 
 **Subtitle:** Build the foundation and prove value in real workflows.
 
 - **0–90 Days:** Define data standards, Trello structure, priority workflows, security approach, and pilot teams.
-- **3–6 Months:** Deploy Industrial Design / Engineering and Sales / PM pilots. Begin Creative Services workflow support and executive dashboard prototype.
+- **3–6 Months:** Deploy Sales / PM and Industrial Design / Engineering pilots. Begin Creative Services workflow support and executive dashboard prototype.
 - **6–9 Months:** Add recurring project health summaries, LR readiness checks, sample risk alerts, and meeting-note automation.
 - **9–12 Months:** Review adoption, improve accuracy, standardize dashboards, and decide what to scale next.
 
@@ -703,7 +703,7 @@ The long-term advantage is not the tool itself. It is the company memory, discip
 **Subtitle:** Approval does not mean one big technology bet. It means permission to build the first working version.
 
 - **Approve the direction:** AI as a strategic operating capability for Westfield.
-- **Approve initial implementation:** Start with an agentic system organized around Industrial Design / Engineering, Sales / PM, Creative Services, and Executive / Operations.
+- **Approve initial implementation:** Start with an agentic system organized around Sales / PM, Industrial Design / Engineering, Creative Services, and Executive / Operations.
 - **Approve process support:** Standardize Trello and key workflows so AI has clean information to work from.
 - **Approve future scaling discussion:** After pilot results, evaluate expansion to Finance, Accounting, Operations, and other functions.
 
