@@ -1,361 +1,1469 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Westfield AI Vision</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#f7f7f3;--paper:#fff;--ink:#141414;--muted:#5b5e5a;--line:rgba(20,20,20,.12);--accent:#d63b2f;--blue:#2c6588;--green:#1f6e52;--amber:#9a5d36;--shadow:0 18px 45px rgba(0,0,0,.08);--pad:clamp(1.3rem,3vw,3rem);--radius:8px}*{box-sizing:border-box}html{scroll-snap-type:y mandatory;scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#fbfbf8,#ecece7);font-family:Inter,Arial,sans-serif;color:var(--ink);overflow-x:hidden}.slide{min-height:100vh;min-height:100dvh;scroll-snap-align:start;position:relative;display:flex;overflow:hidden}.slide:nth-child(even){background:rgba(236,236,231,.58)}.content{width:min(1240px,92vw);margin:auto;padding:calc(var(--pad) + 20px) var(--pad);display:flex;flex-direction:column;gap:clamp(.65rem,1.25vw,1rem)}.logo{position:absolute;right:clamp(1rem,2.2vw,2rem);top:clamp(.8rem,1.4vw,1.2rem);width:clamp(120px,12vw,180px);height:auto;opacity:.86}.slide-number{position:absolute;right:clamp(1rem,2.2vw,2rem);bottom:clamp(.8rem,1.4vw,1.2rem);font-weight:800;font-size:.78rem;letter-spacing:.08em;color:rgba(20,20,20,.38)}.eyebrow{margin:0;color:var(--accent);font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;font-weight:900}h1{margin:0;max-width:1120px;font-size:clamp(2rem,4.3vw,4.45rem);line-height:.98;letter-spacing:0;font-weight:900}.lede{margin:0;max-width:1050px;color:var(--muted);font-size:clamp(1rem,1.48vw,1.3rem);line-height:1.36}.cover h1{font-size:clamp(2.5rem,5.8vw,5.7rem)}.pill-row,.chips{display:flex;gap:.65rem;flex-wrap:wrap;margin-top:.55rem}.pill-row span,.chips span{border:1px solid var(--line);background:rgba(255,255,255,.78);border-radius:999px;padding:.68rem 1rem;font-weight:800}.hero-line{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:.75rem}.hero-line span{border-top:5px solid var(--accent);background:rgba(255,255,255,.72);padding:1rem;font-weight:900;box-shadow:var(--shadow);border-radius:var(--radius)}blockquote{margin:.75rem 0 0;border-left:10px solid var(--accent);background:var(--paper);box-shadow:var(--shadow);border-radius:var(--radius);padding:clamp(1.25rem,2.5vw,2.2rem);font-size:clamp(1.55rem,3vw,3.25rem);line-height:1.08;font-weight:900}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.82rem;margin-top:.72rem}.cards.compact{grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:.72rem}.cards.two{grid-template-columns:repeat(2,minmax(0,1fr))}.card{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(.86rem,1.45vw,1.15rem);box-shadow:var(--shadow);border-top:6px solid var(--accent)}.card:nth-child(3n+1){border-top-color:var(--blue)}.card:nth-child(3n+2){border-top-color:var(--green)}.card:nth-child(3n){border-top-color:var(--amber)}.card h3{margin:0 0 .38rem;font-size:clamp(.98rem,1.18vw,1.12rem);line-height:1.15}.card p{margin:0;color:var(--muted);font-size:clamp(.86rem,1vw,.98rem);line-height:1.34}.card ul{margin:.35rem 0 0;padding-left:1.05rem;color:var(--muted);font-size:clamp(.84rem,.95vw,.95rem);line-height:1.32}.card li{margin:.18rem 0}.bullets{margin:.45rem 0 0;padding-left:1.2rem;color:var(--muted);line-height:1.36;font-weight:650;font-size:clamp(.98rem,1.18vw,1.12rem);max-width:1080px}.bullets li{margin:.24rem 0}.callout{margin:.75rem 0 0;background:#151515;color:#fff;border-radius:var(--radius);padding:1.05rem 1.3rem;font-size:clamp(1.02rem,1.45vw,1.32rem);font-weight:850;line-height:1.24}.progress{position:fixed;left:0;bottom:0;height:5px;background:var(--accent);width:0;z-index:31}@media(max-width:900px){html{scroll-snap-type:none}.content{padding:5rem 1.1rem}.hero-line,.cards.two{grid-template-columns:1fr}h1{font-size:2.12rem}.cover h1{font-size:2.38rem}blockquote{font-size:1.75rem}.slide{min-height:auto}.logo{width:118px}.slide-number{position:static;margin-left:auto;padding:0 1.1rem 1rem}}
-</style>
-</head>
-<body>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Westfield Agentic AI Vision</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><style>
+:root{--bg:#f7f7f3;--paper:#fff;--ink:#141414;--muted:#5b5e5a;--line:rgba(20,20,20,.12);--accent:#d63b2f;--blue:#2c6588;--green:#1f6e52;--amber:#9a5d36;--shadow:0 18px 45px rgba(0,0,0,.08);--pad:clamp(1.3rem,3vw,3rem);--radius:8px}*{box-sizing:border-box}html{scroll-snap-type:y mandatory;scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#fbfbf8,#ecece7);font-family:Inter,Arial,sans-serif;color:var(--ink);overflow-x:hidden}.slide{min-height:100vh;min-height:100dvh;scroll-snap-align:start;position:relative;display:flex;overflow:hidden}.slide:nth-child(even){background:rgba(236,236,231,.58)}.content{width:min(1220px,92vw);margin:auto;padding:calc(var(--pad) + 20px) var(--pad);display:flex;flex-direction:column;gap:clamp(.75rem,1.5vw,1.15rem)}.logo{position:absolute;right:clamp(1rem,2.2vw,2rem);top:clamp(.8rem,1.4vw,1.2rem);width:clamp(120px,12vw,180px);height:auto;opacity:.86}.slide-number{position:absolute;right:clamp(1rem,2.2vw,2rem);bottom:clamp(.8rem,1.4vw,1.2rem);font-weight:800;font-size:.78rem;letter-spacing:.08em;color:rgba(20,20,20,.38)}.eyebrow{margin:0;color:var(--accent);font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;font-weight:900}h1{margin:0;max-width:1080px;font-size:clamp(2rem,4.7vw,4.75rem);line-height:.98;letter-spacing:0;font-weight:900}.lede{margin:0;max-width:1000px;color:var(--muted);font-size:clamp(1rem,1.55vw,1.36rem);line-height:1.36}.cover h1{font-size:clamp(2.5rem,6vw,5.9rem)}.pill-row,.chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:.65rem;margin-top:1rem}.pill-row span,.chips span{border:1px solid var(--line);background:rgba(255,255,255,.78);border-radius:999px;padding:.72rem 1rem;font-weight:800;text-align:center}.hero-line{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}.hero-line span{border-top:5px solid var(--accent);background:rgba(255,255,255,.72);padding:1rem;font-weight:900;box-shadow:var(--shadow);border-radius:var(--radius)}blockquote{margin:1rem 0 0;border-left:10px solid var(--accent);background:var(--paper);box-shadow:var(--shadow);border-radius:var(--radius);padding:clamp(1.4rem,3vw,2.5rem);font-size:clamp(1.75rem,3.6vw,3.9rem);line-height:1.08;font-weight:900}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:1rem;margin-top:1rem}.card{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(1rem,1.7vw,1.35rem);box-shadow:var(--shadow);border-top:6px solid var(--accent)}.card:nth-child(3n+1){border-top-color:var(--blue)}.card:nth-child(3n+2){border-top-color:var(--green)}.card:nth-child(3n){border-top-color:var(--amber)}.card h3{margin:0 0 .45rem;font-size:clamp(1rem,1.32vw,1.2rem);line-height:1.15}.card p{margin:0;color:var(--muted);font-size:clamp(.9rem,1.06vw,1rem);line-height:1.35}.source-cloud{position:relative;height:clamp(265px,38vw,390px);margin-top:1rem;border:1px dashed rgba(20,20,20,.18);border-radius:var(--radius);background:radial-gradient(circle at 30% 30%,rgba(214,59,47,.08),transparent 34%),radial-gradient(circle at 70% 60%,rgba(44,101,136,.1),transparent 38%),rgba(255,255,255,.5);overflow:hidden}.source-cloud span{position:absolute;display:inline-flex;align-items:center;justify-content:center;padding:.72rem 1rem;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.88);box-shadow:var(--shadow);font-weight:900;color:var(--ink);transform:translate(-50%,-50%)}.source-cloud span:nth-child(1){left:15%;top:26%;font-size:1.18rem}.source-cloud span:nth-child(2){left:42%;top:18%;font-size:.98rem}.source-cloud span:nth-child(3){left:73%;top:28%;font-size:1.3rem}.source-cloud span:nth-child(4){left:27%;top:54%;font-size:1.06rem}.source-cloud span:nth-child(5){left:60%;top:52%;font-size:.96rem}.source-cloud span:nth-child(6){left:83%;top:62%;font-size:1.08rem}.source-cloud span:nth-child(7){left:20%;top:78%;font-size:.96rem}.source-cloud span:nth-child(8){left:50%;top:82%;font-size:1.16rem}.visual-frame{margin-top:.8rem;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow)}.visual-frame img{display:block;width:100%;height:auto}.bullets{margin:.6rem 0 0;padding-left:1.2rem;color:var(--muted);line-height:1.38;font-weight:650;font-size:clamp(1rem,1.25vw,1.16rem);max-width:1040px}.bullets li{margin:.28rem 0}.callout{margin:1rem 0 0;background:#151515;color:#fff;border-radius:var(--radius);padding:1.1rem 1.3rem;font-size:clamp(1.05rem,1.55vw,1.45rem);font-weight:850;line-height:1.24}.progress{position:fixed;left:0;bottom:0;height:5px;background:var(--accent);width:0;z-index:31}.language-toggle{position:fixed;left:clamp(1rem,2.2vw,2rem);bottom:clamp(.8rem,1.4vw,1.2rem);z-index:40;border:1px solid rgba(20,20,20,.16);background:rgba(255,255,255,.88);color:var(--ink);border-radius:999px;padding:.48rem .8rem;font-size:.78rem;font-weight:900;letter-spacing:.04em;box-shadow:0 10px 28px rgba(0,0,0,.1);cursor:pointer}.language-toggle:hover,.language-toggle:focus-visible{background:#151515;color:#fff;outline:none}@media(max-width:900px){html{scroll-snap-type:none}.content{padding:5rem 1.1rem}.hero-line{grid-template-columns:1fr}h1{font-size:2.2rem}.cover h1{font-size:2.45rem}blockquote{font-size:2rem}.slide{min-height:auto}.logo{width:118px}.source-cloud{height:auto;display:flex;flex-wrap:wrap;gap:.7rem;padding:1rem}.source-cloud span{position:static;transform:none;font-size:1rem!important}.slide-number{position:static;margin-left:auto;padding:0 1.1rem 1rem}.language-toggle{position:static;margin:1rem 0 0 1.1rem;display:inline-flex}}
+.toc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(5,auto);grid-auto-flow:column;gap:.72rem;margin-top:.8rem}.toc-item{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:.75rem;text-decoration:none;color:var(--ink);background:rgba(255,255,255,.88);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:var(--radius);box-shadow:var(--shadow);padding:.86rem 1rem}.toc-item:nth-child(3n+1){border-left-color:var(--blue)}.toc-item:nth-child(3n+2){border-left-color:var(--green)}.toc-item:nth-child(3n){border-left-color:var(--amber)}.toc-index{font-weight:900;color:var(--accent);letter-spacing:.08em}.toc-title{font-weight:900;font-size:clamp(.96rem,1.12vw,1.08rem);line-height:1.12}.toc-range{color:var(--muted);font-weight:800;font-size:.82rem;white-space:nowrap}.section-label{position:absolute;right:clamp(5.2rem,7.8vw,8.4rem);bottom:clamp(.8rem,1.4vw,1.2rem);max-width:34vw;border:1px solid rgba(20,20,20,.12);background:rgba(255,255,255,.78);border-radius:999px;padding:.42rem .72rem;color:rgba(20,20,20,.58);font-size:.72rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;z-index:2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.slide::after{content:"Property of Westfield Outdoors. Confidential and proprietary. Do not reproduce, distribute, or disclose without written permission.";position:absolute;left:50%;bottom:clamp(.72rem,1.2vw,1rem);transform:translateX(-50%);width:min(640px,42vw);text-align:center;color:rgba(20,20,20,.34);font-size:.48rem;line-height:1.2;font-weight:700;letter-spacing:.03em;z-index:1;pointer-events:none}html[lang="zh-Hans"] .slide::after{content:"Westfield Outdoors 财产。保密及专有资料。未经书面许可，不得复制、分发或披露。"}@media(max-width:900px){.toc-grid{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}.toc-item{grid-template-columns:auto 1fr}.toc-range{grid-column:2}.section-label{position:static;margin:0 1.1rem .8rem auto;max-width:calc(100vw - 2.2rem);align-self:flex-end}.slide::after{position:static;display:block;transform:none;width:auto;margin:.4rem 1.1rem 1rem;text-align:left;font-size:.48rem}}
+</style><style>
+.row-stack{display:grid;gap:.8rem;margin-top:1rem}.principle-row{display:grid;grid-template-columns:minmax(160px,220px) 1fr;align-items:center;gap:1rem;border:1px solid var(--line);background:rgba(255,255,255,.86);border-left:8px solid var(--blue);border-radius:var(--radius);box-shadow:var(--shadow);padding:1rem 1.15rem}.principle-row:nth-child(2){border-left-color:var(--green)}.principle-row:nth-child(3){border-left-color:var(--amber)}.principle-row h3{margin:0;font-size:clamp(1.15rem,1.8vw,1.75rem);line-height:1.05}.principle-row p{margin:0;color:var(--muted);font-size:clamp(.98rem,1.18vw,1.12rem);line-height:1.34;font-weight:650}.principle-conclusion{margin-top:.2rem}.two-boxes,.compare-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1rem}.two-boxes .card,.compare-card{margin:0}.compact-list{margin:.4rem 0 0;padding-left:1.05rem;color:var(--muted);font-size:clamp(.95rem,1.08vw,1.04rem);line-height:1.34;font-weight:650}.compact-list li{margin:.22rem 0}.compare-card{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(1.1rem,2vw,1.55rem);display:flex;flex-direction:column;gap:.55rem;border-top:7px solid var(--blue)}.compare-card.agent{border-top-color:var(--green)}.compare-label{margin:0;color:var(--muted);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.compare-card h3{margin:0;font-size:clamp(1.6rem,2.5vw,2.4rem);line-height:1}.compare-card p{margin:0;color:var(--muted);font-size:clamp(1rem,1.2vw,1.15rem);line-height:1.34;font-weight:650}.dense-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:.68rem}.dense-cards .card{padding:.72rem .86rem;border-top-width:4px}.dense-cards .card h3{font-size:clamp(.82rem,.95vw,1rem);line-height:1.08;margin-bottom:.28rem}.dense-cards .card p{font-size:clamp(.72rem,.82vw,.88rem);line-height:1.24}.example-callout{background:#151515;color:#fff}.example-callout h3{margin:0 0 .35rem;font-size:clamp(1rem,1.25vw,1.2rem);line-height:1.1}.example-callout p{margin:0;color:rgba(255,255,255,.82);font-size:clamp(.98rem,1.12vw,1.08rem);line-height:1.36}.architecture-frame{margin-top:.65rem}.architecture-frame img{height:clamp(300px,42vh,455px);object-fit:contain}.architecture-note{margin-top:.2rem}#slide-12 .architecture-frame{display:inline-block;align-self:center;width:auto;max-width:min(100%,1040px);margin-top:.55rem;background:transparent;line-height:0;padding:0}#slide-12 .architecture-frame img{display:block;width:auto;max-width:100%;height:clamp(300px,38vh,410px);object-fit:contain}@media(min-width:901px) and (max-height:950px){#slide-19 .content{padding:2.7rem var(--pad);gap:.62rem}#slide-19 h1{font-size:clamp(1.9rem,3.7vw,3.85rem);line-height:.98}#slide-19 .lede{font-size:clamp(.96rem,1.16vw,1.16rem);line-height:1.3}#slide-19 .dense-cards{gap:.5rem;margin-top:.48rem}#slide-19 .dense-cards .card{padding:.55rem .68rem;border-top-width:4px}#slide-19 .dense-cards .card h3{font-size:.83rem;margin-bottom:.28rem}#slide-19 .dense-cards .card p{font-size:.72rem;line-height:1.18}}@media(max-width:900px){.principle-row{grid-template-columns:1fr;gap:.35rem}.two-boxes,.compare-grid,.dense-cards{grid-template-columns:1fr}.architecture-frame img{height:auto}}
+</style><style>
+#slide-20 .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:900px){#slide-20 .cards{grid-template-columns:1fr}}
+#slide-22 .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:900px){#slide-22 .cards{grid-template-columns:1fr}}
+#slide-23 .cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:.78rem}#slide-23 .card{padding:.9rem 1rem}#slide-23 .card h3{font-size:clamp(.95rem,1.08vw,1.08rem)}#slide-23 .card p{font-size:clamp(.82rem,.92vw,.95rem);line-height:1.28}
+@media(max-width:900px){#slide-23 .cards{grid-template-columns:1fr}}
+</style><style>
+.workflow-timeline{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr auto 1fr;align-items:stretch;gap:.55rem;margin-top:1.05rem}.timeline-step{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);border-top:7px solid var(--blue);padding:clamp(.9rem,1.35vw,1.18rem);display:flex;flex-direction:column;gap:.5rem;min-height:250px}.timeline-step:nth-of-type(3){border-top-color:var(--green)}.timeline-step:nth-of-type(5){border-top-color:var(--amber)}.timeline-step:nth-of-type(7){border-top-color:var(--blue)}.timeline-step:nth-of-type(9){border-top-color:var(--green)}.timeline-num{display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;border-radius:999px;background:#151515;color:#fff;font-weight:900;font-size:.85rem}.timeline-step h3{margin:0;font-size:clamp(1.1rem,1.55vw,1.45rem);line-height:1.05}.timeline-step p{margin:0;color:var(--muted);font-size:clamp(.86rem,.96vw,.98rem);line-height:1.3;font-weight:650}.timeline-arrow{display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:clamp(1.65rem,2.5vw,2.4rem);font-weight:900}@media(max-width:900px){.workflow-timeline{grid-template-columns:1fr}.timeline-step{min-height:0}.timeline-arrow{transform:rotate(90deg);font-size:2rem}}
+</style><style>
+.lane-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.9rem;margin-top:1rem}.lane-card{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);border-top:8px solid var(--blue);padding:clamp(1rem,1.45vw,1.25rem);display:flex;flex-direction:column;gap:.65rem;min-height:410px}.lane-card:nth-child(2){border-top-color:var(--green)}.lane-card:nth-child(3){border-top-color:var(--amber)}.lane-card:nth-child(4){border-top-color:var(--accent)}.lane-label{margin:0;color:var(--muted);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.lane-card h3{margin:0;font-size:clamp(1.2rem,1.65vw,1.55rem);line-height:1.04}.lane-card p{margin:0;color:var(--muted);font-size:clamp(.86rem,.98vw,1rem);line-height:1.3;font-weight:650}.lane-card ul{margin:.05rem 0 0;padding-left:1.05rem;color:var(--muted);font-size:clamp(.82rem,.92vw,.94rem);line-height:1.28;font-weight:650}.lane-card li{margin:.2rem 0}@media(max-width:900px){.lane-grid{grid-template-columns:1fr}.lane-card{min-height:0}}
+</style><style>
+.briefing-layout{display:grid;grid-template-columns:1.5fr .85fr;gap:1rem;margin-top:1rem}.briefing-paper{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.briefing-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;background:#151515;color:#fff;padding:.9rem 1.05rem}.briefing-header strong{font-size:clamp(1rem,1.35vw,1.25rem);line-height:1}.briefing-header span{color:rgba(255,255,255,.72);font-size:.78rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}.briefing-list{display:grid}.briefing-item{display:grid;grid-template-columns:auto 1fr;gap:.8rem;padding:.85rem 1rem;border-top:1px solid var(--line)}.briefing-item:first-child{border-top:0}.briefing-rank{display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;border-radius:999px;background:rgba(214,59,47,.1);color:var(--accent);font-weight:950}.briefing-item h3{margin:0 0 .22rem;font-size:clamp(.98rem,1.12vw,1.1rem);line-height:1.08}.briefing-item p{margin:0;color:var(--muted);font-size:clamp(.86rem,.96vw,.98rem);line-height:1.28;font-weight:650}.decision-panel{background:#151515;color:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.05rem;display:flex;flex-direction:column;gap:.8rem}.decision-panel .kicker{margin:0;color:#f5c15a;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.decision-panel h3{margin:0;font-size:clamp(1.4rem,2.1vw,2rem);line-height:1.02}.decision-panel p{margin:0;color:rgba(255,255,255,.78);font-size:clamp(.92rem,1.02vw,1rem);line-height:1.32;font-weight:650}.decision-chip{border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.58rem .75rem;color:#fff;font-size:.84rem;font-weight:850}@media(max-width:900px){.briefing-layout{grid-template-columns:1fr}.briefing-header{align-items:flex-start;flex-direction:column}.briefing-header span{white-space:normal}.briefing-item{grid-template-columns:1fr}.decision-panel h3{font-size:1.5rem}}
+</style><style>
+.work-diff{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:stretch;margin-top:1rem}.diff-panel{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(1.05rem,1.7vw,1.35rem);border-top:8px solid var(--amber);display:flex;flex-direction:column;gap:.78rem}.diff-panel.agent{border-top-color:var(--green)}.diff-panel .kicker{margin:0;color:var(--muted);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.diff-panel h3{margin:0;font-size:clamp(1.55rem,2.5vw,2.4rem);line-height:1}.diff-list{display:grid;gap:.55rem;margin-top:.2rem}.diff-row{display:grid;grid-template-columns:auto 1fr;gap:.55rem;align-items:flex-start;color:var(--muted);font-size:clamp(.95rem,1.08vw,1.06rem);line-height:1.3;font-weight:700}.diff-mark{width:1.45rem;height:1.45rem;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:rgba(154,93,54,.12);color:var(--amber);font-size:.88rem;font-weight:950}.diff-panel.agent .diff-mark{background:rgba(31,110,82,.12);color:var(--green)}.diff-arrow{display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:clamp(2.2rem,4vw,4rem);font-weight:950}.diff-takeaway{margin-top:.85rem;background:#151515;color:#fff;border-radius:var(--radius);padding:1rem 1.2rem;box-shadow:var(--shadow);font-size:clamp(1rem,1.35vw,1.24rem);line-height:1.26;font-weight:850}.diff-takeaway span{color:#f5c15a}@media(max-width:900px){.work-diff{grid-template-columns:1fr}.diff-arrow{transform:rotate(90deg);font-size:2rem}.diff-panel h3{font-size:1.65rem}}
+</style><style>
+.memory-cycle{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:.65rem;align-items:stretch;margin-top:1rem}.cycle-step{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);border-top:7px solid var(--blue);padding:clamp(.9rem,1.3vw,1.15rem);display:flex;flex-direction:column;gap:.48rem;min-height:210px}.cycle-step:nth-of-type(3){border-top-color:var(--green)}.cycle-step:nth-of-type(5){border-top-color:var(--amber)}.cycle-step:nth-of-type(7){border-top-color:var(--accent)}.cycle-step .kicker{margin:0;color:var(--muted);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.cycle-step h3{margin:0;font-size:clamp(1.05rem,1.42vw,1.35rem);line-height:1.04}.cycle-step p{margin:0;color:var(--muted);font-size:clamp(.82rem,.92vw,.94rem);line-height:1.28;font-weight:650}.cycle-arrow{display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:clamp(1.6rem,2.8vw,2.6rem);font-weight:950}.memory-examples{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.8rem}.memory-examples span{border:1px solid var(--line);background:rgba(255,255,255,.82);border-radius:999px;padding:.5rem .7rem;color:var(--muted);font-size:.82rem;font-weight:850}.cycle-callout{margin-top:.8rem;background:#151515;color:#fff;border-radius:var(--radius);padding:.95rem 1.15rem;box-shadow:var(--shadow);font-size:clamp(1rem,1.28vw,1.18rem);line-height:1.26;font-weight:850}.cycle-callout span{color:#f5c15a}@media(max-width:900px){.memory-cycle{grid-template-columns:1fr}.cycle-step{min-height:0}.cycle-arrow{transform:rotate(90deg);font-size:2rem}.memory-examples span{font-size:.78rem}}
+</style><style>
+.story-timeline{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr auto 1fr;gap:.55rem;align-items:stretch;margin-top:1rem}.story-step{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);border-top:7px solid var(--blue);padding:clamp(.78rem,1.08vw,1rem);display:flex;flex-direction:column;gap:.42rem;min-height:245px}.story-step:nth-of-type(3){border-top-color:var(--green)}.story-step:nth-of-type(5){border-top-color:var(--amber)}.story-step:nth-of-type(7){border-top-color:var(--accent)}.story-step:nth-of-type(9){border-top-color:var(--blue)}.story-day{margin:0;color:var(--muted);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.story-step h3{margin:0;font-size:clamp(.98rem,1.22vw,1.2rem);line-height:1.05}.story-step p{margin:0;color:var(--muted);font-size:clamp(.78rem,.86vw,.9rem);line-height:1.25;font-weight:650}.story-evidence{margin-top:auto;border-top:1px solid var(--line);padding-top:.48rem;color:var(--ink);font-size:clamp(.72rem,.8vw,.84rem);line-height:1.22;font-weight:850}.story-arrow{display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:clamp(1.55rem,2.35vw,2.2rem);font-weight:950}.story-callout{margin-top:.8rem;background:#151515;color:#fff;border-radius:var(--radius);padding:.9rem 1.1rem;box-shadow:var(--shadow);font-size:clamp(.98rem,1.22vw,1.14rem);line-height:1.26;font-weight:850}.story-callout span{color:#f5c15a}@media(max-width:900px){.story-timeline{grid-template-columns:1fr}.story-step{min-height:0}.story-arrow{transform:rotate(90deg);font-size:2rem}}
+</style><style>
+.lane-impact{display:grid;grid-template-columns:.86fr 1.38fr;gap:1rem;align-items:stretch;margin-top:1rem}.impact-lead{background:#151515;color:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(1rem,1.7vw,1.35rem);display:flex;flex-direction:column;gap:.75rem}.impact-lead .kicker{margin:0;color:#f5c15a;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.impact-lead h3{margin:0;font-size:clamp(1.45rem,2.3vw,2.2rem);line-height:1.02}.impact-lead p{margin:0;color:rgba(255,255,255,.78);font-size:clamp(.92rem,1.05vw,1rem);line-height:1.33;font-weight:650}.impact-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.72rem}.impact-item{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);border-left:7px solid var(--blue);padding:.9rem 1rem}.impact-item:nth-child(2){border-left-color:var(--green)}.impact-item:nth-child(3){border-left-color:var(--amber)}.impact-item:nth-child(4){border-left-color:var(--accent)}.impact-item h3{margin:0 0 .28rem;font-size:clamp(.98rem,1.18vw,1.14rem);line-height:1.08}.impact-item p{margin:0;color:var(--muted);font-size:clamp(.84rem,.94vw,.96rem);line-height:1.28;font-weight:650}.impact-callout{margin-top:.85rem;background:rgba(255,255,255,.9);border:1px solid var(--line);border-left:8px solid var(--green);border-radius:var(--radius);box-shadow:var(--shadow);padding:.9rem 1.1rem;color:var(--ink);font-size:clamp(.98rem,1.18vw,1.1rem);line-height:1.28;font-weight:850}.impact-callout span{color:var(--green)}@media(max-width:900px){.lane-impact{grid-template-columns:1fr}.impact-list{grid-template-columns:1fr}}
+</style><style>
+.functional-close{display:grid;grid-template-columns:.78fr 1.22fr;gap:1rem;align-items:stretch;margin-top:1rem}.close-thesis{background:#151515;color:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(1rem,1.8vw,1.45rem);display:flex;flex-direction:column;justify-content:space-between;gap:1rem}.close-thesis .kicker{margin:0;color:#f5c15a;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.close-thesis h3{margin:0;font-size:clamp(1.65rem,2.55vw,2.45rem);line-height:1}.close-thesis p{margin:0;color:rgba(255,255,255,.78);font-size:clamp(.92rem,1.05vw,1rem);line-height:1.32;font-weight:650}.close-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.72rem}.close-column{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);border-top:7px solid var(--blue);padding:.9rem 1rem;display:flex;flex-direction:column;gap:.5rem}.close-column:nth-child(2){border-top-color:var(--green)}.close-column:nth-child(3){border-top-color:var(--amber)}.close-column h3{margin:0;font-size:clamp(1rem,1.2vw,1.15rem);line-height:1.08}.close-column p{margin:0;color:var(--muted);font-size:clamp(.82rem,.92vw,.95rem);line-height:1.28;font-weight:650}.close-column ul{margin:.1rem 0 0;padding-left:1.05rem;color:var(--muted);font-size:clamp(.78rem,.86vw,.9rem);line-height:1.24;font-weight:650}.close-column li{margin:.18rem 0}.close-final{margin-top:.85rem;background:rgba(255,255,255,.9);border:1px solid var(--line);border-left:8px solid var(--accent);border-radius:var(--radius);box-shadow:var(--shadow);padding:.9rem 1.1rem;color:var(--ink);font-size:clamp(.98rem,1.18vw,1.12rem);line-height:1.28;font-weight:850}.close-final span{color:var(--accent)}@media(max-width:900px){.functional-close{grid-template-columns:1fr}.close-grid{grid-template-columns:1fr}}
+</style><style>
+.competitive-layout{display:grid;grid-template-columns:.92fr 1.08fr;gap:1rem;align-items:stretch;margin-top:1rem}.retailer-pressure{background:#151515;color:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(1rem,1.8vw,1.45rem);display:flex;flex-direction:column;gap:.9rem}.retailer-pressure .kicker{margin:0;color:#f5c15a;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.retailer-pressure h3{margin:0;font-size:clamp(1.55rem,2.45vw,2.35rem);line-height:1}.retailer-pressure p{margin:0;color:rgba(255,255,255,.8);font-size:clamp(.94rem,1.08vw,1.04rem);line-height:1.33;font-weight:650}.retailer-expects{display:grid;gap:.5rem;margin-top:auto}.expect-row{border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:.58rem .75rem;color:#fff;font-size:clamp(.82rem,.95vw,.92rem);font-weight:850}.competition-stack{display:grid;grid-template-columns:1fr;gap:.75rem}.competition-card{background:rgba(255,255,255,.92);border:1px solid var(--line);border-left:8px solid var(--blue);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(.95rem,1.45vw,1.18rem);display:grid;grid-template-columns:.72fr 1.28fr;gap:.8rem;align-items:start}.competition-card:nth-child(2){border-left-color:var(--green)}.competition-card .kicker{margin:0;color:var(--muted);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.competition-card h3{margin:.16rem 0 0;font-size:clamp(1.15rem,1.55vw,1.48rem);line-height:1.05}.competition-card p{margin:0;color:var(--muted);font-size:clamp(.86rem,.98vw,.98rem);line-height:1.3;font-weight:650}.competitive-close{margin-top:.85rem;background:rgba(255,255,255,.92);border:1px solid var(--line);border-left:8px solid var(--accent);border-radius:var(--radius);box-shadow:var(--shadow);padding:.9rem 1.1rem;color:var(--ink);font-size:clamp(.98rem,1.18vw,1.1rem);line-height:1.28;font-weight:850}.competitive-close span{color:var(--accent)}@media(max-width:900px){.competitive-layout{grid-template-columns:1fr}.competition-card{grid-template-columns:1fr}.expect-row{border-radius:var(--radius)}}
+</style><style>
+.advantage-layout{display:grid;grid-template-columns:1.08fr .92fr;gap:1rem;align-items:stretch;margin-top:1rem}.advantage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.78rem}.advantage-card{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);border-top:7px solid var(--blue);padding:clamp(.95rem,1.35vw,1.12rem);min-height:188px;display:flex;flex-direction:column;gap:.48rem}.advantage-card:nth-child(2){border-top-color:var(--green)}.advantage-card:nth-child(3){border-top-color:var(--amber)}.advantage-card:nth-child(4){border-top-color:var(--accent)}.advantage-card .kicker{margin:0;color:var(--muted);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.advantage-card h3{margin:0;font-size:clamp(1.05rem,1.35vw,1.3rem);line-height:1.06}.advantage-card p{margin:0;color:var(--muted);font-size:clamp(.84rem,.95vw,.96rem);line-height:1.28;font-weight:650}.leadership-advantage{background:#151515;color:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(1rem,1.8vw,1.45rem);display:flex;flex-direction:column;gap:.9rem}.leadership-advantage .kicker{margin:0;color:#f5c15a;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.leadership-advantage h3{margin:0;font-size:clamp(1.55rem,2.45vw,2.32rem);line-height:1}.leadership-advantage p{margin:0;color:rgba(255,255,255,.8);font-size:clamp(.92rem,1.05vw,1rem);line-height:1.32;font-weight:650}.leadership-proof{display:grid;gap:.52rem;margin-top:auto}.proof-row{border:1px solid rgba(255,255,255,.16);border-radius:var(--radius);padding:.68rem .78rem;color:#fff;font-size:clamp(.82rem,.94vw,.92rem);line-height:1.24;font-weight:850}.advantage-bottom{margin-top:.85rem;background:rgba(255,255,255,.92);border:1px solid var(--line);border-left:8px solid var(--green);border-radius:var(--radius);box-shadow:var(--shadow);padding:.9rem 1.1rem;color:var(--ink);font-size:clamp(.98rem,1.18vw,1.1rem);line-height:1.28;font-weight:850}.advantage-bottom span{color:var(--green)}@media(max-width:900px){.advantage-layout{grid-template-columns:1fr}.advantage-grid{grid-template-columns:1fr}.advantage-card{min-height:0}}
+</style><style>
+.risk-halves{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1rem}.risk-half{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(1.1rem,1.8vw,1.45rem);min-height:330px;display:flex;flex-direction:column;gap:.75rem;border-top:8px solid var(--amber)}.risk-half.with{border-top-color:var(--green)}.risk-half .kicker{margin:0;color:var(--muted);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.risk-half h3{margin:0;font-size:clamp(1.55rem,2.45vw,2.35rem);line-height:1}.risk-half ul{margin:.2rem 0 0;padding-left:1.1rem;color:var(--muted);font-size:clamp(.95rem,1.1vw,1.06rem);line-height:1.35;font-weight:700}.risk-half li{margin:.28rem 0}.risk-conclusion{margin-top:.9rem;background:#151515;color:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.05rem 1.25rem;font-size:clamp(1.05rem,1.45vw,1.34rem);line-height:1.24;font-weight:850}.risk-conclusion span{color:#f5c15a}@media(max-width:900px){.risk-halves{grid-template-columns:1fr}.risk-half{min-height:0}}
+</style><style>
+.ownership-flow{display:grid;grid-template-columns:1.05fr auto 1.05fr auto 1.05fr;align-items:stretch;gap:.8rem;margin-top:1rem}.ownership-panel{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(1rem,1.8vw,1.45rem);border-top:7px solid var(--blue);display:flex;flex-direction:column;gap:.55rem}.ownership-panel:nth-of-type(3){border-top-color:var(--green)}.ownership-panel:nth-of-type(5){border-top-color:var(--amber)}.ownership-panel .kicker{margin:0;color:var(--muted);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.ownership-panel h3{margin:0;font-size:clamp(1.35rem,2vw,2rem);line-height:1.02}.ownership-panel p{margin:0;color:var(--muted);font-size:clamp(.95rem,1.12vw,1.08rem);line-height:1.34;font-weight:650}.flow-arrow{display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:clamp(1.8rem,3vw,2.7rem);font-weight:900}.strategic-callout{margin-top:.9rem;background:#151515;color:#fff;border-radius:var(--radius);padding:1.05rem 1.25rem;box-shadow:var(--shadow);font-size:clamp(1.05rem,1.5vw,1.38rem);line-height:1.24;font-weight:850}.strategic-callout span{color:#f5c15a}@media(max-width:900px){.ownership-flow{grid-template-columns:1fr}.flow-arrow{transform:rotate(90deg);font-size:2rem}.strategic-callout{font-size:1.05rem}}
+</style></head><body>
 <section class="slide cover" id="slide-1">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Cover</div>
 <div class="content">
-<p class="eyebrow">Westfield Outdoors | Executive AI Vision</p>
-<h1>Using AI to Help Build the Fastest, Smartest Product Organization in Outdoor</h1>
-<p class="lede">A practical vision for Westfield Outdoors: people + process + AI working together.</p>
-<div class="pill-row"><span>People + Process + AI</span><span>Four work lanes</span><span>Multiple pilots already active</span></div>
-<div class="hero-line"><span>Already working</span><span>Structured support</span><span>Scaled capability</span></div>
-<ul class="bullets"><li>This is not a presentation about buying software.</li><li>It is about building a stronger, smarter, and more connected way for Westfield to develop products, manage information, and make decisions.</li></ul>
+<p class="eyebrow">Westfield Outdoors | Executive Agentic AI Vision</p>
+<h1>Using AI Agents to Help Build the Fastest, Smartest Product Organization in Outdoor</h1>
+<p class="lede">A practical vision for Westfield Outdoors: people + process + AI agents working together</p>
 </div>
-<div class="slide-number">01 / 21</div>
+<div class="slide-number">01 / 45</div>
 </section>
-<section class="slide" id="slide-2">
+<section class="slide toc-slide" id="slide-2">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Table of Contents</div>
 <div class="content">
-<p class="eyebrow">Westfield AI Vision</p>
-<h1>The Message and the Business Case</h1>
-<p class="lede">AI should help Westfield become faster, smarter, more transparent, and more precise without pretending technology replaces people.</p>
-<blockquote>AI is not here to make decisions for us. It is here to make sure our people have the best possible information when they make decisions.</blockquote>
-<div class="cards compact">
-<article class="card"><h3>Better people impact</h3><p>Less administrative drag. More time on judgment, creativity, relationships, customers, and product direction.</p></article>
-<article class="card"><h3>Better process</h3><p>More consistent workflows, documentation, follow-up, ownership, and accountability.</p></article>
-<article class="card"><h3>Better decisions</h3><p>Leadership sees risks, opportunities, bottlenecks, and company health earlier.</p></article>
-<article class="card"><h3>Why now</h3><p>Retailers, consumer trends, competitive products, factory decisions, and internal information are all moving faster.</p></article>
+<p class="eyebrow">Navigation</p>
+<h1>Table of Contents</h1>
+<div class="toc-grid">
+<a class="toc-item" href="#slide-3"><span class="toc-index">01</span><span class="toc-title">Executive Overview</span><span class="toc-range">Slides 3-8</span></a>
+<a class="toc-item" href="#slide-9"><span class="toc-index">02</span><span class="toc-title">AI Basics</span><span class="toc-range">Slides 9-12</span></a>
+<a class="toc-item" href="#slide-13"><span class="toc-index">03</span><span class="toc-title">PM / Sales Deployment</span><span class="toc-range">Slides 13-17</span></a>
+<a class="toc-item" href="#slide-18"><span class="toc-index">04</span><span class="toc-title">Industrial Design Deployment</span><span class="toc-range">Slides 18-21</span></a>
+<a class="toc-item" href="#slide-22"><span class="toc-index">05</span><span class="toc-title">Trello Source of Truth</span><span class="toc-range">Slides 22-23</span></a>
+<a class="toc-item" href="#slide-24"><span class="toc-index">06</span><span class="toc-title">Operating Model + Lane Detail</span><span class="toc-range">Slides 24-29</span></a>
+<a class="toc-item" href="#slide-30"><span class="toc-index">07</span><span class="toc-title">Executive Intelligence</span><span class="toc-range">Slides 30-32</span></a>
+<a class="toc-item" href="#slide-33"><span class="toc-index">08</span><span class="toc-title">Functional Expansion</span><span class="toc-range">Slides 33-34</span></a>
+<a class="toc-item" href="#slide-35"><span class="toc-index">09</span><span class="toc-title">Competitive Necessity</span><span class="toc-range">Slides 35-38</span></a>
+<a class="toc-item" href="#slide-39"><span class="toc-index">10</span><span class="toc-title">Roadmap + Approval</span><span class="toc-range">Slides 39-45</span></a>
 </div>
 </div>
-<div class="slide-number">02 / 21</div>
+<div class="slide-number">02 / 45</div>
 </section>
 <section class="slide" id="slide-3">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Executive Overview</div>
 <div class="content">
-<p class="eyebrow">Current State to Future State</p>
-<h1>Westfield Has Knowledge Spread Across Too Many Places</h1>
-<p class="lede">The company does not lack knowledge. The problem is that knowledge is split across tools, teams, meetings, files, and individual memory.</p>
-<div class="cards two">
-<article class="card"><h3>Today</h3><ul><li>Email, Teams, Trello, PowerPoint, Excel, OneDrive, Testing, WeChat</li><li>Line reviews, engineering notes, compliance questions, buyer feedback</li><li>People search manually, meetings fill gaps, decisions depend on memory</li></ul></article>
-<article class="card"><h3>Future state</h3><ul><li>Inputs: Trello, Email, Teams, NetSuite, testing, sales, design, engineering, factories, finance</li><li>Core: Westfield AI Knowledge Layer</li><li>Outputs: dashboards, briefings, alerts, summaries, recommendations, action lists</li></ul></article>
+<p class="eyebrow">Westfield Agentic AI Vision</p>
+<h1>The Message in One Sentence</h1>
+<p class="lede">Agentic AI systems should help Westfield become faster, smarter, more transparent, and more precise without pretending technology replaces people.</p>
+<blockquote>AI agents are not here to make decisions for us. They are here to make sure our people have the best possible information when they make decisions.</blockquote>
+<ul class="bullets"><li>Better People Impact: Less administrative drag. More time on judgment, creativity, and customers.</li><li>Better Process: More consistent workflows, documentation, follow-up, and accountability.</li><li>Better Decisions: Leadership sees risks, opportunities, and company health earlier.</li></ul>
 </div>
-<div class="callout">The goal is not more reports. The goal is better visibility, earlier warnings, and faster decisions.</div>
-</div>
-<div class="slide-number">03 / 21</div>
+<div class="slide-number">03 / 45</div>
 </section>
 <section class="slide" id="slide-4">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Executive Overview</div>
 <div class="content">
-<p class="eyebrow">Operating Philosophy</p>
-<h1>People + Process + AI</h1>
-<p class="lede">AI works only when it is paired with good people and disciplined process.</p>
-<div class="cards compact">
-<article class="card"><h3>People</h3><p>Experience, creativity, relationships, judgment, leadership, taste, and final business ownership.</p></article>
-<article class="card"><h3>Process</h3><p>Repeatable workflows, clear ownership, good data discipline, decision history, and accountability.</p></article>
-<article class="card"><h3>AI</h3><p>Speed, memory, summarization, monitoring, pattern recognition, comparison, recommendations, and drafting.</p></article>
-<article class="card"><h3>LLMs</h3><p>Language engines like ChatGPT, Claude, Gemini, and Llama that read, write, summarize, compare, and reason across information.</p></article>
-<article class="card"><h3>Agents</h3><p>Workflow systems with a role, approved information access, and repeatable jobs: checking, preparing, watching, and supporting.</p></article>
-<article class="card"><h3>Important limit</h3><p>AI is not automatically correct, does not fix bad process by itself, and should not make final business decisions alone.</p></article>
+<p class="eyebrow">Practical Vision</p>
+<h1>AI Agents Are Already Working in Real Westfield Workstreams</h1>
+<p class="lede">The opportunity now is to support what is working, structure it, and scale it into a repeatable company capability.</p>
+<div class="pill-row"><span>Already working in PM / Sales, Design, and Executive workflows</span><span>Delivering faster decks, clearer summaries, and better visibility</span><span>Ready for structure, support, and scale</span></div>
+<div class="hero-line"><span>Current proof</span><span>Business results</span><span>Scale plan</span></div>
+<ul class="bullets"><li>Westfield is not starting from zero. Agent-supported work is already showing value in practical workflows.</li><li>The next step is a structured plan: cleaner inputs, repeatable agents, workflow standards, human review, and leadership visibility.</li><li>The goal is not experimentation for its own sake. The goal is to turn early wins into a durable operating capability.</li></ul>
 </div>
-</div>
-<div class="slide-number">04 / 21</div>
+<div class="slide-number">04 / 45</div>
 </section>
 <section class="slide" id="slide-5">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Executive Overview</div>
 <div class="content">
-<p class="eyebrow">Agentic System</p>
-<h1>The Power Is Multiple Specialists Using the Same Business Memory</h1>
-<p class="lede">An agentic system is a group of specialized AI agents working from shared information, each focused on a different function of the business.</p>
-<div class="cards compact">
-<article class="card"><h3>Sales / PM AI</h3><p>Product charters, line review readiness, AI-powered buyer presentations, account status, buyer feedback, action tracking, and cross-functional follow-up.</p></article>
-<article class="card"><h3>Industrial Design / Engineering AI</h3><p>Concepts, technical research, CAD support, engineering questions, sample feedback, and design-development memory.</p></article>
-<article class="card"><h3>Creative Services AI</h3><p>Presentation support, brand storytelling, video work, request ingest, Trello automation, routing, tracking, and response workflows.</p></article>
-<article class="card"><h3>Executive / Operations AI</h3><p>Company-health snapshots, project risk, bottlenecks, margin watch, compliance open items, and decision support.</p></article>
-<article class="card"><h3>Shared layer</h3><p>Trello, documents, meeting notes, testing, NetSuite, sales, design files, technical references, and factory updates.</p></article>
-<article class="card"><h3>Human review</h3><p>Each lane produces structured output for people to evaluate, revise, approve, and act on.</p></article>
+<p class="eyebrow">The Business Case</p>
+<h1>Why This Matters Now</h1>
+<p class="lede">The companies that learn faster will move faster. The companies that move faster will win more business.</p>
+<div class="cards">
+<article class="card"><p>Retailers expect faster answers.</p></article>
+<article class="card"><p>Consumer trends move faster.</p></article>
+<article class="card"><p>Competitive products appear faster.</p></article>
+<article class="card"><p>Cost and factory decisions are more complex.</p></article>
+<article class="card"><p>Internal information is growing faster than people can manually organize it.</p></article>
 </div>
+<div class="callout">Agentic AI systems help Westfield answer faster, track market and competitor movement sooner, manage complex cost and factory decisions with better context, and turn scattered internal information into usable decision support.</div>
 </div>
-<div class="slide-number">05 / 21</div>
+<div class="slide-number">05 / 45</div>
 </section>
 <section class="slide" id="slide-6">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Executive Overview</div>
 <div class="content">
-<p class="eyebrow">Westfield-Specific Vision</p>
-<h1>Four Work Lanes, One Knowledge Layer, Better Executive Intelligence</h1>
-<p class="lede">A system that helps every function work with better information while giving leadership a clearer view of company health.</p>
-<div class="cards compact">
-<article class="card"><h3>1. Four AI work lanes</h3><p>Agents built around Sales / PM, Industrial Design / Engineering, Creative Services, and Executive / Operations.</p></article>
-<article class="card"><h3>2. Shared knowledge layer</h3><p>Trello becomes a key source of truth for project status, decisions, ownership, and action history.</p></article>
-<article class="card"><h3>3. Executive intelligence</h3><p>Leadership gets company-health snapshots, risks, bottlenecks, and recommendations without waiting for a manual report.</p></article>
-<article class="card"><h3>Why Trello matters</h3><p>Project charters, milestones, owners, samples, factory notes, engineering risks, compliance, buyer feedback, and next steps become readable structure.</p></article>
+<p class="eyebrow">Current State</p>
+<h1>The Problem Agentic AI Can Help Solve</h1>
+<p class="lede">Westfield does not lack knowledge. Westfield has knowledge spread across too many places.</p>
+<div class="source-cloud" aria-label="Scattered information sources">
+<span>Email</span>
+<span>Teams</span>
+<span>Trello</span>
+<span>PowerPoint</span>
+<span>Excel</span>
+<span>OneDrive</span>
+<span>Testing</span>
+<span>WeChat</span>
 </div>
-<div class="callout">When Trello is maintained consistently, AI can turn project activity into dashboards, alerts, and decision support.</div>
 </div>
-<div class="slide-number">06 / 21</div>
+<div class="slide-number">06 / 45</div>
 </section>
 <section class="slide" id="slide-7">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Executive Overview</div>
 <div class="content">
-<p class="eyebrow">Sales / PM Proof Point</p>
-<h1>Chuck Is a Practical PM/Sales AI Pilot Already Working</h1>
-<p class="lede">Matt's Chuck prototype shows the Sales / PM lane in practical form: AI-powered presentation building for line review workflows.</p>
-<div class="cards compact">
-<article class="card"><h3>The problem</h3><p>Buyer presentations can take hours of copying from Trello, finding images, checking specs, adding pricing, and formatting slides.</p></article>
-<article class="card"><h3>What Chuck does</h3><p>Reads Trello boards directly, pulls card data, product photos, specs, pricing, buyer feedback, comments, and attachment URLs.</p></article>
-<article class="card"><h3>The output</h3><p>Builds a complete HTML buyer presentation from a natural-language request and publishes a live URL for review or presentation.</p></article>
-<article class="card"><h3>Why this matters</h3><p>PMs get a faster first pass, more consistent line-review formatting, and more time for commercial judgment and account strategy.</p></article>
+<p class="eyebrow">Connected Intelligence</p>
+<h1>The Future State</h1>
+<p class="lede">Information should find the people who need it.</p>
+<div class="visual-frame">
+<img src="assets/future-state-knowledge-layer.png" data-zh-src="assets/future-state-knowledge-layer-zh.png" alt="Scattered inputs flowing through the Westfield AI Knowledge Layer into dashboards, briefings, alerts, summaries, recommendations, and action lists.">
 </div>
+<div class="callout">The goal is not more reports. The goal is better visibility, earlier warnings, and faster decisions.</div>
 </div>
-<div class="slide-number">07 / 21</div>
+<div class="slide-number">07 / 45</div>
 </section>
 <section class="slide" id="slide-8">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Executive Overview</div>
 <div class="content">
-<p class="eyebrow">Chuck Workflow</p>
-<h1>From Trello Board to Buyer Presentation</h1>
-<p class="lede">Chuck turns the PM workflow into a repeatable pipeline instead of a manual copy-paste exercise.</p>
-<div class="cards compact">
-<article class="card"><h3>1. Ask</h3><p>A PM asks for a deck in natural language: "Build the Walmart 27 line review deck."</p></article>
-<article class="card"><h3>2. Pull</h3><p>Chuck reads the Trello board, lists, cards, comments, attachment URLs, product names, specs, pricing, and buyer notes.</p></article>
-<article class="card"><h3>3. Build</h3><p>Product slides include real photos, structured product information, pricing, comments, and account-ready storytelling.</p></article>
-<article class="card"><h3>4. Deploy</h3><p>The deck publishes as a live URL that can be shared quickly, reviewed internally, and revised on the fly.</p></article>
+<p class="eyebrow">Operating Philosophy</p>
+<h1>People + Process + AI Agents</h1>
+<p class="lede">AI agents work only when they are paired with good people and disciplined process.</p>
+<div class="row-stack">
+<article class="principle-row"><h3>People</h3><p>Experience, creativity, relationships, judgment, and leadership.</p></article>
+<article class="principle-row"><h3>Process</h3><p>Repeatable workflows, clear ownership, good data discipline, and accountability.</p></article>
+<article class="principle-row"><h3>AI Agents</h3><p>Speed, memory, summarization, monitoring, pattern recognition, and recommendations.</p></article>
 </div>
-<div class="callout">This is the Sales / PM counterpart to the Industrial Design proof point: AI supporting real work that is already happening.</div>
+<div class="callout principle-conclusion">Competitive advantage comes from good people using better information inside a better process.</div>
 </div>
-<div class="slide-number">08 / 21</div>
+<div class="slide-number">08 / 45</div>
 </section>
 <section class="slide" id="slide-9">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">AI Basics</div>
 <div class="content">
-<p class="eyebrow">Chuck Roadmap</p>
-<h1>Where the PM/Sales Pilot Can Go Next</h1>
-<p class="lede">The first version proves the Trello-to-deck workflow. The next step is to connect more PM and sales context into the same repeatable system.</p>
-<div class="cards compact">
-<article class="card"><h3>Working now</h3><p>Live from Trello: product data, specs, real photos, comments, attachments, and buyer-presentation structure.</p></article>
-<article class="card"><h3>Sales data integration</h3><p>Pull Circana or direct sales data into comparison slides, account views, and product-context summaries.</p></article>
-<article class="card"><h3>Auto-refresh</h3><p>Keep decks closer to live project status as Trello cards, pricing, photos, comments, and attachments change.</p></article>
-<article class="card"><h3>PPTX and weekly briefings</h3><p>Export for buyer portals and generate weekly account updates: what changed, what is missing, and what needs follow-up.</p></article>
+<p class="eyebrow">AI Basics</p>
+<h1>A Simple Explanation: What Is an LLM?</h1>
+<p class="lede">A Large Language Model is an AI model trained to work with language: reading, summarizing, comparing, drafting, answering questions, and creating structured outputs.</p>
+<div class="two-boxes">
+<article class="card"><h3>Examples</h3><p>ChatGPT, Claude, and Gemini are AI assistants built on large language models. Llama is a family of large language models. The LLM is the language engine inside the broader AI system.</p></article>
+<article class="card"><h3>What they are good at</h3><ul class="compact-list"><li>Reading large amounts of text quickly</li><li>Summarizing documents</li><li>Finding patterns across notes</li><li>Drafting emails, reports, briefs, and presentations</li><li>Translating messy inputs into structured outputs</li><li>Explaining complex information simply</li></ul></article>
 </div>
 </div>
-<div class="slide-number">09 / 21</div>
+<div class="slide-number">09 / 45</div>
 </section>
 <section class="slide" id="slide-10">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">AI Basics</div>
 <div class="content">
-<p class="eyebrow">Industrial Design Proof Point</p>
-<h1>Industrial Design Is a Practical AI Pilot Already Underway</h1>
-<p class="lede">Westfield does not need to imagine AI from zero. Industrial Design is already using AI across real product-development work.</p>
-<div class="cards">
-<article class="card"><h3>Why this function works as a pilot</h3><p>Industrial Design sits at the intersection of creative direction, technical feasibility, vendor communication, project visibility, presentations, and executive alignment.</p></article>
-<article class="card"><h3>What AI is already helping with</h3><p>Research, synthesis, visualization, documentation, communication, tracking, translation, and design memory.</p></article>
-<article class="card"><h3>The strategic point</h3><p>The opportunity is not to replace design judgment. The opportunity is to support, structure, and scale the working pattern that already exists.</p></article>
+<p class="eyebrow">AI Basics</p>
+<h1>A Simple Explanation: What Is an AI Agent?</h1>
+<p class="lede">An AI agent is an AI system that has a role, access to approved information, and the ability to perform a workflow repeatedly.</p>
+<div class="compare-grid">
+<article class="compare-card"><p class="compare-label">Reactive</p><h3>Chatbot</h3><p>You ask a question. It answers.</p></article>
+<article class="compare-card agent"><p class="compare-label">Workflow-based</p><h3>Agent</h3><p>It has a job. It checks information, prepares outputs, watches for changes, and supports a workflow.</p></article>
 </div>
+<div class="callout example-callout"><h3>Example</h3><p>A Product Management Agent could review Trello every morning, identify late sample risks, summarize upcoming line review needs, and draft action items for the PM team.</p></div>
 </div>
-<div class="slide-number">10 / 21</div>
+<div class="slide-number">10 / 45</div>
 </section>
 <section class="slide" id="slide-11">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">AI Basics</div>
 <div class="content">
-<p class="eyebrow">Current Use Cases</p>
-<h1>What Industrial Design Is Already Doing With AI</h1>
-<p class="lede">AI is already supporting a wide range of Industrial Design and product-development workflows.</p>
-<div class="cards compact">
-<article class="card"><h3>Concept exploration</h3><p>Rapid product ideas, styling directions, form language studies, usage scenarios, mood boards, sketch prompts, and early visual territories.</p></article>
-<article class="card"><h3>Technical and design research</h3><p>Construction, mechanisms, materials, assembly methods, folding systems, storage approaches, durability, comfort, manufacturability, patents, prior art, teardowns, and design precedents.</p></article>
-<article class="card"><h3>CAD and visualization support</h3><p>Early geometry studies, STEP/CAD support, part inspection, dimensional review, assembly thinking, snapshots, and visual review links.</p></article>
-<article class="card"><h3>Presentation building</h3><p>Internal decks, customer-facing decks, design-review layouts, revised copy, Chinese translation, template standards, logo consistency, and publishing.</p></article>
-<article class="card"><h3>Project and Trello visibility</h3><p>Status, blockers, overdue items, open questions, next steps, owners, daily/weekly reports, and operating visibility.</p></article>
-<article class="card"><h3>Feedback synthesis</h3><p>Review comments, chat threads, meeting notes, decisions, open questions, risks, revision paths, action items, and factory handoffs.</p></article>
+<p class="eyebrow">AI Basics</p>
+<h1>What Is an Agentic System?</h1>
+<p class="lede">An agentic system is a set of AI agents that can perform defined jobs, use approved information, and coordinate steps inside a business process.</p>
+<div class="cards">
+<article class="card"><h3>What it is</h3><p>Multiple task-focused agents working from shared data, tools, rules, and human oversight.</p></article>
+<article class="card"><h3>How companies use it</h3><p>Monitoring workflows, summarizing changes, preparing drafts, flagging risks, routing work, and keeping teams aligned.</p></article>
+<article class="card"><h3>Why it matters</h3><p>The system turns repeated information work into a more consistent operating rhythm without removing human judgment.</p></article>
 </div>
+<div class="callout">The key difference: a chatbot answers a request; an agentic system supports an ongoing workflow.</div>
 </div>
-<div class="slide-number">11 / 21</div>
+<div class="slide-number">11 / 45</div>
 </section>
 <section class="slide" id="slide-12">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">AI Basics</div>
 <div class="content">
-<p class="eyebrow">Expansion Opportunity</p>
-<h1>Where This Could Go With More Adoption and Support</h1>
-<p class="lede">The next step is to make the current AI-supported workflow more structured, repeatable, and useful across product development.</p>
-<div class="cards compact">
-<article class="card"><h3>Formal ID AI workspace</h3><p>One connected workspace for concepts, CAD references, technical research, project status, presentations, sample feedback, and design memory.</p></article>
-<article class="card"><h3>Product-development memory</h3><p>Searchable history of concepts, materials, mechanisms, factory lessons, engineering decisions, sample issues, CAD references, and presentations.</p></article>
-<article class="card"><h3>Project visibility</h3><p>Automated project health summaries, risk flags, missing-information alerts, and weekly ID / product-development leadership views.</p></article>
-<article class="card"><h3>Reusable workflows</h3><p>Concept briefs, technical research, design reviews, CAD review, deck creation, Chinese translation, sample feedback, and Trello reporting.</p></article>
-<article class="card"><h3>Cross-functional adoption</h3><p>Extend the working model into PM, engineering, sourcing, compliance, operations, and executive reporting around each function's real workflow.</p></article>
-<article class="card"><h3>Leadership visibility</h3><p>Active concepts, blocked work, resource needs, recurring issues, and product-development memory become easier to see.</p></article>
+<p class="eyebrow">Westfield-Specific Vision</p>
+<h1>The Westfield Agentic AI Vision</h1>
+<p class="lede">A system that helps every function work with better information while giving leadership a clearer view of company health.</p>
+<div class="visual-frame architecture-frame">
+<img src="assets/agentic-system-building.png" data-zh-src="assets/agentic-system-building-zh.png" alt="Building diagram showing the Shared Westfield Knowledge Layer as the foundation, Sales and PM, Industrial Design and Engineering, Creative Services, and Executive Operations as agentic AI deployment columns, and Westfield Business as the roof.">
 </div>
+<div class="callout architecture-note">Westfield needs four separate agentic AI deployments because these functions have vastly different needs, workflows, inputs, and decision rhythms. The shared knowledge foundation connects them without forcing them into one generic system.</div>
 </div>
-<div class="slide-number">12 / 21</div>
+<div class="slide-number">12 / 45</div>
 </section>
 <section class="slide" id="slide-13">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">PM / Sales Deployment</div>
 <div class="content">
-<p class="eyebrow">Across Functions</p>
-<h1>The Four Work Lanes Use Similar Architecture but Different Operating Modes</h1>
-<p class="lede">Each lane has approved inputs, workflow-specific memory, repeatable agents, summaries, alerts, and human review.</p>
-<div class="cards compact">
-<article class="card"><h3>Sales / PM</h3><ul><li>Product charters</li><li>Line review readiness</li><li>AI-powered buyer presentations</li><li>Trello card data, photos, specs, and pricing</li><li>Buyer feedback summaries</li><li>Cross-functional follow-up</li></ul></article>
-<article class="card"><h3>Industrial Design / Engineering</h3><ul><li>Concept exploration</li><li>Technical and design research</li><li>CAD / STEP support</li><li>Engineering questions</li><li>Sample and prototype feedback</li><li>Design-development memory</li></ul></article>
-<article class="card"><h3>Creative Services</h3><ul><li>Presentation support</li><li>Brand and product storytelling</li><li>Heavy video work</li><li>Request ingest and routing</li><li>Large-volume Trello automation</li><li>Tracking and response workflows</li></ul></article>
-<article class="card"><h3>Executive / Operations</h3><ul><li>Company-health snapshots</li><li>Project risk detection</li><li>Margin and cost watch</li><li>Compliance open items</li><li>Operational bottlenecks</li><li>Leadership briefings</li></ul></article>
+<p class="eyebrow">Project Management + Sales</p>
+<h1>What This Means for Project Management and Sales</h1>
+<p class="lede">The Agents handle more of the work around the work, so PM and Sales teams can spend more time on judgment, customers, and commercial decisions.</p>
+<div class="two-boxes">
+<article class="card"><h3>Humans own</h3><ul class="compact-list"><li>Commercial judgment</li><li>Customer relationships</li><li>Category strategy</li><li>Prioritization</li><li>Final recommendations</li><li>Cross-functional alignment</li><li>Business accountability</li></ul></article>
+<article class="card"><h3>The Agents support</h3><ul class="compact-list"><li>Project summaries</li><li>Line review inputs</li><li>Account history</li><li>Competitive feature matrices</li><li>Buyer presentation first drafts</li><li>Open action-item lists</li><li>Charter first drafts</li><li>Risk and timing summaries</li></ul></article>
 </div>
+<div class="callout">The division is clear: people own the business story and final judgment; The Agents prepare the source material, drafts, and follow-up structure.</div>
 </div>
-<div class="slide-number">13 / 21</div>
+<div class="slide-number">13 / 45</div>
 </section>
 <section class="slide" id="slide-14">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">PM / Sales Deployment</div>
 <div class="content">
-<p class="eyebrow">Initial System</p>
-<h1>The First Practical Agent Structure</h1>
-<p class="lede">Start with four lanes that share the same operating foundation but support different kinds of work.</p>
-<div class="cards compact">
-<article class="card"><h3>Input layer</h3><p>Trello cards, documents, notes, images, testing records, project files, sales inputs, and approved business data.</p></article>
-<article class="card"><h3>Memory layer</h3><p>Reusable project memory: decisions, risks, lessons, requirements, revisions, sample status, account feedback, and open questions.</p></article>
-<article class="card"><h3>Agent layer</h3><p>Role-based agents that read, compare, summarize, flag, draft, route, and prepare recurring outputs.</p></article>
-<article class="card"><h3>Output layer</h3><p>Briefings, dashboards, line-review prep, Chuck-style buyer decks, action lists, risk alerts, technical summaries, and follow-up notes.</p></article>
-<article class="card"><h3>Governance</h3><p>Approved sources, human review, sensitive-data boundaries, process standards, and clear ownership.</p></article>
-<article class="card"><h3>Expansion path</h3><p>Prove value in product workflows, then extend to Finance, Accounting, Operations, Compliance, and annual planning intelligence.</p></article>
+<p class="eyebrow">Project Management + Sales Proof Point</p>
+<h1>The Agents Are Already Useful in Buyer Presentation Work</h1>
+<p class="lede">The PM / Sales deployment is practical because it starts with a painful, repeatable workflow: turning scattered project records into a clear buyer-ready presentation.</p>
+<div class="cards">
+<article class="card"><h3>The workflow problem</h3><p>Line review decks require product data, photos, specs, pricing, buyer feedback, open decisions, and clean formatting from multiple places.</p></article>
+<article class="card"><h3>The agent role</h3><p>The Agents read the structured project record, gather the relevant material, organize it, and create a strong first draft for human review.</p></article>
+<article class="card"><h3>The human role</h3><p>PM and Sales own the account strategy, commercial story, final recommendations, buyer sensitivity, and presentation decisions.</p></article>
 </div>
 </div>
-<div class="slide-number">14 / 21</div>
+<div class="slide-number">14 / 45</div>
 </section>
 <section class="slide" id="slide-15">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">PM / Sales Deployment</div>
 <div class="content">
-<p class="eyebrow">CEO View</p>
-<h1>Executive Intelligence Should Explain What Changed and Where Attention Is Needed</h1>
-<p class="lede">The executive agent should not simply display numbers. It should explain what changed, why it matters, and what needs follow-up.</p>
-<div class="cards compact">
-<article class="card"><h3>Projects at risk</h3><p>12 active risk flags; 3 need leadership attention this week.</p></article>
-<article class="card"><h3>Upcoming line reviews</h3><p>8 upcoming reviews; 2 require updated samples or missing inputs.</p></article>
-<article class="card"><h3>Sample delays</h3><p>17 sample delays; 5 tied to major account timing.</p></article>
-<article class="card"><h3>Innovation pipeline</h3><p>42 active ideas; 9 ready for gate review.</p></article>
-<article class="card"><h3>Margin watch</h3><p>6 cost changes above threshold need review.</p></article>
-<article class="card"><h3>Compliance open items</h3><p>14 open items; 4 need decision support.</p></article>
+<p class="eyebrow">Agent Presentation Workflow</p>
+<h1>From Project Record to Buyer-Ready First Draft</h1>
+<p class="lede">The workflow is valuable because it follows the same sequence PM and Sales already use, but removes much of the manual assembly.</p>
+<div class="workflow-timeline">
+<article class="timeline-step"><span class="timeline-num">1</span><h3>Ask</h3><p>Request a line review, account update, product recap, or buyer presentation in natural language.</p></article>
+<div class="timeline-arrow">→</div>
+<article class="timeline-step"><span class="timeline-num">2</span><h3>Pull</h3><p>The Agents read Trello cards, lists, comments, attachments, product photos, specs, prices, and buyer notes.</p></article>
+<div class="timeline-arrow">→</div>
+<article class="timeline-step"><span class="timeline-num">3</span><h3>Structure</h3><p>The Agents organize the material by account, product, category, decision status, and presentation need.</p></article>
+<div class="timeline-arrow">→</div>
+<article class="timeline-step"><span class="timeline-num">4</span><h3>Draft</h3><p>The Agents build the first-pass story, product slides, summaries, and open-question lists.</p></article>
+<div class="timeline-arrow">→</div>
+<article class="timeline-step"><span class="timeline-num">5</span><h3>Review</h3><p>PM and Sales edit, prioritize, approve, and decide what should actually go to the buyer.</p></article>
 </div>
-<div class="callout">The issue is not that 12 projects are at risk. The issue is that 3 of them could impact major account timing if not addressed this week.</div>
 </div>
-<div class="slide-number">15 / 21</div>
+<div class="slide-number">15 / 45</div>
 </section>
 <section class="slide" id="slide-16">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">PM / Sales Deployment</div>
 <div class="content">
-<p class="eyebrow">Executive Example</p>
-<h1>A Daily CEO Briefing and Product Development Scenario</h1>
-<p class="lede">One page every morning: what changed, what is at risk, and what needs attention.</p>
-<div class="cards compact">
-<article class="card"><h3>Items needing attention today</h3><p>Costco hard-arm chair sample risk requires a frame-direction decision by Friday.</p></article>
-<article class="card"><h3>Product development health</h3><p>Softlines has 4 projects with no sample update in 10+ days; Engineering is waiting for 2 revised CAD files.</p></article>
-<article class="card"><h3>Commercial opportunity</h3><p>Repeated interest in compact seating platforms is appearing across Costco, Target, and DSG notes.</p></article>
-<article class="card"><h3>Risk to watch</h3><p>Two projects have compliance questions that may affect import or labeling requirements.</p></article>
-<article class="card"><h3>Costco chair request</h3><p>AI pulls previous feedback, competitive comparison, sample history, engineering constraints, factory capability, target price bands, and margin concerns.</p></article>
-<article class="card"><h3>Better starting point</h3><p>The team starts more informed. AI prepares the context; people own the product judgment.</p></article>
+<p class="eyebrow">Presentation Output</p>
+<h1>What The Agents Can Prepare</h1>
+<p class="lede">The output is not just a formatted deck. It is a structured first pass that brings the live project record into a presentation format.</p>
+<div class="cards">
+<article class="card"><h3>Buyer story</h3><p>Account context, line review purpose, category framing, product positioning, and recommended narrative flow.</p></article>
+<article class="card"><h3>Product pages</h3><p>Product photos, feature summaries, dimensions, specs, pricing context, status, and open decisions.</p></article>
+<article class="card"><h3>Project context</h3><p>Buyer feedback, sample notes, timing risks, comparison points, cross-functional comments, and unresolved questions.</p></article>
+<article class="card"><h3>Competitive whitespace</h3><p>Actual competitive analysis, comparable product patterns, retailer expectations for faster response, and whitespace opportunities the line review should address.</p></article>
+<article class="card"><h3>Account-specific trend decks</h3><p>Modify trend presentations based on what matters most to each account, including retailer priorities, category focus, buyer feedback, and whitespace opportunities.</p></article>
+<article class="card"><h3>Action structure</h3><p>Follow-up lists, owners, missing inputs, decision points, and next steps for PM, Sales, Design, and Operations.</p></article>
 </div>
 </div>
-<div class="slide-number">16 / 21</div>
+<div class="slide-number">16 / 45</div>
 </section>
 <section class="slide" id="slide-17">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">PM / Sales Deployment</div>
 <div class="content">
-<p class="eyebrow">Functional Impact</p>
-<h1>PM, Design, Engineering, Operations, Finance, and Accounting Get Better Support</h1>
-<p class="lede">AI handles more of the work around the work so people can focus on strategy, customers, product, and decisions.</p>
-<div class="cards compact">
-<article class="card"><h3>Product Management</h3><p>Project summaries, line review inputs, account history, buyer presentation first drafts, Trello card photos/specs/pricing, action-item lists, risk, and timing summaries.</p></article>
-<article class="card"><h3>Design and Engineering</h3><p>Technical/design research, material research, teardown summaries, concept briefs, testing document summaries, risk lists, and previous-solution lookup.</p></article>
-<article class="card"><h3>Operations</h3><p>Factory delays, sample status, production bottlenecks, capacity issues, shipment risks, and recurring follow-up.</p></article>
-<article class="card"><h3>Finance</h3><p>Margin movement, cost change summaries, scenario support, pricing pressure visibility, and exception flags.</p></article>
-<article class="card"><h3>Accounting</h3><p>Document workflow support, exception tracking, payment issue summaries, and process consistency.</p></article>
-<article class="card"><h3>Leadership</h3><p>Function health, key risks, open decisions, missing inputs, and recommended follow-up become visible earlier.</p></article>
+<p class="eyebrow">PM / Sales Value</p>
+<h1>Why This Matters</h1>
+<p class="lede">The business value is not that The Agents make the final presentation. The value is that PM and Sales start from a better, faster, more complete first draft.</p>
+<div class="two-boxes">
+<article class="card"><h3>Before</h3><ul class="compact-list"><li>Manual copying from Trello, files, and messages</li><li>Photos and specs gathered one item at a time</li><li>Deck quality varies by account, timing, and capacity</li><li>Project records and presentation files drift apart</li></ul></article>
+<article class="card"><h3>With The Agents</h3><ul class="compact-list"><li>Faster first drafts from current project data</li><li>More consistent line review structure</li><li>Clearer missing-information and risk flags</li><li>More PM/Sales time for buyer strategy and judgment</li></ul></article>
 </div>
+<div class="callout">The Agents do the assembly work. People decide the business story.</div>
 </div>
-<div class="slide-number">17 / 21</div>
+<div class="slide-number">17 / 45</div>
 </section>
 <section class="slide" id="slide-18">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Industrial Design Deployment</div>
 <div class="content">
-<p class="eyebrow">Company Memory and Operating Leverage</p>
-<h1>AI Lets Westfield Do Important Work More Consistently</h1>
-<p class="lede">This is not just faster work. It is more complete work.</p>
-<div class="cards compact">
-<article class="card"><p>Capture meeting decisions consistently.</p></article>
-<article class="card"><p>Summarize every project status weekly.</p></article>
-<article class="card"><p>Compare every new concept against historical attempts.</p></article>
-<article class="card"><p>Track buyer feedback by account over time.</p></article>
-<article class="card"><p>Flag missing information before line reviews.</p></article>
-<article class="card"><p>Build Chuck-style buyer decks from Trello card data, photos, specs, pricing, and comments.</p></article>
-<article class="card"><p>Monitor risk without waiting for a meeting.</p></article>
-<article class="card"><p>Build executive summaries automatically.</p></article>
-<article class="card"><p>Use lessons learned from past projects.</p></article>
+<p class="eyebrow">Industrial Design Proof Point</p>
+<h1>Industrial Design Already Has AI Agents Doing Real Work</h1>
+<p class="lede">Westfield does not need to imagine AI agents from zero. Industrial Design already has deployed AI agents supporting real product-development work.</p>
+<div class="cards">
+<article class="card"><h3>Top-level agents</h3><p>Shared agents support Industrial Design workflows across research, synthesis, visualization, documentation, translation, Trello visibility, and presentation building.</p></article>
+<article class="card"><h3>Personal agents</h3><p>Team members also have personal agents that help with their own project work, questions, references, follow-up, and daily execution.</p></article>
+<article class="card"><h3>Already deployed</h3><p>This is not a theoretical future state. Agents are already operating inside the Industrial Design workflow and producing useful work.</p></article>
 </div>
-<blockquote>Every morning, Westfield should wake up smarter than it was yesterday.</blockquote>
+<div class="callout">The opportunity is not to replace design judgment. The opportunity is to support, structure, and scale the working pattern that already exists.</div>
 </div>
-<div class="slide-number">18 / 21</div>
+<div class="slide-number">18 / 45</div>
 </section>
 <section class="slide" id="slide-19">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Industrial Design Deployment</div>
 <div class="content">
-<p class="eyebrow">Competitive Context</p>
-<h1>The Risk Is Not AI Replacing Westfield. It Is Competitors Moving Faster.</h1>
-<p class="lede">Large retailers, consumer brands, and manufacturers are already using AI to improve speed, precision, operations, and innovation.</p>
-<div class="cards compact">
-<article class="card"><h3>Retailers</h3><p>Personalization, inventory, supply-chain visibility, automation, and faster customer response.</p></article>
-<article class="card"><h3>Consumer brands</h3><p>Consumer understanding, faster innovation, better operations, and scalable knowledge.</p></article>
-<article class="card"><h3>Manufacturers</h3><p>Planning, quality, compliance, supplier coordination, and production visibility.</p></article>
-<article class="card"><h3>Westfield advantage</h3><p>High project volume, repeatable product patterns, retailer-specific knowledge, cross-functional complexity, and a Trello foundation.</p></article>
-<article class="card"><h3>Risk of waiting</h3><p>More projects, more messages, more files, more dependence on individual memory, and slower risk visibility.</p></article>
-<article class="card"><h3>What to win</h3><p>Westfield does not need to outspend the largest companies. It needs to outlearn slower competitors in its own categories.</p></article>
+<p class="eyebrow">Current Use Cases</p>
+<h1>What Industrial Design Agents Are Already Supporting</h1>
+<p class="lede">Top-level and personal AI agents are already supporting a wide range of Industrial Design and product-development workflows.</p>
+<div class="cards dense-cards">
+<article class="card"><h3>Concept exploration</h3><p>Rapid product ideas, styling directions, form language studies, usage scenarios, mood boards, sketch prompts, and early visual territories.</p></article>
+<article class="card"><h3>Technical and design research</h3><p>Comparable product construction, mechanisms, materials, assembly methods, folding systems, storage approaches, durability details, comfort details, manufacturability references, patents, prior art, teardown references, and design precedents.</p></article>
+<article class="card"><h3>CAD and visualization support</h3><p>Early geometry studies, STEP/CAD support, part inspection, dimensional review, assembly thinking, snapshots, and visual review links.</p></article>
+<article class="card"><h3>Presentation building</h3><p>Internal decks, customer-facing decks, design-review layouts, revised slide copy, Chinese translation when needed, template standards, logo consistency, and GitHub Pages publishing.</p></article>
+<article class="card"><h3>Project and Trello visibility</h3><p>Project status, blockers, overdue items, open questions, next steps, owners, daily/weekly reports, and operating visibility.</p></article>
+<article class="card"><h3>Project management</h3><p>Defining critical paths, Gantt-style planning, dependencies, owners, timing risks, milestone structure, and project flow inside Trello.</p></article>
+<article class="card"><h3>Feedback synthesis</h3><p>Review comments, chat threads, meeting notes, decisions, open questions, risks, revision paths, and action items.</p></article>
+<article class="card"><h3>Cross-functional translation</h3><p>Reframing design work for PM, engineering, sourcing, factories, and leadership.</p></article>
+<article class="card"><h3>China and vendor communication support</h3><p>Chinese translation, factory handoff notes, sample feedback summaries, revision requests, and open-question tracking.</p></article>
 </div>
 </div>
-<div class="slide-number">19 / 21</div>
+<div class="slide-number">19 / 45</div>
 </section>
 <section class="slide" id="slide-20">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Industrial Design Deployment</div>
 <div class="content">
-<p class="eyebrow">Success Standard and Guardrails</p>
-<h1>A Good System Produces Clear, Useful Outputs That People Trust Enough to Use</h1>
-<p class="lede">Success should be measured by business effectiveness, not by how many AI tools are purchased.</p>
-<div class="cards compact">
-<article class="card"><h3>What good looks like</h3><p>Accurate enough to trust, simple enough to use, visible enough to manage, flexible enough to grow, disciplined enough to scale, and human-led.</p></article>
-<article class="card"><h3>What not to do</h3><p>Do not buy tools without workflow, build disconnected experiments, skip human review, expect AI to fix unclear ownership, or connect sensitive information without governance.</p></article>
-<article class="card"><h3>Business metrics</h3><p>Faster risk visibility, more complete line-review prep, faster buyer deck creation, fewer missed decisions, better account memory, and stronger executive visibility.</p></article>
+<p class="eyebrow">Expansion Opportunity</p>
+<h1>Where This Could Go With More Adoption and Support</h1>
+<p class="lede">The next step is to make the current agent-supported workflow more structured, repeatable, and useful across product development.</p>
+<div class="cards">
+<article class="card"><h3>Formal Industrial Design agent workspace</h3><p>One connected workspace for concepts, CAD references, technical research, project status, presentations, sample feedback, and design memory.</p></article>
+<article class="card"><h3>Structured product-development memory</h3><p>Searchable history of concepts, materials, mechanisms, factory lessons, engineering decisions, sample issues, CAD references, and presentation outputs.</p></article>
+<article class="card"><h3>Consistent project visibility</h3><p>Automated project health summaries, risk flags, missing-information alerts, and weekly ID / product-development leadership views.</p></article>
+<article class="card"><h3>Reusable agent-assisted workflows</h3><p>Standard workflows for concept briefs, technical research, design reviews, CAD review, deck creation, Chinese translation, sample feedback, and Trello reporting.</p></article>
+<article class="card"><h3>Better cross-functional adoption</h3><p>Extend the same working model into PM, engineering, sourcing, compliance, operations, and executive reporting by building around each function's real workflow.</p></article>
+<article class="card"><h3>Executive intelligence from real work</h3><p>Leadership can see active concepts, blocked work, resource needs, recurring issues, and product opportunities gaining traction.</p></article>
 </div>
 </div>
-<div class="slide-number">20 / 21</div>
+<div class="slide-number">20 / 45</div>
 </section>
 <section class="slide" id="slide-21">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Industrial Design Deployment</div>
 <div class="content">
-<p class="eyebrow">Roadmap and Ask</p>
-<h1>Start Narrow Enough to Execute, Then Scale What Works</h1>
-<p class="lede">Approval does not mean one big technology bet. It means permission to build the first working version.</p>
-<div class="cards compact">
-<article class="card"><h3>0-90 days</h3><p>Define data standards, Trello structure, priority workflows, security approach, and pilot teams.</p></article>
-<article class="card"><h3>3-6 months</h3><p>Deploy Sales / PM and Industrial Design / Engineering pilots, including Chuck line-review deck generation. Begin Creative Services workflow support and executive dashboard prototype.</p></article>
-<article class="card"><h3>6-12 months</h3><p>Add recurring health summaries, line-review readiness checks, sample risk alerts, auto-refresh presentation workflows, adoption review, and dashboard standardization.</p></article>
-<article class="card"><h3>12-24 months</h3><p>Expand into Finance, Accounting, Operations, and Compliance; connect more structured data; introduce predictive risk and leadership rhythm.</p></article>
-<article class="card"><h3>The ask</h3><p>Approve the direction, initial implementation, process support, and future scaling discussion after pilot results.</p></article>
-<article class="card"><h3>Closing thought</h3><p>The goal is not to build the smartest AI system in outdoor. The goal is to build the smartest outdoor company using AI.</p></article>
+<p class="eyebrow">From Pilot to Capability</p>
+<h1>The Strategic Point</h1>
+<p class="lede">Industrial Design is already proving that deployed AI agents can create leverage without removing human ownership.</p>
+<div class="ownership-flow">
+<article class="ownership-panel"><p class="kicker">Human Ownership</p><h3>Designers Still Own Judgment</h3><p>Taste, product intent, customer empathy, physical evaluation, and final direction stay with the Industrial Design team.</p></article>
+<div class="flow-arrow">→</div>
+<article class="ownership-panel"><p class="kicker">Agent Support</p><h3>Agents Carry the Workflow Load</h3><p>Top-level and personal agents support speed, memory, iteration, communication, research, presentation building, and project visibility.</p></article>
+<div class="flow-arrow">→</div>
+<article class="ownership-panel"><p class="kicker">Westfield Scale</p><h3>The Model Becomes Repeatable</h3><p>Good people use better information inside better workflows, creating a practical deployment pattern other functions can adopt.</p></article>
 </div>
-<div class="callout">People + Process + AI: the fastest, smartest product organization in outdoor.</div>
+<div class="strategic-callout"><span>The point:</span> support, structure, and scale the workflows already improving speed, visibility, communication, and product-development memory.</div>
 </div>
-<div class="slide-number">21 / 21</div>
+<div class="slide-number">21 / 45</div>
 </section>
-
-<div class="progress"></div>
-<script>
+<section class="slide" id="slide-22">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Trello Source of Truth</div>
+<div class="content">
+<p class="eyebrow">Trello Primer</p>
+<h1>What Trello Is and Why It Matters to AI Agents</h1>
+<p class="lede">Trello is a Kanban-based project management system: work is organized into boards, lists, and cards that can hold owners, dates, labels, comments, checklists, attachments, and decisions.</p>
+<div class="cards">
+<article class="card"><h3>Kanban-based work system</h3><p>Boards show the workflow, lists show stages, and cards carry the actual work item from idea to decision to completion.</p></article>
+<article class="card"><h3>Single source of truth</h3><p>When the card is maintained well, the latest status, context, files, comments, owners, and open questions live in one place instead of scattered across messages and memory.</p></article>
+<article class="card"><h3>Structured enough for agents</h3><p>Trello gives agents clean objects to read: boards, cards, labels, due dates, members, checklist items, comments, attachments, and activity history.</p></article>
+<article class="card"><h3>Direct API access</h3><p>Agents can safely read and update approved boards through Trello's API, summarize changes, flag missing information, draft reports, and keep cards current.</p></article>
+<article class="card"><h3>Part of a broader category</h3><p>Trello sits in a wider species of work-management tools alongside platforms like Asana, Monday, Jira, ClickUp, Smartsheet, Airtable, and Microsoft Planner.</p></article>
+<article class="card"><h3>Not locked to one vendor</h3><p>The important idea is structured work: projects, owners, dates, comments, attachments, decisions, and status history organized so people and agents can use them.</p></article>
+</div>
+<div class="callout">Trello is the current practical foundation, not the only possible answer. The strategic requirement is a structured work system agents can read, summarize, update, and turn into useful visibility.</div>
+</div>
+<div class="slide-number">22 / 45</div>
+</section>
+<section class="slide" id="slide-23">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Trello Source of Truth</div>
+<div class="content">
+<p class="eyebrow">Business Operating System</p>
+<h1>A Single Source of Truth for Every Team's Workflow</h1>
+<p class="lede">The real opportunity is not a task board. It is a shared operating layer where project work, decisions, files, timing, ownership, and feedback stay connected across the business.</p>
+<div class="cards">
+<article class="card"><h3>PM / Sales</h3><p>Line review readiness, retailer feedback, pricing context, assortment decisions, buyer follow-up, and account-specific priorities.</p></article>
+<article class="card"><h3>Industrial Design</h3><p>Concept direction, research, sample feedback, presentation outputs, CAD references, visual decisions, and design memory.</p></article>
+<article class="card"><h3>Engineering</h3><p>Specifications, technical risks, construction decisions, test status, manufacturability questions, and unresolved blockers.</p></article>
+<article class="card"><h3>Sourcing / Factories</h3><p>Factory notes, vendor questions, sample timing, material choices, cost implications, and production handoff details.</p></article>
+<article class="card"><h3>Compliance</h3><p>Requirements, certification status, open questions, documentation gaps, and risk visibility before problems reach the customer.</p></article>
+<article class="card"><h3>Creative Services</h3><p>Requests, routing, assets, video needs, deadlines, approval status, version control, and campaign or presentation support.</p></article>
+<article class="card"><h3>Operations / Finance</h3><p>Timing risk, margin impact, resource needs, inventory implications, recurring issues, and cross-functional follow-up.</p></article>
+<article class="card"><h3>Leadership</h3><p>One view of active work, blocked work, decision needs, opportunities gaining traction, and where the business needs attention.</p></article>
+</div>
+<div class="callout">When work is organized this way, agents can support each team in its own workflow while leadership sees one connected version of the business.</div>
+</div>
+<div class="slide-number">23 / 45</div>
+</section>
+<section class="slide" id="slide-24">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Operating Model</div>
+<div class="content">
+<p class="eyebrow">Across Functions</p>
+<h1>The Four Work Lanes and First Agents</h1>
+<p class="lede">Start with four lanes that share one foundation, but tune each agent to the workflow, inputs, outputs, and leadership value of that lane.</p>
+<div class="lane-grid">
+<article class="lane-card"><p class="lane-label">Lane 1 | Agent 1</p><h3>Sales / PM Agent</h3><p>Turns project records into buyer-ready commercial work.</p><ul><li>Line review deck generation</li><li>Pricing, specs, photos, and feedback</li><li>Product status and open decisions</li><li>Account-specific next actions</li></ul></article>
+<article class="lane-card"><p class="lane-label">Lane 2 | Agent 2</p><h3>ID / Engineering Agent</h3><p>Supports design development from concept through technical review.</p><ul><li>Concept and reference research</li><li>CAD / STEP and visual review support</li><li>Engineering questions and risks</li><li>Sample feedback and design memory</li></ul></article>
+<article class="lane-card"><p class="lane-label">Lane 3 | Agent 3</p><h3>Creative Services Agent</h3><p>Helps manage high-volume creative work without losing context.</p><ul><li>Request intake and routing</li><li>Asset, video, and deck support</li><li>Status visibility and approvals</li><li>Template and story consistency</li></ul></article>
+<article class="lane-card"><p class="lane-label">Lane 4 | Agent 4</p><h3>Executive / Ops Agent</h3><p>Converts live work into leadership intelligence and operating follow-up.</p><ul><li>Project health summaries</li><li>Blocked-work and risk signals</li><li>Decision and resource needs</li><li>Cross-functional executive briefs</li></ul></article>
+</div>
+</div>
+<div class="slide-number">24 / 45</div>
+</section>
+<section class="slide" id="slide-25">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Functional Expansion</div>
+<div class="content">
+<p class="eyebrow">Sales + PM Focus</p>
+<h1>What This Means for Sales and PM</h1>
+<p class="lede">This lane turns structured project records into faster account work: cleaner buyer stories, better line-review prep, and clearer follow-up on open product decisions.</p>
+<div class="lane-impact">
+<aside class="impact-lead"><p class="kicker">Lane 1 | Sales / PM</p><h3>From project records to buyer-ready commercial work.</h3><p>The agent helps Sales and PM start with the right account context, product status, feedback, photos, specs, and open decisions already organized.</p></aside>
+<div class="impact-list">
+<article class="impact-item"><h3>Line review readiness</h3><p>Account priorities, product status, missing inputs, sample needs, buyer feedback, competitive context, and next-step decisions.</p></article>
+<article class="impact-item"><h3>Buyer presentation support</h3><p>First-pass story structure, product pages, feature summaries, photos, specs, pricing context, and open-question lists.</p></article>
+<article class="impact-item"><h3>Account-specific intelligence</h3><p>Retailer preferences, price bands, repeated feedback, category trends, whitespace opportunities, and comparable products.</p></article>
+<article class="impact-item"><h3>Commercial follow-through</h3><p>Draft buyer emails, Trello replies, action lists, owner follow-up, presentation kickoffs, and decision records.</p></article>
+</div>
+</div>
+<div class="impact-callout"><span>Information hierarchy:</span> Sales and PM own the account strategy and commercial judgment; the agent prepares the source material, draft structure, and follow-up path.</div>
+</div>
+<div class="slide-number">25 / 45</div>
+</section>
+<section class="slide" id="slide-26">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Functional Expansion</div>
+<div class="content">
+<p class="eyebrow">Design + Engineering Focus</p>
+<h1>What This Means for Design and Engineering</h1>
+<p class="lede">This lane needs more than generic summarization. It needs structured support for the technical judgment that happens between idea, sample, engineering review, and factory execution.</p>
+<div class="lane-impact">
+<aside class="impact-lead"><p class="kicker">Lane 2 | ID + Engineering</p><h3>From scattered technical context to a stronger starting point.</h3><p>The agent helps the team begin with the relevant history already assembled, so designers and engineers spend less time hunting and more time deciding.</p></aside>
+<div class="impact-list">
+<article class="impact-item"><h3>Research and reference base</h3><p>Technical research, construction methods, material options, comparable mechanisms, patent/prior-art references, and competitive teardown notes.</p></article>
+<article class="impact-item"><h3>Project and sample memory</h3><p>Past sample feedback, factory learnings, previous solution attempts, recurring issues, CAD references, and design rationale.</p></article>
+<article class="impact-item"><h3>Engineering decision support</h3><p>Risk lists, unresolved technical questions, manufacturability concerns, test summaries, and tradeoffs that need human review.</p></article>
+<article class="impact-item"><h3>Reusable outputs</h3><p>Concept briefs, design-review decks, CAD review notes, vendor questions, testing summaries, and follow-up structure.</p></article>
+</div>
+</div>
+<div class="impact-callout"><span>Information hierarchy:</span> the agent organizes context and flags decisions; the design and engineering teams own the creative and technical judgment.</div>
+</div>
+<div class="slide-number">26 / 45</div>
+</section>
+<section class="slide" id="slide-27">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Functional Expansion</div>
+<div class="content">
+<p class="eyebrow">Creative Services Focus</p>
+<h1>What This Means for Creative Services</h1>
+<p class="lede">Creative Services needs a work system that can handle high request volume, video-heavy work, asset reuse, approvals, and presentation support without losing context.</p>
+<div class="lane-impact">
+<aside class="impact-lead"><p class="kicker">Lane 3 | Creative Services</p><h3>From scattered requests to managed creative throughput.</h3><p>The agent organizes incoming work, keeps source context attached, and helps the team move from request intake to finished asset with fewer dropped details.</p></aside>
+<div class="impact-list">
+<article class="impact-item"><h3>Request intake and routing</h3><p>Capture briefs, due dates, stakeholders, references, priorities, approvals, and missing information from Trello and conversation threads.</p></article>
+<article class="impact-item"><h3>Asset and video support</h3><p>Track source files, product photos, video needs, edits, cutdowns, version history, and where each asset should be reused.</p></article>
+<article class="impact-item"><h3>Presentation and template work</h3><p>Kick off decks, preserve story consistency, manage visual standards, and turn product context into first-pass presentation structure.</p></article>
+<article class="impact-item"><h3>Status and approvals</h3><p>Show what is waiting, who needs to review it, what changed, and which creative requests are blocking Sales, PM, or leadership work.</p></article>
+</div>
+</div>
+<div class="impact-callout"><span>Information hierarchy:</span> Creative Services keeps control of the final work; the agent protects context, routing, status, and reusable creative memory.</div>
+</div>
+<div class="slide-number">27 / 45</div>
+</section>
+<section class="slide" id="slide-28">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Functional Expansion</div>
+<div class="content">
+<p class="eyebrow">Operations + Finance Focus</p>
+<h1>What This Means for Operations, Finance, and Accounting</h1>
+<p class="lede">This lane applies the same operating-system logic to business execution: earlier visibility into operational risk, cost movement, document exceptions, and process gaps.</p>
+<div class="lane-impact">
+<aside class="impact-lead"><p class="kicker">Business Support Lane</p><h3>From late discovery to earlier operating signals.</h3><p>The agent does not replace functional expertise. It makes risk, cost movement, document exceptions, and process gaps visible before they become harder to fix.</p></aside>
+<div class="impact-list">
+<article class="impact-item"><h3>Operations</h3><p>Factory delays, sample status, production bottlenecks, capacity issues, shipment risks, and ownership gaps.</p></article>
+<article class="impact-item"><h3>Finance</h3><p>Margin movement, cost-change summaries, pricing pressure, scenario support, and account-level financial signals.</p></article>
+<article class="impact-item"><h3>Accounting</h3><p>Document workflow support, exception tracking, payment issue summaries, missing approvals, and process consistency.</p></article>
+<article class="impact-item"><h3>Executive handoff</h3><p>Clear escalation lists, owner follow-up, recurring process issues, and the financial or operational reason each item matters.</p></article>
+</div>
+</div>
+<div class="impact-callout"><span>Information hierarchy:</span> operations, finance, and accounting keep ownership of the function; the agent raises the right signals, organizes the evidence, and helps execute follow-up.</div>
+</div>
+<div class="slide-number">28 / 45</div>
+</section>
+<section class="slide" id="slide-29">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Functional Expansion</div>
+<div class="content">
+<p class="eyebrow">Executive Focus</p>
+<h1>What This Means for Executive Work</h1>
+<p class="lede">This lane turns live work into a leadership operating picture: what changed, what needs a decision, and what follow-up can happen in the same conversation.</p>
+<div class="lane-impact">
+<aside class="impact-lead"><p class="kicker">Lane 4 | Executive</p><h3>From passive status review to active operating intelligence.</h3><p>The agent helps leadership see the business from current work, not stale reports, then move directly into follow-up actions.</p></aside>
+<div class="impact-list">
+<article class="impact-item"><h3>Business health signals</h3><p>Projects needing attention, blocked work, timing risk, account readiness, commercial opportunity, and cross-functional decision pressure.</p></article>
+<article class="impact-item"><h3>Decision points</h3><p>What needs leadership input, who owns the next step, when the decision is needed, and what happens if it waits.</p></article>
+<article class="impact-item"><h3>Same-chat execution</h3><p>Draft vendor emails, reply to Trello comments, kick off presentation work, assign follow-up, and preserve the decision record.</p></article>
+<article class="impact-item"><h3>Leadership rhythm</h3><p>Daily briefs, weekly leadership summaries, department health views, and cross-functional escalation lists.</p></article>
+</div>
+</div>
+<div class="impact-callout"><span>Information hierarchy:</span> the agent highlights the operating signal and prepares the action; leaders make the call and set the priority.</div>
+</div>
+<div class="slide-number">29 / 45</div>
+</section>
+<section class="slide" id="slide-30">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Executive Intelligence</div>
+<div class="content">
+<p class="eyebrow">Better Management System</p>
+<h1>From Dashboard to Decision Support</h1>
+<p class="lede">The dashboard should tell leadership where to spend time.</p>
+<div class="work-diff">
+<article class="diff-panel"><p class="kicker">Traditional Dashboard</p><h3>Reporting Work</h3><div class="diff-list"><div class="diff-row"><span class="diff-mark">•</span><span>Lots of metrics that still require interpretation.</span></div><div class="diff-row"><span class="diff-mark">•</span><span>Leadership has to decide what matters after reading the report.</span></div><div class="diff-row"><span class="diff-mark">•</span><span>Status can become noise when ownership and urgency are unclear.</span></div><div class="diff-row"><span class="diff-mark">•</span><span>Information often arrives after the window to act has narrowed.</span></div></div></article>
+<div class="diff-arrow">→</div>
+<article class="diff-panel agent"><p class="kicker">Agent-Supported System</p><h3>Decision Work</h3><div class="diff-list"><div class="diff-row"><span class="diff-mark">✓</span><span>Explains what changed and why it matters.</span></div><div class="diff-row"><span class="diff-mark">✓</span><span>Names the owner, decision needed, and timing risk.</span></div><div class="diff-row"><span class="diff-mark">✓</span><span>Ranks issues by business impact, not just activity level.</span></div><div class="diff-row"><span class="diff-mark">✓</span><span>Lets leaders act in the same conversation: draft an email, reply to a Trello comment, or kick off a presentation.</span></div></div></article>
+</div>
+<div class="diff-takeaway"><span>The shift:</span> from asking leaders to interpret a dashboard to giving them a one-stop operating conversation where information, decisions, and follow-up actions live together.</div>
+</div>
+<div class="slide-number">30 / 45</div>
+</section>
+<section class="slide" id="slide-31">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Executive Intelligence</div>
+<div class="content">
+<p class="eyebrow">Executive Example</p>
+<h1>A Daily CEO Briefing</h1>
+<p class="lede">One page every morning: what changed, what is at risk, and what needs attention.</p>
+<div class="briefing-layout">
+<div class="briefing-paper">
+<div class="briefing-header"><strong>Good Morning Leadership</strong><span>Agent-generated operating brief</span></div>
+<div class="briefing-list">
+<article class="briefing-item"><span class="briefing-rank">1</span><div><h3>Items needing attention today</h3><p>Costco hard-arm chair sample risk requires a frame-direction decision by Friday.</p></div></article>
+<article class="briefing-item"><span class="briefing-rank">2</span><div><h3>Product development health</h3><p>Softlines has 4 projects with no sample update in 10+ days; Engineering is waiting for 2 revised CAD files.</p></div></article>
+<article class="briefing-item"><span class="briefing-rank">3</span><div><h3>Commercial opportunity</h3><p>Compact seating interest is repeating across Costco, Target, and DSG notes.</p></div></article>
+<article class="briefing-item"><span class="briefing-rank">4</span><div><h3>Risk to watch</h3><p>Two projects have compliance questions that may affect import or labeling requirements.</p></div></article>
+</div>
+</div>
+<aside class="decision-panel"><p class="kicker">Leadership Action</p><h3>Decide and act in the same chat.</h3><p>The agent highlights the decision point, then helps execute the follow-up without switching tools.</p><div class="decision-chip">Draft the vendor email</div><div class="decision-chip">Reply to the Trello comment</div><div class="decision-chip">Kick off the presentation</div></aside>
+</div>
+</div>
+<div class="slide-number">31 / 45</div>
+</section>
+<section class="slide" id="slide-32">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Executive Intelligence</div>
+<div class="content">
+<p class="eyebrow">Company Memory</p>
+<h1>Institutional Knowledge Becomes a Company Asset</h1>
+<p class="lede">Today, much of our knowledge lives inside people. AI agents can help capture it back into the system as work happens, making it searchable, reusable, and better organized over time.</p>
+<div class="memory-cycle">
+<article class="cycle-step"><p class="kicker">1. Work Happens</p><h3>Decisions and context appear everywhere</h3><p>Meetings, buyer feedback, Trello comments, factory notes, testing updates, and chat threads all create useful business knowledge.</p></article>
+<div class="cycle-arrow">→</div>
+<article class="cycle-step"><p class="kicker">2. Agents Capture</p><h3>Information goes back into the system</h3><p>Agents summarize decisions, update cards, preserve context, and attach follow-up actions to the right project record.</p></article>
+<div class="cycle-arrow">→</div>
+<article class="cycle-step"><p class="kicker">3. Memory Improves</p><h3>The company becomes easier to search</h3><p>Repeated lessons, open questions, risks, wins, losses, costing decisions, and compliance history become findable.</p></article>
+<div class="cycle-arrow">→</div>
+<article class="cycle-step"><p class="kicker">4. Next Work Gets Better</p><h3>Better inputs create better outputs</h3><p>Each project makes the next brief, presentation, risk summary, and leadership decision more informed.</p></article>
+</div>
+<div class="memory-examples"><span>Meeting notes</span><span>Buyer feedback</span><span>Factory learnings</span><span>Engineering solutions</span><span>Testing history</span><span>Product wins/losses</span><span>Costing lessons</span><span>Compliance decisions</span></div>
+<div class="cycle-callout"><span>Virtuous cycle:</span> the agents do not only retrieve information. They help put better information back into the operating system every time the team works.</div>
+</div>
+</div>
+<div class="slide-number">32 / 45</div>
+</section>
+<section class="slide" id="slide-33">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Functional Expansion</div>
+<div class="content">
+<p class="eyebrow">Westfield Scenario</p>
+<h1>A Project Story: Costco Chair Request</h1>
+<p class="lede">One retailer signal becomes a stronger brief, a faster decision, and better company memory for the next product-development cycle.</p>
+<div class="story-timeline">
+<article class="story-step"><p class="story-day">Signal</p><h3>Buyer asks for a better hard-arm chair platform</h3><p>The request arrives through Sales / PM with account context, timing pressure, and open questions.</p><div class="story-evidence">Captured: buyer note, account priority, target line review window.</div></article>
+<div class="story-arrow">→</div>
+<article class="story-step"><p class="story-day">Agent Pull</p><h3>The agent assembles the history</h3><p>It reads previous Costco feedback, past sample issues, competitive chairs, target price bands, and factory notes.</p><div class="story-evidence">Pulled: Trello cards, photos, comments, sample history, pricing context.</div></article>
+<div class="story-arrow">→</div>
+<article class="story-step"><p class="story-day">Team Brief</p><h3>PM, ID, and Engineering start with the same facts</h3><p>The agent turns scattered inputs into a clear product brief with options, risks, and decision points.</p><div class="story-evidence">Created: product brief, design direction, risk list, open decisions.</div></article>
+<div class="story-arrow">→</div>
+<article class="story-step"><p class="story-day">Decision</p><h3>People choose the path forward</h3><p>The team decides what to show, what to cost, what to ask the factory, and what needs executive attention.</p><div class="story-evidence">Actioned: Trello replies, vendor email, buyer presentation starter.</div></article>
+<div class="story-arrow">→</div>
+<article class="story-step"><p class="story-day">Next Project | Memory</p><h3>The learning goes back into the system</h3><p>The decision, rationale, sample outcome, buyer reaction, and factory learning become searchable for the next chair project.</p><div class="story-evidence">Improved: future briefs, risk summaries, account history, line-review prep.</div></article>
+</div>
+<div class="story-callout"><span>Story point:</span> the agent is not only helping the team move faster. It is turning each project into structured knowledge that makes the next project easier to understand, search, and act on.</div>
+</div>
+<div class="slide-number">33 / 45</div>
+</section>
+<section class="slide" id="slide-34">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Functional Expansion</div>
+<div class="content">
+<p class="eyebrow">Functional Conclusion</p>
+<h1>What the Functional System Adds Up To</h1>
+<p class="lede">Across Sales, PM, Design, Creative Services, Operations, Finance, Accounting, and Executive work, the pattern is the same: better capture, better visibility, and better follow-through.</p>
+<div class="functional-close">
+<aside class="close-thesis"><div><p class="kicker">The operating shift</p><h3>More complete work with agents that never sleep, not just faster work.</h3></div><p>AI agents help make the repeated work visible and structured, so each function can act from better context without waiting for another meeting.</p></aside>
+<div class="close-grid">
+<article class="close-column"><h3>Capture the work</h3><p>Useful decisions and context stop disappearing into scattered notes, emails, chats, and memories.</p><ul><li>Meeting decisions</li><li>Buyer feedback</li><li>Project status</li><li>Lessons learned</li></ul></article>
+<article class="close-column"><h3>Find the signal</h3><p>The system turns live work into clearer priorities, risk signals, missing inputs, and account-specific needs.</p><ul><li>Line-review gaps</li><li>Blocked work</li><li>Repeated themes</li><li>Executive summaries</li></ul></article>
+<article class="close-column"><h3>Move the work forward</h3><p>Agents help teams draft, route, summarize, compare, and prepare the next action in the same operating flow.</p><ul><li>Buyer decks</li><li>Trello replies</li><li>Vendor emails</li><li>Follow-up lists</li></ul></article>
+</div>
+</div>
+<div class="close-final"><span>Functional conclusion:</span> every time Westfield works this way, the company becomes more organized, more searchable, and better prepared for the next product, account, risk, or leadership decision.</div>
+</div>
+<div class="slide-number">34 / 45</div>
+</section>
+<section class="slide" id="slide-35">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Competitive Necessity</div>
+<div class="content">
+<p class="eyebrow">Competitive Context</p>
+<h1>Why This Is Becoming Competitive Necessity</h1>
+<p class="lede">AI is changing both sides of Westfield's market: retailers are raising supplier expectations, while brands and manufacturers are improving how quickly they compete.</p>
+<div class="competitive-layout">
+<aside class="retailer-pressure"><div><p class="kicker">Retailers set the bar</p><h3>They will expect suppliers to move faster with better context.</h3></div><p>Retailers are using AI to improve planning, personalization, inventory, supply chain visibility, and customer response. That changes what they will expect from companies selling into them.</p><div class="retailer-expects"><div class="expect-row">Faster answers</div><div class="expect-row">Cleaner product information</div><div class="expect-row">Sharper account-specific recommendations</div><div class="expect-row">Less friction between request and decision</div></div></aside>
+<div class="competition-stack">
+<article class="competition-card"><div><p class="kicker">Competitive set</p><h3>Consumer brands</h3></div><p>Other consumer brands are using AI agents and analytics to understand consumers, spot trends, build account-specific stories, and accelerate innovation cycles.</p></article>
+<article class="competition-card"><div><p class="kicker">Competitive set</p><h3>Manufacturers</h3></div><p>Other manufacturers are using agentic systems to improve planning, quality, compliance, supplier coordination, costing visibility, and production follow-through.</p></article>
+<div class="competitive-close"><span>Competitive point:</span> Westfield is both a supplier to retailers and a consumer brand/manufacturer. The pressure comes from retailer expectations and from competitors improving the way they operate.</div>
+</div>
+</div>
+</div>
+<div class="slide-number">35 / 45</div>
+</section>
+<section class="slide" id="slide-36">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Competitive Necessity</div>
+<div class="content">
+<p class="eyebrow">Why Us</p>
+<h1>The Westfield Advantage</h1>
+<p class="lede">Westfield has the right business conditions for agentic AI, and unusually strong leadership adoption to turn those conditions into operating results.</p>
+<div class="advantage-layout">
+<div class="advantage-grid">
+<article class="advantage-card"><p class="kicker">Business condition</p><h3>High project volume</h3><p>Many active product-development projects across categories, accounts, factories, and launch windows.</p></article>
+<article class="advantage-card"><p class="kicker">Business condition</p><h3>Repeatable product patterns</h3><p>Chairs, wagons, coolers, shelters, bags, and accessories create reusable learning across cycles.</p></article>
+<article class="advantage-card"><p class="kicker">Business condition</p><h3>Retailer-specific knowledge</h3><p>Each account has patterns, preferences, price bands, feedback history, and presentation needs.</p></article>
+<article class="advantage-card"><p class="kicker">Business condition</p><h3>Complex cross-functional work</h3><p>Product, sales, design, engineering, compliance, finance, operations, and factories must align.</p></article>
+</div>
+<aside class="leadership-advantage"><div><p class="kicker">Leadership advantage</p><h3>Adoption at the top makes this operational faster.</h3></div><p>Because executive and director-level leaders are already using personal agents, Westfield does not have to wait for belief to form after a technology rollout.</p><div class="leadership-proof"><div class="proof-row">EVP / COO-level leaders were early adopters and helped drive technical deployment.</div><div class="proof-row">PM and ID directors adopted even earlier and are among the heaviest users.</div><div class="proof-row">That means standards, workflows, and accountability can move from leadership into daily operations faster.</div></div></aside>
+</div>
+<div class="advantage-bottom"><span>Why it matters:</span> the advantage is not just readiness. It is the ability to operationalize agentic AI faster, with better judgment, cleaner adoption, and stronger business results.</div>
+</div>
+<div class="slide-number">36 / 45</div>
+</section>
+<section class="slide" id="slide-37">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Competitive Necessity</div>
+<div class="content">
+<p class="eyebrow">Strategic Risk</p>
+<h1>The Risk of Waiting</h1>
+<p class="lede">If we do not build this capability, our information problem grows every year.</p>
+<div class="risk-halves">
+<article class="risk-half"><p class="kicker">Without agentic AI</p><h3>More work creates more drag.</h3><ul><li>More projects, emails, meetings, and files</li><li>More dependence on individual memory</li><li>Slower visibility to risk and missed decisions</li><li>Harder handoffs across Sales, PM, Design, Operations, and leadership</li></ul></article>
+<article class="risk-half with"><p class="kicker">With agentic AI</p><h3>More work creates more intelligence.</h3><ul><li>Projects become searchable company knowledge</li><li>Risks, gaps, and decisions surface earlier</li><li>Teams work from more complete context</li><li>Leadership gets cleaner visibility and faster follow-up</li></ul></article>
+</div>
+<div class="risk-conclusion"><span>Conclusion:</span> the danger is not that AI agents replace Westfield. The danger is that competitors use agentic AI systems to move faster while we continue working the old way.</div>
+</div>
+<div class="slide-number">37 / 45</div>
+</section>
+<section class="slide" id="slide-38">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Competitive Necessity</div>
+<div class="content">
+<p class="eyebrow">Success Standard</p>
+<h1>What Good Looks Like</h1>
+<p class="lede">A good system produces clear, useful outputs that people trust enough to use.</p>
+<div class="cards">
+<article class="card"><h3>Accurate enough to trust</h3><p>Grounded in approved Westfield information.</p></article>
+<article class="card"><h3>Simple enough to use</h3><p>Designed around real workflows, not technology demos.</p></article>
+<article class="card"><h3>Visible enough to manage</h3><p>Leaders can see the health of the business without chasing updates.</p></article>
+<article class="card"><h3>Flexible enough to grow</h3><p>Start with product and expand across functions.</p></article>
+<article class="card"><h3>Disciplined enough to scale</h3><p>Requires process standards, data hygiene, ownership, and governance.</p></article>
+<article class="card"><h3>Human-led</h3><p>AI agents support recommendations; leaders make decisions.</p></article>
+</div>
+</div>
+<div class="slide-number">38 / 45</div>
+</section>
+<section class="slide" id="slide-39">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Roadmap + Approval</div>
+<div class="content">
+<p class="eyebrow">Phase 1</p>
+<h1>12-Month Roadmap</h1>
+<p class="lede">Build the foundation and prove value in real workflows.</p>
+<div class="cards">
+<article class="card"><h3>0–90 Days</h3><p>Define data standards, Trello structure, priority workflows, security approach, and pilot teams.</p></article>
+<article class="card"><h3>3–6 Months</h3><p>Deploy Sales / PM and Industrial Design / Engineering pilots, including line-review deck generation. Begin Creative Services workflow support and executive dashboard prototype.</p></article>
+<article class="card"><h3>6–9 Months</h3><p>Add recurring project health summaries, LR readiness checks, sample risk alerts, auto-refresh presentation workflows, and meeting-note automation.</p></article>
+<article class="card"><h3>9–12 Months</h3><p>Review adoption, improve accuracy, standardize dashboards, and decide what to scale next.</p></article>
+</div>
+</div>
+<div class="slide-number">39 / 45</div>
+</section>
+<section class="slide" id="slide-40">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Roadmap + Approval</div>
+<div class="content">
+<p class="eyebrow">Phase 2</p>
+<h1>24-Month Roadmap</h1>
+<p class="lede">Move from pilots to a connected operating system.</p>
+<div class="cards">
+<article class="card"><h3>12–15 Months</h3><p>Expand agents into Finance, Accounting, Operations, and Compliance workflows.</p></article>
+<article class="card"><h3>15–18 Months</h3><p>Connect more structured data sources and improve dashboard reliability.</p></article>
+<article class="card"><h3>18–21 Months</h3><p>Introduce predictive risk: projects likely to miss timing, accounts needing attention, repeated sample issues.</p></article>
+<article class="card"><h3>21–24 Months</h3><p>Create leadership rhythm: executive briefings, department health views, and annual planning intelligence.</p></article>
+</div>
+</div>
+<div class="slide-number">40 / 45</div>
+</section>
+<section class="slide" id="slide-41">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Roadmap + Approval</div>
+<div class="content">
+<p class="eyebrow">Longer-Term Vision</p>
+<h1>Future Peek</h1>
+<p class="lede">Beyond 24 months, the system becomes part of how Westfield operates every day.</p>
+<div class="cards">
+<article class="card"><p>Agent-supported annual planning</p></article>
+<article class="card"><p>Account-specific intelligence files</p></article>
+<article class="card"><p>Automated competitive monitoring</p></article>
+<article class="card"><p>Predictive product development risk</p></article>
+<article class="card"><p>Cross-account white space identification</p></article>
+<article class="card"><p>Factory capability memory</p></article>
+<article class="card"><p>Consumer trend intelligence</p></article>
+<article class="card"><p>Company health command center</p></article>
+</div>
+</div>
+<div class="slide-number">41 / 45</div>
+</section>
+<section class="slide" id="slide-42">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Roadmap + Approval</div>
+<div class="content">
+<p class="eyebrow">Next Steps</p>
+<h1>Show the System Working Live</h1>
+<p class="lede">These are the demos the team wants to show live in an upcoming meeting so leadership can see AI agents working on real Westfield problems.</p>
+<div class="cards">
+<article class="card"><h3>Demo 1</h3><p>Project Health: An agent reads Trello cards and produces a risk-ranked project summary.</p></article>
+<article class="card"><h3>Demo 2</h3><p>Line Review Deck: An agent reads a Trello line-review board, pulls product photos, specs, pricing, comments, and attachment URLs, then builds a shareable buyer presentation.</p></article>
+<article class="card"><h3>Demo 3</h3><p>Costco Chair Brief: An agent creates a complete product brief from past feedback, competitive notes, and project history.</p></article>
+<article class="card"><h3>Demo 4</h3><p>CEO Daily Brief: An agent prepares one page of business changes, risks, and recommended follow-up.</p></article>
+</div>
+</div>
+<div class="slide-number">42 / 45</div>
+</section>
+<section class="slide" id="slide-43">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Roadmap + Approval</div>
+<div class="content">
+<p class="eyebrow">Business Metrics</p>
+<h1>How We Measure Success</h1>
+<p class="lede">Success should be measured by business effectiveness, not by how many AI tools or agent experiments we buy.</p>
+<div class="cards">
+<article class="card"><p>Faster visibility to project risk</p></article>
+<article class="card"><p>More complete line review preparation</p></article>
+<article class="card"><p>Faster buyer presentation first drafts</p></article>
+<article class="card"><p>Fewer missed decisions</p></article>
+<article class="card"><p>Higher-quality project documentation</p></article>
+<article class="card"><p>Better account memory</p></article>
+<article class="card"><p>Better use of historical lessons</p></article>
+<article class="card"><p>Improved executive visibility</p></article>
+<article class="card"><p>More consistent cross-functional follow-up</p></article>
+</div>
+</div>
+<div class="slide-number">43 / 45</div>
+</section>
+<section class="slide" id="slide-44">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Roadmap + Approval</div>
+<div class="content">
+<p class="eyebrow">The Ask</p>
+<h1>What Approval Enables</h1>
+<p class="lede">Approval does not mean one big technology bet. It means permission to build the first working version.</p>
+<div class="cards">
+<article class="card"><h3>Approve the direction</h3><p>Agentic AI as a strategic operating capability for Westfield.</p></article>
+<article class="card"><h3>Approve initial implementation</h3><p>Start with an agentic system organized around Sales / PM, Industrial Design / Engineering, Creative Services, and Executive / Operations.</p></article>
+<article class="card"><h3>Approve process support</h3><p>Standardize Trello and key workflows so AI agents have clean information to work from.</p></article>
+<article class="card"><h3>Approve future scaling discussion</h3><p>After pilot results, evaluate expansion to Finance, Accounting, Operations, and other functions.</p></article>
+</div>
+</div>
+<div class="slide-number">44 / 45</div>
+</section>
+<section class="slide" id="slide-45">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="section-label">Roadmap + Approval</div>
+<div class="content">
+<p class="eyebrow">Close</p>
+<h1>Closing Thought</h1>
+<p class="lede">The goal is not to build the smartest agentic AI system in outdoor. The goal is to build the smartest outdoor company using AI agents well.</p>
+<ul class="bullets"><li>Westfield already has strong people, strong retailer relationships, and deep product knowledge.</li><li>AI agents give us a way to connect that knowledge, make it visible, and use it more consistently.</li><li>If we do this well, we do not just work faster. We become a company that learns faster.</li><li>People + Process + AI Agents: the fastest, smartest product organization in outdoor.</li></ul>
+</div>
+<div class="slide-number">45 / 45</div>
+</section>
+<button class="language-toggle" id="language-toggle" type="button" aria-label="Switch deck to Chinese" title="Switch deck to Chinese">中文</button>
+<div class="progress"></div><script>
 const slides=[...document.querySelectorAll('.slide')],bar=document.querySelector('.progress');let i=0;function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides[i].scrollIntoView();bar.style.width=((i+1)/slides.length*100)+'%';location.hash='slide-'+(i+1)}function sync(){let best=0,dist=1e9;slides.forEach((s,n)=>{const d=Math.abs(s.getBoundingClientRect().top);if(d<dist){dist=d;best=n}});i=best;bar.style.width=((i+1)/slides.length*100)+'%'}addEventListener('scroll',sync,{passive:true});addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1)}});const m=location.hash.match(/slide-(\d+)/);if(m)show(+m[1]-1);else sync();
-</script>
-</body>
-</html>
+const zhText={
+"Westfield Agentic AI Vision":"Westfield 智能体 AI 愿景",
+"Cover":"封面",
+"Westfield Outdoors | Executive Agentic AI Vision":"Westfield Outdoors | 高管智能体 AI 愿景",
+"Using AI Agents to Help Build the Fastest, Smartest Product Organization in Outdoor":"用 AI 智能体帮助打造户外行业最快、最聪明的产品组织",
+"A practical vision for Westfield Outdoors: people + process + AI agents working together":"Westfield Outdoors 的务实愿景：人 + 流程 + AI 智能体协同工作",
+"Table of Contents":"目录",
+"Navigation":"导航",
+"Executive Overview":"高管概览",
+"AI Basics":"AI 基础",
+"PM / Sales Deployment":"PM / 销售部署",
+"Industrial Design Deployment":"工业设计部署",
+"Trello Source of Truth":"Trello 事实源",
+"Operating Model + Lane Detail":"运营模型 + 职能通道细节",
+"Executive Intelligence":"高管智能",
+"Functional Expansion":"职能扩展",
+"Competitive Necessity":"竞争必要性",
+"Roadmap + Approval":"路线图 + 审批",
+"The Message in One Sentence":"一句话信息",
+"Agentic AI systems should help Westfield become faster, smarter, more transparent, and more precise without pretending technology replaces people.":"智能体 AI 系统应该帮助 Westfield 变得更快、更聪明、更透明、更精准，同时不假装技术可以替代人。",
+"AI agents are not here to make decisions for us. They are here to make sure our people have the best possible information when they make decisions.":"AI 智能体不是来替我们做决定的。它们是为了确保人在做决定时拥有尽可能好的信息。",
+"Better People Impact: Less administrative drag. More time on judgment, creativity, and customers.":"更好的人员价值：减少行政拖累，把更多时间留给判断、创造力和客户。",
+"Better Process: More consistent workflows, documentation, follow-up, and accountability.":"更好的流程：更一致的工作流、文档、跟进和责任归属。",
+"Better Decisions: Leadership sees risks, opportunities, and company health earlier.":"更好的决策：领导层更早看到风险、机会和公司健康状况。",
+"Practical Vision":"务实愿景",
+"AI Agents Are Already Working in Real Westfield Workstreams":"AI 智能体已经在真实的 Westfield 工作流中运行",
+"The opportunity now is to support what is working, structure it, and scale it into a repeatable company capability.":"现在的机会是支持已经有效的做法，把它结构化，并扩展成可复制的公司能力。",
+"Already working in PM / Sales, Design, and Executive workflows":"已经在 PM / 销售、设计和高管工作流中运行",
+"Delivering faster decks, clearer summaries, and better visibility":"正在交付更快的演示文稿、更清晰的摘要和更好的可见性",
+"Ready for structure, support, and scale":"已准备好进行结构化、支持和扩展",
+"Current proof":"当前证明",
+"Business results":"业务结果",
+"Scale plan":"扩展计划",
+"The Business Case":"业务理由",
+"Why This Matters Now":"为什么现在重要",
+"The companies that learn faster will move faster. The companies that move faster will win more business.":"学习更快的公司会行动更快。行动更快的公司会赢得更多业务。",
+"Retailers expect faster answers.":"零售商期待更快的答复。",
+"Consumer trends move faster.":"消费者趋势变化更快。",
+"Competitive products appear faster.":"竞品出现得更快。",
+"Cost and factory decisions are more complex.":"成本和工厂决策更复杂。",
+"Internal information is growing faster than people can manually organize it.":"内部信息增长速度已经超过人工整理的速度。",
+"Current State":"当前状态",
+"The Problem Agentic AI Can Help Solve":"智能体 AI 可以帮助解决的问题",
+"Westfield does not lack knowledge. Westfield has knowledge spread across too many places.":"Westfield 并不缺少知识。Westfield 的知识分散在太多地方。",
+"Connected Intelligence":"连接的智能",
+"The Future State":"未来状态",
+"Information should find the people who need it.":"信息应该主动找到需要它的人。",
+"The goal is not more reports. The goal is better visibility, earlier warnings, and faster decisions.":"目标不是更多报告，而是更好的可见性、更早的预警和更快的决策。",
+"Operating Philosophy":"运营理念",
+"People + Process + AI Agents":"人 + 流程 + AI 智能体",
+"AI agents work only when they are paired with good people and disciplined process.":"AI 智能体只有与优秀的人和有纪律的流程配合时才真正有效。",
+"People":"人",
+"Experience, creativity, relationships, judgment, and leadership.":"经验、创造力、关系、判断力和领导力。",
+"Process":"流程",
+"Repeatable workflows, clear ownership, good data discipline, and accountability.":"可重复的工作流、清晰的归属、良好的数据纪律和责任制。",
+"AI Agents":"AI 智能体",
+"Speed, memory, summarization, monitoring, pattern recognition, and recommendations.":"速度、记忆、摘要、监控、模式识别和建议。",
+"Competitive advantage comes from good people using better information inside a better process.":"竞争优势来自优秀的人在更好的流程中使用更好的信息。",
+"A Simple Explanation: What Is an LLM?":"简单解释：什么是 LLM？",
+"Examples":"示例",
+"What they are good at":"擅长什么",
+"A Simple Explanation: What Is an AI Agent?":"简单解释：什么是 AI 智能体？",
+"Reactive":"被动响应",
+"Chatbot":"聊天机器人",
+"You ask a question. It answers.":"你提问，它回答。",
+"Workflow-based":"基于工作流",
+"Agent":"智能体",
+"It has a job. It checks information, prepares outputs, watches for changes, and supports a workflow.":"它有一项工作。它检查信息、准备输出、观察变化，并支持一个工作流。",
+"What Is an Agentic System?":"什么是智能体系统？",
+"What it is":"它是什么",
+"How companies use it":"公司如何使用",
+"Why it matters":"为什么重要",
+"Westfield-Specific Vision":"Westfield 专属愿景",
+"The Westfield Agentic AI Vision":"Westfield 智能体 AI 愿景",
+"Project Management + Sales":"项目管理 + 销售",
+"What This Means for Project Management and Sales":"这对项目管理和销售意味着什么",
+"Humans own":"人负责",
+"The Agents support":"智能体支持",
+"Commercial judgment":"商业判断",
+"Customer relationships":"客户关系",
+"Category strategy":"品类策略",
+"Prioritization":"优先级",
+"Final recommendations":"最终建议",
+"Cross-functional alignment":"跨职能对齐",
+"Business accountability":"业务责任",
+"Project summaries":"项目摘要",
+"Line review inputs":"Line review 输入",
+"Account history":"客户历史",
+"Competitive feature matrices":"竞品功能矩阵",
+"Buyer presentation first drafts":"买家演示初稿",
+"Open action-item lists":"未完成行动项清单",
+"Charter first drafts":"项目章程初稿",
+"Risk and timing summaries":"风险和时间摘要",
+"Project Management + Sales Proof Point":"项目管理 + 销售证明点",
+"The Agents Are Already Useful in Buyer Presentation Work":"智能体已经在买家演示工作中有用",
+"Agent Presentation Workflow":"智能体演示工作流",
+"From Project Record to Buyer-Ready First Draft":"从项目记录到买家可用的初稿",
+"Ask":"提出请求",
+"Pull":"拉取",
+"Structure":"结构化",
+"Draft":"起草",
+"Review":"审核",
+"Presentation Output":"演示输出",
+"What The Agents Can Prepare":"智能体可以准备什么",
+"Buyer story":"买家故事",
+"Product pages":"产品页面",
+"Project context":"项目背景",
+"Competitive whitespace":"竞争空白",
+"Account-specific trend decks":"客户专属趋势演示",
+"Action structure":"行动结构",
+"PM / Sales Value":"PM / 销售价值",
+"Why This Matters":"为什么重要",
+"Before":"之前",
+"With The Agents":"有智能体后",
+"The Agents do the assembly work. People decide the business story.":"智能体做组装工作，人决定业务故事。",
+"Industrial Design Proof Point":"工业设计证明点",
+"Industrial Design Already Has AI Agents Doing Real Work":"工业设计已经有 AI 智能体在做真实工作",
+"Top-level agents":"顶层智能体",
+"Personal agents":"个人智能体",
+"Already deployed":"已经部署",
+"Current Use Cases":"当前用例",
+"What Industrial Design Agents Are Already Supporting":"工业设计智能体已经在支持什么",
+"Concept exploration":"概念探索",
+"Technical and design research":"技术与设计研究",
+"CAD and visualization support":"CAD 和可视化支持",
+"Presentation building":"演示文稿制作",
+"Project and Trello visibility":"项目与 Trello 可见性",
+"Project management":"项目管理",
+"Feedback synthesis":"反馈整合",
+"Cross-functional translation":"跨职能转译",
+"China and vendor communication support":"中国与供应商沟通支持",
+"Expansion Opportunity":"扩展机会",
+"Where This Could Go With More Adoption and Support":"在更多采用和支持下可以走向哪里",
+"From Pilot to Capability":"从试点到能力",
+"The Strategic Point":"战略重点",
+"Human Ownership":"人类主导",
+"Designers Still Own Judgment":"设计师仍然拥有判断权",
+"Agent Support":"智能体支持",
+"Agents Carry the Workflow Load":"智能体承担工作流负载",
+"Westfield Scale":"Westfield 规模化",
+"The Model Becomes Repeatable":"模型变得可复制",
+"Trello Primer":"Trello 入门",
+"What Trello Is and Why It Matters to AI Agents":"什么是 Trello，以及它为什么对 AI 智能体重要",
+"Kanban-based work system":"基于看板的工作系统",
+"Single source of truth":"单一事实源",
+"Structured enough for agents":"对智能体足够结构化",
+"Direct API access":"直接 API 访问",
+"Part of a broader category":"更大品类的一部分",
+"Not locked to one vendor":"不绑定单一供应商",
+"Business Operating System":"业务操作系统",
+"A Single Source of Truth for Every Team's Workflow":"每个团队工作流的单一事实源",
+"PM / Sales":"PM / 销售",
+"Industrial Design":"工业设计",
+"Engineering":"工程",
+"Sourcing / Factories":"采购 / 工厂",
+"Compliance":"合规",
+"Creative Services":"创意服务",
+"Operations / Finance":"运营 / 财务",
+"Leadership":"领导层",
+"Operating Model":"运营模型",
+"Across Functions":"跨职能",
+"The Four Work Lanes and First Agents":"四条工作通道和第一批智能体",
+"Lane 1 | Agent 1":"通道 1 | 智能体 1",
+"Sales / PM Agent":"销售 / PM 智能体",
+"Lane 2 | Agent 2":"通道 2 | 智能体 2",
+"ID / Engineering Agent":"ID / 工程智能体",
+"Lane 3 | Agent 3":"通道 3 | 智能体 3",
+"Creative Services Agent":"创意服务智能体",
+"Lane 4 | Agent 4":"通道 4 | 智能体 4",
+"Executive / Ops Agent":"高管 / 运营智能体",
+"Sales + PM Focus":"销售 + PM 重点",
+"What This Means for Sales and PM":"这对销售和 PM 意味着什么",
+"Lane 1 | Sales / PM":"通道 1 | 销售 / PM",
+"Design + Engineering Focus":"设计 + 工程重点",
+"What This Means for Design and Engineering":"这对设计和工程意味着什么",
+"Lane 2 | ID + Engineering":"通道 2 | ID + 工程",
+"Creative Services Focus":"创意服务重点",
+"What This Means for Creative Services":"这对创意服务意味着什么",
+"Lane 3 | Creative Services":"通道 3 | 创意服务",
+"Operations + Finance Focus":"运营 + 财务重点",
+"What This Means for Operations, Finance, and Accounting":"这对运营、财务和会计意味着什么",
+"Business Support Lane":"业务支持通道",
+"Operations":"运营",
+"Finance":"财务",
+"Accounting":"会计",
+"Executive handoff":"高管交接",
+"Executive Focus":"高管重点",
+"What This Means for Executive Work":"这对高管工作意味着什么",
+"Lane 4 | Executive":"通道 4 | 高管",
+"Better Management System":"更好的管理系统",
+"From Dashboard to Decision Support":"从仪表盘到决策支持",
+"Traditional Dashboard":"传统仪表盘",
+"Reporting Work":"报告工作",
+"Agent-Supported System":"智能体支持系统",
+"Decision Work":"决策工作",
+"Executive Example":"高管示例",
+"A Daily CEO Briefing":"每日 CEO 简报",
+"Good Morning Leadership":"领导层早上好",
+"Agent-generated operating brief":"智能体生成的运营简报",
+"Items needing attention today":"今天需要关注的事项",
+"Leadership Action":"领导行动",
+"Decide and act in the same chat.":"在同一个聊天中决定并行动。",
+"Company Memory":"公司记忆",
+"Institutional Knowledge Becomes a Company Asset":"机构知识成为公司资产",
+"1. Work Happens":"1. 工作发生",
+"2. Agents Capture":"2. 智能体捕捉",
+"3. Memory Improves":"3. 记忆改善",
+"4. Next Work Gets Better":"4. 下一项工作变得更好",
+"Virtuous cycle:":"良性循环：",
+"Westfield Scenario":"Westfield 场景",
+"A Project Story: Costco Chair Request":"项目故事：Costco 椅子请求",
+"Signal":"信号",
+"Agent Pull":"智能体拉取",
+"Team Brief":"团队简报",
+"Decision":"决策",
+"Next Project | Memory":"下一个项目 | 记忆",
+"Story point:":"故事重点：",
+"Functional Conclusion":"职能结论",
+"What the Functional System Adds Up To":"职能系统最终带来什么",
+"The operating shift":"运营转变",
+"Capture the work":"捕捉工作",
+"Find the signal":"找到信号",
+"Move the work forward":"推动工作前进",
+"Functional conclusion:":"职能结论：",
+"Competitive Context":"竞争背景",
+"Why This Is Becoming Competitive Necessity":"为什么这正成为竞争必要性",
+"Retailers set the bar":"零售商设定标准",
+"Competitive set":"竞争集合",
+"Consumer brands":"消费品牌",
+"Manufacturers":"制造商",
+"Competitive point:":"竞争重点：",
+"Why Us":"为什么是我们",
+"The Westfield Advantage":"Westfield 优势",
+"Business condition":"业务条件",
+"High project volume":"高项目量",
+"Repeatable product patterns":"可重复的产品模式",
+"Retailer-specific knowledge":"零售商专属知识",
+"Complex cross-functional work":"复杂的跨职能工作",
+"Leadership advantage":"领导层优势",
+"Adoption at the top makes this operational faster.":"高层采用让它更快进入运营。",
+"Why it matters:":"为什么重要：",
+"Strategic Risk":"战略风险",
+"The Risk of Waiting":"等待的风险",
+"Without agentic AI":"没有智能体 AI",
+"More work creates more drag.":"更多工作带来更多拖累。",
+"With agentic AI":"有智能体 AI",
+"More work creates more intelligence.":"更多工作创造更多智能。",
+"Conclusion:":"结论：",
+"Success Standard":"成功标准",
+"What Good Looks Like":"好的状态是什么",
+"Accurate enough to trust":"准确到足以信任",
+"Simple enough to use":"简单到足以使用",
+"Visible enough to manage":"可见到足以管理",
+"Flexible enough to grow":"灵活到足以增长",
+"Disciplined enough to scale":"有纪律到足以规模化",
+"Human-led":"以人为主导",
+"Phase 1":"第一阶段",
+"12-Month Roadmap":"12 个月路线图",
+"Phase 2":"第二阶段",
+"24-Month Roadmap":"24 个月路线图",
+"Longer-Term Vision":"更长期愿景",
+"Future Peek":"未来一瞥",
+"Next Steps":"下一步",
+"Show the System Working Live":"现场展示系统如何工作",
+"Demo 1":"演示 1",
+"Demo 2":"演示 2",
+"Demo 3":"演示 3",
+"Demo 4":"演示 4",
+"Business Metrics":"业务指标",
+"How We Measure Success":"如何衡量成功",
+"The Ask":"请求批准",
+"What Approval Enables":"批准将带来什么",
+"Approve the direction":"批准方向",
+"Approve initial implementation":"批准初始实施",
+"Approve process support":"批准流程支持",
+"Approve future scaling discussion":"批准未来扩展讨论",
+"Close":"收尾",
+"Closing Thought":"结尾思考",
+"Email":"邮件",
+"Teams":"Teams",
+"PowerPoint":"PowerPoint",
+"Excel":"Excel",
+"OneDrive":"OneDrive",
+"Testing":"测试",
+"WeChat":"微信",
+"Westfield is not starting from zero. Agent-supported work is already showing value in practical workflows.":"Westfield 不是从零开始。智能体支持的工作已经在实际流程中体现价值。",
+"The next step is a structured plan: cleaner inputs, repeatable agents, workflow standards, human review, and leadership visibility.":"下一步是结构化计划：更干净的输入、可重复的智能体、工作流标准、人工审核和领导层可见性。",
+"The goal is not experimentation for its own sake. The goal is to turn early wins into a durable operating capability.":"目标不是为了实验而实验，而是把早期成果转化为持久的运营能力。",
+"Agentic AI systems help Westfield answer faster, track market and competitor movement sooner, manage complex cost and factory decisions with better context, and turn scattered internal information into usable decision support.":"智能体 AI 系统帮助 Westfield 更快回应，更早跟踪市场和竞争动态，在更充分的背景下管理复杂的成本与工厂决策，并把分散的内部信息转化为可用的决策支持。",
+"A Large Language Model is an AI model trained to work with language: reading, summarizing, comparing, drafting, answering questions, and creating structured outputs.":"大型语言模型是一种经过训练、能够处理语言的 AI 模型：阅读、总结、比较、起草、回答问题，并生成结构化输出。",
+"ChatGPT, Claude, and Gemini are AI assistants built on large language models. Llama is a family of large language models. The LLM is the language engine inside the broader AI system.":"ChatGPT、Claude 和 Gemini 是建立在大型语言模型上的 AI 助手。Llama 是一系列大型语言模型。LLM 是更广泛 AI 系统中的语言引擎。",
+"Drafting emails, reports, briefs, and presentations":"起草邮件、报告、简报和演示文稿",
+"Translating messy inputs into structured outputs":"把杂乱输入转化为结构化输出",
+"An AI agent is an AI system that has a role, access to approved information, and the ability to perform a workflow repeatedly.":"AI 智能体是具有明确角色、可访问已批准信息，并能反复执行工作流的 AI 系统。",
+"A Product Management Agent could review Trello every morning, identify late sample risks, summarize upcoming line review needs, and draft action items for the PM team.":"产品管理智能体可以每天早上查看 Trello，识别样品延误风险，总结即将到来的 line review 需求，并为 PM 团队起草行动项。",
+"An agentic system is a set of AI agents that can perform defined jobs, use approved information, and coordinate steps inside a business process.":"智能体系统是一组 AI 智能体，可以执行明确任务、使用已批准信息，并在业务流程中协调步骤。",
+"Multiple task-focused agents working from shared data, tools, rules, and human oversight.":"多个以任务为中心的智能体，基于共享数据、工具、规则和人工监督工作。",
+"Monitoring workflows, summarizing changes, preparing drafts, flagging risks, routing work, and keeping teams aligned.":"监控工作流、总结变化、准备草稿、标记风险、路由工作，并保持团队对齐。",
+"The system turns repeated information work into a more consistent operating rhythm without removing human judgment.":"该系统把重复的信息工作转化为更一致的运营节奏，同时不移除人的判断。",
+"The key difference: a chatbot answers a request; an agentic system supports an ongoing workflow.":"关键区别：聊天机器人回答请求；智能体系统支持持续的工作流。",
+"A system that helps every function work with better information while giving leadership a clearer view of company health.":"一个帮助每个职能用更好信息工作，同时让领导层更清楚看到公司健康状况的系统。",
+"Westfield needs four separate agentic AI deployments because these functions have vastly different needs, workflows, inputs, and decision rhythms. The shared knowledge foundation connects them without forcing them into one generic system.":"Westfield 需要四个独立的智能体 AI 部署，因为这些职能在需求、工作流、输入和决策节奏上差异很大。共享知识基础将它们连接起来，而不是强迫它们使用一个通用系统。",
+"The Agents handle more of the work around the work, so PM and Sales teams can spend more time on judgment, customers, and commercial decisions.":"智能体承担更多“围绕工作本身的工作”，让 PM 和销售团队把更多时间用于判断、客户和商业决策。",
+"The division is clear: people own the business story and final judgment; The Agents prepare the source material, drafts, and follow-up structure.":"分工很清楚：人负责业务故事和最终判断；智能体准备源材料、草稿和跟进结构。",
+"The PM / Sales deployment is practical because it starts with a painful, repeatable workflow: turning scattered project records into a clear buyer-ready presentation.":"PM / 销售部署很务实，因为它从一个痛苦且可重复的工作流开始：把分散的项目记录转化为清晰、可给买家使用的演示。",
+"Line review decks require product data, photos, specs, pricing, buyer feedback, open decisions, and clean formatting from multiple places.":"Line review 演示需要从多个地方收集产品数据、照片、规格、价格、买家反馈、未决决策和清晰格式。",
+"The Agents read the structured project record, gather the relevant material, organize it, and create a strong first draft for human review.":"智能体读取结构化项目记录，收集相关材料，进行组织，并创建可供人工审核的强初稿。",
+"PM and Sales own the account strategy, commercial story, final recommendations, buyer sensitivity, and presentation decisions.":"PM 和销售负责客户策略、商业故事、最终建议、买家敏感点和演示决策。",
+"The workflow is valuable because it follows the same sequence PM and Sales already use, but removes much of the manual assembly.":"这个工作流有价值，因为它遵循 PM 和销售已经在使用的同一顺序，但去掉了大量手工组装。",
+"Request a line review, account update, product recap, or buyer presentation in natural language.":"用自然语言请求 line review、客户更新、产品回顾或买家演示。",
+"The Agents read Trello cards, lists, comments, attachments, product photos, specs, prices, and buyer notes.":"智能体读取 Trello 卡片、列表、评论、附件、产品照片、规格、价格和买家备注。",
+"The Agents organize the material by account, product, category, decision status, and presentation need.":"智能体按客户、产品、品类、决策状态和演示需求组织材料。",
+"The Agents build the first-pass story, product slides, summaries, and open-question lists.":"智能体构建第一版故事、产品页、摘要和开放问题清单。",
+"PM and Sales edit, prioritize, approve, and decide what should actually go to the buyer.":"PM 和销售负责编辑、排序、批准，并决定最终给买家的内容。",
+"The output is not just a formatted deck. It is a structured first pass that brings the live project record into a presentation format.":"输出不只是格式化的演示文稿，而是把实时项目记录转化为演示格式的结构化初稿。",
+"Account context, line review purpose, category framing, product positioning, and recommended narrative flow.":"客户背景、line review 目的、品类框架、产品定位和建议叙事流程。",
+"Product photos, feature summaries, dimensions, specs, pricing context, status, and open decisions.":"产品照片、功能摘要、尺寸、规格、价格背景、状态和未决决策。",
+"Buyer feedback, sample notes, timing risks, comparison points, cross-functional comments, and unresolved questions.":"买家反馈、样品备注、时间风险、比较点、跨职能评论和未解决问题。",
+"Actual competitive analysis, comparable product patterns, retailer expectations for faster response, and whitespace opportunities the line review should address.":"真实竞品分析、可比产品模式、零售商对更快响应的期待，以及 line review 应该处理的空白机会。",
+"Modify trend presentations based on what matters most to each account, including retailer priorities, category focus, buyer feedback, and whitespace opportunities.":"根据每个客户最重视的内容修改趋势演示，包括零售商优先事项、品类重点、买家反馈和空白机会。",
+"Follow-up lists, owners, missing inputs, decision points, and next steps for PM, Sales, Design, and Operations.":"PM、销售、设计和运营的跟进清单、负责人、缺失输入、决策点和下一步。",
+"The business value is not that The Agents make the final presentation. The value is that PM and Sales start from a better, faster, more complete first draft.":"业务价值不在于智能体制作最终演示，而在于 PM 和销售能从更好、更快、更完整的初稿开始。",
+"Manual copying from Trello, files, and messages":"从 Trello、文件和消息中手工复制",
+"Deck quality varies by account, timing, and capacity":"演示质量会随客户、时间和产能而波动",
+"Project records and presentation files drift apart":"项目记录和演示文件逐渐脱节",
+"More PM/Sales time for buyer strategy and judgment":"PM / 销售有更多时间用于买家策略和判断",
+"Westfield does not need to imagine AI agents from zero. Industrial Design already has deployed AI agents supporting real product-development work.":"Westfield 不需要从零想象 AI 智能体。工业设计已经部署了支持真实产品开发工作的 AI 智能体。",
+"Shared agents support Industrial Design workflows across research, synthesis, visualization, documentation, translation, Trello visibility, and presentation building.":"共享智能体支持工业设计在研究、综合、可视化、文档、翻译、Trello 可见性和演示制作方面的工作流。",
+"Team members also have personal agents that help with their own project work, questions, references, follow-up, and daily execution.":"团队成员也有个人智能体，帮助自己的项目工作、问题、参考、跟进和日常执行。",
+"This is not a theoretical future state. Agents are already operating inside the Industrial Design workflow and producing useful work.":"这不是理论上的未来状态。智能体已经在工业设计工作流中运行，并产生有用工作。",
+"The opportunity is not to replace design judgment. The opportunity is to support, structure, and scale the working pattern that already exists.":"机会不是替代设计判断，而是支持、结构化并扩展已经存在的工作模式。",
+"Top-level and personal AI agents are already supporting a wide range of Industrial Design and product-development workflows.":"顶层和个人 AI 智能体已经在支持广泛的工业设计和产品开发工作流。",
+"Rapid product ideas, styling directions, form language studies, usage scenarios, mood boards, sketch prompts, and early visual territories.":"快速产品想法、造型方向、形态语言研究、使用场景、情绪板、草图提示和早期视觉方向。",
+"Early geometry studies, STEP/CAD support, part inspection, dimensional review, assembly thinking, snapshots, and visual review links.":"早期几何研究、STEP/CAD 支持、零件检查、尺寸审查、装配思考、快照和视觉审查链接。",
+"Internal decks, customer-facing decks, design-review layouts, revised slide copy, Chinese translation when needed, template standards, logo consistency, and GitHub Pages publishing.":"内部演示、客户演示、设计评审版式、修改后的幻灯片文案、需要时的中文翻译、模板标准、logo 一致性和 GitHub Pages 发布。",
+"Project status, blockers, overdue items, open questions, next steps, owners, daily/weekly reports, and operating visibility.":"项目状态、阻碍、逾期事项、开放问题、下一步、负责人、日报/周报和运营可见性。",
+"Defining critical paths, Gantt-style planning, dependencies, owners, timing risks, milestone structure, and project flow inside Trello.":"在 Trello 中定义关键路径、甘特式计划、依赖关系、负责人、时间风险、里程碑结构和项目流程。",
+"Review comments, chat threads, meeting notes, decisions, open questions, risks, revision paths, and action items.":"评审评论、聊天线程、会议记录、决策、开放问题、风险、修改路径和行动项。",
+"Reframing design work for PM, engineering, sourcing, factories, and leadership.":"为 PM、工程、采购、工厂和领导层重新表述设计工作。",
+"Chinese translation, factory handoff notes, sample feedback summaries, revision requests, and open-question tracking.":"中文翻译、工厂交接说明、样品反馈摘要、修改请求和开放问题跟踪。",
+"The next step is to make the current agent-supported workflow more structured, repeatable, and useful across product development.":"下一步是让当前智能体支持的工作流在产品开发中更结构化、更可重复、更有用。",
+"Industrial Design is already proving that deployed AI agents can create leverage without removing human ownership.":"工业设计已经证明，部署的 AI 智能体可以在不移除人类主导权的情况下创造杠杆效应。",
+"Taste, product intent, customer empathy, physical evaluation, and final direction stay with the Industrial Design team.":"审美、产品意图、客户共情、实物评估和最终方向仍由工业设计团队掌握。",
+"Top-level and personal agents support speed, memory, iteration, communication, research, presentation building, and project visibility.":"顶层和个人智能体支持速度、记忆、迭代、沟通、研究、演示制作和项目可见性。",
+"Good people use better information inside better workflows, creating a practical deployment pattern other functions can adopt.":"优秀的人在更好的工作流中使用更好的信息，形成其他职能可采用的实际部署模式。",
+"support, structure, and scale the workflows already improving speed, visibility, communication, and product-development memory.":"支持、结构化并扩展那些已经提升速度、可见性、沟通和产品开发记忆的工作流。",
+"Trello is a Kanban-based project management system: work is organized into boards, lists, and cards that can hold owners, dates, labels, comments, checklists, attachments, and decisions.":"Trello 是基于看板的项目管理系统：工作被组织成看板、列表和卡片，卡片可以包含负责人、日期、标签、评论、检查清单、附件和决策。",
+"Boards show the workflow, lists show stages, and cards carry the actual work item from idea to decision to completion.":"看板展示工作流，列表展示阶段，卡片承载从想法到决策再到完成的实际工作项。",
+"Trello gives agents clean objects to read: boards, cards, labels, due dates, members, checklist items, comments, attachments, and activity history.":"Trello 给智能体提供可读取的清晰对象：看板、卡片、标签、截止日期、成员、检查项、评论、附件和活动历史。",
+"The important idea is structured work: projects, owners, dates, comments, attachments, decisions, and status history organized so people and agents can use them.":"重要的是结构化工作：项目、负责人、日期、评论、附件、决策和状态历史被组织起来，让人和智能体都能使用。",
+"The real opportunity is not a task board. It is a shared operating layer where project work, decisions, files, timing, ownership, and feedback stay connected across the business.":"真正的机会不是任务看板，而是一个共享运营层，让项目工作、决策、文件、时间、责任和反馈在整个业务中保持连接。",
+"When work is organized this way, agents can support each team in its own workflow while leadership sees one connected version of the business.":"当工作这样组织时，智能体可以支持每个团队自己的工作流，同时让领导层看到一个连接起来的业务版本。",
+"Start with four lanes that share one foundation, but tune each agent to the workflow, inputs, outputs, and leadership value of that lane.":"从共享同一基础的四条通道开始，但根据每条通道的工作流、输入、输出和领导价值调整每个智能体。",
+"Turns project records into buyer-ready commercial work.":"把项目记录转化为买家可用的商业工作。",
+"Supports design development from concept through technical review.":"支持从概念到技术评审的设计开发。",
+"Helps manage high-volume creative work without losing context.":"帮助管理大量创意工作，同时不丢失背景。",
+"Converts live work into leadership intelligence and operating follow-up.":"把实时工作转化为领导层智能和运营跟进。",
+"This lane turns structured project records into faster account work: cleaner buyer stories, better line-review prep, and clearer follow-up on open product decisions.":"这条通道把结构化项目记录转化为更快的客户工作：更清晰的买家故事、更好的 line review 准备，以及对未决产品决策更清楚的跟进。",
+"This lane needs more than generic summarization. It needs structured support for the technical judgment that happens between idea, sample, engineering review, and factory execution.":"这条通道需要的不只是通用摘要，而是对从想法、样品、工程评审到工厂执行之间技术判断的结构化支持。",
+"Creative Services needs a work system that can handle high request volume, video-heavy work, asset reuse, approvals, and presentation support without losing context.":"创意服务需要一个能处理高请求量、大量视频工作、资产复用、审批和演示支持，同时不丢失背景的工作系统。",
+"This lane applies the same operating-system logic to business execution: earlier visibility into operational risk, cost movement, document exceptions, and process gaps.":"这条通道把同样的操作系统逻辑应用到业务执行中：更早看到运营风险、成本变化、文件异常和流程缺口。",
+"This lane turns live work into a leadership operating picture: what changed, what needs a decision, and what follow-up can happen in the same conversation.":"这条通道把实时工作转化为领导层运营图景：什么变了、什么需要决策，以及哪些跟进可以在同一对话中完成。",
+"The dashboard should tell leadership where to spend time.":"仪表盘应该告诉领导层应该把时间花在哪里。",
+"One page every morning: what changed, what is at risk, and what needs attention.":"每天早上一页：什么发生变化、什么存在风险、什么需要关注。",
+"Today, much of our knowledge lives inside people. AI agents can help capture it back into the system as work happens, making it searchable, reusable, and better organized over time.":"今天，我们很多知识都存在人的脑子里。AI 智能体可以在工作发生时把这些知识捕捉回系统中，使其随着时间变得可搜索、可复用、组织更好。",
+"One retailer signal becomes a stronger brief, a faster decision, and better company memory for the next product-development cycle.":"一个零售商信号会变成更强的简报、更快的决策，以及为下一个产品开发周期服务的更好公司记忆。",
+"Across Sales, PM, Design, Creative Services, Operations, Finance, Accounting, and Executive work, the pattern is the same: better capture, better visibility, and better follow-through.":"在销售、PM、设计、创意服务、运营、财务、会计和高管工作中，模式都是一样的：更好的捕捉、更好的可见性和更好的跟进。",
+"More complete work with agents that never sleep, not just faster work.":"不是只追求更快，而是通过永不休息的智能体完成更完整的工作。",
+"AI is changing both sides of Westfield's market: retailers are raising supplier expectations, while brands and manufacturers are improving how quickly they compete.":"AI 正在改变 Westfield 市场的两侧：零售商提高对供应商的期待，而品牌和制造商也在提升竞争速度。",
+"They will expect suppliers to move faster with better context.":"他们会期待供应商在更好的背景下更快行动。",
+"Westfield has the right business conditions for agentic AI, and unusually strong leadership adoption to turn those conditions into operating results.":"Westfield 具备适合智能体 AI 的业务条件，并且领导层采用度异常强，这能把这些条件转化为运营成果。",
+"If we do not build this capability, our information problem grows every year.":"如果我们不建立这项能力，我们的信息问题每年都会变得更严重。",
+"The danger is not that AI agents replace Westfield. The danger is that competitors use agentic AI systems to move faster while we continue working the old way.":"危险不在于 AI 智能体会取代 Westfield。危险在于竞争对手使用智能体 AI 系统更快行动，而我们仍按旧方式工作。",
+"A good system produces clear, useful outputs that people trust enough to use.":"好的系统会产生清晰、有用、让人足够信任并愿意使用的输出。",
+"Build the foundation and prove value in real workflows.":"建立基础，并在真实工作流中证明价值。",
+"Move from pilots to a connected operating system.":"从试点走向连接的操作系统。",
+"Beyond 24 months, the system becomes part of how Westfield operates every day.":"24 个月以后，该系统会成为 Westfield 日常运营方式的一部分。",
+"These are the demos the team wants to show live in an upcoming meeting so leadership can see AI agents working on real Westfield problems.":"这些是团队希望在即将召开的会议中现场展示的演示，让领导层看到 AI 智能体如何处理真实的 Westfield 问题。",
+"Project Health: An agent reads Trello cards and produces a risk-ranked project summary.":"项目健康：智能体读取 Trello 卡片，并生成按风险排序的项目摘要。",
+"Line Review Deck: An agent reads a Trello line-review board, pulls product photos, specs, pricing, comments, and attachment URLs, then builds a shareable buyer presentation.":"Line Review 演示：智能体读取 Trello line-review 看板，拉取产品照片、规格、价格、评论和附件链接，然后生成可分享的买家演示。",
+"Costco Chair Brief: An agent creates a complete product brief from past feedback, competitive notes, and project history.":"Costco 椅子简报：智能体根据过往反馈、竞品备注和项目历史创建完整产品简报。",
+"CEO Daily Brief: An agent prepares one page of business changes, risks, and recommended follow-up.":"CEO 每日简报：智能体准备一页业务变化、风险和建议跟进。",
+"Success should be measured by business effectiveness, not by how many AI tools or agent experiments we buy.":"成功应该用业务有效性衡量，而不是用购买了多少 AI 工具或做了多少智能体实验衡量。",
+"Approval does not mean one big technology bet. It means permission to build the first working version.":"批准并不意味着下一场大型技术赌注，而是允许我们构建第一个可运行版本。",
+"The goal is not to build the smartest agentic AI system in outdoor. The goal is to build the smartest outdoor company using AI agents well.":"目标不是打造户外行业最聪明的智能体 AI 系统，而是打造最会使用 AI 智能体的户外公司。",
+"Slides 3-8":"幻灯片 3-8",
+"Slides 9-12":"幻灯片 9-12",
+"Slides 13-17":"幻灯片 13-17",
+"Slides 18-21":"幻灯片 18-21",
+"Slides 22-23":"幻灯片 22-23",
+"Slides 24-29":"幻灯片 24-29",
+"Slides 30-32":"幻灯片 30-32",
+"Slides 33-34":"幻灯片 33-34",
+"Slides 35-38":"幻灯片 35-38",
+"Slides 39-45":"幻灯片 39-45",
+"Reading large amounts of text quickly":"快速阅读大量文本",
+"Summarizing documents":"总结文档",
+"Finding patterns across notes":"从笔记中发现模式",
+"Explaining complex information simply":"用简单方式解释复杂信息",
+"Example":"示例",
+"The workflow problem":"工作流问题",
+"The agent role":"智能体角色",
+"The human role":"人的角色",
+"Photos and specs gathered one item at a time":"照片和规格逐项收集",
+"Faster first drafts from current project data":"基于当前项目数据更快生成初稿",
+"More consistent line review structure":"更一致的 line review 结构",
+"Clearer missing-information and risk flags":"更清楚地标记缺失信息和风险",
+"Comparable product construction, mechanisms, materials, assembly methods, folding systems, storage approaches, durability details, comfort details, manufacturability references, patents, prior art, teardown references, and design precedents.":"可比产品结构、机构、材料、装配方式、折叠系统、收纳方式、耐用性细节、舒适性细节、可制造性参考、专利、现有技术、拆解参考和设计先例。",
+"Formal Industrial Design agent workspace":"正式的工业设计智能体工作空间",
+"One connected workspace for concepts, CAD references, technical research, project status, presentations, sample feedback, and design memory.":"一个连接概念、CAD 参考、技术研究、项目状态、演示文稿、样品反馈和设计记忆的工作空间。",
+"Structured product-development memory":"结构化产品开发记忆",
+"Searchable history of concepts, materials, mechanisms, factory lessons, engineering decisions, sample issues, CAD references, and presentation outputs.":"可搜索的历史记录，包括概念、材料、机构、工厂经验、工程决策、样品问题、CAD 参考和演示输出。",
+"Consistent project visibility":"一致的项目可见性",
+"Automated project health summaries, risk flags, missing-information alerts, and weekly ID / product-development leadership views.":"自动化项目健康摘要、风险标记、缺失信息提醒，以及每周 ID / 产品开发领导视图。",
+"Reusable agent-assisted workflows":"可复用的智能体辅助工作流",
+"Standard workflows for concept briefs, technical research, design reviews, CAD review, deck creation, Chinese translation, sample feedback, and Trello reporting.":"面向概念简报、技术研究、设计评审、CAD 评审、演示文稿创建、中文翻译、样品反馈和 Trello 报告的标准工作流。",
+"Better cross-functional adoption":"更好的跨职能采用",
+"Extend the same working model into PM, engineering, sourcing, compliance, operations, and executive reporting by building around each function's real workflow.":"围绕每个职能的真实工作流，把同一工作模型扩展到 PM、工程、采购、合规、运营和高管报告。",
+"Executive intelligence from real work":"来自真实工作的高管智能",
+"Leadership can see active concepts, blocked work, resource needs, recurring issues, and product opportunities gaining traction.":"领导层可以看到活跃概念、受阻工作、资源需求、反复出现的问题，以及正在形成势头的产品机会。",
+"When the card is maintained well, the latest status, context, files, comments, owners, and open questions live in one place instead of scattered across messages and memory.":"当卡片维护良好时，最新状态、背景、文件、评论、负责人和开放问题都会集中在一处，而不是分散在消息和记忆中。",
+"Agents can safely read and update approved boards through Trello's API, summarize changes, flag missing information, draft reports, and keep cards current.":"智能体可以通过 Trello API 安全读取和更新已批准的看板，总结变化、标记缺失信息、起草报告，并保持卡片最新。",
+"Trello sits in a wider species of work-management tools alongside platforms like Asana, Monday, Jira, ClickUp, Smartsheet, Airtable, and Microsoft Planner.":"Trello 属于更广泛的工作管理工具类别，同类平台包括 Asana、Monday、Jira、ClickUp、Smartsheet、Airtable 和 Microsoft Planner。",
+"Trello is the current practical foundation, not the only possible answer. The strategic requirement is a structured work system agents can read, summarize, update, and turn into useful visibility.":"Trello 是当前实际可用的基础，但不是唯一答案。战略需求是一个结构化工作系统，让智能体可以读取、总结、更新，并转化为有用的可见性。",
+"Line review readiness, retailer feedback, pricing context, assortment decisions, buyer follow-up, and account-specific priorities.":"Line review 准备度、零售商反馈、价格背景、品类组合决策、买家跟进和客户专属优先事项。",
+"Concept direction, research, sample feedback, presentation outputs, CAD references, visual decisions, and design memory.":"概念方向、研究、样品反馈、演示输出、CAD 参考、视觉决策和设计记忆。",
+"Specifications, technical risks, construction decisions, test status, manufacturability questions, and unresolved blockers.":"规格、技术风险、结构决策、测试状态、可制造性问题和未解决阻碍。",
+"Factory notes, vendor questions, sample timing, material choices, cost implications, and production handoff details.":"工厂备注、供应商问题、样品时间、材料选择、成本影响和生产交接细节。",
+"Requirements, certification status, open questions, documentation gaps, and risk visibility before problems reach the customer.":"要求、认证状态、开放问题、文档缺口，以及问题到达客户前的风险可见性。",
+"Requests, routing, assets, video needs, deadlines, approval status, version control, and campaign or presentation support.":"请求、流转、资产、视频需求、截止日期、审批状态、版本控制，以及营销活动或演示支持。",
+"Timing risk, margin impact, resource needs, inventory implications, recurring issues, and cross-functional follow-up.":"时间风险、利润影响、资源需求、库存影响、反复问题和跨职能跟进。",
+"One view of active work, blocked work, decision needs, opportunities gaining traction, and where the business needs attention.":"一个视图呈现活跃工作、受阻工作、决策需求、正在形成势头的机会，以及业务需要关注的位置。",
+"Line review deck generation":"Line review 演示生成",
+"Pricing, specs, photos, and feedback":"价格、规格、照片和反馈",
+"Product status and open decisions":"产品状态和未决决策",
+"Account-specific next actions":"客户专属下一步行动",
+"Concept and reference research":"概念与参考研究",
+"CAD / STEP and visual review support":"CAD / STEP 与视觉评审支持",
+"Engineering questions and risks":"工程问题和风险",
+"Sample feedback and design memory":"样品反馈和设计记忆",
+"Request intake and routing":"请求接收和流转",
+"Asset, video, and deck support":"资产、视频和演示文稿支持",
+"Status visibility and approvals":"状态可见性和审批",
+"Template and story consistency":"模板和故事一致性",
+"Project health summaries":"项目健康摘要",
+"Blocked-work and risk signals":"受阻工作和风险信号",
+"Decision and resource needs":"决策和资源需求",
+"Cross-functional executive briefs":"跨职能高管简报",
+"From project records to buyer-ready commercial work.":"从项目记录到买家可用的商业工作。",
+"The agent helps Sales and PM start with the right account context, product status, feedback, photos, specs, and open decisions already organized.":"智能体帮助销售和 PM 从已经整理好的客户背景、产品状态、反馈、照片、规格和未决决策开始。",
+"Line review readiness":"Line review 准备度",
+"Account priorities, product status, missing inputs, sample needs, buyer feedback, competitive context, and next-step decisions.":"客户优先事项、产品状态、缺失输入、样品需求、买家反馈、竞争背景和下一步决策。",
+"Buyer presentation support":"买家演示支持",
+"First-pass story structure, product pages, feature summaries, photos, specs, pricing context, and open-question lists.":"第一版故事结构、产品页面、功能摘要、照片、规格、价格背景和开放问题清单。",
+"Account-specific intelligence":"客户专属智能",
+"Retailer preferences, price bands, repeated feedback, category trends, whitespace opportunities, and comparable products.":"零售商偏好、价格带、反复反馈、品类趋势、空白机会和可比产品。",
+"Commercial follow-through":"商业跟进",
+"Draft buyer emails, Trello replies, action lists, owner follow-up, presentation kickoffs, and decision records.":"起草买家邮件、Trello 回复、行动清单、负责人跟进、演示启动和决策记录。",
+"Information hierarchy:":"信息层级：",
+"Sales and PM own the account strategy and commercial judgment; the agent prepares the source material, draft structure, and follow-up path.":"销售和 PM 负责客户策略和商业判断；智能体准备源材料、草稿结构和跟进路径。",
+"From scattered technical context to a stronger starting point.":"从分散的技术背景到更强的起点。",
+"The agent helps the team begin with the relevant history already assembled, so designers and engineers spend less time hunting and more time deciding.":"智能体帮助团队从已经汇集好的相关历史开始，让设计师和工程师少花时间查找，多花时间决策。",
+"Research and reference base":"研究和参考基础",
+"Technical research, construction methods, material options, comparable mechanisms, patent/prior-art references, and competitive teardown notes.":"技术研究、结构方法、材料选项、可比机构、专利 / 现有技术参考和竞品拆解备注。",
+"Project and sample memory":"项目和样品记忆",
+"Past sample feedback, factory learnings, previous solution attempts, recurring issues, CAD references, and design rationale.":"过往样品反馈、工厂经验、以前的解决尝试、反复问题、CAD 参考和设计理由。",
+"Engineering decision support":"工程决策支持",
+"Risk lists, unresolved technical questions, manufacturability concerns, test summaries, and tradeoffs that need human review.":"风险清单、未解决技术问题、可制造性担忧、测试摘要和需要人工评审的取舍。",
+"Reusable outputs":"可复用输出",
+"Concept briefs, design-review decks, CAD review notes, vendor questions, testing summaries, and follow-up structure.":"概念简报、设计评审演示、CAD 评审备注、供应商问题、测试摘要和跟进结构。",
+"the agent organizes context and flags decisions; the design and engineering teams own the creative and technical judgment.":"智能体组织背景并标记决策点；设计和工程团队负责创意和技术判断。",
+"From scattered requests to managed creative throughput.":"从分散请求到可管理的创意产出。",
+"The agent organizes incoming work, keeps source context attached, and helps the team move from request intake to finished asset with fewer dropped details.":"智能体组织进入的工作，保留源背景，并帮助团队从请求接收到最终资产，减少细节遗漏。",
+"Capture briefs, due dates, stakeholders, references, priorities, approvals, and missing information from Trello and conversation threads.":"从 Trello 和对话线程中捕捉简报、截止日期、相关方、参考、优先级、审批和缺失信息。",
+"Asset and video support":"资产和视频支持",
+"Track source files, product photos, video needs, edits, cutdowns, version history, and where each asset should be reused.":"跟踪源文件、产品照片、视频需求、编辑、短版剪辑、版本历史，以及每个资产应在哪里复用。",
+"Presentation and template work":"演示和模板工作",
+"Kick off decks, preserve story consistency, manage visual standards, and turn product context into first-pass presentation structure.":"启动演示文稿、保持故事一致性、管理视觉标准，并把产品背景转化为第一版演示结构。",
+"Status and approvals":"状态和审批",
+"Show what is waiting, who needs to review it, what changed, and which creative requests are blocking Sales, PM, or leadership work.":"显示哪些事项在等待、谁需要评审、发生了什么变化，以及哪些创意请求正在阻碍销售、PM 或领导层工作。",
+"Creative Services keeps control of the final work; the agent protects context, routing, status, and reusable creative memory.":"创意服务保留对最终工作的控制；智能体保护背景、流转、状态和可复用的创意记忆。",
+"From late discovery to earlier operating signals.":"从较晚发现到更早的运营信号。",
+"The agent does not replace functional expertise. It makes risk, cost movement, document exceptions, and process gaps visible before they become harder to fix.":"智能体不会替代职能专业能力。它让风险、成本变化、文档异常和流程缺口在更难修复之前变得可见。",
+"Factory delays, sample status, production bottlenecks, capacity issues, shipment risks, and ownership gaps.":"工厂延误、样品状态、生产瓶颈、产能问题、出货风险和责任缺口。",
+"Margin movement, cost-change summaries, pricing pressure, scenario support, and account-level financial signals.":"利润变化、成本变化摘要、价格压力、情景支持和客户层面的财务信号。",
+"Document workflow support, exception tracking, payment issue summaries, missing approvals, and process consistency.":"文档工作流支持、异常跟踪、付款问题摘要、缺失审批和流程一致性。",
+"Clear escalation lists, owner follow-up, recurring process issues, and the financial or operational reason each item matters.":"清晰的升级清单、负责人跟进、反复流程问题，以及每一项的重要财务或运营原因。",
+"operations, finance, and accounting keep ownership of the function; the agent raises the right signals, organizes the evidence, and helps execute follow-up.":"运营、财务和会计保留对职能的所有权；智能体提出正确信号、组织证据，并帮助执行跟进。",
+"From passive status review to active operating intelligence.":"从被动状态查看到主动运营智能。",
+"The agent helps leadership see the business from current work, not stale reports, then move directly into follow-up actions.":"智能体帮助领导层从当前工作而不是过时报表中了解业务，然后直接进入跟进行动。",
+"Business health signals":"业务健康信号",
+"Projects needing attention, blocked work, timing risk, account readiness, commercial opportunity, and cross-functional decision pressure.":"需要关注的项目、受阻工作、时间风险、客户准备度、商业机会和跨职能决策压力。",
+"Decision points":"决策点",
+"What needs leadership input, who owns the next step, when the decision is needed, and what happens if it waits.":"哪些事项需要领导层输入、谁负责下一步、何时需要决策，以及如果等待会发生什么。",
+"Same-chat execution":"同一聊天内执行",
+"Draft vendor emails, reply to Trello comments, kick off presentation work, assign follow-up, and preserve the decision record.":"起草供应商邮件、回复 Trello 评论、启动演示工作、分配跟进，并保留决策记录。",
+"Leadership rhythm":"领导节奏",
+"Daily briefs, weekly leadership summaries, department health views, and cross-functional escalation lists.":"每日简报、每周领导摘要、部门健康视图和跨职能升级清单。",
+"the agent highlights the operating signal and prepares the action; leaders make the call and set the priority.":"智能体突出运营信号并准备行动；领导者做决定并设定优先级。",
+"Lots of metrics that still require interpretation.":"大量仍需要解释的指标。",
+"Leadership has to decide what matters after reading the report.":"领导层读完报告后还必须判断什么重要。",
+"Status can become noise when ownership and urgency are unclear.":"当责任和紧急程度不清楚时，状态信息会变成噪音。",
+"Information often arrives after the window to act has narrowed.":"信息经常在行动窗口已经变窄后才到达。",
+"Explains what changed and why it matters.":"解释发生了什么变化以及为什么重要。",
+"Names the owner, decision needed, and timing risk.":"明确负责人、所需决策和时间风险。",
+"Ranks issues by business impact, not just activity level.":"按业务影响而不只是活动量对问题排序。",
+"Lets leaders act in the same conversation: draft an email, reply to a Trello comment, or kick off a presentation.":"让领导者在同一对话中行动：起草邮件、回复 Trello 评论，或启动演示文稿。",
+"The shift:":"转变：",
+"from asking leaders to interpret a dashboard to giving them a one-stop operating conversation where information, decisions, and follow-up actions live together.":"从要求领导者解读仪表盘，转向提供一个一站式运营对话，让信息、决策和跟进行动集中在一起。",
+"Costco hard-arm chair sample risk requires a frame-direction decision by Friday.":"Costco 硬扶手椅样品风险需要在周五前决定框架方向。",
+"Product development health":"产品开发健康状况",
+"Softlines has 4 projects with no sample update in 10+ days; Engineering is waiting for 2 revised CAD files.":"软品有 4 个项目超过 10 天没有样品更新；工程正在等待 2 个修订后的 CAD 文件。",
+"Commercial opportunity":"商业机会",
+"Compact seating interest is repeating across Costco, Target, and DSG notes.":"Costco、Target 和 DSG 备注中反复出现对紧凑型座椅的兴趣。",
+"Risk to watch":"需关注风险",
+"Two projects have compliance questions that may affect import or labeling requirements.":"两个项目存在可能影响进口或标签要求的合规问题。",
+"The agent highlights the decision point, then helps execute the follow-up without switching tools.":"智能体突出决策点，然后帮助执行跟进，无需切换工具。",
+"Draft the vendor email":"起草供应商邮件",
+"Reply to the Trello comment":"回复 Trello 评论",
+"Kick off the presentation":"启动演示文稿",
+"Decisions and context appear everywhere":"决策和背景出现在各处",
+"Meetings, buyer feedback, Trello comments, factory notes, testing updates, and chat threads all create useful business knowledge.":"会议、买家反馈、Trello 评论、工厂备注、测试更新和聊天线程都会产生有用的业务知识。",
+"Information goes back into the system":"信息回到系统中",
+"Agents summarize decisions, update cards, preserve context, and attach follow-up actions to the right project record.":"智能体总结决策、更新卡片、保留背景，并把跟进行动附到正确的项目记录上。",
+"The company becomes easier to search":"公司变得更容易搜索",
+"Repeated lessons, open questions, risks, wins, losses, costing decisions, and compliance history become findable.":"反复经验、开放问题、风险、成功、失败、成本决策和合规历史都变得可查找。",
+"Better inputs create better outputs":"更好的输入创造更好的输出",
+"Each project makes the next brief, presentation, risk summary, and leadership decision more informed.":"每个项目都会让下一个简报、演示、风险摘要和领导决策拥有更多信息。",
+"Meeting notes":"会议记录",
+"Buyer feedback":"买家反馈",
+"Factory learnings":"工厂经验",
+"Engineering solutions":"工程解决方案",
+"Testing history":"测试历史",
+"Product wins/losses":"产品成功 / 失败",
+"Costing lessons":"成本经验",
+"Compliance decisions":"合规决策",
+"the agents do not only retrieve information. They help put better information back into the operating system every time the team works.":"智能体不只是检索信息。每次团队工作时，它们都帮助把更好的信息放回运营系统。",
+"Buyer asks for a better hard-arm chair platform":"买家要求更好的硬扶手椅平台",
+"The request arrives through Sales / PM with account context, timing pressure, and open questions.":"请求通过销售 / PM 进入，带有客户背景、时间压力和开放问题。",
+"Captured: buyer note, account priority, target line review window.":"已捕捉：买家备注、客户优先级、目标 line review 窗口。",
+"The agent assembles the history":"智能体汇集历史",
+"It reads previous Costco feedback, past sample issues, competitive chairs, target price bands, and factory notes.":"它读取过往 Costco 反馈、过去的样品问题、竞品椅、目标价格带和工厂备注。",
+"Pulled: Trello cards, photos, comments, sample history, pricing context.":"已拉取：Trello 卡片、照片、评论、样品历史和价格背景。",
+"PM, ID, and Engineering start with the same facts":"PM、ID 和工程从同一事实开始",
+"The agent turns scattered inputs into a clear product brief with options, risks, and decision points.":"智能体把分散输入转化为清晰的产品简报，包含选项、风险和决策点。",
+"Created: product brief, design direction, risk list, open decisions.":"已创建：产品简报、设计方向、风险清单和未决决策。",
+"People choose the path forward":"人选择前进路径",
+"The team decides what to show, what to cost, what to ask the factory, and what needs executive attention.":"团队决定展示什么、核算什么、向工厂询问什么，以及哪些事项需要高管关注。",
+"Actioned: Trello replies, vendor email, buyer presentation starter.":"已行动：Trello 回复、供应商邮件、买家演示启动稿。",
+"The learning goes back into the system":"经验回到系统中",
+"The decision, rationale, sample outcome, buyer reaction, and factory learning become searchable for the next chair project.":"决策、理由、样品结果、买家反应和工厂经验会为下一个椅子项目变得可搜索。",
+"Improved: future briefs, risk summaries, account history, line-review prep.":"已改善：未来简报、风险摘要、客户历史和 line-review 准备。",
+"the agent is not only helping the team move faster. It is turning each project into structured knowledge that makes the next project easier to understand, search, and act on.":"智能体不只是帮助团队更快行动。它把每个项目转化为结构化知识，让下一个项目更容易理解、搜索和行动。",
+"AI agents help make the repeated work visible and structured, so each function can act from better context without waiting for another meeting.":"AI 智能体帮助把重复工作变得可见且结构化，让每个职能都能基于更好的背景行动，而不用等待下一次会议。",
+"Useful decisions and context stop disappearing into scattered notes, emails, chats, and memories.":"有用的决策和背景不再消失在分散的笔记、邮件、聊天和个人记忆中。",
+"Meeting decisions":"会议决策",
+"Project status":"项目状态",
+"Lessons learned":"经验教训",
+"The system turns live work into clearer priorities, risk signals, missing inputs, and account-specific needs.":"系统把实时工作转化为更清晰的优先级、风险信号、缺失输入和客户专属需求。",
+"Line-review gaps":"Line review 缺口",
+"Blocked work":"受阻工作",
+"Repeated themes":"反复主题",
+"Executive summaries":"高管摘要",
+"Agents help teams draft, route, summarize, compare, and prepare the next action in the same operating flow.":"智能体帮助团队在同一运营流程中起草、流转、总结、比较，并准备下一步行动。",
+"Buyer decks":"买家演示",
+"Trello replies":"Trello 回复",
+"Vendor emails":"供应商邮件",
+"Follow-up lists":"跟进清单",
+"every time Westfield works this way, the company becomes more organized, more searchable, and better prepared for the next product, account, risk, or leadership decision.":"每次 Westfield 这样工作，公司都会变得更有组织、更可搜索，并为下一个产品、客户、风险或领导决策做好更充分准备。",
+"Retailers are using AI to improve planning, personalization, inventory, supply chain visibility, and customer response. That changes what they will expect from companies selling into them.":"零售商正在使用 AI 改善规划、个性化、库存、供应链可见性和客户响应。这会改变他们对供应商的期待。",
+"Faster answers":"更快的答复",
+"Cleaner product information":"更清晰的产品信息",
+"Sharper account-specific recommendations":"更精准的客户专属建议",
+"Less friction between request and decision":"从请求到决策之间更少阻力",
+"Other consumer brands are using AI agents and analytics to understand consumers, spot trends, build account-specific stories, and accelerate innovation cycles.":"其他消费品牌正在使用 AI 智能体和分析工具理解消费者、发现趋势、构建客户专属故事，并加快创新周期。",
+"Other manufacturers are using agentic systems to improve planning, quality, compliance, supplier coordination, costing visibility, and production follow-through.":"其他制造商正在使用智能体系统改善规划、质量、合规、供应商协同、成本可见性和生产跟进。",
+"Westfield is both a supplier to retailers and a consumer brand/manufacturer. The pressure comes from retailer expectations and from competitors improving the way they operate.":"Westfield 既是零售商供应商，也是消费品牌 / 制造商。压力来自零售商期待，也来自竞争对手正在改善运营方式。",
+"Many active product-development projects across categories, accounts, factories, and launch windows.":"跨品类、客户、工厂和上市窗口有大量活跃产品开发项目。",
+"Chairs, wagons, coolers, shelters, bags, and accessories create reusable learning across cycles.":"椅子、拖车、冷柜、遮阳棚、包袋和配件在多个周期中创造可复用经验。",
+"Each account has patterns, preferences, price bands, feedback history, and presentation needs.":"每个客户都有自己的模式、偏好、价格带、反馈历史和演示需求。",
+"Product, sales, design, engineering, compliance, finance, operations, and factories must align.":"产品、销售、设计、工程、合规、财务、运营和工厂必须对齐。",
+"Because executive and director-level leaders are already using personal agents, Westfield does not have to wait for belief to form after a technology rollout.":"因为高管和总监级领导已经在使用个人智能体，Westfield 不需要等技术推出后才慢慢形成信心。",
+"EVP / COO-level leaders were early adopters and helped drive technical deployment.":"EVP / COO 级领导是早期采用者，并帮助推动技术部署。",
+"PM and ID directors adopted even earlier and are among the heaviest users.":"PM 和 ID 总监采用得更早，也是使用最频繁的人群之一。",
+"That means standards, workflows, and accountability can move from leadership into daily operations faster.":"这意味着标准、工作流和责任制可以更快从领导层进入日常运营。",
+"the advantage is not just readiness. It is the ability to operationalize agentic AI faster, with better judgment, cleaner adoption, and stronger business results.":"优势不只是准备度，而是能够用更好的判断、更清晰的采用方式和更强的业务结果，更快地把智能体 AI 运营化。",
+"More projects, emails, meetings, and files":"更多项目、邮件、会议和文件",
+"More dependence on individual memory":"更加依赖个人记忆",
+"Slower visibility to risk and missed decisions":"更慢看到风险和遗漏决策",
+"Harder handoffs across Sales, PM, Design, Operations, and leadership":"销售、PM、设计、运营和领导层之间交接更困难",
+"Projects become searchable company knowledge":"项目成为可搜索的公司知识",
+"Risks, gaps, and decisions surface earlier":"风险、缺口和决策更早浮现",
+"Teams work from more complete context":"团队基于更完整的背景工作",
+"Leadership gets cleaner visibility and faster follow-up":"领导层获得更清晰的可见性和更快的跟进",
+"the danger is not that AI agents replace Westfield. The danger is that competitors use agentic AI systems to move faster while we continue working the old way.":"危险不在于 AI 智能体取代 Westfield。危险在于竞争对手使用智能体 AI 系统更快行动，而我们仍按旧方式工作。",
+"Grounded in approved Westfield information.":"基于已批准的 Westfield 信息。",
+"Designed around real workflows, not technology demos.":"围绕真实工作流设计，而不是技术演示。",
+"Leaders can see the health of the business without chasing updates.":"领导者无需追着要更新，也能看到业务健康状况。",
+"Start with product and expand across functions.":"从产品开始，并扩展到各个职能。",
+"Requires process standards, data hygiene, ownership, and governance.":"需要流程标准、数据卫生、责任归属和治理。",
+"AI agents support recommendations; leaders make decisions.":"AI 智能体支持建议；领导者做决策。",
+"0–90 Days":"0–90 天",
+"Define data standards, Trello structure, priority workflows, security approach, and pilot teams.":"定义数据标准、Trello 结构、优先工作流、安全方法和试点团队。",
+"3–6 Months":"3–6 个月",
+"Deploy Sales / PM and Industrial Design / Engineering pilots, including line-review deck generation. Begin Creative Services workflow support and executive dashboard prototype.":"部署销售 / PM 和工业设计 / 工程试点，包括 line-review 演示生成。开始创意服务工作流支持和高管仪表盘原型。",
+"6–9 Months":"6–9 个月",
+"Add recurring project health summaries, LR readiness checks, sample risk alerts, auto-refresh presentation workflows, and meeting-note automation.":"增加定期项目健康摘要、LR 准备度检查、样品风险提醒、自动刷新演示工作流和会议记录自动化。",
+"9–12 Months":"9–12 个月",
+"Review adoption, improve accuracy, standardize dashboards, and decide what to scale next.":"复盘采用情况、提升准确性、标准化仪表盘，并决定下一步扩展什么。",
+"12–15 Months":"12–15 个月",
+"Expand agents into Finance, Accounting, Operations, and Compliance workflows.":"把智能体扩展到财务、会计、运营和合规工作流。",
+"15–18 Months":"15–18 个月",
+"Connect more structured data sources and improve dashboard reliability.":"连接更多结构化数据源，并提升仪表盘可靠性。",
+"18–21 Months":"18–21 个月",
+"Introduce predictive risk: projects likely to miss timing, accounts needing attention, repeated sample issues.":"引入预测性风险：可能错过时间节点的项目、需要关注的客户、反复出现的样品问题。",
+"21–24 Months":"21–24 个月",
+"Create leadership rhythm: executive briefings, department health views, and annual planning intelligence.":"建立领导节奏：高管简报、部门健康视图和年度规划智能。",
+"Agent-supported annual planning":"智能体支持的年度规划",
+"Account-specific intelligence files":"客户专属智能文件",
+"Automated competitive monitoring":"自动化竞争监测",
+"Predictive product development risk":"预测性产品开发风险",
+"Cross-account white space identification":"跨客户空白机会识别",
+"Factory capability memory":"工厂能力记忆",
+"Consumer trend intelligence":"消费者趋势智能",
+"Company health command center":"公司健康指挥中心",
+"Faster visibility to project risk":"更快看到项目风险",
+"More complete line review preparation":"更完整的 line review 准备",
+"Faster buyer presentation first drafts":"更快的买家演示初稿",
+"Fewer missed decisions":"更少遗漏决策",
+"Higher-quality project documentation":"更高质量的项目文档",
+"Better account memory":"更好的客户记忆",
+"Better use of historical lessons":"更好利用历史经验",
+"Improved executive visibility":"更好的高管可见性",
+"More consistent cross-functional follow-up":"更一致的跨职能跟进",
+"Agentic AI as a strategic operating capability for Westfield.":"把智能体 AI 作为 Westfield 的战略运营能力。",
+"Start with an agentic system organized around Sales / PM, Industrial Design / Engineering, Creative Services, and Executive / Operations.":"从围绕销售 / PM、工业设计 / 工程、创意服务和高管 / 运营组织的智能体系统开始。",
+"Standardize Trello and key workflows so AI agents have clean information to work from.":"标准化 Trello 和关键工作流，让 AI 智能体拥有干净的信息基础。",
+"After pilot results, evaluate expansion to Finance, Accounting, Operations, and other functions.":"在试点结果出来后，评估扩展到财务、会计、运营和其他职能。",
+"Westfield already has strong people, strong retailer relationships, and deep product knowledge.":"Westfield 已经拥有优秀的人、强大的零售商关系和深厚的产品知识。",
+"AI agents give us a way to connect that knowledge, make it visible, and use it more consistently.":"AI 智能体为我们提供一种方式，把这些知识连接起来、变得可见，并更一致地使用。",
+"If we do this well, we do not just work faster. We become a company that learns faster.":"如果我们做好这件事，我们不只是工作更快。我们会成为一家学习更快的公司。",
+"People + Process + AI Agents: the fastest, smartest product organization in outdoor.":"人 + 流程 + AI 智能体：户外行业最快、最聪明的产品组织。"
+};
+const languageToggleEl=document.getElementById('language-toggle'),textNodes=[],localizedImages=[...document.querySelectorAll('img[data-zh-src]')];localizedImages.forEach(img=>{img.dataset.enSrc=img.getAttribute('src')});function collectTextNodes(root){const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(node){const text=node.nodeValue.replace(/\s+/g,' ').trim();if(!text||node.parentElement.closest('script,style'))return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT;}});let node;while(node=walker.nextNode()){node.__en=node.nodeValue;textNodes.push(node)}}function applyLanguage(lang){document.documentElement.lang=lang==='zh'?'zh-Hans':'en';textNodes.forEach(node=>{const key=node.__en.replace(/\s+/g,' ').trim();node.nodeValue=lang==='zh'&&zhText[key]?node.__en.replace(key,zhText[key]):node.__en});localizedImages.forEach(img=>{img.setAttribute('src',lang==='zh'?img.dataset.zhSrc:img.dataset.enSrc)});languageToggleEl.textContent=lang==='zh'?'EN':'中文';const label=lang==='zh'?'Switch deck to English':'Switch deck to Chinese';languageToggleEl.setAttribute('aria-label',label);languageToggleEl.setAttribute('title',label);localStorage.setItem('westfield-ai-vision-language',lang)}collectTextNodes(document.body);let currentLanguage=localStorage.getItem('westfield-ai-vision-language')==='zh'?'zh':'en';applyLanguage(currentLanguage);languageToggleEl.addEventListener('click',()=>{currentLanguage=currentLanguage==='zh'?'en':'zh';applyLanguage(currentLanguage)});
+</script></body></html>
