@@ -34,6 +34,57 @@
 .risk-halves{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1rem}.risk-half{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(1.1rem,1.8vw,1.45rem);min-height:330px;display:flex;flex-direction:column;gap:.75rem;border-top:8px solid var(--amber)}.risk-half.with{border-top-color:var(--green)}.risk-half .kicker{margin:0;color:var(--muted);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.risk-half h3{margin:0;font-size:clamp(1.55rem,2.45vw,2.35rem);line-height:1}.risk-half ul{margin:.2rem 0 0;padding-left:1.1rem;color:var(--muted);font-size:clamp(.95rem,1.1vw,1.06rem);line-height:1.35;font-weight:700}.risk-half li{margin:.28rem 0}.risk-conclusion{margin-top:.9rem;background:#151515;color:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.05rem 1.25rem;font-size:clamp(1.05rem,1.45vw,1.34rem);line-height:1.24;font-weight:850}.risk-conclusion span{color:#f5c15a}@media(max-width:900px){.risk-halves{grid-template-columns:1fr}.risk-half{min-height:0}}
 </style><style>
 .ownership-flow{display:grid;grid-template-columns:1.05fr auto 1.05fr auto 1.05fr;align-items:stretch;gap:.8rem;margin-top:1rem}.ownership-panel{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(1rem,1.8vw,1.45rem);border-top:7px solid var(--blue);display:flex;flex-direction:column;gap:.55rem}.ownership-panel:nth-of-type(3){border-top-color:var(--green)}.ownership-panel:nth-of-type(5){border-top-color:var(--amber)}.ownership-panel .kicker{margin:0;color:var(--muted);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.ownership-panel h3{margin:0;font-size:clamp(1.35rem,2vw,2rem);line-height:1.02}.ownership-panel p{margin:0;color:var(--muted);font-size:clamp(.95rem,1.12vw,1.08rem);line-height:1.34;font-weight:650}.flow-arrow{display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:clamp(1.8rem,3vw,2.7rem);font-weight:900}.strategic-callout{margin-top:.9rem;background:#151515;color:#fff;border-radius:var(--radius);padding:1.05rem 1.25rem;box-shadow:var(--shadow);font-size:clamp(1.05rem,1.5vw,1.38rem);line-height:1.24;font-weight:850}.strategic-callout span{color:#f5c15a}@media(max-width:900px){.ownership-flow{grid-template-columns:1fr}.flow-arrow{transform:rotate(90deg);font-size:2rem}.strategic-callout{font-size:1.05rem}}
+</style><style>
+@media(max-width:900px){
+  html{scroll-padding-top:0}
+  body{background:#ecece7}
+  .slide{display:block;min-height:100svh;overflow:visible;padding:3.85rem 0 4.15rem;border-bottom:1px solid rgba(20,20,20,.08)}
+  .content{width:100%;margin:0;padding:0 1rem;gap:.82rem}
+  .logo{position:absolute;top:.78rem;right:.9rem;width:94px;max-width:28vw}
+  .section-label{position:absolute;left:1rem;right:auto;top:.95rem;bottom:auto;max-width:calc(100vw - 8.2rem);margin:0;padding:.36rem .58rem;font-size:.58rem;letter-spacing:.06em;background:rgba(255,255,255,.82)}
+  .slide-number{position:absolute;right:.95rem;bottom:1.35rem;margin:0;padding:0;font-size:.62rem;letter-spacing:.04em}
+  .slide::after{position:absolute;left:1rem;right:4.85rem;bottom:.55rem;display:block;transform:none;width:auto;margin:0;text-align:left;font-size:.43rem;line-height:1.16}
+  .language-toggle{position:fixed;left:.85rem;bottom:.85rem;margin:0;padding:.44rem .72rem;font-size:.72rem;background:rgba(255,255,255,.94)}
+  .progress{height:4px}
+  h1{font-size:clamp(1.85rem,9vw,2.55rem);line-height:1.02}
+  .cover h1{font-size:clamp(2rem,10vw,2.75rem)}
+  .lede{font-size:1rem;line-height:1.34}
+  .eyebrow{font-size:.66rem;letter-spacing:.1em}
+  blockquote{font-size:1.55rem;line-height:1.1;border-left-width:6px;padding:1rem}
+  .cards,.pill-row,.chips{grid-template-columns:1fr;gap:.72rem;margin-top:.55rem}
+  .card,.compare-card,.timeline-step,.lane-card,.briefing-paper,.decision-panel,.diff-panel,.cycle-step,.story-step,.impact-lead,.impact-item,.close-thesis,.close-column,.retailer-pressure,.competition-card,.advantage-card,.leadership-advantage,.risk-half,.ownership-panel{box-shadow:0 8px 22px rgba(0,0,0,.07)}
+  .card,.pill-row span,.chips span{padding:.88rem}
+  .card h3{font-size:1rem}
+  .card p,.compact-list,.bullets{font-size:.93rem;line-height:1.32}
+  .callout,.example-callout,.strategic-callout,.diff-takeaway,.cycle-callout,.story-callout,.impact-callout,.close-final,.competitive-close,.advantage-bottom,.risk-conclusion{padding:.88rem 1rem;font-size:1rem;line-height:1.25}
+  .toc-grid{gap:.58rem}
+  .toc-item{grid-template-columns:auto 1fr;padding:.72rem .8rem;gap:.5rem}
+  .toc-title{font-size:.94rem}
+  .toc-range{grid-column:2;font-size:.76rem}
+  .visual-frame img,.architecture-frame img,#slide-12 .architecture-frame img{width:100%;height:auto;max-height:58vh;object-fit:contain}
+  #slide-12 .architecture-frame{display:block;width:100%;max-width:100%}
+  .workflow-timeline,.lane-grid,.briefing-layout,.work-diff,.memory-cycle,.story-timeline,.lane-impact,.functional-close,.competitive-layout,.advantage-layout,.risk-halves,.ownership-flow{grid-template-columns:1fr;gap:.72rem}
+  .impact-list,.close-grid,.advantage-grid{grid-template-columns:1fr;gap:.72rem}
+  .timeline-arrow,.diff-arrow,.cycle-arrow,.story-arrow,.flow-arrow{height:1.3rem;transform:rotate(90deg);font-size:1.8rem;line-height:1}
+  .lane-card,.risk-half,.cycle-step,.story-step,.advantage-card{min-height:0}
+  .briefing-header{align-items:flex-start;flex-direction:column}
+  .briefing-header span{white-space:normal}
+  .briefing-item{grid-template-columns:1fr}
+  .competition-card{grid-template-columns:1fr}
+  .expect-row{border-radius:var(--radius)}
+  .source-cloud{height:auto;display:flex;flex-wrap:wrap;gap:.55rem;padding:.85rem}
+  .source-cloud span{position:static;transform:none;font-size:.92rem!important;padding:.55rem .7rem}
+}
+@media(max-width:420px){
+  .slide{padding-top:3.55rem}
+  .content{padding-inline:.82rem}
+  .logo{width:82px}
+  .section-label{left:.82rem;max-width:calc(100vw - 7.1rem);font-size:.54rem}
+  h1{font-size:clamp(1.62rem,8.7vw,2.08rem)}
+  .cover h1{font-size:clamp(1.75rem,9.4vw,2.35rem)}
+  blockquote{font-size:1.34rem}
+  .slide::after{left:.82rem;right:4.45rem}
+}
 </style></head><body>
 <section class="slide cover" id="slide-1">
 <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
