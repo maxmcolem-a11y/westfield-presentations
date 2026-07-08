@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Westfield AI Vision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f7f3;--paper:#fff;--ink:#141414;--muted:#5b5e5a;--line:rgba(20,20,20,.12);--accent:#d63b2f;--blue:#2c6588;--green:#1f6e52;--amber:#9a5d36;--shadow:0 18px 45px rgba(0,0,0,.08);--pad:clamp(1.3rem,3vw,3rem);--radius:8px}*{box-sizing:border-box}html{scroll-snap-type:y mandatory;scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#fbfbf8,#ecece7);font-family:Inter,Arial,sans-serif;color:var(--ink);overflow-x:hidden}.slide{min-height:100vh;min-height:100dvh;scroll-snap-align:start;position:relative;display:flex;overflow:hidden}.slide:nth-child(even){background:rgba(236,236,231,.58)}.content{width:min(1240px,92vw);margin:auto;padding:calc(var(--pad) + 20px) var(--pad);display:flex;flex-direction:column;gap:clamp(.65rem,1.25vw,1rem)}.logo{position:absolute;right:clamp(1rem,2.2vw,2rem);top:clamp(.8rem,1.4vw,1.2rem);width:clamp(120px,12vw,180px);height:auto;opacity:.86}.slide-number{position:absolute;right:clamp(1rem,2.2vw,2rem);bottom:clamp(.8rem,1.4vw,1.2rem);font-weight:800;font-size:.78rem;letter-spacing:.08em;color:rgba(20,20,20,.38)}.eyebrow{margin:0;color:var(--accent);font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;font-weight:900}h1{margin:0;max-width:1120px;font-size:clamp(2rem,4.3vw,4.45rem);line-height:.98;letter-spacing:0;font-weight:900}.lede{margin:0;max-width:1050px;color:var(--muted);font-size:clamp(1rem,1.48vw,1.3rem);line-height:1.36}.cover h1{font-size:clamp(2.5rem,5.8vw,5.7rem)}.pill-row,.chips{display:flex;gap:.65rem;flex-wrap:wrap;margin-top:.55rem}.pill-row span,.chips span{border:1px solid var(--line);background:rgba(255,255,255,.78);border-radius:999px;padding:.68rem 1rem;font-weight:800}.hero-line{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:.75rem}.hero-line span{border-top:5px solid var(--accent);background:rgba(255,255,255,.72);padding:1rem;font-weight:900;box-shadow:var(--shadow);border-radius:var(--radius)}blockquote{margin:.75rem 0 0;border-left:10px solid var(--accent);background:var(--paper);box-shadow:var(--shadow);border-radius:var(--radius);padding:clamp(1.25rem,2.5vw,2.2rem);font-size:clamp(1.55rem,3vw,3.25rem);line-height:1.08;font-weight:900}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.82rem;margin-top:.72rem}.cards.compact{grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:.72rem}.cards.two{grid-template-columns:repeat(2,minmax(0,1fr))}.card{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(.86rem,1.45vw,1.15rem);box-shadow:var(--shadow);border-top:6px solid var(--accent)}.card:nth-child(3n+1){border-top-color:var(--blue)}.card:nth-child(3n+2){border-top-color:var(--green)}.card:nth-child(3n){border-top-color:var(--amber)}.card h3{margin:0 0 .38rem;font-size:clamp(.98rem,1.18vw,1.12rem);line-height:1.15}.card p{margin:0;color:var(--muted);font-size:clamp(.86rem,1vw,.98rem);line-height:1.34}.card ul{margin:.35rem 0 0;padding-left:1.05rem;color:var(--muted);font-size:clamp(.84rem,.95vw,.95rem);line-height:1.32}.card li{margin:.18rem 0}.bullets{margin:.45rem 0 0;padding-left:1.2rem;color:var(--muted);line-height:1.36;font-weight:650;font-size:clamp(.98rem,1.18vw,1.12rem);max-width:1080px}.bullets li{margin:.24rem 0}.callout{margin:.75rem 0 0;background:#151515;color:#fff;border-radius:var(--radius);padding:1.05rem 1.3rem;font-size:clamp(1.02rem,1.45vw,1.32rem);font-weight:850;line-height:1.24}.progress{position:fixed;left:0;bottom:0;height:5px;background:var(--accent);width:0;z-index:31}@media(max-width:900px){html{scroll-snap-type:none}.content{padding:5rem 1.1rem}.hero-line,.cards.two{grid-template-columns:1fr}h1{font-size:2.12rem}.cover h1{font-size:2.38rem}blockquote{font-size:1.75rem}.slide{min-height:auto}.logo{width:118px}.slide-number{position:static;margin-left:auto;padding:0 1.1rem 1rem}}
+</style>
+</head>
+<body>
+<section class="slide cover" id="slide-1">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">Westfield Outdoors | Executive AI Vision</p>
+<h1>Using AI to Help Build the Fastest, Smartest Product Organization in Outdoor</h1>
+<p class="lede">A practical vision for Westfield Outdoors: people + process + AI working together.</p>
+<div class="pill-row"><span>People + Process + AI</span><span>Four work lanes</span><span>Industrial Design as proof point</span></div>
+<div class="hero-line"><span>Already working</span><span>Structured support</span><span>Scaled capability</span></div>
+<ul class="bullets"><li>This is not a presentation about buying software.</li><li>It is about building a stronger, smarter, and more connected way for Westfield to develop products, manage information, and make decisions.</li></ul>
+</div>
+<div class="slide-number">01 / 18</div>
+</section>
+
+<section class="slide" id="slide-2">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">Westfield AI Vision</p>
+<h1>The Message and the Business Case</h1>
+<p class="lede">AI should help Westfield become faster, smarter, more transparent, and more precise without pretending technology replaces people.</p>
+<blockquote>AI is not here to make decisions for us. It is here to make sure our people have the best possible information when they make decisions.</blockquote>
+<div class="cards compact">
+<article class="card"><h3>Better people impact</h3><p>Less administrative drag. More time on judgment, creativity, relationships, customers, and product direction.</p></article>
+<article class="card"><h3>Better process</h3><p>More consistent workflows, documentation, follow-up, ownership, and accountability.</p></article>
+<article class="card"><h3>Better decisions</h3><p>Leadership sees risks, opportunities, bottlenecks, and company health earlier.</p></article>
+<article class="card"><h3>Why now</h3><p>Retailers, consumer trends, competitive products, factory decisions, and internal information are all moving faster.</p></article>
+</div>
+</div>
+<div class="slide-number">02 / 18</div>
+</section>
+
+<section class="slide" id="slide-3">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">Current State to Future State</p>
+<h1>Westfield Has Knowledge Spread Across Too Many Places</h1>
+<p class="lede">The company does not lack knowledge. The problem is that knowledge is split across tools, teams, meetings, files, and individual memory.</p>
+<div class="cards two">
+<article class="card"><h3>Today</h3><ul><li>Email, Teams, Trello, PowerPoint, Excel, OneDrive, Testing, WeChat</li><li>Line reviews, engineering notes, compliance questions, buyer feedback</li><li>People search manually, meetings fill gaps, decisions depend on memory</li></ul></article>
+<article class="card"><h3>Future state</h3><ul><li>Inputs: Trello, Email, Teams, NetSuite, testing, sales, design, engineering, factories, finance</li><li>Core: Westfield AI Knowledge Layer</li><li>Outputs: dashboards, briefings, alerts, summaries, recommendations, action lists</li></ul></article>
+</div>
+<div class="callout">The goal is not more reports. The goal is better visibility, earlier warnings, and faster decisions.</div>
+</div>
+<div class="slide-number">03 / 18</div>
+</section>
+
+<section class="slide" id="slide-4">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">Operating Philosophy</p>
+<h1>People + Process + AI</h1>
+<p class="lede">AI works only when it is paired with good people and disciplined process.</p>
+<div class="cards compact">
+<article class="card"><h3>People</h3><p>Experience, creativity, relationships, judgment, leadership, taste, and final business ownership.</p></article>
+<article class="card"><h3>Process</h3><p>Repeatable workflows, clear ownership, good data discipline, decision history, and accountability.</p></article>
+<article class="card"><h3>AI</h3><p>Speed, memory, summarization, monitoring, pattern recognition, comparison, recommendations, and drafting.</p></article>
+<article class="card"><h3>LLMs</h3><p>Language engines like ChatGPT, Claude, Gemini, and Llama that read, write, summarize, compare, and reason across information.</p></article>
+<article class="card"><h3>Agents</h3><p>Workflow systems with a role, approved information access, and repeatable jobs: checking, preparing, watching, and supporting.</p></article>
+<article class="card"><h3>Important limit</h3><p>AI is not automatically correct, does not fix bad process by itself, and should not make final business decisions alone.</p></article>
+</div>
+</div>
+<div class="slide-number">04 / 18</div>
+</section>
+
+<section class="slide" id="slide-5">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">Agentic System</p>
+<h1>The Power Is Multiple Specialists Using the Same Business Memory</h1>
+<p class="lede">An agentic system is a group of specialized AI agents working from shared information, each focused on a different function of the business.</p>
+<div class="cards compact">
+<article class="card"><h3>Industrial Design / Engineering AI</h3><p>Concepts, technical research, CAD support, engineering questions, sample feedback, and design-development memory.</p></article>
+<article class="card"><h3>Sales / PM AI</h3><p>Product charters, line review readiness, account status, buyer feedback, action tracking, and cross-functional follow-up.</p></article>
+<article class="card"><h3>Creative Services AI</h3><p>Presentation support, brand storytelling, video work, request ingest, Trello automation, routing, tracking, and response workflows.</p></article>
+<article class="card"><h3>Executive / Operations AI</h3><p>Company-health snapshots, project risk, bottlenecks, margin watch, compliance open items, and decision support.</p></article>
+<article class="card"><h3>Shared layer</h3><p>Trello, documents, meeting notes, testing, NetSuite, sales, design files, technical references, and factory updates.</p></article>
+<article class="card"><h3>Human review</h3><p>Each lane produces structured output for people to evaluate, revise, approve, and act on.</p></article>
+</div>
+</div>
+<div class="slide-number">05 / 18</div>
+</section>
+
+<section class="slide" id="slide-6">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">Westfield-Specific Vision</p>
+<h1>Four Work Lanes, One Knowledge Layer, Better Executive Intelligence</h1>
+<p class="lede">A system that helps every function work with better information while giving leadership a clearer view of company health.</p>
+<div class="cards compact">
+<article class="card"><h3>1. Four AI work lanes</h3><p>Agents built around Industrial Design / Engineering, Sales / PM, Creative Services, and Executive / Operations.</p></article>
+<article class="card"><h3>2. Shared knowledge layer</h3><p>Trello becomes a key source of truth for project status, decisions, ownership, and action history.</p></article>
+<article class="card"><h3>3. Executive intelligence</h3><p>Leadership gets company-health snapshots, risks, bottlenecks, and recommendations without waiting for a manual report.</p></article>
+<article class="card"><h3>Why Trello matters</h3><p>Project charters, milestones, owners, samples, factory notes, engineering risks, compliance, buyer feedback, and next steps become readable structure.</p></article>
+</div>
+<div class="callout">When Trello is maintained consistently, AI can turn project activity into dashboards, alerts, and decision support.</div>
+</div>
+<div class="slide-number">06 / 18</div>
+</section>
+
+<section class="slide" id="slide-7">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">Industrial Design Proof Point</p>
+<h1>Industrial Design Is the Practical AI Pilot Already Underway</h1>
+<p class="lede">Westfield does not need to imagine AI from zero. Industrial Design is already using AI across real product-development work.</p>
+<div class="cards">
+<article class="card"><h3>Why this function works as a pilot</h3><p>Industrial Design sits at the intersection of creative direction, technical feasibility, vendor communication, project visibility, presentations, and executive alignment.</p></article>
+<article class="card"><h3>What AI is already helping with</h3><p>Research, synthesis, visualization, documentation, communication, tracking, translation, and design memory.</p></article>
+<article class="card"><h3>The strategic point</h3><p>The opportunity is not to replace design judgment. The opportunity is to support, structure, and scale the working pattern that already exists.</p></article>
+</div>
+</div>
+<div class="slide-number">07 / 18</div>
+</section>
+
+<section class="slide" id="slide-8">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">Current Use Cases</p>
+<h1>What Industrial Design Is Already Doing With AI</h1>
+<p class="lede">AI is already supporting a wide range of Industrial Design and product-development workflows.</p>
+<div class="cards compact">
+<article class="card"><h3>Concept exploration</h3><p>Rapid product ideas, styling directions, form language studies, usage scenarios, mood boards, sketch prompts, and early visual territories.</p></article>
+<article class="card"><h3>Technical and design research</h3><p>Construction, mechanisms, materials, assembly methods, folding systems, storage approaches, durability, comfort, manufacturability, patents, prior art, teardowns, and design precedents.</p></article>
+<article class="card"><h3>CAD and visualization support</h3><p>Early geometry studies, STEP/CAD support, part inspection, dimensional review, assembly thinking, snapshots, and visual review links.</p></article>
+<article class="card"><h3>Presentation building</h3><p>Internal decks, customer-facing decks, design-review layouts, revised copy, Chinese translation, template standards, logo consistency, and publishing.</p></article>
+<article class="card"><h3>Project and Trello visibility</h3><p>Status, blockers, overdue items, open questions, next steps, owners, daily/weekly reports, and operating visibility.</p></article>
+<article class="card"><h3>Feedback synthesis</h3><p>Review comments, chat threads, meeting notes, decisions, open questions, risks, revision paths, action items, and factory handoffs.</p></article>
+</div>
+</div>
+<div class="slide-number">08 / 18</div>
+</section>
+
+<section class="slide" id="slide-9">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">Expansion Opportunity</p>
+<h1>Where This Could Go With More Adoption and Support</h1>
+<p class="lede">The next step is to make the current AI-supported workflow more structured, repeatable, and useful across product development.</p>
+<div class="cards compact">
+<article class="card"><h3>Formal ID AI workspace</h3><p>One connected workspace for concepts, CAD references, technical research, project status, presentations, sample feedback, and design memory.</p></article>
+<article class="card"><h3>Product-development memory</h3><p>Searchable history of concepts, materials, mechanisms, factory lessons, engineering decisions, sample issues, CAD references, and presentations.</p></article>
+<article class="card"><h3>Project visibility</h3><p>Automated project health summaries, risk flags, missing-information alerts, and weekly ID / product-development leadership views.</p></article>
+<article class="card"><h3>Reusable workflows</h3><p>Concept briefs, technical research, design reviews, CAD review, deck creation, Chinese translation, sample feedback, and Trello reporting.</p></article>
+<article class="card"><h3>Cross-functional adoption</h3><p>Extend the working model into PM, engineering, sourcing, compliance, operations, and executive reporting around each function's real workflow.</p></article>
+<article class="card"><h3>Leadership visibility</h3><p>Active concepts, blocked work, resource needs, recurring issues, and product-development memory become easier to see.</p></article>
+</div>
+</div>
+<div class="slide-number">09 / 18</div>
+</section>
+
+<section class="slide" id="slide-10">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">Across Functions</p>
+<h1>The Four Work Lanes Use Similar Architecture but Different Operating Modes</h1>
+<p class="lede">Each lane has approved inputs, workflow-specific memory, repeatable agents, summaries, alerts, and human review.</p>
+<div class="cards compact">
+<article class="card"><h3>Industrial Design / Engineering</h3><ul><li>Concept exploration</li><li>Technical and design research</li><li>CAD / STEP support</li><li>Engineering questions</li><li>Sample and prototype feedback</li><li>Design-development memory</li></ul></article>
+<article class="card"><h3>Sales / PM</h3><ul><li>Product charters</li><li>Line review readiness</li><li>Account and project status</li><li>Buyer feedback summaries</li><li>Next-action tracking</li><li>Cross-functional follow-up</li></ul></article>
+<article class="card"><h3>Creative Services</h3><ul><li>Presentation support</li><li>Brand and product storytelling</li><li>Heavy video work</li><li>Request ingest and routing</li><li>Large-volume Trello automation</li><li>Tracking and response workflows</li></ul></article>
+<article class="card"><h3>Executive / Operations</h3><ul><li>Company-health snapshots</li><li>Project risk detection</li><li>Margin and cost watch</li><li>Compliance open items</li><li>Operational bottlenecks</li><li>Leadership briefings</li></ul></article>
+</div>
+</div>
+<div class="slide-number">10 / 18</div>
+</section>
+
+<section class="slide" id="slide-11">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">Initial System</p>
+<h1>The First Practical Agent Structure</h1>
+<p class="lede">Start with four lanes that share the same operating foundation but support different kinds of work.</p>
+<div class="cards compact">
+<article class="card"><h3>Input layer</h3><p>Trello cards, documents, notes, images, testing records, project files, sales inputs, and approved business data.</p></article>
+<article class="card"><h3>Memory layer</h3><p>Reusable project memory: decisions, risks, lessons, requirements, revisions, sample status, account feedback, and open questions.</p></article>
+<article class="card"><h3>Agent layer</h3><p>Role-based agents that read, compare, summarize, flag, draft, route, and prepare recurring outputs.</p></article>
+<article class="card"><h3>Output layer</h3><p>Briefings, dashboards, line-review prep, action lists, risk alerts, customer-ready decks, technical summaries, and follow-up notes.</p></article>
+<article class="card"><h3>Governance</h3><p>Approved sources, human review, sensitive-data boundaries, process standards, and clear ownership.</p></article>
+<article class="card"><h3>Expansion path</h3><p>Prove value in product workflows, then extend to Finance, Accounting, Operations, Compliance, and annual planning intelligence.</p></article>
+</div>
+</div>
+<div class="slide-number">11 / 18</div>
+</section>
+
+<section class="slide" id="slide-12">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">CEO View</p>
+<h1>Executive Intelligence Should Explain What Changed and Where Attention Is Needed</h1>
+<p class="lede">The executive agent should not simply display numbers. It should explain what changed, why it matters, and what needs follow-up.</p>
+<div class="cards compact">
+<article class="card"><h3>Projects at risk</h3><p>12 active risk flags; 3 need leadership attention this week.</p></article>
+<article class="card"><h3>Upcoming line reviews</h3><p>8 upcoming reviews; 2 require updated samples or missing inputs.</p></article>
+<article class="card"><h3>Sample delays</h3><p>17 sample delays; 5 tied to major account timing.</p></article>
+<article class="card"><h3>Innovation pipeline</h3><p>42 active ideas; 9 ready for gate review.</p></article>
+<article class="card"><h3>Margin watch</h3><p>6 cost changes above threshold need review.</p></article>
+<article class="card"><h3>Compliance open items</h3><p>14 open items; 4 need decision support.</p></article>
+</div>
+<div class="callout">The issue is not that 12 projects are at risk. The issue is that 3 of them could impact major account timing if not addressed this week.</div>
+</div>
+<div class="slide-number">12 / 18</div>
+</section>
+
+<section class="slide" id="slide-13">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">Executive Example</p>
+<h1>A Daily CEO Briefing and Product Development Scenario</h1>
+<p class="lede">One page every morning: what changed, what is at risk, and what needs attention.</p>
+<div class="cards compact">
+<article class="card"><h3>Items needing attention today</h3><p>Costco hard-arm chair sample risk requires a frame-direction decision by Friday.</p></article>
+<article class="card"><h3>Product development health</h3><p>Softlines has 4 projects with no sample update in 10+ days; Engineering is waiting for 2 revised CAD files.</p></article>
+<article class="card"><h3>Commercial opportunity</h3><p>Repeated interest in compact seating platforms is appearing across Costco, Target, and DSG notes.</p></article>
+<article class="card"><h3>Risk to watch</h3><p>Two projects have compliance questions that may affect import or labeling requirements.</p></article>
+<article class="card"><h3>Costco chair request</h3><p>AI pulls previous feedback, competitive comparison, sample history, engineering constraints, factory capability, target price bands, and margin concerns.</p></article>
+<article class="card"><h3>Better starting point</h3><p>The team starts more informed. AI prepares the context; people own the product judgment.</p></article>
+</div>
+</div>
+<div class="slide-number">13 / 18</div>
+</section>
+
+<section class="slide" id="slide-14">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">Functional Impact</p>
+<h1>PM, Design, Engineering, Operations, Finance, and Accounting Get Better Support</h1>
+<p class="lede">AI handles more of the work around the work so people can focus on strategy, customers, product, and decisions.</p>
+<div class="cards compact">
+<article class="card"><h3>Product Management</h3><p>Project summaries, line review inputs, account history, competitive feature matrices, action-item lists, charters, risk, and timing summaries.</p></article>
+<article class="card"><h3>Design and Engineering</h3><p>Technical/design research, material research, teardown summaries, concept briefs, testing document summaries, risk lists, and previous-solution lookup.</p></article>
+<article class="card"><h3>Operations</h3><p>Factory delays, sample status, production bottlenecks, capacity issues, shipment risks, and recurring follow-up.</p></article>
+<article class="card"><h3>Finance</h3><p>Margin movement, cost change summaries, scenario support, pricing pressure visibility, and exception flags.</p></article>
+<article class="card"><h3>Accounting</h3><p>Document workflow support, exception tracking, payment issue summaries, and process consistency.</p></article>
+<article class="card"><h3>Leadership</h3><p>Function health, key risks, open decisions, missing inputs, and recommended follow-up become visible earlier.</p></article>
+</div>
+</div>
+<div class="slide-number">14 / 18</div>
+</section>
+
+<section class="slide" id="slide-15">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">Company Memory and Operating Leverage</p>
+<h1>AI Lets Westfield Do Important Work More Consistently</h1>
+<p class="lede">This is not just faster work. It is more complete work.</p>
+<div class="cards compact">
+<article class="card"><p>Capture meeting decisions consistently.</p></article>
+<article class="card"><p>Summarize every project status weekly.</p></article>
+<article class="card"><p>Compare every new concept against historical attempts.</p></article>
+<article class="card"><p>Track buyer feedback by account over time.</p></article>
+<article class="card"><p>Flag missing information before line reviews.</p></article>
+<article class="card"><p>Monitor risk without waiting for a meeting.</p></article>
+<article class="card"><p>Build executive summaries automatically.</p></article>
+<article class="card"><p>Use lessons learned from past projects.</p></article>
+</div>
+<blockquote>Every morning, Westfield should wake up smarter than it was yesterday.</blockquote>
+</div>
+<div class="slide-number">15 / 18</div>
+</section>
+
+<section class="slide" id="slide-16">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">Competitive Context</p>
+<h1>The Risk Is Not AI Replacing Westfield. It Is Competitors Moving Faster.</h1>
+<p class="lede">Large retailers, consumer brands, and manufacturers are already using AI to improve speed, precision, operations, and innovation.</p>
+<div class="cards compact">
+<article class="card"><h3>Retailers</h3><p>Personalization, inventory, supply-chain visibility, automation, and faster customer response.</p></article>
+<article class="card"><h3>Consumer brands</h3><p>Consumer understanding, faster innovation, better operations, and scalable knowledge.</p></article>
+<article class="card"><h3>Manufacturers</h3><p>Planning, quality, compliance, supplier coordination, and production visibility.</p></article>
+<article class="card"><h3>Westfield advantage</h3><p>High project volume, repeatable product patterns, retailer-specific knowledge, cross-functional complexity, and a Trello foundation.</p></article>
+<article class="card"><h3>Risk of waiting</h3><p>More projects, more messages, more files, more dependence on individual memory, and slower risk visibility.</p></article>
+<article class="card"><h3>What to win</h3><p>Westfield does not need to outspend the largest companies. It needs to outlearn slower competitors in its own categories.</p></article>
+</div>
+</div>
+<div class="slide-number">16 / 18</div>
+</section>
+
+<section class="slide" id="slide-17">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">Success Standard and Guardrails</p>
+<h1>A Good System Produces Clear, Useful Outputs That People Trust Enough to Use</h1>
+<p class="lede">Success should be measured by business effectiveness, not by how many AI tools are purchased.</p>
+<div class="cards compact">
+<article class="card"><h3>What good looks like</h3><p>Accurate enough to trust, simple enough to use, visible enough to manage, flexible enough to grow, disciplined enough to scale, and human-led.</p></article>
+<article class="card"><h3>What not to do</h3><p>Do not buy tools without workflow, build disconnected experiments, skip human review, expect AI to fix unclear ownership, or connect sensitive information without governance.</p></article>
+<article class="card"><h3>Business metrics</h3><p>Faster risk visibility, more complete line-review prep, fewer missed decisions, better documentation, better account memory, and stronger executive visibility.</p></article>
+</div>
+</div>
+<div class="slide-number">17 / 18</div>
+</section>
+
+<section class="slide" id="slide-18">
+<img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+<div class="content">
+<p class="eyebrow">Roadmap and Ask</p>
+<h1>Start Narrow Enough to Execute, Then Scale What Works</h1>
+<p class="lede">Approval does not mean one big technology bet. It means permission to build the first working version.</p>
+<div class="cards compact">
+<article class="card"><h3>0-90 days</h3><p>Define data standards, Trello structure, priority workflows, security approach, and pilot teams.</p></article>
+<article class="card"><h3>3-6 months</h3><p>Deploy Industrial Design / Engineering and Sales / PM pilots. Begin Creative Services workflow support and executive dashboard prototype.</p></article>
+<article class="card"><h3>6-12 months</h3><p>Add recurring health summaries, line-review readiness checks, sample risk alerts, meeting-note automation, adoption review, and dashboard standardization.</p></article>
+<article class="card"><h3>12-24 months</h3><p>Expand into Finance, Accounting, Operations, and Compliance; connect more structured data; introduce predictive risk and leadership rhythm.</p></article>
+<article class="card"><h3>The ask</h3><p>Approve the direction, initial implementation, process support, and future scaling discussion after pilot results.</p></article>
+<article class="card"><h3>Closing thought</h3><p>The goal is not to build the smartest AI system in outdoor. The goal is to build the smartest outdoor company using AI.</p></article>
+</div>
+<div class="callout">People + Process + AI: the fastest, smartest product organization in outdoor.</div>
+</div>
+<div class="slide-number">18 / 18</div>
+</section>
+
+<div class="progress"></div>
+<script>
+const slides=[...document.querySelectorAll('.slide')],bar=document.querySelector('.progress');let i=0;function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides[i].scrollIntoView();bar.style.width=((i+1)/slides.length*100)+'%';location.hash='slide-'+(i+1)}function sync(){let best=0,dist=1e9;slides.forEach((s,n)=>{const d=Math.abs(s.getBoundingClientRect().top);if(d<dist){dist=d;best=n}});i=best;bar.style.width=((i+1)/slides.length*100)+'%'}addEventListener('scroll',sync,{passive:true});addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1)}});const m=location.hash.match(/slide-(\d+)/);if(m)show(+m[1]-1);else sync();
+</script>
+</body>
+</html>
