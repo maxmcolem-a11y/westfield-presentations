@@ -153,7 +153,7 @@ The power is not one AI tool. The power is multiple specialists using the same b
 
 **Speaker Note:** This is the core operating model.
 
-## Slide 11: Industrial Design Is the Practical AI Pilot Already Underway
+## Slide 11: Industrial Design Is a Practical AI Pilot Already Underway
 
 **Eyebrow:** Industrial Design Proof Point
 
@@ -213,9 +213,9 @@ AI helps with speed, organization, memory, iteration, communication, and visibil
 
 That is the model Westfield can scale: good people using better information inside better workflows.
 
-**Industrial Design is already functioning as Westfield's practical AI pilot; the next step is to support, structure, and scale the workflows that are already improving speed, visibility, communication, and product-development memory.**
+**Industrial Design is already functioning as a practical Westfield AI pilot; the next step is to support, structure, and scale the workflows that are already improving speed, visibility, communication, and product-development memory.**
 
-**Speaker Note:** This should be the bridge back to the broader enterprise deck. It connects Darin's company-wide AI vision to a real proof point inside Industrial Design.
+**Speaker Note:** This should be the bridge back to the broader enterprise deck. It connects Darin's company-wide AI vision to one real proof point inside Industrial Design, while leaving room for the PM / Chuck workflow and Darin's executive role as parallel examples of AI already operating across Westfield.
 
 ## Slide 15: Why Trello Matters
 
