@@ -10,14 +10,26 @@ This Markdown breaks the HTML deck into editable slide content. Visual styling, 
 
 **Subtitle:** A practical vision for Westfield Outdoors: people + process + AI working together
 
-This is not a presentation about buying software.
-It is about building a stronger, smarter, and more connected way for Westfield to develop products, manage information, and make decisions.
-**Keywords:** People, Process, AI, Speed, Transparency
-**Visual labels:** Product, Sales, Ops, Finance, Executive
-
 **Speaker Note:** Open by making clear this is not about AI replacing judgment or people. It is about giving good people better information, better speed, and better visibility.
 
-## Slide 2: The Message in One Sentence
+## Slide 2: Table of Contents
+
+**Eyebrow:** Navigation
+
+- **Executive Overview:** Slides 3-8
+- **AI Basics:** Slides 9-12
+- **PM / Sales Deployment:** Slides 13-17
+- **Industrial Design Deployment:** Slides 18-21
+- **Trello Source of Truth:** Slides 22-23
+- **Operating Model:** Slides 24-25
+- **Executive Intelligence:** Slides 26-29
+- **Functional Expansion:** Slides 30-34
+- **Competitive Necessity:** Slides 35-38
+- **Roadmap + Approval:** Slides 39-45
+
+**Deck UI note:** The HTML deck includes a bottom-right section label beside the slide number on every slide; the bottom-left corner is reserved for future translation controls.
+
+## Slide 3: The Message in One Sentence
 
 **Subtitle:** AI should help Westfield become faster, smarter, more transparent, and more precise without pretending technology replaces people.
 
@@ -28,7 +40,23 @@ It is about building a stronger, smarter, and more connected way for Westfield t
 
 **Speaker Note:** This slide should set tone. We are not promising magic. We are promising a more effective company.
 
-## Slide 3: Why This Matters Now
+## Slide 4: A Practical Vision for Westfield Outdoors
+
+**Eyebrow:** Practical Vision
+
+**Subtitle:** The opportunity now is to support what is working, structure it, and scale it into a repeatable company capability.
+
+**Keywords:** Already working in PM / Sales, Design, and Executive workflows; Delivering faster decks, clearer summaries, and better visibility; Ready for structure, support, and scale
+
+**Visual labels:** Current proof, Business results, Scale plan
+
+Westfield is not starting from zero. AI-supported work is already showing value in practical workflows.
+The next step is a structured plan: cleaner inputs, repeatable agents, workflow standards, human review, and leadership visibility.
+The goal is not experimentation for its own sake. The goal is to turn early wins into a durable operating capability.
+
+**Speaker Note:** This page should make the deck feel grounded in current Westfield momentum. The message is already working, now support and scale.
+
+## Slide 5: Why This Matters Now
 
 **Eyebrow:** The Business Case
 
@@ -39,11 +67,12 @@ It is about building a stronger, smarter, and more connected way for Westfield t
 - Competitive products appear faster.
 - Cost and factory decisions are more complex.
 - Internal information is growing faster than people can manually organize it.
-AI gives Westfield a way to turn disconnected information into business intelligence.
+
+**Response:** AI helps Westfield answer faster, track market and competitor movement sooner, manage complex cost and factory decisions with better context, and turn scattered internal information into usable decision support.
 
 **Speaker Note:** Frame the urgency around business speed and decision quality, not technology hype.
 
-## Slide 4: The Problem AI Can Help Solve
+## Slide 6: The Problem AI Can Help Solve
 
 **Eyebrow:** Current State
 
@@ -63,9 +92,11 @@ AI gives Westfield a way to turn disconnected information into business intellig
 - Buyer Feedback
 Information everywhere -> People search manually -> Meetings fill gaps -> Decisions depend on memory
 
+**Visual direction:** Show Email, Teams, Trello, PowerPoint, Excel, OneDrive, Testing, and WeChat as a scattered cloud of sources rather than a neat grid. The page should feel like information exists, but it is spread out and hard to use consistently.
+
 **Speaker Note:** This is a non-blaming statement. The company has a lot of knowledge, but the current system makes it hard to use consistently.
 
-## Slide 5: The Future State
+## Slide 7: The Future State
 
 **Eyebrow:** Connected Intelligence
 
@@ -76,29 +107,36 @@ Information everywhere -> People search manually -> Meetings fill gaps -> Decisi
 **Outputs:** Dashboards, Briefings, Alerts, Summaries, Recommendations, Action Lists
 The goal is not more reports. The goal is better visibility, earlier warnings, and faster decisions.
 
+**Visual direction:** Use generated image asset `assets/future-state-knowledge-layer.png`: scattered input cloud flowing into a chemistry-style distillation device labeled Westfield AI Knowledge Layer, then organized outputs flowing out.
+
 **Speaker Note:** This slide introduces the system-level vision: connected information, not isolated tools.
 
-## Slide 6: People + Process + AI
+## Slide 8: People + Process + AI
 
 **Eyebrow:** Operating Philosophy
 
 **Subtitle:** AI works only when it is paired with good people and disciplined process.
 
-- **People:** Experience, creativity, relationships, judgment, leadership.
-- **Process:** Repeatable workflows, clear ownership, good data discipline, accountability.
-- **AI:** Speed, memory, summarization, monitoring, pattern recognition, recommendations.
-**Competitive advantage = good people using better information inside a better process.**
+**Layout direction:** Present the three ideas as three horizontal rows, then place the conclusion below them as its own statement.
+
+- **People:** Experience, creativity, relationships, judgment, and leadership.
+- **Process:** Repeatable workflows, clear ownership, good data discipline, and accountability.
+- **AI:** Speed, memory, summarization, monitoring, pattern recognition, and recommendations.
+
+**Conclusion:** Competitive advantage comes from good people using better information inside a better process.
 
 **Speaker Note:** This addresses the concern that AI can sound like a replacement for people. It is not.
 
-## Slide 7: A Simple Explanation: What Is an LLM?
+## Slide 9: A Simple Explanation: What Is an LLM?
 
 **Eyebrow:** AI Basics
 
-**Subtitle:** A Large Language Model is a system trained to understand and generate language, summarize information, compare documents, answer questions, and create structured outputs.
+**Subtitle:** A Large Language Model is an AI model trained to work with language: reading, summarizing, comparing, drafting, answering questions, and creating structured outputs.
 
-Examples: ChatGPT, Claude, Gemini, and Llama are examples of Large Language Models (LLMs). They are not the entire AI system by themselves; they are the language engines that can read, write, summarize, compare, and reason across information.
-- **What it is good at**
+**Layout direction:** Show this as two boxes only: Examples and What they are good at.
+
+- **Examples:** ChatGPT, Claude, and Gemini are AI assistants built on large language models. Llama is a family of large language models. The LLM is the language engine inside the broader AI system.
+- **What they are good at**
   - Reading large amounts of text quickly
   - Summarizing documents
   - Finding patterns across notes
@@ -114,60 +152,54 @@ Examples: ChatGPT, Claude, Gemini, and Llama are examples of Large Language Mode
 
 **Speaker Note:** Keep this simple. Leadership is technical, but we do not need to make this a computer science presentation.
 
-## Slide 8: A Simple Explanation: What Is an AI Agent?
+## Slide 10: A Simple Explanation: What Is an AI Agent?
 
 **Eyebrow:** AI Basics
 
 **Subtitle:** An AI agent is an AI system that has a role, access to approved information, and the ability to perform a workflow repeatedly.
 
-- **Chatbot:** You ask a question. It answers.
-- **Agent:** It has a job. It checks information, prepares outputs, watches for changes, and supports a workflow.
-Example: A Product Management Agent could review Trello every morning, identify late sample risks, summarize upcoming line review needs, and draft action items for the PM team.
+**Layout direction:** Show Chatbot and Agent as a clear two-column comparison. Put the example below as a separate full-width callout so the hierarchy is definition first, proof second.
+
+- **Chatbot:** Reactive. You ask a question. It answers.
+- **Agent:** Workflow-based. It has a job. It checks information, prepares outputs, watches for changes, and supports a workflow.
+
+**Example:** A Product Management Agent could review Trello every morning, identify late sample risks, summarize upcoming line review needs, and draft action items for the PM team.
 
 **Speaker Note:** The simple distinction: chatbot is reactive, agent is workflow-based.
 
-## Slide 9: What Is an Agentic System?
+## Slide 11: What Is an Agentic System?
 
 **Eyebrow:** AI Basics
 
-**Subtitle:** An agentic system is a group of specialized AI agents working from shared information, each focused on a different function of the business.
+**Subtitle:** An agentic system is a set of AI agents that can perform defined jobs, use approved information, and coordinate steps inside a business process.
 
-- Sales / PM AI
-- Industrial Design / Engineering AI
-- Creative Services AI
-- Executive / Operations AI
-- Shared Westfield Knowledge Layer: Trello • Documents • Meeting Notes • Testing • NetSuite • Sales • Design Files • Technical References • Factory Updates
-The power is not one AI tool. The power is multiple specialists using the same business memory.
+- **What it is:** Multiple task-focused agents working from shared data, tools, rules, and human oversight.
+- **How companies use it:** Monitoring workflows, summarizing changes, preparing drafts, flagging risks, routing work, and keeping teams aligned.
+- **Why it matters:** The system turns repeated information work into a more consistent operating rhythm without removing human judgment.
 
-**Speaker Note:** This slide should introduce the four-lane architecture. Each lane uses the same general architecture: approved inputs, workflow-specific memory, repeatable agents, summaries, alerts, and human review. The lanes are different in how they operate.
+**Bottom text box:** The key difference: a chatbot answers a request; an agentic system supports an ongoing workflow.
 
-## Slide 10: The Westfield AI Vision
+**Speaker Note:** Keep this slide general. It should explain what companies are doing with agentic systems before moving into the Westfield-specific architecture.
+
+## Slide 12: The Westfield AI Vision
 
 **Eyebrow:** Westfield-Specific Vision
 
 **Subtitle:** A system that helps every function work with better information while giving leadership a clearer view of company health.
 
-- **1. Four AI Work Lanes:** Agents built around four operating lanes: Sales / PM, Industrial Design / Engineering, Creative Services, and Executive / Operations.
-- **2. Shared Knowledge Layer:** Trello becomes a key source of truth for project status, decisions, ownership, and action history.
-- **3. Executive Intelligence:** Leadership gets company-health snapshots, risks, bottlenecks, and recommendations without waiting for someone to prepare a report.
+**Visual direction:** Use generated image asset `assets/agentic-system-building.png`: show the Westfield AI vision as a building. The Shared Westfield Knowledge Layer is the foundation; Sales / PM, Industrial Design / Engineering, Creative Services, and Executive / Operations are the four agentic AI deployment columns; Westfield Business is the roof. Do not include a fake Westfield logo in the image.
+
+**Bottom text box:** Westfield needs four separate agentic AI deployments because these functions have vastly different needs, workflows, inputs, and decision rhythms. The shared knowledge foundation connects them without forcing them into one generic system.
 
 **Speaker Note:** This is the core operating model.
 
-## Slide 11: What This Means for Product Management
+## Slide 13: What This Means for Project Management and Sales
 
-**Eyebrow:** Product Management Focus
+**Eyebrow:** Project Management + Sales
 
-**Subtitle:** PMs become more strategic because AI handles more of the work around the work.
+**Subtitle:** The Agents handle more of the work around the work, so PM and Sales teams can spend more time on judgment, customers, and commercial decisions.
 
-- **AI can prepare**
-  - Project summary drafts
-  - Line review inputs
-  - Account history
-  - Competitive feature matrices
-  - Open action-item lists
-  - Charter first drafts
-  - Risk and timing summaries
-- **PMs still own**
+- **Humans own**
   - Commercial judgment
   - Customer relationships
   - Category strategy
@@ -175,81 +207,120 @@ The power is not one AI tool. The power is multiple specialists using the same b
   - Final recommendations
   - Cross-functional alignment
   - Business accountability
+- **The Agents support**
+  - Project summary drafts
+  - Line review inputs
+  - Account history
+  - Competitive feature matrices
+  - Buyer presentation first drafts
+  - Open action-item lists
+  - Charter first drafts
+  - Risk and timing summaries
+
+**Bottom text box:** The division is clear: people own the business story and final judgment; The Agents prepare the source material, drafts, and follow-up structure.
 
 **Speaker Note:** This supports the part others will write, but keeps the general thesis clear.
 
-## Slide 12: Sales / PM Proof Point: Chuck
+## Slide 14: The Agents Are Already Useful in Buyer Presentation Work
 
-**Eyebrow:** Product Management Proof Point
+**Eyebrow:** Project Management + Sales Proof Point
 
-**Subtitle:** Matt's Chuck prototype shows the PM lane in practical form: AI-powered presentation building for line review workflows.
+**Subtitle:** The PM / Sales deployment is practical because it starts with a painful, repeatable workflow: turning scattered project records into a clear buyer-ready presentation.
 
-**What Chuck does today**
-- Reads Trello boards directly for line review and product-development information.
-- Pulls card data, product photos, specs, pricing, buyer feedback, comments, and attachment URLs.
-- Builds a complete HTML buyer presentation from a natural-language request.
-- Deploys a live URL that can be shared quickly and revised on the fly.
+- **The workflow problem:** Line review decks require product data, photos, specs, pricing, buyer feedback, open decisions, and clean formatting from multiple places.
+- **The agent role:** The Agents read the structured project record, gather the relevant material, organize it, and create a strong first draft for human review.
+- **The human role:** PM and Sales own the account strategy, commercial story, final recommendations, buyer sensitivity, and presentation decisions.
 
-**Workflow example**
-- **Ask:** "Build the Walmart 27 line review deck."
-- **Pull:** Chuck reads the relevant Trello board, lists, cards, comments, and attachments.
-- **Build:** Product slides include real photos, specs, pricing, buyer commentary, and structured product information.
-- **Deploy:** The presentation is published as a live URL for review or buyer presentation.
+**Speaker Note:** This is the Sales / PM counterpart to the Industrial Design proof point. It is not theoretical: it shows the same Westfield AI model working on a PM workflow that already consumes time and coordination.
 
-**Why this matters**
-- Reduces presentation prep from hours of copying, image gathering, and formatting into a faster first pass.
-- Creates more consistent line review formatting across accounts and categories.
-- Keeps presentations closer to the live project record instead of detached static files.
-- Gives PMs more time for commercial judgment, account strategy, prioritization, and cross-functional alignment.
+## Slide 15: From Project Record to Buyer-Ready First Draft
 
-**Next extensions**
-- Sales data integration for comparison slides.
-- Auto-refresh when Trello cards are updated.
-- PPTX export for buyer portals.
-- Weekly account and line-review auto-briefings: "what changed since last week."
+**Eyebrow:** Agent Presentation Workflow
 
-**Speaker Note:** This is the Sales / PM counterpart to the Industrial Design proof point. It is not theoretical: it shows the same Westfield AI model working on a PM workflow that already consumes time and coordination. Keep the message practical: Trello becomes structured source material, Chuck builds the first pass, and PM owns the final business story.
+**Subtitle:** The workflow is valuable because it follows the same sequence PM and Sales already use, but removes much of the manual assembly.
 
-## Slide 13: Industrial Design Is a Practical AI Pilot Already Underway
+- **1. Ask:** Request a line review, account update, product recap, or buyer presentation in natural language.
+- **2. Pull:** The Agents read Trello cards, lists, comments, attachments, product photos, specs, prices, and buyer notes.
+- **3. Structure:** The Agents organize the material by account, product, category, decision status, and presentation need.
+- **4. Draft:** The Agents build the first-pass story, product slides, summaries, and open-question lists.
+- **5. Review:** PM and Sales edit, prioritize, approve, and decide what should actually go to the buyer.
+
+**Speaker Note:** Keep the sequence operational. The point is not novelty; it is less manual assembly around a workflow the team already performs.
+
+## Slide 16: What The Agents Can Prepare
+
+**Eyebrow:** Presentation Output
+
+**Subtitle:** The output is not just a formatted deck. It is a structured first pass that brings the live project record into a presentation format.
+
+- **Buyer story:** Account context, line review purpose, category framing, product positioning, and recommended narrative flow.
+- **Product pages:** Product photos, feature summaries, dimensions, specs, pricing context, status, and open decisions.
+- **Project context:** Buyer feedback, sample notes, timing risks, comparison points, cross-functional comments, and unresolved questions.
+- **Action structure:** Follow-up lists, owners, missing inputs, decision points, and next steps for PM, Sales, Design, and Operations.
+
+**Speaker Note:** This page should make clear why connecting to the project record matters: the deck becomes a structured view of real work, not a disconnected file.
+
+## Slide 17: Why This Matters
+
+**Eyebrow:** PM / Sales Value
+
+**Subtitle:** The business value is not that AI makes the final presentation. The value is that PM and Sales start from a better, faster, more complete first draft.
+
+- **Before**
+  - Manual copying from Trello, files, and messages
+  - Photos and specs gathered one item at a time
+  - Deck quality varies by account, timing, and capacity
+  - Project records and presentation files drift apart
+- **With The Agents**
+  - Faster first drafts from current project data
+  - More consistent line review structure
+  - Clearer missing-information and risk flags
+  - More PM/Sales time for buyer strategy and judgment
+
+**Bottom text box:** The Agents do the assembly work. People decide the business story.
+
+**Speaker Note:** This page should land the practical value: speed, consistency, completeness, and more time for commercial judgment.
+
+## Slide 18: Industrial Design Already Has AI Agents Doing Real Work
 
 **Eyebrow:** Industrial Design Proof Point
 
-**Subtitle:** Westfield does not need to imagine AI from zero. Industrial Design is already using AI across real product-development work.
+**Subtitle:** Westfield does not need to imagine AI from zero. Industrial Design already has deployed AI agents supporting real product-development work.
 
-Industrial Design is a strong pilot function because it sits at the intersection of creative direction, technical feasibility, vendor communication, project visibility, presentations, and executive alignment.
+- **Top-level agents:** Shared agents support Industrial Design workflows across research, synthesis, visualization, documentation, translation, Trello visibility, and presentation building.
+- **Personal agents:** Team members also have personal agents that help with their own project work, questions, references, follow-up, and daily execution.
+- **Already deployed:** This is not a theoretical future state. Agents are already operating inside the Industrial Design workflow and producing useful work.
 
-AI is already helping the team move faster through the surrounding work: research, synthesis, visualization, documentation, communication, tracking, translation, and memory.
+**Bottom text box:** The opportunity is not to replace design judgment. The opportunity is to support, structure, and scale the working pattern that already exists.
 
-The opportunity is not to replace design judgment. The opportunity is to support, structure, and scale the working pattern that already exists.
+**Speaker Note:** This slide should make the strategy tangible. The point is that Industrial Design is not asking leadership to bet on a theory. It already has top-level and personal AI agents deployed and doing real work inside Westfield.
 
-**Speaker Note:** This slide should make the strategy tangible. The point is that Industrial Design is not asking leadership to bet on a theory. It is showing a practical model that is already operating inside Westfield.
-
-## Slide 14: What Industrial Design Is Already Doing With AI
+## Slide 19: What Industrial Design Agents Are Already Supporting
 
 **Eyebrow:** Current Use Cases
 
-**Subtitle:** AI is already supporting a wide range of Industrial Design and product-development workflows.
+**Subtitle:** Top-level and personal AI agents are already supporting a wide range of Industrial Design and product-development workflows.
 
 - **Concept exploration:** Rapid product ideas, styling directions, form language studies, usage scenarios, mood boards, sketch prompts, and early visual territories.
 - **Technical and design research:** Comparable product construction, mechanisms, materials, assembly methods, folding systems, storage approaches, durability details, comfort details, manufacturability references, patents, prior art, teardown references, and design precedents.
 - **CAD and visualization support:** Early geometry studies, STEP/CAD support, part inspection, dimensional review, assembly thinking, snapshots, and visual review links.
 - **Presentation building:** Internal decks, customer-facing decks, design-review layouts, revised slide copy, Chinese translation when needed, template standards, logo consistency, and GitHub Pages publishing.
 - **Project and Trello visibility:** Project status, blockers, overdue items, open questions, next steps, owners, daily/weekly reports, and operating visibility.
+- **Project management:** Defining critical paths, Gantt-style planning, dependencies, owners, timing risks, milestone structure, and project flow inside Trello.
 - **Feedback synthesis:** Review comments, chat threads, meeting notes, decisions, open questions, risks, revision paths, and action items.
 - **Cross-functional translation:** Reframing design work for PM, engineering, sourcing, factories, and leadership.
 - **China and vendor communication support:** Chinese translation, factory handoff notes, sample feedback summaries, revision requests, and open-question tracking.
-- **Product-development memory:** Prior concepts, presentation standards, sample feedback, technical decisions, research findings, and lessons learned.
-- **Repeatable workflow automation:** Deck creation, translation, CAD snapshots, Trello summaries, weekly reports, file organization, technical reference gathering, and presentation publishing.
 
 **Speaker Note:** Keep this grounded in work that is already happening. The research language should stay focused on technical and design research.
 
-## Slide 15: Where This Could Go With More Adoption and Support
+## Slide 20: Where This Could Go With More Adoption and Support
 
 **Eyebrow:** Expansion Opportunity
 
-**Subtitle:** The next step is to make the current AI-supported workflow more structured, repeatable, and useful across product development.
+**Subtitle:** The next step is to make the current agent-supported workflow more structured, repeatable, and useful across product development.
 
 - **Formal Industrial Design AI workspace:** One connected workspace for concepts, CAD references, technical research, project status, presentations, sample feedback, and design memory.
+- **Agent deployment model:** Clear roles for top-level Industrial Design agents and personal agents for each team member, with shared standards and human review.
 - **Structured product-development memory:** Searchable history of concepts, materials, mechanisms, factory lessons, engineering decisions, sample issues, CAD references, and presentation outputs.
 - **Consistent project visibility:** Automated project health summaries, risk flags, missing-information alerts, and weekly ID / product-development leadership views.
 - **Reusable AI-assisted workflows:** Standard workflows for concept briefs, technical research, design reviews, CAD review, deck creation, Chinese translation, sample feedback, and Trello reporting.
@@ -258,23 +329,23 @@ The opportunity is not to replace design judgment. The opportunity is to support
 
 **Speaker Note:** This slide separates current reality from future potential. The message is support and scale, not speculative reinvention.
 
-## Slide 16: The Strategic Point
+## Slide 21: The Strategic Point
 
 **Eyebrow:** From Pilot to Capability
 
-**Subtitle:** Industrial Design is already proving that AI can create leverage without removing human ownership.
+**Subtitle:** Industrial Design is already proving that deployed AI agents can create leverage without removing human ownership.
 
 The designer still owns taste, judgment, product intent, customer empathy, physical evaluation, and final direction.
 
-AI helps with speed, organization, memory, iteration, communication, and visibility.
+Top-level agents and personal agents help with speed, organization, memory, iteration, communication, and visibility.
 
 That is the model Westfield can scale: good people using better information inside better workflows.
 
-**Industrial Design is already functioning as a practical Westfield AI pilot; the next step is to support, structure, and scale the workflows that are already improving speed, visibility, communication, and product-development memory.**
+**Industrial Design is already functioning as a practical Westfield agent deployment; the next step is to support, structure, and scale the workflows that are already improving speed, visibility, communication, and product-development memory.**
 
 **Speaker Note:** This should be the bridge back to the broader enterprise deck. It connects Darin's company-wide AI vision to one real proof point inside Industrial Design, while leaving room for the PM / Chuck workflow and Darin's executive role as parallel examples of AI already operating across Westfield.
 
-## Slide 17: Why Trello Matters
+## Slide 22: Why Trello Matters
 
 **Eyebrow:** Trello as the Nervous System
 
@@ -290,7 +361,7 @@ When Trello is maintained consistently, AI can turn project activity into dashbo
 
 **Speaker Note:** Important: the system will only be as good as the process discipline. Trello creates structure for AI to read.
 
-## Slide 18: The Four Work Lanes
+## Slide 23: The Four Work Lanes
 
 **Eyebrow:** Across Functions
 
@@ -331,7 +402,7 @@ When Trello is maintained consistently, AI can turn project activity into dashbo
 
 **Speaker Note:** The important point is that these lanes share an architecture, but they do not operate the same way. Industrial Design / Engineering needs technical memory and visual workflow support. Sales / PM needs account, line review, and project action support. Creative Services needs asset, deck, and story consistency. Executive / Operations needs visibility, escalation, and operating rhythm.
 
-## Slide 19: The First Practical Agent Structure
+## Slide 24: The First Practical Agent Structure
 
 **Eyebrow:** Initial System
 
@@ -372,7 +443,7 @@ When Trello is maintained consistently, AI can turn project activity into dashbo
 
 **Speaker Note:** This directly reflects the intended four-lane model. The architecture is common across lanes: connect approved information, maintain workflow memory, summarize changes, flag issues, prepare outputs, and keep humans in control.
 
-## Slide 20: Executive Intelligence: What Leadership Could See
+## Slide 25: Executive Intelligence: What Leadership Could See
 
 **Eyebrow:** CEO View
 
@@ -388,7 +459,7 @@ AI summary: The issue is not that 12 projects are at risk. The issue is that 3 o
 
 **Speaker Note:** Use example numbers only. The key is the executive summary: not just status, but attention guidance.
 
-## Slide 21: From Dashboard to Decision Support
+## Slide 26: From Dashboard to Decision Support
 
 **Eyebrow:** Better Management System
 
@@ -408,7 +479,7 @@ AI summary: The issue is not that 12 projects are at risk. The issue is that 3 o
 
 **Speaker Note:** This is a powerful distinction. AI should reduce ambiguity, not create more reporting.
 
-## Slide 22: A Daily CEO Briefing
+## Slide 27: A Daily CEO Briefing
 
 **Eyebrow:** Executive Example
 
@@ -422,7 +493,7 @@ AI summary: The issue is not that 12 projects are at risk. The issue is that 3 o
 
 **Speaker Note:** This is the kind of output Leadership can immediately understand. It is not technical. It is useful.
 
-## Slide 23: Institutional Knowledge Becomes a Company Asset
+## Slide 28: Institutional Knowledge Becomes a Company Asset
 
 **Eyebrow:** Company Memory
 
@@ -441,7 +512,7 @@ When an employee leaves, changes roles, or is unavailable, the knowledge should 
 
 **Speaker Note:** Leadership should appreciate this as a company health and continuity issue.
 
-## Slide 24: Product Development Example: A Costco Chair Request
+## Slide 29: Product Development Example: A Costco Chair Request
 
 **Eyebrow:** Westfield Scenario
 
@@ -462,7 +533,7 @@ When an employee leaves, changes roles, or is unavailable, the knowledge should 
 
 **Speaker Note:** This example connects directly to Westfield business and makes the AI practical.
 
-## Slide 25: What This Means for Design and Engineering
+## Slide 30: What This Means for Design and Engineering
 
 **Eyebrow:** Design + Engineering Focus
 
@@ -487,7 +558,7 @@ When an employee leaves, changes roles, or is unavailable, the knowledge should 
 
 **Speaker Note:** Reinforce AI as support for better work, not a substitute for physical product expertise.
 
-## Slide 26: What This Means for Operations, Finance, and Accounting
+## Slide 31: What This Means for Operations, Finance, and Accounting
 
 **Eyebrow:** Business Functions
 
@@ -500,11 +571,11 @@ The goal is not to replace functional expertise. The goal is to give every funct
 
 **Speaker Note:** This satisfies the broader business angle without going too deep into departments outside your scope.
 
-## Slide 27: What AI Allows Us To Do That We Do Not Do Consistently Today
+## Slide 32: What AI Allows Us To Do That We Do Not Do Consistently Today
 
 **Eyebrow:** Precision and Coverage
 
-**Subtitle:** This is not just faster work. It is more complete work.
+**Subtitle:** More complete work with agents that never sleep, not just faster work.
 
 - Consistently capture meeting decisions
 - Summarize every project status weekly
@@ -518,7 +589,7 @@ The goal is not to replace functional expertise. The goal is to give every funct
 
 **Speaker Note:** This is a key message from the user: AI is not reducing staffing. It lets us do work we could not do precisely enough before due to capacity.
 
-## Slide 28: AI Never Sleeps
+## Slide 33: AI Never Sleeps
 
 **Eyebrow:** Operating Leverage
 
@@ -536,46 +607,49 @@ The goal is not to replace functional expertise. The goal is to give every funct
 
 **Speaker Note:** This slide is memorable and helps Leadership see the compounding value of the system.
 
-## Slide 29: Why This Is Becoming Competitive Necessity
+## Slide 35: Why This Is Becoming Competitive Necessity
 
 **Eyebrow:** Competitive Context
 
-**Subtitle:** Large retailers and consumer companies are already using AI to improve speed, precision, operations, and innovation.
+**Subtitle:** AI is changing both sides of Westfield's market: retailers are raising supplier expectations, while brands and manufacturers are improving how quickly they compete.
 
-- **Retailers:** Using AI for personalization, inventory, supply chain visibility, automation, and faster customer response.
-- **Consumer Brands:** Using AI and analytics to understand consumers, accelerate innovation, improve operations, and scale knowledge.
-- **Manufacturers:** Using AI to improve planning, quality, compliance, supplier coordination, and production visibility.
-Westfield does not need to outspend the largest companies. We need to outlearn slower competitors in our own categories.
+- **Retailers set the bar:** They are using AI to improve planning, personalization, inventory, supply chain visibility, and customer response. That changes what they will expect from companies selling into them: faster answers, cleaner product information, sharper account-specific recommendations, and less friction between request and decision.
+- **Competitive set: Consumer brands:** Other consumer brands are using AI agents and analytics to understand consumers, spot trends, build account-specific stories, and accelerate innovation cycles.
+- **Competitive set: Manufacturers:** Other manufacturers are using agentic systems to improve planning, quality, compliance, supplier coordination, costing visibility, and production follow-through.
+
+**Competitive point:** Westfield is both a supplier to retailers and a consumer brand/manufacturer. The pressure comes from retailer expectations and from competitors improving the way they operate.
 
 **Speaker Note:** Avoid too many external facts on the slide. Keep it strategic and use spoken examples if needed.
 
-## Slide 30: The Westfield Advantage
+## Slide 36: The Westfield Advantage
 
 **Eyebrow:** Why Us
 
-**Subtitle:** We have the right conditions to benefit from AI because our business has repeatable complexity.
+**Subtitle:** Westfield has the right business conditions for agentic AI, and unusually strong leadership adoption to turn those conditions into operating results.
 
-- **High project volume:** Many active product development projects across categories and accounts.
-- **Repeatable product patterns:** Chairs, wagons, coolers, shelters, bags, and accessories all create reusable learning.
-- **Retailer-specific knowledge:** Each account has patterns, preferences, price bands, and feedback history.
-- **Complex cross-functional work:** Product, sales, design, engineering, compliance, finance, operations, and factories must align.
-- **Trello foundation:** A practical place to structure project information for AI to read and summarize.
+- **Business condition: High project volume:** Many active product-development projects across categories, accounts, factories, and launch windows.
+- **Business condition: Repeatable product patterns:** Chairs, wagons, coolers, shelters, bags, and accessories create reusable learning across cycles.
+- **Business condition: Retailer-specific knowledge:** Each account has patterns, preferences, price bands, feedback history, and presentation needs.
+- **Business condition: Complex cross-functional work:** Product, sales, design, engineering, compliance, finance, operations, and factories must align.
+- **Leadership advantage:** Because executive and director-level leaders are already using personal agents, Westfield does not have to wait for belief to form after a technology rollout.
+- **Operationalization advantage:** EVP / COO-level leaders were early adopters and helped drive technical deployment. PM and ID directors adopted even earlier and are among the heaviest users. That means standards, workflows, and accountability can move from leadership into daily operations faster.
+- **Why it matters:** The advantage is not just readiness. It is the ability to operationalize agentic AI faster, with better judgment, cleaner adoption, and stronger business results.
 
-**Speaker Note:** The point: our complexity creates the opportunity. AI has real use cases here.
+**Speaker Note:** The point: our complexity creates the opportunity, and Westfield has unusual leadership readiness. AI agents already have executive and director-level adoption, which gives the company a faster path to operationalize the system and get better results than companies where this is only a technology department initiative.
 
-## Slide 31: The Risk of Waiting
+## Slide 37: The Risk of Waiting
 
 **Eyebrow:** Strategic Risk
 
 **Subtitle:** If we do not build this capability, our information problem grows every year.
 
-- **Without AI:** More projects, more emails, more meetings, more files, more dependence on individual memory, slower visibility to risk.
-- **With AI:** More projects can create more knowledge, more consistency, more visibility, and stronger decisions.
-The danger is not that AI replaces Westfield. The danger is that competitors use AI to move faster while we continue working the old way.
+- **Without agentic AI:** More projects, more emails, more meetings, more files, more dependence on individual memory, slower visibility to risk.
+- **With agentic AI:** More projects can create more knowledge, more consistency, more visibility, and stronger decisions.
+The danger is not that AI agents replace Westfield. The danger is that competitors use agentic AI systems to move faster while we continue working the old way.
 
 **Speaker Note:** This should feel urgent but not alarmist.
 
-## Slide 32: What Good Looks Like
+## Slide 38: What Good Looks Like
 
 **Eyebrow:** Success Standard
 
@@ -586,55 +660,24 @@ The danger is not that AI replaces Westfield. The danger is that competitors use
 - **Visible enough to manage:** Leaders can see the health of the business without chasing updates.
 - **Flexible enough to grow:** Start with product and expand across functions.
 - **Disciplined enough to scale:** Requires process standards, data hygiene, ownership, and governance.
-- **Human-led:** AI supports recommendations; leaders make decisions.
+- **Human-led:** AI agents support recommendations; leaders make decisions.
 
 **Speaker Note:** This sets expectations and governance.
 
-## Slide 33: What We Should Not Do
-
-**Eyebrow:** Guardrails
-
-**Subtitle:** Avoid treating AI as random tools, side experiments, or another disconnected system.
-
-- Do not buy tools without a workflow.
-- Do not let every department build disconnected AI experiments.
-- Do not use AI outputs without human review.
-- Do not expect AI to fix unclear ownership.
-- Do not connect sensitive information without governance.
-- Do not measure success only by time saved.
-The goal is an operating capability, not a collection of software subscriptions.
-
-**Speaker Note:** This shows maturity and helps avoid a technology-first interpretation.
-
-## Slide 34: Implementation Principle
-
-**Eyebrow:** How We Begin
-
-**Subtitle:** Start narrow enough to execute, but design the system so it can scale.
-
-- **Step 1:** Pick high-value workflows
-- **Step 2:** Structure Trello and key documents
-- **Step 3:** Build useful agents
-- **Step 4:** Create executive dashboards
-- **Step 5:** Expand after value is proven
-The first phase should focus on workflows that are already painful, high-value, and information-heavy: product status, line review readiness, sample risk, customer feedback, and executive visibility.
-
-**Speaker Note:** This creates a practical path without cost details.
-
-## Slide 35: 12-Month Roadmap
+## Slide 39: 12-Month Roadmap
 
 **Eyebrow:** Phase 1
 
 **Subtitle:** Build the foundation and prove value in real workflows.
 
 - **0–90 Days:** Define data standards, Trello structure, priority workflows, security approach, and pilot teams.
-- **3–6 Months:** Deploy Sales / PM and Industrial Design / Engineering pilots. Begin Creative Services workflow support and executive dashboard prototype.
-- **6–9 Months:** Add recurring project health summaries, LR readiness checks, sample risk alerts, and meeting-note automation.
+- **3–6 Months:** Deploy Sales / PM and Industrial Design / Engineering pilots, including Chuck line-review deck generation. Begin Creative Services workflow support and executive dashboard prototype.
+- **6–9 Months:** Add recurring project health summaries, LR readiness checks, sample risk alerts, auto-refresh presentation workflows, and meeting-note automation.
 - **9–12 Months:** Review adoption, improve accuracy, standardize dashboards, and decide what to scale next.
 
 **Speaker Note:** No costs yet. Focus on sequence.
 
-## Slide 36: 24-Month Roadmap
+## Slide 40: 24-Month Roadmap
 
 **Eyebrow:** Phase 2
 
@@ -647,13 +690,13 @@ The first phase should focus on workflows that are already painful, high-value, 
 
 **Speaker Note:** This is ambitious but believable.
 
-## Slide 37: Future Peek
+## Slide 41: Future Peek
 
 **Eyebrow:** Longer-Term Vision
 
 **Subtitle:** Beyond 24 months, the system becomes part of how Westfield operates every day.
 
-- AI-supported annual planning
+- Agent-supported annual planning
 - Account-specific intelligence files
 - Automated competitive monitoring
 - Predictive product development risk
@@ -665,24 +708,24 @@ The long-term advantage is not the tool itself. It is the company memory, discip
 
 **Speaker Note:** Give a peek but avoid going too far into science fiction.
 
-## Slide 38: Pilot Demonstrations for Leadership
+## Slide 42: Pilot Demonstrations for Leadership
 
 **Eyebrow:** Live Demo Ideas
 
-**Subtitle:** The fastest way to create belief is to show AI working on Westfield problems.
+**Subtitle:** The fastest way to create belief is to show AI agents working on Westfield problems.
 
-- **Demo 1: Project Health:** AI reads Trello cards and produces a risk-ranked project summary.
-- **Demo 2: Chuck Line Review Deck:** AI reads a Trello line-review board, pulls product photos, specs, pricing, comments, and attachment URLs, then builds a shareable buyer presentation.
-- **Demo 3: Costco Chair Brief:** AI creates a complete product brief from past feedback, competitive notes, and project history.
-- **Demo 4: CEO Daily Brief:** AI prepares one page of business changes, risks, and recommended follow-up.
+- **Demo 1: Project Health:** An agent reads Trello cards and produces a risk-ranked project summary.
+- **Demo 2: Chuck Line Review Deck:** An agent reads a Trello line-review board, pulls product photos, specs, pricing, comments, and attachment URLs, then builds a shareable buyer presentation.
+- **Demo 3: Costco Chair Brief:** An agent creates a complete product brief from past feedback, competitive notes, and project history.
+- **Demo 4: CEO Daily Brief:** An agent prepares one page of business changes, risks, and recommended follow-up.
 
 **Speaker Note:** Tie demonstrations to Westfield business, not generic AI novelty.
 
-## Slide 39: How We Measure Success
+## Slide 43: How We Measure Success
 
 **Eyebrow:** Business Metrics
 
-**Subtitle:** Success should be measured by business effectiveness, not by how many AI tools we buy.
+**Subtitle:** Success should be measured by business effectiveness, not by how many AI tools or agent experiments we buy.
 
 - Faster visibility to project risk
 - More complete line review preparation
@@ -696,28 +739,28 @@ The long-term advantage is not the tool itself. It is the company memory, discip
 
 **Speaker Note:** Avoid saying headcount reduction. Say effectiveness, visibility, completeness, and precision.
 
-## Slide 40: What Approval Enables
+## Slide 44: What Approval Enables
 
 **Eyebrow:** The Ask
 
 **Subtitle:** Approval does not mean one big technology bet. It means permission to build the first working version.
 
-- **Approve the direction:** AI as a strategic operating capability for Westfield.
+- **Approve the direction:** Agentic AI as a strategic operating capability for Westfield.
 - **Approve initial implementation:** Start with an agentic system organized around Sales / PM, Industrial Design / Engineering, Creative Services, and Executive / Operations.
-- **Approve process support:** Standardize Trello and key workflows so AI has clean information to work from.
+- **Approve process support:** Standardize Trello and key workflows so AI agents have clean information to work from.
 - **Approve future scaling discussion:** After pilot results, evaluate expansion to Finance, Accounting, Operations, and other functions.
 
 **Speaker Note:** This is the business ask without cost detail.
 
-## Slide 41: Closing Thought
+## Slide 45: Closing Thought
 
 **Eyebrow:** Close
 
-**Subtitle:** The goal is not to build the smartest AI system in outdoor. The goal is to build the smartest outdoor company using AI.
+**Subtitle:** The goal is not to build the smartest agentic AI system in outdoor. The goal is to build the smartest outdoor company using AI agents well.
 
 Westfield already has strong people, strong retailer relationships, and deep product knowledge.
-AI gives us a way to connect that knowledge, make it visible, and use it more consistently.
+AI agents give us a way to connect that knowledge, make it visible, and use it more consistently.
 If we do this well, we do not just work faster. We become a company that learns faster.
-**People + Process + AI The fastest, smartest product organization in outdoor.**
+**People + Process + AI Agents: the fastest, smartest product organization in outdoor.**
 
 **Speaker Note:** End with the vision and the practical next step.
