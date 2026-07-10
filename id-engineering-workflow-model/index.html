@@ -1,911 +1,729 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Industrial Design and Engineering Workflow Model</title>
-  <meta name="description" content="Westfield Outdoors bilingual presentation for a Stage 1 Industrial Design and Engineering workflow model using Trello as the visible operating surface." />
-  <link rel="canonical" href="https://maxmcolem-a11y.github.io/westfield-presentations/id-engineering-workflow-model/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Westfield Outdoors Presentations" />
-  <meta property="og:title" content="Industrial Design and Engineering Workflow Model" />
-  <meta property="og:description" content="A practical Stage 1 workflow model for visible work, clear ownership, better handoffs, and meaningful improvement loops." />
-  <meta property="og:url" content="https://maxmcolem-a11y.github.io/westfield-presentations/id-engineering-workflow-model/" />
-  <meta property="og:image" content="https://maxmcolem-a11y.github.io/westfield-presentations/id-engineering-workflow-model/assets/social-preview.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Westfield Outdoors workflow model presentation preview" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Industrial Design and Engineering Workflow Model" />
-  <meta name="twitter:description" content="Visible work. Clear ownership. Better handoffs." />
-  <meta name="twitter:image" content="https://maxmcolem-a11y.github.io/westfield-presentations/id-engineering-workflow-model/assets/social-preview.png" />
+  <meta name="description" content="A practical Stage 1 workflow model for visible work, clear ownership, better handoffs, and useful AI-supported operating data.">
+  <link rel="canonical" href="https://maxmcolem-a11y.github.io/westfield-presentations/id-engineering-workflow-model/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Westfield Outdoors">
+  <meta property="og:title" content="Industrial Design and Engineering Workflow Model">
+  <meta property="og:description" content="Visible work. Clear ownership. Better handoffs. A Stage 1 operating model for Industrial Design and Engineering.">
+  <meta property="og:url" content="https://maxmcolem-a11y.github.io/westfield-presentations/id-engineering-workflow-model/">
+  <meta property="og:image" content="https://maxmcolem-a11y.github.io/westfield-presentations/id-engineering-workflow-model/assets/social-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Westfield Outdoors workflow model presentation preview">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Industrial Design and Engineering Workflow Model">
+  <meta name="twitter:description" content="Visible work. Clear ownership. Better handoffs.">
+  <meta name="twitter:image" content="https://maxmcolem-a11y.github.io/westfield-presentations/id-engineering-workflow-model/assets/social-preview.png">
+  <meta name="theme-color" content="#d63b2f">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --paper: #f7f1e4;
-      --paper-2: #fffaf0;
-      --ink: #202329;
-      --muted: #646760;
-      --line: #d8cfbd;
-      --red: #c9483d;
-      --green: #6f845f;
-      --sage: #dfe7d5;
-      --gold: #c39a4b;
-      --shadow: 0 18px 48px rgba(28, 24, 18, 0.13);
-      --footer-en: "Property of Westfield Outdoors. Confidential and proprietary. Do not reproduce, distribute, or disclose without written permission.";
-      --footer-zh: "Westfield Outdoors 财产。保密及专有资料。未经书面许可，不得复制、分发或披露。";
+      --bg: #f7f7f3;
+      --paper: #fff;
+      --ink: #141414;
+      --muted: #5b5e5a;
+      --line: rgba(20,20,20,.12);
+      --accent: #d63b2f;
+      --blue: #2c6588;
+      --green: #1f6e52;
+      --amber: #9a5d36;
+      --shadow: 0 18px 45px rgba(0,0,0,.08);
+      --pad: clamp(1.3rem,3vw,3rem);
+      --radius: 8px;
     }
-
     * { box-sizing: border-box; }
-    html { background: #171717; color: var(--ink); }
+    html { scroll-snap-type: y mandatory; scroll-behavior: smooth; background: #ecece7; }
     body {
       margin: 0;
-      font-family: "Avenir Next", "Inter", "Segoe UI", Arial, sans-serif;
-      background: #171717;
-      overflow: hidden;
+      background: linear-gradient(180deg,#fbfbf8,#ecece7);
+      font-family: Inter, Arial, sans-serif;
+      color: var(--ink);
+      overflow-x: hidden;
     }
-
-    .deck {
-      width: 100vw;
-      height: 100dvh;
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 18% 8%, rgba(201, 72, 61, 0.12), transparent 27%),
-        linear-gradient(135deg, var(--paper-2), var(--paper));
-    }
-
     .slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 220ms ease;
-      padding: clamp(34px, 4.4vw, 72px);
-      display: grid;
-      grid-template-rows: auto 1fr;
-      gap: clamp(18px, 2.5vw, 34px);
+      min-height: 100vh;
+      min-height: 100dvh;
+      scroll-snap-align: start;
+      position: relative;
+      display: flex;
       overflow: hidden;
     }
-
-    .slide.active {
-      opacity: 1;
-      pointer-events: auto;
+    .slide:nth-child(even) { background: rgba(236,236,231,.58); }
+    .content {
+      width: min(1220px,92vw);
+      margin: auto;
+      padding: calc(var(--pad) + 20px) var(--pad);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(.75rem,1.5vw,1.15rem);
     }
-
+    .logo {
+      position: absolute;
+      right: clamp(1rem,2.2vw,2rem);
+      top: clamp(.8rem,1.4vw,1.2rem);
+      width: clamp(120px,12vw,180px);
+      height: auto;
+      opacity: .86;
+    }
+    .slide-number {
+      position: absolute;
+      right: clamp(1rem,2.2vw,2rem);
+      bottom: clamp(.8rem,1.4vw,1.2rem);
+      font-weight: 800;
+      font-size: .78rem;
+      letter-spacing: .08em;
+      color: rgba(20,20,20,.38);
+    }
+    .section-label {
+      position: absolute;
+      right: clamp(5.2rem,7.8vw,8.4rem);
+      bottom: clamp(.8rem,1.4vw,1.2rem);
+      max-width: 34vw;
+      border: 1px solid rgba(20,20,20,.12);
+      background: rgba(255,255,255,.78);
+      border-radius: 999px;
+      padding: .42rem .72rem;
+      color: rgba(20,20,20,.58);
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      z-index: 2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     .slide::after {
-      content: var(--footer-en);
+      content: "Property of Westfield Outdoors. Confidential and proprietary. Do not reproduce, distribute, or disclose without written permission.";
       position: absolute;
       left: 50%;
-      bottom: 13px;
+      bottom: clamp(.72rem,1.2vw,1rem);
       transform: translateX(-50%);
-      width: min(86vw, 1120px);
-      color: rgba(32, 35, 41, 0.42);
-      font-size: 9px;
-      line-height: 1.25;
+      width: min(640px,42vw);
       text-align: center;
-      letter-spacing: 0;
-    }
-
-    body.zh .slide::after { content: var(--footer-zh); }
-
-    .slide-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 28px;
-      min-height: 58px;
-    }
-
-    .kicker {
-      margin: 0 0 8px;
-      color: var(--red);
-      text-transform: uppercase;
-      font-size: clamp(12px, 1.15vw, 14px);
-      font-weight: 700;
-      letter-spacing: 0.08em;
-    }
-
-    h1, h2, h3, p { margin: 0; }
-    h1 {
-      font-family: Charter, Georgia, serif;
-      font-size: clamp(46px, 6.2vw, 92px);
-      line-height: 0.96;
-      max-width: 980px;
-      letter-spacing: 0;
-      font-weight: 700;
-    }
-
-    h2 {
-      font-family: Charter, Georgia, serif;
-      font-size: clamp(31px, 4vw, 58px);
-      line-height: 1;
-      max-width: 920px;
-      letter-spacing: 0;
-    }
-
-    h3 {
-      font-size: clamp(17px, 1.45vw, 22px);
+      color: rgba(20,20,20,.34);
+      font-size: .48rem;
       line-height: 1.2;
       font-weight: 700;
+      letter-spacing: .03em;
+      z-index: 1;
+      pointer-events: none;
+    }
+    html[lang="zh-Hans"] .slide::after { content: "Westfield Outdoors 财产。保密及专有资料。未经书面许可，不得复制、分发或披露。"; }
+    .eyebrow {
+      margin: 0;
+      color: var(--accent);
+      font-size: .78rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+    h1 {
+      margin: 0;
+      max-width: 1080px;
+      font-size: clamp(2rem,4.7vw,4.75rem);
+      line-height: .98;
       letter-spacing: 0;
+      font-weight: 900;
     }
-
-    p, li {
-      font-size: clamp(16px, 1.55vw, 24px);
-      line-height: 1.38;
-      color: var(--ink);
-      letter-spacing: 0;
-    }
-
-    .muted { color: var(--muted); }
-
-    .logo {
-      width: clamp(118px, 12vw, 178px);
-      height: auto;
-      object-fit: contain;
-      flex: 0 0 auto;
-    }
-
-    .cover {
-      grid-template-rows: 1fr auto;
-      padding: clamp(38px, 5vw, 78px);
-    }
-
-    .cover-main {
-      display: grid;
-      align-content: center;
-      gap: clamp(24px, 3vw, 42px);
-      max-width: 1120px;
-    }
-
-    .cover .logo {
-      position: absolute;
-      top: clamp(30px, 4vw, 60px);
-      right: clamp(34px, 5vw, 78px);
-    }
-
-    .title-rule {
-      width: min(560px, 52vw);
-      height: 2px;
-      background: linear-gradient(90deg, var(--red), var(--green), transparent);
-    }
-
-    .subtitle {
-      max-width: 860px;
-      font-size: clamp(20px, 2.1vw, 32px);
+    .cover h1 { font-size: clamp(2.5rem,6vw,5.9rem); }
+    .lede {
+      margin: 0;
+      max-width: 1000px;
       color: var(--muted);
-      line-height: 1.35;
+      font-size: clamp(1rem,1.55vw,1.36rem);
+      line-height: 1.36;
+      font-weight: 550;
     }
-
-    .cover-tags,
-    .toc-grid,
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .tag,
-    .toc-item,
-    .small-pill {
-      border: 1px solid var(--line);
-      background: rgba(255, 250, 240, 0.72);
-      border-radius: 8px;
-      color: var(--ink);
-      box-shadow: 0 8px 28px rgba(28, 24, 18, 0.05);
-    }
-
-    .tag {
-      padding: 8px 11px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--muted);
-    }
-
     .toc-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      align-content: start;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      grid-template-rows: repeat(4,auto);
+      grid-auto-flow: column;
+      gap: .72rem;
+      margin-top: .8rem;
     }
-
     .toc-item {
-      padding: clamp(16px, 2.2vw, 24px);
-      min-height: 130px;
       display: grid;
-      gap: 12px;
-      align-content: start;
-    }
-
-    .toc-num {
-      color: var(--red);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .toc-item p,
-    .compact p,
-    .diagram-note p {
-      font-size: clamp(14px, 1.2vw, 17px);
-      color: var(--muted);
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.82fr);
-      gap: clamp(24px, 4vw, 56px);
+      grid-template-columns: auto 1fr auto;
       align-items: center;
-      min-height: 0;
-    }
-
-    .statement {
-      display: grid;
-      gap: 22px;
-      max-width: 880px;
-    }
-
-    .principles {
-      display: grid;
-      gap: 12px;
-    }
-
-    .principle {
-      display: grid;
-      grid-template-columns: 12px 1fr;
-      gap: 14px;
-      align-items: baseline;
-      font-size: clamp(20px, 2.4vw, 34px);
-      line-height: 1.14;
-      font-family: Charter, Georgia, serif;
-      font-weight: 700;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--red);
-      margin-top: 0.45em;
-    }
-
-    .side-panel {
-      border-left: 2px solid var(--red);
-      padding-left: clamp(18px, 2.2vw, 34px);
-      display: grid;
-      gap: 14px;
-    }
-
-    .side-panel p {
-      font-size: clamp(17px, 1.6vw, 24px);
-      color: var(--muted);
-    }
-
-    .diagram-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(290px, 0.34fr);
-      gap: clamp(18px, 3vw, 40px);
-      align-items: center;
-      min-height: 0;
-    }
-
-    .diagram-wrap {
-      position: relative;
-      min-height: 0;
-    }
-
-    .diagram-wrap img {
-      display: block;
-      width: 100%;
-      max-height: calc(100dvh - 210px);
-      object-fit: contain;
-      border: 1px solid rgba(32, 35, 41, 0.12);
-      box-shadow: var(--shadow);
-      background: #fff8ec;
-    }
-
-    .diagram-note {
-      display: grid;
-      gap: 15px;
-      align-content: center;
-    }
-
-    .small-pill {
-      padding: 8px 10px;
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--red);
-      text-transform: uppercase;
-    }
-
-    .label-stack {
-      display: grid;
-      gap: 9px;
-    }
-
-    .label-row {
-      display: grid;
-      grid-template-columns: 16px 1fr;
-      gap: 10px;
-      align-items: baseline;
-      font-size: clamp(14px, 1.3vw, 18px);
+      gap: .75rem;
+      text-decoration: none;
       color: var(--ink);
-      line-height: 1.25;
-      font-weight: 700;
+      background: rgba(255,255,255,.88);
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--accent);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: .86rem 1rem;
     }
-
-    .label-row span:first-child {
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-      background: var(--green);
-      transform: translateY(1px);
-    }
-
-    .label-row.red span:first-child { background: var(--red); }
-    .label-row.gold span:first-child { background: var(--gold); }
-
-    .list-grid {
+    .toc-item:nth-child(3n+1), .card:nth-child(3n+1), .step:nth-child(3n+1), .rule:nth-child(3n+1) { border-left-color: var(--blue); border-top-color: var(--blue); }
+    .toc-item:nth-child(3n+2), .card:nth-child(3n+2), .step:nth-child(3n+2), .rule:nth-child(3n+2) { border-left-color: var(--green); border-top-color: var(--green); }
+    .toc-item:nth-child(3n), .card:nth-child(3n), .step:nth-child(3n), .rule:nth-child(3n) { border-left-color: var(--amber); border-top-color: var(--amber); }
+    .toc-index { font-weight: 900; color: var(--accent); letter-spacing: .08em; }
+    .toc-title { font-weight: 900; font-size: clamp(.96rem,1.12vw,1.08rem); line-height: 1.12; }
+    .toc-range { color: var(--muted); font-weight: 800; font-size: .82rem; white-space: nowrap; }
+    .chips, .cards, .metric-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: clamp(14px, 2vw, 22px);
-      align-content: start;
+      grid-template-columns: repeat(auto-fit,minmax(245px,1fr));
+      gap: 1rem;
+      margin-top: 1rem;
     }
-
-    .compact {
-      border-top: 1px solid var(--line);
-      padding-top: 14px;
+    .chip, .card, .metric, .step, .rule {
+      background: rgba(255,255,255,.88);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .chip {
+      border-radius: 999px;
+      padding: .72rem 1rem;
+      font-weight: 900;
+      text-align: center;
+    }
+    .card, .metric {
+      border-top: 6px solid var(--accent);
+      padding: clamp(1rem,1.7vw,1.35rem);
+    }
+    .card h3, .metric h3, .step h3, .rule h3 {
+      margin: 0 0 .45rem;
+      font-size: clamp(1rem,1.32vw,1.2rem);
+      line-height: 1.15;
+    }
+    .card p, .metric p, .step p, .rule p {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(.9rem,1.06vw,1rem);
+      line-height: 1.35;
+      font-weight: 600;
+    }
+    .callout {
+      margin: 1rem 0 0;
+      background: #151515;
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 1.1rem 1.3rem;
+      font-size: clamp(1.05rem,1.55vw,1.45rem);
+      font-weight: 850;
+      line-height: 1.24;
+    }
+    .split {
       display: grid;
-      gap: 8px;
+      grid-template-columns: .92fr 1.08fr;
+      gap: 1rem;
+      align-items: stretch;
+      margin-top: 1rem;
     }
-
-    .rule-list {
-      display: grid;
-      gap: 14px;
-      max-width: 1120px;
+    .dark-panel {
+      background: #151515;
+      color: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(1rem,1.8vw,1.45rem);
+      display: flex;
+      flex-direction: column;
+      gap: .9rem;
     }
-
+    .dark-panel .kicker {
+      margin: 0;
+      color: #f5c15a;
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+    .dark-panel h3 {
+      margin: 0;
+      font-size: clamp(1.55rem,2.45vw,2.35rem);
+      line-height: 1;
+    }
+    .dark-panel p { margin: 0; color: rgba(255,255,255,.8); font-size: clamp(.94rem,1.08vw,1.04rem); line-height: 1.33; font-weight: 650; }
+    .rule-stack, .step-stack { display: grid; gap: .72rem; }
     .rule {
+      border-left: 8px solid var(--accent);
+      padding: .9rem 1.05rem;
       display: grid;
-      grid-template-columns: minmax(170px, 0.32fr) 1fr;
-      gap: 20px;
-      padding: 15px 0;
-      border-top: 1px solid var(--line);
-      align-items: baseline;
+      grid-template-columns: minmax(150px,.42fr) 1fr;
+      gap: 1rem;
+      align-items: start;
     }
-
-    .rule h3 { color: var(--red); }
-    .rule p { color: var(--muted); }
-
     .timeline {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 10px;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: .8rem;
       align-items: stretch;
+      margin-top: 1rem;
     }
-
-    .stage {
-      border: 1px solid var(--line);
-      background: rgba(255, 250, 240, 0.68);
-      border-radius: 8px;
-      padding: 16px;
-      min-height: 168px;
-      display: grid;
-      gap: 10px;
-      align-content: start;
-      position: relative;
-      overflow: hidden;
+    .step {
+      border-top: 7px solid var(--accent);
+      padding: clamp(1rem,1.8vw,1.45rem);
+      display: flex;
+      flex-direction: column;
+      gap: .55rem;
     }
-
-    .stage::before {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 4px;
-      background: var(--red);
-    }
-
-    .stage:nth-child(even)::before { background: var(--green); }
-    .stage p { font-size: clamp(13px, 1.15vw, 16px); color: var(--muted); }
-
-    .nav {
-      position: fixed;
-      left: 50%;
-      bottom: 34px;
-      transform: translateX(-50%);
-      z-index: 20;
+    .step h3 { font-size: clamp(1.25rem,1.85vw,1.9rem); }
+    .arrow {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 7px 9px;
-      border: 1px solid rgba(32, 35, 41, 0.14);
-      border-radius: 999px;
-      background: rgba(255, 250, 240, 0.88);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 34px rgba(28, 24, 18, 0.13);
+      justify-content: center;
+      color: var(--accent);
+      font-size: clamp(1.8rem,3vw,2.7rem);
+      font-weight: 900;
     }
-
-    .nav button {
-      width: 34px;
-      height: 34px;
-      border: 0;
-      border-radius: 50%;
-      background: transparent;
-      color: var(--ink);
-      font-size: 20px;
-      cursor: pointer;
+    .image-frame {
+      margin-top: .75rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.88);
+      box-shadow: var(--shadow);
+      padding: .9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-
-    .nav button:hover { background: rgba(111, 132, 95, 0.16); }
-    .counter {
-      min-width: 52px;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--muted);
+    .image-frame img {
+      display: block;
+      width: 100%;
+      max-height: min(52vh,520px);
+      object-fit: contain;
     }
-
-    .lang {
+    .progress {
       position: fixed;
-      left: 24px;
-      bottom: 31px;
-      z-index: 21;
-      border: 1px solid rgba(32, 35, 41, 0.14);
-      background: rgba(255, 250, 240, 0.88);
+      left: 0;
+      bottom: 0;
+      height: 5px;
+      background: var(--accent);
+      width: 0;
+      z-index: 31;
+    }
+    .language-toggle {
+      position: fixed;
+      left: clamp(1rem,2.2vw,2rem);
+      bottom: clamp(.8rem,1.4vw,1.2rem);
+      z-index: 40;
+      border: 1px solid rgba(20,20,20,.16);
+      background: rgba(255,255,255,.88);
       color: var(--ink);
       border-radius: 999px;
-      padding: 11px 14px;
-      font-weight: 800;
+      padding: .48rem .8rem;
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .04em;
+      box-shadow: 0 10px 28px rgba(0,0,0,.1);
       cursor: pointer;
-      box-shadow: 0 10px 34px rgba(28, 24, 18, 0.12);
     }
-
-    @media (max-width: 900px) {
-      body { overflow: auto; }
-      .deck { height: auto; min-height: 100dvh; overflow: visible; }
+    .language-toggle:hover, .language-toggle:focus-visible { background: #151515; color: #fff; outline: none; }
+    @media(max-width:900px) {
+      html { scroll-snap-type: none; }
       .slide {
-        position: relative;
-        min-height: 100dvh;
-        display: none;
-        padding: 30px 22px 92px;
+        display: block;
+        min-height: 100svh;
         overflow: visible;
+        padding: 3.85rem 0 4.15rem;
+        border-bottom: 1px solid rgba(20,20,20,.08);
       }
-      .slide.active { display: grid; }
-      .slide-header { gap: 16px; }
-      .slide-header .logo { display: none; }
-      .logo { width: 104px; }
-      .toc-grid,
-      .two-col,
-      .diagram-layout,
-      .list-grid,
-      .timeline {
-        grid-template-columns: 1fr;
-      }
-      .diagram-wrap img { max-height: none; }
-      .rule { grid-template-columns: 1fr; gap: 7px; }
-      .cover .logo { top: 24px; right: 22px; }
-      .cover-main { padding-top: 70px; }
-      .lang { left: 14px; bottom: 24px; }
-      .nav { bottom: 20px; }
+      .content { width: 100%; margin: 0; padding: 0 1rem; gap: .82rem; }
+      .logo { top: .78rem; right: .9rem; width: 94px; max-width: 28vw; }
+      .section-label { left: 1rem; right: auto; top: .95rem; bottom: auto; max-width: calc(100vw - 8.2rem); font-size: .58rem; letter-spacing: .06em; }
+      .slide-number { right: .95rem; bottom: 1.35rem; font-size: .62rem; letter-spacing: .04em; }
+      .slide::after { left: 1rem; right: 4.85rem; bottom: .55rem; transform: none; width: auto; text-align: left; font-size: .43rem; line-height: 1.16; }
+      .language-toggle { left: .85rem; bottom: .85rem; padding: .44rem .72rem; font-size: .72rem; background: rgba(255,255,255,.94); }
+      h1 { font-size: clamp(1.85rem,9vw,2.55rem); line-height: 1.02; }
+      .cover h1 { font-size: clamp(2rem,10vw,2.75rem); }
+      .lede { font-size: 1rem; line-height: 1.34; }
+      .eyebrow { font-size: .66rem; letter-spacing: .1em; }
+      .toc-grid, .chips, .cards, .metric-grid, .split, .timeline { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; gap: .72rem; }
+      .toc-item { grid-template-columns: auto 1fr; padding: .72rem .8rem; gap: .5rem; }
+      .toc-range { grid-column: 2; font-size: .76rem; }
+      .card, .metric, .step, .rule, .dark-panel { box-shadow: 0 8px 22px rgba(0,0,0,.07); }
+      .rule { grid-template-columns: 1fr; gap: .35rem; }
+      .arrow { height: 1.3rem; transform: rotate(90deg); font-size: 1.8rem; line-height: 1; }
+      .callout { padding: .88rem 1rem; font-size: 1rem; line-height: 1.25; }
+      .image-frame img { max-height: 58vh; }
+      .progress { height: 4px; }
     }
   </style>
 </head>
 <body>
-  <button class="lang" id="langToggle" type="button" aria-label="Switch language">中文</button>
-  <main class="deck" id="deck">
-    <section class="slide cover active">
-      <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors" />
-      <div class="cover-main">
-        <p class="kicker" data-i18n="cover.kicker">Stage 1 operating model</p>
-        <h1 data-i18n="cover.title">Industrial Design and Engineering Workflow Model</h1>
-        <div class="title-rule"></div>
-        <p class="subtitle" data-i18n="cover.subtitle">A practical card-based system for visible work, clear ownership, better handoffs, and meaningful process improvement.</p>
-        <div class="cover-tags">
-          <span class="tag" data-i18n="cover.tag1">Visible workflow</span>
-          <span class="tag" data-i18n="cover.tag2">Trello operating surface</span>
-          <span class="tag" data-i18n="cover.tag3">Human + AI readability</span>
-          <span class="tag" data-i18n="cover.tag4">Physical product development</span>
-        </div>
-      </div>
-      <p class="muted" data-i18n="cover.date">Prepared for Westfield Outdoors | July 2026</p>
-    </section>
+  <button id="language-toggle" class="language-toggle" type="button" aria-label="Switch deck to Chinese" title="Switch deck to Chinese">中文</button>
+  <div id="progress" class="progress" aria-hidden="true"></div>
 
-    <section class="slide">
-      <div class="slide-header">
-        <div>
-          <p class="kicker" data-i18n="toc.kicker">Contents</p>
-          <h2 data-i18n="toc.title">What this deck covers</h2>
-        </div>
-        <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors" />
+  <section class="slide cover" id="slide-1">
+    <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+    <div class="section-label">Cover</div>
+    <div class="content">
+      <p class="eyebrow">Westfield Outdoors | Stage 1 Operating Model</p>
+      <h1>Industrial Design and Engineering Workflow Model</h1>
+      <p class="lede">A practical card-based workflow for visible work, clear ownership, better handoffs, and useful AI-supported operating data.</p>
+      <div class="chips">
+        <div class="chip">Make work visible</div>
+        <div class="chip">Clarify ownership</div>
+        <div class="chip">Improve handoffs</div>
       </div>
+    </div>
+    <div class="slide-number">01 / 12</div>
+  </section>
+
+  <section class="slide" id="slide-2">
+    <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+    <div class="section-label">Table of Contents</div>
+    <div class="content">
+      <p class="eyebrow">Navigation</p>
+      <h1>Table of Contents</h1>
       <div class="toc-grid">
-        <article class="toc-item"><div class="toc-num">01</div><h3 data-i18n="toc.s1">Executive Summary</h3><p data-i18n="toc.p1">Why the team needs a clearer workflow model.</p></article>
-        <article class="toc-item"><div class="toc-num">02</div><h3 data-i18n="toc.s2">Workflow Before Tool</h3><p data-i18n="toc.p2">The operating logic Trello makes visible.</p></article>
-        <article class="toc-item"><div class="toc-num">03</div><h3 data-i18n="toc.s3">Trello as Operating Surface</h3><p data-i18n="toc.p3">How cards become readable to people and agents.</p></article>
-        <article class="toc-item"><div class="toc-num">04</div><h3 data-i18n="toc.s4">Useful Data Discipline</h3><p data-i18n="toc.p4">What to capture and what to remove.</p></article>
-        <article class="toc-item"><div class="toc-num">05</div><h3 data-i18n="toc.s5">Retrospectives and Improvement</h3><p data-i18n="toc.p5">How milestone feedback becomes board change.</p></article>
-        <article class="toc-item"><div class="toc-num">06</div><h3 data-i18n="toc.s6">Stage 1 Rollout</h3><p data-i18n="toc.p6">A focused path from workflow definition to operating rhythm.</p></article>
+        <a class="toc-item" href="#slide-3"><span class="toc-index">01</span><span class="toc-title">Executive Summary</span><span class="toc-range">Slides 3-4</span></a>
+        <a class="toc-item" href="#slide-5"><span class="toc-index">02</span><span class="toc-title">Workflow Before Tool</span><span class="toc-range">Slides 5-6</span></a>
+        <a class="toc-item" href="#slide-7"><span class="toc-index">03</span><span class="toc-title">Agile-Informed Model</span><span class="toc-range">Slides 7-8</span></a>
+        <a class="toc-item" href="#slide-9"><span class="toc-index">04</span><span class="toc-title">Stage 1 Board Flow</span><span class="toc-range">Slide 9</span></a>
+        <a class="toc-item" href="#slide-10"><span class="toc-index">05</span><span class="toc-title">Data + AI Support</span><span class="toc-range">Slides 10-11</span></a>
+        <a class="toc-item" href="#slide-12"><span class="toc-index">06</span><span class="toc-title">Operating Decision</span><span class="toc-range">Slide 12</span></a>
       </div>
-    </section>
+    </div>
+    <div class="slide-number">02 / 12</div>
+  </section>
 
-    <section class="slide">
-      <div class="slide-header">
-        <div>
-          <p class="kicker" data-i18n="exec.kicker">Executive summary</p>
-          <h2 data-i18n="exec.title">The goal is not to look Agile. The goal is to make product-development workflow better.</h2>
-        </div>
-        <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors" />
+  <section class="slide" id="slide-3">
+    <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+    <div class="section-label">Executive Summary</div>
+    <div class="content">
+      <p class="eyebrow">The Operating Goal</p>
+      <h1>Make product-development work easier to see, hand off, unblock, finish, and improve.</h1>
+      <p class="lede">Industrial Design and Engineering need a workflow that reflects real physical product work: leadership requests, retailer needs, factory constraints, sample timing, cost feedback, and shifting priorities.</p>
+      <div class="cards">
+        <article class="card"><h3>Visible Work</h3><p>Active product work is readable from the board without reconstructing status from memory.</p></article>
+        <article class="card"><h3>Clear Ownership</h3><p>Each card shows who has the work now, what action is required, and where it goes next.</p></article>
+        <article class="card"><h3>Better Handoffs</h3><p>Teams move work with the right files, decisions, blockers, and definition of done.</p></article>
       </div>
-      <div class="two-col">
-        <div class="statement">
-          <div class="principles">
-            <div class="principle"><span class="dot"></span><span data-i18n="exec.p1">Make work visible.</span></div>
-            <div class="principle"><span class="dot"></span><span data-i18n="exec.p2">Clarify ownership.</span></div>
-            <div class="principle"><span class="dot"></span><span data-i18n="exec.p3">Improve handoffs.</span></div>
-          </div>
-          <p class="muted" data-i18n="exec.body">Industrial Design and Engineering need a simple card-based workflow so active product work is visible, blockers are explicit, and the team can improve from real workflow data.</p>
-        </div>
-        <aside class="side-panel">
-          <h3 data-i18n="exec.sideTitle">Practical flexibility</h3>
-          <p data-i18n="exec.sideBody">The system has to absorb leadership requests, retailer needs, factory constraints, sample timing, market changes, and cost feedback without pretending every pivot is a process failure.</p>
-        </aside>
-      </div>
-    </section>
+    </div>
+    <div class="slide-number">03 / 12</div>
+  </section>
 
-    <section class="slide">
-      <div class="slide-header">
-        <div>
-          <p class="kicker" data-i18n="workflow.kicker">Diagram 1</p>
-          <h2 data-i18n="workflow.title">Workflow before tool</h2>
+  <section class="slide" id="slide-4">
+    <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+    <div class="section-label">Why This Matters</div>
+    <div class="content">
+      <p class="eyebrow">Current Friction</p>
+      <h1>Westfield does not lack work. The challenge is making the work state obvious.</h1>
+      <div class="split">
+        <div class="dark-panel">
+          <p class="kicker">Risk</p>
+          <h3>Informal workflow creates hidden drag.</h3>
+          <p>Priorities become visible to some people but not everyone. Ownership is implied. Blockers appear late. Weekly reporting becomes status reconstruction.</p>
         </div>
-        <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors" />
-      </div>
-      <div class="diagram-layout">
-        <div class="diagram-wrap">
-          <img src="assets/diagram-workflow-model.png" alt="Illustrated product workflow moving from intake through review, handoff, and completion" />
+        <div class="rule-stack">
+          <article class="rule"><h3>Cards describe action</h3><p>Every active card needs a clear next action, blocker, or decision request.</p></article>
+          <article class="rule"><h3>Lists mean real states</h3><p>Cards move because ownership, state, or required action changed.</p></article>
+          <article class="rule"><h3>History becomes operating data</h3><p>Comments, attachments, labels, and checklists create a record that humans and AI agents can use.</p></article>
         </div>
-        <aside class="diagram-note">
-          <div class="pill-row"><span class="small-pill" data-i18n="workflow.pill">Image-based diagram</span></div>
-          <h3 data-i18n="workflow.noteTitle">The card is the digital folder.</h3>
-          <p data-i18n="workflow.noteBody">Each movement needs to mean something: ownership changes, work state changes, or a required action changes.</p>
-          <div class="label-stack">
-            <div class="label-row red"><span></span><strong data-i18n="workflow.l1">Intake and definition</strong></div>
-            <div class="label-row gold"><span></span><strong data-i18n="workflow.l2">Active work and blockers</strong></div>
-            <div class="label-row"><span></span><strong data-i18n="workflow.l3">Review, handoff, and completion</strong></div>
-          </div>
-        </aside>
       </div>
-    </section>
+    </div>
+    <div class="slide-number">04 / 12</div>
+  </section>
 
-    <section class="slide">
-      <div class="slide-header">
-        <div>
-          <p class="kicker" data-i18n="board.kicker">Diagram 2</p>
-          <h2 data-i18n="board.title">Trello makes the workflow visible to humans and AI agents</h2>
-        </div>
-        <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors" />
+  <section class="slide" id="slide-5">
+    <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+    <div class="section-label">Workflow Before Tool</div>
+    <div class="content">
+      <p class="eyebrow">Physical Workflow Model</p>
+      <h1>Trello is the visible surface. The workflow is the movement of responsibility.</h1>
+      <p class="lede">If every project were a paper brief in a folder, the same questions would still drive the system.</p>
+      <div class="cards">
+        <article class="card"><h3>Who has the folder?</h3><p>The current owner or owner group is explicit.</p></article>
+        <article class="card"><h3>What action is required?</h3><p>The next action is visible before review starts.</p></article>
+        <article class="card"><h3>What blocks movement?</h3><p>Missing inputs, samples, decisions, or files are named.</p></article>
+        <article class="card"><h3>Where does it go next?</h3><p>Handoff conditions are clear before the card moves.</p></article>
       </div>
-      <div class="diagram-layout">
-        <div class="diagram-wrap">
-          <img src="assets/diagram-humans-ai-board.png" alt="Illustrated Trello board seen by a person and an AI agent" />
-        </div>
-        <aside class="diagram-note">
-          <div class="pill-row"><span class="small-pill" data-i18n="board.pill">Image-based diagram</span></div>
-          <h3 data-i18n="board.noteTitle">The board becomes the operating surface.</h3>
-          <p data-i18n="board.noteBody">Lists, labels, comments, attachments, checklists, and linked cards are not decoration. They are the readable record of work.</p>
-          <div class="label-stack">
-            <div class="label-row red"><span></span><strong data-i18n="board.l1">Human status visibility</strong></div>
-            <div class="label-row gold"><span></span><strong data-i18n="board.l2">Agent summaries and follow-ups</strong></div>
-            <div class="label-row"><span></span><strong data-i18n="board.l3">Shared execution record</strong></div>
-          </div>
-        </aside>
-      </div>
-    </section>
+      <div class="callout">A card is the digital folder. A list is the current work state or owner group.</div>
+    </div>
+    <div class="slide-number">05 / 12</div>
+  </section>
 
-    <section class="slide">
-      <div class="slide-header">
-        <div>
-          <p class="kicker" data-i18n="matters.kicker">Why this matters</p>
-          <h2 data-i18n="matters.title">Informal workflow hides the critical path.</h2>
-        </div>
-        <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors" />
+  <section class="slide" id="slide-6">
+    <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+    <div class="section-label">Workflow Model</div>
+    <div class="content">
+      <p class="eyebrow">Card Path</p>
+      <h1>The path of the card is the path of the work.</h1>
+      <p class="lede">Critical path becomes visible when the board shows where the card is sitting, what it needs, and who can move it.</p>
+      <div class="image-frame">
+        <img src="assets/diagram-workflow-model.png" alt="Workflow model diagram">
       </div>
-      <div class="list-grid">
-        <div class="compact"><h3 data-i18n="matters.h1">Without a clear model</h3><p data-i18n="matters.p1">Priorities are visible to some people but not everyone. Ownership is implied. Blockers are discovered late. Status reporting requires reconstruction.</p></div>
-        <div class="compact"><h3 data-i18n="matters.h2">With a clear model</h3><p data-i18n="matters.p2">Cards show the next required action, the owner group, the blocker, the decision needed, and what done means for the current stage.</p></div>
-        <div class="compact"><h3 data-i18n="matters.h3">For physical product work</h3><p data-i18n="matters.p3">The workflow has to account for CAD, renderings, samples, factory feedback, cost targets, packaging, retailer needs, and leadership decisions.</p></div>
-        <div class="compact"><h3 data-i18n="matters.h4">For agent support</h3><p data-i18n="matters.p4">AI agents can summarize, identify follow-ups, and support reporting only when the board itself is consistent.</p></div>
-      </div>
-    </section>
+    </div>
+    <div class="slide-number">06 / 12</div>
+  </section>
 
-    <section class="slide">
-      <div class="slide-header">
-        <div>
-          <p class="kicker" data-i18n="discipline.kicker">Data discipline</p>
-          <h2 data-i18n="discipline.title">Useful data beats decorative data.</h2>
+  <section class="slide" id="slide-7">
+    <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+    <div class="section-label">Agile-Informed</div>
+    <div class="content">
+      <p class="eyebrow">Not Agile Theater</p>
+      <h1>Use Agile ideas only where they improve physical product work.</h1>
+      <div class="split">
+        <div class="rule-stack">
+          <article class="rule"><h3>Keep</h3><p>Visible work, smaller pieces, frequent review, blocker surfacing, WIP discipline, and improvement based on real friction.</p></article>
+          <article class="rule"><h3>Avoid</h3><p>Strict two-week commitments for all work, story points as the primary system, mandatory standups, and unused custom fields.</p></article>
+          <article class="rule"><h3>Start</h3><p>A Kanban-style workflow with selected Agile habits that fit samples, factories, testing, and leadership decisions.</p></article>
         </div>
-        <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors" />
+        <div class="dark-panel">
+          <p class="kicker">Principle</p>
+          <h3>The goal is not to look Agile.</h3>
+          <p>The goal is to make product-development workflow better, especially when priorities shift.</p>
+        </div>
       </div>
-      <div class="rule-list">
-        <div class="rule"><h3 data-i18n="discipline.r1h">Lists</h3><p data-i18n="discipline.r1p">Use lists for real work state or owner group, not vague organization.</p></div>
-        <div class="rule"><h3 data-i18n="discipline.r2h">Labels</h3><p data-i18n="discipline.r2p">Use labels for categories, channels, brands, and filters people actually review.</p></div>
-        <div class="rule"><h3 data-i18n="discipline.r3h">Attachments</h3><p data-i18n="discipline.r3p">Put source documents, specs, CAD, references, sample photos, and SharePoint links where the work happens.</p></div>
-        <div class="rule"><h3 data-i18n="discipline.r4h">Comments</h3><p data-i18n="discipline.r4p">Capture decisions, blockers, handoff notes, and meaningful updates directly on the card.</p></div>
-        <div class="rule"><h3 data-i18n="discipline.r5h">Custom fields</h3><p data-i18n="discipline.r5p">Keep them only when they carry structured information that is actively reviewed and cannot be represented more clearly elsewhere.</p></div>
-      </div>
-    </section>
+    </div>
+    <div class="slide-number">07 / 12</div>
+  </section>
 
-    <section class="slide">
-      <div class="slide-header">
-        <div>
-          <p class="kicker" data-i18n="wip.kicker">Work in progress</p>
-          <h2 data-i18n="wip.title">Kill weak ideas early. Once costly execution starts, finish the current stage or make an explicit kill decision.</h2>
-        </div>
-        <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors" />
+  <section class="slide" id="slide-8">
+    <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+    <div class="section-label">WIP Discipline</div>
+    <div class="content">
+      <p class="eyebrow">Exploration vs. Execution</p>
+      <h1>Kill weak ideas early. Once costly execution starts, finish the current stage or make an explicit kill decision.</h1>
+      <p class="lede">Physical samples, CAD, engineering time, technical packs, and factory effort create evidence. The workflow should protect that learning while still allowing weak ideas to die quickly.</p>
+      <div class="metric-grid">
+        <article class="metric"><h3>Cheap Exploration</h3><p>Sketching, directional concepting, and early reviews can move fast and stop fast.</p></article>
+        <article class="metric"><h3>Costly Execution</h3><p>Once the work consumes engineering, sample, factory, or tooling effort, the next stage needs a clear finish or stop decision.</p></article>
+        <article class="metric"><h3>Sample Evidence</h3><p>A sample can prove cost, reveal overbuild, support value engineering, or show why an idea cannot meet target.</p></article>
       </div>
-      <div class="two-col">
-        <div class="statement">
-          <p data-i18n="wip.body1">Early concepting, sketching, and directional exploration can die quickly. That is healthy. The team should not treat every sketch as precious.</p>
-          <p data-i18n="wip.body2">Once engineering time, technical packs, CAD, tooling direction, sample work, or factory effort has started, the discipline changes. A sample is evidence: cost, construction, overbuild, underbuild, value-engineering path, and proof for leadership.</p>
-        </div>
-        <aside class="side-panel">
-          <h3 data-i18n="wip.sideTitle">Practical sample logic</h3>
-          <p data-i18n="wip.sideBody">Sometimes the faster and cheaper path is to build one sample, create the first bill of materials, then value engineer from something real.</p>
-        </aside>
-      </div>
-    </section>
+    </div>
+    <div class="slide-number">08 / 12</div>
+  </section>
 
-    <section class="slide">
-      <div class="slide-header">
-        <div>
-          <p class="kicker" data-i18n="retro.kicker">Diagram 3</p>
-          <h2 data-i18n="retro.title">Retrospectives at real workflow milestones</h2>
-        </div>
-        <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors" />
-      </div>
-      <div class="diagram-layout">
-        <div class="diagram-wrap">
-          <img src="assets/diagram-retrospective-loop.png" alt="Illustrated retrospective loop from work stage to blocker capture to improvement" />
-        </div>
-        <aside class="diagram-note">
-          <div class="pill-row"><span class="small-pill" data-i18n="retro.pill">Image-based diagram</span></div>
-          <h3 data-i18n="retro.noteTitle">The output is one to three concrete changes.</h3>
-          <p data-i18n="retro.noteBody">Capture blockers while the work happens, let the agent summarize card history, then combine that summary with human feedback.</p>
-          <div class="label-stack">
-            <div class="label-row red"><span></span><strong data-i18n="retro.l1">Work stage completes</strong></div>
-            <div class="label-row gold"><span></span><strong data-i18n="retro.l2">Friction is reviewed</strong></div>
-            <div class="label-row"><span></span><strong data-i18n="retro.l3">Board standard changes</strong></div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="slide">
-      <div class="slide-header">
-        <div>
-          <p class="kicker" data-i18n="stage.kicker">Stage 1 operating model</p>
-          <h2 data-i18n="stage.title">Keep the rollout focused and practical.</h2>
-        </div>
-        <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors" />
-      </div>
+  <section class="slide" id="slide-9">
+    <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+    <div class="section-label">Stage 1 Board Flow</div>
+    <div class="content">
+      <p class="eyebrow">Practical Flow</p>
+      <h1>Stage 1 stays focused: improve the team-level workflow before creating a large company process initiative.</h1>
       <div class="timeline">
-        <article class="stage"><h3 data-i18n="stage.s1h">Define the workflow</h3><p data-i18n="stage.s1p">Agree on real states: not ready, ready, in progress, blocked, review, waiting, done.</p></article>
-        <article class="stage"><h3 data-i18n="stage.s2h">Set card standards</h3><p data-i18n="stage.s2p">Require owner group, next action, blocker, required input, and definition of done.</p></article>
-        <article class="stage"><h3 data-i18n="stage.s3h">Clean the data model</h3><p data-i18n="stage.s3p">Prefer lists, labels, attachments, comments, and checklists before custom fields.</p></article>
-        <article class="stage"><h3 data-i18n="stage.s4h">Review active work</h3><p data-i18n="stage.s4p">Look at active and blocked work regularly with WIP discipline.</p></article>
-        <article class="stage"><h3 data-i18n="stage.s5h">Improve from evidence</h3><p data-i18n="stage.s5p">Turn retrospective outcomes into board changes, card standards, or follow-up cards.</p></article>
+        <article class="step"><h3>Ready</h3><p>The card has enough information for someone to begin.</p></article>
+        <div class="arrow">→</div>
+        <article class="step"><h3>In Progress / Blocked</h3><p>The work is active, or the blocker and needed input are named.</p></article>
+        <div class="arrow">→</div>
+        <article class="step"><h3>Review / Handoff</h3><p>The output, decision, or next owner is attached or linked before the card moves on.</p></article>
       </div>
-    </section>
+      <div class="image-frame">
+        <img src="assets/diagram-rollout-stages.png" alt="Stage rollout diagram">
+      </div>
+    </div>
+    <div class="slide-number">09 / 12</div>
+  </section>
 
-    <section class="slide">
-      <div class="slide-header">
-        <div>
-          <p class="kicker" data-i18n="rollout.kicker">Diagram 4</p>
-          <h2 data-i18n="rollout.title">Future-compatible, not heavy at the starting point</h2>
-        </div>
-        <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors" />
+  <section class="slide" id="slide-10">
+    <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+    <div class="section-label">Data Discipline</div>
+    <div class="content">
+      <p class="eyebrow">Useful Data, Not Decorative Data</p>
+      <h1>The board should answer operating questions, not collect fields nobody uses.</h1>
+      <p class="lede">Recent S28 cleanup showed the risk: custom fields that are unused, inconsistent, or reduced to repeated historical values are noise. Workflow data should help decisions.</p>
+      <div class="cards">
+        <article class="card"><h3>Lists</h3><p>State and ownership.</p></article>
+        <article class="card"><h3>Labels</h3><p>Categories, channels, brands, and useful filters.</p></article>
+        <article class="card"><h3>Attachments</h3><p>Source documents, photos, specs, CAD, and SharePoint links.</p></article>
+        <article class="card"><h3>Comments</h3><p>Decisions, blockers, handoff notes, and context.</p></article>
       </div>
-      <div class="diagram-layout">
-        <div class="diagram-wrap">
-          <img src="assets/diagram-rollout-stages.png" alt="Illustrated rollout from local workflow to cross-functional visibility and future portfolio planning" />
-        </div>
-        <aside class="diagram-note">
-          <div class="pill-row"><span class="small-pill" data-i18n="rollout.pill">Image-based diagram</span></div>
-          <h3 data-i18n="rollout.noteTitle">Stage 1 does not need to carry the weight of a company-wide transformation.</h3>
-          <p data-i18n="rollout.noteBody">It creates the local workflow discipline that later portfolio, brand-channel, Lean-Agile, or SAFe-style planning can connect to.</p>
-          <div class="label-stack">
-            <div class="label-row red"><span></span><strong data-i18n="rollout.l1">Team workflow</strong></div>
-            <div class="label-row gold"><span></span><strong data-i18n="rollout.l2">Cross-functional flow</strong></div>
-            <div class="label-row"><span></span><strong data-i18n="rollout.l3">Future portfolio compatibility</strong></div>
-          </div>
-        </aside>
-      </div>
-    </section>
+    </div>
+    <div class="slide-number">10 / 12</div>
+  </section>
 
-    <section class="slide">
-      <div class="slide-header">
-        <div>
-          <p class="kicker" data-i18n="close.kicker">Close</p>
-          <h2 data-i18n="close.title">The board is useful when it tells the truth about the work.</h2>
-        </div>
-        <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors" />
+  <section class="slide" id="slide-11">
+    <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+    <div class="section-label">Humans + AI Agents</div>
+    <div class="content">
+      <p class="eyebrow">Agent-Ready Surface</p>
+      <h1>Trello makes the workflow visible to both humans and AI agents.</h1>
+      <p class="lede">Agents can summarize activity, identify follow-ups, support reporting, and prepare retrospectives, but only if the board itself is consistent.</p>
+      <div class="image-frame">
+        <img src="assets/diagram-humans-ai-board.png" alt="Humans and AI agents working from the board">
       </div>
-      <div class="two-col">
-        <div class="statement">
-          <p data-i18n="close.body1">The operating model is simple: make the workflow visible, clarify who owns the next action, name blockers directly, and use real evidence to improve the system.</p>
-          <p data-i18n="close.body2">Trello is the current surface. The discipline is the workflow.</p>
-        </div>
-        <aside class="side-panel">
-          <h3 data-i18n="close.metaTitle">Prepared by</h3>
-          <p data-i18n="close.metaBody">Industrial Design | Westfield Outdoors | July 2026</p>
-        </aside>
-      </div>
-    </section>
-  </main>
+    </div>
+    <div class="slide-number">11 / 12</div>
+  </section>
 
-  <nav class="nav" aria-label="Slide navigation">
-    <button type="button" id="prev" aria-label="Previous slide">‹</button>
-    <div class="counter" id="counter">1 / 12</div>
-    <button type="button" id="next" aria-label="Next slide">›</button>
-  </nav>
+  <section class="slide" id="slide-12">
+    <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+    <div class="section-label">Operating Decision</div>
+    <div class="content">
+      <p class="eyebrow">Decision Request</p>
+      <h1>Approve Stage 1 as a practical ID + Engineering workflow operating model.</h1>
+      <p class="lede">This is not a company-wide Agile rollout. It is a focused workflow system for visible work, clear ownership, better handoffs, useful retrospectives, and agent-supported reporting.</p>
+      <div class="timeline">
+        <article class="step"><h3>Define</h3><p>Finalize real work states, card standards, and handoff rules.</p></article>
+        <div class="arrow">→</div>
+        <article class="step"><h3>Run</h3><p>Use the board as the operating surface for active ID and Engineering-touching work.</p></article>
+        <div class="arrow">→</div>
+        <article class="step"><h3>Improve</h3><p>Use blockers, handoff friction, and retrospectives to update the workflow.</p></article>
+      </div>
+    </div>
+    <div class="slide-number">12 / 12</div>
+  </section>
 
   <script>
-    const translations = {
-      zh: {
-        "cover.kicker": "第一阶段运营模型",
-        "cover.title": "工业设计与工程工作流模型",
-        "cover.subtitle": "一个实用的卡片式系统，用于让工作可见、责任清晰、交接更顺畅，并推动有意义的流程改进。",
-        "cover.tag1": "可见工作流",
-        "cover.tag2": "Trello 运营界面",
-        "cover.tag3": "人与 AI 均可读取",
-        "cover.tag4": "实体产品开发",
-        "cover.date": "为 Westfield Outdoors 准备 | 2026 年 7 月",
-        "toc.kicker": "目录",
-        "toc.title": "本演示涵盖内容",
-        "toc.s1": "执行摘要",
-        "toc.p1": "为什么团队需要更清晰的工作流模型。",
-        "toc.s2": "工作流先于工具",
-        "toc.p2": "Trello 所呈现的运营逻辑。",
-        "toc.s3": "Trello 作为运营界面",
-        "toc.p3": "卡片如何变得可供人员和代理读取。",
-        "toc.s4": "有用的数据纪律",
-        "toc.p4": "应该捕捉什么，应该移除什么。",
-        "toc.s5": "复盘与改进",
-        "toc.p5": "里程碑反馈如何转化为看板改进。",
-        "toc.s6": "第一阶段 rollout",
-        "toc.p6": "从工作流定义到运营节奏的聚焦路径。",
-        "exec.kicker": "执行摘要",
-        "exec.title": "目标不是看起来敏捷。目标是让产品开发工作流更好。",
-        "exec.p1": "让工作可见。",
-        "exec.p2": "明确责任归属。",
-        "exec.p3": "改善交接。",
-        "exec.body": "工业设计与工程需要一个简单的卡片式工作流，让活跃产品工作可见、阻塞明确，并让团队能基于真实工作流数据持续改进。",
-        "exec.sideTitle": "实用的灵活性",
-        "exec.sideBody": "系统必须能承接领导要求、零售商需求、工厂限制、样品时间、市场变化和成本反馈，而不是把每一次转向都当作流程失败。",
-        "workflow.kicker": "图示 1",
-        "workflow.title": "工作流先于工具",
-        "workflow.pill": "图像式图示",
-        "workflow.noteTitle": "卡片就是数字文件夹。",
-        "workflow.noteBody": "每一次移动都要有意义：责任变化、工作状态变化，或所需行动变化。",
-        "workflow.l1": "接收与定义",
-        "workflow.l2": "进行中的工作与阻塞",
-        "workflow.l3": "评审、交接与完成",
-        "board.kicker": "图示 2",
-        "board.title": "Trello 让工作流同时对人员和 AI 代理可见",
-        "board.pill": "图像式图示",
-        "board.noteTitle": "看板成为运营界面。",
-        "board.noteBody": "列表、标签、评论、附件、清单和关联卡片不是装饰，而是工作的可读记录。",
-        "board.l1": "人员可见的状态",
-        "board.l2": "代理摘要与跟进",
-        "board.l3": "共享执行记录",
-        "matters.kicker": "为什么重要",
-        "matters.title": "非正式工作流会隐藏关键路径。",
-        "matters.h1": "没有清晰模型时",
-        "matters.p1": "优先级只对部分人可见。责任是暗示的。阻塞被发现得太晚。状态报告需要重新拼凑。",
-        "matters.h2": "有清晰模型时",
-        "matters.p2": "卡片显示下一步行动、负责团队、阻塞、需要的决策，以及当前阶段的完成定义。",
-        "matters.h3": "对于实体产品工作",
-        "matters.p3": "工作流必须覆盖 CAD、渲染、样品、工厂反馈、成本目标、包装、零售商需求和领导决策。",
-        "matters.h4": "对于代理支持",
-        "matters.p4": "只有看板本身一致，AI 代理才能做摘要、识别跟进事项，并支持报告。",
-        "discipline.kicker": "数据纪律",
-        "discipline.title": "有用的数据优于装饰性数据。",
-        "discipline.r1h": "列表",
-        "discipline.r1p": "用列表表达真实工作状态或负责团队，而不是模糊分类。",
-        "discipline.r2h": "标签",
-        "discipline.r2p": "用标签表达人员实际会查看的类别、渠道、品牌和筛选条件。",
-        "discipline.r3h": "附件",
-        "discipline.r3p": "把源文件、规格、CAD、参考、样品照片和 SharePoint 链接放在工作发生的位置。",
-        "discipline.r4h": "评论",
-        "discipline.r4p": "直接在卡片上记录决策、阻塞、交接说明和有意义的更新。",
-        "discipline.r5h": "自定义字段",
-        "discipline.r5p": "只有当字段承载被主动审阅、且无法用其他看板元素更清晰表达的结构化信息时才保留。",
-        "wip.kicker": "在制品纪律",
-        "wip.title": "弱想法要早杀。昂贵执行开始后，要完成当前阶段，或做出明确停止决策。",
-        "wip.body1": "早期概念、草图和方向探索可以快速终止。这是健康的。团队不应该把每张草图都当成必须保护的资产。",
-        "wip.body2": "一旦工程时间、技术包、CAD、模具方向、样品工作或工厂投入已经开始，纪律就会改变。样品是证据：成本、结构、过度设计、不足设计、价值工程路径，以及给领导的证明。",
-        "wip.sideTitle": "实用样品逻辑",
-        "wip.sideBody": "有时更快、更便宜的路径是先做一个样品，形成第一版 BOM，再基于真实对象做价值工程。",
-        "retro.kicker": "图示 3",
-        "retro.title": "在真实工作流里程碑上复盘",
-        "retro.pill": "图像式图示",
-        "retro.noteTitle": "输出是一到三个具体改变。",
-        "retro.noteBody": "在工作发生时捕捉阻塞，让代理总结卡片历史，再与人的反馈结合。",
-        "retro.l1": "工作阶段完成",
-        "retro.l2": "回顾摩擦点",
-        "retro.l3": "看板标准改变",
-        "stage.kicker": "第一阶段运营模型",
-        "stage.title": "保持 rollout 聚焦且实用。",
-        "stage.s1h": "定义工作流",
-        "stage.s1p": "统一真实状态：未准备好、已准备、进行中、阻塞、评审、等待、完成。",
-        "stage.s2h": "设定卡片标准",
-        "stage.s2p": "要求负责团队、下一步行动、阻塞、所需输入和完成定义。",
-        "stage.s3h": "清理数据模型",
-        "stage.s3p": "优先使用列表、标签、附件、评论和清单，再考虑自定义字段。",
-        "stage.s4h": "审阅活跃工作",
-        "stage.s4p": "用在制品纪律定期查看活跃和阻塞工作。",
-        "stage.s5h": "基于证据改进",
-        "stage.s5p": "把复盘结果转化为看板改变、卡片标准或后续卡片。",
-        "rollout.kicker": "图示 4",
-        "rollout.title": "面向未来兼容，但起点不沉重",
-        "rollout.pill": "图像式图示",
-        "rollout.noteTitle": "第一阶段不需要承担公司级转型的重量。",
-        "rollout.noteBody": "它建立本地工作流纪律，未来的组合管理、品牌渠道流程、精益敏捷或 SAFe 式规划都可以接入。",
-        "rollout.l1": "团队工作流",
-        "rollout.l2": "跨职能流程",
-        "rollout.l3": "未来组合规划兼容性",
-        "close.kicker": "结尾",
-        "close.title": "当看板真实反映工作时，它才有用。",
-        "close.body1": "运营模型很简单：让工作流可见，明确谁负责下一步，直接命名阻塞，并用真实证据改进系统。",
-        "close.body2": "Trello 是当前界面。纪律是工作流本身。",
-        "close.metaTitle": "准备方",
-        "close.metaBody": "工业设计 | Westfield Outdoors | 2026 年 7 月"
-      }
+    const zhText = {
+      "Westfield Outdoors | Stage 1 Operating Model": "Westfield Outdoors | 第一阶段运营模型",
+      "Industrial Design and Engineering Workflow Model": "工业设计与工程工作流模型",
+      "A practical card-based workflow for visible work, clear ownership, better handoffs, and useful AI-supported operating data.": "一个实用的卡片式工作流，用于让工作可见、明确责任、改善交接，并形成可被 AI 支持的运营数据。",
+      "Make work visible": "让工作可见",
+      "Clarify ownership": "明确责任",
+      "Improve handoffs": "改善交接",
+      "Navigation": "导航",
+      "Table of Contents": "目录",
+      "Executive Summary": "管理层摘要",
+      "Workflow Before Tool": "工作流先于工具",
+      "Agile-Informed Model": "借鉴敏捷的模型",
+      "Stage 1 Board Flow": "第一阶段看板流程",
+      "Data + AI Support": "数据与 AI 支持",
+      "Operating Decision": "运营决策",
+      "Slides 3-4": "第 3-4 页",
+      "Slides 5-6": "第 5-6 页",
+      "Slides 7-8": "第 7-8 页",
+      "Slide 9": "第 9 页",
+      "Slides 10-11": "第 10-11 页",
+      "Slide 12": "第 12 页",
+      "The Operating Goal": "运营目标",
+      "Make product-development work easier to see, hand off, unblock, finish, and improve.": "让产品开发工作更容易被看见、交接、解除阻碍、完成并持续改进。",
+      "Industrial Design and Engineering need a workflow that reflects real physical product work: leadership requests, retailer needs, factory constraints, sample timing, cost feedback, and shifting priorities.": "工业设计与工程需要一个反映实体产品开发现实的工作流：管理层需求、零售商需求、工厂限制、样品节奏、成本反馈以及不断变化的优先级。",
+      "Visible Work": "工作可见",
+      "Active product work is readable from the board without reconstructing status from memory.": "团队无需靠记忆重建状态，就能从看板读懂正在推进的产品工作。",
+      "Clear Ownership": "责任清晰",
+      "Each card shows who has the work now, what action is required, and where it goes next.": "每张卡片显示当前由谁负责、需要什么行动、下一步交给谁。",
+      "Better Handoffs": "更好的交接",
+      "Teams move work with the right files, decisions, blockers, and definition of done.": "团队在交接工作时带上正确的文件、决策、阻碍信息和当前阶段完成标准。",
+      "Current Friction": "当前摩擦",
+      "Westfield does not lack work. The challenge is making the work state obvious.": "Westfield 并不缺少工作。挑战在于让工作状态一眼可见。",
+      "Risk": "风险",
+      "Informal workflow creates hidden drag.": "非正式工作流会形成隐藏阻力。",
+      "Priorities become visible to some people but not everyone. Ownership is implied. Blockers appear late. Weekly reporting becomes status reconstruction.": "优先级只对部分人可见，责任靠默契而非明示，阻碍暴露较晚，周报变成重新拼状态。",
+      "Cards describe action": "卡片描述行动",
+      "Every active card needs a clear next action, blocker, or decision request.": "每张活跃卡片都需要清楚的下一步行动、阻碍或决策请求。",
+      "Lists mean real states": "列表代表真实状态",
+      "Cards move because ownership, state, or required action changed.": "卡片移动是因为责任、状态或所需行动发生了变化。",
+      "History becomes operating data": "历史记录成为运营数据",
+      "Comments, attachments, labels, and checklists create a record that humans and AI agents can use.": "评论、附件、标签和清单形成可供人员和 AI 代理使用的记录。",
+      "Physical Workflow Model": "实体工作流模型",
+      "Trello is the visible surface. The workflow is the movement of responsibility.": "Trello 是可见界面。真正的工作流是责任的流转。",
+      "If every project were a paper brief in a folder, the same questions would still drive the system.": "如果每个项目都是文件夹里的纸质简报，系统仍然由同样的问题驱动。",
+      "Who has the folder?": "文件夹现在在谁手里？",
+      "The current owner or owner group is explicit.": "当前负责人或负责小组必须明确。",
+      "What action is required?": "需要什么行动？",
+      "The next action is visible before review starts.": "评审开始前，下一步行动必须可见。",
+      "What blocks movement?": "什么阻碍了流转？",
+      "Missing inputs, samples, decisions, or files are named.": "缺失的输入、样品、决策或文件需要被点名。",
+      "Where does it go next?": "下一步去哪里？",
+      "Handoff conditions are clear before the card moves.": "卡片移动前，交接条件必须清楚。",
+      "A card is the digital folder. A list is the current work state or owner group.": "卡片就是数字文件夹。列表代表当前工作状态或负责小组。",
+      "Card Path": "卡片路径",
+      "The path of the card is the path of the work.": "卡片的路径就是工作的路径。",
+      "Critical path becomes visible when the board shows where the card is sitting, what it needs, and who can move it.": "当看板显示卡片停在哪里、需要什么、谁能推动时，关键路径就变得可见。",
+      "Not Agile Theater": "不是敏捷表演",
+      "Use Agile ideas only where they improve physical product work.": "只在能改善实体产品工作的地方使用敏捷思想。",
+      "Keep": "保留",
+      "Visible work, smaller pieces, frequent review, blocker surfacing, WIP discipline, and improvement based on real friction.": "工作可见、拆小工作、频繁评审、暴露阻碍、控制在制品，并根据真实摩擦改进。",
+      "Avoid": "避免",
+      "Strict two-week commitments for all work, story points as the primary system, mandatory standups, and unused custom fields.": "避免把所有工作都强行纳入两周承诺、以故事点为主系统、强制站会，以及没人使用的自定义字段。",
+      "Start": "起点",
+      "A Kanban-style workflow with selected Agile habits that fit samples, factories, testing, and leadership decisions.": "从看板式工作流开始，选择适合样品、工厂、测试和管理层决策的敏捷习惯。",
+      "Principle": "原则",
+      "The goal is not to look Agile.": "目标不是看起来敏捷。",
+      "The goal is to make product-development workflow better, especially when priorities shift.": "目标是让产品开发工作流更好，尤其是在优先级变化时。",
+      "Exploration vs. Execution": "探索与执行",
+      "Kill weak ideas early. Once costly execution starts, finish the current stage or make an explicit kill decision.": "弱想法要早停。一旦进入高成本执行阶段，就完成当前阶段，或做出明确停止决策。",
+      "Physical samples, CAD, engineering time, technical packs, and factory effort create evidence. The workflow should protect that learning while still allowing weak ideas to die quickly.": "实体样品、CAD、工程时间、技术包和工厂投入都会产生证据。工作流应保护这些学习，同时允许弱想法快速停止。",
+      "Cheap Exploration": "低成本探索",
+      "Sketching, directional concepting, and early reviews can move fast and stop fast.": "草图、方向性概念和早期评审可以快速推进，也可以快速停止。",
+      "Costly Execution": "高成本执行",
+      "Once the work consumes engineering, sample, factory, or tooling effort, the next stage needs a clear finish or stop decision.": "一旦工作消耗工程、样品、工厂或模具相关投入，下一阶段就需要明确完成或停止决策。",
+      "Sample Evidence": "样品证据",
+      "A sample can prove cost, reveal overbuild, support value engineering, or show why an idea cannot meet target.": "样品可以验证成本、暴露过度设计、支持价值工程，或证明某个想法无法达成目标。",
+      "Practical Flow": "实用流程",
+      "Stage 1 stays focused: improve the team-level workflow before creating a large company process initiative.": "第一阶段保持聚焦：先改善团队级工作流，而不是启动大型公司流程项目。",
+      "Ready": "准备就绪",
+      "The card has enough information for someone to begin.": "卡片已有足够信息，可以开始行动。",
+      "In Progress / Blocked": "进行中 / 受阻",
+      "The work is active, or the blocker and needed input are named.": "工作正在推进，或阻碍与所需输入已被明确。",
+      "Review / Handoff": "评审 / 交接",
+      "The output, decision, or next owner is attached or linked before the card moves on.": "卡片继续移动前，输出、决策或下一负责人已附上或链接。",
+      "Useful Data, Not Decorative Data": "有用数据，而不是装饰性数据",
+      "The board should answer operating questions, not collect fields nobody uses.": "看板应该回答运营问题，而不是收集没人使用的字段。",
+      "Recent S28 cleanup showed the risk: custom fields that are unused, inconsistent, or reduced to repeated historical values are noise. Workflow data should help decisions.": "最近的 S28 清理说明了风险：未使用、不一致，或只剩重复历史值的自定义字段都是噪音。工作流数据应服务于决策。",
+      "Lists": "列表",
+      "State and ownership.": "状态与责任。",
+      "Labels": "标签",
+      "Categories, channels, brands, and useful filters.": "类别、渠道、品牌和有用筛选。",
+      "Attachments": "附件",
+      "Source documents, photos, specs, CAD, and SharePoint links.": "源文件、照片、规格、CAD 和 SharePoint 链接。",
+      "Comments": "评论",
+      "Decisions, blockers, handoff notes, and context.": "决策、阻碍、交接记录和背景。",
+      "Agent-Ready Surface": "面向 AI 代理的工作界面",
+      "Trello makes the workflow visible to both humans and AI agents.": "Trello 让工作流同时对人员和 AI 代理可见。",
+      "Agents can summarize activity, identify follow-ups, support reporting, and prepare retrospectives, but only if the board itself is consistent.": "AI 代理可以总结活动、识别后续事项、支持汇报并准备复盘，但前提是看板本身保持一致。",
+      "Decision Request": "决策请求",
+      "Approve Stage 1 as a practical ID + Engineering workflow operating model.": "批准第一阶段作为实用的工业设计 + 工程工作流运营模型。",
+      "This is not a company-wide Agile rollout. It is a focused workflow system for visible work, clear ownership, better handoffs, useful retrospectives, and agent-supported reporting.": "这不是全公司敏捷推广，而是一个聚焦的工作流系统，用于工作可见、责任清晰、交接改善、有用复盘和 AI 支持汇报。",
+      "Define": "定义",
+      "Finalize real work states, card standards, and handoff rules.": "最终确定真实工作状态、卡片标准和交接规则。",
+      "Run": "运行",
+      "Use the board as the operating surface for active ID and Engineering-touching work.": "将看板作为当前工业设计及涉及工程工作的运营界面。",
+      "Improve": "改进",
+      "Use blockers, handoff friction, and retrospectives to update the workflow.": "用阻碍、交接摩擦和复盘结果持续更新工作流。"
     };
 
-    const sourceText = {};
-    document.querySelectorAll("[data-i18n]").forEach((node) => {
-      sourceText[node.dataset.i18n] = node.textContent;
-    });
+    const languageToggleEl = document.getElementById('language-toggle');
+    const progressEl = document.getElementById('progress');
+    const textNodes = [];
 
-    const slides = [...document.querySelectorAll(".slide")];
-    const counter = document.getElementById("counter");
-    let current = 0;
-    const requestedLang = new URLSearchParams(location.search).get("lang");
-    let lang = requestedLang === "zh" || requestedLang === "en"
-      ? requestedLang
-      : localStorage.getItem("wf-id-eng-workflow-lang") || "en";
-
-    function applyLanguage(nextLang) {
-      lang = nextLang;
-      document.body.classList.toggle("zh", lang === "zh");
-      document.documentElement.lang = lang === "zh" ? "zh" : "en";
-      document.querySelectorAll("[data-i18n]").forEach((node) => {
-        const key = node.dataset.i18n;
-        node.textContent = lang === "zh" ? translations.zh[key] || sourceText[key] : sourceText[key];
+    function collectTextNodes(root) {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          const text = node.nodeValue.replace(/\s+/g, ' ').trim();
+          if (!text || node.parentElement.closest('script,style')) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
       });
-      document.getElementById("langToggle").textContent = lang === "zh" ? "EN" : "中文";
-      localStorage.setItem("wf-id-eng-workflow-lang", lang);
+      let node;
+      while ((node = walker.nextNode())) {
+        node.__en = node.nodeValue;
+        textNodes.push(node);
+      }
     }
 
-    function showSlide(index) {
-      current = Math.max(0, Math.min(slides.length - 1, index));
-      slides.forEach((slide, i) => slide.classList.toggle("active", i === current));
-      counter.textContent = `${current + 1} / ${slides.length}`;
-      history.replaceState(null, "", `#${current + 1}`);
+    function applyLanguage(lang) {
+      document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : 'en';
+      textNodes.forEach((node) => {
+        const key = node.__en.replace(/\s+/g, ' ').trim();
+        node.nodeValue = lang === 'zh' && zhText[key] ? node.__en.replace(key, zhText[key]) : node.__en;
+      });
+      languageToggleEl.textContent = lang === 'zh' ? 'EN' : '中文';
+      const label = lang === 'zh' ? 'Switch deck to English' : 'Switch deck to Chinese';
+      languageToggleEl.setAttribute('aria-label', label);
+      languageToggleEl.setAttribute('title', label);
+      localStorage.setItem('id-engineering-workflow-model-language', lang);
     }
 
-    document.getElementById("prev").addEventListener("click", () => showSlide(current - 1));
-    document.getElementById("next").addEventListener("click", () => showSlide(current + 1));
-    document.getElementById("langToggle").addEventListener("click", () => applyLanguage(lang === "zh" ? "en" : "zh"));
-    window.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") showSlide(current + 1);
-      if (event.key === "ArrowLeft" || event.key === "PageUp") showSlide(current - 1);
-      if (event.key.toLowerCase() === "l") applyLanguage(lang === "zh" ? "en" : "zh");
+    function updateProgress() {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = max > 0 ? window.scrollY / max : 0;
+      progressEl.style.width = `${Math.min(1, Math.max(0, progress)) * 100}%`;
+    }
+
+    collectTextNodes(document.body);
+    let currentLanguage = localStorage.getItem('id-engineering-workflow-model-language') === 'zh' ? 'zh' : 'en';
+    applyLanguage(currentLanguage);
+    languageToggleEl.addEventListener('click', () => {
+      currentLanguage = currentLanguage === 'zh' ? 'en' : 'zh';
+      applyLanguage(currentLanguage);
     });
-
-    const hashSlide = Number.parseInt(location.hash.replace("#", ""), 10);
-    applyLanguage(lang);
-    showSlide(Number.isFinite(hashSlide) ? hashSlide - 1 : 0);
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
   </script>
 </body>
 </html>
