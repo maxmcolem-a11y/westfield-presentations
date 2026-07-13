@@ -1,0 +1,532 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GRAM Rocker Simulator</title>
+<style>
+  :root {
+    --page: #f7f7f5;
+    --surface: #fcfcfb;
+    --ink: #131311;
+    --ink2: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11, 11, 11, 0.10);
+    --accent: #c23b34;
+    --accent-wash: rgba(227, 73, 72, 0.09);
+    --good: #006300;
+    --good-wash: rgba(12, 163, 12, 0.12);
+    --crit: #d03b3b;
+    --crit-wash: rgba(208, 59, 59, 0.12);
+    --warn: #8a5a00;
+    --warn-wash: rgba(250, 178, 25, 0.16);
+    --tube: #9aa0a6;
+    --tube-dark: #6c7278;
+    --fabric: #b8bdc2;
+    --skin: #52514e;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --page: #0d0d0d; --surface: #1a1a19; --ink: #f2f1ec; --ink2: #c3c2b7;
+      --muted: #898781; --grid: #2c2c2a; --baseline: #45453f;
+      --border: rgba(255,255,255,0.10);
+      --accent: #e66767; --accent-wash: rgba(230,103,103,0.12);
+      --good: #0ca30c; --good-wash: rgba(12,163,12,0.16);
+      --crit: #e66767; --crit-wash: rgba(208,59,59,0.20);
+      --warn: #fab219; --warn-wash: rgba(250,178,25,0.12);
+      --tube: #7d838a; --tube-dark: #aab0b6; --fabric: #4b5054; --skin: #c3c2b7;
+    }
+  }
+  :root[data-theme="light"] {
+    --page: #f7f7f5; --surface: #fcfcfb; --ink: #131311; --ink2: #52514e;
+    --muted: #898781; --grid: #e1e0d9; --baseline: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --accent: #c23b34; --accent-wash: rgba(227,73,72,0.09);
+    --good: #006300; --good-wash: rgba(12,163,12,0.12);
+    --crit: #d03b3b; --crit-wash: rgba(208,59,59,0.12);
+    --warn: #8a5a00; --warn-wash: rgba(250,178,25,0.16);
+    --tube: #9aa0a6; --tube-dark: #6c7278; --fabric: #b8bdc2; --skin: #52514e;
+  }
+  :root[data-theme="dark"] {
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #f2f1ec; --ink2: #c3c2b7;
+    --muted: #898781; --grid: #2c2c2a; --baseline: #45453f;
+    --border: rgba(255,255,255,0.10);
+    --accent: #e66767; --accent-wash: rgba(230,103,103,0.12);
+    --good: #0ca30c; --good-wash: rgba(12,163,12,0.16);
+    --crit: #e66767; --crit-wash: rgba(208,59,59,0.20);
+    --warn: #fab219; --warn-wash: rgba(250,178,25,0.12);
+    --tube: #7d838a; --tube-dark: #aab0b6; --fabric: #4b5054; --skin: #c3c2b7;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--page); color: var(--ink);
+    font-family: var(--sans); line-height: 1.5;
+    margin: 0; padding: 0 20px 56px;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; }
+
+  header { padding: 32px 0 6px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 6px;
+  }
+  h1 { font-size: 26px; font-weight: 650; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .sub { color: var(--ink2); margin: 0 0 18px; max-width: 64ch; }
+
+  .stage {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    overflow: hidden; position: relative;
+  }
+  canvas { display: block; width: 100%; height: auto; cursor: grab; touch-action: none; }
+  canvas.dragging { cursor: grabbing; }
+  .state-chip {
+    position: absolute; top: 12px; left: 12px;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    padding: 4px 10px; border-radius: 99px;
+  }
+  .state-chip.ok   { color: var(--good); background: var(--good-wash); }
+  .state-chip.bad  { color: var(--crit); background: var(--crit-wash); }
+  .state-chip.warn { color: var(--warn); background: var(--warn-wash); }
+  .hint {
+    position: absolute; bottom: 10px; left: 0; right: 0; text-align: center;
+    font-size: 12.5px; color: var(--muted); pointer-events: none;
+  }
+
+  .controls {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px 18px; margin-top: 12px;
+  }
+  .ctl { margin-bottom: 18px; }
+  .ctl:last-child { margin-bottom: 0; }
+  .ctl-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+  .ctl-head label { font-size: 13.5px; color: var(--ink2); }
+  .ctl-head .val { font-family: var(--mono); font-size: 14px; font-weight: 600; }
+  input[type="range"] { width: 100%; accent-color: var(--accent); margin: 2px 0 0; }
+  input[type="range"]:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .zone-track { position: relative; height: 8px; border-radius: 4px; margin: 6px 1px 2px; background: var(--grid); overflow: visible; }
+  .zone { position: absolute; top: 0; bottom: 0; }
+  .zone.z-bad  { background: var(--crit-wash); border-radius: 4px 0 0 4px; }
+  .zone.z-good { background: var(--good); opacity: 0.55; }
+  .zone.z-warn { background: var(--warn-wash); border-radius: 0 4px 4px 0; }
+  .zone-mark { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--ink2); }
+  .zone-mark span {
+    position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+    font-family: var(--mono); font-size: 10.5px; color: var(--muted); white-space: nowrap;
+  }
+  .zone-labels { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10.5px; color: var(--muted); margin-top: 20px; }
+
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 620px) { .row2 { grid-template-columns: 1fr; } }
+
+  .readouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 12px; }
+  .ro { padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
+  .ro .r-label { font-size: 11.5px; color: var(--muted); margin: 0; }
+  .ro .r-value { font-family: var(--mono); font-size: 18px; font-weight: 600; margin: 2px 0 0; font-variant-numeric: tabular-nums; }
+  .ro .r-value small { font-size: 11.5px; font-weight: 400; color: var(--muted); }
+  .ro.print { border-color: var(--accent); }
+
+  .btns { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  button {
+    font: inherit; font-size: 13.5px; padding: 7px 14px; border-radius: 6px;
+    border: 1px solid var(--baseline); background: var(--surface); color: var(--ink);
+    cursor: pointer;
+  }
+  button:hover { border-color: var(--ink2); }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  details { margin-top: 22px; color: var(--ink2); font-size: 14px; }
+  summary { cursor: pointer; font-size: 13px; color: var(--ink2); font-family: var(--mono); letter-spacing: 0.06em; text-transform: uppercase; }
+  details ul { margin: 10px 0 0; padding-left: 20px; }
+  details li { margin-bottom: 7px; max-width: 75ch; }
+  details code { font-family: var(--mono); font-size: 0.9em; }
+
+  footer { margin-top: 34px; font-size: 12px; color: var(--muted); font-family: var(--mono); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">GRAM chair · compliant corner program</p>
+    <h1>Rocker Simulator</h1>
+    <p class="sub">The whole system in side view: the corner elbows flex, the frame shears square→parallelogram, the rider goes along. Set corner strength, <strong>drag the rider</strong> fore/aft, release — see if it rocks.</p>
+  </header>
+
+  <div class="stage">
+    <canvas id="sim" width="900" height="540" aria-label="Side-view simulation of the GRAM rocking chair with a seated rider"></canvas>
+    <div class="state-chip" id="stateChip"></div>
+    <div class="hint">drag the rider fore/aft · or use ← → keys · space = push</div>
+  </div>
+
+  <div class="controls">
+    <div class="ctl">
+      <div class="ctl-head">
+        <label for="kSlider">Corner strength — rotational stiffness of <em>each</em> corner</label>
+        <span class="val" id="kVal"></span>
+      </div>
+      <input type="range" id="kSlider" min="0" max="1000" value="380" step="1"
+             aria-label="Corner stiffness in newton meters per radian">
+      <div class="zone-track" id="zoneTrack"></div>
+      <div class="zone-labels"><span>50</span><span id="zoneMid"></span><span>1,800 N·m/rad (log)</span></div>
+    </div>
+    <div class="row2">
+      <div class="ctl">
+        <div class="ctl-head">
+          <label for="wSlider">Rider weight</label>
+          <span class="val" id="wVal"></span>
+        </div>
+        <input type="range" id="wSlider" min="100" max="300" step="5" value="200">
+      </div>
+      <div class="ctl">
+        <div class="ctl-head">
+          <label for="stopSlider">Stop angle (travel each way)</label>
+          <span class="val" id="stopVal"></span>
+        </div>
+        <input type="range" id="stopSlider" min="8" max="16" step="0.5" value="12">
+      </div>
+    </div>
+    <div class="btns">
+      <button class="primary" id="pushBtn">Give it a push</button>
+      <button id="resetBtn">Reset</button>
+    </div>
+    <div class="readouts">
+      <div class="ro"><p class="r-label">Lean right now</p><p class="r-value" id="roLean">0.0°</p></div>
+      <div class="ro"><p class="r-label">Moment on each corner</p><p class="r-value" id="roMoment">0 <small>N·m</small></p></div>
+      <div class="ro"><p class="r-label">Needed to not fall over (×1.3)</p><p class="r-value" id="roFloor">— <small>N·m/rad</small></p></div>
+      <div class="ro"><p class="r-label">Rocking frequency</p><p class="r-value" id="roFreq">— <small>Hz</small></p></div>
+      <div class="ro print"><p class="r-label">Print recipe — TPU 95A, rec. geometry</p><p class="r-value" id="roInfill">— <small>infill</small></p></div>
+    </div>
+  </div>
+
+  <details>
+    <summary>What the model is</summary>
+    <ul>
+      <li><strong>One rule makes the whole thing work:</strong> the skids stay planted and the frame shears square→parallelogram, so all 8 corners flex together by the lean angle θ. The corners resist with <code>8·k·θ</code>; gravity pushes the rider further over with <code>m·g·L·sinθ</code> (L = 655&nbsp;mm leg span). Corner strength must beat gravity — that's the red zone on the slider, and it moves as you change rider weight.</li>
+      <li><strong>Too strong is also a failure:</strong> past the green band the rider's weight shift can't command a useful arc — the chair is stable but dead. The as-designed CAD corners in TPU 95A measure 1,324–1,756&nbsp;N·m/rad (marked on the slider).</li>
+      <li><strong>Print recipe:</strong> your samples are 3-D printed, so infill is the tuning knob. The readout assumes the recommended corner geometry (3&nbsp;mm wall / 25&nbsp;mm flexure) printed solid in TPU&nbsp;95A = 240&nbsp;N·m/rad, and scales stiffness with infill by a power law (<code>k ∝ infill^1.8</code>, typical for gyroid/grid). <em>Uncalibrated</em> — print one corner, twist-test it, and I'll fit the real exponent.</li>
+      <li>Damping is a typical elastomer loss factor (ζ ≈ 0.15). Stops are stiff bumpers at the travel angle. Corner stiffness ↔ geometry/material comes from the FEA side (<code>gramcorner</code> CLI in <code>06_corner_design_tool/</code>).</li>
+      <li>2-D single-degree-of-freedom idealization: no side-load/racking, fold, or cushion compliance. Strain and fatigue checks live in the CLI reports.</li>
+    </ul>
+  </details>
+
+  <footer>gramcorner v0.1 · geometry from GRAM Rocker.stp side profile · L = 655 mm · 8 flexing corners · FEA runs 2026-07-12</footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  // ---------- physics (matches gramcorner/chair.py) ----------
+  var G = 9.81, LB = 0.45359237, L = 0.655, N = 8, COUPLER = 2.0,
+      ZETA = 0.15, D_MAX = 0.15;          // max CG shift the rider can command, m
+
+  var K_MIN = 50, K_MAX = 1800;           // slider range, log scale
+  var K_SOLID = 240, INFILL_EXP = 1.8;    // recommended geometry @ 100% infill, TPU 95A
+
+  var kSlider = byId("kSlider"), wSlider = byId("wSlider"), stopSlider = byId("stopSlider");
+
+  function sliderToK(v) { return K_MIN * Math.pow(K_MAX / K_MIN, v / 1000); }
+  function kToSlider(k) { return 1000 * Math.log(k / K_MIN) / Math.log(K_MAX / K_MIN); }
+  kSlider.value = kToSlider(240);
+
+  var state = { th: 0, thDot: 0, lean: 0, leanTarget: 0, pushT: 0 };
+
+  function params() {
+    var k = sliderToK(+kSlider.value),
+        w = +wSlider.value,
+        mOcc = w * LB, m = mOcc + COUPLER,
+        stopRad = +stopSlider.value * Math.PI / 180;
+    return { k: k, w: w, mOcc: mOcc, m: m, stopRad: stopRad,
+             Ktot: N * k, destab: m * G * L,
+             kFloorEach: m * G * L / N };
+  }
+
+  function step(dt) {
+    var p = params(), I = p.m * L * L;
+    var d = state.lean * D_MAX;                       // rider CG offset, m
+    var M = -p.Ktot * state.th                        // corners
+          + p.m * G * L * Math.sin(state.th)          // gravity (destabilizing)
+          + p.mOcc * G * d * Math.cos(state.th);      // rider lean input
+    if (state.pushT > 0) { M += 90; state.pushT -= dt; }
+    // stops: stiff bumper spring + damper past the travel angle
+    var over = Math.abs(state.th) - p.stopRad;
+    if (over > 0) M += -Math.sign(state.th) * over * 60000 - state.thDot * 600;
+    var c = 2 * ZETA * Math.sqrt(p.Ktot * I);         // damping from corner elastomer
+    M -= c * state.thDot;
+    state.thDot += (M / I) * dt;
+    state.th += state.thDot * dt;
+    var lim = p.stopRad * 1.25;
+    if (state.th > lim) { state.th = lim; state.thDot = Math.min(0, state.thDot) * 0.4; }
+    if (state.th < -lim) { state.th = -lim; state.thDot = Math.max(0, state.thDot) * 0.4; }
+    state.lean += (state.leanTarget - state.lean) * Math.min(1, dt * 10);
+  }
+
+  // ---------- theme-aware colors ----------
+  var css = {};
+  function refreshCss() {
+    var s = getComputedStyle(document.documentElement);
+    ["--surface", "--ink", "--ink2", "--muted", "--grid", "--baseline", "--accent",
+     "--tube", "--tube-dark", "--fabric", "--skin", "--good", "--crit",
+     "--warn"].forEach(function (v) { css[v] = s.getPropertyValue(v).trim(); });
+  }
+  refreshCss();
+  if (window.matchMedia) {
+    matchMedia("(prefers-color-scheme: dark)").addEventListener("change", refreshCss);
+  }
+  new MutationObserver(refreshCss).observe(document.documentElement,
+    { attributes: true, attributeFilter: ["data-theme"] });
+
+  // ---------- drawing ----------
+  var cv = byId("sim"), ctx = cv.getContext("2d");
+  var VW = 900, VH = 540;
+  function fitCanvas() {
+    var dpr = window.devicePixelRatio || 1, w = cv.clientWidth || VW;
+    var h = w * VH / VW;
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    ctx.setTransform(cv.width / VW, 0, 0, cv.width / VW, 0, 0);
+  }
+  fitCanvas();
+  addEventListener("resize", fitCanvas);
+
+  // --- chair geometry from the CAD side profile (mm) ---
+  // One continuous side loop: skid -> elbow -> leg -> elbow -> top rail,
+  // with a raked backrest post rising past the top-rear corner.
+  var GROUND = 14;                        // skid tube centerline height
+  var REAR_X = 0, FRONT_X = 570;          // leg centerlines
+  var RAIL_Y = 690;                       // top (arm) rail height
+  var CR = 62;                            // elbow corner radius
+  var SEAT_Y = 430;                       // seat rail height
+  var FLOOR_PX = 486, SCALE = 0.335, X0 = 380;   // canvas mapping
+
+  function shear(x, y, th) {              // parallelogram map about the ground line
+    return [x + (y - GROUND) * Math.sin(th), GROUND + (y - GROUND) * Math.cos(th)];
+  }
+  function px(q) { return [X0 + q[0] * SCALE, FLOOR_PX - q[1] * SCALE]; }
+  function P(x, y, th) { return px(shear(x, y, th)); }
+
+  function arcPts(cx, cy, r, a0, a1, n) {
+    var out = [];
+    for (var i = 0; i <= n; i++) {
+      var a = a0 + (a1 - a0) * i / n;
+      out.push([cx + r * Math.cos(a), cy + r * Math.sin(a)]);
+    }
+    return out;
+  }
+  // neutral-frame polylines (mm), sheared per-frame
+  var D = Math.PI / 180;
+  var ELBOWS = [   // the 4 compliant corners, sampled arcs w/ sleeve overhang
+    arcPts(REAR_X + CR, GROUND + CR, CR, 180 * D, 270 * D, 14),        // bottom rear
+    arcPts(FRONT_X - CR, GROUND + CR, CR, 270 * D, 360 * D, 14),       // bottom front
+    arcPts(FRONT_X - CR, RAIL_Y - CR, CR, 0, 90 * D, 14),              // top front
+    arcPts(REAR_X + CR, RAIL_Y - CR, CR, 90 * D, 180 * D, 14)          // top rear
+  ];
+  var LOOP = [].concat(
+    [[REAR_X, RAIL_Y - CR]],
+    ELBOWS[0],
+    [[REAR_X + CR, GROUND], [FRONT_X - CR, GROUND]],
+    ELBOWS[1],
+    [[FRONT_X, GROUND + CR], [FRONT_X, RAIL_Y - CR]],
+    ELBOWS[2],
+    [[FRONT_X - CR, RAIL_Y], [REAR_X + CR, RAIL_Y]],
+    ELBOWS[3]
+  );
+  // backrest post: rises from the rear leg, kinks near the rail, rakes back
+  var POST = [[REAR_X, 545], [REAR_X, 740], [REAR_X - 14, 790], [REAR_X - 88, 1265]];
+  var LEG_SLEEVES = [   // mid-leg elastomer sleeves (fold couplers)
+    [[REAR_X, 285], [REAR_X, 375]],
+    [[FRONT_X, 285], [FRONT_X, 375]]
+  ];
+
+  function stroke(pts, th, wpx, color, alpha) {
+    ctx.globalAlpha = alpha === undefined ? 1 : alpha;
+    ctx.strokeStyle = color; ctx.lineWidth = wpx;
+    ctx.lineCap = "round"; ctx.lineJoin = "round";
+    ctx.beginPath();
+    var a = P(pts[0][0], pts[0][1], th);
+    ctx.moveTo(a[0], a[1]);
+    for (var i = 1; i < pts.length; i++) {
+      var b = P(pts[i][0], pts[i][1], th);
+      ctx.lineTo(b[0], b[1]);
+    }
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+
+  function draw() {
+    var p = params(), th = state.th;
+    ctx.clearRect(0, 0, VW, VH);
+
+    // floor
+    ctx.strokeStyle = css["--baseline"]; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(30, FLOOR_PX + 10); ctx.lineTo(VW - 30, FLOOR_PX + 10); ctx.stroke();
+    ctx.strokeStyle = css["--grid"]; ctx.lineWidth = 1;
+    for (var hx = 50; hx < VW - 40; hx += 46) {
+      ctx.beginPath(); ctx.moveTo(hx, FLOOR_PX + 11); ctx.lineTo(hx - 9, FLOOR_PX + 20); ctx.stroke();
+    }
+
+    // ghost neutral frame
+    stroke(LOOP, 0, 7, css["--muted"], 0.15);
+    stroke(POST, 0, 7, css["--muted"], 0.15);
+
+    // frame loop (tube), then elastomer elbows over it
+    stroke(LOOP, th, 9, css["--tube"]);
+    stroke(POST, th, 8, css["--tube"]);
+    var flexW = 11 + 5 * Math.min(1, Math.abs(th) / 0.21);
+    ELBOWS.forEach(function (e) { stroke(e, th, flexW, css["--accent"]); });
+    LEG_SLEEVES.forEach(function (s) { stroke(s, th, 11, css["--accent"]); });
+
+    // seat rail + sleeves + fabric (all at seat height -> translate with shear)
+    stroke([[REAR_X + 8, SEAT_Y], [FRONT_X - 8, SEAT_Y]], th, 7, css["--tube"]);
+    stroke([[REAR_X + 8, SEAT_Y], [REAR_X + 70, SEAT_Y]], th, 10, css["--accent"]);
+    stroke([[FRONT_X - 70, SEAT_Y], [FRONT_X - 8, SEAT_Y]], th, 10, css["--accent"]);
+    // seat fabric with a little sag
+    ctx.strokeStyle = css["--fabric"]; ctx.lineWidth = 13; ctx.lineCap = "butt";
+    var sA = P(70, SEAT_Y + 10, th), sB = P(FRONT_X - 90, SEAT_Y + 10, th),
+        sM = P((70 + FRONT_X - 90) / 2, SEAT_Y - 14, th);
+    ctx.beginPath(); ctx.moveTo(sA[0], sA[1]); ctx.quadraticCurveTo(sM[0], sM[1], sB[0], sB[1]); ctx.stroke();
+
+    // backrest fabric along the post's upper run
+    var fA = P(REAR_X - 34, 880, th), fB = P(REAR_X - 94, 1245, th);
+    ctx.strokeStyle = css["--fabric"]; ctx.lineWidth = 30;
+    ctx.beginPath(); ctx.moveTo(fA[0], fA[1]); ctx.lineTo(fB[0], fB[1]); ctx.stroke();
+
+    // ---- rider (translates with the seat; torso upright + lean input) ----
+    var lean = state.lean;
+    var hip = shear(210, SEAT_Y + 42, th);
+    var torsoA = -0.14 + th + lean * 0.42;            // rad from vertical, fwd +
+    var sh = [hip[0] + 480 * Math.sin(torsoA), hip[1] + 480 * Math.cos(torsoA)];
+    var knee = shear(505, SEAT_Y + 30, th);
+    var foot = [590, 26];                              // planted on the floor
+    ctx.strokeStyle = css["--skin"]; ctx.lineCap = "round";
+    ctx.lineWidth = 21; lineMM(hip, knee);
+    ctx.lineWidth = 16; lineMM(knee, foot);
+    ctx.lineWidth = 26; lineMM(hip, sh);
+    // arm to the front of the arm rail
+    var hand = shear(FRONT_X - 140, RAIL_Y + 6, th);
+    var elbow = [sh[0] * 0.5 + hand[0] * 0.5, sh[1] * 0.55 + hand[1] * 0.45 - 40];
+    ctx.lineWidth = 13; lineMM(sh, elbow); lineMM(elbow, hand);
+    // head
+    var head = [sh[0] + 62 * Math.sin(torsoA), sh[1] + 62 * Math.cos(torsoA)];
+    var hp = px(head);
+    ctx.fillStyle = css["--skin"];
+    ctx.beginPath(); ctx.arc(hp[0], hp[1], 18, 0, 7); ctx.fill();
+
+    // travel arc indicator at the bottom-rear elbow
+    var C = px([REAR_X + CR, GROUND + CR]);
+    ctx.strokeStyle = css["--ink2"]; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.arc(C[0], C[1], 66, -Math.PI / 2 - p.stopRad, -Math.PI / 2 + p.stopRad); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.strokeStyle = css["--accent"]; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.arc(C[0], C[1], 66, -Math.PI / 2, -Math.PI / 2 + th, th < 0); ctx.stroke();
+
+    function lineMM(a, b) {
+      var pa = px(a), pb = px(b);
+      ctx.beginPath(); ctx.moveTo(pa[0], pa[1]); ctx.lineTo(pb[0], pb[1]); ctx.stroke();
+    }
+  }
+
+  // ---------- UI ----------
+  function byId(id) { return document.getElementById(id); }
+  var chip = byId("stateChip");
+
+  function fmtK(k) { return k >= 1000 ? (k / 1000).toFixed(2) + " kN·m/rad" : k.toFixed(0) + " N·m/rad"; }
+
+  function updateZones() {
+    var p = params(),
+        kFloor = p.kFloorEach,
+        kMargin = kFloor * 1.3,
+        kFeelHi = (p.mOcc * G * D_MAX / (6 * Math.PI / 180) + p.destab) / N;
+    var track = byId("zoneTrack");
+    function pos(k) { return Math.max(0, Math.min(100, kToSlider(k) / 10)) + "%"; }
+    track.innerHTML =
+      '<div class="zone z-bad" style="left:0;width:' + pos(kMargin) + '"></div>' +
+      '<div class="zone z-good" style="left:' + pos(kMargin) + ';width:calc(' + pos(Math.max(kFeelHi, kMargin)) + " - " + pos(kMargin) + ')"></div>' +
+      '<div class="zone z-warn" style="left:' + pos(Math.max(kFeelHi, kMargin)) + ';right:0"></div>' +
+      '<div class="zone-mark" style="left:' + pos(240) + '"><span>240 rec. (solid)</span></div>' +
+      '<div class="zone-mark" style="left:' + pos(1324) + '"><span>1,324 as-designed</span></div>';
+    byId("zoneMid").textContent = "red: falls over · green: rocks · amber: too stiff";
+  }
+
+  function updateReadouts() {
+    var p = params();
+    byId("kVal").textContent = fmtK(p.k);
+    byId("wVal").textContent = p.w + " lb";
+    byId("stopVal").textContent = (+stopSlider.value).toFixed(1) + "°";
+    byId("roLean").textContent = (state.th * 180 / Math.PI).toFixed(1) + "°";
+    byId("roMoment").innerHTML = Math.abs(p.k * state.th).toFixed(1) + " <small>N·m</small>";
+    byId("roFloor").innerHTML = (p.kFloorEach * 1.3).toFixed(0) + " <small>N·m/rad ea.</small>";
+    var Knet = p.Ktot - p.destab, I = p.m * L * L;
+    byId("roFreq").innerHTML = Knet > 0
+      ? (Math.sqrt(Knet / I) / (2 * Math.PI)).toFixed(2) + " <small>Hz</small>"
+      : "— <small>unstable</small>";
+
+    // print recipe: k = K_SOLID * (infill)^1.8  ->  infill = (k/K_SOLID)^(1/1.8)
+    var inf = 100 * Math.pow(p.k / K_SOLID, 1 / INFILL_EXP), infEl = byId("roInfill");
+    if (p.k > K_SOLID * 1.02) infEl.innerHTML = "&gt;100% <small>needs stiffer geometry</small>";
+    else if (inf < 15) infEl.innerHTML = "&lt;15% <small>too sparse — soften geometry instead</small>";
+    else infEl.innerHTML = inf.toFixed(0) + "% <small>infill (uncalibrated)</small>";
+
+    var leanMax = Knet > 0 ? (p.mOcc * G * D_MAX / Knet) * 180 / Math.PI : 99;
+    if (Knet <= 0) { chip.className = "state-chip bad"; chip.textContent = "✕ falls onto its stops — corners too weak"; }
+    else if (p.Ktot < 1.3 * p.destab) { chip.className = "state-chip warn"; chip.textContent = "△ self-centers, but under 1.3× margin"; }
+    else if (leanMax < 3) { chip.className = "state-chip warn"; chip.textContent = "△ stable but stiff — barely rocks (max " + leanMax.toFixed(1) + "°)"; }
+    else { chip.className = "state-chip ok"; chip.textContent = "✓ rocks — rider commands " + Math.min(leanMax, +stopSlider.value).toFixed(1) + "° each way"; }
+  }
+
+  [kSlider, wSlider, stopSlider].forEach(function (s) {
+    s.addEventListener("input", function () { updateZones(); });
+  });
+  byId("pushBtn").addEventListener("click", function () { state.pushT = 0.25; });
+  byId("resetBtn").addEventListener("click", function () {
+    state.th = 0; state.thDot = 0; state.lean = 0; state.leanTarget = 0;
+    kSlider.value = kToSlider(240); wSlider.value = 200; stopSlider.value = 12;
+    updateZones();
+  });
+
+  // drag the rider
+  var dragging = false, dragX0 = 0, lean0 = 0;
+  cv.addEventListener("pointerdown", function (e) {
+    dragging = true; dragX0 = e.clientX; lean0 = state.leanTarget;
+    cv.classList.add("dragging"); cv.setPointerCapture(e.pointerId);
+  });
+  cv.addEventListener("pointermove", function (e) {
+    if (!dragging) return;
+    var w = cv.clientWidth;
+    state.leanTarget = clamp(lean0 + (e.clientX - dragX0) / (w * 0.22), -1, 1);
+  });
+  function endDrag() { dragging = false; state.leanTarget = 0; cv.classList.remove("dragging"); }
+  cv.addEventListener("pointerup", endDrag);
+  cv.addEventListener("pointercancel", endDrag);
+
+  addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") { state.leanTarget = -1; e.preventDefault(); }
+    if (e.key === "ArrowRight") { state.leanTarget = 1; e.preventDefault(); }
+    if (e.key === " " && e.target === document.body) { state.pushT = 0.25; e.preventDefault(); }
+  });
+  addEventListener("keyup", function (e) {
+    if (e.key === "ArrowLeft" || e.key === "ArrowRight") state.leanTarget = 0;
+  });
+
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+  // ---------- main loop ----------
+  var last = performance.now();
+  function frame(now) {
+    var dt = Math.min(0.032, (now - last) / 1000); last = now;
+    var n = 4; for (var i = 0; i < n; i++) step(dt / n);
+    draw();
+    updateReadouts();
+    requestAnimationFrame(frame);
+  }
+  updateZones();
+  requestAnimationFrame(frame);
+})();
+</script>
+
+</body>
+</html>
