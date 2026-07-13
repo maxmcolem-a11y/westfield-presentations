@@ -1,0 +1,711 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Concertina Cooler — Fold Simulation</title>
+<style>
+  :root{color-scheme:light}
+  img{max-width:100%}
+</style>
+<style>
+  :root{
+    --bg:#F4F4F1; --panel:#FFFFFF; --panel2:#EDEDE8;
+    --ink:#1D1B17; --mut:#6E6A60; --line:#DBD8CF; --line2:#C9C5BA;
+    --accent:#E8430F; --accent-ink:#C43608; --accent-soft:rgba(232,67,15,.10);
+    --grid:rgba(29,27,23,.05);
+    --risk-hi:#B3300F; --risk-med:#9A7300; --risk-lo:#5F6A55;
+    --disp:"Avenir Next Condensed","HelveticaNeue-CondensedBold","Arial Narrow",Impact,system-ui,sans-serif;
+    --body:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+    --mono:ui-monospace,"SF Mono","Cascadia Mono",Consolas,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#191713; --panel:#201E19; --panel2:#26231D;
+      --ink:#EDEAE3; --mut:#9B958A; --line:#33302A; --line2:#454138;
+      --accent:#FF5B22; --accent-ink:#FF7748; --accent-soft:rgba(255,91,34,.14);
+      --grid:rgba(237,234,227,.05);
+      --risk-hi:#F26A44; --risk-med:#D8AC33; --risk-lo:#93A883;
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#F4F4F1; --panel:#FFFFFF; --panel2:#EDEDE8;
+    --ink:#1D1B17; --mut:#6E6A60; --line:#DBD8CF; --line2:#C9C5BA;
+    --accent:#E8430F; --accent-ink:#C43608; --accent-soft:rgba(232,67,15,.10);
+    --grid:rgba(29,27,23,.05);
+    --risk-hi:#B3300F; --risk-med:#9A7300; --risk-lo:#5F6A55;
+  }
+  :root[data-theme="dark"]{
+    --bg:#191713; --panel:#201E19; --panel2:#26231D;
+    --ink:#EDEAE3; --mut:#9B958A; --line:#33302A; --line2:#454138;
+    --accent:#FF5B22; --accent-ink:#FF7748; --accent-soft:rgba(255,91,34,.14);
+    --grid:rgba(237,234,227,.05);
+    --risk-hi:#F26A44; --risk-med:#D8AC33; --risk-lo:#93A883;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:var(--body); font-size:15px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px 80px}
+
+  /* ---------- header ---------- */
+  header{
+    display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
+    gap:16px;padding:28px 0 20px;border-bottom:2px solid var(--ink);margin-bottom:20px;
+  }
+  .eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--mut);margin:0 0 6px;
+  }
+  h1{
+    font-family:var(--disp);font-weight:800;text-transform:uppercase;
+    font-size:clamp(34px,5vw,54px);line-height:.95;letter-spacing:.01em;margin:0;
+    text-wrap:balance;
+  }
+  h1 .thin{color:var(--accent)}
+  .tags{display:flex;gap:8px;flex-wrap:wrap;padding-bottom:6px}
+  .tag{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    padding:5px 9px;border:1px solid var(--line2);color:var(--mut);white-space:nowrap;
+  }
+  .tag.hot{border-color:var(--accent);color:var(--accent-ink);background:var(--accent-soft)}
+
+  /* ---------- viewer ---------- */
+  .viewer{
+    display:grid;grid-template-columns:minmax(0,1fr) 312px;gap:14px;align-items:stretch;
+  }
+  @media (max-width:880px){.viewer{grid-template-columns:1fr}}
+  .stage{
+    position:relative;background:var(--panel);border:1px solid var(--line);
+    background-image:
+      linear-gradient(var(--grid) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:36px 36px;
+    min-height:480px;
+  }
+  .stage canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+  .stage canvas:active{cursor:grabbing}
+  .stage .figlabel{
+    position:absolute;top:12px;left:14px;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--mut);pointer-events:none;
+  }
+  .stage .hint{
+    position:absolute;bottom:12px;left:14px;font-family:var(--mono);font-size:10.5px;
+    color:var(--mut);letter-spacing:.06em;pointer-events:none;
+  }
+  .statechip{
+    position:absolute;top:12px;right:14px;font-family:var(--mono);font-size:11px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--accent-ink);
+    border:1px solid var(--accent);background:var(--accent-soft);padding:5px 10px;
+    pointer-events:none;
+  }
+
+  /* ---------- dock ---------- */
+  .dock{display:flex;flex-direction:column;gap:14px;min-width:0}
+  .card{background:var(--panel);border:1px solid var(--line);padding:14px 16px}
+  .card h3{
+    margin:0 0 10px;font-family:var(--mono);font-weight:600;font-size:10.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--mut);
+  }
+  .reads{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+  .read .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+  .read .v{
+    font-family:var(--mono);font-size:19px;font-weight:600;font-variant-numeric:tabular-nums;
+    color:var(--ink);line-height:1.25;
+  }
+  .read .v small{font-size:11px;color:var(--mut);font-weight:400}
+  .read.hero .v{color:var(--accent-ink);font-size:23px}
+  #profile{display:block;width:100%;height:210px}
+  .cap{font-size:12px;color:var(--mut);margin:8px 0 0;line-height:1.5}
+  .cap b{color:var(--ink);font-weight:600}
+
+  /* ---------- controls ---------- */
+  .controls{display:flex;flex-direction:column;gap:12px}
+  .presets{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  button{
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    background:var(--panel2);border:1px solid var(--line2);color:var(--ink);
+    padding:9px 6px;cursor:pointer;
+  }
+  button:hover{border-color:var(--ink)}
+  button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .playrow{display:flex;gap:8px;align-items:center}
+  .playrow button{flex:0 0 auto;padding:9px 14px}
+  input[type=range]{
+    flex:1;appearance:none;-webkit-appearance:none;height:26px;background:transparent;min-width:0;
+  }
+  input[type=range]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  input[type=range]::-webkit-slider-runnable-track{height:3px;background:var(--line2)}
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;width:18px;height:18px;border-radius:50%;
+    background:var(--accent);margin-top:-7.5px;border:none;
+  }
+  input[type=range]::-moz-range-track{height:3px;background:var(--line2)}
+  input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);border:none}
+  .sliderlabels{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-top:-4px}
+
+  /* ---------- sections ---------- */
+  section{margin-top:56px}
+  .sechead{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:22px}
+  .fig{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--accent-ink)}
+  h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(22px,3vw,30px);
+     letter-spacing:.01em;margin:0;line-height:1}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  @media (max-width:820px){.cols{grid-template-columns:1fr}}
+  p{max-width:64ch;margin:0 0 14px}
+  .note{
+    border-left:3px solid var(--accent);background:var(--accent-soft);
+    padding:12px 16px;margin:18px 0;max-width:70ch;
+  }
+  .note p{margin:0}
+
+  /* risk table */
+  table{border-collapse:collapse;width:100%;font-size:13.5px}
+  th{
+    font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--mut);text-align:left;font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line2);
+  }
+  td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);background:var(--panel)}
+  .sev{font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:2px 7px;white-space:nowrap;border:1px solid currentColor}
+  .sev.hi{color:var(--risk-hi)} .sev.med{color:var(--risk-med)} .sev.lo{color:var(--risk-lo)}
+  .dots{font-family:var(--mono);letter-spacing:2px;white-space:nowrap}
+  .dots b{color:var(--accent-ink);font-weight:400}
+  .dots span{color:var(--line2)}
+  td .why{display:block;color:var(--mut);font-size:12px;margin-top:2px}
+
+  /* wall stack diagram */
+  .stack{border:1px solid var(--line);background:var(--panel)}
+  .layer{display:grid;grid-template-columns:120px 1fr 92px;gap:0;border-bottom:1px solid var(--line);align-items:stretch}
+  .layer:last-child{border-bottom:none}
+  .layer .sw{min-height:44px}
+  .layer .nm{padding:10px 14px;font-size:13px}
+  .layer .nm b{display:block;font-weight:600}
+  .layer .nm span{color:var(--mut);font-size:12px}
+  .layer .th{font-family:var(--mono);font-size:12px;color:var(--mut);padding:10px 14px;text-align:right;font-variant-numeric:tabular-nums;align-self:center}
+  .sw.outer{background:repeating-linear-gradient(45deg,var(--accent),var(--accent) 6px,var(--accent-ink) 6px,var(--accent-ink) 7px)}
+  .sw.foam{background:repeating-linear-gradient(-45deg,var(--panel2),var(--panel2) 5px,var(--line2) 5px,var(--line2) 6px)}
+  .sw.stiff{background:repeating-linear-gradient(90deg,var(--mut),var(--mut) 2px,var(--panel2) 2px,var(--panel2) 6px)}
+  .sw.film{background:var(--accent-soft);border-top:2px dashed var(--accent)}
+  .sw.liner{background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,.35));border-top:1px solid var(--line2)}
+  @media (prefers-color-scheme: dark){ .sw.liner{background:linear-gradient(180deg,rgba(237,234,227,.5),rgba(237,234,227,.18))} }
+  :root[data-theme="dark"] .sw.liner{background:linear-gradient(180deg,rgba(237,234,227,.5),rgba(237,234,227,.18))}
+  :root[data-theme="light"] .sw.liner{background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,.35))}
+
+  /* manufacturing steps */
+  ol.steps{list-style:none;counter-reset:st;margin:0;padding:0;max-width:72ch}
+  ol.steps li{
+    counter-increment:st;display:grid;grid-template-columns:52px 1fr;gap:14px;
+    padding:14px 0;border-bottom:1px solid var(--line);
+  }
+  ol.steps li:last-child{border-bottom:none}
+  ol.steps li::before{
+    content:counter(st,decimal-leading-zero);
+    font-family:var(--mono);font-size:20px;color:var(--accent-ink);font-variant-numeric:tabular-nums;
+    line-height:1.2;
+  }
+  ol.steps b{display:block;font-weight:600;margin-bottom:2px}
+  ol.steps .sub{color:var(--mut);font-size:13.5px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .chip{font-family:var(--mono);font-size:11px;letter-spacing:.05em;border:1px solid var(--line2);
+    color:var(--ink);padding:5px 10px;background:var(--panel)}
+  ul.plain{margin:0;padding-left:18px;max-width:66ch}
+  ul.plain li{margin-bottom:8px}
+  footer{
+    margin-top:64px;padding-top:16px;border-top:1px solid var(--line2);
+    font-family:var(--mono);font-size:11px;color:var(--mut);letter-spacing:.06em;line-height:1.8;
+  }
+  @media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div>
+      <p class="eyebrow">Westfield Outdoors — Industrial Design · Simulation Handoff · 2026-07-12</p>
+      <h1>Concertina Cooler <span class="thin">/ Fold Study</span></h1>
+    </div>
+    <div class="tags">
+      <span class="tag hot">Sim v0.1</span>
+      <span class="tag">Placeholder geometry — no CAD on card</span>
+      <span class="tag">Panel length conserved</span>
+    </div>
+  </header>
+
+  <div class="viewer">
+    <div class="stage" id="stage">
+      <canvas id="c3d" aria-label="Interactive 3D fold simulation of the concertina cooler body"></canvas>
+      <span class="figlabel">Fig. 00 — Fold / unfold kinematics</span>
+      <span class="statechip" id="stateChip">Expanded</span>
+      <span class="hint">drag to orbit · slider to fold</span>
+    </div>
+
+    <div class="dock">
+      <div class="card">
+        <h3>Live readout</h3>
+        <div class="reads">
+          <div class="read hero"><div class="k">Body height</div><div class="v" id="rH">—</div></div>
+          <div class="read hero"><div class="k">Interior vol.</div><div class="v" id="rV">—</div></div>
+          <div class="read"><div class="k">Fold angle φ</div><div class="v" id="rPhi">—</div></div>
+          <div class="read"><div class="k">Pleat depth</div><div class="v" id="rA">—</div></div>
+          <div class="read"><div class="k">≈ 355 ml cans</div><div class="v" id="rCans">—</div></div>
+          <div class="read"><div class="k">Footprint</div><div class="v">320<small> × </small>200<small> mm</small></div></div>
+        </div>
+      </div>
+
+      <div class="card controls">
+        <h3>Fold control</h3>
+        <div class="presets">
+          <button id="pExp" class="on">Expanded</button>
+          <button id="pMid">Six-pack</button>
+          <button id="pCmp">Packed</button>
+        </div>
+        <div class="playrow">
+          <button id="play" aria-label="Animate fold cycle">▶ Cycle</button>
+          <input id="fold" type="range" min="0" max="1000" value="0" aria-label="Fold amount">
+        </div>
+        <div class="sliderlabels"><span>Open</span><span>Compressed</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Wall section @ current fold</h3>
+        <canvas id="profile" aria-label="2D cross-section of the pleated wall"></canvas>
+        <p class="cap"><b>●</b> outer ridge (weld land) · <b>○</b> inner valley (hinge / thermal-bridge line). Panel slant length is fixed at 38 mm — height trades directly for pleat depth.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 01 KINEMATICS ============ -->
+  <section>
+    <div class="sechead"><span class="fig">FIG. 01</span><h2>What the fold is doing</h2></div>
+    <div class="cols">
+      <div>
+        <p>The body is a <b>concertina bellows, not a flat accordion stack</b>: 12 pleat rows on a fixed slant length <span style="font-family:var(--mono)">L = 38 mm</span>, with diagonal creases running across every face so each pleat is a shallow V that nests into its neighbors and interlocks at the corners. The fold angle φ is still the single degree of freedom — height is <span style="font-family:var(--mono)">12·L·cos φ</span>, pleat depth is <span style="font-family:var(--mono)">L·sin φ</span> — and nothing stretches, which is what makes a welded construction possible. Because the crease pattern is fixed in the flat sheet, the V-drop scales with pleat pitch: the diagonals are pronounced when expanded and flatten as the body packs down.</p>
+        <p>Those diagonals are the difference between a concertina and a plain accordion, and they're structural, not styling: they triangulate the large facets so they can't oil-can, they let the corners fold without bunching (the reason camera bellows are cut this way), and they bias every pleat to collapse in the same sequence instead of buckling randomly. The rim inherits the last pleat's V — which is why the liner collar shows through at the face centers, exactly as in the prototype renders — and the lid architecture has to own that.</p>
+        <p>Note the inversion: pleats stick <b>out further when compressed</b> (depth 17 → 37 mm across the range). The compressed footprint grows ~40 mm in width and depth — straps and any carry frame must clear that.</p>
+        <div class="note"><p><b>Answer to Nessa's "does it fold flat?":</b> not flat — it compresses to roughly 1/3 height (≈410 → ≈120 mm body) plus a fixed base and lid stack. Locked states, not a flat-pack.</p></div>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Fold-geometry risk</th><th>Sev.</th><th>Mitigation</th></tr></thead>
+          <tbody>
+            <tr><td>Thermal-bridge stripes at every hinge valley<span class="why">wall thins from ~16 mm foam to a few mm of laminate at each fold line</span></td><td><span class="sev hi">HIGH</span></td><td>3 mm flexible XLPE strip in hinges; offset inner/outer hinge lines (labyrinth) so no straight-through thin section</td></tr>
+            <tr><td>Rim / lid seal across multiple heights<span class="why">opening geometry changes as pleats near the rim engage</span></td><td><span class="sev hi">HIGH</span></td><td>rigid floating rim + roll-top or gasketed zip above the pleat stack; top pleat locked rigid</td></tr>
+            <tr><td>Sidewall oil-canning under partial load<span class="why">contents push flats outward mid-compression</span></td><td><span class="sev med">MED</span></td><td>chevron crease + 0.8–1.2 mm PP facet stiffeners on large panels</td></tr>
+            <tr><td>Out-of-sequence re-fold (pleat skipping)<span class="why">one valley inverts before its neighbor under strap load</span></td><td><span class="sev med">MED</span></td><td>graded hinge stiffness bottom→top; strap path crosses every ridge</td></tr>
+            <tr><td>Grime / meltwater trapped in exterior valleys<span class="why">interior is protected by the smooth liner; exterior pleats still collect</span></td><td><span class="sev med">MED</span></td><td>≥6 mm valley radius, no fabric overlap seams in valleys, drain gaps at base flare</td></tr>
+            <tr><td>Strap loads distorting the fold<span class="why">buckle tension is what sets the volume state</span></td><td><span class="sev lo">LO</span></td><td>anchor hardware on ridge weld-lands only, never mid-hinge</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 MATERIALS ============ -->
+  <section>
+    <div class="sechead"><span class="fig">FIG. 02</span><h2>Material stack — recommended</h2></div>
+    <div class="cols">
+      <div>
+        <p>The move that makes this manufacturable: <b>the foam facet is both the structure and the insulation.</b> Rigid panels aren't a separate skeleton — die-cut closed-cell foam pads sit in welded pockets between two weldable skins, and the bare laminate between pads is the hinge. One material system, one factory type.</p>
+        <div class="stack" role="img" aria-label="Wall cross-section layer stack from outside to inside">
+          <div class="layer"><div class="sw outer"></div><div class="nm"><b>Outer skin — 840D nylon, TPU-laminated both sides</b><span>weldable, abrasion + UV package, premium hand; this is standard welded-cooler shell material</span></div><div class="th">~0.6 mm</div></div>
+          <div class="layer"><div class="sw stiff"></div><div class="nm"><b>Facet stiffener (large panels only) — PP sheet</b><span>kills oil-canning on the two big faces; bonded to foam, stops short of hinge lines</span></div><div class="th">0.8–1.2 mm</div></div>
+          <div class="layer"><div class="sw foam"></div><div class="nm"><b>Facet core — IXPE / compression-molded EVA, per-facet die-cut</b><span>closed-cell (k ≈ 0.036 W/m·K): the insulation AND the panel rigidity; edges chamfered to fold angle</span></div><div class="th">14–18 mm</div></div>
+          <div class="layer"><div class="sw film"></div><div class="nm"><b>Hinge zone — bare laminate + 3 mm XLPE strip</b><span>8–12 mm wide flex lands between facets; the thin foam strip halves the thermal bridge</span></div><div class="th">3 mm</div></div>
+          <div class="layer"><div class="sw liner"></div><div class="nm"><b>Liner — single-piece thermoformed / RF-welded TPU bucket</b><span>smooth, ≥8 mm corner radii, attached at rim and base only — it floats over the pleat valleys, so the interior has no fold traps to clean and no pleat seams to leak</span></div><div class="th">0.5 mm</div></div>
+        </div>
+        <p class="cap" style="margin-top:10px">Base: molded EVA/PU tray, welded to the shell. Hardware: acetal/PP cam buckles + ladderlocks on bartacked webbing, anchored on ridge weld-lands. Expect <b>soft-cooler-class retention (~24 h ice)</b>, not hard-cooler — hinge lines cap the ceiling; the labyrinth offset and hinge strips are what keep it near that number.</p>
+      </div>
+      <div>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Option</th><th>Insul.</th><th>Mfg.</th><th>Durab.</th><th>Verdict</th></tr></thead>
+            <tbody>
+              <tr><td><b>A — Welded TPU laminate + foam facet inserts</b><span class="why">soft-cooler construction, pleats set by weld tooling</span></td>
+                <td class="dots"><b>●●●</b><span>●</span></td><td class="dots"><b>●●●</b><span>●</span></td><td class="dots"><b>●●●</b><span>●</span></td>
+                <td><span class="sev lo">RECOMMENDED</span></td></tr>
+              <tr><td><b>B — Compression-molded EVA shell, integral thin hinges</b><span class="why">one-piece molded body, case-industry tooling</span></td>
+                <td class="dots"><b>●●●●</b></td><td class="dots"><b>●●</b><span>●●</span></td><td class="dots"><b>●●</b><span>●●</span></td>
+                <td>Premium look; hinge fatigue + cold-crack risk, big tools per size</td></tr>
+              <tr><td><b>C — PP living-hinge shell + drop-in insulated liner bag</b><span class="why">crate-style folding shell does structure, bag does thermal</span></td>
+                <td class="dots"><b>●●</b><span>●●</span></td><td class="dots"><b>●●●</b><span>●</span></td><td class="dots"><b>●●●●</b></td>
+                <td>Million-cycle hinges but reads as a crate, not a premium cooler</td></tr>
+              <tr><td><b>D — A + aerogel strips in hinge zones</b><span class="why">aerogel blanket only where the wall is thin</span></td>
+                <td class="dots"><b>●●●●</b></td><td class="dots"><b>●●</b><span>●●</span></td><td class="dots"><b>●●●</b><span>●</span></td>
+                <td>Cost adder; keep as a v2 upgrade if retention tests miss target</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:16px">Option A matches the welded-cooler brand position, uses the supplier base already visited on the China trip, and shares laminate + RF-weld learnings with <b>Origami Wagon</b> — exactly the dependency Max flagged on the card. B and C are worth one coupon each, not a program.</p>
+        <div class="note"><p><b>Insulation physics to hold onto:</b> heat takes the parallel path. Keep hinge area under ~12% of total wall, never let inner and outer hinge lines stack on the same vertical plane, and the pleats cost you surprisingly little. Let them stack, and the cooler grows cold-leak stripes you can see on a thermal camera.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 MANUFACTURING ============ -->
+  <section>
+    <div class="sechead"><span class="fig">FIG. 03</span><h2>How to actually make it</h2></div>
+    <div class="cols">
+      <div>
+        <p>The unlock: the pleat pattern is <b>developable — it unrolls flat.</b> So you never manufacture a folded thing. You cut flat, weld flat on a flatbed RF machine (the weld bars double as crease setters), then the first compression folds the body into shape. That is standard soft-goods flow plus weld fixtures, not exotic tooling.</p>
+        <ol class="steps">
+          <li><div><b>Prove the motion — 3D print (the August sample)</b><span class="sub">Print TPU 95A, single wall 1.2–1.6 mm with hinge grooves thinned to 0.6–0.8 mm, pleats oriented vertically on the bed. It proves fold sequence, lock states, and rim behavior — not materials or thermal.</span></div></li>
+          <li><div><b>Flat-pattern soft prototype</b><span class="sub">CNC/laser-cut the laminate blanks and die-cut foam facets; bond foam, weld the two side seams, sew the collar, bolt on bought hardware. One week of sample-room time per iteration.</span></div></li>
+          <li><div><b>Coupon tests before tooling</b><span class="sub">Run the hinge, not the cooler: 10k fold cycles, −20 °C cold-crack fold, weld peel, puncture, stain/cleanability, UV. Kill bad stacks at $50 a coupon, not $5k a tool.</span></div></li>
+          <li><div><b>Production cut &amp; weld</b><span class="sub">Die-cut laminate + foam → flatbed RF/HF weld: pocket welds capture each facet, crease welds set each hinge → two vertical body seams close the tube.</span></div></li>
+          <li><div><b>Liner and base</b><span class="sub">Thermoform or RF-weld the TPU bucket liner; weld its rim to the shell collar and its floor to the base tray. Interior stays a single smooth surface.</span></div></li>
+          <li><div><b>Hardware &amp; carry</b><span class="sub">Bartack webbing onto welded anchor patches on ridge lands; cam buckles set the locked volume states; backpack harness anchors to base tray and rim, not to pleats.</span></div></li>
+          <li><div><b>QC every unit</b><span class="sub">Air-pressurize ~0.2–0.3 psi and dunk for leaks; 20 fold cycles; rim-fit gauge at each lock state.</span></div></li>
+        </ol>
+      </div>
+      <div>
+        <p><b>Factory profile:</b> a welded soft-cooler / dry-bag factory with flatbed RF welders — the same supplier pool as the current welded-cooler line and, likely, Origami Wagon. Tooling is cutting dies + weld fixtures + one thermoform tool for the liner: light, and per-size cost stays low, which protects the "scalable architecture" goal on the card.</p>
+        <p><b>What the August print must prove</b> (gate to spending on soft tooling):</p>
+        <ul class="plain">
+          <li>Repeatable fold sequence — 20 cycles, no pleat skipping, by hand</li>
+          <li>Stands upright loaded at full, mid, and compressed states</li>
+          <li>Rim stays plan-flat within ~3 mm across all lock states</li>
+          <li>No pinch points on the liner path when compressing</li>
+          <li>Strap take-up per lock state is a length a buckle can actually manage</li>
+        </ul>
+        <div class="chips" aria-label="Coupon test list">
+          <span class="chip">10k fold cycles</span><span class="chip">−20 °C cold crack</span>
+          <span class="chip">weld peel</span><span class="chip">puncture</span>
+          <span class="chip">cleanability</span><span class="chip">UV / abrasion</span>
+          <span class="chip">24 h ice retention</span>
+        </div>
+        <div class="note" style="margin-top:22px"><p><b>Open before sample build:</b> target capacity + lock states (proposal: 16 L / 10 L / 5 L six-pack); backpack vs. tote priority; lid architecture (roll-top vs. gasketed zip rim); price point, which sets foam budget.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    SOURCES: Trello card + comment timeline (Nessa / Lia / Max, May–Jun 2026) · prototype one-pager · concept renders.<br>
+    GEOMETRY IS PLACEHOLDER — parametric accordion, panel length conserved. Replace with CAD when the August sample exists. Retention figures are engineering estimates, not test data.
+  </footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+const RAD=Math.PI/180;
+const P={W:320,D:200,r:48,NP:6,L:38,phiMin:26*RAD,phiMax:76*RAD,baseH:26};
+const ROWS=2*P.NP;                       // 12 panel rows, 13 rings
+const A_IN=41080;                        // interior footprint mm^2
+const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- perimeter (built once) ----------
+   Rigid-origami footprint: chamfered rectangle, 12 vertices, all straight
+   segments. cw = chevron weight (1 at face-center crease vertices).
+   Normals are miter directions so pleat offsets keep every edge straight. */
+function buildPerim(){
+  const {W,D}=P,hw=W/2,hd=D/2,c=P.r*0.9;
+  const raw=[                                   // CCW
+    [-hw+c,-hd,0],[0,-hd,1],[hw-c,-hd,0],       // front face
+    [hw,-hd+c,0],[hw,0,1],[hw,hd-c,0],          // right face
+    [hw-c,hd,0],[0,hd,1],[-hw+c,hd,0],          // back face
+    [-hw,hd-c,0],[-hw,0,1],[-hw,-hd+c,0]        // left face
+  ];
+  const n=raw.length, pts=[];
+  for(let i=0;i<n;i++){
+    const [x,y,cw]=raw[i];
+    const [xp,yp]=raw[(i-1+n)%n], [xn,yn]=raw[(i+1)%n];
+    const l1=Math.hypot(x-xp,y-yp), l2=Math.hypot(xn-x,yn-y);
+    const n1x=(y-yp)/l1, n1y=-(x-xp)/l1;        // outward edge normals (CCW)
+    const n2x=(yn-y)/l2, n2y=-(xn-x)/l2;
+    let mx=n1x+n2x, my=n1y+n2y;
+    const ml=Math.hypot(mx,my)||1; mx/=ml; my/=ml;
+    const miter=1/Math.max(0.5,mx*n1x+my*n1y);
+    pts.push({x,y,nx:mx*miter,ny:my*miter,cw});
+  }
+  return pts;
+}
+const PER=buildPerim(), M=PER.length;
+
+/* ---------- state ---------- */
+let t=0, tTarget=0, yaw=-32*RAD, pitch=17*RAD, autoRot=!reduced, playing=false, playDir=1;
+let lastInteract=0;
+
+function phiOf(tt){return P.phiMin+(P.phiMax-P.phiMin)*tt}
+function geomStats(tt){
+  const phi=phiOf(tt), pitchMM=P.L*Math.cos(phi), a=P.L*Math.sin(phi);
+  const H=ROWS*pitchMM;
+  const Vi=Math.max(0,A_IN*(H-14)*0.94/1e6);
+  return {phi,a,H,Vi};
+}
+
+/* ---------- 3D canvas ---------- */
+const cv=document.getElementById("c3d"), ctx=cv.getContext("2d");
+const stage=document.getElementById("stage");
+let CW=0,CH=0,DPR=1;
+function resize(){
+  DPR=Math.min(2,window.devicePixelRatio||1);
+  CW=stage.clientWidth; CH=stage.clientHeight;
+  cv.width=CW*DPR; cv.height=CH*DPR;
+}
+new ResizeObserver(()=>{resize();draw();}).observe(stage);
+resize();
+
+function render3D(){
+  const {a,H}=geomStats(t);
+  // concertina diagonals: crease drop scales with pleat pitch, so the
+  // V-pattern flattens as the body packs down (fixed crease pattern in the flat sheet)
+  const pitchMM=H/ROWS;
+  const chev=0.85*pitchMM;
+  const cyw=Math.cos(yaw),syw=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
+  const dist=1500, f=1.55*Math.min(CW,CH);
+  const zc=(H+80)/2-P.baseH*0.5;   // vertical center incl. liner allowance
+  const quads=[];
+
+  function proj(x,y,z){
+    const x1=cyw*x-syw*y, y1=syw*x+cyw*y, z1=z-zc;
+    const y2=cp*y1+sp*z1, z2=-sp*y1+cp*z1;
+    const d=dist+y2;
+    return [CW/2+f*x1/d, CH*0.52-f*z2/d, y2, x1, z2];
+  }
+  // shade helper: world normal -> view light
+  const Lx=-0.42,Ly=-0.7,Lz=0.58;
+  function addQuad(p,q,rr,s,baseCol,alpha,noCull,outN){
+    // world normal
+    const ux=q[0]-p[0],uy=q[1]-p[1],uz=q[2]-p[2];
+    const vx=s[0]-p[0],vy=s[1]-p[1],vz=s[2]-p[2];
+    let nx=uy*vz-uz*vy, ny=uz*vx-ux*vz, nz=ux*vy-uy*vx;
+    const nl=Math.hypot(nx,ny,nz)||1; nx/=nl;ny/=nl;nz/=nl;
+    if(outN && (nx*outN[0]+ny*outN[1]+nz*outN[2])<0){nx=-nx;ny=-ny;nz=-nz;}
+    // view-space normal
+    const nx1=cyw*nx-syw*ny, ny1=syw*nx+cyw*ny;
+    const nvy=cp*ny1+sp*nz;
+    if(!noCull && nvy>0.02) return;
+    const A=proj(...p),B=proj(...q),C=proj(...rr),D2=proj(...s);
+    const depth=(A[2]+B[2]+C[2]+D2[2])/4;
+    // light in view space
+    const nvx=nx1, nvz=-sp*ny1+cp*nz;
+    let dl=Math.max(0,nvx*Lx+nvy*Ly+nvz*Lz);
+    const sh=0.42+0.58*dl, spec=Math.pow(dl,4)*0.30;
+    quads.push({A,B,C,D:D2,depth,col:baseCol,sh,spec,alpha});
+  }
+
+  // rings
+  const rings=[];
+  for(let i=0;i<=ROWS;i++){
+    const sgn=(i%2===0)?1:-1, z0=P.baseH*0+i*(H/ROWS);
+    const ramp=Math.min(1,0.2+i/2); // seat the bottom pleats level into the base tray
+    const ring=new Array(M);
+    for(let j=0;j<M;j++){
+      const q=PER[j], amp=sgn*a*0.5;
+      const zoff=-chev*ramp*q.cw;
+      ring[j]=[q.x+q.nx*amp, q.y+q.ny*amp, z0+zoff];
+    }
+    rings.push(ring);
+  }
+  // body quads (orange)
+  for(let i=0;i<ROWS;i++){
+    const even=(i%2===0);
+    for(let j=0;j<M;j++){
+      const j2=(j+1)%M, q=PER[j];
+      const col=even?[255,74,20]:[236,58,10]; // subtle band alternation
+      addQuad(rings[i][j],rings[i][j2],rings[i+1][j2],rings[i+1][j],col,1,false,[q.nx,q.ny,0]);
+    }
+  }
+  // base tray (dark)
+  const bAmp=13;
+  for(let j=0;j<M;j++){
+    const j2=(j+1)%M,q=PER[j],q2=PER[j2];
+    const p0=[q.x+q.nx*bAmp,q.y+q.ny*bAmp,-P.baseH], p1=[q2.x+q2.nx*bAmp,q2.y+q2.ny*bAmp,-P.baseH];
+    const p2=[q2.x+q2.nx*bAmp,q2.y+q2.ny*bAmp,2], p3=[q.x+q.nx*bAmp,q.y+q.ny*bAmp,2];
+    addQuad(p0,p1,p2,p3,[40,35,28],1,false,[q.nx,q.ny,0]);
+  }
+  // liner: interior bucket + collar (translucent)
+  const linIn=-15, collarH=26+72*(1-0.75*t);
+  const zTop=H-2;
+  const linCol=[248,247,242];
+  // interior walls
+  for(let j=0;j<M;j++){
+    const j2=(j+1)%M,q=PER[j],q2=PER[j2];
+    const a0=[q.x+q.nx*linIn,q.y+q.ny*linIn], a1=[q2.x+q2.nx*linIn,q2.y+q2.ny*linIn];
+    addQuad([a0[0],a0[1],8],[a1[0],a1[1],8],[a1[0],a1[1],zTop],[a0[0],a0[1],zTop],linCol,0.42,true,null);
+  }
+  // collar flaring above rim
+  const linTopIn=-4;
+  for(let j=0;j<M;j++){
+    const j2=(j+1)%M,q=PER[j],q2=PER[j2];
+    const a0=[q.x+q.nx*linIn,q.y+q.ny*linIn], a1=[q2.x+q2.nx*linIn,q2.y+q2.ny*linIn];
+    const b0=[q.x+q.nx*linTopIn,q.y+q.ny*linTopIn], b1=[q2.x+q2.nx*linTopIn,q2.y+q2.ny*linTopIn];
+    addQuad([a0[0],a0[1],zTop],[a1[0],a1[1],zTop],[b1[0],b1[1],zTop+collarH],[b0[0],b0[1],zTop+collarH],linCol,0.52,true,null);
+  }
+  // liner floor
+  {
+    const c=proj(0,0,10);
+    // draw as fan: approximate with one polygon later — push as special quad set
+    for(let j=0;j<M;j++){
+      const j2=(j+1)%M,q=PER[j],q2=PER[j2];
+      addQuad([0,0,10],[q.x+q.nx*linIn,q.y+q.ny*linIn,10],[q2.x+q2.nx*linIn,q2.y+q2.ny*linIn,10],[0,0,10],linCol,0.5,true,null);
+    }
+  }
+  // side compression straps (dark ribbons on left/right faces, over ridges)
+  const strapAmp=a*0.5+6;
+  [[-1,0],[1,0]].forEach(dir=>{
+    const sx=dir[0]*(P.W/2), w=16;
+    for(let i=0;i<ROWS;i++){
+      const z0=i*(H/ROWS), z1=(i+1)*(H/ROWS);
+      const off=dir[0]*strapAmp;
+      addQuad([sx+off,-w,z0],[sx+off,w,z0],[sx+off,w,z1],[sx+off,-w,z1],[26,23,20],1,true,null);
+    }
+  });
+
+  // ---- draw ----
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  ctx.clearRect(0,0,CW,CH);
+  // ground shadow
+  const g=proj(0,0,-P.baseH);
+  const ex=f*(P.W*0.62+a*0.5)/dist, ey=ex*0.32;
+  ctx.save();ctx.globalAlpha=0.16;ctx.fillStyle="#000";
+  ctx.beginPath();ctx.ellipse(g[0],g[1]+6,ex,ey,0,0,Math.PI*2);ctx.fill();ctx.restore();
+
+  quads.sort((u,v)=>v.depth-u.depth);
+  for(const q of quads){
+    const [r0,g0,b0]=q.col;
+    const rr=Math.min(255,r0*q.sh+255*q.spec),gg=Math.min(255,g0*q.sh+255*q.spec),bb=Math.min(255,b0*q.sh+255*q.spec);
+    ctx.globalAlpha=q.alpha;
+    ctx.fillStyle="rgb("+(rr|0)+","+(gg|0)+","+(bb|0)+")";
+    ctx.beginPath();
+    ctx.moveTo(q.A[0],q.A[1]);ctx.lineTo(q.B[0],q.B[1]);ctx.lineTo(q.C[0],q.C[1]);ctx.lineTo(q.D[0],q.D[1]);
+    ctx.closePath();ctx.fill();
+    if(q.alpha===1){ctx.strokeStyle=ctx.fillStyle;ctx.lineWidth=0.6;ctx.stroke();}
+  }
+  ctx.globalAlpha=1;
+}
+
+/* ---------- profile canvas ---------- */
+const pc=document.getElementById("profile"), pctx=pc.getContext("2d");
+function drawProfile(){
+  const w=pc.clientWidth, h=210, dpr=Math.min(2,window.devicePixelRatio||1);
+  if(pc.width!==w*dpr){pc.width=w*dpr;pc.height=h*dpr;}
+  pctx.setTransform(dpr,0,0,dpr,0,0);
+  pctx.clearRect(0,0,w,h);
+  const cs=getComputedStyle(document.documentElement);
+  const cInk=cs.getPropertyValue("--ink").trim(), cMut=cs.getPropertyValue("--mut").trim(),
+        cAcc=cs.getPropertyValue("--accent").trim(), cLine=cs.getPropertyValue("--line2").trim();
+  const {a,H}=geomStats(t);
+  const maxH=ROWS*P.L*Math.cos(P.phiMin)+P.baseH+10;
+  const s=(h-24)/maxH;
+  const groundY=h-12, cx=[w*0.30,w*0.70];
+  // ground
+  pctx.strokeStyle=cLine;pctx.lineWidth=1;
+  pctx.beginPath();pctx.moveTo(8,groundY);pctx.lineTo(w-8,groundY);pctx.stroke();
+  // base slabs
+  pctx.fillStyle=cMut;
+  pctx.globalAlpha=0.35;
+  pctx.fillRect(cx[0]-16,groundY-P.baseH*s,(cx[1]-cx[0])+32,P.baseH*s);
+  pctx.globalAlpha=1;
+  cx.forEach((x0,side)=>{
+    const dir=side===0?-1:1;
+    pctx.strokeStyle=cInk;pctx.lineWidth=2;pctx.lineJoin="round";
+    pctx.beginPath();
+    const pts=[];
+    for(let i=0;i<=ROWS;i++){
+      const sgn=(i%2===0)?1:-1;
+      const x=x0+dir*sgn*a*0.5*s*1.6;   // exaggerate depth slightly for readability
+      const y=groundY-P.baseH*s-i*(H/ROWS)*s;
+      pts.push([x,y,sgn]);
+      i===0?pctx.moveTo(x,y):pctx.lineTo(x,y);
+    }
+    pctx.stroke();
+    // hinge dots
+    for(const [x,y,sgn] of pts){
+      pctx.beginPath();pctx.arc(x,y,3.2,0,Math.PI*2);
+      if(sgn>0){pctx.fillStyle=cAcc;pctx.fill();}
+      else{pctx.fillStyle="transparent";pctx.strokeStyle=cAcc;pctx.lineWidth=1.5;pctx.stroke();}
+    }
+  });
+  // rim line
+  pctx.strokeStyle=cMut;pctx.setLineDash([3,3]);pctx.lineWidth=1;
+  const rimY=groundY-P.baseH*s-H*s;
+  pctx.beginPath();pctx.moveTo(cx[0]-26,rimY);pctx.lineTo(cx[1]+26,rimY);pctx.stroke();
+  pctx.setLineDash([]);
+  // height dim text
+  pctx.fillStyle=cMut;pctx.font="10px "+cs.getPropertyValue("--mono");
+  pctx.textAlign="center";
+  pctx.fillText(Math.round(H)+" mm",w*0.5,rimY-6);
+}
+
+/* ---------- readouts ---------- */
+const el=id=>document.getElementById(id);
+const chip=el("stateChip");
+function fmtIn(mm){return (mm/25.4).toFixed(1)}
+function updateReads(){
+  const {phi,a,H,Vi}=geomStats(t);
+  el("rH").innerHTML=Math.round(H)+"<small> mm · "+fmtIn(H)+"&Prime;</small>";
+  el("rV").innerHTML=Vi.toFixed(1)+"<small> L</small>";
+  el("rPhi").innerHTML=Math.round(phi/RAD)+"<small>°</small>";
+  el("rA").innerHTML=Math.round(a)+"<small> mm</small>";
+  el("rCans").innerHTML=Math.max(0,Math.floor(Vi*0.68/0.355))+"<small> + ice</small>";
+  chip.textContent = t<0.25?"Expanded":(t<0.8?"Mid-compressed":"Packed");
+}
+
+/* ---------- controls ---------- */
+const slider=el("fold"), bE=el("pExp"), bM=el("pMid"), bC=el("pCmp"), bPlay=el("play");
+const presets=[[bE,0],[bM,0.62],[bC,1]];
+function setButtons(){
+  presets.forEach(([b,v])=>b.classList.toggle("on",Math.abs(t-v)<0.03&&!playing));
+  bPlay.classList.toggle("on",playing);
+  bPlay.textContent=playing?"❚❚ Stop":"▶ Cycle";
+}
+slider.addEventListener("input",()=>{playing=false;tTarget=t=slider.value/1000;sync();});
+presets.forEach(([b,v])=>b.addEventListener("click",()=>{playing=false;tTarget=v;if(reduced){t=v;sync();}setButtons();}));
+bPlay.addEventListener("click",()=>{playing=!playing;setButtons();});
+
+function sync(){
+  slider.value=Math.round(t*1000);
+  updateReads();drawProfile();setButtons();
+}
+
+/* orbit */
+let dragging=false,lx=0,ly=0;
+cv.addEventListener("pointerdown",e=>{dragging=true;lx=e.clientX;ly=e.clientY;cv.setPointerCapture(e.pointerId);lastInteract=performance.now();});
+cv.addEventListener("pointermove",e=>{
+  if(!dragging)return;
+  yaw+=(e.clientX-lx)*0.008; pitch=Math.max(4*RAD,Math.min(38*RAD,pitch+(e.clientY-ly)*0.005));
+  lx=e.clientX;ly=e.clientY;lastInteract=performance.now();
+});
+["pointerup","pointercancel"].forEach(ev=>cv.addEventListener(ev,()=>{dragging=false;lastInteract=performance.now();}));
+
+/* theme watch → redraw profile */
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",drawProfile);
+new MutationObserver(drawProfile).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+
+/* ---------- loop ---------- */
+let prev=performance.now();
+function draw(){render3D();}
+function tick(now){
+  const dt=Math.min(0.05,(now-prev)/1000);prev=now;
+  let dirty=false;
+  if(playing&&!reduced){
+    tTarget+=playDir*dt*0.28;
+    if(tTarget>=1){tTarget=1;playDir=-1}
+    if(tTarget<=0){tTarget=0;playDir=1}
+  }
+  if(Math.abs(tTarget-t)>0.0004){
+    t+= (tTarget-t)*Math.min(1,dt*6);
+    if(Math.abs(tTarget-t)<0.0004)t=tTarget;
+    sync();dirty=true;
+  }
+  if(autoRot&&!dragging&&!reduced&&(now-lastInteract>3000)){yaw+=dt*0.10;dirty=true;}
+  if(dragging)dirty=true;
+  if(dirty||!tick.first){draw();tick.first=true;}
+  requestAnimationFrame(tick);
+}
+sync();draw();
+requestAnimationFrame(tick);
+})();
+</script>
+
+</body>
+</html>

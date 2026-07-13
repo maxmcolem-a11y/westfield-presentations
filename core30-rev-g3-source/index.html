@@ -1,0 +1,659 @@
+<title>Flat-Fold Cantilever Chair — Load-Opposed Fold</title>
+<style>
+  :root{
+    --paper:#F4F4F1; --panel:#FFFFFF; --ink:#22272B; --muted:#6A737C;
+    --line:#DFE1DB; --chip:#ECEDE9; --accent:#C2622F;
+    --good:#2F7D4F; --warn:#B07A1E;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --paper:#15181B; --panel:#1D2125; --ink:#E8E8E3; --muted:#9AA3AC;
+      --line:#2E3338; --chip:#262B30; --accent:#DE8A52;
+      --good:#5CB585; --warn:#D2A24C; }
+  }
+  :root[data-theme="dark"]{
+    --paper:#15181B; --panel:#1D2125; --ink:#E8E8E3; --muted:#9AA3AC;
+    --line:#2E3338; --chip:#262B30; --accent:#DE8A52;
+    --good:#5CB585; --warn:#D2A24C;
+  }
+  :root[data-theme="light"]{
+    --paper:#F4F4F1; --panel:#FFFFFF; --ink:#22272B; --muted:#6A737C;
+    --line:#DFE1DB; --chip:#ECEDE9; --accent:#C2622F;
+    --good:#2F7D4F; --warn:#B07A1E;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Avenir Next",Avenir,"Segoe UI",system-ui,-apple-system,sans-serif;
+    font-size:16px; line-height:1.55;
+  }
+  .wrap{max-width:1080px; margin:0 auto; padding:40px 24px 80px}
+  .eyebrow{
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);
+  }
+  h1{ font-size:clamp(26px,4vw,38px); font-weight:600; letter-spacing:-.01em;
+      margin:6px 0 8px; text-wrap:balance; }
+  .lede{color:var(--muted); max-width:66ch; margin:0 0 24px}
+  .lede strong{color:var(--ink); font-weight:600}
+
+  .controls{
+    display:flex; flex-wrap:wrap; align-items:center; gap:14px;
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:14px 16px; margin-bottom:14px;
+  }
+  button.play{
+    width:42px; height:42px; border-radius:50%; border:1px solid var(--line);
+    background:var(--ink); color:var(--paper); font-size:15px; cursor:pointer;
+    display:grid; place-items:center; flex:none;
+  }
+  button.play:focus-visible, .stagebtn:focus-visible, #scrub:focus-visible{
+    outline:2px solid var(--accent); outline-offset:2px;
+  }
+  #scrub{flex:1 1 220px; min-width:180px; accent-color:var(--accent); height:28px}
+  .stages{display:flex; flex-wrap:wrap; gap:6px}
+  .stagebtn{
+    font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:11.5px;
+    letter-spacing:.04em; padding:7px 11px; border-radius:6px; cursor:pointer;
+    border:1px solid var(--line); background:var(--chip); color:var(--muted);
+  }
+  .stagebtn.on{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+  .stagebtn.deploybtn{border-color:var(--accent); color:var(--accent); background:transparent}
+
+  .viewport{
+    position:relative; background:var(--panel); border:1px solid var(--line);
+    border-radius:10px; overflow:hidden; margin-bottom:14px;
+  }
+  .viewport canvas{display:block; width:100%; height:100%}
+  .vp-inner{width:100%; aspect-ratio:16/11; min-height:420px}
+  .hint{
+    position:absolute; right:12px; bottom:10px;
+    font-family:ui-monospace,Menlo,monospace; font-size:10.5px; letter-spacing:.08em;
+    color:var(--muted); text-transform:uppercase; pointer-events:none;
+  }
+  .readouts{
+    position:absolute; left:12px; bottom:10px; display:flex; gap:8px; flex-wrap:wrap;
+    font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:12px;
+    font-variant-numeric:tabular-nums;
+  }
+  .readouts span{
+    background:var(--chip); border:1px solid var(--line); border-radius:5px;
+    padding:3px 8px; color:var(--muted);
+  }
+  .readouts b{color:var(--ink); font-weight:600}
+
+  .locks{
+    display:flex; flex-wrap:wrap; gap:8px 10px; align-items:center;
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:12px 16px; margin-bottom:44px;
+  }
+  .locks .lbl{
+    font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:11px;
+    letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-right:4px;
+  }
+  .lock{
+    display:inline-flex; align-items:center; gap:7px; font-size:12.5px;
+    padding:5px 11px; border-radius:99px; border:1px solid var(--line); background:var(--chip);
+  }
+  .lock i{width:8px; height:8px; border-radius:50%; background:var(--good); flex:none}
+  .lock.released i{background:var(--warn)}
+  .lock em{font-style:normal; font-family:ui-monospace,Menlo,monospace; font-size:10.5px;
+    letter-spacing:.06em; color:var(--muted)}
+
+  section h3{
+    font-size:12px; font-family:ui-monospace,"SF Mono",Menlo,monospace;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--muted);
+    margin:0 0 14px; padding-bottom:8px; border-bottom:1px solid var(--line);
+  }
+  ul.joints{margin:0 0 24px; padding-left:0; list-style:none; max-width:76ch}
+  ul.joints li{
+    padding:11px 0; border-bottom:1px solid var(--line); font-size:14.5px; color:var(--muted);
+    display:grid; grid-template-columns:150px 1fr; gap:14px;
+  }
+  @media (max-width:600px){ ul.joints li{grid-template-columns:1fr; gap:4px} }
+  ul.joints .j{
+    font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:12px;
+    letter-spacing:.05em; color:var(--ink); font-weight:600; padding-top:2px;
+  }
+  ul.joints b{color:var(--ink); font-weight:600}
+  .foot{font-size:13.5px; color:var(--muted); max-width:76ch}
+  .foot b{color:var(--ink)}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">Concept 01 · Rev F — load-opposed fold, collision-swept</p>
+  <h1>Flat-Fold Cantilever Chair</h1>
+  <p class="lede"><strong>Every joint folds against its use load</strong> — sitting, leaning
+  back, or pushing up on the arms presses each member into a hard stop, and no latch ever
+  carries a person. The big around-rotations demand clear sweep corridors, so the members run
+  in <strong>offset lanes</strong>: rails 28&nbsp;in, runners 28&nbsp;out — flush against
+  the legs — backs 56&nbsp;out, arms 84&nbsp;out. The whole fold is numerically swept for
+  member-to-member collisions.</p>
+
+  <div class="controls">
+    <button class="play" id="play" aria-label="Play fold sequence">▶</button>
+    <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="Fold progress">
+    <div class="stages" id="stages"></div>
+    <button class="stagebtn deploybtn" id="deploy"
+      title="Curiosity: spring-cascade deploy — packs the chair, then blooms it open in sequence">⟳ SPRING DEPLOY</button>
+  </div>
+
+  <div class="viewport">
+    <div class="vp-inner" id="vp"></div>
+    <div class="readouts">
+      <span>back <b id="rBack">0°</b></span>
+      <span>arm <b id="rArm">0°</b></span>
+      <span>seat <b id="rSeat">0°</b></span>
+      <span>runner <b id="rRun">0°</b></span>
+      <span>width <b id="rW">470 mm</b></span>
+    </div>
+    <div class="hint">drag orbit · scroll zoom</div>
+  </div>
+
+  <div class="locks" id="locks"><span class="lbl">Stops</span></div>
+
+  <section>
+    <h3>Joint logic — load vs. fold</h3>
+    <ul class="joints">
+      <li><span class="j">SHOULDER ×2</span><span>Recline pushes the back <b>rearward into its
+      stop</b>. Fold goes forward, +107°, the back lying down beside the arm in the next lane
+      out.</span></li>
+      <li><span class="j">WRIST ×2</span><span>Pushing up out of the chair loads the armrest
+      <b>down into its stop</b>. Fold swings arm + back up and over the front, +289° — the
+      outboard lane keeps the whole sweep clear of the X and the drop.</span></li>
+      <li><span class="j">SEAT KNUCKLE ×2</span><span>Sitting drives the cantilevered rail
+      <b>rear-end-down into its stop</b> — the big joint carries this on a stop face, not a
+      latch. Fold sweeps the rail up and over, +284°, resting inboard beside the drop.</span></li>
+      <li><span class="j">RUNNER ×2</span><span>Ground reaction pushes the foot <b>up into its
+      stop</b>. Fold rotates down and around, +300°, nesting <b>flush along the leg</b> — just
+      one tube-width out, on a compact boss at the joint.</span></li>
+      <li><span class="j">SPREADER X</span><span>Two chains meet at the center boss — one
+      pinned between the knuckles, one between lower drop pins — so the open X reads true.
+      Seat-fabric tension jams each elbow <b>onto a fixed stop plate</b>; no sitter load can
+      move them. To fold, the center boss swivels half a turn through the front, then the
+      chains scissor apart <b>inline with the leg plane</b> — one elbow up the plane, one
+      down, links ending parallel to the drops inside the pack.</span></li>
+    </ul>
+    <p class="foot"><b>Packed: a flat bar ≈ 720 × 290 × 140 mm</b>, everything parallel to the
+    drop line. The fold is swept end-to-end in software: minimum clearance between any two
+    members stays positive through all five stages — the offsets and the 4–20° splay of each
+    member's resting angle are what buy that. Boss widths at the wrist, knuckle, and runner
+    joints absorb the lane jogs.</p>
+    <p class="foot"><b>⟳ Spring deploy is a curiosity, not the baseline.</b> Because every
+    fold is load-opposed and rotational, deploy-biased springs push the same way the sitter's
+    weight does — onto the stops. The button shows the cascade version: width blooms open,
+    then each joint trips the next in reverse fold order, rebounding softly off its stop.
+    V1 keeps springs for parking only; the cascade's trip linkages and a damped arm swing are
+    a v2 conversation.</p>
+  </section>
+</div>
+
+<script>__THREE_SRC__</script>
+<script>
+(function(){
+  "use strict";
+  var D2R=Math.PI/180;
+  var V3=function(x,y,z){ return new THREE.Vector3(x,y,z); };
+  function smooth(x){ x=Math.max(0,Math.min(1,x)); return x*x*(3-2*x); }
+  function seg(t,a,b){ return smooth((t-a)/(b-a)); }
+
+  // ---------- helpers ----------
+  function tubePath(pts, r){
+    var path=new THREE.CurvePath();
+    var cur=pts[0].clone();
+    for(var i=1;i<pts.length-1;i++){
+      var p=pts[i], nxt=pts[i+1];
+      var d1=p.clone().sub(cur), d2=nxt.clone().sub(p);
+      var l1=d1.length(), l2=d2.length();
+      var rr=Math.min(r, l1*0.49, l2*0.49);
+      var a=p.clone().sub(d1.clone().multiplyScalar(rr/l1));
+      var b=p.clone().add(d2.clone().multiplyScalar(rr/l2));
+      path.add(new THREE.LineCurve3(cur.clone(), a));
+      path.add(new THREE.QuadraticBezierCurve3(a, p.clone(), b));
+      cur=b;
+    }
+    path.add(new THREE.LineCurve3(cur, pts[pts.length-1].clone()));
+    return path;
+  }
+  function tubeMesh(pts, cornerR, radius, mat, segs){
+    var m=new THREE.Mesh(new THREE.TubeGeometry(tubePath(pts,cornerR), segs||140, radius, 16, false), mat);
+    m.castShadow=true; return m;
+  }
+  function ball(p, r, mat, g){
+    var s=new THREE.Mesh(new THREE.SphereGeometry(r,14,12), mat);
+    s.position.copy(p); s.castShadow=true; g.add(s); return s;
+  }
+  function discX(p, r, h, mat, g){
+    var m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,24), mat);
+    m.rotation.z=Math.PI/2; m.position.copy(p); m.castShadow=true; g.add(m); return m;
+  }
+  function makeCyl(r, mat, g){
+    var m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,1,14), mat);
+    m.castShadow=true; g.add(m); return m;
+  }
+  function setCyl(m, a, b){
+    var d=b.clone().sub(a), len=d.length();
+    m.scale.set(1,len,1);
+    m.position.copy(a).add(b).multiplyScalar(0.5);
+    m.quaternion.setFromUnitVectors(V3(0,1,0), d.clone().normalize());
+  }
+
+  // ---------- materials ----------
+  var mFrame=new THREE.MeshStandardMaterial({color:0x33373C, roughness:0.38, metalness:0.55});
+  var mPlastic=new THREE.MeshStandardMaterial({color:0x1E2124, roughness:0.6, metalness:0.1});
+  var mLockG=new THREE.MeshStandardMaterial({color:0x3E9464, roughness:0.5, metalness:0.1});
+  var mLockW=new THREE.MeshStandardMaterial({color:0xC08A2E, roughness:0.5, metalness:0.1});
+  var mFab=new THREE.MeshStandardMaterial({color:0xE3DCC8, roughness:0.95, metalness:0,
+        side:THREE.DoubleSide});
+
+  // ---------- scene ----------
+  var vp=document.getElementById("vp");
+  var renderer=new THREE.WebGLRenderer({antialias:true});
+  renderer.setPixelRatio(Math.min(2,window.devicePixelRatio));
+  renderer.shadowMap.enabled=true;
+  renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  renderer.outputEncoding=THREE.sRGBEncoding;
+  vp.appendChild(renderer.domElement);
+  var scene=new THREE.Scene();
+  var camera=new THREE.PerspectiveCamera(30,16/11,10,20000);
+
+  var hemi=new THREE.HemisphereLight(0xffffff,0x8a94a0,0.85); scene.add(hemi);
+  var sun=new THREE.DirectionalLight(0xffffff,1.0);
+  sun.position.set(900,1800,1100); sun.castShadow=true;
+  sun.shadow.mapSize.set(2048,2048);
+  sun.shadow.camera.left=-1400; sun.shadow.camera.right=1400;
+  sun.shadow.camera.top=1400; sun.shadow.camera.bottom=-1400;
+  sun.shadow.camera.far=6000;
+  scene.add(sun);
+  var rim=new THREE.DirectionalLight(0xdfe8f2,0.35);
+  rim.position.set(-1200,600,-900); scene.add(rim);
+
+  var shadowMat=new THREE.ShadowMaterial({opacity:0.16});
+  var groundMesh=new THREE.Mesh(new THREE.PlaneGeometry(7000,7000), shadowMat);
+  groundMesh.rotation.x=-Math.PI/2; groundMesh.receiveShadow=true; scene.add(groundMesh);
+  var ringMat=new THREE.MeshBasicMaterial({color:0x999999, transparent:true, opacity:0.35});
+  var ring=new THREE.Mesh(new THREE.RingGeometry(1060,1070,72), ringMat);
+  ring.rotation.x=-Math.PI/2; ring.position.y=1; scene.add(ring);
+
+  // =======================================================================
+  // chair (mm; Y up, +Z forward). Offset lanes per side (x, + = outboard):
+  //   rail -28 | drop 0 | runner +28 | back +56 | arm +84
+  // =======================================================================
+  var HW_OPEN=235, HW_CLOSED=46;
+  var TUBE_R=13, RAIL_R=11;
+  var LANE_RAIL=28, LANE_ARM=84, LANE_BACK=56, LANE_RUN=28;
+  var WRIST=V3(0,592,264);
+  var ELBOW=V3(0,18,-132);
+  var RJOINT=V3(0,16,-88);
+  var KNUCKLE=V3(0,445,163);
+  var DROP_DIR=V3(0,-0.823,-0.568);
+  var A_BACK=107*D2R, A_ARM=289*D2R, A_RAIL=284*D2R, A_RUN=300*D2R;
+
+  var sides=[], armGroups=[], backGroups=[], railGroups=[], runGroups=[];
+  var shoulderBosses=[], wristBosses=[], knuckleBosses=[], runnerBosses=[];
+
+  [-1,1].forEach(function(sgn){
+    var side=new THREE.Group(); side.position.x=sgn*HW_OPEN; scene.add(side); sides.push(side);
+
+    // fixed drop: wrist -> elbow -> runner-joint stub (lane 0)
+    side.add(tubeMesh([WRIST.clone(), ELBOW, RJOINT], 46, TUBE_R, mFrame));
+    var pad=new THREE.Mesh(new THREE.BoxGeometry(30,8,44), mPlastic);
+    pad.position.set(0,5,-126); pad.castShadow=true; side.add(pad);
+
+    // joint bosses (lock-state colored)
+    var wbk=makeCyl(9,mFrame,side); setCyl(wbk, V3(0,592,264), V3(sgn*LANE_ARM,592,264));
+    var wb=discX(V3(sgn*LANE_ARM,592,264), 19, 26, mLockG, side); wristBosses.push(wb);
+    var kb=discX(V3(-sgn*LANE_RAIL/2,445,163), 24, LANE_RAIL+26, mLockG, side); knuckleBosses.push(kb);
+    // runner boss, flush against the leg
+    var rb=discX(V3(sgn*LANE_RUN/2,16,-88), 15, LANE_RUN+24, mLockG, side); runnerBosses.push(rb);
+    // spreader lower pin disc on the drop (140mm down)
+    var lp=new THREE.Mesh(new THREE.CylinderGeometry(12,12,18,18), mPlastic);
+    lp.quaternion.setFromUnitVectors(V3(0,1,0), V3(0,-0.568,0.823));
+    lp.position.set(-sgn*22, 445-0.823*140, 163-0.568*140);
+    lp.castShadow=true; side.add(lp);
+
+    // arm + front sweep (folding at wrist; outboard lane)
+    var ag=new THREE.Group(); ag.position.set(sgn*LANE_ARM,592,264);
+    side.add(ag); armGroups.push(ag);
+    ag.add(tubeMesh([V3(0,0,0), V3(0,30,21), V3(0,92,-492)], 62, TUBE_R, mFrame));
+    ball(V3(0,92,-492), TUBE_R, mFrame, ag);
+    var sb=discX(V3(-sgn*14,92,-495), 17, 48, mLockG, ag); shoulderBosses.push(sb);
+
+    // back upright (folding at shoulder; one lane inboard of the arm)
+    var bg=new THREE.Group(); bg.position.set(-sgn*28,92,-497);
+    ag.add(bg); backGroups.push(bg);
+    bg.add(tubeMesh([V3(0,-22,1), V3(0,0,-3), V3(0,316,-57)], 40, TUBE_R, mFrame));
+    ball(V3(0,316,-57), TUBE_R, mFrame, bg);
+    ball(V3(0,-22,1), TUBE_R, mFrame, bg);
+
+    // seat rail (folding at the big knuckle; inboard lane)
+    var lg=new THREE.Group(); lg.position.set(-sgn*LANE_RAIL,445,163);
+    side.add(lg); railGroups.push(lg);
+    var rt=makeCyl(RAIL_R, mFrame, lg); setCyl(rt, V3(0,0,-6), V3(0,0,-358));
+    var rcap=new THREE.Mesh(new THREE.CylinderGeometry(RAIL_R+2.5,RAIL_R+2.5,14,18), mPlastic);
+    rcap.rotation.x=Math.PI/2; rcap.position.set(0,0,-361); rcap.castShadow=true; lg.add(rcap);
+
+    // runner (folding on the outrigger boss; outermost lane)
+    var rg=new THREE.Group(); rg.position.set(sgn*LANE_RUN,16,-88);
+    side.add(rg); runGroups.push(rg);
+    var runTube=makeCyl(TUBE_R, mFrame, rg); setCyl(runTube, V3(0,0,0), V3(0,-1,408));
+    ball(V3(0,-1,408), TUBE_R, mFrame, rg);
+    var cap=new THREE.Mesh(new THREE.CylinderGeometry(TUBE_R+3.5,TUBE_R+2,58,14), mPlastic);
+    cap.position.set(0,-1,382); cap.rotation.x=Math.PI/2; cap.castShadow=true; rg.add(cap);
+  });
+
+  // ---------- spreader: double-chain X, both chains over-centered toward the seat ----------
+  // Two chains with HORIZONTAL pin axes: chain 0 between the knuckles, chain 1
+  // between lower drop pins 140mm down. Their elbows meet at the crossing, so
+  // open it reads as a true X with a center boss. In use each elbow bears on a
+  // fixed stop plate (fabric tension jams it on — load-opposed). To fold, the
+  // center boss swivels half a turn through the front, then the chains scissor
+  // apart INLINE with the leg plane: one elbow up the plane, one down.
+  var SP_N=V3(0,-0.568,0.823);
+  var SP_H0=70;
+  var xChains=[];
+  [0,1].forEach(function(ci){
+    var mid=ci===0? KNUCKLE.clone()
+                  : KNUCKLE.clone().add(DROP_DIR.clone().multiplyScalar(140));
+    var span0=HW_OPEN-22;
+    var c={mid:mid, L:Math.sqrt(span0*span0+SP_H0*SP_H0),
+      l1:makeCyl(8.5,mFrame,scene), l2:makeCyl(8.5,mFrame,scene),
+      e:new THREE.Mesh(new THREE.CylinderGeometry(14,14,22,24), mLockG)};
+    c.e.castShadow=true; c.e.quaternion.setFromUnitVectors(V3(0,1,0), SP_N);
+    scene.add(c.e); xChains.push(c);
+  });
+
+  function updateSpreader(hw, swv){
+    var span=hw-22;
+    var psi=Math.PI*swv;                    // center-boss swivel, through the front
+    xChains.forEach(function(c,ci){
+      var s_i=ci===0?1:-1;                  // chain0 elbow starts down-plane, chain1 up
+      var h=Math.sqrt(Math.max(100, c.L*c.L-span*span));
+      var dir=DROP_DIR.clone().multiplyScalar(s_i*Math.cos(psi))
+               .add(SP_N.clone().multiplyScalar(Math.sin(psi)));
+      var zoff=SP_N.clone().multiplyScalar(ci===0?10:-10);
+      var E=c.mid.clone().add(dir.multiplyScalar(h)).add(zoff);
+      var A=V3(-span,c.mid.y,c.mid.z).add(zoff);
+      var B=V3( span,c.mid.y,c.mid.z).add(zoff);
+      setCyl(c.l1,A,E); setCyl(c.l2,B,E);
+      c.e.position.copy(E);
+      c.segA=[[A.x,A.y,A.z],[E.x,E.y,E.z]];
+      c.segB=[[B.x,B.y,B.z],[E.x,E.y,E.z]];
+    });
+  }
+
+  // ---------- seat fabric (slung between the folding rails) ----------
+  var seatGeo=new THREE.PlaneGeometry(1,1,30,10);
+  var seatFab=new THREE.Mesh(seatGeo,mFab); seatFab.castShadow=true;
+  seatFab.frustumCulled=false; scene.add(seatFab);
+  function updateSeat(hw, thRail){
+    var pos=seatGeo.attributes.position, idx=0;
+    var xr=hw-LANE_RAIL-12;
+    var sag=Math.max(24, 0.5*Math.sqrt(Math.max(0,396*396-4*xr*xr)));
+    var rip=(HW_OPEN-hw)/(HW_OPEN-HW_CLOSED);
+    var dy=Math.sin(thRail), dz=-Math.cos(thRail);
+    for(var iy=0;iy<=10;iy++){
+      for(var ix=0;ix<=30;ix++){
+        var u=ix/30-0.5, v=iy/10;
+        var s=12+v*334;
+        var p=1-(2*u)*(2*u);
+        var y=445+dy*s+RAIL_R-1 - sag*p - 4*(1-(2*v-1)*(2*v-1))
+              - rip*16*Math.sin(u*26)*p;
+        pos.setXYZ(idx++, u*2*xr, y, 163+dz*s);
+      }
+    }
+    pos.needsUpdate=true; seatGeo.computeVertexNormals();
+  }
+
+  // ---------- back fabric (follows arm chain: wrist -> shoulder) ----------
+  var backGeo=new THREE.PlaneGeometry(1,1,24,8);
+  var backFab=new THREE.Mesh(backGeo,mFab); backFab.castShadow=true;
+  backFab.frustumCulled=false;
+  var armC=new THREE.Group(); armC.position.copy(WRIST); scene.add(armC);
+  var backCC=new THREE.Group(); backCC.position.set(0,92,-497); armC.add(backCC);
+  backCC.add(backFab);
+  function zAt(y){ return -195+(y-445)*((-290+195)/(1000-445)); }
+  function updateBackFab(hw){
+    var pos=backGeo.attributes.position, idx=0;
+    var rip=(HW_OPEN-hw)/(HW_OPEN-HW_CLOSED);
+    var hb=hw+LANE_BACK-13;
+    for(var iy=0;iy<=8;iy++){
+      for(var ix=0;ix<=24;ix++){
+        var u=ix/24-0.5;
+        var y=742+(iy/8)*238;
+        var p=1-(2*u)*(2*u);
+        var zl=zAt(y)+233 - 10*p - rip*20*Math.sin(u*20)*p;
+        var ax=Math.abs(u);
+        if(ax>0.44){ zl+=(ax-0.44)*150; }
+        pos.setXYZ(idx++, u*2*hb, y-684, zl);
+      }
+    }
+    pos.needsUpdate=true; backGeo.computeVertexNormals();
+  }
+
+  // ---------- fold sequence ----------
+  var t=0;
+  var PH={ back:[0,.18], arm:[.18,.42], rail:[.42,.62], run:[.62,.82], width:[.82,1] };
+  var STAGES=[
+    {t:0,l:"OPEN"},{t:.18,l:"BACK"},{t:.42,l:"ARMS OVER"},
+    {t:.62,l:"SEAT OVER"},{t:.82,l:"RUNNERS"},{t:1,l:"PACKED"}];
+  var LOCKS=[
+    {n:"Shoulder stops ×2",at:0},{n:"Wrist stops ×2",at:.18},
+    {n:"Knuckle stops ×2",at:.42},{n:"Runner stops ×2",at:.62},
+    {n:"Spreader over-center",at:.82}];
+
+  // arrival easing for spring-deploy: fast travel, soft rebound off the stop
+  function arrive(u){
+    if(u<=0) return 1; if(u>=1) return 0;
+    if(u<0.72) return 1-smooth(u/0.72);
+    var s=(u-0.72)/0.28;
+    return 0.05*Math.sin(s*Math.PI)*(1-0.6*s);
+  }
+  function poseFromT(){
+    var pw=seg(t,PH.width[0],PH.width[1]);
+    return {
+      pb:seg(t,PH.back[0],PH.back[1]), pa:seg(t,PH.arm[0],PH.arm[1]),
+      pl:seg(t,PH.rail[0],PH.rail[1]), pr:seg(t,PH.run[0],PH.run[1]),
+      swv:smooth(Math.min(1,pw/0.15)),
+      pww:smooth(Math.max(0,(pw-0.15)/0.85))
+    };
+  }
+  // spring-cascade deploy: reverse order, each joint tripped by the last
+  function poseFromDeploy(d){
+    function w(a,b){ return arrive((d-a)/(b-a)); }
+    return { pww:w(0,.22), swv:w(.22,.30), pr:w(.30,.48),
+             pl:w(.48,.66), pa:w(.66,.84), pb:w(.84,.96) };
+  }
+  function applyPose(P){
+    var thB=A_BACK*P.pb, thA=A_ARM*P.pa, thL=A_RAIL*P.pl, thR=A_RUN*P.pr;
+    var hw=HW_OPEN+(HW_CLOSED-HW_OPEN)*P.pww;
+
+    sides[0].position.x=-hw; sides[1].position.x=hw;
+    armGroups.forEach(function(g){ g.rotation.x=thA; });
+    backGroups.forEach(function(g){ g.rotation.x=thB; });
+    armC.rotation.x=thA; backCC.rotation.x=thB;
+    railGroups.forEach(function(g){ g.rotation.x=thL; });
+    runGroups.forEach(function(g){ g.rotation.x=thR; });
+    updateSpreader(hw, P.swv); updateSeat(hw,thL); updateBackFab(hw);
+
+    var rel=[P.pb>0.004, P.pa>0.004, P.pl>0.004, P.pr>0.004,
+             P.swv>0.004||P.pww>0.004];
+    shoulderBosses.forEach(function(d){ d.material=rel[0]?mLockW:mLockG; });
+    wristBosses.forEach(function(d){ d.material=rel[1]?mLockW:mLockG; });
+    knuckleBosses.forEach(function(d){ d.material=rel[2]?mLockW:mLockG; });
+    runnerBosses.forEach(function(d){ d.material=rel[3]?mLockW:mLockG; });
+    xChains.forEach(function(c){ c.e.material=rel[4]?mLockW:mLockG; });
+    lockEls.forEach(function(el,i){
+      el.el.classList.toggle("released",rel[i]);
+      el.em.textContent=rel[i]?"RELEASED":"ENGAGED";
+    });
+
+    document.getElementById("rBack").textContent=Math.round(thB/D2R)+"°";
+    document.getElementById("rArm").textContent=Math.round(thA/D2R)+"°";
+    document.getElementById("rSeat").textContent=Math.round(thL/D2R)+"°";
+    document.getElementById("rRun").textContent=Math.round(thR/D2R)+"°";
+    document.getElementById("rW").textContent=Math.round(2*hw)+" mm";
+  }
+  function render3(){
+    applyPose(poseFromT());
+    document.getElementById("scrub").value=Math.round(t*1000);
+    var idx=0; STAGES.forEach(function(s,i){ if(t>=s.t-0.001) idx=i; });
+    stageEls.forEach(function(b,i){ b.classList.toggle("on",i===idx); });
+  }
+
+  // ---------- collision-sweep API (used by the offline checker) ----------
+  window.__foldCheck=function(tt){
+    t=tt; render3();
+    scene.updateMatrixWorld(true);
+    function S(name,g,a,b,r){
+      var A=g.localToWorld(new THREE.Vector3(a[0],a[1],a[2]));
+      var B=g.localToWorld(new THREE.Vector3(b[0],b[1],b[2]));
+      return {n:name, a:[A.x,A.y,A.z], b:[B.x,B.y,B.z], r:r};
+    }
+    var out=[];
+    for(var i=0;i<2;i++){
+      var sd=i===0?"L":"R";
+      out.push(S("drop"+sd, sides[i], [0,592,264],[0,18,-132],13));
+      out.push(S("arm"+sd, armGroups[i], [0,6,4],[0,92,-492],13));
+      out.push(S("back"+sd, backGroups[i], [0,-22,1],[0,316,-57],13));
+      out.push(S("rail"+sd, railGroups[i], [0,0,-6],[0,0,-358],11));
+      out.push(S("run"+sd, runGroups[i], [0,0,0],[0,-1,408],13));
+    }
+    xChains.forEach(function(c,ci){
+      function trim(sg){ var a=sg[0],b=sg[1];
+        return {a:[a[0]+(b[0]-a[0])*0.16, a[1]+(b[1]-a[1])*0.16, a[2]+(b[2]-a[2])*0.16], b:b}; }
+      var ta=trim(c.segA), tb=trim(c.segB);
+      out.push({n:"lkA"+ci, a:ta.a, b:ta.b, r:8.5});
+      out.push({n:"lkB"+ci, a:tb.a, b:tb.b, r:8.5});
+    });
+    return out;
+  };
+
+  // ---------- UI ----------
+  var stagesBox=document.getElementById("stages"), stageEls=[];
+  STAGES.forEach(function(s){
+    var b=document.createElement("button");
+    b.className="stagebtn"; b.textContent=s.l;
+    b.addEventListener("click",function(){ tweenTo(s.t); });
+    stagesBox.appendChild(b); stageEls.push(b);
+  });
+  var locksBox=document.getElementById("locks"), lockEls=[];
+  LOCKS.forEach(function(L){
+    var sp=document.createElement("span"); sp.className="lock";
+    sp.innerHTML="<i></i>"+L.n+" <em>ENGAGED</em>";
+    locksBox.appendChild(sp);
+    lockEls.push({el:sp, em:sp.querySelector("em"), at:L.at});
+  });
+
+  var scrub=document.getElementById("scrub");
+  scrub.addEventListener("input",function(){ stopAll(); t=+scrub.value/1000; });
+
+  var reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var playing=false, tween=null, deployRun=null;
+  var playBtn=document.getElementById("play");
+  function stopAll(){ playing=false; tween=null; deployRun=null; playBtn.textContent="▶"; }
+  document.getElementById("deploy").addEventListener("click",function(){
+    stopAll();
+    if(reduced){ t=0; return; }
+    t=1; deployRun={t0:null};
+  });
+  function tweenTo(tg){
+    stopAll();
+    if(reduced){ t=tg; return; }
+    tween={from:t,to:tg,t0:null,dur:Math.max(300,Math.abs(tg-t)*4200)};
+  }
+  playBtn.addEventListener("click",function(){
+    if(playing){ stopAll(); return; }
+    if(t>=0.999) t=0;
+    playing=true; playBtn.textContent="❚❚";
+    if(reduced){
+      var iv=setInterval(function(){
+        if(!playing){ clearInterval(iv); return; }
+        var nx=null;
+        for(var i=0;i<STAGES.length;i++){ if(STAGES[i].t>t+0.001){ nx=STAGES[i]; break; } }
+        if(!nx){ clearInterval(iv); stopAll(); return; }
+        t=nx.t;
+      },900);
+    }
+  });
+
+  // ---------- theme ----------
+  function isDark(){
+    var dt=document.documentElement.getAttribute("data-theme");
+    if(dt) return dt==="dark";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+  function applyTheme(){
+    var d=isDark();
+    scene.background=new THREE.Color(d?0x15181B:0xF4F4F1);
+    shadowMat.opacity=d?0.35:0.16;
+    ringMat.color.set(d?0x3A4148:0xC9CCC5);
+    hemi.intensity=d?0.7:0.85;
+  }
+  applyTheme();
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",applyTheme);
+  new MutationObserver(applyTheme).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+
+  // ---------- camera / orbit ----------
+  var yaw=-0.55, pitch=0.3, radius=2900, target=V3(0,480,20);
+  var interacted=false;
+  function placeCam(){
+    camera.position.set(
+      target.x+radius*Math.cos(pitch)*Math.sin(yaw),
+      target.y+radius*Math.sin(pitch),
+      target.z+radius*Math.cos(pitch)*Math.cos(yaw));
+    camera.lookAt(target);
+  }
+  var dragging=false, px=0, py=0;
+  var cv=renderer.domElement;
+  cv.style.touchAction="none";
+  cv.addEventListener("pointerdown",function(e){ dragging=true; interacted=true; px=e.clientX; py=e.clientY; cv.setPointerCapture(e.pointerId); });
+  cv.addEventListener("pointermove",function(e){
+    if(!dragging) return;
+    yaw-=(e.clientX-px)*0.006; pitch+=(e.clientY-py)*0.005;
+    pitch=Math.max(0.03,Math.min(1.25,pitch));
+    px=e.clientX; py=e.clientY;
+  });
+  cv.addEventListener("pointerup",function(){ dragging=false; });
+  cv.addEventListener("wheel",function(e){
+    e.preventDefault(); interacted=true;
+    radius=Math.max(1300,Math.min(5600,radius*(1+e.deltaY*0.0012)));
+  },{passive:false});
+
+  function resize(){
+    var w=vp.clientWidth,h=vp.clientHeight;
+    renderer.setSize(w,h,false);
+    camera.aspect=w/h; camera.updateProjectionMatrix();
+  }
+  new ResizeObserver(resize).observe(vp);
+  resize();
+
+  var lastTs=null;
+  function loop(ts){
+    requestAnimationFrame(loop);
+    if(lastTs===null) lastTs=ts;
+    var dt=(ts-lastTs)/1000; lastTs=ts;
+    if(playing && !reduced){ t=Math.min(1,t+dt/10); if(t>=1) stopAll(); }
+    if(tween){
+      if(tween.t0===null) tween.t0=ts;
+      var p=smooth(Math.min(1,(ts-tween.t0)/tween.dur));
+      t=tween.from+(tween.to-tween.from)*p;
+      if(p>=1) tween=null;
+    }
+    if(!interacted && !reduced) yaw+=dt*0.05;
+    placeCam();
+    if(deployRun){
+      if(deployRun.t0===null) deployRun.t0=ts;
+      var d=(ts-deployRun.t0)/4200;
+      if(d>=1){ deployRun=null; t=0; render3(); }
+      else{
+        applyPose(poseFromDeploy(d));
+        document.getElementById("scrub").value=Math.round((1-d)*1000);
+      }
+    } else {
+      render3();
+    }
+    renderer.render(scene,camera);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>

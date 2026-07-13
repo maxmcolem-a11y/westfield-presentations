@@ -1,0 +1,491 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Concertina Cooler — Market &amp; Manufacturing Analysis</title>
+<style>
+  :root{color-scheme:light}
+  img{max-width:100%}
+</style>
+<style>
+  :root{
+    --bg:#F4F4F1; --panel:#FFFFFF; --panel2:#EDEDE8;
+    --ink:#1D1B17; --mut:#6E6A60; --line:#DBD8CF; --line2:#C9C5BA;
+    --accent:#E8430F; --accent-ink:#C43608; --accent-soft:rgba(232,67,15,.10);
+    --risk-hi:#B3300F; --risk-med:#9A7300; --risk-lo:#5F6A55;
+    --s-orange:#E8430F; --s-blue:#3A6EA8; --s-teal:#0F9E70; --s-gray:#8A857A;
+    --disp:"Avenir Next Condensed","HelveticaNeue-CondensedBold","Arial Narrow",Impact,system-ui,sans-serif;
+    --body:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+    --mono:ui-monospace,"SF Mono","Cascadia Mono",Consolas,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#191713; --panel:#201E19; --panel2:#26231D;
+      --ink:#EDEAE3; --mut:#9B958A; --line:#33302A; --line2:#454138;
+      --accent:#FF5B22; --accent-ink:#FF7748; --accent-soft:rgba(255,91,34,.14);
+      --risk-hi:#F26A44; --risk-med:#D8AC33; --risk-lo:#93A883;
+      --s-orange:#F65A22; --s-blue:#4E8BD1; --s-teal:#1CA478; --s-gray:#7B766B;
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#F4F4F1; --panel:#FFFFFF; --panel2:#EDEDE8;
+    --ink:#1D1B17; --mut:#6E6A60; --line:#DBD8CF; --line2:#C9C5BA;
+    --accent:#E8430F; --accent-ink:#C43608; --accent-soft:rgba(232,67,15,.10);
+    --risk-hi:#B3300F; --risk-med:#9A7300; --risk-lo:#5F6A55;
+    --s-orange:#E8430F; --s-blue:#3A6EA8; --s-teal:#0F9E70; --s-gray:#8A857A;
+  }
+  :root[data-theme="dark"]{
+    --bg:#191713; --panel:#201E19; --panel2:#26231D;
+    --ink:#EDEAE3; --mut:#9B958A; --line:#33302A; --line2:#454138;
+    --accent:#FF5B22; --accent-ink:#FF7748; --accent-soft:rgba(255,91,34,.14);
+    --risk-hi:#F26A44; --risk-med:#D8AC33; --risk-lo:#93A883;
+    --s-orange:#F65A22; --s-blue:#4E8BD1; --s-teal:#1CA478; --s-gray:#7B766B;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px 80px}
+
+  header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;
+    padding:28px 0 20px;border-bottom:2px solid var(--ink);margin-bottom:24px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin:0 0 6px}
+  h1{font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(32px,5vw,52px);
+     line-height:.95;letter-spacing:.01em;margin:0;text-wrap:balance}
+  h1 .thin{color:var(--accent)}
+  .tags{display:flex;gap:8px;flex-wrap:wrap;padding-bottom:6px}
+  .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    padding:5px 9px;border:1px solid var(--line2);color:var(--mut);white-space:nowrap}
+  .tag.hot{border-color:var(--accent);color:var(--accent-ink);background:var(--accent-soft)}
+
+  /* verdict band */
+  .verdict{border:2px solid var(--accent);background:var(--accent-soft);padding:18px 20px;margin-bottom:22px}
+  .verdict p{margin:0;max-width:100ch;font-size:15.5px}
+  .verdict b{color:var(--accent-ink)}
+
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:8px}
+  @media (max-width:880px){.tiles{grid-template-columns:repeat(2,1fr)}}
+  .tile{background:var(--panel);border:1px solid var(--line);padding:14px 16px}
+  .tile .k{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+  .tile .v{font-family:var(--mono);font-weight:600;font-size:24px;line-height:1.2;margin-top:4px}
+  .tile .v.acc{color:var(--accent-ink)}
+  .tile .s{font-size:12px;color:var(--mut);margin-top:2px;line-height:1.45}
+
+  section{margin-top:52px}
+  .sechead{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:22px}
+  .fig{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--accent-ink)}
+  h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(21px,3vw,28px);letter-spacing:.01em;margin:0;line-height:1}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  @media (max-width:820px){.cols{grid-template-columns:1fr}}
+  p{max-width:66ch;margin:0 0 14px}
+  .note{border-left:3px solid var(--accent);background:var(--accent-soft);padding:12px 16px;margin:18px 0;max-width:72ch}
+  .note p{margin:0}
+  .warn{border-left:3px solid var(--risk-med);background:var(--panel);padding:12px 16px;margin:18px 0;max-width:72ch}
+  .warn p{margin:0}
+
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  th{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);
+     text-align:left;font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line2);white-space:nowrap}
+  td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;font-variant-numeric:tabular-nums}
+  tr:last-child td{border-bottom:none}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);background:var(--panel)}
+  td.num{font-family:var(--mono);white-space:nowrap}
+  .conf{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;padding:2px 6px;border:1px solid currentColor;white-space:nowrap}
+  .conf.s{color:var(--risk-lo)} .conf.m{color:var(--risk-med)} .conf.w{color:var(--risk-hi)}
+  td .why{display:block;color:var(--mut);font-size:11.5px;margin-top:1px}
+  .sev{font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:2px 7px;white-space:nowrap;border:1px solid currentColor}
+  .sev.hi{color:var(--risk-hi)} .sev.med{color:var(--risk-med)} .sev.lo{color:var(--risk-lo)}
+
+  /* chart chrome */
+  .chart{background:var(--panel);border:1px solid var(--line);padding:16px}
+  .chart h3{margin:0 0 2px;font-size:14.5px;font-weight:600;font-family:var(--body)}
+  .chart .sub{font-size:12px;color:var(--mut);margin:0 0 12px}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin:0 0 10px;font-size:12px;color:var(--mut)}
+  .legend .li{display:flex;align-items:center;gap:6px}
+  .dotk{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+  .linek{width:16px;height:3px;flex:0 0 auto}
+  #scatter{width:100%;height:auto;display:block}
+  .tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-family:var(--mono);
+    font-size:11px;padding:6px 9px;line-height:1.5;opacity:0;transition:opacity .12s;z-index:50;max-width:240px}
+
+  /* margin stack bars */
+  .mrow{margin-bottom:18px}
+  .mrow .mh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+  .mrow .mh .n{font-size:13px;font-weight:600}
+  .mrow .mh .gm{font-family:var(--mono);font-size:12px;color:var(--mut)}
+  .bar{display:flex;height:34px;gap:2px}
+  .seg{position:relative;min-width:2px}
+  .seg span{position:absolute;left:8px;top:50%;transform:translateY(-50%);font-family:var(--mono);
+    font-size:11px;color:#fff;white-space:nowrap}
+  .seg.dim span{color:var(--ink)}
+  .axisnote{font-family:var(--mono);font-size:10.5px;color:var(--mut);margin-top:6px;letter-spacing:.04em}
+
+  ol.steps{list-style:none;counter-reset:st;margin:0;padding:0;max-width:72ch}
+  ol.steps li{counter-increment:st;display:grid;grid-template-columns:48px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  ol.steps li:last-child{border-bottom:none}
+  ol.steps li::before{content:counter(st,decimal-leading-zero);font-family:var(--mono);font-size:18px;color:var(--accent-ink);line-height:1.3}
+  ol.steps b{display:block;font-weight:600;margin-bottom:1px}
+  ol.steps .sub{color:var(--mut);font-size:13px}
+  ul.plain{margin:0 0 14px;padding-left:18px;max-width:68ch}
+  ul.plain li{margin-bottom:8px}
+  footer{margin-top:64px;padding-top:16px;border-top:1px solid var(--line2);
+    font-family:var(--mono);font-size:11px;color:var(--mut);letter-spacing:.04em;line-height:1.9}
+  footer a{color:var(--mut)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div>
+      <p class="eyebrow">Westfield Outdoors — Industrial Design · Business Case · 2026-07-12</p>
+      <h1>Concertina Cooler <span class="thin">/ Market &amp; Manufacturing</span></h1>
+    </div>
+    <div class="tags">
+      <span class="tag hot">Analysis v1.2</span>
+      <span class="tag hot">Architecture v3 — molded EPP monolith</span>
+      <span class="tag">Web-researched 2026-07-12</span>
+      <span class="tag">Est. figures flagged</span>
+    </div>
+  </header>
+
+  <div class="verdict">
+    <p><b>Verdict: the whitespace is real and the economics close.</b> No premium brand sells a rigid-panel, adjustable-volume, welded backpack cooler. The soft/backpack segment is the growth pocket inside an otherwise flat cooler market. A ~$32 FOB unit from Vietnam or Cambodia lands under $40 and supports a $250 MSRP at healthy wholesale margins. Architecture v3 (this revision) is a <b>one-piece molded EPP body with an in-mold PP film skin</b> — the structure IS the insulation (k ≈ 0.037, same as cooler foam), the hinge valleys are thinned insulation rather than thermal bridges, and the film skin is simultaneously the wipe-clean interior, the water barrier, and the hinge membrane. Existence proof: the Flip-Box collapsible EPP cooler. This deletes the shell, foam pads, jacket, welding, and bonding from earlier revisions — FOB drops to ~$13–25 and unlocks a $199–279 pricing choice. The two things that could kill it now: unproven willingness-to-pay for collapsibility above $200, and whether skinned, textured EPP can be made to read premium rather than "foam box" — a design-execution risk backed by an ~80% wholesale margin cushion.</p>
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><div class="k">Premium adjustable-volume competitors</div><div class="v acc">0 found</div><div class="s">Nearest: Coleman Snap 'N Go (hard, binary) · RUX (soft, no lock states)</div></div>
+    <div class="tile"><div class="k">Est. FOB @ 1–3k units</div><div class="v">$13–25</div><div class="s">Arch. v3: one molded EPP body deletes shell, pads, jacket, welding &amp; bonding</div></div>
+    <div class="tile"><div class="k">Landed cost, Vietnam/Cambodia</div><div class="v">$17–31</div><div class="s">~17% duty stack mid-2026 vs ~42% from China</div></div>
+    <div class="tile"><div class="k">Supportable MSRP</div><div class="v acc">$199–279</div><div class="s">Pricing choice unlocked: hold premium at ~80% wholesale GM, or undercut RTIC at $199</div></div>
+  </div>
+
+  <!-- ================= 01 MARKET ================= -->
+  <section>
+    <div class="sechead"><span class="fig">FIG. 01</span><h2>Market context</h2></div>
+    <div class="cols">
+      <div>
+        <p>The post-2020 cooler boom has plateaued. Yeti — the best public proxy — grew total sales only ~2% in FY2025 (~$1.87B) with US sales down ~3% through Q3 and management describing a "promotional market environment." Third-party market-size reports put US retail coolers at roughly $1.3B, but those figures are report-mill grade; treat as order-of-magnitude.</p>
+        <p><b>The growth is hiding inside the soft segment.</b> Yeti's Coolers &amp; Equipment line grew 7% to $748.5M in FY2025, and the company explicitly credited "strong performance in soft coolers and bags." Grand View pegs soft-sided as the fastest-growing cooler type in North America (~8% CAGR). Meanwhile the premium soft field is thinning: OtterBox has exited soft coolers entirely and Hydro Flask's Day Escape line appears to be winding down — consolidation around Yeti, RTIC, and Engel leaves room for a differentiated entrant with a mechanism story.</p>
+        <p>Channel reality (Yeti proxy): ~60% DTC / 40% wholesale through REI, Dick's, Academy, Bass Pro and ~3,000 independents. Plan for 45–50% retailer margin at specialty; a $250 MSRP wholesales at ~$125–138.</p>
+      </div>
+      <div>
+        <div class="tiles" style="grid-template-columns:1fr 1fr;margin-bottom:14px">
+          <div class="tile"><div class="k">Yeti C&amp;E segment FY2025</div><div class="v">+7%</div><div class="s">to $748.5M — "driven by soft coolers and bags"</div></div>
+          <div class="tile"><div class="k">Soft-sided cooler CAGR, NA</div><div class="v">~8%</div><div class="s">fastest-growing type segment (Grand View, medium confidence)</div></div>
+          <div class="tile"><div class="k">Yeti US sales, YTD Q3 2025</div><div class="v">−3%</div><div class="s">flat, promotional US market; international +25%</div></div>
+          <div class="tile"><div class="k">Premium soft field</div><div class="v">Thinning</div><div class="s">OtterBox exited; Hydro Flask fading; Yeti/RTIC/Engel remain</div></div>
+        </div>
+        <div class="note"><p><b>Demand validation, both price poles:</b> two mainstream brands built 2025–26 products around "coolers are miserable to store" — Coleman Snap 'N Go collapsible hard cooler ($200–240) and REI Campwell fold-flat soft ($40). Nobody has built it premium-soft-welded, in the middle, with locked volume states. That's the Concertina's slot.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 02 POSITIONING MAP ================= -->
+  <section>
+    <div class="sechead"><span class="fig">FIG. 02</span><h2>Positioning map</h2></div>
+    <div class="chart">
+      <h3>Price vs. capacity — soft, backpack &amp; collapsible coolers, mid-2026 MSRPs</h3>
+      <p class="sub">Every collapsible option is either budget-grade (&lt;$60) or a hard bin (Coleman). The premium band above $180 is exclusively fixed-volume — except the Concertina's target slot.</p>
+      <div class="legend">
+        <span class="li"><span class="dotk" style="background:var(--s-blue)"></span>Fixed-volume</span>
+        <span class="li"><span class="dotk" style="background:var(--s-teal)"></span>Collapsible / fold-flat</span>
+        <span class="li"><span class="linek" style="background:var(--s-orange)"></span>Concertina target (adjustable 5–16 L @ $250)</span>
+      </div>
+      <svg id="scatter" viewBox="0 0 920 480" role="img" aria-label="Scatter plot of cooler price versus capacity showing no premium collapsible products"></svg>
+    </div>
+  </section>
+
+  <!-- ================= 03 COMPETITOR TABLE ================= -->
+  <section>
+    <div class="sechead"><span class="fig">FIG. 03</span><h2>Competitive set — verified pricing</h2></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Product</th><th>Type</th><th>Capacity</th><th>MSRP</th><th>Volume-adjust?</th><th>Source confidence</th></tr></thead>
+        <tbody>
+          <tr><td>Yeti Hopper M20 2.0</td><td>Backpack, welded</td><td class="num">~20 L</td><td class="num">$325</td><td>No</td><td><span class="conf s">STRONG</span></td></tr>
+          <tr><td>Yeti Hopper M30 2.0</td><td>Tote, welded</td><td class="num">30 L</td><td class="num">$350</td><td>No</td><td><span class="conf s">STRONG</span></td></tr>
+          <tr><td>Yeti Hopper M12</td><td>Backpack, welded</td><td class="num">~12 L</td><td class="num">$275</td><td>No</td><td><span class="conf m">MED</span></td></tr>
+          <tr><td>Yeti Hopper Flip 12</td><td>Zippered cube</td><td class="num">12 L</td><td class="num">$250</td><td>No</td><td><span class="conf s">STRONG</span></td></tr>
+          <tr><td>Titan PRO 36-can (Arctic Zone)</td><td>Welded, rigid liner</td><td class="num">~21 L</td><td class="num">$225</td><td>No</td><td><span class="conf s">STRONG</span></td></tr>
+          <tr><td>RTIC Ultra-Tough Backpack</td><td>Backpack, welded</td><td class="num">~14 L</td><td class="num">$199</td><td>No</td><td><span class="conf s">STRONG</span></td></tr>
+          <tr><td>Hydro Flask Day Escape 26</td><td>Backpack/tote</td><td class="num">26 L</td><td class="num">$200</td><td>No</td><td><span class="conf s">STRONG</span> <span class="why">line possibly winding down</span></td></tr>
+          <tr><td>Engel HD30</td><td>Welded tote</td><td class="num">30 L</td><td class="num">$200</td><td>No</td><td><span class="conf s">STRONG</span></td></tr>
+          <tr><td>RUX Soft Cooler 25L</td><td>Welded roll-top</td><td class="num">25 L</td><td class="num">$200</td><td>Packs flat — no lock states, day-trip insulation</td><td><span class="conf s">STRONG</span></td></tr>
+          <tr><td>Coleman Snap 'N Go 35 / 55 QT</td><td>Collapsible hard</td><td class="num">33 / 52 L</td><td class="num">$200 / $240</td><td>Binary open/closed; 16 lb; liner leak-risk</td><td><span class="conf s">STRONG</span></td></tr>
+          <tr><td>REI Co-op Trail Gate 30</td><td>Soft</td><td class="num">30 L</td><td class="num">$160</td><td>No</td><td><span class="conf s">STRONG</span></td></tr>
+          <tr><td>Yeti Daytrip Tote</td><td>Tote</td><td class="num">14 L</td><td class="num">$145</td><td>No</td><td><span class="conf s">STRONG</span></td></tr>
+          <tr><td>IceMule Pro 23 / Jaunt 15</td><td>Roll-top backpack</td><td class="num">23 / 15 L</td><td class="num">$135 / $110</td><td>Rolls down empty</td><td><span class="conf s">STRONG</span></td></tr>
+          <tr><td>Igloo Trailmate 32-can</td><td>Backpack</td><td class="num">~19 L</td><td class="num">$100</td><td>No</td><td><span class="conf s">STRONG</span></td></tr>
+          <tr><td>RTIC 20-can Soft Pack</td><td>Zippered</td><td class="num">12 L</td><td class="num">$99</td><td>No</td><td><span class="conf s">STRONG</span></td></tr>
+          <tr><td>REI Co-op Campwell 18L</td><td>Fold-flat soft</td><td class="num">18 L</td><td class="num">$40</td><td>Folds flat; unsealed zip, thin foam</td><td><span class="conf s">STRONG</span></td></tr>
+          <tr><td>CleverMade Backpack Cooler</td><td>Collapsible budget</td><td class="num">25 L</td><td class="num">$30</td><td>Folds to 3.5″; PEVA liner, soaks through</td><td><span class="conf s">STRONG</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note" style="margin-top:18px"><p><b>Consumer signal mapped to the concept:</b> review complaints across OutdoorGearLab / GearJunkie / forums line up almost one-to-one with Concertina features — stiff waterproof zippers (→ rigid-rim opening), liners that trap water and are painful to clean (→ seamless blow-molded hard interior, no liner at all — cleans like a dish tub), premium welded coolers that "don't compress, bulky even when empty" (Engel HD30, Yeti M30 — → the entire fold mechanism), and cheap soft coolers that slump when loaded (→ rigid pleat panels). The unquantified gap: nobody has survey data showing storability commands $200+ — Coleman's Snap 'N Go is the first live test and its reviews are positive.</p></div>
+  </section>
+
+  <!-- ================= 04 MANUFACTURING ================= -->
+  <section>
+    <div class="sechead"><span class="fig">FIG. 04</span><h2>Manufacturing &amp; sourcing</h2></div>
+    <div class="cols">
+      <div>
+        <p>Architecture v3 is one process family: <b>steam-chest-molded EPP</b> (car bumper cores, protective cases — commodity capability across China and Vietnam via automotive/packaging molders) with an <b>in-mold PP film skin</b> on the interior face (established process, used on skinned-EPP luggage). Because pleats can't demold vertically, the body molds as a flat crease-patterned sheet — thick facets necking to 4–6 mm hinge grooves — folded and hot-plate welded at one seam, the same joining used on EPP bumper assemblies. Direct product proof: the Flip-Box collapsible EPP cooler. The soft-goods shortlist below reduces to a final-assembly role (rim collar, lid, webbing); no sewing, welding fixtures, or bonding lines remain. MOQ and terms improve accordingly.</p>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Candidate OEM/ODM</th><th>Where</th><th>Why shortlisted</th></tr></thead>
+            <tbody>
+              <tr><td>Quanzhou Xinheng Outdoor</td><td>Quanzhou</td><td>210 RF welders, ~1M welded soft coolers/yr — strongest capability fit found</td></tr>
+              <tr><td>Sealock Outdoor Gear</td><td>Dongguan + Vietnam</td><td>840D TPU welded coolers; BSCI/SMETA/ISO audited</td></tr>
+              <tr><td>Everich Outdoor</td><td>Hangzhou + Cambodia</td><td>TPU welded cooler bags; markets tariff-advantaged Cambodia lines; 2–7 day samples</td></tr>
+              <tr><td>Dingfeng / iBagCase</td><td>Shenzhen/Dongguan</td><td>Welded TPU coolers w/ rigid liners; MOQ 1,000; bulk 25–35 days</td></tr>
+              <tr><td>Chaumet Bag</td><td>Quanzhou + Cambodia</td><td>30 lines; Cambodia plant opened ~2024</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="warn" style="margin-top:16px"><p><b>Concertina-specific process flags:</b> (1) bead fusion density must stay uniform through the thin hinge grooves — demand density mapping at the mold trial; (2) the in-mold film must laminate without wrinkles across every crease line — the film is the water barrier and hinge membrane, so film-lamination QC is the critical process control of the whole product; (3) EPP gouges more easily than solid plastic — molded exterior texture and the rim/base hardware carry the abuse zones.</p></div>
+      </div>
+      <div>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Tooling item</th><th>Range (China basis)</th><th>Confidence</th></tr></thead>
+            <tbody>
+              <tr><td>EPP steam-chest tool — body, flat crease pattern (incl. integral base course)</td><td class="num">$10k–25k</td><td><span class="conf m">MED</span> <span class="why">aluminum tooling; cheaper than the blow mold it replaces</span></td></tr>
+              <tr><td>In-mold film-skin setup + lamination trials</td><td class="num">$2k–6k</td><td><span class="conf w">LOW-MED</span></td></tr>
+              <tr><td>Lid tool (EPP, gasketed)</td><td class="num">$3k–8k</td><td><span class="conf w">LOW-MED</span></td></tr>
+              <tr><td>Rim collar injection tool (PP, strap anchors)</td><td class="num">$8k–15k</td><td><span class="conf m">MED</span></td></tr>
+              <tr><td>Fold + seam-weld fixtures</td><td class="num">$2k–5k</td><td><span class="conf w">LOW-MED</span></td></tr>
+              <tr><td>Sampling, 3–4 rounds (incl. mold + film trials)</td><td class="num">$3k–8k</td><td><span class="conf m">MED</span></td></tr>
+              <tr><td><b>Program total (stock hardware)</b></td><td class="num"><b>$28k–67k</b></td><td><span class="conf w">LOW-MED</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:16px"><b>Timeline, concept → ex-factory:</b> realistic 9–15 months — prototype rounds to pre-production approval in 8–12 weeks once a factory is engaged, plus liner/EVA tooling, ice-retention and leak validation, and a 25–35 day first run. That sequences cleanly behind the August 3D-printed motion sample.</p>
+        <p>Use stock acetal/PP hardware — custom buckle molds ($3–10k each) buy nothing at launch.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 05 TARIFFS ================= -->
+  <section>
+    <div class="sechead"><span class="fig">FIG. 05</span><h2>Tariffs &amp; landed cost — mid-2026</h2></div>
+    <div class="cols">
+      <div>
+        <p>Insulated cooler bags classify under <b>HTS 4202.92</b>: 7% MFN with a textile outer surface, or 3.4% if the outer surface counts as plastic sheeting. On top of that, mid-2026 additives: China carries Section 301 List 3 (+25%) plus the Section 122 baseline (+10%); Vietnam and Cambodia carry the +10% baseline only.</p>
+        <div class="tiles" style="grid-template-columns:1fr 1fr">
+          <div class="tile"><div class="k">China, effective duty</div><div class="v">≈38–42%</div><div class="s">MFN + 301 (25%) + §122 (10%)</div></div>
+          <div class="tile"><div class="k">Vietnam / Cambodia</div><div class="v acc">≈13–17%</div><div class="s">MFN + §122 (10%) — the sourcing answer</div></div>
+        </div>
+        <div class="warn"><p><b>Volatility warning — 12 days out:</b> the Section 122 baseline sunsets ~July 24, 2026, with a proposed 12.5% replacement in play and a new Section 301 review open. Every additive above could move within weeks. Treat rates as indicative (they came from broker/tracker sites, not the Federal Register) and verify with a customs broker before quoting landed costs internally.</p></div>
+      </div>
+      <div>
+        <p><b>Two levers worth real money:</b></p>
+        <ul class="plain">
+          <li><b>Classification (design-adjacent):</b> whether TPU-laminated 840D presents an "outer surface of plastic sheeting" (3.4%) vs. textile (7%) hinges on whether the coating visibly obscures the weave — CBP rulings go both ways. And if the bag drifts toward "sport/travel bag" (4202.92.31) it's 17.6%. Keep the insulated-bag claim clean and get a <b>binding ruling</b> before production.</li>
+          <li><b>Country (sourcing):</b> at a $32 FOB, China's stack adds ~$13/unit vs. ~$5 from Vietnam/Cambodia — an ~$8 landed swing that is roughly the entire foam + liner BOM. Yeti's playbook confirms the direction: tariffs cost it ~230 bps of FY2025 gross margin and it drove China below 5% of COGS entering 2026.</li>
+        </ul>
+        <p>Recommended posture: RFQ both a Fujian plant and its Vietnam/Cambodia sister line (Sealock, Everich, Chaumet all offer this), tool once, and let the duty math pick the production line.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 06 UNIT ECONOMICS ================= -->
+  <section>
+    <div class="sechead"><span class="fig">FIG. 06</span><h2>Unit economics @ $250 MSRP</h2></div>
+    <div class="cols">
+      <div>
+        <div class="chart">
+          <h3>Margin stack — wholesale channel, FOB $18 est. (arch. v3)</h3>
+          <p class="sub">Retailer at keystone ($125). Brand gross = wholesale minus landed, before opex.</p>
+          <div class="legend">
+            <span class="li"><span class="dotk" style="background:var(--s-gray);border-radius:2px"></span>Landed cost</span>
+            <span class="li"><span class="dotk" style="background:var(--s-orange);border-radius:2px"></span>Brand gross</span>
+            <span class="li"><span class="dotk" style="background:var(--s-blue);border-radius:2px"></span>Retailer margin</span>
+          </div>
+          <div class="mrow">
+            <div class="mh"><span class="n">Sourced China (~42% duty)</span><span class="gm">brand GM ≈ 78%</span></div>
+            <div class="bar" id="barCN"></div>
+          </div>
+          <div class="mrow">
+            <div class="mh"><span class="n">Sourced Vietnam / Cambodia (~17% duty)</span><span class="gm">brand GM ≈ 82%</span></div>
+            <div class="bar" id="barVN"></div>
+          </div>
+          <div class="axisnote">Bar length = $250 MSRP. DTC units skip the blue segment entirely — at Yeti-like 60% DTC mix, blended margins improve further.</div>
+        </div>
+      </div>
+      <div>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>BOM line (16 L welded concertina)</th><th>Est.</th></tr></thead>
+            <tbody>
+              <tr><td>Molded EPP body w/ in-mold PP film skin (~0.8 kg, base integral)</td><td class="num">$4–7</td></tr>
+              <tr><td>Rim collar (injection PP, strap anchors)</td><td class="num">$1–2</td></tr>
+              <tr><td>Lid (EPP, gasketed)</td><td class="num">$2–3.50</td></tr>
+              <tr><td>Buckles, webbing, harness</td><td class="num">$2–4</td></tr>
+              <tr><td>Fold + seam weld, assembly, QC</td><td class="num">$2–4</td></tr>
+              <tr><td>Factory OH + margin (~15%)</td><td class="num">$2–4</td></tr>
+              <tr><td><b>FOB</b></td><td class="num"><b>$13–25</b></td></tr>
+              <tr><td>Landed US — China (+~42% + freight)</td><td class="num">$20–37</td></tr>
+              <tr><td><b>Landed US — Vietnam/Cambodia (+~17% + freight)</b></td><td class="num"><b>$17–31</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="sub" style="margin-top:10px;font-size:12px;color:var(--mut);max-width:66ch">All line items are triangulated estimates. The v3 band reflects deleting the shell, foam pads, jacket, welding and bonding lines of earlier architectures — EPP resin runs $3–5/kg and the body is ~0.8 kg. Even worst-case ($25 FOB, China duty) holds ~70% wholesale brand GM at $250, and the cushion is what de-risks the EPP premium-perception question: a $199 fallback price still clears the original v1 margin plan.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 07 VERDICT ================= -->
+  <section>
+    <div class="sechead"><span class="fig">FIG. 07</span><h2>Read &amp; gates</h2></div>
+    <div class="cols">
+      <div>
+        <p><b>This is a fund-the-next-gate concept, not a bet-the-line concept.</b> The strategic logic is strong: a mechanism-differentiated product in the one growing sub-segment of a flat market, at a price point ($250) that undercuts Yeti while carrying a story no incumbent has. The economics clear comfortably from Vietnam/Cambodia. The demand question — will people pay premium for adjustability — is live but de-risked by Coleman and REI both betting on storability in 2025–26, and by every review of premium welded coolers complaining they don't compress.</p>
+        <ol class="steps">
+          <li><div><b>August 3D print proves the motion — plus a $60 Flip-Box teardown</b><span class="sub">Fold sequence, strap-set states, rim behavior; buy and tear down the collapsible EPP cooler already on the market for wall/hinge/skin benchmarks. CNC-cut an EPP mockup alongside the print for the feel test.</span></div></li>
+          <li><div><b>Concept test at $249 vs. $199</b><span class="sub">Panel or landing-page test against Hopper M12/RTIC imagery; kill threshold agreed in advance.</span></div></li>
+          <li><div><b>RFQ EPP molders + assembler, dual-country</b><span class="sub">Automotive/packaging EPP molders in Fujian and Vietnam; target FOB ≤ $22 with bead-density map and film-lamination trial from the first shot.</span></div></li>
+          <li><div><b>Skinned-EPP hinge coupons + binding tariff ruling</b><span class="sub">10k fold cycles / −20 °C cold-crack / film-peel on skinned EPP samples, in parallel with CBP classification (3.4% vs 7% vs 17.6% is real money).</span></div></li>
+          <li><div><b>Tooling go/no-go</b><span class="sub">$28–67k program tooling only after gates 1–4; production 9–15 months from concept.</span></div></li>
+        </ol>
+      </div>
+      <div>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Risk</th><th>Sev.</th><th>Posture</th></tr></thead>
+            <tbody>
+              <tr><td>WTP for collapsibility above $200 unproven<span class="why">current collapsible buyers cluster at $30–70; Coleman $200–240 is the first premium test</span></td><td><span class="sev hi">HIGH</span></td><td>Gate 2 concept test before tooling; watch Snap 'N Go sell-through</td></tr>
+              <tr><td>Skinned EPP reads as "foam box" at premium price<span class="why">nobody has made EPP feel like $250; Flip-Box reads utilitarian</span></td><td><span class="sev hi">HIGH</span></td><td>In-mold texture + film skin, premium rim/strap hardware; $199 fallback price still clears v1 margin plan</td></tr>
+              <tr><td>EPP hinge / film-skin fatigue at fold grooves<span class="why">thin bead-foam grooves + laminated film do the folding; delamination or bead cracking kills the unit</span></td><td><span class="sev hi">HIGH</span></td><td>−20 °C 10k fold-cycle coupons on skinned EPP + Flip-Box teardown benchmark before tool sign-off</td></tr>
+              <tr><td>Tariff regime shifts (§122 sunset July 24, 2026)<span class="why">every additive rate could change within weeks</span></td><td><span class="sev med">MED</span></td><td>Dual-country tooling posture; broker verification; refund upside if §122 falls</td></tr>
+              <tr><td>Ice retention below Hopper class<span class="why">soft-cooler-class ceiling; reviewers measure this — though EPP improves it (even hinge grooves are insulation)</span></td><td><span class="sev lo">LO-MED</span></td><td>Market as day-plus cooler, not 3-day; 25 mm facets, thick lid and base</td></tr>
+              <tr><td>Incumbent response<span class="why">Yeti has the brand and the welding suppliers</span></td><td><span class="sev med">MED</span></td><td>Speed + design patent on pleat/lock geometry before disclosure</td></tr>
+              <tr><td>US market stays promotional<span class="why">Yeti US −3%; discounting pressure at retail</span></td><td><span class="sev lo">LO</span></td><td>Margin structure survives 20% promo at VN sourcing</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note" style="margin-top:18px"><p><b>One-line recommendation:</b> proceed to the August sample and run gates 2–4 in parallel this fall — total exposure before tooling is sample + test budget (low five figures), against a validated-whitespace product with ~80% wholesale gross margin potential from Vietnam and a mono-material recyclability story on top.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    KEY SOURCES: Yeti FY2025 &amp; Q3 2025 releases (investors.yeti.com) · GearJunkie soft-cooler guide (May 2026) · OutdoorGearLab soft-cooler review (Apr 2025) · brand pricing pages fetched 2026-07-12 (rticoutdoors.com, icemule.com, engelcoolers.com, igloocoolers.com, rux.life, clevermade.com, coleman.com, rei.com) · CBP rulings J88172/K83596 + hts.usitc.gov (HTS 4202.92) · tariff trackers (tariffstool.com, gatewaylines.com, taxfoundation.org) — indicative, not Federal Register · Supply Chain Dive &amp; Forbes on Yeti China exit · OEM listings: made-in-china.com, qz-xinheng.en.alibaba.com, sealockoutdoor.com, everichoutdoor.com, ibagcase.com.<br>
+    CONFIDENCE FLAGS: market-size $ figures = weak (report mills) · FOB/BOM/tooling = triangulated estimates, no published welded-cooler costs exist · tariff rates = volatile, verify with broker · competitor MSRPs = strong (first-party or major-retailer pages).
+  </footer>
+</div>
+
+<div class="tip" id="tip"></div>
+
+<script>
+(function(){
+"use strict";
+/* ---------------- scatter ---------------- */
+const svgNS="http://www.w3.org/2000/svg";
+const svg=document.getElementById("scatter"), tip=document.getElementById("tip");
+const Wv=920,Hv=480,mL=64,mR=24,mT=18,mB=46;
+const xMax=55,yMax=380;
+const X=v=>mL+(Wv-mL-mR)*v/xMax;
+const Y=v=>Hv-mB-(Hv-mT-mB)*v/yMax;
+function el(n,attrs,parent){const e=document.createElementNS(svgNS,n);for(const k in attrs)e.setAttribute(k,attrs[k]);(parent||svg).appendChild(e);return e;}
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+const FIXED=[
+ ["Yeti Hopper M30",30,350,1],["Yeti Hopper M20",20,325,1],["Yeti Hopper M12",12,275,0],
+ ["Yeti Hopper Flip 12",12,250,0],["Titan PRO 36-can",21,225,0],["RTIC UT Backpack",14,199,0],
+ ["HF Day Escape 26",26,200,0],["Engel HD30",30,200,1],["REI Trail Gate",30,160,0],
+ ["Yeti Daytrip",14,145,0],["IceMule Pro 23",23,135,0],["IceMule Jaunt 15",15,110,0],
+ ["Igloo Trailmate",19,100,0],["RTIC 20-can Soft Pack",12,99,0]
+];
+const COLLAPSE=[
+ ["Coleman Snap 'N Go 55QT",52,240,1],["Coleman Snap 'N Go 35QT",33,200,0],
+ ["RUX 25L",25,200,1],["REI Campwell",18,40,1],["CleverMade Backpack",25,30,1]
+];
+
+function build(){
+  while(svg.firstChild)svg.removeChild(svg.firstChild);
+  const cLine=css("--line"),cMut=css("--mut"),cInk=css("--ink"),
+        cB=css("--s-blue"),cT=css("--s-teal"),cO=css("--s-orange"),cPanel=css("--panel");
+  // grid + axes
+  for(let p=0;p<=350;p+=50){
+    el("line",{x1:mL,x2:Wv-mR,y1:Y(p),y2:Y(p),stroke:cLine,"stroke-width":1});
+    el("text",{x:mL-10,y:Y(p)+4,"text-anchor":"end",fill:cMut,"font-size":11,
+      "font-family":"ui-monospace,Menlo,monospace"},svg).textContent="$"+p;
+  }
+  for(let l=0;l<=50;l+=10){
+    el("line",{x1:X(l),x2:X(l),y1:mT,y2:Hv-mB,stroke:cLine,"stroke-width":l===0?0:1});
+    el("text",{x:X(l),y:Hv-mB+20,"text-anchor":"middle",fill:cMut,"font-size":11,
+      "font-family":"ui-monospace,Menlo,monospace"},svg).textContent=l+" L";
+  }
+  el("line",{x1:mL,x2:Wv-mR,y1:Y(0),y2:Y(0),stroke:cMut,"stroke-width":1});
+  // premium band annotation
+  el("text",{x:Wv-mR-6,y:Y(180)-8,"text-anchor":"end",fill:cMut,"font-size":11,
+    "font-style":"italic","font-family":"inherit"},svg).textContent="premium band ≥ $180: fixed-volume only —";
+  el("line",{x1:mL,x2:Wv-mR,y1:Y(180),y2:Y(180),stroke:cMut,"stroke-width":1,"stroke-dasharray":"5 5",opacity:.6});
+
+  function dots(data,color,cls){
+    data.forEach(([name,cap,price,lab])=>{
+      const g=el("g",{});
+      el("circle",{cx:X(cap),cy:Y(price),r:5.5,fill:color,stroke:cPanel,"stroke-width":2},g);
+      const hit=el("circle",{cx:X(cap),cy:Y(price),r:13,fill:"transparent"},g);
+      hit.addEventListener("pointerenter",e=>{tip.style.opacity=1;
+        tip.innerHTML="<b>"+name+"</b><br>"+cap+" L · $"+price+" · "+cls;});
+      hit.addEventListener("pointermove",e=>{tip.style.left=(e.clientX+14)+"px";tip.style.top=(e.clientY-10)+"px";});
+      hit.addEventListener("pointerleave",()=>{tip.style.opacity=0;});
+      if(lab){
+        const flip=cap>42;
+        el("text",{x:X(cap)+(flip?-11:9),y:Y(price)-8,fill:cInk,"font-size":11.5,
+          "text-anchor":flip?"end":"start","font-family":"inherit"},g).textContent=name;
+      }
+    });
+  }
+  dots(FIXED,cB,"fixed-volume");
+  dots(COLLAPSE,cT,"collapsible / fold-flat");
+  // Concertina range
+  const y=Y(250);
+  el("line",{x1:X(5),x2:X(16),y1:y,y2:y,stroke:cO,"stroke-width":4,"stroke-linecap":"round"});
+  el("circle",{cx:X(5),cy:y,r:6,fill:cO,stroke:cPanel,"stroke-width":2});
+  el("circle",{cx:X(16),cy:y,r:6,fill:cO,stroke:cPanel,"stroke-width":2});
+  const t1=el("text",{x:X(10.5),y:y-24,"text-anchor":"middle",fill:cO,"font-size":12.5,
+    "font-weight":"700","font-family":"inherit"});t1.textContent="CONCERTINA TARGET";
+  const t2=el("text",{x:X(10.5),y:y-11,"text-anchor":"middle",fill:cO,"font-size":11,
+    "font-family":"inherit"});t2.textContent="5–16 L adjustable · $250";
+  const hitC=el("rect",{x:X(5)-8,y:y-10,width:X(16)-X(5)+16,height:20,fill:"transparent"});
+  hitC.addEventListener("pointerenter",()=>{tip.style.opacity=1;
+    tip.innerHTML="<b>Concertina Cooler (target)</b><br>5–16 L locked states · $250 · welded backpack";});
+  hitC.addEventListener("pointermove",e=>{tip.style.left=(e.clientX+14)+"px";tip.style.top=(e.clientY-10)+"px";});
+  hitC.addEventListener("pointerleave",()=>{tip.style.opacity=0;});
+}
+build();
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",build);
+new MutationObserver(build).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+
+/* ---------------- margin bars ---------------- */
+function bars(id,landed){
+  const wrap=document.getElementById(id);
+  wrap.innerHTML="";
+  const msrp=250, retail=125, brand=retail-landed;
+  const segs=[
+    ["Landed $"+landed,landed,"var(--s-gray)",false],
+    ["Brand gross $"+brand,brand,"var(--s-orange)",false],
+    ["Retailer $"+retail,retail,"var(--s-blue)",false]
+  ];
+  segs.forEach(([label,v,color])=>{
+    const d=document.createElement("div");
+    d.className="seg";d.style.background=color;d.style.width=(v/msrp*100)+"%";
+    const s=document.createElement("span");s.textContent=label;d.appendChild(s);
+    d.addEventListener("pointerenter",()=>{tip.style.opacity=1;
+      tip.innerHTML="<b>"+label+"</b><br>"+Math.round(v/msrp*100)+"% of $250 MSRP";});
+    d.addEventListener("pointermove",e=>{tip.style.left=(e.clientX+14)+"px";tip.style.top=(e.clientY-10)+"px";});
+    d.addEventListener("pointerleave",()=>{tip.style.opacity=0;});
+    wrap.appendChild(d);
+  });
+}
+bars("barCN",28);
+bars("barVN",23);
+})();
+</script>
+
+</body>
+</html>
