@@ -108,7 +108,7 @@ for i, pair in enumerate(pairs, start=5):
     <div class="pair-shell">
       <div class="pair-heading">
         <p class="eyebrow">PORTFOLIO MOMENTUM</p>
-        <h1>Designed as products.<br><span>Built as leverage.</span></h1>
+        <h1><span>Built to move the category.</span></h1>
       </div>
       <div class="pair-grid">{product_card(pair[0])}{product_card(pair[1])}</div>
     </div>
