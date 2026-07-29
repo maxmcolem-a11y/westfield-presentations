@@ -17,9 +17,9 @@ pairs = [
     ("Hard Liners", "ComfortCore Hybrid Arms"),
     ("GRAM Chair", "Camp / Field Utility Board"),
     ("Systems Wagon", "Westfield Adventure Pack"),
-    ("Westfield Adventure Tote", "Handwarmer Armrests"),
-    ("Range & Field Cleaning Station", "Concertina Cooler"),
+    ("Westfield Adventure Tote", "Concertina Cooler"),
 ]
+TOTAL_SLIDES = 1 + len(heroes) + len(pairs)
 
 hero_copy = {
     "Origami Wagon": (
@@ -47,17 +47,7 @@ def media(project):
 
 def product_card(name):
     p = PROJECTS[name]
-    fallbacks = {
-        "Handwarmer Armrests": (
-            "Comfort becomes a feature customers can feel before they ever sit down.",
-            "Integrated warmth turns an ordinary touchpoint into a seasonal reason to choose Westfield—without asking the chair to look technical.",
-        ),
-        "Range & Field Cleaning Station": (
-            "A messy task becomes a purpose-built field ritual.",
-            "The station organizes cleaning, maintenance, and small-part control into one portable work surface—giving Westfield a credible entry into equipment care.",
-        ),
-    }
-    hook, why = fallbacks.get(name, (p.get("rallyLine", ""), p.get("whyCool", "")))
+    hook, why = p.get("rallyLine", ""), p.get("whyCool", "")
     return f"""
       <article class="product-card">
         <button class="media-button" data-image="{html.escape(media(p))}" data-alt="{html.escape(p.get('heroAlt', name))}">
@@ -107,7 +97,7 @@ def hero_slide(name, number):
       {simulation}
     </div>
     <div class="section-label">INDUSTRIAL DESIGN · HERO PLATFORM</div>
-    <div class="slide-number">{number:02d} / 11</div>
+    <div class="slide-number">{number:02d} / {TOTAL_SLIDES:02d}</div>
   </section>"""
 
 slides = [hero_slide(name, i + 2) for i, name in enumerate(heroes)]
@@ -123,7 +113,7 @@ for i, pair in enumerate(pairs, start=5):
       <div class="pair-grid">{product_card(pair[0])}{product_card(pair[1])}</div>
     </div>
     <div class="section-label">WESTFIELD INDUSTRIAL DESIGN · CATEGORY BUILDERS</div>
-    <div class="slide-number">{i:02d} / 11</div>
+    <div class="slide-number">{i:02d} / {TOTAL_SLIDES:02d}</div>
   </section>""")
 
 doc = f"""<!doctype html>
@@ -168,10 +158,10 @@ doc = f"""<!doctype html>
       <p class="eyebrow">INDUSTRIAL DESIGN · AUGUST 2026</p>
       <h1>Built to move<br><span>the category.</span></h1>
       <p class="dek">A team turning mechanisms, materials, and customer behavior into products people can understand in a second—and remember for years.</p>
-      <div class="cover-statement"><div><b>17</b><span>market-facing concepts</span></div><div><b>3</b><span>hero platforms</span></div><div><b>1</b><span>team building the next curve</span></div></div>
+      <div class="cover-statement"><div><b>15</b><span>market-facing concepts</span></div><div><b>3</b><span>hero platforms</span></div><div><b>1</b><span>team building the next curve</span></div></div>
     </div>
     <div class="cover-visual"><img src="{media(PROJECTS['Origami Wagon'])}" alt="Origami Wagon"><div class="cover-tag">Not styling.<br>Structural advantage.</div></div>
-    <div class="section-label">WESTFIELD OUTDOORS · CONFIDENTIAL</div><div class="slide-number">01 / 11</div>
+    <div class="section-label">WESTFIELD OUTDOORS · CONFIDENTIAL</div><div class="slide-number">01 / {TOTAL_SLIDES:02d}</div>
   </section>
   {''.join(slides)}
   <div class="media-open-modal" role="dialog" aria-modal="true" aria-label="Expanded product image"><button class="modal-close" aria-label="Close">×</button><img alt=""></div>
@@ -203,7 +193,7 @@ draw.text((58, 55), "WESTFIELD INDUSTRIAL DESIGN", font=eyebrow_font, fill="#d53
 draw.multiline_text((58, 112), "Built to move\nthe category.", font=title_font, fill="#111111", spacing=-5)
 draw.multiline_text(
     (61, 335),
-    "17 market-facing concepts.\n3 hero platforms. One team\nbuilding the next curve.",
+    "15 market-facing concepts.\n3 hero platforms. One team\nbuilding the next curve.",
     font=body_font,
     fill="#3f3d39",
     spacing=8,
@@ -214,4 +204,4 @@ for x, label in [(60, "ORIGAMI WAGON"), (243, "FLOW V2"), (365, "INSTANT INDOOR"
     draw.text((x + 13, 527), label, font=chip_font, fill="#ffffff")
 draw.rectangle((685, 0, 698, 630), fill="#d53a30")
 preview.save(ROOT / "assets/social-preview.png", optimize=True)
-print(f"wrote {ROOT / 'index.html'} with 11 total slides (cover + 10 content)")
+print(f"wrote {ROOT / 'index.html'} with {TOTAL_SLIDES} total slides (cover + {TOTAL_SLIDES - 1} content)")
