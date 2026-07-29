@@ -103,21 +103,26 @@
     .rankline span { border:1px solid var(--line); border-radius:999px; padding:.34rem .65rem; color:var(--muted); font-size:.65rem; font-weight:850; text-transform:uppercase; letter-spacing:.06em; }
     .rankline .rank { background:var(--green); color:white; border-color:var(--green); }
     .product-slide h1 { font-size:clamp(2.5rem,4.6vw,4.9rem); }
-    .product-value { margin:.8rem 0 1rem; max-width:760px; color:var(--muted); font-size:clamp(.9rem,1.2vw,1.16rem); line-height:1.34; font-weight:650; }
+    .product-value { margin:.8rem 0 .55rem; max-width:760px; color:var(--muted); font-size:clamp(.9rem,1.2vw,1.16rem); line-height:1.34; font-weight:650; }
+    .product-brief { margin:0 0 1rem; max-width:760px; color:var(--ink); font-size:clamp(.78rem,.95vw,.94rem); line-height:1.4; font-weight:600; }
     .signals { display:grid; gap:.6rem; margin-top:auto; }
-    .signal { border:1px solid var(--line); border-left:6px solid var(--green); background:white; border-radius:12px; padding:.76rem .88rem; }
+    .signal { width:100%; border:1px solid var(--line); border-left:6px solid var(--green); background:white; border-radius:12px; padding:.76rem .88rem; text-align:left; color:var(--ink); }
     .signal-ip { border-left-color:var(--blue); }
     .signal-gate { border-left-color:var(--amber); }
     .signal-top { display:flex; align-items:center; justify-content:space-between; gap:1rem; }
     .signal-title { color:var(--muted); font-size:.65rem; font-weight:900; letter-spacing:.09em; text-transform:uppercase; }
     .signal-value { font-size:.77rem; text-align:right; }
     .signal p { margin:.3rem 0 0; color:var(--muted); font-size:clamp(.7rem,.82vw,.82rem); line-height:1.25; font-weight:650; }
+    .signal-detail { cursor:pointer; appearance:none; transition:background .18s ease,border-color .18s ease,transform .18s ease; }
+    .signal-detail:hover { background:#f5f8f4; border-color:#b9c5ba; transform:translateY(-1px); }
+    .signal-detail:focus-visible { outline:3px solid rgba(22,132,84,.28); outline-offset:2px; }
+    .signal-action { display:block; margin-top:.3rem; color:var(--green); font-size:.61rem; font-weight:850; }
+    .signal-ip .signal-action { color:var(--blue); }
     .trello-link { margin-top:.7rem; color:var(--green); text-decoration:none; font-size:.72rem; font-weight:850; }
     .hero-button { position:relative; margin:0; border:0; padding:0; background:#e7e9e4; cursor:zoom-in; overflow:hidden; min-width:0; display:grid; place-items:center; }
     .hero-frame { display:block; width:min(78%,70vh); aspect-ratio:1; overflow:hidden; background:#dde0da; box-shadow:0 18px 55px rgba(17,23,19,.14); }
     .product-hero { width:100%; height:100%; object-fit:cover; object-position:center; display:block; filter:grayscale(1) contrast(1.06); transition:transform .45s ease; }
     .hero-button:hover .product-hero { transform:scale(1.025); }
-    .expand-hint { position:absolute; left:1.25rem; bottom:1.2rem; background:rgba(17,23,19,.86); color:white; border-radius:999px; padding:.48rem .78rem; font-size:.65rem; font-weight:850; }
     .trl-ribbon { position:absolute; top:1.2rem; left:1.2rem; background:var(--green); color:white; padding:.58rem .75rem; border-radius:7px; font-size:.75rem; font-weight:900; }
     .simulation-slide { background:#0a1410 !important; color:white; }
     .simulation-slide .logo { filter:invert(1); }
@@ -135,6 +140,15 @@
     #image-modal { width:min(92vw,90vh); height:min(92vw,90vh); }
     #image-modal img { width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.06); }
     #simulation-modal iframe { width:100%; height:100%; border:0; background:white; }
+    #signal-modal { width:min(92vw,720px); height:fit-content !important; max-height:86vh; background:#f7f8f4; color:var(--ink); overflow:auto; border-radius:18px; }
+    #signal-modal .modal-close { border-color:rgba(17,23,19,.18); background:var(--ink); }
+    .signal-modal-shell { padding:clamp(1.4rem,4vw,2.8rem); }
+    .signal-modal-shell h2 { margin:.25rem 3rem 1.25rem 0; color:var(--green); font-size:clamp(1.7rem,4vw,2.8rem); line-height:1.02; }
+    .signal-modal-grid { display:grid; gap:.75rem; }
+    .signal-modal-block { border:1px solid var(--line); border-radius:12px; background:white; padding:1rem 1.05rem; }
+    .signal-modal-block h3 { margin:0 0 .35rem; color:var(--muted); font-size:.64rem; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
+    .signal-modal-block p { margin:0; color:var(--ink); font-size:.86rem; line-height:1.45; font-weight:620; }
+    .signal-modal-guardrail { color:var(--muted) !important; font-size:.74rem !important; }
     .modal-title { position:absolute; left:1rem; top:.9rem; z-index:5; color:white; background:rgba(0,0,0,.62); border-radius:999px; padding:.45rem .75rem; font-size:.72rem; font-weight:850; }
     @media (max-width:900px) {
       html { scroll-snap-type:y proximity; }
@@ -178,10 +192,12 @@
       .rankline { margin-bottom:.6rem; gap:.3rem; }
       .rankline span { font-size:.55rem; padding:.25rem .45rem; }
       .product-slide h1 { font-size:2.5rem; }
-      .product-value { margin:.45rem 0 .55rem; font-size:.82rem; }
+      .product-value { margin:.45rem 0 .3rem; font-size:.8rem; }
+      .product-brief { margin-bottom:.55rem; font-size:.69rem; line-height:1.3; }
       .signals { gap:.35rem; }
       .signal { padding:.5rem .58rem; }
       .signal p { font-size:.64rem; }
+      .signal-action { margin-top:.18rem; font-size:.56rem; }
       .trello-link { margin-top:.4rem; }
       .simulation-slide { min-height:100dvh; }
       .simulation-copy h1 { font-size:2.2rem; }
@@ -311,24 +327,41 @@
           <p class="eyebrow">Timber Ridge</p>
           <h1>Diamond Daypack</h1>
           <p class="product-value">Structured 26 L daypack with triangular panel architecture and slanted-access organization.</p>
+          <p class="product-brief">The physical sample and quote are in hand. August review should focus on access, carry feel, branding, and a short revision list.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 6 · Demonstrated prototype"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 6 · Demonstrated prototype"
+              data-signal-basis="Sample received; review form and August quote are complete."
+              data-signal-scale="Demonstrated prototype: a current physical sample is ready for a decision."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Approve the received sample and release the post-meeting revision list."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 6 · Demonstrated prototype</strong>
         </div>
-        <p>Sample received; review form and August quote are complete.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: Not assessed"
+              data-signal-title="IP value"
+              data-signal-value="Not assessed"
+              data-signal-basis="No patentability analysis is attached to the source card."
+              data-signal-scale="Not assessed: no current patentability analysis is attached, so no IP value is inferred."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Approve the received sample and release the post-meeting revision list."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">Not assessed</strong>
         </div>
-        <p>No patentability analysis is attached to the source card.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -351,7 +384,6 @@
             <img class="product-hero" src="assets/source/diamond-daypack/6a27fea4226650ee2f604145.jpg"
                  alt="Diamond Daypack physical sample" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 6</span>
         </button>
       </div>
@@ -380,24 +412,41 @@
           <p class="eyebrow">Timber Ridge</p>
           <h1>Spiral Daypack</h1>
           <p class="product-value">Hybrid sling/daypack with spiral panel architecture and body-wrap ergonomics.</p>
+          <p class="product-brief">The physical sample and quote are complete. The meeting can now judge access, body-wrap comfort, and whether the hybrid format earns its complexity.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 6 · Demonstrated prototype"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 6 · Demonstrated prototype"
+              data-signal-basis="Sample received; review form and August quote are complete."
+              data-signal-scale="Demonstrated prototype: a current physical sample is ready for a decision."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Approve access, carry feel, and branding; release the next revision."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 6 · Demonstrated prototype</strong>
         </div>
-        <p>Sample received; review form and August quote are complete.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: Not assessed"
+              data-signal-title="IP value"
+              data-signal-value="Not assessed"
+              data-signal-basis="No patentability analysis is attached to the source card."
+              data-signal-scale="Not assessed: no current patentability analysis is attached, so no IP value is inferred."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Approve access, carry feel, and branding; release the next revision."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">Not assessed</strong>
         </div>
-        <p>No patentability analysis is attached to the source card.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -420,7 +469,6 @@
             <img class="product-hero" src="assets/source/spiral-daypack/6a27feefc0a35f2199a9cc3e.jpg"
                  alt="Spiral Daypack physical sample" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 6</span>
         </button>
       </div>
@@ -449,24 +497,41 @@
           <p class="eyebrow">SKW-041</p>
           <h1>Instant Indoor</h1>
           <p class="product-value">A parcel-friendly sofa platform that deploys from Westfield steel-tube folding architecture.</p>
+          <p class="product-brief">The upholstered chair broadly validates the deployable platform. Remaining work is upholstery tuning plus the next carton and SKU proof.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 6 · Demonstrated prototype"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 6 · Demonstrated prototype"
+              data-signal-basis="Full upholstered sample received; only small upholstery tuning remains."
+              data-signal-scale="Demonstrated prototype: a current physical sample is ready for a decision."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Approve the platform story, upholstery corrections, and next SKU/carton validation."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 6 · Demonstrated prototype</strong>
         </div>
-        <p>Full upholstered sample received; only small upholstery tuning remains.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: 4/5 · Strong"
+              data-signal-title="IP value"
+              data-signal-value="4/5 · Strong"
+              data-signal-basis="Moderate–High; three protectable clusters, with FTO caution around modular sofa prior art."
+              data-signal-scale="Strong: the analysis identifies multiple potentially protectable invention clusters."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Approve the platform story, upholstery corrections, and next SKU/carton validation."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">4/5 · Strong</strong>
         </div>
-        <p>Moderate–High; three protectable clusters, with FTO caution around modular sofa prior art.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -489,7 +554,6 @@
             <img class="product-hero" src="assets/source/skw-041-instant-indoor/6a615f9156fbe30d8f075c14.png"
                  alt="Instant Indoor upholstered armchair prototype" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 6</span>
         </button>
       </div>
@@ -518,24 +582,41 @@
           <p class="eyebrow">SKW-018</p>
           <h1>Hawkeye V3</h1>
           <p class="product-value">A compact motion chair that replaces rocker skis with a bow-limb front-leg mechanism.</p>
+          <p class="product-brief">The V3 sample validates the motion concept. Steel-foot geometry and slider tuning remain the key ride-quality variables.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 5 · Integrated prototype"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 5 · Integrated prototype"
+              data-signal-basis="V3 sample arrived and works; geometry tuning is still required."
+              data-signal-scale="Integrated functional prototype: the mechanism works, but a correction loop remains."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Show V3 and authorize the steel-foot geometry plus slider tuning test."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 5 · Integrated prototype</strong>
         </div>
-        <p>V3 sample arrived and works; geometry tuning is still required.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: Not assessed"
+              data-signal-title="IP value"
+              data-signal-value="Not assessed"
+              data-signal-basis="No current patentability analysis is attached to the source card."
+              data-signal-scale="Not assessed: no current patentability analysis is attached, so no IP value is inferred."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Show V3 and authorize the steel-foot geometry plus slider tuning test."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">Not assessed</strong>
         </div>
-        <p>No current patentability analysis is attached to the source card.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -558,7 +639,6 @@
             <img class="product-hero" src="assets/source/skw-018-hawkeye-2026/6a62b24b069a9bcbd3b9fca1.png"
                  alt="Hawkeye V3 motion chair prototype" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 5</span>
         </button>
       </div>
@@ -587,24 +667,41 @@
           <p class="eyebrow">SKW-044</p>
           <h1>Suspend Chair</h1>
           <p class="product-value">A folding camp chair that translates suspended-seat bounce, sway, and rock into a portable frame.</p>
+          <p class="product-brief">The improved V2 sample is ready to demonstrate. The team still needs to define the intended motion signature before freezing V3.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 5 · Integrated prototype"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 5 · Integrated prototype"
+              data-signal-basis="Improved V2 sample received; motion target and story still need definition."
+              data-signal-scale="Integrated functional prototype: the mechanism works, but a correction loop remains."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Choose the intended motion signature and approve the V3 correction list."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 5 · Integrated prototype</strong>
         </div>
-        <p>Improved V2 sample received; motion target and story still need definition.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: 3/5 · Focused"
+              data-signal-title="IP value"
+              data-signal-value="3/5 · Focused"
+              data-signal-basis="Moderate; two protectable mechanism/design clusters with adjacent suspension prior art."
+              data-signal-scale="Focused: the opportunity is narrower and sits closer to adjacent mechanism or design prior art."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Choose the intended motion signature and approve the V3 correction list."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">3/5 · Focused</strong>
         </div>
-        <p>Moderate; two protectable mechanism/design clusters with adjacent suspension prior art.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -627,7 +724,6 @@
             <img class="product-hero" src="assets/source/skw-044-suspend-chair/6a62b41284ea42bd8a24fae3.png"
                  alt="Suspend Chair physical sample" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 5</span>
         </button>
       </div>
@@ -656,24 +752,41 @@
           <p class="eyebrow">Cooler Platform</p>
           <h1>Hard Liners</h1>
           <p class="product-value">A removable living-hinge liner that lets a soft cooler ship flat and perform rigid in use.</p>
+          <p class="product-brief">The shell and printed liner are ready for fold, fit, and cleanability testing. Production-intent liner CAD follows only if that proof passes.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 5 · Integrated prototype"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 5 · Integrated prototype"
+              data-signal-basis="Fabric shell and printed liner are complete for the August review."
+              data-signal-scale="Integrated functional prototype: the mechanism works, but a correction loop remains."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Validate fold, fit, cleanability, and authorize production-intent liner CAD."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 5 · Integrated prototype</strong>
         </div>
-        <p>Fabric shell and printed liner are complete for the August review.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: 3/5 · Focused"
+              data-signal-title="IP value"
+              data-signal-value="3/5 · Focused"
+              data-signal-basis="Moderate; three clusters, but removable rigid liners create close prior-art pressure."
+              data-signal-scale="Focused: the opportunity is narrower and sits closer to adjacent mechanism or design prior art."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Validate fold, fit, cleanability, and authorize production-intent liner CAD."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">3/5 · Focused</strong>
         </div>
-        <p>Moderate; three clusters, but removable rigid liners create close prior-art pressure.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -696,7 +809,6 @@
             <img class="product-hero" src="assets/source/hard-liners/6a1fa17fcf1f9b7472b9655a.png"
                  alt="Hard Liners fold-flat cooler concept" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 5</span>
         </button>
       </div>
@@ -725,24 +837,41 @@
           <p class="eyebrow">Comfort Platform</p>
           <h1>ComfortCore Hybrid Arms</h1>
           <p class="product-value">A replaceable cushioned cartridge that combines plastic-arm width with fabric skin comfort.</p>
+          <p class="product-brief">Upholstered arm samples confirm the comfort benefit. The meeting must decide whether that value supports cost and cross-platform assembly.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 5 · Integrated prototype"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 5 · Integrated prototype"
+              data-signal-basis="Upholstered samples are ready; comfort is proven, cost and assembly are open."
+              data-signal-scale="Integrated functional prototype: the mechanism works, but a correction loop remains."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Approve comfort value versus cost and set the cross-platform manufacturing path."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 5 · Integrated prototype</strong>
         </div>
-        <p>Upholstered samples are ready; comfort is proven, cost and assembly are open.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: 4/5 · Strong"
+              data-signal-title="IP value"
+              data-signal-value="4/5 · Strong"
+              data-signal-basis="Moderate–High; three clusters across cartridge design, platform compatibility, and material reuse."
+              data-signal-scale="Strong: the analysis identifies multiple potentially protectable invention clusters."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Approve comfort value versus cost and set the cross-platform manufacturing path."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">4/5 · Strong</strong>
         </div>
-        <p>Moderate–High; three clusters across cartridge design, platform compatibility, and material reuse.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -765,7 +894,6 @@
             <img class="product-hero" src="assets/source/comfortcore-hybrid-arms/6a63a7a47341441c559c7b72.jpg"
                  alt="ComfortCore upholstered hybrid armrest prototype" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 5</span>
         </button>
       </div>
@@ -794,24 +922,41 @@
           <p class="eyebrow">Motion Platform</p>
           <h1>Flow-Motion V2</h1>
           <p class="product-value">A tunable wedge-and-leaf-spring rocker that separates lean-back feel, return force, and pinch-gap control.</p>
+          <p class="product-brief">The production sample shipped after digital validation. Review should isolate motion feel, return force, and pinch-gap behavior.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 5 · Integrated prototype"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 5 · Integrated prototype"
+              data-signal-basis="3D model validated; production sample was approved, built, and shipped."
+              data-signal-scale="Integrated functional prototype: the mechanism works, but a correction loop remains."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Evaluate sample motion and pinch gap; decide filing path and next tuning wedge."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 5 · Integrated prototype</strong>
         </div>
-        <p>3D model validated; production sample was approved, built, and shipped.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: 4/5 · Strong"
+              data-signal-title="IP value"
+              data-signal-value="4/5 · Strong"
+              data-signal-basis="Moderate–Strong; three claim angles around dual fulcrums, tuning, and pinch-gap control."
+              data-signal-scale="Strong: the analysis identifies multiple potentially protectable invention clusters."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Evaluate sample motion and pinch gap; decide filing path and next tuning wedge."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">4/5 · Strong</strong>
         </div>
-        <p>Moderate–Strong; three claim angles around dual fulcrums, tuning, and pinch-gap control.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -834,7 +979,6 @@
             <img class="product-hero" src="assets/source/flow-motion-v2/6a62b59734aa5f883f3d440e.png"
                  alt="Flow-Motion V2 chair concept" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 5</span>
         </button>
       </div>
@@ -863,24 +1007,41 @@
           <p class="eyebrow">SKW-033</p>
           <h1>Origami Wagon</h1>
           <p class="product-value">A one-sheet living-hinge wagon body that replaces tube-and-fabric construction and folds to a briefcase-like package.</p>
+          <p class="product-brief">Full-scale folding works. The next evidence must cover load behavior, hinge fatigue, rib nesting, and end-lock reliability.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 4 · Component prototype"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 4 · Component prototype"
+              data-signal-basis="Full-scale folding sample works; load behavior, hinge fatigue, rib nesting, and end-lock remain open."
+              data-signal-scale="Component or partial prototype: the core architecture is represented, but evidence is incomplete."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Approve the ribbed-wall/end-lock next sample and the hinge-coupon program."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 4 · Component prototype</strong>
         </div>
-        <p>Full-scale folding sample works; load behavior, hinge fatigue, rib nesting, and end-lock remain open.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: 5/5 · Strategic"
+              data-signal-title="IP value"
+              data-signal-value="5/5 · Strategic"
+              data-signal-basis="High if manufacturable; three platform-level invention clusters."
+              data-signal-scale="Strategic: the analysis indicates potential platform-level protection if the mechanism proves manufacturable."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Approve the ribbed-wall/end-lock next sample and the hinge-coupon program."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">5/5 · Strategic</strong>
         </div>
-        <p>High if manufacturable; three platform-level invention clusters.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -903,7 +1064,6 @@
             <img class="product-hero" src="assets/source/skw-033-origami-wagon/6945bc4fd7d51dbae1bc6406.png"
                  alt="Origami Wagon folding concept" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 4</span>
         </button>
       </div>
@@ -965,24 +1125,41 @@
           <p class="eyebrow">SKW</p>
           <h1>GRAM Chair</h1>
           <p class="product-value">A lightweight director&#x27;s-chair rocker using compliant elastomer corner joints instead of runners or springs.</p>
+          <p class="product-brief">Frames and printed compliant corners are in hand. Seat height and corner stiffness are the two tuning variables that matter now.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 4 · Component prototype"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 4 · Component prototype"
+              data-signal-basis="Frames received; 3D-printed compliant corners and seat-height corrections are in progress."
+              data-signal-scale="Component or partial prototype: the core architecture is represented, but evidence is incomplete."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Calibrate corner stiffness and seat height, then approve the next mechanism round."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 4 · Component prototype</strong>
         </div>
-        <p>Frames received; 3D-printed compliant corners and seat-height corrections are in progress.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: 4/5 · Strong"
+              data-signal-title="IP value"
+              data-signal-value="4/5 · Strong"
+              data-signal-basis="Moderate–Strong in the deeper FTO report; novel integrated corner-flex mechanism with low reviewed FTO risk."
+              data-signal-scale="Strong: the analysis identifies multiple potentially protectable invention clusters."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Calibrate corner stiffness and seat height, then approve the next mechanism round."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">4/5 · Strong</strong>
         </div>
-        <p>Moderate–Strong in the deeper FTO report; novel integrated corner-flex mechanism with low reviewed FTO risk.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -1005,7 +1182,6 @@
             <img class="product-hero" src="assets/source/gram-chair/6a62ba8bbd4fc4a28ed6a76d.png"
                  alt="GRAM compliant rocking chair CAD" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 4</span>
         </button>
       </div>
@@ -1067,24 +1243,41 @@
           <p class="eyebrow">Utility Surface</p>
           <h1>Camp / Field Utility Board</h1>
           <p class="product-value">An ironing-board mechanism translated into a fast-deploying, height-adjustable outdoor work surface.</p>
+          <p class="product-brief">The received sample was repaired after weld failures. Stability, foot design, lock feedback, and finish now need a focused check.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 4 · Component prototype"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 4 · Component prototype"
+              data-signal-basis="Physical sample arrived; broken welds were repaired and new plastic parts are pending."
+              data-signal-scale="Component or partial prototype: the core architecture is represented, but evidence is incomplete."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Review the repaired sample and approve stability, weld, foot, and finish corrections."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 4 · Component prototype</strong>
         </div>
-        <p>Physical sample arrived; broken welds were repaired and new plastic parts are pending.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: 3/5 · Focused"
+              data-signal-title="IP value"
+              data-signal-value="3/5 · Focused"
+              data-signal-basis="Moderate; two narrow clusters around field adaptation, feet, lock feedback, and use positions."
+              data-signal-scale="Focused: the opportunity is narrower and sits closer to adjacent mechanism or design prior art."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Review the repaired sample and approve stability, weld, foot, and finish corrections."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">3/5 · Focused</strong>
         </div>
-        <p>Moderate; two narrow clusters around field adaptation, feet, lock feedback, and use positions.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -1107,7 +1300,6 @@
             <img class="product-hero" src="assets/source/camp-field-utility-board/6a2630a0409f52780f208d15.png"
                  alt="Camp and Field Utility Board prototype" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 4</span>
         </button>
       </div>
@@ -1136,24 +1328,41 @@
           <p class="eyebrow">SKW-037</p>
           <h1>Systems Wagon</h1>
           <p class="product-value">A rigid modular transport chassis built around 24 qt crates and an M-LOK-style accessory ecosystem.</p>
+          <p class="product-brief">Prototype parts are in and the frame entered welding. The platform story depends on proving the chassis and accessory interface together.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 4 · Component prototype"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 4 · Component prototype"
+              data-signal-basis="Prototype parts arrived and the new frame entered welding."
+              data-signal-scale="Component or partial prototype: the core architecture is represented, but evidence is incomplete."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Demonstrate the welded frame and lock the accessory architecture and presentation story."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 4 · Component prototype</strong>
         </div>
-        <p>Prototype parts arrived and the new frame entered welding.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: 4/5 · Strong"
+              data-signal-title="IP value"
+              data-signal-value="4/5 · Strong"
+              data-signal-basis="Moderate–High; three protectable platform/ecosystem clusters."
+              data-signal-scale="Strong: the analysis identifies multiple potentially protectable invention clusters."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Demonstrate the welded frame and lock the accessory architecture and presentation story."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">4/5 · Strong</strong>
         </div>
-        <p>Moderate–High; three protectable platform/ecosystem clusters.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -1176,7 +1385,6 @@
             <img class="product-hero" src="assets/source/skw-037-systems-wagon/6a1f8a2bb833b2fb9c36b879.png"
                  alt="Systems Wagon modular chassis CAD" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 4</span>
         </button>
       </div>
@@ -1205,24 +1413,41 @@
           <p class="eyebrow">Timber Ridge</p>
           <h1>Westfield Adventure Pack</h1>
           <p class="product-value">A structured travel backpack moving from AI-assisted concept visualization into a construction-ready softgoods package.</p>
+          <p class="product-brief">The concept is now a construction-authorized sample package. Review should lock drawings, dimensions, and material direction against the physical build.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 4 · Component prototype"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 4 · Component prototype"
+              data-signal-basis="Specs were clarified and the construction sample was authorized."
+              data-signal-scale="Component or partial prototype: the core architecture is represented, but evidence is incomplete."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Review construction accuracy and lock line drawings, dimensions, and material direction."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 4 · Component prototype</strong>
         </div>
-        <p>Specs were clarified and the construction sample was authorized.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: Not assessed"
+              data-signal-title="IP value"
+              data-signal-value="Not assessed"
+              data-signal-basis="No patentability analysis is attached to the source card."
+              data-signal-scale="Not assessed: no current patentability analysis is attached, so no IP value is inferred."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Review construction accuracy and lock line drawings, dimensions, and material direction."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">Not assessed</strong>
         </div>
-        <p>No patentability analysis is attached to the source card.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -1245,7 +1470,6 @@
             <img class="product-hero" src="assets/source/westfield-adventure-pack/6a3d8897353efb2542b95b1a.jpeg"
                  alt="Westfield Adventure Pack concept" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 4</span>
         </button>
       </div>
@@ -1274,24 +1498,41 @@
           <p class="eyebrow">Timber Ridge</p>
           <h1>Westfield Adventure Tote</h1>
           <p class="product-value">A 30 L travel tote designed as the companion softgoods system to the Adventure Pack.</p>
+          <p class="product-brief">The companion tote is in sample correction for true 30 L capacity. Construction accuracy and consistency with the pack are the review focus.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 4 · Component prototype"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 4 · Component prototype"
+              data-signal-basis="Construction sample authorized; sample room is correcting capacity to 30 L."
+              data-signal-scale="Component or partial prototype: the core architecture is represented, but evidence is incomplete."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Review the 30 L construction sample and lock dimensions, access, and material."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 4 · Component prototype</strong>
         </div>
-        <p>Construction sample authorized; sample room is correcting capacity to 30 L.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: Not assessed"
+              data-signal-title="IP value"
+              data-signal-value="Not assessed"
+              data-signal-basis="No patentability analysis is attached to the source card."
+              data-signal-scale="Not assessed: no current patentability analysis is attached, so no IP value is inferred."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Review the 30 L construction sample and lock dimensions, access, and material."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">Not assessed</strong>
         </div>
-        <p>No patentability analysis is attached to the source card.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -1314,7 +1555,6 @@
             <img class="product-hero" src="assets/source/westfield-adventure-tote/6a3d87a6896706c25c67639d.jpeg"
                  alt="Westfield Adventure Tote concept" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 4</span>
         </button>
       </div>
@@ -1343,24 +1583,41 @@
           <p class="eyebrow">SKW-028</p>
           <h1>Handwarmer Armrests</h1>
           <p class="product-value">Heated armrests adapted to the familiar director&#x27;s-chair platform for cold-weather comfort.</p>
+          <p class="product-brief">The concept has been handed off and samples were reported in transit. Confirm fit, heat, controls, safety, and chair-family compatibility.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 4 · Component prototype"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 4 · Component prototype"
+              data-signal-basis="Engineering concept was handed off and a sample was reported in transit; review evidence is still stale."
+              data-signal-scale="Component or partial prototype: the core architecture is represented, but evidence is incomplete."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Confirm sample status, then validate heat, comfort, safety, and chair-format fit."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 4 · Component prototype</strong>
         </div>
-        <p>Engineering concept was handed off and a sample was reported in transit; review evidence is still stale.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: Not assessed"
+              data-signal-title="IP value"
+              data-signal-value="Not assessed"
+              data-signal-basis="No patentability analysis is attached to the source card."
+              data-signal-scale="Not assessed: no current patentability analysis is attached, so no IP value is inferred."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Confirm sample status, then validate heat, comfort, safety, and chair-format fit."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">Not assessed</strong>
         </div>
-        <p>No patentability analysis is attached to the source card.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -1383,7 +1640,6 @@
             <img class="product-hero" src="assets/source/skw-028-handwarmer-armrests-2026/69cb7772e29d07a806595f63.png"
                  alt="Heated director chair armrest concept" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 4</span>
         </button>
       </div>
@@ -1412,24 +1668,41 @@
           <p class="eyebrow">Hunt</p>
           <h1>Range &amp; Field Cleaning Station</h1>
           <p class="product-value">A portable organized gunsmithing and cleaning station for range and field use.</p>
+          <p class="product-brief">The developed concept resolves the main use zones and storage logic. The next decision is whether the use case is strong enough to fund physical proof.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 4 · Component prototype"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 4 · Component prototype"
+              data-signal-basis="First-round sample exists, but development is paused for gun-case design-language alignment."
+              data-signal-scale="Component or partial prototype: the core architecture is represented, but evidence is incomplete."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Decide whether the gun-case language is mature enough to resume this program."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 4 · Component prototype</strong>
         </div>
-        <p>First-round sample exists, but development is paused for gun-case design-language alignment.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: Not assessed"
+              data-signal-title="IP value"
+              data-signal-value="Not assessed"
+              data-signal-basis="No patentability analysis is attached to the source card."
+              data-signal-scale="Not assessed: no current patentability analysis is attached, so no IP value is inferred."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Decide whether the gun-case language is mature enough to resume this program."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">Not assessed</strong>
         </div>
-        <p>No patentability analysis is attached to the source card.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -1452,7 +1725,6 @@
             <img class="product-hero" src="assets/source/range-and-field-cleaning-and-gunsmithing-station/range-station-product.png"
                  alt="Portable range equipment and cleaning station reference" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 4</span>
         </button>
       </div>
@@ -1481,24 +1753,41 @@
           <p class="eyebrow">Cooler Platform</p>
           <h1>Concertina Cooler</h1>
           <p class="product-value">A premium 5–16 L adjustable-capacity cooler using structured EPP bellows and locked volume states.</p>
+          <p class="product-brief">The digital fold study resolves the basic architecture. A printed and assembled kill test is needed for leaks, lock states, and insulation.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 3 · Digital proof"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 3 · Digital proof"
+              data-signal-basis="Architecture and rough kinematics are defined; the August 3D motion sample is the first real gate."
+              data-signal-scale="Digital or analytical proof: the next meaningful gate is a physical kill test."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Validate geometry/lock states and authorize skinned-EPP coupons and price testing."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 3 · Digital proof</strong>
         </div>
-        <p>Architecture and rough kinematics are defined; the August 3D motion sample is the first real gate.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: 4/5 · Strong"
+              data-signal-title="IP value"
+              data-signal-value="4/5 · Strong"
+              data-signal-basis="Moderate–High; three clusters around variable volume, lock states, and molded EPP construction."
+              data-signal-scale="Strong: the analysis identifies multiple potentially protectable invention clusters."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Validate geometry/lock states and authorize skinned-EPP coupons and price testing."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">4/5 · Strong</strong>
         </div>
-        <p>Moderate–High; three clusters around variable volume, lock states, and molded EPP construction.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -1521,7 +1810,6 @@
             <img class="product-hero" src="assets/source/concertina-cooler/6a1f9eab5d8df6f96507c550.png"
                  alt="Concertina Cooler variable-volume concept" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 3</span>
         </button>
       </div>
@@ -1583,24 +1871,41 @@
           <p class="eyebrow">SKW-040</p>
           <h1>Core 30</h1>
           <p class="product-value">A cantilever camp chair whose load-opposed joints fold into a flat bar without sacrificing visual identity.</p>
+          <p class="product-brief">The flat-fold architecture is digitally resolved. A production-intent tubular prototype must validate loaded joints and folded size.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 3 · Digital proof"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 3 · Digital proof"
+              data-signal-basis="Successful collision-swept fold study; production-intent CAD and physical validation have not started."
+              data-signal-scale="Digital or analytical proof: the next meaningful gate is a physical kill test."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Review the fold simulation and authorize production-intent joint/X-boss CAD."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 3 · Digital proof</strong>
         </div>
-        <p>Successful collision-swept fold study; production-intent CAD and physical validation have not started.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: 4/5 · Strong"
+              data-signal-title="IP value"
+              data-signal-value="4/5 · Strong"
+              data-signal-basis="Moderate–High; two clusters around load-opposed joints and the flat-bar fold package."
+              data-signal-scale="Strong: the analysis identifies multiple potentially protectable invention clusters."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Review the fold simulation and authorize production-intent joint/X-boss CAD."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">4/5 · Strong</strong>
         </div>
-        <p>Moderate–High; two clusters around load-opposed joints and the flat-bar fold package.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -1623,7 +1928,6 @@
             <img class="product-hero" src="assets/source/skw-040-project-core-30/6a35556705740771532c32e3.png"
                  alt="Core 30 cantilever chair concept" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 3</span>
         </button>
       </div>
@@ -1685,24 +1989,41 @@
           <p class="eyebrow">SKW-032</p>
           <h1>Loaf T</h1>
           <p class="product-value">A pole-free, pump-free family tent whose pre-cambered batten skin blooms and locks with one cord.</p>
+          <p class="product-brief">The digital study shows the pre-cambered baton and lock behavior. The next proof is a physical setup and pack-down cycle.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 3 · Digital proof"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 3 · Digital proof"
+              data-signal-basis="End-to-end simulation is useful, but the B1 bench rig remains the physics kill gate."
+              data-signal-scale="Digital or analytical proof: the next meaningful gate is a physical kill test."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Authorize the B1 bench rig and provisional-first evidence plan."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 3 · Digital proof</strong>
         </div>
-        <p>End-to-end simulation is useful, but the B1 bench rig remains the physics kill gate.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: 4/5 · Strong"
+              data-signal-title="IP value"
+              data-signal-value="4/5 · Strong"
+              data-signal-basis="Moderate–High; two protectable clusters around structural skin and one-cord setup."
+              data-signal-scale="Strong: the analysis identifies multiple potentially protectable invention clusters."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Authorize the B1 bench rig and provisional-first evidence plan."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">4/5 · Strong</strong>
         </div>
-        <p>Moderate–High; two protectable clusters around structural skin and one-cord setup.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -1725,7 +2046,6 @@
             <img class="product-hero" src="assets/source/skw-032-loaf-t-pop-lock-tensegrity-tent/6a5468bb49eb73fa048190a3.jpg"
                  alt="Loaf T pop-and-lock tensegrity tent concept" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 3</span>
         </button>
       </div>
@@ -1787,24 +2107,41 @@
           <p class="eyebrow">Personal Climate</p>
           <h1>Earth Suit</h1>
           <p class="product-value">A liquid-cooled garment and backpack vapor-compression chiller for sustained work in extreme heat.</p>
+          <p class="product-brief">The system architecture is defined around a backpack compressor chiller. Thermal-loop feasibility, wearable integration, and the build route remain open.</p>
           <div class="signals">
             
-      <article class="signal signal-trl">
+      <button class="signal signal-trl signal-detail" type="button"
+              aria-label="Open rationale for Technical readiness: TRL 2 · Concept defined"
+              data-signal-title="Technical readiness"
+              data-signal-value="TRL 2 · Concept defined"
+              data-signal-basis="Architecture and performance gates are defined; no benchtop thermal loop or wearable alpha exists."
+              data-signal-scale="Architecture defined: feasibility work has not yet produced a system prototype."
+              data-signal-next-label="Next proof to advance"
+              data-signal-next="Approve compressor data acquisition, competitor teardown, and a viable price/weight envelope."
+              data-signal-guardrail="">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 2 · Concept defined</strong>
         </div>
-        <p>Architecture and performance gates are defined; no benchtop thermal loop or wearable alpha exists.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
-      <article class="signal signal-ip">
+      <button class="signal signal-ip signal-detail" type="button"
+              aria-label="Open rationale for IP value: 3/5 · Focused"
+              data-signal-title="IP value"
+              data-signal-value="3/5 · Focused"
+              data-signal-basis="Moderate; three clusters, but the category carries heavy prior art."
+              data-signal-scale="Focused: the opportunity is narrower and sits closer to adjacent mechanism or design prior art."
+              data-signal-next-label="Meeting implication"
+              data-signal-next="Approve compressor data acquisition, competitor teardown, and a viable price/weight envelope."
+              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">3/5 · Focused</strong>
         </div>
-        <p>Moderate; three clusters, but the category carries heavy prior art.</p>
-      </article>
+        <span class="signal-action">View rationale ↗</span>
+      </button>
     
             
       <article class="signal signal-gate">
@@ -1827,7 +2164,6 @@
             <img class="product-hero" src="assets/source/earth-suit-liquid-cooled-personal-climate-system/compressor-reference.jpg"
                  alt="Mini vapor-compression compressor reference for Earth Suit" loading="lazy">
           </span>
-          <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 2</span>
         </button>
       </div>
@@ -1848,6 +2184,31 @@
     <button class="modal-close" type="button" aria-label="Close simulation">×</button>
     <span class="modal-title"></span>
     <iframe title="Interactive simulation" allowfullscreen></iframe>
+  </dialog>
+  <dialog id="signal-modal" aria-label="Portfolio signal rationale">
+    <button class="modal-close" type="button" aria-label="Close rationale">×</button>
+    <div class="signal-modal-shell">
+      <p class="eyebrow signal-modal-title"></p>
+      <h2 class="signal-modal-value"></h2>
+      <div class="signal-modal-grid">
+        <section class="signal-modal-block">
+          <h3>Evidence basis</h3>
+          <p class="signal-modal-basis"></p>
+        </section>
+        <section class="signal-modal-block">
+          <h3>How to read this score</h3>
+          <p class="signal-modal-scale"></p>
+        </section>
+        <section class="signal-modal-block">
+          <h3 class="signal-modal-next-label"></h3>
+          <p class="signal-modal-next"></p>
+        </section>
+        <section class="signal-modal-block signal-modal-guardrail-wrap">
+          <h3>Source and guardrail</h3>
+          <p class="signal-modal-guardrail"></p>
+        </section>
+      </div>
+    </div>
   </dialog>
   <script>
     const slides = [...document.querySelectorAll('.slide')];
@@ -1892,6 +2253,20 @@
       simulationModal.querySelector('iframe').src = button.dataset.simulation;
       simulationModal.querySelector('.modal-title').textContent = button.dataset.title;
       simulationModal.showModal();
+    }));
+    const signalModal = document.getElementById('signal-modal');
+    document.querySelectorAll('.signal-detail').forEach(button => button.addEventListener('click', () => {
+      signalModal.querySelector('.signal-modal-title').textContent = button.dataset.signalTitle;
+      signalModal.querySelector('.signal-modal-value').textContent = button.dataset.signalValue;
+      signalModal.querySelector('.signal-modal-basis').textContent = button.dataset.signalBasis;
+      signalModal.querySelector('.signal-modal-scale').textContent = button.dataset.signalScale;
+      signalModal.querySelector('.signal-modal-next-label').textContent = button.dataset.signalNextLabel;
+      signalModal.querySelector('.signal-modal-next').textContent = button.dataset.signalNext;
+      const guardrailWrap = signalModal.querySelector('.signal-modal-guardrail-wrap');
+      const guardrail = button.dataset.signalGuardrail;
+      guardrailWrap.hidden = !guardrail;
+      signalModal.querySelector('.signal-modal-guardrail').textContent = guardrail;
+      signalModal.showModal();
     }));
     document.querySelectorAll('dialog').forEach(dialog => {
       dialog.querySelector('.modal-close').addEventListener('click', () => dialog.close());
