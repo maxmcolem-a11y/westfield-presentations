@@ -145,9 +145,15 @@
     .signal-modal-shell { padding:clamp(1.4rem,4vw,2.8rem); }
     .signal-modal-shell h2 { margin:.25rem 3rem 1.25rem 0; color:var(--green); font-size:clamp(1.7rem,4vw,2.8rem); line-height:1.02; }
     .signal-modal-grid { display:grid; gap:.75rem; }
+    .signal-ip-split { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; }
     .signal-modal-block { border:1px solid var(--line); border-radius:12px; background:white; padding:1rem 1.05rem; }
     .signal-modal-block h3 { margin:0 0 .35rem; color:var(--muted); font-size:.64rem; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
     .signal-modal-block p { margin:0; color:var(--ink); font-size:.86rem; line-height:1.45; font-weight:620; }
+    .signal-modal-protectable { border-color:rgba(11,95,56,.28); background:#f2f8f4; }
+    .signal-modal-not-protectable { border-color:rgba(211,47,47,.24); background:#fff7f6; }
+    .signal-modal-sources { display:flex; flex-wrap:wrap; gap:.38rem; }
+    .signal-modal-sources a { display:inline-flex; color:var(--green); background:#f1f4ef; border:1px solid var(--line); border-radius:999px; padding:.36rem .58rem; font-size:.66rem; line-height:1.2; font-weight:820; text-decoration:none; }
+    .signal-modal-sources a:hover,.signal-modal-sources a:focus-visible { border-color:var(--green); }
     .signal-modal-guardrail { color:var(--muted) !important; font-size:.74rem !important; }
     .modal-title { position:absolute; left:1rem; top:.9rem; z-index:5; color:white; background:rgba(0,0,0,.62); border-radius:999px; padding:.45rem .75rem; font-size:.72rem; font-weight:850; }
     @media (max-width:900px) {
@@ -199,6 +205,12 @@
       .signal p { font-size:.64rem; }
       .signal-action { margin-top:.18rem; font-size:.56rem; }
       .trello-link { margin-top:.4rem; }
+      .signal-ip-split { grid-template-columns:1fr; }
+      .signal-modal-shell { padding:1.2rem .8rem; }
+      .signal-modal-shell h2 { font-size:1.75rem; margin-bottom:.75rem; }
+      .signal-modal-grid,.signal-ip-split { gap:.5rem; }
+      .signal-modal-block { padding:.72rem .78rem; }
+      .signal-modal-block p { font-size:.76rem; line-height:1.35; }
       .simulation-slide { min-height:100dvh; }
       .simulation-copy h1 { font-size:2.2rem; }
       .simulation-copy .lede { font-size:.82rem; }
@@ -226,15 +238,15 @@
           <p class="eyebrow">Westfield Outdoors · August 2026</p>
           <h1>Industrial Design<br><span>Innovation Portfolio</span></h1>
         </div>
-        <div class="cover-number" aria-label="20 active projects">
-          <strong>20</strong><span>active<br>projects</span>
+        <div class="cover-number" aria-label="18 active projects">
+          <strong>18</strong><span>active<br>projects</span>
         </div>
       </div>
       
       <div class="section-label">Portfolio</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">01 / 28</div>
+      <div class="slide-number">01 / 26</div>
     
     </section>
     
@@ -263,18 +275,19 @@
             <ol class="scale-list ip-list">
               <li><b>5 · Strategic</b><span>Potential platform-level claims if the mechanism is manufacturable.</span></li>
               <li><b>4 · Strong</b><span>Moderate–High / Moderate–Strong analysis with multiple protectable clusters.</span></li>
-              <li><b>3 · Focused</b><span>Moderate analysis; narrower mechanism or design protection.</span></li>
-              <li><b>— · Not assessed</b><span>No current patentability analysis attached; no value is inferred.</span></li>
+              <li><b>3 · Focused</b><span>Specific mechanism or combination; broad category claims not supported.</span></li>
+              <li><b>2 · Limited</b><span>Narrow implementation or ornamental opportunity against close prior art.</span></li>
+              <li><b>1 · Low</b><span>No defensible utility mechanism identified; design protection only if form freezes distinctly.</span></li>
             </ol>
           </article>
         </div>
-        <p class="method-note">Internal portfolio triage only. Patentability/FTO signals are not legal opinions or filing recommendations.</p>
+        <p class="method-note">Research refreshed July 28, 2026 from attached analyses and representative public prior art. Internal portfolio triage only—not a legal opinion or filing recommendation.</p>
       </div>
       
       <div class="section-label">Method</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">02 / 28</div>
+      <div class="slide-number">02 / 26</div>
     
     </section>
     
@@ -293,11 +306,11 @@
             <thead>
               <tr>
                 <th class="matrix-corner"><span>Technical readiness ↓</span><b>IP value →</b></th>
-                <th scope="col"><b>5 · Strategic</b><span>Platform opportunity</span></th><th scope="col"><b>4 · Strong</b><span>Multiple claim clusters</span></th><th scope="col"><b>3 · Focused</b><span>Narrow mechanism</span></th><th scope="col"><b>— · Not assessed</b><span>No analysis attached</span></th>
+                <th scope="col"><b>5 · Strategic</b><span>Platform opportunity</span></th><th scope="col"><b>4 · Strong</b><span>Multiple claim clusters</span></th><th scope="col"><b>3 · Focused</b><span>Specific combination</span></th><th scope="col"><b>2 · Limited</b><span>Narrow protection</span></th><th scope="col"><b>1 · Low</b><span>Design only / no mechanism</span></th>
               </tr>
             </thead>
             <tbody>
-              <tr><th scope="row"><b>TRL 6</b><span>Demonstrated</span></th><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><a href="#project-3" title="Instant Indoor"><span>03</span>Instant Indoor</a></td><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><a href="#project-1" title="Diamond Daypack"><span>01</span>Diamond Daypack</a><a href="#project-2" title="Spiral Daypack"><span>02</span>Spiral Daypack</a></td></tr><tr><th scope="row"><b>TRL 5</b><span>Integrated</span></th><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><a href="#project-7" title="ComfortCore Hybrid Arms"><span>07</span>ComfortCore Hybrid Arms</a><a href="#project-8" title="Flow-Motion V2"><span>08</span>Flow-Motion V2</a></td><td class="matrix-cell"><a href="#project-5" title="Suspend Chair"><span>05</span>Suspend Chair</a><a href="#project-6" title="Hard Liners"><span>06</span>Hard Liners</a></td><td class="matrix-cell"><a href="#project-4" title="Hawkeye V3"><span>04</span>Hawkeye V3</a></td></tr><tr><th scope="row"><b>TRL 4</b><span>Partial proof</span></th><td class="matrix-cell"><a href="#project-9" title="Origami Wagon"><span>09</span>Origami Wagon</a></td><td class="matrix-cell"><a href="#project-10" title="GRAM Chair"><span>10</span>GRAM Chair</a><a href="#project-12" title="Systems Wagon"><span>12</span>Systems Wagon</a></td><td class="matrix-cell"><a href="#project-11" title="Camp / Field Utility Board"><span>11</span>Camp / Field Utility Board</a></td><td class="matrix-cell"><a href="#project-13" title="Westfield Adventure Pack"><span>13</span>Westfield Adventure Pack</a><a href="#project-14" title="Westfield Adventure Tote"><span>14</span>Westfield Adventure Tote</a><a href="#project-15" title="Handwarmer Armrests"><span>15</span>Handwarmer Armrests</a><a href="#project-16" title="Range &amp; Field Cleaning Station"><span>16</span>Range &amp; Field Cleaning Station</a></td></tr><tr><th scope="row"><b>TRL 3</b><span>Digital proof</span></th><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><a href="#project-17" title="Concertina Cooler"><span>17</span>Concertina Cooler</a><a href="#project-18" title="Core 30"><span>18</span>Core 30</a><a href="#project-19" title="Loaf T"><span>19</span>Loaf T</a></td><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><i>—</i></td></tr><tr><th scope="row"><b>TRL 2</b><span>Architecture</span></th><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><a href="#project-20" title="Earth Suit"><span>20</span>Earth Suit</a></td><td class="matrix-cell"><i>—</i></td></tr>
+              <tr><th scope="row"><b>TRL 6</b><span>Demonstrated</span></th><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><a href="#project-3" title="Instant Indoor"><span>03</span>Instant Indoor</a></td><td class="matrix-cell"><a href="#project-1" title="Diamond Daypack"><span>01</span>Diamond Daypack</a><a href="#project-2" title="Spiral Daypack"><span>02</span>Spiral Daypack</a></td><td class="matrix-cell"><i>—</i></td></tr><tr><th scope="row"><b>TRL 5</b><span>Integrated</span></th><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><a href="#project-8" title="Flow-Motion V2"><span>08</span>Flow-Motion V2</a></td><td class="matrix-cell"><a href="#project-7" title="ComfortCore Hybrid Arms"><span>07</span>ComfortCore Hybrid Arms</a></td><td class="matrix-cell"><a href="#project-4" title="Hawkeye V3"><span>04</span>Hawkeye V3</a><a href="#project-5" title="Suspend Chair"><span>05</span>Suspend Chair</a><a href="#project-6" title="Hard Liners"><span>06</span>Hard Liners</a></td><td class="matrix-cell"><i>—</i></td></tr><tr><th scope="row"><b>TRL 4</b><span>Partial proof</span></th><td class="matrix-cell"><a href="#project-9" title="Origami Wagon"><span>09</span>Origami Wagon</a></td><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><a href="#project-10" title="GRAM Chair"><span>10</span>GRAM Chair</a><a href="#project-12" title="Systems Wagon"><span>12</span>Systems Wagon</a></td><td class="matrix-cell"><a href="#project-11" title="Camp / Field Utility Board"><span>11</span>Camp / Field Utility Board</a></td><td class="matrix-cell"><a href="#project-13" title="Westfield Adventure Pack"><span>13</span>Westfield Adventure Pack</a><a href="#project-14" title="Westfield Adventure Tote"><span>14</span>Westfield Adventure Tote</a></td></tr><tr><th scope="row"><b>TRL 3</b><span>Digital proof</span></th><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><a href="#project-15" title="Concertina Cooler"><span>15</span>Concertina Cooler</a><a href="#project-16" title="Core 30"><span>16</span>Core 30</a><a href="#project-17" title="Loaf T"><span>17</span>Loaf T</a></td><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><i>—</i></td></tr><tr><th scope="row"><b>TRL 2</b><span>Architecture</span></th><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><a href="#project-18" title="Earth Suit"><span>18</span>Earth Suit</a></td><td class="matrix-cell"><i>—</i></td></tr>
             </tbody>
           </table>
         </div>
@@ -306,7 +319,7 @@
       <div class="section-label">Ranked Portfolio</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">03 / 28</div>
+      <div class="slide-number">03 / 26</div>
     
     </section>
     
@@ -338,7 +351,10 @@
               data-signal-scale="Demonstrated prototype: a current physical sample is ready for a decision."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Approve the received sample and release the post-meeting revision list."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 6 · Demonstrated prototype</strong>
@@ -348,17 +364,20 @@
     
             
       <button class="signal signal-ip signal-detail" type="button"
-              aria-label="Open rationale for IP value: Not assessed"
+              aria-label="Open rationale for IP value: 2/5 · Limited"
               data-signal-title="IP value"
-              data-signal-value="Not assessed"
-              data-signal-basis="No patentability analysis is attached to the source card."
-              data-signal-scale="Not assessed: no current patentability analysis is attached, so no IP value is inferred."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Approve the received sample and release the post-meeting revision list."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-value="2/5 · Limited"
+              data-signal-basis="Narrow ornamental protection may remain, but angled and side-access backpack construction is established prior art."
+              data-signal-scale="Limited: only narrow implementation or ornamental protection appears plausible against close prior art."
+              data-signal-next-label="Why this score"
+              data-signal-next="The public screen found older angled- and side-access backpack patents. That leaves a narrow design-patent path if the final appearance is visually distinct, but little basis for broad utility protection."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially the frozen ornamental combination: triangular-panel silhouette, M-profile webbing read, and the exact slanted-zipper placement."
+              data-signal-not-protectable="Not the broad ideas of a structured daypack, angled opening, side access, internal organization, or using CAD/printed form studies during development."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/UO9YYma7&quot;},{&quot;label&quot;:&quot;EP0803211A2 \u00b7 carry pack with angled opening&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/EP0803211A2/en&quot;},{&quot;label&quot;:&quot;CA2653277A1 \u00b7 backpack with side access&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/CA2653277A1/en&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
-          <strong class="signal-value">Not assessed</strong>
+          <strong class="signal-value">2/5 · Limited</strong>
         </div>
         <span class="signal-action">View rationale ↗</span>
       </button>
@@ -391,7 +410,7 @@
       <div class="section-label">TRL 6 · Demonstrated prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">04 / 28</div>
+      <div class="slide-number">04 / 26</div>
     
     </section>
     
@@ -423,7 +442,10 @@
               data-signal-scale="Demonstrated prototype: a current physical sample is ready for a decision."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Approve access, carry feel, and branding; release the next revision."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 6 · Demonstrated prototype</strong>
@@ -433,17 +455,20 @@
     
             
       <button class="signal signal-ip signal-detail" type="button"
-              aria-label="Open rationale for IP value: Not assessed"
+              aria-label="Open rationale for IP value: 2/5 · Limited"
               data-signal-title="IP value"
-              data-signal-value="Not assessed"
-              data-signal-basis="No patentability analysis is attached to the source card."
-              data-signal-scale="Not assessed: no current patentability analysis is attached, so no IP value is inferred."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Approve access, carry feel, and branding; release the next revision."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-value="2/5 · Limited"
+              data-signal-basis="The final spiral appearance may support narrow design protection; convertible sling/backpack carrying systems are crowded."
+              data-signal-scale="Limited: only narrow implementation or ornamental protection appears plausible against close prior art."
+              data-signal-next-label="Why this score"
+              data-signal-next="Convertible single-strap, backpack, and cross-body systems have been patented for decades. The remaining opportunity is narrow and likely appearance-led rather than a broad functional claim."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially the final ornamental spiral panel flow and a very specific access/strap arrangement if the sample presents a distinct overall visual impression."
+              data-signal-not-protectable="Not the general sling/backpack hybrid, body-wrap carry, cross-body conversion, or front-access concept."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/jzPb5qso&quot;},{&quot;label&quot;:&quot;US5577652A \u00b7 convertible backpack&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US5577652A/en&quot;},{&quot;label&quot;:&quot;US9826817B2 \u00b7 multimodal strap system&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US9826817B2/en&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
-          <strong class="signal-value">Not assessed</strong>
+          <strong class="signal-value">2/5 · Limited</strong>
         </div>
         <span class="signal-action">View rationale ↗</span>
       </button>
@@ -476,7 +501,7 @@
       <div class="section-label">TRL 6 · Demonstrated prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">05 / 28</div>
+      <div class="slide-number">05 / 26</div>
     
     </section>
     
@@ -508,7 +533,10 @@
               data-signal-scale="Demonstrated prototype: a current physical sample is ready for a decision."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Approve the platform story, upholstery corrections, and next SKU/carton validation."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 6 · Demonstrated prototype</strong>
@@ -518,17 +546,20 @@
     
             
       <button class="signal signal-ip signal-detail" type="button"
-              aria-label="Open rationale for IP value: 4/5 · Strong"
+              aria-label="Open rationale for IP value: 3/5 · Focused"
               data-signal-title="IP value"
-              data-signal-value="4/5 · Strong"
-              data-signal-basis="Moderate–High; three protectable clusters, with FTO caution around modular sofa prior art."
-              data-signal-scale="Strong: the analysis identifies multiple potentially protectable invention clusters."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Approve the platform story, upholstery corrections, and next SKU/carton validation."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-value="3/5 · Focused"
+              data-signal-basis="Potentially protectable only as a narrow deployment-frame, concealment, and upholstery sequence; flat-pack and folding furniture are heavily patented."
+              data-signal-scale="Focused: a specific mechanism or combination may be protectable, but broad category claims are not supported."
+              data-signal-next-label="Why this score"
+              data-signal-next="The attached FTO work identified substantial adjacent art and multiple risk patents. Any protection would need to stay close to Westfield&#x27;s specific frame geometry and concealment sequence."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially the exact steel-tube deployment frame, parcel-cube transformation sequence, and upholstery/cushion system that conceals the folding structure after setup."
+              data-signal-not-protectable="Not flat-pack furniture, folding sofas, expandable seating, modular sofas, or parcel-friendly furniture as broad concepts."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/OUcGqXxw&quot;},{&quot;label&quot;:&quot;US9290935B2 \u00b7 flexible expandable furniture system&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US9290935&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
-          <strong class="signal-value">4/5 · Strong</strong>
+          <strong class="signal-value">3/5 · Focused</strong>
         </div>
         <span class="signal-action">View rationale ↗</span>
       </button>
@@ -561,7 +592,7 @@
       <div class="section-label">TRL 6 · Demonstrated prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">06 / 28</div>
+      <div class="slide-number">06 / 26</div>
     
     </section>
     
@@ -593,7 +624,10 @@
               data-signal-scale="Integrated functional prototype: the mechanism works, but a correction loop remains."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Show V3 and authorize the steel-foot geometry plus slider tuning test."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 5 · Integrated prototype</strong>
@@ -603,17 +637,20 @@
     
             
       <button class="signal signal-ip signal-detail" type="button"
-              aria-label="Open rationale for IP value: Not assessed"
+              aria-label="Open rationale for IP value: 2/5 · Limited"
               data-signal-title="IP value"
-              data-signal-value="Not assessed"
-              data-signal-basis="No current patentability analysis is attached to the source card."
-              data-signal-scale="Not assessed: no current patentability analysis is attached, so no IP value is inferred."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Show V3 and authorize the steel-foot geometry plus slider tuning test."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-value="2/5 · Limited"
+              data-signal-basis="A specific bow-limb geometry may be protectable, but spring, leaf, and portable rocking-chair mechanisms create close prior art."
+              data-signal-scale="Limited: only narrow implementation or ornamental protection appears plausible against close prior art."
+              data-signal-next-label="Why this score"
+              data-signal-next="Portable rockers, spring mechanisms, and leaf-spring chair motion are crowded. Hawkeye may support a narrow engineering claim, but the mechanism is Engineering-owned and should not be presented as broad ID-owned IP."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially the exact bow-limb front-leg geometry, material stack, deflection regime, steel-foot connection, and its interaction with the slider tuning system."
+              data-signal-not-protectable="Not a motion chair without runners, a flexible chair leg, a leaf-spring rocker, or a portable spring-actuated rocking chair in the abstract."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/md4yE8HL&quot;},{&quot;label&quot;:&quot;US9060611B2 \u00b7 collapsible portable rocking chair&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US9060611B2/en&quot;},{&quot;label&quot;:&quot;US6827401B2 \u00b7 leaf-spring rocker mechanism&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US6827401B2/en&quot;},{&quot;label&quot;:&quot;US20210186217A1 \u00b7 spring-actuated collapsible-chair rocker&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US20210186217A1/en&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
-          <strong class="signal-value">Not assessed</strong>
+          <strong class="signal-value">2/5 · Limited</strong>
         </div>
         <span class="signal-action">View rationale ↗</span>
       </button>
@@ -646,7 +683,7 @@
       <div class="section-label">TRL 5 · Integrated prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">07 / 28</div>
+      <div class="slide-number">07 / 26</div>
     
     </section>
     
@@ -678,7 +715,10 @@
               data-signal-scale="Integrated functional prototype: the mechanism works, but a correction loop remains."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Choose the intended motion signature and approve the V3 correction list."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 5 · Integrated prototype</strong>
@@ -688,17 +728,20 @@
     
             
       <button class="signal signal-ip signal-detail" type="button"
-              aria-label="Open rationale for IP value: 3/5 · Focused"
+              aria-label="Open rationale for IP value: 2/5 · Limited"
               data-signal-title="IP value"
-              data-signal-value="3/5 · Focused"
-              data-signal-basis="Moderate; two protectable mechanism/design clusters with adjacent suspension prior art."
-              data-signal-scale="Focused: the opportunity is narrower and sits closer to adjacent mechanism or design prior art."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Choose the intended motion signature and approve the V3 correction list."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-value="2/5 · Limited"
+              data-signal-basis="Only the exact folding-frame and webbing load path appears differentiable; suspended and motion-chair behavior is crowded."
+              data-signal-scale="Limited: only narrow implementation or ornamental protection appears plausible against close prior art."
+              data-signal-next-label="Why this score"
+              data-signal-next="Suspended lounge chairs, hammock chairs, and motion camp chairs are crowded. Differentiation depends on documenting a specific frame-and-webbing mechanism, not the desired user feel."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially the exact folding-frame geometry and static/elastic webbing load path that produces controlled bounce, sway, and rock while remaining foldable."
+              data-signal-not-protectable="Not suspended seating, hammock-chair behavior, bounce, sway, rocking, or a fabric seat supported by a portable frame as broad concepts."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/zgqMBTfm&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
-          <strong class="signal-value">3/5 · Focused</strong>
+          <strong class="signal-value">2/5 · Limited</strong>
         </div>
         <span class="signal-action">View rationale ↗</span>
       </button>
@@ -731,7 +774,7 @@
       <div class="section-label">TRL 5 · Integrated prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">08 / 28</div>
+      <div class="slide-number">08 / 26</div>
     
     </section>
     
@@ -763,7 +806,10 @@
               data-signal-scale="Integrated functional prototype: the mechanism works, but a correction loop remains."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Validate fold, fit, cleanability, and authorize production-intent liner CAD."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 5 · Integrated prototype</strong>
@@ -773,17 +819,20 @@
     
             
       <button class="signal signal-ip signal-detail" type="button"
-              aria-label="Open rationale for IP value: 3/5 · Focused"
+              aria-label="Open rationale for IP value: 2/5 · Limited"
               data-signal-title="IP value"
-              data-signal-value="3/5 · Focused"
-              data-signal-basis="Moderate; three clusters, but removable rigid liners create close prior-art pressure."
-              data-signal-scale="Focused: the opportunity is narrower and sits closer to adjacent mechanism or design prior art."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Validate fold, fit, cleanability, and authorize production-intent liner CAD."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-value="2/5 · Limited"
+              data-signal-basis="The fold-flat living-hinge pattern may be narrow utility subject matter; removable rigid cooler liners are established prior art."
+              data-signal-scale="Limited: only narrow implementation or ornamental protection appears plausible against close prior art."
+              data-signal-next-label="Why this score"
+              data-signal-next="Removable rigid inserts for flexible coolers are old. The viable claim territory is the specific fold-flat living-hinge geometry and shell integration."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially the one-piece box-spiral living-hinge pattern, the flat-to-rigid fold sequence, and the way that liner indexes into the soft shell."
+              data-signal-not-protectable="Not a removable rigid cooler liner, a rigid insert inside a flexible cooler, cleanability, leak resistance, or flat storage by themselves."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/uRw64mJg&quot;},{&quot;label&quot;:&quot;US5403095 \u00b7 flexible cooler with removable rigid insert&quot;,&quot;url&quot;:&quot;https://www.freepatentsonline.com/5403095.html&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
-          <strong class="signal-value">3/5 · Focused</strong>
+          <strong class="signal-value">2/5 · Limited</strong>
         </div>
         <span class="signal-action">View rationale ↗</span>
       </button>
@@ -816,7 +865,7 @@
       <div class="section-label">TRL 5 · Integrated prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">09 / 28</div>
+      <div class="slide-number">09 / 26</div>
     
     </section>
     
@@ -848,7 +897,10 @@
               data-signal-scale="Integrated functional prototype: the mechanism works, but a correction loop remains."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Approve comfort value versus cost and set the cross-platform manufacturing path."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 5 · Integrated prototype</strong>
@@ -858,17 +910,20 @@
     
             
       <button class="signal signal-ip signal-detail" type="button"
-              aria-label="Open rationale for IP value: 4/5 · Strong"
+              aria-label="Open rationale for IP value: 3/5 · Focused"
               data-signal-title="IP value"
-              data-signal-value="4/5 · Strong"
-              data-signal-basis="Moderate–High; three clusters across cartridge design, platform compatibility, and material reuse."
-              data-signal-scale="Strong: the analysis identifies multiple potentially protectable invention clusters."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Approve comfort value versus cost and set the cross-platform manufacturing path."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-value="3/5 · Focused"
+              data-signal-basis="The replaceable multi-platform cartridge may be protectable; padded armrests and scrap-fabric use alone are not strong claim territory."
+              data-signal-scale="Focused: a specific mechanism or combination may be protectable, but broad category claims are not supported."
+              data-signal-next-label="Why this score"
+              data-signal-next="Arm pads and upholstered armrests are common. Protectable value depends on a specific cartridge assembly and repeatable cross-platform mounting geometry."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially the screw-on cushioned cartridge construction and a shared interface that lets one replaceable insert work across several chair platforms."
+              data-signal-not-protectable="Not a padded armrest, an upholstered arm, a wider plastic arm, or using scrap fabric as a sustainability story by itself."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/dEMill29&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
-          <strong class="signal-value">4/5 · Strong</strong>
+          <strong class="signal-value">3/5 · Focused</strong>
         </div>
         <span class="signal-action">View rationale ↗</span>
       </button>
@@ -901,7 +956,7 @@
       <div class="section-label">TRL 5 · Integrated prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">10 / 28</div>
+      <div class="slide-number">10 / 26</div>
     
     </section>
     
@@ -933,7 +988,10 @@
               data-signal-scale="Integrated functional prototype: the mechanism works, but a correction loop remains."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Evaluate sample motion and pinch gap; decide filing path and next tuning wedge."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 5 · Integrated prototype</strong>
@@ -948,9 +1006,12 @@
               data-signal-value="4/5 · Strong"
               data-signal-basis="Moderate–Strong; three claim angles around dual fulcrums, tuning, and pinch-gap control."
               data-signal-scale="Strong: the analysis identifies multiple potentially protectable invention clusters."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Evaluate sample motion and pinch gap; decide filing path and next tuning wedge."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-next-label="Why this score"
+              data-signal-next="Rocking-chair art is crowded, but the attached analysis identifies a more specific geometry-and-control combination than a generic spring rocker."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially the angled ground-interface wedge, its distinct forward/rear fulcrums, and the geometry that tunes amplitude, return force, and pinch gap together."
+              data-signal-not-protectable="Not a spring rocking chair, a collapsible motion chair, an elastic return mechanism, or adjustable rocking feel broadly."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/EmhDKNr4&quot;},{&quot;label&quot;:&quot;US9060611B2 \u00b7 collapsible portable rocking chair&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US9060611B2/en&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">4/5 · Strong</strong>
@@ -986,7 +1047,7 @@
       <div class="section-label">TRL 5 · Integrated prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">11 / 28</div>
+      <div class="slide-number">11 / 26</div>
     
     </section>
     
@@ -1018,7 +1079,10 @@
               data-signal-scale="Component or partial prototype: the core architecture is represented, but evidence is incomplete."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Approve the ribbed-wall/end-lock next sample and the hinge-coupon program."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 4 · Component prototype</strong>
@@ -1033,9 +1097,12 @@
               data-signal-value="5/5 · Strategic"
               data-signal-basis="High if manufacturable; three platform-level invention clusters."
               data-signal-scale="Strategic: the analysis indicates potential platform-level protection if the mechanism proves manufacturable."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Approve the ribbed-wall/end-lock next sample and the hinge-coupon program."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-next-label="Why this score"
+              data-signal-next="Both folding wagons and living hinges are established. The strategic opportunity is their specific load-bearing combination—if hinge fatigue, locking, and manufacturability are proven."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially the one-sheet load-bearing body, exact living-hinge pattern, fold sequence, rib/lock features, and conversion between flexible fold state and rigid transport state."
+              data-signal-not-protectable="Not a folding wagon, living hinges, polymer sheet construction, flat folding, or a briefcase-like package individually."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/qHgjVBW7&quot;},{&quot;label&quot;:&quot;US8973940B2 \u00b7 folding wagon&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US8973940B2/en&quot;},{&quot;label&quot;:&quot;US7685676B2 \u00b7 living-hinge flex zone&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US7685676B2/en&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">5/5 · Strategic</strong>
@@ -1071,7 +1138,7 @@
       <div class="section-label">TRL 4 · Component prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">12 / 28</div>
+      <div class="slide-number">12 / 26</div>
     
     </section>
     
@@ -1104,7 +1171,7 @@
       <div class="section-label">Interactive Evidence</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">13 / 28</div>
+      <div class="slide-number">13 / 26</div>
     
     </section>
     
@@ -1136,7 +1203,10 @@
               data-signal-scale="Component or partial prototype: the core architecture is represented, but evidence is incomplete."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Calibrate corner stiffness and seat height, then approve the next mechanism round."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 4 · Component prototype</strong>
@@ -1146,17 +1216,20 @@
     
             
       <button class="signal signal-ip signal-detail" type="button"
-              aria-label="Open rationale for IP value: 4/5 · Strong"
+              aria-label="Open rationale for IP value: 3/5 · Focused"
               data-signal-title="IP value"
-              data-signal-value="4/5 · Strong"
-              data-signal-basis="Moderate–Strong in the deeper FTO report; novel integrated corner-flex mechanism with low reviewed FTO risk."
-              data-signal-scale="Strong: the analysis identifies multiple potentially protectable invention clusters."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Calibrate corner stiffness and seat height, then approve the next mechanism round."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-value="3/5 · Focused"
+              data-signal-basis="The exact compliant-corner geometry may support narrow claims; flexible furniture mounts and elastomer joints are established."
+              data-signal-scale="Focused: a specific mechanism or combination may be protectable, but broad category claims are not supported."
+              data-signal-next-label="Why this score"
+              data-signal-next="Compliant furniture is established. The protection case depends on narrow mechanical geometry and proof that the corner system creates a controlled, repeatable motion benefit."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially the exact elastomer corner geometry that converts a director-frame stance into controlled parallelogram rocking, including the tuned stiffness and mounting relationship."
+              data-signal-not-protectable="Not flexible furniture mounts, elastomer joints, compliant corners, or rocking through frame flex as broad concepts."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/7ir1icyE&quot;},{&quot;label&quot;:&quot;US6827401B2 \u00b7 leaf-spring rocker mechanism&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US6827401B2/en&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
-          <strong class="signal-value">4/5 · Strong</strong>
+          <strong class="signal-value">3/5 · Focused</strong>
         </div>
         <span class="signal-action">View rationale ↗</span>
       </button>
@@ -1189,7 +1262,7 @@
       <div class="section-label">TRL 4 · Component prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">14 / 28</div>
+      <div class="slide-number">14 / 26</div>
     
     </section>
     
@@ -1222,7 +1295,7 @@
       <div class="section-label">Interactive Evidence</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">15 / 28</div>
+      <div class="slide-number">15 / 26</div>
     
     </section>
     
@@ -1254,7 +1327,10 @@
               data-signal-scale="Component or partial prototype: the core architecture is represented, but evidence is incomplete."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Review the repaired sample and approve stability, weld, foot, and finish corrections."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 4 · Component prototype</strong>
@@ -1264,17 +1340,20 @@
     
             
       <button class="signal signal-ip signal-detail" type="button"
-              aria-label="Open rationale for IP value: 3/5 · Focused"
+              aria-label="Open rationale for IP value: 2/5 · Limited"
               data-signal-title="IP value"
-              data-signal-value="3/5 · Focused"
-              data-signal-basis="Moderate; two narrow clusters around field adaptation, feet, lock feedback, and use positions."
-              data-signal-scale="Focused: the opportunity is narrower and sits closer to adjacent mechanism or design prior art."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Review the repaired sample and approve stability, weld, foot, and finish corrections."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-value="2/5 · Limited"
+              data-signal-basis="Outdoor foot geometry and lock feedback may be narrow claim territory; ironing-board mechanisms and multi-height folding tables are mature prior art."
+              data-signal-scale="Limited: only narrow implementation or ornamental protection appears plausible against close prior art."
+              data-signal-next-label="Why this score"
+              data-signal-next="The base mechanism and use positions come from mature ironing-board and folding-table art. Only a narrow outdoor adaptation appears differentiable."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially field-specific foot geometry, tactile lock feedback, and the exact multi-height/workload package when integrated into the donor mechanism."
+              data-signal-not-protectable="Not an ironing-board mechanism, folding work surface, multi-height table, fold-flat storage, or hard outdoor tabletop broadly."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/XMLIPzoE&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
-          <strong class="signal-value">3/5 · Focused</strong>
+          <strong class="signal-value">2/5 · Limited</strong>
         </div>
         <span class="signal-action">View rationale ↗</span>
       </button>
@@ -1307,7 +1386,7 @@
       <div class="section-label">TRL 4 · Component prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">16 / 28</div>
+      <div class="slide-number">16 / 26</div>
     
     </section>
     
@@ -1339,7 +1418,10 @@
               data-signal-scale="Component or partial prototype: the core architecture is represented, but evidence is incomplete."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Demonstrate the welded frame and lock the accessory architecture and presentation story."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 4 · Component prototype</strong>
@@ -1349,17 +1431,20 @@
     
             
       <button class="signal signal-ip signal-detail" type="button"
-              aria-label="Open rationale for IP value: 4/5 · Strong"
+              aria-label="Open rationale for IP value: 3/5 · Focused"
               data-signal-title="IP value"
-              data-signal-value="4/5 · Strong"
-              data-signal-basis="Moderate–High; three protectable platform/ecosystem clusters."
-              data-signal-scale="Strong: the analysis identifies multiple potentially protectable invention clusters."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Demonstrate the welded frame and lock the accessory architecture and presentation story."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-value="3/5 · Focused"
+              data-signal-basis="The exact crate-chassis and accessory integration may be protectable; modular wagons and the generic mounting interface are crowded."
+              data-signal-scale="Focused: a specific mechanism or combination may be protectable, but broad category claims are not supported."
+              data-signal-next-label="Why this score"
+              data-signal-next="Carts and modular storage systems are crowded, and the generic interface belongs to existing art. Claims would need to stay on Westfield&#x27;s chassis-to-accessory integration."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially the exact 24-qt crate chassis, structural indexing, and Westfield-specific accessory integration as a combined transport platform."
+              data-signal-not-protectable="Not a modular wagon, milk-crate sizing, a generic accessory ecosystem, or the M-LOK interface itself."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/9SwmZfmx&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
-          <strong class="signal-value">4/5 · Strong</strong>
+          <strong class="signal-value">3/5 · Focused</strong>
         </div>
         <span class="signal-action">View rationale ↗</span>
       </button>
@@ -1392,7 +1477,7 @@
       <div class="section-label">TRL 4 · Component prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">17 / 28</div>
+      <div class="slide-number">17 / 26</div>
     
     </section>
     
@@ -1424,7 +1509,10 @@
               data-signal-scale="Component or partial prototype: the core architecture is represented, but evidence is incomplete."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Review construction accuracy and lock line drawings, dimensions, and material direction."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 4 · Component prototype</strong>
@@ -1434,17 +1522,20 @@
     
             
       <button class="signal signal-ip signal-detail" type="button"
-              aria-label="Open rationale for IP value: Not assessed"
+              aria-label="Open rationale for IP value: 1/5 · Low"
               data-signal-title="IP value"
-              data-signal-value="Not assessed"
-              data-signal-basis="No patentability analysis is attached to the source card."
-              data-signal-scale="Not assessed: no current patentability analysis is attached, so no IP value is inferred."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Review construction accuracy and lock line drawings, dimensions, and material direction."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-value="1/5 · Low"
+              data-signal-basis="No defensible utility mechanism is identified yet; protection is limited to a frozen ornamental design if the final form is distinct."
+              data-signal-scale="Low: no defensible utility mechanism is identified; protection depends on a frozen, distinctive ornamental design."
+              data-signal-next-label="Why this score"
+              data-signal-next="The current package identifies no unique mechanism, and public travel-backpack art already covers structured panels and broad front/dual-access organization. This is a low-value design-patent possibility, not a utility case."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially only the final ornamental silhouette and a specific construction detail that is both frozen and visually distinct."
+              data-signal-not-protectable="Not a structured travel backpack, front access, internal organization, normal softgoods construction, or the AI/CAD concept-development process."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/id4GvFzU&quot;},{&quot;label&quot;:&quot;US8453813B2 \u00b7 structured travel bag with front access&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US8453813B2&quot;},{&quot;label&quot;:&quot;US20020139820A1 \u00b7 backpack luggage with dual access&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US20020139820&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
-          <strong class="signal-value">Not assessed</strong>
+          <strong class="signal-value">1/5 · Low</strong>
         </div>
         <span class="signal-action">View rationale ↗</span>
       </button>
@@ -1477,7 +1568,7 @@
       <div class="section-label">TRL 4 · Component prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">18 / 28</div>
+      <div class="slide-number">18 / 26</div>
     
     </section>
     
@@ -1509,7 +1600,10 @@
               data-signal-scale="Component or partial prototype: the core architecture is represented, but evidence is incomplete."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Review the 30 L construction sample and lock dimensions, access, and material."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 4 · Component prototype</strong>
@@ -1519,17 +1613,20 @@
     
             
       <button class="signal signal-ip signal-detail" type="button"
-              aria-label="Open rationale for IP value: Not assessed"
+              aria-label="Open rationale for IP value: 1/5 · Low"
               data-signal-title="IP value"
-              data-signal-value="Not assessed"
-              data-signal-basis="No patentability analysis is attached to the source card."
-              data-signal-scale="Not assessed: no current patentability analysis is attached, so no IP value is inferred."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Review the 30 L construction sample and lock dimensions, access, and material."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-value="1/5 · Low"
+              data-signal-basis="A 30 L companion tote is conventional; only a distinctive frozen silhouette, handle layout, or construction detail may support narrow design protection."
+              data-signal-scale="Low: no defensible utility mechanism is identified; protection depends on a frozen, distinctive ornamental design."
+              data-signal-next-label="Why this score"
+              data-signal-next="Tote structures are exceptionally crowded and the current project has no distinct mechanism. A narrow design claim may emerge after form freeze; broad utility value is low."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially only a frozen ornamental silhouette, handle/panel arrangement, or a genuinely new construction detail visible in the final sample."
+              data-signal-not-protectable="Not a 30 L tote, companion-product strategy, standard handles, gussets, pockets, open-top access, or ordinary softgoods construction."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/UFHSapNW&quot;},{&quot;label&quot;:&quot;US3675843A \u00b7 collapsible tote bag&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US3675843A/en&quot;},{&quot;label&quot;:&quot;US7762294B2 \u00b7 reversible tote bag&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US7762294&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
-          <strong class="signal-value">Not assessed</strong>
+          <strong class="signal-value">1/5 · Low</strong>
         </div>
         <span class="signal-action">View rationale ↗</span>
       </button>
@@ -1562,182 +1659,12 @@
       <div class="section-label">TRL 4 · Component prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">19 / 28</div>
+      <div class="slide-number">19 / 26</div>
     
     </section>
     
 
     <section class="slide product-slide" id="project-15"
-             data-title="Handwarmer Armrests" data-trl="4">
-      
-      <img class="logo" src="assets/westfield-outdoors-logo.png"
-           alt="Westfield Outdoors logo">
-    
-      <div class="product-shell">
-        <div class="product-copy">
-          <div class="rankline">
-            <span class="rank">#15</span>
-            <span>Furniture</span>
-            <span>Upcoming Sprint</span>
-          </div>
-          <p class="eyebrow">SKW-028</p>
-          <h1>Handwarmer Armrests</h1>
-          <p class="product-value">Heated armrests adapted to the familiar director&#x27;s-chair platform for cold-weather comfort.</p>
-          <p class="product-brief">The concept has been handed off and samples were reported in transit. Confirm fit, heat, controls, safety, and chair-family compatibility.</p>
-          <div class="signals">
-            
-      <button class="signal signal-trl signal-detail" type="button"
-              aria-label="Open rationale for Technical readiness: TRL 4 · Component prototype"
-              data-signal-title="Technical readiness"
-              data-signal-value="TRL 4 · Component prototype"
-              data-signal-basis="Engineering concept was handed off and a sample was reported in transit; review evidence is still stale."
-              data-signal-scale="Component or partial prototype: the core architecture is represented, but evidence is incomplete."
-              data-signal-next-label="Next proof to advance"
-              data-signal-next="Confirm sample status, then validate heat, comfort, safety, and chair-format fit."
-              data-signal-guardrail="">
-        <div class="signal-top">
-          <span class="signal-title">Technical readiness</span>
-          <strong class="signal-value">TRL 4 · Component prototype</strong>
-        </div>
-        <span class="signal-action">View rationale ↗</span>
-      </button>
-    
-            
-      <button class="signal signal-ip signal-detail" type="button"
-              aria-label="Open rationale for IP value: Not assessed"
-              data-signal-title="IP value"
-              data-signal-value="Not assessed"
-              data-signal-basis="No patentability analysis is attached to the source card."
-              data-signal-scale="Not assessed: no current patentability analysis is attached, so no IP value is inferred."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Confirm sample status, then validate heat, comfort, safety, and chair-format fit."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
-        <div class="signal-top">
-          <span class="signal-title">IP value</span>
-          <strong class="signal-value">Not assessed</strong>
-        </div>
-        <span class="signal-action">View rationale ↗</span>
-      </button>
-    
-            
-      <article class="signal signal-gate">
-        <div class="signal-top">
-          <span class="signal-title">August gate</span>
-          <strong class="signal-value">Decision required</strong>
-        </div>
-        <p>Confirm sample status, then validate heat, comfort, safety, and chair-format fit.</p>
-      </article>
-    
-          </div>
-          <a class="trello-link" href="https://trello.com/c/ERwOl149" target="_blank"
-             rel="noopener noreferrer">Open current Trello evidence ↗</a>
-        </div>
-        <button class="hero-button" type="button"
-                data-image="assets/source/skw-028-handwarmer-armrests-2026/69cb7772e29d07a806595f63.png"
-                data-alt="Heated director chair armrest concept"
-                aria-label="Open Handwarmer Armrests image full screen">
-          <span class="hero-frame">
-            <img class="product-hero" src="assets/source/skw-028-handwarmer-armrests-2026/69cb7772e29d07a806595f63.png"
-                 alt="Heated director chair armrest concept" loading="lazy">
-          </span>
-          <span class="trl-ribbon">TRL 4</span>
-        </button>
-      </div>
-      
-      <div class="section-label">TRL 4 · Component prototype</div>
-      <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
-        Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">20 / 28</div>
-    
-    </section>
-    
-
-    <section class="slide product-slide" id="project-16"
-             data-title="Range &amp; Field Cleaning Station" data-trl="4">
-      
-      <img class="logo" src="assets/westfield-outdoors-logo.png"
-           alt="Westfield Outdoors logo">
-    
-      <div class="product-shell">
-        <div class="product-copy">
-          <div class="rankline">
-            <span class="rank">#16</span>
-            <span>Camp Utility</span>
-            <span>Upcoming Sprint</span>
-          </div>
-          <p class="eyebrow">Hunt</p>
-          <h1>Range &amp; Field Cleaning Station</h1>
-          <p class="product-value">A portable organized gunsmithing and cleaning station for range and field use.</p>
-          <p class="product-brief">The developed concept resolves the main use zones and storage logic. The next decision is whether the use case is strong enough to fund physical proof.</p>
-          <div class="signals">
-            
-      <button class="signal signal-trl signal-detail" type="button"
-              aria-label="Open rationale for Technical readiness: TRL 4 · Component prototype"
-              data-signal-title="Technical readiness"
-              data-signal-value="TRL 4 · Component prototype"
-              data-signal-basis="First-round sample exists, but development is paused for gun-case design-language alignment."
-              data-signal-scale="Component or partial prototype: the core architecture is represented, but evidence is incomplete."
-              data-signal-next-label="Next proof to advance"
-              data-signal-next="Decide whether the gun-case language is mature enough to resume this program."
-              data-signal-guardrail="">
-        <div class="signal-top">
-          <span class="signal-title">Technical readiness</span>
-          <strong class="signal-value">TRL 4 · Component prototype</strong>
-        </div>
-        <span class="signal-action">View rationale ↗</span>
-      </button>
-    
-            
-      <button class="signal signal-ip signal-detail" type="button"
-              aria-label="Open rationale for IP value: Not assessed"
-              data-signal-title="IP value"
-              data-signal-value="Not assessed"
-              data-signal-basis="No patentability analysis is attached to the source card."
-              data-signal-scale="Not assessed: no current patentability analysis is attached, so no IP value is inferred."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Decide whether the gun-case language is mature enough to resume this program."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
-        <div class="signal-top">
-          <span class="signal-title">IP value</span>
-          <strong class="signal-value">Not assessed</strong>
-        </div>
-        <span class="signal-action">View rationale ↗</span>
-      </button>
-    
-            
-      <article class="signal signal-gate">
-        <div class="signal-top">
-          <span class="signal-title">August gate</span>
-          <strong class="signal-value">Decision required</strong>
-        </div>
-        <p>Decide whether the gun-case language is mature enough to resume this program.</p>
-      </article>
-    
-          </div>
-          <a class="trello-link" href="https://trello.com/c/pMmo7PiA" target="_blank"
-             rel="noopener noreferrer">Open current Trello evidence ↗</a>
-        </div>
-        <button class="hero-button" type="button"
-                data-image="assets/source/range-and-field-cleaning-and-gunsmithing-station/range-station-product.png"
-                data-alt="Portable range equipment and cleaning station reference"
-                aria-label="Open Range &amp; Field Cleaning Station image full screen">
-          <span class="hero-frame">
-            <img class="product-hero" src="assets/source/range-and-field-cleaning-and-gunsmithing-station/range-station-product.png"
-                 alt="Portable range equipment and cleaning station reference" loading="lazy">
-          </span>
-          <span class="trl-ribbon">TRL 4</span>
-        </button>
-      </div>
-      
-      <div class="section-label">TRL 4 · Component prototype</div>
-      <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
-        Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">21 / 28</div>
-    
-    </section>
-    
-
-    <section class="slide product-slide" id="project-17"
              data-title="Concertina Cooler" data-trl="3">
       
       <img class="logo" src="assets/westfield-outdoors-logo.png"
@@ -1746,7 +1673,7 @@
       <div class="product-shell">
         <div class="product-copy">
           <div class="rankline">
-            <span class="rank">#17</span>
+            <span class="rank">#15</span>
             <span>Coolers</span>
             <span>Current Sprint</span>
           </div>
@@ -1764,7 +1691,10 @@
               data-signal-scale="Digital or analytical proof: the next meaningful gate is a physical kill test."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Validate geometry/lock states and authorize skinned-EPP coupons and price testing."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 3 · Digital proof</strong>
@@ -1779,9 +1709,12 @@
               data-signal-value="4/5 · Strong"
               data-signal-basis="Moderate–High; three clusters around variable volume, lock states, and molded EPP construction."
               data-signal-scale="Strong: the analysis identifies multiple potentially protectable invention clusters."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Validate geometry/lock states and authorize skinned-EPP coupons and price testing."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-next-label="Why this score"
+              data-signal-next="Bellows containers and collapsible coolers exist. The stronger case is the coordinated insulation, partial-load stability, lock states, and manufacturing architecture."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially the cooler-specific insulated bellows geometry, stable locked volume states, hinge-valley construction, and molded EPP/in-mold-film manufacturing package."
+              data-signal-not-protectable="Not an expandable container, bellows sidewalls, collapsible cooler, variable capacity, or straps that hold a chosen size in the abstract."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/sOVT7lW7&quot;},{&quot;label&quot;:&quot;WO2021108890A1 \u00b7 collapsible modular container system&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/WO2021108890A1/en&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">4/5 · Strong</strong>
@@ -1817,12 +1750,12 @@
       <div class="section-label">TRL 3 · Digital proof</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">22 / 28</div>
+      <div class="slide-number">20 / 26</div>
     
     </section>
     
 
-    <section class="slide simulation-slide" id="simulation-17"
+    <section class="slide simulation-slide" id="simulation-15"
              data-title="Concertina Cooler simulation">
       
       <img class="logo" src="assets/westfield-outdoors-logo.png"
@@ -1850,12 +1783,12 @@
       <div class="section-label">Interactive Evidence</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">23 / 28</div>
+      <div class="slide-number">21 / 26</div>
     
     </section>
     
 
-    <section class="slide product-slide" id="project-18"
+    <section class="slide product-slide" id="project-16"
              data-title="Core 30" data-trl="3">
       
       <img class="logo" src="assets/westfield-outdoors-logo.png"
@@ -1864,7 +1797,7 @@
       <div class="product-shell">
         <div class="product-copy">
           <div class="rankline">
-            <span class="rank">#18</span>
+            <span class="rank">#16</span>
             <span>Furniture</span>
             <span>Current Sprint</span>
           </div>
@@ -1882,7 +1815,10 @@
               data-signal-scale="Digital or analytical proof: the next meaningful gate is a physical kill test."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Review the fold simulation and authorize production-intent joint/X-boss CAD."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 3 · Digital proof</strong>
@@ -1897,9 +1833,12 @@
               data-signal-value="4/5 · Strong"
               data-signal-basis="Moderate–High; two clusters around load-opposed joints and the flat-bar fold package."
               data-signal-scale="Strong: the analysis identifies multiple potentially protectable invention clusters."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Review the fold simulation and authorize production-intent joint/X-boss CAD."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-next-label="Why this score"
+              data-signal-next="The category is old, but the attached analysis identifies a coordinated joint architecture whose seated load drives the chair into stops instead of toward collapse."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially the full load-opposed joint stack, continuous side tubes, inline X-boss action, nested runners, and flat-bar folded package as one mechanism."
+              data-signal-not-protectable="Not a folding director chair, scissor braces, over-center joints, cantilever seating, or flat folding individually."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/xq9EWAUz&quot;},{&quot;label&quot;:&quot;US7100975B1 \u00b7 collapsible rocking-chair frame&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US7100975B1/en&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">4/5 · Strong</strong>
@@ -1935,12 +1874,12 @@
       <div class="section-label">TRL 3 · Digital proof</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">24 / 28</div>
+      <div class="slide-number">22 / 26</div>
     
     </section>
     
 
-    <section class="slide simulation-slide" id="simulation-18"
+    <section class="slide simulation-slide" id="simulation-16"
              data-title="Core 30 simulation">
       
       <img class="logo" src="assets/westfield-outdoors-logo.png"
@@ -1968,12 +1907,12 @@
       <div class="section-label">Interactive Evidence</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">25 / 28</div>
+      <div class="slide-number">23 / 26</div>
     
     </section>
     
 
-    <section class="slide product-slide" id="project-19"
+    <section class="slide product-slide" id="project-17"
              data-title="Loaf T" data-trl="3">
       
       <img class="logo" src="assets/westfield-outdoors-logo.png"
@@ -1982,7 +1921,7 @@
       <div class="product-shell">
         <div class="product-copy">
           <div class="rankline">
-            <span class="rank">#19</span>
+            <span class="rank">#17</span>
             <span>Shelter</span>
             <span>Current Sprint</span>
           </div>
@@ -2000,7 +1939,10 @@
               data-signal-scale="Digital or analytical proof: the next meaningful gate is a physical kill test."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Authorize the B1 bench rig and provisional-first evidence plan."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 3 · Digital proof</strong>
@@ -2015,9 +1957,12 @@
               data-signal-value="4/5 · Strong"
               data-signal-basis="Moderate–High; two protectable clusters around structural skin and one-cord setup."
               data-signal-scale="Strong: the analysis identifies multiple potentially protectable invention clusters."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Authorize the B1 bench rig and provisional-first evidence plan."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-next-label="Why this score"
+              data-signal-next="Flexible-loop and pop-up shelters are established. The stronger claim is the specific skin/batten/pocket/cord architecture and its repeatable lock state."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially the fabric-skin structure using pre-cambered battens in staggered pockets, the one-cord lock-up, and their cooperative setup sequence."
+              data-signal-not-protectable="Not a pop-up tent, flexible-loop tent, pole-free shelter, tensioned fabric skin, or quick setup by itself."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/YrHgIN96&quot;},{&quot;label&quot;:&quot;US5645096A \u00b7 flexible-loop pop-up tent&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US5645096A/en&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
           <strong class="signal-value">4/5 · Strong</strong>
@@ -2053,12 +1998,12 @@
       <div class="section-label">TRL 3 · Digital proof</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">26 / 28</div>
+      <div class="slide-number">24 / 26</div>
     
     </section>
     
 
-    <section class="slide simulation-slide" id="simulation-19"
+    <section class="slide simulation-slide" id="simulation-17"
              data-title="Loaf T simulation">
       
       <img class="logo" src="assets/westfield-outdoors-logo.png"
@@ -2086,12 +2031,12 @@
       <div class="section-label">Interactive Evidence</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">27 / 28</div>
+      <div class="slide-number">25 / 26</div>
     
     </section>
     
 
-    <section class="slide product-slide" id="project-20"
+    <section class="slide product-slide" id="project-18"
              data-title="Earth Suit" data-trl="2">
       
       <img class="logo" src="assets/westfield-outdoors-logo.png"
@@ -2100,7 +2045,7 @@
       <div class="product-shell">
         <div class="product-copy">
           <div class="rankline">
-            <span class="rank">#20</span>
+            <span class="rank">#18</span>
             <span>Wearables</span>
             <span>Current Sprint</span>
           </div>
@@ -2118,7 +2063,10 @@
               data-signal-scale="Architecture defined: feasibility work has not yet produced a system prototype."
               data-signal-next-label="Next proof to advance"
               data-signal-next="Approve compressor data acquisition, competitor teardown, and a viable price/weight envelope."
-              data-signal-guardrail="">
+              data-signal-guardrail=""
+              data-signal-protectable=""
+              data-signal-not-protectable=""
+              data-signal-sources="[]">
         <div class="signal-top">
           <span class="signal-title">Technical readiness</span>
           <strong class="signal-value">TRL 2 · Concept defined</strong>
@@ -2128,17 +2076,20 @@
     
             
       <button class="signal signal-ip signal-detail" type="button"
-              aria-label="Open rationale for IP value: 3/5 · Focused"
+              aria-label="Open rationale for IP value: 2/5 · Limited"
               data-signal-title="IP value"
-              data-signal-value="3/5 · Focused"
-              data-signal-basis="Moderate; three clusters, but the category carries heavy prior art."
-              data-signal-scale="Focused: the opportunity is narrower and sits closer to adjacent mechanism or design prior art."
-              data-signal-next-label="Meeting implication"
-              data-signal-next="Approve compressor data acquisition, competitor teardown, and a viable price/weight envelope."
-              data-signal-guardrail="Based on the latest attached preliminary patentability/FTO analysis. Internal portfolio triage only—not a legal opinion or filing recommendation.">
+              data-signal-value="2/5 · Limited"
+              data-signal-basis="Only the specific controls, modular garment zoning, and consumer package may be differentiable; liquid-cooled garments and backpack chillers have deep prior art."
+              data-signal-scale="Limited: only narrow implementation or ornamental protection appears plausible against close prior art."
+              data-signal-next-label="Why this score"
+              data-signal-next="Liquid-cooled garments and portable refrigeration have deep prior art. Only a tightly defined control-and-integration architecture appears differentiable."
+              data-signal-guardrail="Based on the latest attached preliminary analysis plus a refreshed public prior-art screen dated July 28, 2026. Internal portfolio triage only—not a legal opinion or filing recommendation."
+              data-signal-protectable="Potentially a specific control system combining body, garment, environment, and battery signals with modular cooling zones and a defined consumer-outdoor package."
+              data-signal-not-protectable="Not a liquid-cooled garment, backpack vapor-compression chiller, circulating coolant loop, sensor control, or wearable cooling broadly."
+              data-signal-sources="[{&quot;label&quot;:&quot;Current Trello project evidence&quot;,&quot;url&quot;:&quot;https://trello.com/c/B810bWAN&quot;},{&quot;label&quot;:&quot;US6295648B2 \u00b7 personal cooling apparatus integrated with garment&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US6295648B2/en&quot;},{&quot;label&quot;:&quot;US20150150313A1 \u00b7 cooling garment prior-art discussion&quot;,&quot;url&quot;:&quot;https://patents.google.com/patent/US20150150313&quot;}]">
         <div class="signal-top">
           <span class="signal-title">IP value</span>
-          <strong class="signal-value">3/5 · Focused</strong>
+          <strong class="signal-value">2/5 · Limited</strong>
         </div>
         <span class="signal-action">View rationale ↗</span>
       </button>
@@ -2171,7 +2122,7 @@
       <div class="section-label">TRL 2 · Concept defined</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">28 / 28</div>
+      <div class="slide-number">26 / 26</div>
     
     </section>
     
@@ -2199,9 +2150,23 @@
           <h3>How to read this score</h3>
           <p class="signal-modal-scale"></p>
         </section>
+        <div class="signal-ip-split" hidden>
+          <section class="signal-modal-block signal-modal-protectable">
+            <h3>What appears protectable</h3>
+            <p class="signal-modal-protectable-copy"></p>
+          </section>
+          <section class="signal-modal-block signal-modal-not-protectable">
+            <h3>What does not appear protectable</h3>
+            <p class="signal-modal-not-protectable-copy"></p>
+          </section>
+        </div>
         <section class="signal-modal-block">
           <h3 class="signal-modal-next-label"></h3>
           <p class="signal-modal-next"></p>
+        </section>
+        <section class="signal-modal-block signal-modal-sources-wrap" hidden>
+          <h3>Research basis</h3>
+          <div class="signal-modal-sources"></div>
         </section>
         <section class="signal-modal-block signal-modal-guardrail-wrap">
           <h3>Source and guardrail</h3>
@@ -2262,6 +2227,26 @@
       signalModal.querySelector('.signal-modal-scale').textContent = button.dataset.signalScale;
       signalModal.querySelector('.signal-modal-next-label').textContent = button.dataset.signalNextLabel;
       signalModal.querySelector('.signal-modal-next').textContent = button.dataset.signalNext;
+      const ipSplit = signalModal.querySelector('.signal-ip-split');
+      const protectable = button.dataset.signalProtectable;
+      const notProtectable = button.dataset.signalNotProtectable;
+      ipSplit.hidden = !(protectable || notProtectable);
+      signalModal.querySelector('.signal-modal-protectable-copy').textContent = protectable || '';
+      signalModal.querySelector('.signal-modal-not-protectable-copy').textContent = notProtectable || '';
+      const sourceWrap = signalModal.querySelector('.signal-modal-sources-wrap');
+      const sourceList = signalModal.querySelector('.signal-modal-sources');
+      sourceList.replaceChildren();
+      let sources = [];
+      try { sources = JSON.parse(button.dataset.signalSources || '[]'); } catch (_) {}
+      sources.forEach(source => {
+        const link = document.createElement('a');
+        link.href = source.url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = `${source.label} ↗`;
+        sourceList.appendChild(link);
+      });
+      sourceWrap.hidden = !sources.length;
       const guardrailWrap = signalModal.querySelector('.signal-modal-guardrail-wrap');
       const guardrail = button.dataset.signalGuardrail;
       guardrailWrap.hidden = !guardrail;
