@@ -146,6 +146,9 @@
     .signal-modal-shell h2 { margin:.25rem 3rem 1.25rem 0; color:var(--green); font-size:clamp(1.7rem,4vw,2.8rem); line-height:1.02; }
     .signal-modal-grid { display:grid; gap:.75rem; }
     .signal-ip-split { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; }
+    .signal-ip-split[hidden],
+    .signal-modal-sources-wrap[hidden],
+    .signal-modal-guardrail-wrap[hidden] { display:none !important; }
     .signal-modal-block { border:1px solid var(--line); border-radius:12px; background:white; padding:1rem 1.05rem; }
     .signal-modal-block h3 { margin:0 0 .35rem; color:var(--muted); font-size:.64rem; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
     .signal-modal-block p { margin:0; color:var(--ink); font-size:.86rem; line-height:1.45; font-weight:620; }
