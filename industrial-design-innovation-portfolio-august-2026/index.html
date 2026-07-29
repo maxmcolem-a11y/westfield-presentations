@@ -53,10 +53,7 @@
     .cover-grid { width:min(1260px,92vw); height:100%; margin:auto; display:grid; grid-template-columns:1.55fr .65fr; align-items:center; gap:4vw; padding:5rem 2.3rem; }
     .cover h1 { font-size:clamp(3.2rem,6.6vw,7rem); }
     .cover h1 span { color:var(--green); }
-    .cover .lede { max-width:780px; }
-    .cover-rule { width:90px; height:7px; background:var(--lime); margin:1.8rem 0 1rem; }
-    .cover-note { color:var(--muted); font-size:.82rem; font-weight:750; }
-    .cover-number { color:white; display:flex; align-items:flex-end; gap:1rem; justify-content:center; }
+    .cover-number { color:var(--ink); display:flex; align-items:flex-end; gap:1rem; justify-content:center; }
     .cover-number strong { font-size:clamp(7rem,15vw,13rem); line-height:.75; letter-spacing:-.1em; }
     .cover-number span { font-size:1.1rem; font-weight:850; line-height:1.05; text-transform:uppercase; letter-spacing:.08em; }
     .overview h1,.rubric h1,.ranking h1 { max-width:1050px; }
@@ -79,13 +76,27 @@
     .scale-list b { color:var(--green); font-size:.86rem; }
     .scale-list span { color:var(--muted); font-size:.8rem; line-height:1.25; font-weight:650; }
     .method-note { margin:1rem 0 0; color:var(--muted); font-size:.72rem; font-weight:700; }
-    .rank-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:.55rem; margin-top:1.4rem; }
-    .rank-item { display:grid; grid-template-columns:30px 1fr auto; grid-template-areas:'num name trl' 'num ip ip'; gap:.15rem .55rem; align-items:center; padding:.58rem .72rem; border:1px solid var(--line); border-left:5px solid var(--green); border-radius:10px; background:white; color:var(--ink); text-decoration:none; box-shadow:0 5px 20px rgba(19,37,26,.06); }
-    .rank-item span { grid-area:num; color:var(--green); font-weight:900; }
-    .rank-item b { grid-area:name; font-size:.76rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .rank-item em { grid-area:trl; font-style:normal; font-size:.68rem; font-weight:900; color:var(--green); }
-    .rank-item i { grid-area:ip; font-style:normal; color:var(--muted); font-size:.62rem; font-weight:750; }
-    .rank-item.trl-3,.rank-item.trl-2 { border-left-color:var(--amber); }
+    .ranking .content { padding-top:clamp(4.8rem,7vh,6.2rem); }
+    .ranking h1 { font-size:clamp(2.5rem,4.2vw,4.4rem); }
+    .matrix-note { margin:.65rem 0 .9rem; color:var(--muted); font-size:.8rem; line-height:1.35; font-weight:700; }
+    .matrix-wrap { overflow:hidden; border:1px solid var(--line); border-radius:15px; background:white; box-shadow:var(--shadow); }
+    .score-matrix { width:100%; border-collapse:collapse; table-layout:fixed; }
+    .score-matrix th,.score-matrix td { border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .score-matrix tr > *:last-child { border-right:0; }
+    .score-matrix tbody tr:last-child > * { border-bottom:0; }
+    .score-matrix thead th { height:58px; padding:.58rem .7rem; background:#eef2ed; text-align:left; vertical-align:bottom; }
+    .score-matrix thead th b { display:block; color:var(--green); font-size:.73rem; }
+    .score-matrix thead th span { display:block; margin-top:.14rem; color:var(--muted); font-size:.56rem; line-height:1.15; font-weight:750; }
+    .score-matrix .matrix-corner { width:122px; background:var(--ink); color:white; }
+    .score-matrix .matrix-corner span,.score-matrix .matrix-corner b { color:white; }
+    .score-matrix tbody th { width:122px; padding:.58rem .7rem; background:#f4f5f1; text-align:left; vertical-align:top; }
+    .score-matrix tbody th b { display:block; color:var(--green); font-size:.82rem; }
+    .score-matrix tbody th span { display:block; margin-top:.12rem; color:var(--muted); font-size:.58rem; font-weight:750; }
+    .matrix-cell { height:70px; padding:.34rem; vertical-align:top; }
+    .matrix-cell a { display:flex; align-items:center; gap:.38rem; margin:.18rem; padding:.31rem .42rem; border-radius:7px; background:#f5f7f3; color:var(--ink); text-decoration:none; font-size:.61rem; line-height:1.1; font-weight:800; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .matrix-cell a:hover { background:#e4ece5; }
+    .matrix-cell a span { flex:0 0 auto; color:var(--green); font-size:.58rem; font-weight:950; }
+    .matrix-cell i { display:block; padding:.35rem; color:#a6ada7; font-size:.7rem; font-style:normal; }
     .product-shell { height:100%; display:grid; grid-template-columns:minmax(0,.98fr) minmax(420px,1.08fr); }
     .product-copy { padding:clamp(5.1rem,8vh,7.1rem) clamp(2.2rem,4.2vw,5rem) clamp(3.7rem,6vh,5rem); display:flex; flex-direction:column; min-width:0; }
     .rankline { display:flex; gap:.45rem; align-items:center; margin-bottom:1.1rem; flex-wrap:wrap; }
@@ -134,7 +145,8 @@
       .overview-grid { grid-template-columns:1fr 1fr; }
       .bar-panel { grid-column:1/-1; }
       .rubric-grid { grid-template-columns:1fr; }
-      .rank-grid { grid-template-columns:repeat(2,1fr); }
+      .matrix-wrap { overflow:auto; }
+      .score-matrix { min-width:690px; }
       .product-shell { grid-template-columns:1fr; grid-template-rows:1fr 34vh; }
       .product-copy { padding:4.6rem 1rem 1rem; }
       .product-hero { padding:1.1rem; }
@@ -158,8 +170,7 @@
       .rubric-grid article { padding:.8rem; }
       .scale-list { gap:.3rem; margin-top:.5rem; }
       .scale-list li { padding-top:.3rem; }
-      .rank-grid { grid-template-columns:1fr 1fr; gap:.35rem; margin-top:.8rem; }
-      .rank-item { padding:.45rem .5rem; }
+      .matrix-note { font-size:.68rem; margin:.45rem 0 .6rem; }
       .product-shell { min-height:100dvh; grid-template-rows:auto 31vh; }
       .product-copy { min-height:69vh; }
       .rankline { margin-bottom:.6rem; gap:.3rem; }
@@ -196,9 +207,6 @@
         <div class="cover-copy">
           <p class="eyebrow">Westfield Outdoors · August 2026</p>
           <h1>Industrial Design<br><span>Innovation Portfolio</span></h1>
-          <p class="lede">Twenty active projects, ranked by technical readiness and reduced to the signals leadership needs to move them.</p>
-          <div class="cover-rule"></div>
-          <p class="cover-note">Evidence captured July 28, 2026 · Upcoming Sprint through Ready for Review</p>
         </div>
         <div class="cover-number" aria-label="20 active projects">
           <strong>20</strong><span>active<br>projects</span>
@@ -208,72 +216,7 @@
       <div class="section-label">Portfolio</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">01 / 29</div>
-    
-    </section>
-    
-
-    <section class="slide overview" id="portfolio-signal" data-title="Portfolio signal">
-      
-      <img class="logo" src="assets/westfield-outdoors-logo.png"
-           alt="Westfield Outdoors logo">
-    
-      <div class="content">
-        <p class="eyebrow">Portfolio signal</p>
-        <h1>Physical proof is concentrated.<br>IP opportunity is broad.</h1>
-        <div class="overview-grid">
-          <div class="metric-panel">
-            <span class="metric-kicker">Meeting-ready evidence</span>
-            <strong class="big-metric">8</strong>
-            <p>projects at TRL 5–6 with integrated or demonstrated physical prototypes.</p>
-          </div>
-          <div class="metric-panel">
-            <span class="metric-kicker">Patentability evidence</span>
-            <strong class="big-metric">13</strong>
-            <p>projects with attached patentability analysis; 7 remain explicitly unassessed.</p>
-          </div>
-          <div class="bar-panel">
-            <h2>Readiness distribution</h2>
-            
-        <div class="bar-row">
-          <span class="bar-label">TRL 6</span>
-          <div class="bar-track"><i style="width:38%"></i></div>
-          <strong>3</strong>
-        </div>
-        
-        <div class="bar-row">
-          <span class="bar-label">TRL 5</span>
-          <div class="bar-track"><i style="width:62%"></i></div>
-          <strong>5</strong>
-        </div>
-        
-        <div class="bar-row">
-          <span class="bar-label">TRL 4</span>
-          <div class="bar-track"><i style="width:100%"></i></div>
-          <strong>8</strong>
-        </div>
-        
-        <div class="bar-row">
-          <span class="bar-label">TRL 3</span>
-          <div class="bar-track"><i style="width:38%"></i></div>
-          <strong>3</strong>
-        </div>
-        
-        <div class="bar-row">
-          <span class="bar-label">TRL 2</span>
-          <div class="bar-track"><i style="width:12%"></i></div>
-          <strong>1</strong>
-        </div>
-        
-          </div>
-        </div>
-        <div class="portfolio-callout">The meeting should approve the next evidence gate—not treat every concept as equally mature.</div>
-      </div>
-      
-      <div class="section-label">Executive Signal</div>
-      <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
-        Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">02 / 29</div>
+      <div class="slide-number">01 / 28</div>
     
     </section>
     
@@ -313,7 +256,7 @@
       <div class="section-label">Method</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">03 / 29</div>
+      <div class="slide-number">02 / 28</div>
     
     </section>
     
@@ -324,17 +267,28 @@
            alt="Westfield Outdoors logo">
     
       <div class="content">
-        <p class="eyebrow">Readiness order</p>
-        <h1>The August portfolio ladder</h1>
-        <div class="rank-grid">
-          <a href="#project-1" class="rank-item trl-6"><span>01</span><b>Diamond Daypack</b><em>TRL 6</em><i>Not assessed</i></a><a href="#project-2" class="rank-item trl-6"><span>02</span><b>Spiral Daypack</b><em>TRL 6</em><i>Not assessed</i></a><a href="#project-3" class="rank-item trl-6"><span>03</span><b>Instant Indoor</b><em>TRL 6</em><i>Strong</i></a><a href="#project-4" class="rank-item trl-5"><span>04</span><b>Hawkeye</b><em>TRL 5</em><i>Not assessed</i></a><a href="#project-5" class="rank-item trl-5"><span>05</span><b>Suspend Chair</b><em>TRL 5</em><i>Focused</i></a><a href="#project-6" class="rank-item trl-5"><span>06</span><b>Hard Liners</b><em>TRL 5</em><i>Focused</i></a><a href="#project-7" class="rank-item trl-5"><span>07</span><b>ComfortCore Hybrid Arms</b><em>TRL 5</em><i>Strong</i></a><a href="#project-8" class="rank-item trl-5"><span>08</span><b>Flow-Motion V2</b><em>TRL 5</em><i>Strong</i></a><a href="#project-9" class="rank-item trl-4"><span>09</span><b>Origami Wagon</b><em>TRL 4</em><i>Strategic</i></a><a href="#project-10" class="rank-item trl-4"><span>10</span><b>GRAM Chair</b><em>TRL 4</em><i>Strong</i></a><a href="#project-11" class="rank-item trl-4"><span>11</span><b>Camp / Field Utility Board</b><em>TRL 4</em><i>Focused</i></a><a href="#project-12" class="rank-item trl-4"><span>12</span><b>Systems Wagon</b><em>TRL 4</em><i>Strong</i></a><a href="#project-13" class="rank-item trl-4"><span>13</span><b>Westfield Adventure Pack</b><em>TRL 4</em><i>Not assessed</i></a><a href="#project-14" class="rank-item trl-4"><span>14</span><b>Westfield Adventure Tote</b><em>TRL 4</em><i>Not assessed</i></a><a href="#project-15" class="rank-item trl-4"><span>15</span><b>Handwarmer Armrests</b><em>TRL 4</em><i>Not assessed</i></a><a href="#project-16" class="rank-item trl-4"><span>16</span><b>Range &amp; Field Cleaning Station</b><em>TRL 4</em><i>Not assessed</i></a><a href="#project-17" class="rank-item trl-3"><span>17</span><b>Concertina Cooler</b><em>TRL 3</em><i>Strong</i></a><a href="#project-18" class="rank-item trl-3"><span>18</span><b>Core 30</b><em>TRL 3</em><i>Strong</i></a><a href="#project-19" class="rank-item trl-3"><span>19</span><b>Loaf T</b><em>TRL 3</em><i>Strong</i></a><a href="#project-20" class="rank-item trl-2"><span>20</span><b>Earth Suit</b><em>TRL 2</em><i>Focused</i></a>
+        <p class="eyebrow">Portfolio scorecard</p>
+        <h1>Every project on the same two rubrics</h1>
+        <p class="matrix-note">Rows show technical readiness. Columns show assessed IP value. Project numbers retain the readiness-ranked review order.</p>
+        <div class="matrix-wrap">
+          <table class="score-matrix">
+            <thead>
+              <tr>
+                <th class="matrix-corner"><span>Technical readiness ↓</span><b>IP value →</b></th>
+                <th scope="col"><b>5 · Strategic</b><span>Platform opportunity</span></th><th scope="col"><b>4 · Strong</b><span>Multiple claim clusters</span></th><th scope="col"><b>3 · Focused</b><span>Narrow mechanism</span></th><th scope="col"><b>— · Not assessed</b><span>No analysis attached</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row"><b>TRL 6</b><span>Demonstrated</span></th><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><a href="#project-3" title="Instant Indoor"><span>03</span>Instant Indoor</a></td><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><a href="#project-1" title="Diamond Daypack"><span>01</span>Diamond Daypack</a><a href="#project-2" title="Spiral Daypack"><span>02</span>Spiral Daypack</a></td></tr><tr><th scope="row"><b>TRL 5</b><span>Integrated</span></th><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><a href="#project-7" title="ComfortCore Hybrid Arms"><span>07</span>ComfortCore Hybrid Arms</a><a href="#project-8" title="Flow-Motion V2"><span>08</span>Flow-Motion V2</a></td><td class="matrix-cell"><a href="#project-5" title="Suspend Chair"><span>05</span>Suspend Chair</a><a href="#project-6" title="Hard Liners"><span>06</span>Hard Liners</a></td><td class="matrix-cell"><a href="#project-4" title="Hawkeye"><span>04</span>Hawkeye</a></td></tr><tr><th scope="row"><b>TRL 4</b><span>Partial proof</span></th><td class="matrix-cell"><a href="#project-9" title="Origami Wagon"><span>09</span>Origami Wagon</a></td><td class="matrix-cell"><a href="#project-10" title="GRAM Chair"><span>10</span>GRAM Chair</a><a href="#project-12" title="Systems Wagon"><span>12</span>Systems Wagon</a></td><td class="matrix-cell"><a href="#project-11" title="Camp / Field Utility Board"><span>11</span>Camp / Field Utility Board</a></td><td class="matrix-cell"><a href="#project-13" title="Westfield Adventure Pack"><span>13</span>Westfield Adventure Pack</a><a href="#project-14" title="Westfield Adventure Tote"><span>14</span>Westfield Adventure Tote</a><a href="#project-15" title="Handwarmer Armrests"><span>15</span>Handwarmer Armrests</a><a href="#project-16" title="Range &amp; Field Cleaning Station"><span>16</span>Range &amp; Field Cleaning Station</a></td></tr><tr><th scope="row"><b>TRL 3</b><span>Digital proof</span></th><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><a href="#project-17" title="Concertina Cooler"><span>17</span>Concertina Cooler</a><a href="#project-18" title="Core 30"><span>18</span>Core 30</a><a href="#project-19" title="Loaf T"><span>19</span>Loaf T</a></td><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><i>—</i></td></tr><tr><th scope="row"><b>TRL 2</b><span>Architecture</span></th><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><i>—</i></td><td class="matrix-cell"><a href="#project-20" title="Earth Suit"><span>20</span>Earth Suit</a></td><td class="matrix-cell"><i>—</i></td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
       
       <div class="section-label">Ranked Portfolio</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">04 / 29</div>
+      <div class="slide-number">03 / 28</div>
     
     </section>
     
@@ -401,7 +355,7 @@
       <div class="section-label">TRL 6 · Demonstrated prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">05 / 29</div>
+      <div class="slide-number">04 / 28</div>
     
     </section>
     
@@ -468,7 +422,7 @@
       <div class="section-label">TRL 6 · Demonstrated prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">06 / 29</div>
+      <div class="slide-number">05 / 28</div>
     
     </section>
     
@@ -522,10 +476,10 @@
              rel="noopener noreferrer">Open current Trello evidence ↗</a>
         </div>
         <button class="hero-button" type="button"
-                data-image="assets/source/skw-041-instant-indoor/6a2a195732df1b302e31ff00.jpg"
+                data-image="assets/source/skw-041-instant-indoor/instant-indoor-chair-bw-square.png"
                 data-alt="Instant Indoor upholstered armchair prototype"
                 aria-label="Open Instant Indoor image full screen">
-          <img class="product-hero" src="assets/source/skw-041-instant-indoor/6a2a195732df1b302e31ff00.jpg"
+          <img class="product-hero" src="assets/source/skw-041-instant-indoor/instant-indoor-chair-bw-square.png"
                alt="Instant Indoor upholstered armchair prototype" loading="lazy">
           <span class="expand-hint">View evidence image ↗</span>
           <span class="trl-ribbon">TRL 6</span>
@@ -535,7 +489,7 @@
       <div class="section-label">TRL 6 · Demonstrated prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">07 / 29</div>
+      <div class="slide-number">06 / 28</div>
     
     </section>
     
@@ -602,7 +556,7 @@
       <div class="section-label">TRL 5 · Integrated prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">08 / 29</div>
+      <div class="slide-number">07 / 28</div>
     
     </section>
     
@@ -669,7 +623,7 @@
       <div class="section-label">TRL 5 · Integrated prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">09 / 29</div>
+      <div class="slide-number">08 / 28</div>
     
     </section>
     
@@ -736,7 +690,7 @@
       <div class="section-label">TRL 5 · Integrated prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">10 / 29</div>
+      <div class="slide-number">09 / 28</div>
     
     </section>
     
@@ -803,7 +757,7 @@
       <div class="section-label">TRL 5 · Integrated prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">11 / 29</div>
+      <div class="slide-number">10 / 28</div>
     
     </section>
     
@@ -870,7 +824,7 @@
       <div class="section-label">TRL 5 · Integrated prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">12 / 29</div>
+      <div class="slide-number">11 / 28</div>
     
     </section>
     
@@ -937,7 +891,7 @@
       <div class="section-label">TRL 4 · Component prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">13 / 29</div>
+      <div class="slide-number">12 / 28</div>
     
     </section>
     
@@ -970,7 +924,7 @@
       <div class="section-label">Interactive Evidence</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">14 / 29</div>
+      <div class="slide-number">13 / 28</div>
     
     </section>
     
@@ -1037,7 +991,7 @@
       <div class="section-label">TRL 4 · Component prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">15 / 29</div>
+      <div class="slide-number">14 / 28</div>
     
     </section>
     
@@ -1070,7 +1024,7 @@
       <div class="section-label">Interactive Evidence</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">16 / 29</div>
+      <div class="slide-number">15 / 28</div>
     
     </section>
     
@@ -1137,7 +1091,7 @@
       <div class="section-label">TRL 4 · Component prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">17 / 29</div>
+      <div class="slide-number">16 / 28</div>
     
     </section>
     
@@ -1204,7 +1158,7 @@
       <div class="section-label">TRL 4 · Component prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">18 / 29</div>
+      <div class="slide-number">17 / 28</div>
     
     </section>
     
@@ -1271,7 +1225,7 @@
       <div class="section-label">TRL 4 · Component prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">19 / 29</div>
+      <div class="slide-number">18 / 28</div>
     
     </section>
     
@@ -1338,7 +1292,7 @@
       <div class="section-label">TRL 4 · Component prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">20 / 29</div>
+      <div class="slide-number">19 / 28</div>
     
     </section>
     
@@ -1405,7 +1359,7 @@
       <div class="section-label">TRL 4 · Component prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">21 / 29</div>
+      <div class="slide-number">20 / 28</div>
     
     </section>
     
@@ -1472,7 +1426,7 @@
       <div class="section-label">TRL 4 · Component prototype</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">22 / 29</div>
+      <div class="slide-number">21 / 28</div>
     
     </section>
     
@@ -1539,7 +1493,7 @@
       <div class="section-label">TRL 3 · Digital proof</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">23 / 29</div>
+      <div class="slide-number">22 / 28</div>
     
     </section>
     
@@ -1572,7 +1526,7 @@
       <div class="section-label">Interactive Evidence</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">24 / 29</div>
+      <div class="slide-number">23 / 28</div>
     
     </section>
     
@@ -1639,7 +1593,7 @@
       <div class="section-label">TRL 3 · Digital proof</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">25 / 29</div>
+      <div class="slide-number">24 / 28</div>
     
     </section>
     
@@ -1672,7 +1626,7 @@
       <div class="section-label">Interactive Evidence</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">26 / 29</div>
+      <div class="slide-number">25 / 28</div>
     
     </section>
     
@@ -1739,7 +1693,7 @@
       <div class="section-label">TRL 3 · Digital proof</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">27 / 29</div>
+      <div class="slide-number">26 / 28</div>
     
     </section>
     
@@ -1772,7 +1726,7 @@
       <div class="section-label">Interactive Evidence</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">28 / 29</div>
+      <div class="slide-number">27 / 28</div>
     
     </section>
     
@@ -1839,7 +1793,7 @@
       <div class="section-label">TRL 2 · Concept defined</div>
       <div class="confidential">Property of Westfield Outdoors. Confidential and proprietary.
         Do not reproduce, distribute, or disclose without written permission.</div>
-      <div class="slide-number">29 / 29</div>
+      <div class="slide-number">28 / 28</div>
     
     </section>
     
