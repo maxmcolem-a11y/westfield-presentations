@@ -103,8 +103,12 @@
     .rankline span { border:1px solid var(--line); border-radius:999px; padding:.34rem .65rem; color:var(--muted); font-size:.65rem; font-weight:850; text-transform:uppercase; letter-spacing:.06em; }
     .rankline .rank { background:var(--green); color:white; border-color:var(--green); }
     .product-slide h1 { font-size:clamp(2.5rem,4.6vw,4.9rem); }
-    .product-value { margin:.8rem 0 .55rem; max-width:760px; color:var(--muted); font-size:clamp(.9rem,1.2vw,1.16rem); line-height:1.34; font-weight:650; }
-    .product-brief { margin:0 0 1rem; max-width:760px; color:var(--ink); font-size:clamp(.78rem,.95vw,.94rem); line-height:1.4; font-weight:600; }
+    .product-story { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; margin:.8rem 0 .65rem; }
+    .product-story article { border-top:1px solid var(--line); padding-top:.55rem; }
+    .product-story span,.product-status span { display:block; margin-bottom:.28rem; color:var(--green); font-size:.58rem; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
+    .product-story p,.product-status p { margin:0; color:var(--ink); font-size:clamp(.72rem,.84vw,.88rem); line-height:1.38; font-weight:620; }
+    .product-story article:first-child p { color:var(--muted); font-weight:680; }
+    .product-status { margin:0 0 .8rem; padding:.62rem .75rem; border-left:3px solid #a8b2a9; background:#f1f3ef; border-radius:0 8px 8px 0; }
     .signals { display:grid; gap:.6rem; margin-top:auto; }
     .signal { width:100%; border:1px solid var(--line); border-left:6px solid var(--green); background:white; border-radius:12px; padding:.76rem .88rem; text-align:left; color:var(--ink); }
     .signal-ip { border-left-color:var(--blue); }
@@ -201,8 +205,11 @@
       .rankline { margin-bottom:.6rem; gap:.3rem; }
       .rankline span { font-size:.55rem; padding:.25rem .45rem; }
       .product-slide h1 { font-size:2.5rem; }
-      .product-value { margin:.45rem 0 .3rem; font-size:.8rem; }
-      .product-brief { margin-bottom:.55rem; font-size:.69rem; line-height:1.3; }
+      .product-story { gap:.42rem; margin:.45rem 0 .4rem; }
+      .product-story article { padding-top:.35rem; }
+      .product-story span,.product-status span { margin-bottom:.18rem; font-size:.48rem; }
+      .product-story p,.product-status p { font-size:.61rem; line-height:1.25; }
+      .product-status { margin-bottom:.45rem; padding:.4rem .48rem; }
       .signals { gap:.35rem; }
       .signal { padding:.5rem .58rem; }
       .signal p { font-size:.64rem; }
@@ -342,8 +349,20 @@
           </div>
           <p class="eyebrow">Timber Ridge</p>
           <h1>Diamond Daypack</h1>
-          <p class="product-value">Structured 26 L daypack with triangular panel architecture and slanted-access organization.</p>
-          <p class="product-brief">The physical sample and quote are in hand. August review should focus on access, carry feel, branding, and a short revision list.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>Structured 26 L daypack with triangular panel architecture and slanted-access organization.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>The faceted front creates an ownable visual identity, while the slanted opening promises faster access than a conventional top-load or clamshell pack.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>The physical sample and quote are in hand. August review should focus on access, carry feel, branding, and a short revision list.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
@@ -433,8 +452,20 @@
           </div>
           <p class="eyebrow">Timber Ridge</p>
           <h1>Spiral Daypack</h1>
-          <p class="product-value">Hybrid sling/daypack with spiral panel architecture and body-wrap ergonomics.</p>
-          <p class="product-brief">The physical sample and quote are complete. The meeting can now judge access, body-wrap comfort, and whether the hybrid format earns its complexity.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>Hybrid sling/daypack with spiral panel architecture and body-wrap ergonomics.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>The wraparound form feels active and body-led, combining the immediacy of a sling with the capacity and stability of a daypack.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>The physical sample and quote are complete. The meeting can now judge access, body-wrap comfort, and whether the hybrid format earns its complexity.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
@@ -524,8 +555,20 @@
           </div>
           <p class="eyebrow">SKW-041</p>
           <h1>Instant Indoor</h1>
-          <p class="product-value">A parcel-friendly sofa platform that deploys from Westfield steel-tube folding architecture.</p>
-          <p class="product-brief">The upholstered chair broadly validates the deployable platform. Remaining work is upholstery tuning plus the next carton and SKU proof.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>A parcel-friendly sofa platform that deploys from Westfield steel-tube folding architecture.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>It translates proven outdoor folding know-how into real upholstered indoor furniture that can ship in a much more manageable package.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>The upholstered chair broadly validates the deployable platform. Remaining work is upholstery tuning plus the next carton and SKU proof.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
@@ -615,8 +658,20 @@
           </div>
           <p class="eyebrow">SKW-018</p>
           <h1>Hawkeye V3</h1>
-          <p class="product-value">A compact motion chair that replaces rocker skis with a bow-limb front-leg mechanism.</p>
-          <p class="product-brief">The V3 sample validates the motion concept. Steel-foot geometry and slider tuning remain the key ride-quality variables.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>A compact motion chair that replaces rocker skis with a bow-limb front-leg mechanism.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>The flexing front legs create a distinctive, visible motion story without the familiar rails and footprint of a conventional rocker.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>The V3 sample validates the motion concept. Steel-foot geometry and slider tuning remain the key ride-quality variables.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
@@ -706,8 +761,20 @@
           </div>
           <p class="eyebrow">SKW-044</p>
           <h1>Suspend Chair</h1>
-          <p class="product-value">A folding camp chair that translates suspended-seat bounce, sway, and rock into a portable frame.</p>
-          <p class="product-brief">The improved V2 sample is ready to demonstrate. The team still needs to define the intended motion signature before freezing V3.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>A folding camp chair that translates suspended-seat bounce, sway, and rock into a portable frame.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>It brings the floating, emotional comfort of suspended lounge seating into a compact outdoor format that still folds and travels.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>The improved V2 sample is ready to demonstrate. The team still needs to define the intended motion signature before freezing V3.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
@@ -797,8 +864,20 @@
           </div>
           <p class="eyebrow">Cooler Platform</p>
           <h1>Hard Liners</h1>
-          <p class="product-value">A removable living-hinge liner that lets a soft cooler ship flat and perform rigid in use.</p>
-          <p class="product-brief">The shell and printed liner are ready for fold, fit, and cleanability testing. Production-intent liner CAD follows only if that proof passes.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>A removable living-hinge liner that lets a soft cooler ship flat and perform rigid in use.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>It combines soft-cooler portability with rigid cleanability, then lets the hard interior collapse instead of consuming storage space.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>The shell and printed liner are ready for fold, fit, and cleanability testing. Production-intent liner CAD follows only if that proof passes.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
@@ -888,8 +967,20 @@
           </div>
           <p class="eyebrow">Comfort Platform</p>
           <h1>ComfortCore Hybrid Arms</h1>
-          <p class="product-value">A replaceable cushioned cartridge that combines plastic-arm width with fabric skin comfort.</p>
-          <p class="product-brief">Upholstered arm samples confirm the comfort benefit. The meeting must decide whether that value supports cost and cross-platform assembly.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>A replaceable cushioned cartridge that combines plastic-arm width with fabric skin comfort.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>It makes the arm contact point feel visibly premium and materially softer while remaining replaceable and potentially shared across chair families.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>Upholstered arm samples confirm the comfort benefit. The meeting must decide whether that value supports cost and cross-platform assembly.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
@@ -979,8 +1070,20 @@
           </div>
           <p class="eyebrow">Motion Platform</p>
           <h1>Flow-Motion V2</h1>
-          <p class="product-value">A tunable wedge-and-leaf-spring rocker that separates lean-back feel, return force, and pinch-gap control.</p>
-          <p class="product-brief">The production sample shipped after digital validation. Review should isolate motion feel, return force, and pinch-gap behavior.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>A tunable wedge-and-leaf-spring rocker that separates lean-back feel, return force, and pinch-gap control.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>The mechanism turns motion feel and safety into tunable geometry, giving the platform more control than a one-rate spring rocker.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>The production sample shipped after digital validation. Review should isolate motion feel, return force, and pinch-gap behavior.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
@@ -1070,8 +1173,20 @@
           </div>
           <p class="eyebrow">SKW-033</p>
           <h1>Origami Wagon</h1>
-          <p class="product-value">A one-sheet living-hinge wagon body that replaces tube-and-fabric construction and folds to a briefcase-like package.</p>
-          <p class="product-brief">Full-scale folding works. The next evidence must cover load behavior, hinge fatigue, rib nesting, and end-lock reliability.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>A one-sheet living-hinge wagon body that replaces tube-and-fabric construction and folds to a briefcase-like package.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>It replaces a complicated sewn body and tube cage with one foldable structural shell, creating a radically cleaner pack and assembly story.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>Full-scale folding works. The next evidence must cover load behavior, hinge fatigue, rib nesting, and end-lock reliability.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
@@ -1194,8 +1309,20 @@
           </div>
           <p class="eyebrow">SKW</p>
           <h1>GRAM Chair</h1>
-          <p class="product-value">A lightweight director&#x27;s-chair rocker using compliant elastomer corner joints instead of runners or springs.</p>
-          <p class="product-brief">Frames and printed compliant corners are in hand. Seat height and corner stiffness are the two tuning variables that matter now.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>A lightweight director&#x27;s-chair rocker using compliant elastomer corner joints instead of runners or springs.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>Tiny compliant corners create a rocker-like experience while preserving the familiar director-chair frame, low part count, and visual lightness.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>Frames and printed compliant corners are in hand. Seat height and corner stiffness are the two tuning variables that matter now.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
@@ -1318,8 +1445,20 @@
           </div>
           <p class="eyebrow">Utility Surface</p>
           <h1>Camp / Field Utility Board</h1>
-          <p class="product-value">An ironing-board mechanism translated into a fast-deploying, height-adjustable outdoor work surface.</p>
-          <p class="product-brief">The received sample was repaired after weld failures. Stability, foot design, lock feedback, and finish now need a focused check.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>An ironing-board mechanism translated into a fast-deploying, height-adjustable outdoor work surface.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>A familiar low-cost mechanism becomes a flexible camp platform for prep, field work, and standing or seated use without a complex frame.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>The received sample was repaired after weld failures. Stability, foot design, lock feedback, and finish now need a focused check.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
@@ -1409,8 +1548,20 @@
           </div>
           <p class="eyebrow">SKW-037</p>
           <h1>Systems Wagon</h1>
-          <p class="product-value">A rigid modular transport chassis built around 24 qt crates and an M-LOK-style accessory ecosystem.</p>
-          <p class="product-brief">Prototype parts are in and the frame entered welding. The platform story depends on proving the chassis and accessory interface together.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>A rigid modular transport chassis built around 24 qt crates and an M-LOK-style accessory ecosystem.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>It behaves like a configurable platform rather than a one-off wagon, letting crates and accessories reshape the product around each use case.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>Prototype parts are in and the frame entered welding. The platform story depends on proving the chassis and accessory interface together.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
@@ -1500,8 +1651,20 @@
           </div>
           <p class="eyebrow">Timber Ridge</p>
           <h1>Westfield Adventure Pack</h1>
-          <p class="product-value">A structured travel backpack moving from AI-assisted concept visualization into a construction-ready softgoods package.</p>
-          <p class="product-brief">The concept is now a construction-authorized sample package. Review should lock drawings, dimensions, and material direction against the physical build.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>A structured travel backpack moving from AI-assisted concept visualization into a construction-ready softgoods package.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>It demonstrates a fast bridge from printed form studies to a buildable sample and gives Westfield a coherent new travel-softgoods language.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>The concept is now a construction-authorized sample package. Review should lock drawings, dimensions, and material direction against the physical build.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
@@ -1591,8 +1754,20 @@
           </div>
           <p class="eyebrow">Timber Ridge</p>
           <h1>Westfield Adventure Tote</h1>
-          <p class="product-value">A 30 L travel tote designed as the companion softgoods system to the Adventure Pack.</p>
-          <p class="product-brief">The companion tote is in sample correction for true 30 L capacity. Construction accuracy and consistency with the pack are the review focus.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>A 30 L travel tote designed as the companion softgoods system to the Adventure Pack.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>It extends the pack&#x27;s form language into a simpler companion product, creating line-level consistency and shared material opportunities.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>The companion tote is in sample correction for true 30 L capacity. Construction accuracy and consistency with the pack are the review focus.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
@@ -1682,8 +1857,20 @@
           </div>
           <p class="eyebrow">Cooler Platform</p>
           <h1>Concertina Cooler</h1>
-          <p class="product-value">A premium 5–16 L adjustable-capacity cooler using structured EPP bellows and locked volume states.</p>
-          <p class="product-brief">The printed test article moves the fold architecture into physical proof. Review should now resolve leaks, lock states, insulation, and manufacturing behavior.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>A premium 5–16 L adjustable-capacity cooler using structured EPP bellows and locked volume states.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>One cooler can match the load instead of forcing a fixed empty volume, improving carry, storage, and partial-load behavior without multiplying SKUs.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>The printed test article moves the fold architecture into physical proof. Review should now resolve leaks, lock states, insulation, and manufacturing behavior.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
@@ -1806,8 +1993,20 @@
           </div>
           <p class="eyebrow">SKW-040</p>
           <h1>Core 30</h1>
-          <p class="product-value">A cantilever camp chair whose load-opposed joints fold into a flat bar without sacrificing visual identity.</p>
-          <p class="product-brief">The flat-fold architecture is digitally resolved. A production-intent tubular prototype must validate loaded joints and folded size.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>A cantilever camp chair whose load-opposed joints fold into a flat bar without sacrificing visual identity.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>Its joints become safer under seated load, then collapse into an unusually clean flat-bar package that looks unlike a conventional folding chair.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>The flat-fold architecture is digitally resolved. A production-intent tubular prototype must validate loaded joints and folded size.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
@@ -1930,8 +2129,20 @@
           </div>
           <p class="eyebrow">SKW-032</p>
           <h1>Loaf T</h1>
-          <p class="product-value">A pole-free, pump-free family tent whose pre-cambered batten skin blooms and locks with one cord.</p>
-          <p class="product-brief">The digital study shows the pre-cambered baton and lock behavior. The next proof is a physical setup and pack-down cycle.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>A pole-free, pump-free family tent whose pre-cambered batten skin blooms and locks with one cord.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>It targets a genuinely magical setup moment—no loose poles and no pump—by making the skin, battens, and one cord act as the structure.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>The digital study shows the pre-cambered baton and lock behavior. The next proof is a physical setup and pack-down cycle.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
@@ -2054,8 +2265,20 @@
           </div>
           <p class="eyebrow">Personal Climate</p>
           <h1>Earth Suit</h1>
-          <p class="product-value">A liquid-cooled garment and backpack vapor-compression chiller for sustained work in extreme heat.</p>
-          <p class="product-brief">The system architecture is defined around a backpack compressor chiller. Thermal-loop feasibility, wearable integration, and the build route remain open.</p>
+          <div class="product-story">
+            <article>
+              <span>What it is</span>
+              <p>A liquid-cooled garment and backpack vapor-compression chiller for sustained work in extreme heat.</p>
+            </article>
+            <article>
+              <span>Why it is compelling</span>
+              <p>It moves wearable cooling beyond short-lived ice packs toward sustained, controllable performance for people working in serious heat.</p>
+            </article>
+          </div>
+          <div class="product-status">
+            <span>Current proof</span>
+            <p>The system architecture is defined around a backpack compressor chiller. Thermal-loop feasibility, wearable integration, and the build route remain open.</p>
+          </div>
           <div class="signals">
             
       <button class="signal signal-trl signal-detail" type="button"
