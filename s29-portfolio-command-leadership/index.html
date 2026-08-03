@@ -38,8 +38,8 @@
     .slide{position:relative;min-height:100vh;min-height:100dvh;scroll-snap-align:start;display:grid;overflow:hidden;background:
       linear-gradient(rgba(255,255,255,.22),rgba(255,255,255,.22)),radial-gradient(circle at 18% 8%,rgba(255,255,255,.8),transparent 36%),var(--ivory)}
     .slide::before{content:"";position:absolute;inset:18px;border:1px solid rgba(23,42,53,.23);box-shadow:inset 0 0 0 3px var(--ivory),inset 0 0 0 4px rgba(23,42,53,.12);pointer-events:none;z-index:5}
-    .slide::after{content:"Property of Westfield Outdoors. Confidential and proprietary. Do not reproduce, distribute, or disclose without written permission.";position:absolute;left:50%;bottom:16px;transform:translateX(-50%);width:min(660px,54vw);text-align:center;font:500 7px/1.25 var(--sans);letter-spacing:.035em;color:rgba(23,42,53,.48);z-index:7}
-    .content{width:min(1400px,94vw);height:min(900px,100vh);margin:auto;padding:62px clamp(48px,5vw,82px) 48px;display:flex;flex-direction:column;justify-content:center;gap:18px;position:relative;z-index:2}
+    .slide::after{content:"Property of Westfield Outdoors. Confidential and proprietary. Do not reproduce, distribute, or disclose without written permission.";position:absolute;left:50%;bottom:25px;transform:translateX(-50%);width:min(660px,54vw);padding:1px 8px;text-align:center;font:500 7px/1.25 var(--sans);letter-spacing:.035em;color:rgba(23,42,53,.48);background:var(--ivory);z-index:7}
+    .content{width:min(1400px,94vw);height:min(900px,100vh);margin:auto;padding:62px clamp(48px,5vw,82px) 60px;display:flex;flex-direction:column;justify-content:center;gap:18px;position:relative;z-index:2}
     .logo{position:absolute;right:42px;top:33px;width:150px;height:auto;z-index:7;opacity:.88}
     .num{position:absolute;right:42px;bottom:31px;font:600 10px/1 var(--mono);letter-spacing:.16em;color:rgba(23,42,53,.58);z-index:7}
     .kicker{margin:0;color:var(--red);font:700 12px/1.2 var(--sans);letter-spacing:.22em;text-transform:uppercase}
@@ -68,14 +68,15 @@
     .cover-art{height:min(73vh,660px);border:0;background:transparent;box-shadow:none;margin-right:-5vw}
     .cover-art::after{display:none}.cover-art img{object-fit:contain;object-position:center right}
     .support{font:500 clamp(19px,1.5vw,24px)/1.4 var(--serif);color:var(--ink);border-top:1px solid var(--ink);padding-top:16px;max-width:520px}
-    .then-now{grid-template-columns:1fr 1fr}.then-now h3{font-family:var(--serif);font-size:30px;margin-bottom:12px}
-    .motion{height:230px}.motion img{object-fit:cover;object-position:center 55%}
+    .then-now{grid-template-columns:1fr 1fr}.then-now h3{font-family:var(--serif);font-size:30px;margin-bottom:10px}.then-now li{font-size:14px;margin:.3em 0}
+    .motion{height:180px}.motion img{object-fit:cover;object-position:center 55%}
+    #slide-2 .content{gap:12px}#slide-2 h2{font-size:clamp(38px,3.45vw,54px);max-width:1240px}#slide-2 .lede{font-size:18px;line-height:1.35}#slide-2 .anchor{padding:9px 16px}
     .s28-layout{display:grid;grid-template-columns:.42fr .58fr;gap:34px;align-items:center}
     .s28-art{height:590px}.s28-art img{object-fit:cover;object-position:center}
     .stat-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:5px}
-    .stat{border-top:1px solid var(--ink);padding-top:10px}.stat strong{display:block;font:600 clamp(48px,5vw,78px)/.9 var(--serif)}.stat span{font-size:14px;line-height:1.35;color:var(--muted)}
+    .stat{border-top:1px solid var(--ink);padding-top:10px;min-height:112px}.stat strong{display:block;margin-bottom:7px;font:600 clamp(46px,4.6vw,72px)/1 var(--serif)}.stat span{display:block;font-size:14px;line-height:1.32;color:var(--muted)}
     .stat.good strong{color:#286957}.stat.gap strong{color:var(--red)}
-    .folder-anatomy{height:430px;padding:0}.folder-anatomy svg,.shelf-overlay svg,.services svg,.ledger svg,.label-svg svg{width:100%;height:100%;display:block}
+    .folder-anatomy{height:430px;padding:0}.folder-anatomy svg,.shelf-overlay svg,.label-svg svg{width:100%;height:100%;display:block}.master-art{height:430px}.master-art img{object-fit:cover;object-position:center}
     .master-copy{display:grid;grid-template-columns:.42fr .58fr;gap:28px;align-items:center}
     .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
     .principle{padding:13px 14px;border-top:2px solid var(--cyan);background:rgba(255,255,255,.45);font-size:13px;line-height:1.35}
@@ -87,10 +88,11 @@
     .secondary{margin-top:12px;border-top:1px solid var(--ink);padding-top:10px;font:500 11px/1.4 var(--mono);color:var(--muted)}
     .handoff-art{height:390px}.handoff-art img{object-fit:cover}
     .beats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.beat{position:relative;padding:14px 14px 14px 48px;background:rgba(255,255,255,.48);border-top:1px solid var(--ink);font-size:13px;line-height:1.35}.beat b{position:absolute;left:13px;top:10px;font:600 25px var(--serif);color:var(--red)}
-    .role-table{width:100%;border-collapse:collapse;background:rgba(255,255,255,.45);font-size:13px}.role-table th,.role-table td{border-bottom:1px solid rgba(23,42,53,.34);padding:10px 13px;text-align:left;vertical-align:top}.role-table th{width:25%;font:600 12px var(--mono);text-transform:uppercase}.role-table tr:last-child{background:rgba(180,56,47,.07);font-weight:700}.role-table tr:last-child th,.role-table tr:last-child td{border-bottom:2px solid var(--red)}
-    .services{height:390px}.service-copy{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.service-card{border-top:2px solid var(--cyan);background:rgba(220,239,242,.44);padding:12px;font-size:12px;line-height:1.38}.service-card h3{font:600 14px var(--mono);text-transform:uppercase;margin-bottom:6px}
-    #slide-9 h2{font-size:clamp(40px,3.7vw,58px)}#slide-9 .content{gap:13px}#slide-9 .services{height:350px}
-    .ledger-layout{display:grid;grid-template-columns:.42fr .58fr;gap:28px;align-items:center}.ledger{height:470px}.decision-list{display:grid;gap:12px}.decision{display:grid;grid-template-columns:35px 1fr;gap:12px;align-items:start;border-top:1px solid var(--ink);padding-top:10px}.decision .mark{font:600 22px var(--serif);color:var(--cyan)}.decision h3{font-family:var(--serif);font-size:21px}.decision p{font-size:12px;line-height:1.4;color:var(--muted)}
+    .role-table{width:100%;border-collapse:collapse;background:rgba(255,255,255,.45);font-size:12.5px}.role-table th,.role-table td{border-bottom:1px solid rgba(23,42,53,.34);padding:8px 12px;text-align:left;vertical-align:top}.role-table th{width:25%;font:600 11px var(--mono);text-transform:uppercase}.role-table tr:last-child{background:rgba(180,56,47,.07);font-weight:700}.role-table tr:last-child th,.role-table tr:last-child td{border-bottom:2px solid var(--red)}
+    #slide-8 .content{gap:13px}#slide-8 h2{font-size:clamp(40px,3.8vw,60px)}#slide-8 .lede{font-size:18px}.leadership-why{margin-top:2px;padding:14px 18px;border:3px double var(--red);background:rgba(180,56,47,.05);font:600 20px/1.2 var(--serif)}
+    .agent-layout{display:grid;grid-template-columns:.58fr .42fr;gap:16px;align-items:stretch}.agentic-art{height:360px}.agentic-art img{object-fit:cover;object-position:center}.service-copy{display:grid;grid-template-columns:1fr;gap:8px}.service-card{border-top:2px solid var(--cyan);background:rgba(220,239,242,.44);padding:10px 12px;font-size:12px;line-height:1.34}.service-card h3{font:600 14px var(--mono);text-transform:uppercase;margin-bottom:5px}
+    #slide-9 h2{font-size:clamp(40px,3.7vw,58px)}#slide-9 .content{gap:12px}
+    .ledger-layout{display:grid;grid-template-columns:.44fr .56fr;gap:28px;align-items:center}.ledger-art{height:500px}.ledger-art img{object-fit:cover;object-position:center}.decision-list{display:grid;gap:12px}.decision{display:grid;grid-template-columns:35px 1fr;gap:12px;align-items:start;border-top:1px solid var(--ink);padding-top:10px}.decision .mark{font:600 22px var(--serif);color:var(--cyan)}.decision h3{font-family:var(--serif);font-size:21px}.decision p{font-size:12px;line-height:1.4;color:var(--muted)}
     .rollout{display:grid;grid-template-columns:.55fr .45fr;gap:28px;align-items:center}.sequence{counter-reset:step;display:grid;gap:12px}.sequence div{counter-increment:step;position:relative;padding:13px 14px 13px 52px;background:rgba(255,255,255,.48);border-left:2px solid var(--cyan);font-size:13px;line-height:1.38}.sequence div::before{content:counter(step);position:absolute;left:14px;top:9px;font:600 25px var(--serif);color:var(--cyan)}
     .measures{display:grid;grid-template-columns:1fr 1fr;gap:8px}.measure{min-height:92px;padding:12px;border:1px solid var(--hair);background:rgba(255,255,255,.4);font:600 12px/1.35 var(--sans)}
     .commitment{margin-top:8px;padding:19px;border:3px double var(--red);background:rgba(180,56,47,.05);font:600 26px/1.1 var(--serif)}
@@ -99,7 +101,7 @@
     .toast{position:fixed;left:50%;bottom:62px;transform:translate(-50%,12px);opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);padding:9px 13px;font-size:12px;z-index:50;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
     .lightbox{position:fixed;inset:0;background:rgba(13,24,31,.92);display:none;place-items:center;z-index:100;padding:38px}.lightbox.open{display:grid}.lightbox .frame{max-width:96vw;max-height:92vh;display:grid;place-items:center}.lightbox img,.lightbox .clone{max-width:96vw;max-height:86vh;width:auto;height:auto;background:var(--paper);box-shadow:0 25px 80px #000}.lightbox .clone{width:min(1300px,92vw);height:min(760px,84vh)}.close{position:fixed;right:22px;top:20px;width:42px;height:42px;border:1px solid var(--paper);background:var(--ink);color:var(--paper);font-size:24px;cursor:pointer}.lightbox-caption{color:var(--paper);font:500 11px var(--mono);margin-top:10px;text-transform:uppercase;letter-spacing:.06em;text-align:center}
     body.social .controls,body.social .lang,body.social .progress,body.social .num{display:none}body.social .slide::after{display:none}
-    @media(max-width:800px){html{scroll-snap-type:none}.slide{min-height:auto;overflow:visible}.slide::before{inset:8px}.slide::after{position:absolute;width:72vw;bottom:10px;font-size:5px}.content{width:100%;height:auto;min-height:100dvh;padding:72px 25px 50px;justify-content:flex-start}.logo{width:104px;right:18px;top:18px}.num{right:18px;bottom:17px}.lang{left:15px;top:16px}.controls{left:15px;bottom:15px}.cover .content,.master-copy,.s28-layout,.label-layout,.ledger-layout,.rollout{grid-template-columns:1fr}.cover-art{height:42vh;margin:0;order:-1;padding-top:25px}.cover-copy{margin-top:-30px}.grid2,.then-now{grid-template-columns:1fr}.grid3,.principles,.beats,.service-copy{grid-template-columns:1fr}.motion{height:180px}.s28-art{height:390px}.stat-pair{grid-template-columns:1fr 1fr}.folder-anatomy,.services,.ledger{height:340px}.shelf-art{height:330px}.shelf-stations{display:none}.handoff-art{height:250px}.role-table{font-size:11px}.role-table th{width:31%;font-size:9px}.role-table th,.role-table td{padding:8px}.measures{grid-template-columns:1fr 1fr}h1{font-size:49px}h2{font-size:39px}.lightbox{padding:18px}.lightbox .clone{height:auto;max-height:82vh;overflow:auto}.plate{padding:17px}}
+    @media(max-width:800px){html{scroll-snap-type:none}.slide{min-height:auto;overflow:visible}.slide::before{inset:8px}.slide::after{position:absolute;width:72vw;bottom:14px;font-size:5px}.content{width:100%;height:auto;min-height:100dvh;padding:72px 25px 58px;justify-content:flex-start}.logo{width:104px;right:18px;top:18px}.num{right:18px;bottom:17px}.lang{left:15px;top:16px}.controls{display:none}.cover .content,.master-copy,.s28-layout,.label-layout,.ledger-layout,.rollout,.agent-layout{grid-template-columns:1fr}.cover-art{height:42vh;margin:0;order:-1;padding-top:25px}.cover-copy{margin-top:-30px}.grid2,.then-now{grid-template-columns:1fr}.grid3,.principles,.beats,.service-copy{grid-template-columns:1fr}.motion{height:180px}.s28-art{height:390px}.stat-pair{grid-template-columns:1fr 1fr}.folder-anatomy,.master-art,.agentic-art,.ledger-art{height:340px}.shelf-art{height:330px}.shelf-stations{display:none}.handoff-art{height:250px}.role-table{font-size:11px}.role-table th{width:31%;font-size:9px}.role-table th,.role-table td{padding:8px}.measures{grid-template-columns:1fr 1fr}h1{font-size:49px}h2{font-size:39px}.lightbox{padding:18px}.lightbox .clone{height:auto;max-height:82vh;overflow:auto}.plate{padding:17px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.progress,.toast{transition:none}}
   </style>
 </head>
@@ -124,13 +126,14 @@
   <section class="slide" id="slide-2">
     <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
     <div class="content">
-      <p class="kicker">The design principle</p><h2>Whoever had the folder, had the work.</h2>
+      <p class="kicker">The signal we lost</p><h2>Then, possession made ownership visible. Now, access makes the work visible—but not its holder.</h2>
+      <p class="lede">A paper project folder could sit on only one desk at a time. Its location answered who had the next move.</p>
       <div class="grid2 then-now">
-        <div class="plate"><p class="figure-label">Then · visible possession</p><h3>The folder traveled.</h3><ul><li>It moved desk to desk as the work got done.</li><li>It carried the brief, drawings, correspondence, and sign-offs.</li><li>Anyone walking the floor could see who had it and what happened next.</li></ul></div>
-        <div class="plate modern"><p class="figure-label">Now · shared visibility</p><h3>Everything is viewable.</h3><ul><li>Shared drives, chat, and boards made evidence available everywhere.</li><li>But visibility alone does not say who holds the next move.</li><li>Ownership became a question people reconstruct instead of a fact they can see.</li></ul></div>
+        <div class="plate"><p class="figure-label">Then · one folder, one desk</p><h3>Possession was obvious.</h3><ul><li>The folder moved desk to desk as the work moved.</li><li>Its contents and location traveled together.</li><li>Anyone walking the floor could see who had it and where it went next.</li></ul></div>
+        <div class="plate modern"><p class="figure-label">Now · one record, everywhere</p><h3>Access is shared.</h3><ul><li>Drives, chat, and boards make evidence available everywhere.</li><li>But shared access no longer reveals who owes the next move.</li><li>People reconstruct ownership from messages, meetings, and memory.</li></ul></div>
       </div>
-      <p class="anchor">We are not going back to paper. We are taking back the one thing paper did better.</p>
-      <div><div class="art motion" data-caption="Fig. 2 — The folder in motion"><img src="assets/folder-in-motion.png" alt="An engraved folder passing visibly from one pair of hands to another."></div><p class="caption">Fig. 2 — The folder in motion</p></div>
+      <p class="anchor">S29 keeps modern shared access and restores visible possession: one current holder, one next result, one due date.</p>
+      <div><div class="art motion" data-caption="Fig. 2 — The folder in motion"><img src="assets/folder-in-motion.png" alt="An engraved folder passing visibly from one pair of hands to another."></div><p class="caption">Fig. 2 — Where the folder moved, accountability moved</p></div>
     </div><span class="num">02 / 11</span>
   </section>
 
@@ -147,25 +150,9 @@
 
   <section class="slide" id="slide-4">
     <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
-    <div class="content"><p class="kicker">The master record</p><h2>One persistent folder per product — from idea to launch.</h2><p class="lede">The folder moves. The history stays together.</p>
-      <div class="master-copy"><div><ul><li>Brief, concept evidence, specifications, samples, tests, decisions, and retrospectives accumulate in one record.</li><li>Execution teams keep their detailed boards and tools; links point downward without creating a second authoritative record.</li><li>Parked and cancelled folders retain the learning.</li></ul></div>
-        <div><div class="diagram folder-anatomy" data-caption="Fig. 4 — Anatomy of the persistent folder">
-          <svg viewBox="0 0 760 430" role="img" aria-label="A folder containing seven artifact tabs across a lifecycle timeline">
-            <defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#172a35" stroke-width="1" opacity=".18"/></pattern></defs>
-            <path d="M65 105h185l28-38h153l34 38h230v253H65z" fill="#d8c49d" stroke="#172a35" stroke-width="3"/><path d="M65 105h630v253H65z" fill="url(#hatch)" opacity=".72"/>
-            <g font-family="IBM Plex Mono" font-size="12" font-weight="600" fill="#172a35">
-              <g transform="translate(98 133)"><rect width="150" height="32" fill="#fbf7ed" stroke="#172a35"/><text x="12" y="21">BRIEF</text></g>
-              <g transform="translate(118 166)"><rect width="185" height="32" fill="#fbf7ed" stroke="#172a35"/><text x="12" y="21">CONCEPT EVIDENCE</text></g>
-              <g transform="translate(138 199)"><rect width="176" height="32" fill="#fbf7ed" stroke="#172a35"/><text x="12" y="21">DEVELOPMENT PLAN</text></g>
-              <g transform="translate(158 232)"><rect width="202" height="32" fill="#fbf7ed" stroke="#172a35"/><text x="12" y="21">SAMPLE SPECS</text></g>
-              <g transform="translate(178 265)"><rect width="201" height="32" fill="#dceff2" stroke="#1689a8" stroke-width="2"/><text x="12" y="21">SAMPLE FINDINGS</text></g>
-              <g transform="translate(198 298)"><rect width="174" height="32" fill="#fbf7ed" stroke="#172a35"/><text x="12" y="21">FINAL RELEASE</text></g>
-              <g transform="translate(425 246)"><rect width="190" height="32" fill="#fbf7ed" stroke="#172a35"/><text x="12" y="21">RETROSPECTIVES</text></g>
-            </g>
-            <path d="M92 385H666" stroke="#b4382f" stroke-width="2"/><path d="M666 385l-12-6v12z" fill="#b4382f"/><g fill="#172a35" font-family="IBM Plex Mono" font-size="10"><text x="91" y="405">OPPORTUNITY</text><text x="330" y="405">DEVELOPMENT</text><text x="610" y="405">LAUNCH / PARK</text></g>
-            <path d="M485 132h157v69H485z" fill="#fbf7ed" stroke="#172a35" stroke-width="3"/><text x="563" y="160" text-anchor="middle" fill="#172a35" font-family="Cormorant Garamond" font-weight="700" font-size="23">ONE MASTER</text><text x="563" y="186" text-anchor="middle" fill="#172a35" font-family="Cormorant Garamond" font-weight="700" font-size="23">CARD</text>
-          </svg>
-        </div><p class="caption">Fig. 4 — Anatomy of the persistent folder</p></div></div>
+    <div class="content"><p class="kicker">What S29 changes</p><h2>For S29, every product gets one persistent folder—from idea to launch.</h2><p class="lede">S28 proved the evidence exists. S29 makes one master card the durable project record that holds it together.</p>
+      <div class="master-copy"><div><ul><li>The brief, concept evidence, specifications, samples, tests, decisions, and retrospectives accumulate in one record.</li><li>The folder moves through durable product-maturity states; the card is not recreated for each phase or sample round.</li><li>Execution teams keep their detailed tools. Links point downward without creating a second authoritative project record.</li><li>Launched, parked, and cancelled folders retain the learning for the next season.</li></ul></div>
+        <div><div class="art master-art" data-caption="Fig. 4 — One persistent S29 project folder"><img src="assets/s29-persistent-master-folder.png" alt="One engraved project folder accumulating evidence from idea through release, connected by a continuous red binding cord."></div><p class="caption">Fig. 4 — One persistent S29 folder · The holder changes; the record stays whole</p></div></div>
     </div><span class="num">04 / 11</span>
   </section>
 
@@ -195,36 +182,24 @@
 
   <section class="slide" id="slide-8">
     <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
-    <div class="content"><p class="kicker">The human discipline</p><h2>The whole discipline, priced out.</h2>
+    <div class="content"><p class="kicker">The human discipline</p><h2>Leadership decides whether the board becomes truth—or paperwork.</h2><p class="lede">People maintain the place leaders actually use. If status is accepted outside the board, the board becomes a second reporting task.</p>
       <table class="role-table"><tbody>
         <tr><th>Everyone</th><td>Use plain language on the folder. No tokens, jargon, or new ceremonies.</td></tr>
         <tr><th>Portfolio Owner / PM</th><td>Own the product identity, overall accountability, target milestone, and intended path through release.</td></tr>
         <tr><th>Current Owner</th><td>Keep the current result, date, output, open risks, and Blocked Reason true.</td></tr>
         <tr><th>Next Owner</th><td>Take the folder explicitly — one acceptance comment.</td></tr>
         <tr><th>Development approver</th><td>Personally record one decision — <b>APPROVED FOR DEVELOPMENT</b> — at one gate.</td></tr>
-        <tr><th>Leadership — all of us</th><td>Run reviews from the board. Correct missing status on the folder, not out loud.</td></tr>
+        <tr><th>Leadership — all of us</th><td>Run every portfolio review from the board. Resolve missing status by fixing the folder in the room.</td></tr>
       </tbody></table>
-      <p class="commitment">The last row is the one that decides whether this works.</p>
+      <p class="leadership-why">Use the board to make decisions, and keeping it current becomes the work—not extra work.</p>
     </div><span class="num">08 / 11</span>
   </section>
 
   <section class="slide" id="slide-9">
     <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
     <div class="content"><p class="kicker">The agentic layer</p><h2>Real portfolio discipline, without adding a project-management layer.</h2><p class="lede">The paper office had file clerks and registrars keeping folders moving. The agents absorb that routing and memory burden. People decide.</p>
-      <div><div class="diagram services" data-caption="Fig. 8 — One shelf, three services">
-        <svg viewBox="0 0 1100 390" role="img" aria-label="A central folder shelf connected to steward, personal, and leadership services, while human hands retain decision controls">
-          <defs><pattern id="h2" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#172a35" opacity=".17"/></pattern></defs>
-          <rect x="370" y="68" width="360" height="250" fill="#efe4cd" stroke="#172a35" stroke-width="3"/><rect x="382" y="80" width="336" height="226" fill="url(#h2)"/>
-          <g stroke="#172a35" fill="#d8c49d"><path d="M410 119h58l10-13h38l11 13h56v57H410z"/><path d="M494 205h56l10-13h38l11 13h71v57H494z"/><path d="M403 244h42l8-11h30l9 11h50v48H403z"/></g>
-          <text x="550" y="50" text-anchor="middle" font-family="Cormorant Garamond" font-size="28" fill="#172a35">THE SHARED SHELF</text>
-          <g fill="#dceff2" stroke="#1689a8" stroke-width="2"><rect x="38" y="44" width="245" height="78"/><rect x="817" y="44" width="245" height="78"/><rect x="427" y="326" width="246" height="48"/></g>
-          <g fill="#172a35" font-family="IBM Plex Mono" font-size="14" font-weight="600"><text x="160" y="75" text-anchor="middle">STEWARD</text><text x="160" y="99" text-anchor="middle" font-size="11" font-weight="400">CHECK · REMIND · ASK</text><text x="940" y="75" text-anchor="middle">PERSONAL SERVICE</text><text x="940" y="99" text-anchor="middle" font-size="11" font-weight="400">BRIEF · FETCH · UPDATE ON REQUEST</text><text x="550" y="356" text-anchor="middle">LEADERSHIP SERVICE · DECISIONS & RISK</text></g>
-          <g stroke="#1689a8" stroke-width="2" fill="none"><path d="M283 83H367"/><path d="M817 83H733"/><path d="M550 318V326"/></g>
-          <g stroke="#b4382f" stroke-width="3" fill="none"><path d="M328 190c-54 18-58 66-31 95"/><path d="M772 190c54 18 58 66 31 95"/></g>
-          <g fill="#fbf7ed" stroke="#172a35" stroke-width="2"><circle cx="289" cy="294" r="22"/><circle cx="811" cy="294" r="22"/></g><text x="289" y="300" text-anchor="middle" font-family="IBM Plex Mono" font-size="10">HUMAN</text><text x="811" y="300" text-anchor="middle" font-family="IBM Plex Mono" font-size="10">HUMAN</text>
-        </svg>
-      </div><p class="caption">Fig. 8 — One shelf, three services · The services point and explain; people retain every decision</p></div>
-      <div class="service-copy"><div class="service-card"><h3>The steward</h3>Walks the shelf on schedule, flags objective gaps and missed commitments, and keeps advisory clarity questions private until they prove useful.</div><div class="service-card"><h3>Personal service</h3>Gives each participant a short brief: folders held, folders arriving, what changed — and updates only on explicit request.</div><div class="service-card"><h3>Leadership service</h3>Surfaces the decision queue, milestone risk, and portfolio load without reconstructing status in the room.</div></div>
+      <div class="agent-layout"><div><div class="art agentic-art" data-caption="Fig. 8 — Assistance as light around the shared shelf"><img src="assets/s29-agentic-shelf-light.png" alt="Cyan light checks and interprets a shared wall of project folders while human hands retain the red decision pencil and stamp."></div><p class="caption">Fig. 8 — The services point, gather, and explain · People retain every decision</p></div>
+      <div class="service-copy"><div class="service-card"><h3>The steward</h3>Walks the shelf on schedule, flags objective gaps and missed commitments, and keeps advisory clarity questions private until they prove useful.</div><div class="service-card"><h3>Personal service</h3>Gives each participant a short brief: folders held, folders arriving, what changed — and updates only on explicit request.</div><div class="service-card"><h3>Leadership service</h3>Surfaces the decision queue, milestone risk, and portfolio load without reconstructing status in the room.</div></div></div>
       <p class="tiny">Agents never invent owners, dates, acceptance, approvals, priorities, or business decisions. The board remains fully usable with every agent switched off.</p>
     </div><span class="num">09 / 11</span>
   </section>
@@ -232,16 +207,7 @@
   <section class="slide" id="slide-10">
     <img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors">
     <div class="content ledger-layout"><div><p class="kicker">The decision dividend</p><h2>The record pays twice: it runs the work, then informs the decisions.</h2><p class="lede">Tracking is the floor. The reason to keep the folders true is what they can tell us.</p><div class="decision-list"><div class="decision"><span class="mark">01</span><div><h3>Measured stage time</h3><p>Plans built on observed durations instead of optimistic dates.</p></div></div><div class="decision"><span class="mark">02</span><div><h3>Sample-round patterns</h3><p>Sharper specifications and better tooling conversations.</p></div></div><div class="decision"><span class="mark">03</span><div><h3>Load concentration</h3><p>Capacity choices made before overload becomes visible only through escalation.</p></div></div><div class="decision"><span class="mark">04</span><div><h3>Portfolio mix</h3><p>A factual balance of work once Innovation Type is populated consistently.</p></div></div></div></div>
-      <div><div class="diagram ledger" data-caption="Fig. 9 — The season ledger">
-        <svg viewBox="0 0 700 470" role="img" aria-label="An illustrative ledger showing time in state, sample rounds, functional load, and portfolio mix">
-          <rect x="24" y="24" width="652" height="420" fill="#fbf7ed" stroke="#172a35" stroke-width="3"/><rect x="32" y="32" width="636" height="404" fill="none" stroke="#172a35"/><text x="350" y="62" text-anchor="middle" font-family="Cormorant Garamond" font-size="28" font-weight="700" fill="#172a35">THE SEASON LEDGER</text>
-          <g stroke="#172a35"><path d="M48 83H652"/><path d="M350 83V420"/><path d="M48 252H652"/></g>
-          <g font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#172a35"><text x="70" y="110">TIME IN STATE</text><text x="373" y="110">SAMPLE ROUNDS</text><text x="70" y="279">LOAD BY FUNCTION</text><text x="373" y="279">PORTFOLIO MIX</text></g>
-          <g stroke="#1689a8" fill="none" stroke-width="5"><path d="M72 210L118 174l48 12 47-70 49 44 53-24"/><path d="M390 217V171M438 217V139M486 217V190M534 217V121M582 217V165M630 217V201"/></g>
-          <g fill="#1689a8"><rect x="73" y="307" width="192" height="20"/><rect x="73" y="341" width="135" height="20"/><rect x="73" y="375" width="232" height="20"/><path d="M505 343l72-46a86 86 0 0 1 18 142z"/><path d="M505 343l90 96a86 86 0 0 1-147-5z" opacity=".72"/><path d="M505 343l-57 91a86 86 0 0 1-24-111z" opacity=".5"/><path d="M505 343l-81-20a86 86 0 0 1 153-26z" opacity=".3"/></g>
-          <text x="350" y="427" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#617079">ILLUSTRATIVE · DERIVED FROM BOARD HISTORY AS THE SEASON ACCUMULATES</text>
-        </svg>
-      </div><p class="caption">Fig. 9 — The season ledger · measures folders and flow, never people</p><p class="anchor" style="margin-top:12px">S30’s board can be designed from S29’s evidence — not only from anecdotes.</p></div>
+      <div><div class="art ledger-art" data-caption="Fig. 9 — The season ledger"><img src="assets/s29-season-ledger.png" alt="A physical engraved season ledger receives cyan evidence threads from the project-folder wall and drafts the next season from accumulated results."></div><p class="caption">Fig. 9 — The season ledger · Derived from S29 board history as the season accumulates</p><p class="anchor" style="margin-top:12px">S30’s board can be designed from S29’s evidence — not only from anecdotes.</p></div>
     </div><span class="num">10 / 11</span>
   </section>
 
