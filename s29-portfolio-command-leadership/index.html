@@ -23,7 +23,7 @@
   <link rel="icon" href="assets/westfield-outdoors-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Inter:wght@400;500;600;700;800&amp;family=Noto+Serif+SC:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Inter:wght@400;500;600;700;800&amp;family=Noto+Sans+SC:wght@400;500;600;700&amp;family=Noto+Serif+SC:wght@500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     :root{
       --ivory:#f3eddf;--paper:#fbf7ed;--ink:#172a35;--muted:#617079;
@@ -65,17 +65,18 @@
     .method-card{width:min(980px,92vw);max-height:84vh;overflow:auto;padding:28px 30px;background:var(--paper);border:3px double var(--ink);box-shadow:0 25px 80px #000}.method-card h2{font-size:42px}.method-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 24px;margin-top:18px}.method-item{padding-top:8px;border-top:1px solid var(--ink)}.method-item h3{font:600 11px var(--mono);text-transform:uppercase}.method-item p{margin-top:5px;font-size:12px;line-height:1.4;color:var(--muted)}
     .notes-panel{position:fixed;left:104px;bottom:62px;width:min(520px,calc(100vw - 128px));padding:14px 16px;background:rgba(251,247,237,.97);border:3px double var(--ink);box-shadow:0 14px 40px rgba(23,42,53,.24);z-index:80;display:none}.notes-panel.open{display:block}.notes-panel b{display:block;margin-bottom:6px;font:600 9px var(--mono);text-transform:uppercase;color:var(--red)}.notes-panel p{font:600 17px/1.35 var(--serif)}
     body.social .controls,body.social .lang,body.social .notes-toggle,body.social .progress,body.social .num{display:none}body.social .slide::after{display:none}
-    @media(max-width:800px){html{scroll-snap-type:none}.slide{min-height:auto;overflow:visible}.slide::before{inset:8px}.slide::after{position:absolute;width:72vw;bottom:14px;font-size:5px}.content{width:100%;height:auto;min-height:100dvh;padding:72px 25px 58px;justify-content:flex-start}.logo{width:104px;right:18px;top:18px}.num{right:18px;bottom:17px}.lang{left:15px;top:16px}.controls,.notes-toggle{display:none}.cover .content,.s28-layout,.timeline-layout,.label-layout,.dividend-grid{grid-template-columns:1fr}.cover-art{height:42vh;margin:0;order:-1;padding-top:25px}.cover-copy{margin-top:-25px}.then-now,.gap-stats,.principles,.pull-row,.service-hybrid,.ledger-tiles,.method-grid{grid-template-columns:1fr}.synthesis{grid-template-columns:1fr}.s28-art{height:390px}.timeline-track{grid-template-columns:1fr 1fr}.timeline-track::before{display:none}.mini-folder{height:110px}.shelf-art{height:330px}.shelf-stations{display:none}.principles{grid-template-columns:1fr 1fr}.handoff-art{height:250px}.triptych-labels{position:static;grid-template-columns:1fr;margin-top:7px}.triptych-labels div{font-size:8px}.role-table{font-size:10px}.role-table th{width:31%;font-size:8px}.role-table th,.role-table td{padding:7px}.service-hybrid{display:block}.service-image{height:300px;min-height:0;border-right:0;border-bottom:1px solid var(--ink)}.service-card::before,.service-card::after{display:none}.agent-boundary,.dividend-close{grid-template-columns:1fr}h1{font-size:49px}h2{font-size:38px}#slide-4 h2{font-size:38px;line-height:1}.label-copy .kicker{margin-bottom:11px}.label-copy .lede{margin-top:14px}.label-copy .anchor{margin-top:17px}.label-copy .secondary{margin-top:16px}.lightbox,.method-modal{padding:18px}.lightbox .clone{height:auto;max-height:82vh;overflow:auto}.method-card{padding:22px 18px}.plate{padding:17px}}
+    @media(max-width:800px){html{scroll-snap-type:none}body,.slide,.content{width:100%;max-width:100%;min-width:0}.slide{min-height:auto;overflow:visible}.slide::before{inset:8px}.slide::after{position:absolute;width:72vw;bottom:14px;font-size:5px}.content{height:auto;min-height:100dvh;padding:72px 25px 58px;justify-content:flex-start}.content>*,.cover-copy,.history-layout>*,.s28-layout>*,.label-layout>*,.continuity-layout>*,.agent-layout>*,.dividend-grid>*,.pull-row>*,.art,.diagram,.handoff-wrap,.titleblock,.continuity-diagram,.portfolio-field,.role-table{min-width:0;max-width:100%;width:100%}h1,h2,h3,p,li,th,td,.portfolio-card,.triptych-labels div{overflow-wrap:anywhere}.logo{width:104px;right:18px;top:18px}.num{right:18px;bottom:17px}.lang{left:15px;top:16px}.controls,.notes-toggle{display:none}.cover .content,.s28-layout,.timeline-layout,.label-layout,.dividend-grid{grid-template-columns:minmax(0,1fr)}.cover-art{height:42vh;margin:0;order:-1;padding-top:25px}.cover-copy{margin-top:-25px}.then-now,.gap-stats,.principles,.pull-row,.service-hybrid,.ledger-tiles,.method-grid{grid-template-columns:minmax(0,1fr)}.synthesis{grid-template-columns:minmax(0,1fr)}.s28-art{height:390px}.timeline-track{grid-template-columns:1fr 1fr}.timeline-track::before{display:none}.mini-folder{height:110px}.shelf-art{height:330px}.shelf-stations{display:none}.principles{grid-template-columns:1fr 1fr}.handoff-art{height:250px}.triptych-labels{position:static;grid-template-columns:minmax(0,1fr);margin-top:7px}.triptych-labels div{font-size:8px}.field{grid-template-columns:minmax(0,1.05fr) minmax(0,1.35fr)}.role-table{font-size:10px;table-layout:fixed}.role-table th{width:31%;font-size:8px}.role-table th,.role-table td{padding:7px}.service-hybrid{display:block}.service-image{height:300px;min-height:0;border-right:0;border-bottom:1px solid var(--ink)}.service-card::before,.service-card::after{display:none}.agent-boundary,.dividend-close{grid-template-columns:minmax(0,1fr)}h1{font-size:49px}h2{font-size:38px}#slide-4 h2{font-size:38px;line-height:1}.label-copy .kicker{margin-bottom:11px}.label-copy .lede{margin-top:14px}.label-copy .anchor{margin-top:17px}.label-copy .secondary{margin-top:16px}.lightbox,.method-modal{padding:18px}.lightbox .clone{height:auto;max-height:82vh;overflow:auto}.method-card{padding:22px 18px}.plate{padding:17px}}
     @media(max-width:800px){.history-layout,.continuity-layout,.agent-layout{grid-template-columns:1fr}.history-art{height:280px}.continuity-layer{grid-template-columns:1fr}.phase-rail{grid-template-columns:repeat(3,1fr)}.phase-row{display:none}.portfolio-row{grid-template-columns:1fr 1fr;min-height:0;background:none}.portfolio-card.p1,.portfolio-card.p2,.portfolio-card.p3,.queue-stack,.loop-cue{grid-column:auto}.portfolio-summary{grid-template-columns:1fr 1fr}.agent-art{height:300px}.human-boundary{grid-template-columns:1fr}}
     @media(max-height:790px) and (min-width:801px){.content{padding-top:50px;padding-bottom:50px;gap:9px}h2{font-size:48px}.cover-art{height:600px}.s28-art{height:500px}.history-art{height:390px}.portfolio-row{min-height:185px}.handoff-art{height:315px}.agent-art{height:350px}.role-table th,.role-table td{padding:6px 10px}.ledger-tile{min-height:92px}#slide-4 h2{font-size:44px}.label-copy .kicker{margin-bottom:10px}.label-copy .lede{margin-top:12px}.label-copy .anchor{margin-top:15px;padding-top:11px;padding-bottom:12px}.label-copy .secondary{margin-top:14px;padding-top:9px}}
+    html[lang="zh-CN"] body{font-family:"Noto Sans SC",Inter,Arial,sans-serif}html[lang="zh-CN"] h1,html[lang="zh-CN"] h2,html[lang="zh-CN"] .anchor,html[lang="zh-CN"] .support,html[lang="zh-CN"] .digital-break,html[lang="zh-CN"] .field .q,html[lang="zh-CN"] .leadership-why{font-family:"Noto Serif SC",serif;letter-spacing:.01em}html[lang="zh-CN"] h1{line-height:1.08}html[lang="zh-CN"] h2,html[lang="zh-CN"] #slide-4 h2{line-height:1.1;text-wrap:pretty}html[lang="zh-CN"] .kicker,html[lang="zh-CN"] .figure-label,html[lang="zh-CN"] .caption,html[lang="zh-CN"] .fieldname,html[lang="zh-CN"] .phase-row span,html[lang="zh-CN"] .station h3,html[lang="zh-CN"] .role-table th,html[lang="zh-CN"] .service-card h3,html[lang="zh-CN"] .folder-decision h3,html[lang="zh-CN"] .ledger-tile h3,html[lang="zh-CN"] .ledger-head b,html[lang="zh-CN"] .record-chain span,html[lang="zh-CN"] .contract-chain span,html[lang="zh-CN"] .continuity-layer>strong,html[lang="zh-CN"] .phase-rail span{font-family:"Noto Sans SC",sans-serif;letter-spacing:.06em;text-transform:none}html[lang="zh-CN"] .slide::after{content:"Westfield Outdoors 财产。保密及专有资料。未经书面许可，不得复制、分发或披露。"}html[lang="zh-CN"] .triptych-labels div{font-family:"Noto Sans SC",sans-serif;text-transform:none;line-height:1.35}html[lang="zh-CN"] .portfolio-summary div,html[lang="zh-CN"] .role-table,html[lang="zh-CN"] .service-card,html[lang="zh-CN"] .ledger-tile p{line-height:1.45}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.progress,.toast{transition:none}}
   </style>
 </head>
 <body>
-  <button class="lang" id="lang" title="Chinese translation follows final approval">中文</button>
+  <button class="lang" id="lang" title="Switch to Chinese">中文</button>
   <div class="controls" aria-label="Slide controls"><button id="prev" aria-label="Previous slide">↑</button><button id="next" aria-label="Next slide">↓</button></div>
   <button class="notes-toggle" id="notesToggle" aria-expanded="false" title="Presenter notes (N)">NOTES</button>
-  <div class="progress" id="progress"></div><div class="toast" id="toast">Chinese translation will be added after final approval.</div>
+  <div class="progress" id="progress"></div><div class="toast" id="toast"></div>
   <aside class="notes-panel" id="notesPanel" aria-live="polite"><b id="noteLabel">Hallway line</b><p id="noteText"></p></aside>
 
   <section class="slide cover" id="slide-1" data-note="We are not introducing a new kind of work; we are making the work already inside each product record operable.">
@@ -184,6 +185,236 @@
     const progress=document.getElementById('progress');
     const notesPanel=document.getElementById('notesPanel');
     const noteText=document.getElementById('noteText');
+    const query=new URLSearchParams(location.search);
+    const languageKey='s29-portfolio-command-leadership-language';
+    const zhText=new Map(Object.entries({
+      "NOTES":"讲稿",
+      "Hallway line":"一句话",
+      "Leadership Brief · S29":"管理层简报 · S29",
+      "The Project Folder,":"项目档案，",
+      "Made Visible":"流转可见",
+      "S29 — this season’s portfolio operating system":"S29：本季产品组合运营体系",
+      "Every product already creates a folder full of work. S29 makes its current holder, next result, and path forward visible.":"每个产品本来就会形成一份完整的项目档案。S29 让当前承办人、下一项成果和后续流转路径清晰可见。",
+      "One product, one folder. One named holder. One accepted handoff. One live portfolio view.":"一品一档。一次只由一人承办。交接必须签收。全盘状态实时可见。",
+      "In a traditional paper-based office":"传统纸质办公时代",
+      "The project folder was both the record and the responsibility.":"项目档案既是记录，也是责任的载体。",
+      "One working folder moved from desk to desk as the product advanced.":"随着产品推进，唯一的一份工作档案在各张办公桌之间流转。",
+      "It could occupy one place and one pair of hands at a time.":"同一时间，它只能在一个地方，由一个人经手。",
+      "Its location answered who had the work and where it was going next.":"档案在哪里，就能看出工作在谁手上、下一步流向哪里。",
+      "Shared digital systems made the evidence available everywhere — a major improvement — but access is not possession.":"共享数字系统让所有人随时看到证据，这是巨大的进步；但能访问，不等于有人承办。",
+      "S29 keeps digital access. It restores visible possession by convention.":"S29 保留数字化访问，同时用明确规则恢复可见的承办责任。",
+      "Fig. 2 — One physical holder · many simultaneous viewers":"图 2：一人持有 · 多人同时查看",
+      "Fig. 2 — Evidence accumulated · operating state remained implicit":"图 2：证据不断积累 · 运营状态仍然隐含",
+      "What S28 taught us":"S28 告诉我们的",
+      "S28 captured the work. It did not consistently expose the next commitment.":"S28 留住了工作，却没有持续显现下一项承诺。",
+      "Credit first: S28 did real work as an evidence archive —":"先看成绩：S28 作为证据档案确实承载了大量工作。",
+      "of 199 open cards carry attachments and":"张未结卡片中有附件，",
+      "carry discussion.":"有讨论记录。",
+      "have any due date — a dated commitment is almost never visible":"设有任何截止日期，意味着带日期的承诺几乎不可见",
+      "sit in department or executor queues rather than product-lifecycle states":"停留在部门或执行队列，而非产品生命周期状态",
+      "Evidence-rich; weak as a live operating surface.":"证据丰富，但作为实时运营界面仍然薄弱。",
+      "That is the specific gap S29 addresses.":"这正是 S29 要补上的缺口。",
+      "Live Innovation S28 snapshot · 199 open cards · Aug. 2, 2026 · read-only analysis ·":"Innovation S28 实时快照 · 199 张未结卡片 · 2026 年 8 月 2 日 · 只读分析 ·",
+      "method + definitions":"方法与定义",
+      "The S29 Constitution":"S29 运营章程",
+      "The product card now behaves like a routed physical folder.":"产品卡现在像一份带流转单的实体项目档案。",
+      "These fields turn a useful archive into a visible operating record.":"这些字段把有用的资料库变成清晰可见的运营记录。",
+      "One Current Action: the single result controlling portfolio progress now.":"只保留一个当前行动：它是此刻决定产品组合推进的唯一成果。",
+      "Secondary: Target Release / Milestone · Blocked Reason in plain language while blocked":"辅助字段：目标上市 / 里程碑 · 阻塞时用直白语言填写阻塞原因",
+      "Who owns this product?":"谁对这个产品负总责？",
+      "Who owns the work now?":"当前工作由谁负责？",
+      "What result is due next?":"下一项应交付什么成果？",
+      "When is it due?":"何时到期？",
+      "Who receives it next?":"下一位接手人是谁？",
+      "Portfolio Owner / PM":"产品组合负责人 / PM",
+      "Current Owner":"当前负责人",
+      "Current Action":"当前行动",
+      "Current Action Due Date":"当前行动截止日",
+      "Next Owner":"下一负责人",
+      "Fig. 3 — The five controlling fields":"图 3：五个控制字段",
+      "Continuity, not reinvention":"延续，而非推倒重来",
+      "S29 keeps the master-card intent and completes it with routing discipline.":"S29 延续主卡的初衷，并补上流转责任。",
+      "The record was meant to persist in S28. S29’s change is not more content in a card. It is the operating contract on the cover.":"S28 本就希望记录持续存在。S29 的变化不是往卡片里放更多内容，而是在档案封面上加入运营契约。",
+      "Briefs, concepts, specifications, sample evidence, decisions, and retrospectives stay together.":"简报、概念、规格、样品证据、决策和复盘始终保存在一起。",
+      "The card persists through launch, parking, or cancellation.":"卡片一路保留到上市、搁置或取消。",
+      "Detailed execution tools may link into it without replacing the portfolio record.":"详细执行工具可以链接进来，但不能取代产品组合主记录。",
+      "Continuity from S28":"延续 S28",
+      "Brief":"简报",
+      "Specifications":"规格",
+      "Samples":"样品",
+      "Decisions":"决策",
+      "Learning":"经验",
+      "New in S29":"S29 新增",
+      "Named holder":"明确当前负责人",
+      "Next result":"下一项成果",
+      "Due date":"截止日期",
+      "Next owner":"下一负责人",
+      "Acceptance":"签收",
+      "Opportunity":"机会",
+      "Definition":"定义验证",
+      "Development":"产品开发",
+      "Release":"发布",
+      "Complete / Parked":"完成 / 搁置",
+      "Fig. 4 · Same record · new operating contract":"图 4 · 同一份记录 · 新的运营契约",
+      "The genuine digital advantage":"真正的数字化优势",
+      "Digital gives leadership a view the paper office never could.":"数字化让管理层拥有纸质办公室无法提供的全局视野。",
+      "The Constitution restores visible responsibility. Trello adds real-time portfolio visibility.":"运营章程恢复可见责任，Trello 提供实时产品组合视图。",
+      "Pipeline":"机会池",
+      "Kickoff":"开发启动",
+      "Pre-Release":"发布前",
+      "TRAIL CHAIR":"户外轻量椅",
+      "UTILITY WAGON":"多用途手推车",
+      "SHADE SYSTEM":"遮阳系统",
+      "COOLER PLATFORM":"保冷平台",
+      "CAMP TABLE":"露营桌",
+      "FIELD STATION":"野外工作台",
+      "Owner · Design":"负责人 · 设计",
+      "Next · Confirm brief":"下一步 · 确认简报",
+      "Due · Aug 12":"到期 · 8月12日",
+      "Owner · Engineering":"负责人 · 工程",
+      "Next · Review prototype":"下一步 · 评审原型",
+      "Due · Aug 21":"到期 · 8月21日",
+      "Owner · QA":"负责人 · 质量",
+      "Waiting · test result":"等待 · 测试结果",
+      "Owner · Sampling":"负责人 · 样品",
+      "Waiting · sample return":"等待 · 样品返回",
+      "Waiting · acceptance":"等待 · 签收",
+      "Owner · PM":"负责人 · PM",
+      "Next · Release review":"下一步 · 发布评审",
+      "Due · Sep 04":"到期 · 9月4日",
+      "PRODUCT DEVELOPMENT ⇄ SAMPLES · repeat as evidence requires":"产品开发 ⇄ 样品验证 · 根据证据反复迭代",
+      "Product maturity":"产品成熟度",
+      "Visible across every active product.":"所有在研产品一目了然。",
+      "Current owner":"当前负责人",
+      "One named person at a time.":"任何时刻都明确到一人。",
+      "Blocked work and pending handoffs":"阻塞事项与待签收交接",
+      "Visible before status reconstruction.":"无需口头重建状态即可看见。",
+      "Focused views":"聚焦视图",
+      "Decisions, risk, and mix without status reconstruction.":"无需重建状态即可查看决策、风险和组合。",
+      "Fig. 5 — An impossible paper-office view, made live":"图 5：纸质办公室不可能拥有的全局实时视图",
+      "The pull rule":"拉动式交接",
+      "A handoff completes when the next owner takes the folder.":"下一位负责人签收档案，交接才算完成。",
+      "Moving the card is not the transfer. Acceptance is.":"移动卡片不等于移交；签收才算。",
+      "1 · Pack the result":"1 · 装入成果",
+      "Output and open risks go into the folder.":"将成果和未解决风险放入档案。",
+      "2 · Work travels; Current Owner remains":"2 · 工作外发，当前负责人不变",
+      "The supplier work moves. The named Westfield Current Owner still holds the folder.":"供应商工作向外流转，明确的 Westfield 当前负责人仍然持有档案。",
+      "3 · The next owner takes it":"3 · 下一负责人签收",
+      "Acceptance rotates the Current Owner, action, and date.":"签收后才更新当前负责人、行动和日期。",
+      "Fig. 6 — Westfield development · HengFeng sampling · Westfield acceptance":"图 6：Westfield 开发 · 恒丰打样 · Westfield 签收",
+      "Why pull?":"为什么必须由下一位来拉动？",
+      "Work that must be taken cannot be dumped invisibly. Until the next owner is ready, the Current Owner still holds it and the waiting state remains visible.":"必须由接手人签收的工作，不能被悄悄甩给别人。接手人未准备好之前，当前负责人仍然负责，等待状态也保持可见。",
+      "The company boundary:":"公司边界：",
+      "The folder always belongs to Westfield. HengFeng may perform the sample work; the named Westfield Current Owner remains responsible through the request, follow-up, review, and acceptance.":"档案始终归 Westfield 所有。恒丰可以执行样品工作，但从提出请求、跟进、审核到签收，责任始终由一名明确的 Westfield 当前负责人承担。",
+      "The human discipline":"人的纪律",
+      "What S29 requires from each of us.":"S29 对每个人的要求。",
+      "Everyone":"所有人",
+      "Use plain language on the product folder.":"产品档案一律使用直白语言。",
+      "Keep the holder, next result, date, and blocker true.":"确保当前负责人、下一项成果、日期和阻塞原因始终真实。",
+      "Explicitly accept the handoff.":"明确签收交接。",
+      "Keep the record coherent through release or parking.":"在发布或搁置前，确保整份记录连贯。",
+      "Development approver":"开发审批人",
+      "Personally record the development decision at the gate.":"在关口亲自记录开发决策。",
+      "Leadership — all of us":"管理层 · 我们所有人",
+      "Run reviews from the board; correct missing status on the record instead of reconstructing it verbally.":"所有评审从看板开始；缺失状态直接在记录上补齐，不靠口头重建。",
+      "Leadership behavior decides whether the board becomes the operating truth or another place people update after the fact.":"管理层的行为决定看板会成为运营事实，还是又一个事后补录的地方。",
+      "Clerical support without transferred authority":"不转移权力的文书支持",
+      "Agents carry the remembering and retrieval. People carry the judgment.":"智能体负责记忆与检索，人负责判断。",
+      "Fig. 7 — Agentic assistance remembers, retrieves, and prepares; the person retains authority":"图 7：智能体协助记忆、检索和准备，人始终保有决策权",
+      "Remember":"记住",
+      "Notice a blank field, missed date, pending handoff, or incomplete gate.":"发现空白字段、错过的日期、待签收交接或未完成的关口。",
+      "Retrieve":"检索",
+      "Assemble each person’s current folders, incoming handoffs, and recent changes into a short brief.":"把每个人当前承办的档案、即将接手的交接和近期变化汇总成简短简报。",
+      "Prepare":"准备",
+      "Collect the evidence and context for a decision or approval queue.":"为决策或审批队列收集证据和上下文。",
+      "Agents never invent ownership, dates, acceptance, approvals, priorities, or business decisions. The board still works with every agent switched off.":"智能体绝不虚构负责人、日期、签收、审批、优先级或业务决策。关闭所有智能体，看板依然可用。",
+      "People decide.":"人来决策。",
+      "The operating record compounds":"运营记录会持续增值",
+      "A true operating record runs today’s work — and sharpens tomorrow’s decisions.":"一份真实的运营记录，既推动今天的工作，也让明天的决策更准确。",
+      "Keep the folders true, and the evidence starts answering questions instead of merely documenting history.":"让档案始终真实，证据就会开始回答问题，而不只是记录历史。",
+      "Decisions on one product":"单个产品的决策",
+      "Approve development":"批准开发",
+      "Charter, evidence, risks, and open questions together — not a document hunt.":"章程、证据、风险和待决问题集中在一起，不再四处找文件。",
+      "Park, reopen, or learn":"搁置、重启或复盘",
+      "Written conditions and sample history make the next decision explicit.":"书面条件和样品历史让下一次决策有据可依。",
+      "Decisions across the portfolio":"产品组合层面的决策",
+      "Illustrative · real evidence accumulates from live use":"示意 · 真实证据随实际使用逐步积累",
+      "Time in state":"各状态停留时间",
+      "Launch plans built on measured stage durations.":"用实测阶段时长制定上市计划。",
+      "Sample rounds":"样品轮次",
+      "Which product types consume iteration — sharper specifications and tooling conversations.":"看清哪些产品类型消耗更多迭代，从而改进规格和模具沟通。",
+      "Load by function":"各职能负荷",
+      "Capacity choices based on visible queues, not the loudest complaint.":"根据可见队列做产能选择，而不是听谁抱怨得最响。",
+      "Portfolio mix":"产品组合结构",
+      "Innovation Type turns strategic balance into a fact once consistently populated.":"持续填写创新类型后，战略平衡会从印象变成事实。",
+      "Measures of folders and flow":"衡量档案与流转",
+      "Never measures of people":"绝不衡量个人",
+      "S30 should be designed from S29’s accumulated evidence — not from anecdotes.":"S30 应建立在 S29 积累的证据上，而不是传闻上。",
+      "The numbers are only as true as the labels.":"标签有多真实，数字才有多真实。",
+      "S28 evidence method":"S28 证据方法",
+      "What the snapshot measures — and what it does not.":"这份快照衡量什么，又不衡量什么。",
+      "Scope":"范围",
+      "All 199 open cards across all 19 open Innovation S28 lists, captured Aug. 2, 2026. Strictly read-only.":"Innovation S28 的 19 个未关闭列表中全部 199 张未结卡片，截取于 2026 年 8 月 2 日。严格只读。",
+      "Six of 199 cards have Trello’s built-in due date populated: 3%. S28 does not distinguish an action date from a milestone.":"199 张卡片中只有 6 张填写了 Trello 内置截止日期，即 3%。S28 不区分行动日期与里程碑。",
+      "Department / executor queue":"部门 / 执行队列",
+      "Cards in Sample Room, HengFeng, Westfield functional, or Outside Design queues. This measures board organization, not the performance of a function.":"位于 Sample Room、恒丰、Westfield 职能部门或 Outside Design 队列的卡片。这衡量的是看板组织方式，不是某个职能的绩效。",
+      "Assigned member":"已分配成员",
+      "At least one visible Trello member. A proxy for visible ownership, not proof of the S29 Current Owner contract.":"至少分配了一名可见的 Trello 成员。这只是可见责任的替代指标，并不能证明符合 S29 当前负责人契约。",
+      "Interpretation boundary":"解读边界",
+      "The analysis evaluates S28 as a portfolio operating system — never the performance of a person or function.":"本分析评估的是 S28 作为产品组合运营体系的表现，绝不评估个人或职能部门的绩效。",
+      "Held for Q&A":"问答备用数据",
+      "48% lack a member; 71 of 74 HengFeng or Sample Room cards lack a due date; 27% are inactive at least 30 days.":"48% 未分配成员；恒丰或 Sample Room 的 74 张卡片中有 71 张没有截止日期；27% 至少 30 天没有活动。"
+    }));
+    const zhAttributes=new Map(Object.entries({
+      "We are not introducing a new kind of work; we are making the work already inside each product record operable.":"我们不是引入一种新的工作，而是让每份产品记录里已有的工作真正可运营。",
+      "Before shared digital systems, whoever physically held the working folder visibly held the next move.":"在共享数字系统出现之前，谁拿着工作档案，谁就明显掌握着下一步。",
+      "The evidence is there; the dated next move and portfolio position usually are not.":"证据都在，但下一项带日期的行动和产品组合中的位置往往看不见。",
+      "The new idea is not putting everything on one card; it is making the card declare who holds it, what happens next, and who must take it.":"新的不是把所有内容塞进一张卡，而是让卡片明确当前负责人、下一步成果，以及由谁签收交接。",
+      "S28 was already meant to keep one record per product; S29 makes that record accountable as it moves.":"S28 本就希望每个产品保留一份持续记录；S29 让这份记录在流转中始终责任明确。",
+      "At any moment, we can see every product’s position, owner, next move, blocked work, and pending handoffs across the whole portfolio.":"任何时刻，我们都能看到全部产品的位置、负责人、下一步、阻塞事项和待签收交接。",
+      "Moving the card is not the transfer; the next person accepting it is.":"移动卡片不是移交；下一位明确签收才是。",
+      "The system is light, but it only becomes true when each role performs its small part.":"这套系统很轻，但只有每个角色都完成自己那一小部分，它才会成为事实。",
+      "The agents act like clerical support around the record — not managers looking down on the portfolio.":"智能体围绕记录提供文书支持，而不是居高临下地管理产品组合。",
+      "Keep the folders true, and the evidence starts answering questions instead of merely documenting history.":"让档案始终真实，证据就会开始回答问题，而不只是记录历史。",
+      "Fig. 1 — The living product folder":"图 1：持续生长的项目档案",
+      "Fig. 2 — One physical holder; many simultaneous viewers":"图 2：一人持有，多人同时查看",
+      "Fig. 2 — Evidence accumulated; operating state remained implicit":"图 2：证据不断积累，运营状态仍然隐含",
+      "Fig. 3 — The S29 folder Constitution":"图 3：S29 项目档案运营章程",
+      "Fig. 4 · Same record, new operating contract":"图 4 · 同一份记录，新的运营契约",
+      "Fig. 5 — The live portfolio field · illustrative":"图 5：实时产品组合全景 · 示意",
+      "Fig. 6 — The accountable handoff":"图 6：责任明确的交接",
+      "Fig. 7 — The supported project desk":"图 7：获得智能体支持的项目工作台",
+      "Fig. 8 — The season ledger · illustrative":"图 8：本季运营台账 · 示意",
+      "An engraved project folder containing product-development evidence, with a cyan routing label.":"一份雕版风格的项目档案，装有产品开发证据，封面附有青色流转单。",
+      "An engraved diptych contrasts one person physically holding a product folder in a traditional paper office with the same evidence simultaneously visible on several modern digital work surfaces.":"一幅雕版风格双联画：左侧是传统纸质办公室中一人持有项目档案，右侧是同一证据同时出现在多个现代数字工作界面上。",
+      "An overfilled product-development record containing drawings, specifications, swatches, and test evidence, with no routing label or visible operating state.":"一份装满图纸、规格、色样和测试证据的产品开发档案，没有流转单，也没有可见的运营状态。",
+      "Three engraved vignettes show output and risks placed in a project folder, supplier work traveling outward while the named Westfield Current Owner keeps the folder, and the next owner actively accepting it.":"三幅雕版风格小景依次显示：成果和风险装入项目档案；供应商工作向外流转而 Westfield 当前负责人仍保有档案；下一位负责人主动签收。",
+      "An engraved project desk shows a person holding the project folder and decision pencil while agentic assistance brings a brief, highlights one routing field, and retrieves relevant evidence.":"雕版风格的项目工作台上，一人掌握项目档案和决策用笔，智能体协助递交简报、提示一个流转字段并检索相关证据。",
+      "Slide controls":"幻灯片控制",
+      "Previous slide":"上一页",
+      "Next slide":"下一页",
+      "Presenter notes (N)":"演讲提示（N）",
+      "Expanded figure":"放大图示",
+      "Close expanded figure":"关闭放大图示",
+      "Close methodology":"关闭方法说明"
+    }));
+    const textBindings=[];
+    const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode(node){return zhText.has(node.nodeValue.trim())?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+    while(walker.nextNode()){const node=walker.currentNode;const original=node.nodeValue;const key=original.trim();textBindings.push({node,original,key})}
+    const attributeBindings=[];
+    document.querySelectorAll('[data-note],[data-caption],[alt],[aria-label],[title]').forEach(el=>['data-note','data-caption','alt','aria-label','title'].forEach(name=>{if(!el.hasAttribute(name))return;const original=el.getAttribute(name);if(zhAttributes.has(original))attributeBindings.push({el,name,original})}));
+    function localizedText(original,translated){const lead=original.match(/^\s*/)?.[0]||'';const tail=original.match(/\s*$/)?.[0]||'';return lead+translated+tail}
+    function storedLanguage(){try{return localStorage.getItem(languageKey)}catch{return null}}
+    function setStoredLanguage(value){try{localStorage.setItem(languageKey,value)}catch{}}
+    let currentLanguage='en';
+    function setLanguage(language){
+      currentLanguage=language==='zh'?'zh':'en';const isZh=currentLanguage==='zh';
+      document.documentElement.lang=isZh?'zh-CN':'en';document.title=isZh?'项目档案，流转可见':'The Project Folder, Made Visible';
+      textBindings.forEach(({node,original,key})=>{node.nodeValue=isZh?localizedText(original,zhText.get(key)):original});
+      attributeBindings.forEach(({el,name,original})=>el.setAttribute(name,isZh?zhAttributes.get(original):original));
+      const langButton=document.getElementById('lang');langButton.textContent=isZh?'EN':'中文';langButton.title=isZh?'切换到英文':'Switch to Chinese';
+      setStoredLanguage(currentLanguage);updateNote();
+    }
     function currentIndex(){return Math.max(0,slides.findIndex(s=>{const r=s.getBoundingClientRect();return r.top>=-innerHeight*.45&&r.top<innerHeight*.55}))}
     function updateNote(){noteText.textContent=slides[currentIndex()]?.dataset.note||''}
     function go(delta){const i=Math.min(slides.length-1,Math.max(0,currentIndex()+delta));slides[i].scrollIntoView({behavior:'smooth'});setTimeout(updateNote,260)}
@@ -199,8 +430,9 @@
     document.getElementById('close').addEventListener('click',closeLightbox);lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox()});
     document.getElementById('methodOpen').addEventListener('click',()=>{methodModal.classList.add('open');document.getElementById('methodClose').focus()});document.getElementById('methodClose').addEventListener('click',closeMethod);methodModal.addEventListener('click',e=>{if(e.target===methodModal)closeMethod()});
     const notesToggle=document.getElementById('notesToggle');function toggleNotes(force){const open=typeof force==='boolean'?force:!notesPanel.classList.contains('open');notesPanel.classList.toggle('open',open);notesToggle.setAttribute('aria-expanded',String(open));updateNote()}notesToggle.addEventListener('click',()=>toggleNotes());
-    const toast=document.getElementById('toast');document.getElementById('lang').addEventListener('click',()=>{toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2400)});
-    const query=new URLSearchParams(location.search);const qaSlide=Number(query.get('slide'));if(query.get('social')==='1')document.body.classList.add('social');if(qaSlide>=1&&qaSlide<=slides.length){document.documentElement.style.scrollSnapType='none';slides.forEach((s,i)=>s.style.display=i===qaSlide-1?'grid':'none');scrollTo(0,0)}updateNote();
+    document.getElementById('lang').addEventListener('click',()=>setLanguage(currentLanguage==='zh'?'en':'zh'));
+    const requestedLanguage=query.get('lang');setLanguage(requestedLanguage==='zh'||(!requestedLanguage&&storedLanguage()==='zh')?'zh':'en');
+    const qaSlide=Number(query.get('slide'));if(query.get('social')==='1')document.body.classList.add('social');if(qaSlide>=1&&qaSlide<=slides.length){document.documentElement.style.scrollSnapType='none';slides.forEach((s,i)=>s.style.display=i===qaSlide-1?'grid':'none');scrollTo(0,0)}updateNote();
   </script>
 </body>
 </html>
