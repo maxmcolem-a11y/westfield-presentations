@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="only light">
+<meta name="description" content="Hawkeye (SKW-018) motion-chair product story loop for digital signage.">
+<title>Hawkeye — Signage Loop — Westfield Outdoors</title>
+</head>
+<body>
+<style>
+:root{
+  --void:#eef1f3; --panel:#ffffff; --line:#ccd6dd; --line2:#dfe6ea;
+  --ink:#0e1720; --dim:#5d7080; --dimmer:#9aa9b4;
+  --vly:#2f62bd; --mtn:#c2412c; --live:#12855c;
+  --sans:"Helvetica Neue",Helvetica,-apple-system,"Segoe UI",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:var(--void);cursor:none}
+body{font-family:var(--sans);color:var(--ink);display:grid;place-items:center}
+
+/* the whole board is authored at 1920x1080 and scaled to whatever screen it lands on,
+   so a 4K panel gets the identical composition at 2x */
+#fit{position:relative;overflow:hidden;flex:none}
+#board{position:absolute;top:0;left:0;width:1920px;height:1080px;transform-origin:top left;
+  display:flex;flex-direction:column;overflow:hidden;background:var(--void)}
+
+/* ambient: the R 800 arc the whole chair rocks on, drifting.
+   (the wagon board drifts its herringbone crease lattice here — same device, this
+   product's own geometry) */
+#board::before{content:"";position:absolute;inset:-80px;pointer-events:none;z-index:0;
+  background-image:
+    repeating-radial-gradient(circle at 50% 210%,transparent 0 118px,rgba(47,98,189,.075) 118px 120px),
+    repeating-radial-gradient(circle at 50% -110%,transparent 0 146px,rgba(194,65,44,.045) 146px 148px);
+  animation:drift 120s linear infinite}
+@keyframes drift{to{transform:translateY(60px)}}
+#board::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:radial-gradient(120% 80% at 50% 38%,transparent 45%,rgba(176,190,201,.34) 100%)}
+#board>*{position:relative;z-index:2}
+
+/* ---------- loop rail ---------- */
+.rail{height:4px;background:var(--line2);flex:none}
+.rail i{display:block;height:100%;width:0;background:var(--vly)}
+
+/* ---------- header ---------- */
+.head{height:88px;flex:none;display:flex;align-items:center;gap:34px;
+  padding:0 56px;border-bottom:1px solid var(--line)}
+.head .logo{height:26px}
+.head .id{font:600 15px/1 var(--mono);letter-spacing:.24em;color:var(--dim)}
+.head .id b{color:var(--ink);font-weight:600}
+.status{margin-left:auto;display:flex;align-items:center;gap:12px;
+  font:600 14px/1 var(--mono);letter-spacing:.18em;color:var(--live)}
+.dot{width:9px;height:9px;background:var(--live);border-radius:50%;
+  animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.82)}}
+.clock{font:600 15px/1 var(--mono);letter-spacing:.16em;color:var(--dim);
+  font-variant-numeric:tabular-nums;min-width:104px;text-align:right}
+
+/* ---------- body ---------- */
+.body{flex:1;display:flex;gap:52px;padding:34px 56px 26px;min-height:0}
+
+/* persistent: the chair never stops rocking */
+.cad{width:566px;flex:none;display:flex;flex-direction:column;min-height:0;
+  transition:width .65s cubic-bezier(.2,.7,.3,1)}
+body.wide .cad{width:900px}
+.cad .frame{flex:1;position:relative;border:1px solid var(--line);
+  background:linear-gradient(160deg,rgba(47,98,189,.07),transparent 62%);min-height:0}
+.cad canvas{position:absolute;inset:0;width:100%;height:100%}
+.cad .corner{position:absolute;width:16px;height:16px;border:1px solid var(--vly);opacity:.55}
+.cad .c1{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.cad .c2{top:-1px;right:-1px;border-left:0;border-bottom:0}
+.cad .c3{bottom:-1px;left:-1px;border-right:0;border-top:0}
+.cad .c4{bottom:-1px;right:-1px;border-left:0;border-top:0}
+.cad .tag{position:absolute;top:16px;left:18px;font:600 12px/1.6 var(--mono);
+  letter-spacing:.2em;color:var(--vly)}
+.cad .live{position:absolute;bottom:14px;right:18px;font:600 11px/1.6 var(--mono);
+  letter-spacing:.18em;color:var(--dimmer);font-variant-numeric:tabular-nums}
+.cad .cap{flex:none;padding-top:16px;font:15px/1.5 var(--mono);color:var(--dim);
+  letter-spacing:.04em;min-height:70px;transition:opacity .5s}
+
+/* scene stage */
+.stagewrap{flex:1;position:relative;min-width:0}
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  opacity:0;visibility:hidden;transition:opacity .55s ease}
+.scene.on{opacity:1;visibility:visible}
+.scene .el{opacity:0;transform:translateY(18px);
+  transition:opacity .6s cubic-bezier(.2,.7,.3,1),transform .6s cubic-bezier(.2,.7,.3,1)}
+.scene.on .el{opacity:1;transform:none}
+.scene.on .el:nth-child(1){transition-delay:.05s}
+.scene.on .el:nth-child(2){transition-delay:.16s}
+.scene.on .el:nth-child(3){transition-delay:.27s}
+.scene.on .el:nth-child(4){transition-delay:.38s}
+.scene.on .el:nth-child(5){transition-delay:.49s}
+
+.eyebrow{font:600 14px/1 var(--mono);letter-spacing:.26em;text-transform:uppercase;
+  color:var(--vly);display:flex;align-items:center;gap:16px;margin-bottom:26px}
+.eyebrow::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+.eyebrow.m{color:var(--mtn)}
+h1{font:800 74px/1.02 var(--sans);letter-spacing:-.033em;text-wrap:balance;max-width:17ch}
+h1.sm{font-size:60px}
+.sub{font-size:25px;line-height:1.5;color:var(--dim);max-width:44ch;margin-top:22px}
+.sub b{color:var(--ink);font-weight:600}
+
+.row{display:flex;gap:38px;align-items:center;margin-top:30px}
+.mega{font:800 132px/.9 var(--sans);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.mega.v{color:var(--vly)} .mega.m{color:var(--mtn)}
+.mega.trio{font-size:88px}
+.mega small{display:block;font:600 14px/1.5 var(--mono);letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);margin-top:16px}
+.arrow{font:300 62px/1 var(--sans);color:var(--dimmer)}
+
+.bullets{list-style:none;margin-top:34px;display:grid;gap:0;max-width:44ch}
+.bullets li{padding:18px 0;border-top:1px solid var(--line);display:grid;
+  grid-template-columns:auto 1fr;gap:20px;align-items:baseline;font-size:22px;color:var(--dim)}
+.bullets li:last-child{border-bottom:1px solid var(--line)}
+.bullets .k{font:600 13px/1.6 var(--mono);letter-spacing:.16em;color:var(--vly)}
+.bullets b{color:var(--ink);font-weight:600}
+
+.cards{display:grid;grid-template-columns:repeat(3,1fr);margin-top:32px;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cards>div{padding:26px 32px;border-left:1px solid var(--line)}
+.cards>div:first-child{border-left:0;padding-left:0}
+.cards .k{display:block;font:700 13px/1 var(--mono);letter-spacing:.24em;color:var(--vly);
+  margin-bottom:18px}
+.cards .k.m{color:var(--mtn)}
+.cards p{font-size:21px;line-height:1.45;color:var(--dim)}
+.cards b{color:var(--ink);font-weight:600}
+
+.tiles{display:grid;grid-template-columns:1fr 1fr;column-gap:52px;margin-top:28px}
+.tiles>div{padding:24px 0;border-top:1px solid var(--line);transition:opacity .35s ease}
+body.wide .tiles>div{opacity:.34}
+body.wide .tiles>div.live{opacity:1}
+body.wide .tiles>div.live .k{color:var(--ink)}
+.tiles .k{display:block;font:700 14px/1 var(--mono);letter-spacing:.2em;color:var(--vly);
+  text-transform:uppercase;margin-bottom:14px}
+.tiles p{font-size:21px;line-height:1.45;color:var(--dim);max-width:32ch}
+.tiles b{color:var(--ink);font-weight:600}
+
+.kicker{font:600 27px/1.4 var(--sans);color:var(--ink);margin-top:30px;max-width:50ch;
+  padding-left:24px;border-left:4px solid var(--vly)}
+
+.note{font:600 14px/2 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dimmer);margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.note b{color:var(--dim);font-weight:600}
+
+.statrow{display:flex;gap:0;margin-top:34px;border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line)}
+.statrow div{flex:1;padding:22px 26px;border-left:1px solid var(--line)}
+.statrow div:first-child{border-left:0;padding-left:0}
+.statrow .n{display:block;font:800 46px/1 var(--sans);letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums}
+.statrow .n.m{color:var(--mtn)} .statrow .n.v{color:var(--vly)}
+.statrow .l{display:block;font:600 12px/1.5 var(--mono);letter-spacing:.18em;
+  text-transform:uppercase;color:var(--dim);margin-top:12px}
+
+/* scene media */
+.media{display:flex;gap:36px;align-items:center;margin-top:8px}
+.media.top{align-items:flex-start;margin-top:22px}
+.media .txt{flex:1;min-width:0}
+
+/* the two live scene stages: the failed V2 machine, and the COG curve that explains it */
+.stage2{flex:none;width:520px;border:1px solid var(--line);background:var(--panel);
+  padding:8px;position:relative}
+.stage2 canvas{display:block;width:504px;height:400px}
+.stage2 .chip{position:absolute;top:18px;left:18px;display:flex;align-items:center;gap:9px;
+  font:700 13px/1 var(--mono);letter-spacing:.2em;color:var(--mtn)}
+.stage2 .chip i{width:10px;height:10px;border:2px solid currentColor;border-radius:50%;
+  background:currentColor}
+.stage2 .chip.ok{color:var(--live)}
+.stage2 .read{position:absolute;bottom:18px;left:18px;right:18px;display:flex;
+  border-top:1px solid var(--line2);padding-top:10px}
+.stage2 .read div{flex:1;border-left:1px solid var(--line2);padding:0 14px}
+.stage2 .read div:first-child{border-left:0;padding-left:0}
+.stage2 .read .l{display:block;font:600 10px/1 var(--mono);letter-spacing:.18em;
+  text-transform:uppercase;color:var(--dimmer);margin-bottom:7px}
+.stage2 .read .v{display:block;font:700 17px/1 var(--mono);color:var(--ink);
+  font-variant-numeric:tabular-nums}
+.stage2 .read .v.hot{color:var(--mtn)} .stage2 .read .v.good{color:var(--live)}
+
+.plotstage{flex:none;width:560px;border:1px solid var(--line);background:var(--panel);padding:10px}
+.plotstage canvas{display:block;width:540px;height:360px}
+.plotstage.flat{align-self:center}
+.plotstage.flat canvas{height:250px}
+
+/* ---------- KPI strip ---------- */
+.kpis{height:116px;flex:none;display:flex;padding:0 56px;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.kpi{flex:1;display:flex;flex-direction:column;justify-content:center;gap:9px;
+  padding:0 30px;border-left:1px solid var(--line)}
+.kpi:first-child{border-left:0;padding-left:0}
+.kpi .l{font:600 12px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.kpi .v{font:800 42px/1 var(--sans);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.kpi .v u{text-decoration:none;font-size:20px;font-weight:600;color:var(--dim);margin-left:6px}
+.kpi .meter{height:3px;background:var(--line);position:relative;overflow:hidden}
+.kpi .meter i{position:absolute;inset:0 auto 0 0;background:var(--vly);width:0;
+  transition:width 1.4s cubic-bezier(.2,.7,.3,1)}
+.kpi.good .v{color:var(--live)} .kpi.good .meter i{background:var(--live)}
+.kpi.limit .v{color:var(--mtn)} .kpi.limit .meter i{background:var(--mtn)}
+
+/* ---------- ticker ---------- */
+.ticker{height:60px;flex:none;display:flex;align-items:center;overflow:hidden;
+  position:relative;background:var(--panel)}
+.ticker .tape{display:flex;flex:none;animation:tape 64s linear infinite}
+.ticker span{font:600 17px/1 var(--mono);letter-spacing:.14em;color:var(--dim);
+  padding:0 34px;white-space:nowrap;display:flex;align-items:center;gap:34px}
+.ticker span::after{content:"";width:5px;height:5px;background:var(--vly);border-radius:50%}
+.ticker b{color:var(--ink);font-weight:600}
+@keyframes tape{to{transform:translateX(-50%)}}
+
+@media (prefers-reduced-motion:reduce){
+  #board::before,.ticker .tape,.dot{animation:none}
+}
+</style>
+
+<div id="fit"><div id="board">
+  <div class="rail"><i id="rail"></i></div>
+
+  <header class="head">
+    <img class="logo" src="data:image/png;base64,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" alt="Westfield Outdoors">
+    <span class="id">SKW-018 · <b>HAWKEYE</b></span>
+    <span class="status"><span class="dot"></span>V3 IN SAMPLES</span>
+    <span class="clock" id="clock">--:--</span>
+  </header>
+
+  <div class="body">
+    <!-- persistent: the V3 chair working through its four modes, drawn live -->
+    <aside class="cad">
+      <div class="frame">
+        <canvas id="hero" aria-label="Hawkeye V3 chair moving in bounce, rock, roll and twist"></canvas>
+        <span class="corner c1"></span><span class="corner c2"></span>
+        <span class="corner c3"></span><span class="corner c4"></span>
+        <span class="tag" id="herotag">V3 · BOUNCE · 1.8 Hz</span>
+        <span class="live" id="herolive">θ 0.0°</span>
+      </div>
+      <div class="cap" id="cadcap">Both arches flatten together — the quick give</div>
+    </aside>
+
+    <div class="stagewrap">
+
+      <!-- 0 · identity ---------------------------------------------------- -->
+      <section class="scene" data-dur="11000">
+        <div class="el"><p class="eyebrow">Westfield Skunk Works · SKW-018</p></div>
+        <div class="el"><h1>It doesn't just rock.</h1></div>
+        <div class="el"><p class="sub">A rocker runs you along one arc, at one rate. Hawkeye sits on
+          <b>two arched spring bars that give in four directions at once</b> — bounce, rock, roll
+          and twist — so the chair answers whatever you do instead of asking you to steer
+          it.</p></div>
+        <div class="el"><p class="note">Two formed bars · no coil spring · no pivot · no hinge</p></div>
+      </section>
+
+      <!-- 1 · everything else is single-axis -------------------------------- -->
+      <section class="scene" data-dur="12000">
+        <div class="el"><p class="eyebrow">01 — What everything else does</p></div>
+        <div class="el"><h1 class="sm">Every motion chair moves on exactly one axis.</h1></div>
+        <div class="el"><div class="cards">
+          <div><span class="k">01 · RAILS</span><p>FlowMotion skis and GCI runners roll you
+            <b>fore and aft along a fixed arc.</b> Good motion — but it is one motion.</p></div>
+          <div><span class="k">02 · HINGES</span><p>Freestyle-style spring rockers put a pivot under
+            the seat. <b>A hinge has one degree of freedom by definition.</b></p></div>
+          <div><span class="k">03 · PLUNGERS</span><p>Our own DC-0024 bounces
+            <b>straight up and down</b> on a steel spring, and only up and down.</p></div>
+        </div></div>
+        <div class="el"><p class="kicker">Sit still and they are all the same chair. Move, and they
+          all put you back on their one path.</p></div>
+      </section>
+
+      <!-- 2 · what actually changed ------------------------------------------ -->
+      <section class="scene" data-dur="11000">
+        <div class="el"><p class="eyebrow">02 — What we actually changed</p></div>
+        <div class="el"><h1 class="sm">The runner didn't go away. It became the spring.</h1></div>
+        <div class="el"><p class="sub">There is still a member on the ground front to rear — it is
+          an arch now, not a ski, and it is <b>the only springy part in the chair.</b> One part
+          holds you up, sets the ride and does the folding, so the motion stopped being something
+          we bolt on.</p></div>
+        <div class="el"><p class="note">50.8 mm strip · R 800 arc · 648.5 mm between pads ·
+          <b>four half-beams doing all of the work</b></p></div>
+      </section>
+
+      <!-- 3 · the first answer -->
+      <section class="scene" data-dur="13000">
+        <div class="el"><p class="eyebrow">03 — The first answer</p></div>
+        <div class="el media top">
+          <div class="txt">
+            <h1 class="sm">V2 put the spring behind you.</h1>
+            <p class="sub">A shaped composite limb under the rear foot — properly made, and the
+              sample felt solid in the hand. But the spring sat <b>behind the person rather than
+              under them</b>, so what came back was a short, quick shudder instead of a ride.</p>
+            <p class="note" style="margin-top:22px">The right instinct · <b>the wrong place for
+              the spring</b></p>
+          </div>
+          <div class="stage2">
+            <canvas id="v2cv" aria-label="V2 rear limb flexing"></canvas>
+            <span class="chip"><i></i>NOT QUITE IT</span>
+            <span class="read">
+              <div><span class="l">Travel</span><span class="v hot">about a finger's width</span></div>
+              <div><span class="l">Feel</span><span class="v hot">a quick shudder</span></div>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4 · what it taught us -->
+      <section class="scene" data-dur="14000">
+        <div class="el"><p class="eyebrow">04 — What it taught us</p></div>
+        <div class="el"><h1 class="sm">It isn't the spring. It's where the spring sits.</h1></div>
+        <div class="el"><div class="cards">
+          <div><span class="k m">01 · BEHIND YOU</span><p>A spring behind the rear foot has to
+            <b>lift you over it</b> before anything moves, and what little travel there is arrives
+            at the back of the seat.</p></div>
+          <div><span class="k">02 · UNDER YOU</span><p>Four springs at the corners of the base take
+            your weight <b>where you actually sit</b>, so the give arrives underneath you.</p></div>
+          <div><span class="k">03 · THE DIFFERENCE</span><p>Same idea and much the same materials.
+            <b>One you have to drive. The other one answers.</b></p></div>
+        </div></div>
+        <div class="el"><p class="kicker">V2 was a good chair with its spring in the wrong
+          place — and finding that out is what pointed at the arch.</p></div>
+      </section>
+
+      <!-- 5 · spread the compliance -------------------------------------------- -->
+      <section class="scene" data-dur="12000">
+        <div class="el"><p class="eyebrow">05 — The move that worked</p></div>
+        <div class="el media top">
+          <div class="txt">
+            <h1 class="sm">Stop springing the leg. Spring the base.</h1>
+            <p class="sub">Two arched bars, one each side, each carrying you on two half-beams.
+              <b>Four springs at the four corners of the chair</b> — so weight anywhere on the seat
+              finds a different combination of them, and the chair leans, dips or turns to
+              match.</p>
+          </div>
+          <div class="plotstage">
+            <canvas id="modecv" aria-label="The four soft modes and their rates"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6 · the four modes ---------------------------------------------------- -->
+      <section class="scene" data-dur="16000">
+        <div class="el"><p class="eyebrow">06 — What you actually feel</p></div>
+        <div class="el"><h1 class="sm">Four ways to move, all live at once.</h1></div>
+        <div class="el"><div class="tiles">
+          <div data-mode="bounce"><span class="k">Bounce · 1.8 Hz</span><p>Both arches flatten together.
+            <b>The quick give</b> when you drop into it or push with your heels.</p></div>
+          <div data-mode="rock"><span class="k">Rock · 1.3 Hz</span><p>The arches trade height front to rear.
+            <b>The long one</b> — half the rate of the others, so it leads.</p></div>
+          <div data-mode="roll"><span class="k">Roll · 1.8 Hz</span><p>One side gives, the other lifts.
+            <b>Lean on an arm and the chair leans with you.</b></p></div>
+          <div data-mode="twist"><span class="k">Twist · soft</span><p>A 50.8 mm bar has almost no torsional
+            stiffness, so <b>the seat winds slightly</b> as you turn.</p></div>
+        </div></div>
+        <div class="el"><p class="kicker">You get the one you ask for. Lean back and it rocks;
+          drop into it and it gives; lean on an arm and it follows.</p></div>
+      </section>
+
+      <!-- 7 · why that is more fun ---------------------------------------------- -->
+      <section class="scene" data-dur="15000">
+        <div class="el"><p class="eyebrow">07 — Why that is more fun</p></div>
+        <div class="el"><h1 class="sm">A slow rock, on a quick spring.</h1></div>
+        <div class="el"><p class="sub">The rock comes out at <b>1.3 Hz</b> and the give and the lean
+          at about <b>1.8</b> — so you get a long rocking stroke with a lively spring underneath it,
+          not one rate for everything. A rail rocker has a single rate and a single path: whatever
+          you do, it hands you the same stroke back.</p></div>
+        <div class="el"><div class="cards">
+          <div><span class="k">YOU DON'T DRIVE IT</span><p>A rocker has to be pumped along its arc.
+            <b>This answers a shrug.</b></p></div>
+          <div><span class="k">IT STAYS PUT</span><p>A rail rocker walks its contact
+            <b>140 mm across the ground.</b> Four pads don't move at all.</p></div>
+          <div><span class="k">NOTHING TO LEARN</span><p>No arc to find and no rhythm to catch —
+            <b>it answers the first thing you do in it.</b></p></div>
+        </div></div>
+      </section>
+
+      <!-- 8 · steel proved it, composite ships it -->
+      <section class="scene" data-dur="13000">
+        <div class="el"><p class="eyebrow">08 — What it is made of</p></div>
+        <div class="el"><h1 class="sm">Steel proved it. Composite ships it.</h1></div>
+        <div class="el"><p class="sub">The sample bars are spring steel because steel is quick to
+          form and quick to argue with. <b>The production bar is composite</b> — same stiffness at
+          7.2 mm, <b>half the weight</b>, no plating and no corrosion. And the tune
+          stops being a thickness and becomes a layup.</p></div>
+        <div class="el"><div class="statrow">
+          <div><span class="n v" data-count="1.06" data-dec="2" data-suffix=" kg">0</span>
+            <span class="l">composite pair, both bars</span></div>
+          <div><span class="n v" data-count="1.15" data-dec="2" data-suffix=" kg">0</span>
+            <span class="l">lighter than the same bar in steel</span></div>
+          <div><span class="n v" data-count="201" data-suffix=" MPa">0</span>
+            <span class="l">seated · 174 at 10° of rock</span></div>
+          <div><span class="n v" data-count="0">0</span>
+            <span class="l">pivots · bushings · coils</span></div>
+        </div></div>
+        <div class="el"><p class="note">Fibre fraction and ply count are the tuning knobs —
+          <b>the process Haibo already runs for the V2 limb</b></p></div>
+      </section>
+
+      <!-- 9 · the arch depth, solved -->
+      <section class="scene" data-dur="15000">
+        <div class="el"><p class="eyebrow">09 — The next sample</p></div>
+        <div class="el media top">
+          <div class="txt">
+            <h1 class="sm">How deep the arch has to be, solved.</h1>
+            <p class="sub">The bar carries you in bending, so the vertical mode obeys the same law
+              that beat V2: <b>f = (1/2π)√(g/δ)</b>. Want 1.8 Hz, and you have just asked for
+              <b>77 mm of sag</b>. Add the travel you want left over and the rise falls out —
+              <b>170 mm, R 394</b>, against today's 45.</p>
+            <p class="note" style="margin-top:20px">Today's arch is <b>shallower than its own
+              sag</b> — it flattens under the occupant before it can move</p>
+          </div>
+          <div class="plotstage flat">
+            <canvas id="archcv" aria-label="Today's 45 mm arch against the proposed 170 mm arch"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10 · the build -->
+      <section class="scene" data-dur="14000">
+        <div class="el"><p class="eyebrow">10 — The build</p></div>
+        <div class="el"><h1 class="sm">The next sample, in three parts.</h1></div>
+        <div class="el"><div class="cards">
+          <div><span class="k">01 · THE ARCH</span><p><b>170 mm of rise, R 394.</b> Deep enough to
+            take the sag and still have travel left under you.</p></div>
+          <div><span class="k">02 · THE BAR</span><p><b>7.2 × 50.8 mm composite</b>, 1.06 kg the
+            pair. Tuned by layup, in the process we already run.</p></div>
+          <div><span class="k">03 · THE PAD</span><p><b>110 mm long</b>, so the contact rolls as the
+            arch works. The cheapest part on the chair.</p></div>
+        </div></div>
+        <div class="el"><div class="statrow">
+          <div><span class="n v" data-count="1.3" data-dec="1" data-suffix=" Hz">0</span>
+            <span class="l">the rock</span></div>
+          <div><span class="n v" data-count="1.8" data-dec="1" data-suffix=" Hz">0</span>
+            <span class="l">the give, and the lean</span></div>
+          <div><span class="n v" data-count="94" data-suffix=" mm">0</span>
+            <span class="l">travel still under you, seated</span></div>
+          <div><span class="n v" data-count="4">0</span>
+            <span class="l">directions, from two parts</span></div>
+        </div></div>
+        <div class="el"><p class="note">The 6/23 sample proved the geometry in steel ·
+          <b>the crown bolt moves back 76 mm with them</b> · two numbers off the mule, then a mould</p></div>
+      </section>
+
+    </div>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi good"><span class="l">Directions it gives</span>
+      <span class="v"><span data-count="4">0</span><u>bounce · rock · roll · twist</u></span>
+      <span class="meter"><i data-fill="100"></i></span></div>
+    <div class="kpi good"><span class="l">Rock rate</span>
+      <span class="v"><span data-count="1.3" data-dec="1">0</span><u>Hz</u></span>
+      <span class="meter"><i data-fill="72"></i></span></div>
+    <div class="kpi good"><span class="l">Bounce rate</span>
+      <span class="v"><span data-count="1.8" data-dec="1">0</span><u>Hz</u></span>
+      <span class="meter"><i data-fill="80"></i></span></div>
+    <div class="kpi good"><span class="l">Travel at the crown</span>
+      <span class="v"><span data-count="94">0</span><u>mm spare, seated</u></span>
+      <span class="meter"><i data-fill="76"></i></span></div>
+    <div class="kpi"><span class="l">Ground contact travel</span>
+      <span class="v"><span data-count="0">0</span><u>mm · a rail rocker 140</u></span>
+      <span class="meter"><i data-fill="100"></i></span></div>
+    <div class="kpi good"><span class="l">Composite bar, the pair</span>
+      <span class="v"><span data-count="1.06" data-dec="2">0</span><u>kg · the pair</u></span>
+      <span class="meter"><i data-fill="57"></i></span></div>
+  </div>
+
+  <div class="ticker"><div class="tape" id="tape"></div></div>
+</div></div>
+
+<script>
+(function(){
+"use strict";
+var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var $ = function(id){ return document.getElementById(id); };
+
+/* ══════════════════════════════════════════════════════════════════════════
+   GEOMETRY — mm, chair frame: X lateral, Y fore-aft (0 = front foot), Z up.
+   Every number resolved from Hawkeye_V2.stp / Hawkeye_V3.stp: the product tree
+   walked, placements composed, B-rep vertices transformed into assembly
+   coordinates. Nothing here is sketched.
+   ══════════════════════════════════════════════════════════════════════════ */
+var GS = 14.6;                      // V3 pads sit 14.6 mm below the bow underside
+var G = {
+  halfW: 294.9,
+  /* the sling is carried on the front rail, so it terminates there rather than at the
+     STEP's -59.7 panel edge, which overhung the frame by 47 mm */
+  seat: {y0:-6, z0:487.0, y1:522.8, z1:429.2, hw:285.3},
+  back: {y0:508.9, z0:744.5, y1:614.2, z1:1110.2, hw:313.9},
+  cog:  {y:400, z:650},
+  v2:{ arm:{w:50.8,t:15.24}, lower:{y:0,z0:13.59,z1:264.68,w:38.1,t:13.8},
+       backLeg:{w:50.8,t:15.0,pts:[[488.95,269.80],[488.86,362.55],[507.43,655.99],
+                                   [511.65,689.00],[538.98,852.55]]},
+       foot:{y:-0.15,z1:51.7,hw:38.1}, pad:{y0:504.6,y1:653.4,z1:30.4,hw:30.5,nose:628.4},
+       limbW:50.8, limbT:12.7, clamp:{y:488.95,z:278.93}, pivotY:653.4, sag:26, clear:12.2 },
+  v3:{ loop:{y0:93.65,y1:395.30,z0:157.60,z1:636.18,r:94,w:27.0,t:25.4},
+       backArc:{cy:1112.5,cz:599.9,r:610.8,z0:574.13,z1:849.84,w:25.4,t:23.0},
+       bowW:50.8, bowT:4.2, pad:{len:78.5,hw:30.9,h:14.6},
+       padF:4.25, padR:635.5, crownY:400, crownZ:57.6 }
+};
+function armPath(){
+  var P=[], i, a, c1=[183.0,580.3], r1=183.1, c2=[455.4,682.1], r2=41.97;
+  for(i=0;i<=6;i++) P.push([0, 270.24+(580.32-270.24)*i/6]);
+  for(i=1;i<=16;i++){ a=Math.PI+(1.4224-Math.PI)*i/16;
+    P.push([c1[0]+r1*Math.cos(a), c1[1]+r1*Math.sin(a)]); }
+  for(i=1;i<=8;i++) P.push([210.17+(461.61-210.17)*i/8, 761.38+(723.61-761.38)*i/8]);
+  for(i=1;i<=8;i++){ a=1.4224+(-0.1274-1.4224)*i/8;
+    P.push([c2[0]+r2*Math.cos(a), c2[1]+r2*Math.sin(a)]); }
+  for(i=1;i<=3;i++) P.push([496.99+(489.94-496.99)*i/3, 676.75+(616.56-676.75)*i/3]);
+  return P;
+}
+function limbPath(){                       // tail on the ground → 180° U → 90° bend → clamp
+  var P=[], R=69.85, i, a;
+  for(i=0;i<=10;i++) P.push([559.53-(559.53-355.6)*i/10, 18.58]);
+  for(i=1;i<=26;i++){ a=-Math.PI/2-Math.PI*i/26; P.push([355.6+R*Math.cos(a), 88.43+R*Math.sin(a)]); }
+  for(i=1;i<=6;i++) P.push([355.6+(419.1-355.6)*i/6, 158.28]);
+  for(i=1;i<=14;i++){ a=-Math.PI/2+(Math.PI/2)*i/14; P.push([419.1+R*Math.cos(a), 228.13+R*Math.sin(a)]); }
+  for(i=1;i<=4;i++) P.push([488.95, 228.13+(278.93-228.13)*i/4]);
+  return P;
+}
+function bowPath(){                        // R 93.65 pad blend, tangent at Y 72.71, onto R 806.35
+  var P=[], t=6.35, i, a, A={y:43.5,z:100}, rA=93.65, B={y:324.2,z:-755.1}, rB=806.35,
+      TA={y:72.71,z:11.01}, TB={y:575.69,z:11.01}, C={y:605,z:100};
+  for(i=0;i<=4;i++) P.push([43.5*i/4, t]);
+  var a0=-Math.PI/2, a1=Math.atan2(TA.z-A.z, TA.y-A.y);
+  for(i=1;i<=6;i++){ a=a0+(a1-a0)*i/6; P.push([A.y+rA*Math.cos(a), A.z+rA*Math.sin(a)]); }
+  var b0=Math.atan2(TA.z-B.z,TA.y-B.y), b1=Math.atan2(TB.z-B.z,TB.y-B.y);
+  for(i=1;i<=34;i++){ a=b0+(b1-b0)*i/34; P.push([B.y+rB*Math.cos(a), B.z+rB*Math.sin(a)]); }
+  var c0=Math.atan2(TB.z-C.z,TB.y-C.y), c1=-Math.PI/2;
+  for(i=1;i<=6;i++){ a=c0+(c1-c0)*i/6; P.push([C.y+rA*Math.cos(a), C.z+rA*Math.sin(a)]); }
+  for(i=1;i<=4;i++) P.push([605+43.5*i/4, t]);
+  return P;
+}
+function loopPath(){
+  var L=G.v3.loop, P=[], seg=9;
+  function add(cy,cz,a0,a1){ for(var i=0;i<=seg;i++){ var a=a0+(a1-a0)*i/seg;
+    P.push([cy+L.r*Math.cos(a), cz+L.r*Math.sin(a)]); } }
+  add(L.y1,L.z0,-Math.PI/2,0); add(L.y1,L.z1,0,Math.PI/2);
+  add(L.y0,L.z1,Math.PI/2,Math.PI); add(L.y0,L.z0,Math.PI,1.5*Math.PI);
+  P.push(P[0].slice()); return P;
+}
+function backPath(){
+  var B=G.v3.backArc, P=[], i;
+  for(i=0;i<=10;i++){ var z=B.z0+(B.z1-B.z0)*i/10;
+    P.push([B.cy-Math.sqrt(Math.max(0,B.r*B.r-(z-B.cz)*(z-B.cz))), z]); }
+  return P;
+}
+function smooth(pts, sub){
+  var out=[], n=pts.length, i, k, d;
+  for(i=0;i<n-1;i++){
+    var p0=pts[Math.max(0,i-1)], p1=pts[i], p2=pts[i+1], p3=pts[Math.min(n-1,i+2)];
+    for(k=0;k<sub;k++){ var t=k/sub, t2=t*t, t3=t2*t, q=[];
+      for(d=0;d<2;d++) q.push(0.5*((2*p1[d])+(-p0[d]+p2[d])*t+
+        (2*p0[d]-5*p1[d]+4*p2[d]-p3[d])*t2+(-p0[d]+3*p1[d]-3*p2[d]+p3[d])*t3));
+      out.push(q); }
+  }
+  out.push(pts[n-1].slice()); return out;
+}
+var ARM=armPath(), LIMB=limbPath(), BOW=bowPath(), LOOP=loopPath(),
+    BACK=backPath(), BACKLEG=smooth(G.v2.backLeg.pts,5), TAILN=11;
+
+/* seated 95 kg occupant, joints in chair coordinates */
+/* Seated on the sling, not through it. The seat runs from (-60, 493) at the front edge
+   to (523, 429) at the back with a little sag, so the thigh line is set to ride just
+   above that surface and the torso to sit against the back panel. */
+var BODY = { hip:[452,524], chest:[441,815], neck:[468,1002], head:[486,1128],
+             knee:[-72,568], ankle:[-140,54], toe:[-252,32],
+             shoulder:[455,948], elbow:[424,812], hand:[268,775] };
+
+/* ══════════════════════════════════════════════════════════════════════════
+   PHYSICS — same model as the engineering study
+   ══════════════════════════════════════════════════════════════════════════ */
+var M=95, GR=9.81, INER=19, E=200000;
+function stiffness(t, crownY){
+  var I=G.v3.bowW*t*t*t/12,
+      Lf=Math.max(80, crownY-G.v3.padF), Lr=Math.max(80, G.v3.padR-crownY),
+      k=2*(3*E*I/Lf+3*E*I/Lr)/1000,
+      h=(G.cog.z-(G.v3.crownZ+GS))/1000, mgh=M*GR*h,
+      net=k-mgh;
+  return {k:k, net:net, f:net>0?Math.sqrt(net/INER)/(2*Math.PI):0};
+}
+var S3 = stiffness(G.v3.bowT, G.v3.crownY);
+function cogRise(ver, th){                  // mm, + = recline
+  var r=th*Math.PI/180;
+  if(ver==="v2"){ var d=G.v2.pivotY-G.cog.y, h=G.cog.z;
+    return d*Math.sin(r)-h*(1-Math.cos(r)); }
+  var d3=G.cog.y-G.v3.crownY, h3=G.cog.z-(G.v3.crownZ+GS);
+  return -d3*Math.sin(r)-h3*(1-Math.cos(r));
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   A WebGL stage. One per canvas: own context, own buffer, own camera.
+   ══════════════════════════════════════════════════════════════════════════ */
+var VS = "attribute vec3 aPos;attribute vec3 aNrm;attribute vec3 aCol;uniform mat4 uMVP;" +
+         "varying vec3 vN;varying vec3 vC;" +
+         "void main(){gl_Position=uMVP*vec4(aPos,1.0);vN=aNrm;vC=aCol;}";
+var FS = "precision mediump float;varying vec3 vN;varying vec3 vC;" +
+         "void main(){vec3 n=normalize(vN);" +
+         "float d=max(dot(n,normalize(vec3(0.42,-0.60,0.78))),0.0);" +
+         "float f=max(dot(n,normalize(vec3(-0.5,-0.7,0.25))),0.0)*0.20;" +
+         "float r=pow(1.0-abs(n.z),2.0)*0.05;" +
+         "gl_FragColor=vec4(vC*(0.52+0.62*d+f+r),1.0);}";
+
+/* Emphasis. A scene that is about the bar should not be competing with a mannequin,
+   so everything else fades toward the panel rather than disappearing. */
+var EM = {bar:1, frame:1, fabric:1, body:1};
+var RECEDE = [0.925, 0.940, 0.951];
+function fade(c, e){
+  if(e>=1) return c;
+  var k=(1-e)*0.82;
+  return [c[0]+(RECEDE[0]-c[0])*k, c[1]+(RECEDE[1]-c[1])*k, c[2]+(RECEDE[2]-c[2])*k];
+}
+var COL = {
+  frame:[0.60,0.645,0.695], fabric:[0.42,0.47,0.53], fabric2:[0.37,0.42,0.48],
+  foot:[0.30,0.33,0.37], grip:[0.20,0.22,0.25],
+  bow:[0.184,0.384,0.741],            /* --vly, the thing that works */
+  limb:[0.761,0.255,0.173],           /* --mtn, the thing that did not */
+  body:[0.80,0.765,0.715], cog:[0.85,0.42,0.16],
+  ground:[0.912,0.933,0.945], shadow:[0.74,0.775,0.80]
+};
+
+function makeStage(cv, opts){
+  var gl = cv.getContext("webgl", {antialias:true, alpha:true, premultipliedAlpha:false});
+  if(!gl) return null;
+  function sh(t,src){ var o=gl.createShader(t); gl.shaderSource(o,src); gl.compileShader(o); return o; }
+  var prog=gl.createProgram();
+  gl.attachShader(prog, sh(gl.VERTEX_SHADER,VS)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER,FS));
+  gl.bindAttribLocation(prog,0,"aPos"); gl.bindAttribLocation(prog,1,"aNrm");
+  gl.bindAttribLocation(prog,2,"aCol"); gl.linkProgram(prog); gl.useProgram(prog);
+  var uMVP=gl.getUniformLocation(prog,"uMVP");
+  var buf=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.enableVertexAttribArray(0); gl.enableVertexAttribArray(1); gl.enableVertexAttribArray(2);
+  gl.vertexAttribPointer(0,3,gl.FLOAT,false,36,0);
+  gl.vertexAttribPointer(1,3,gl.FLOAT,false,36,12);
+  gl.vertexAttribPointer(2,3,gl.FLOAT,false,36,24);
+  gl.enable(gl.DEPTH_TEST);
+
+  var A=new Float32Array(700000), n=0;
+  function reset(){ n=0; }
+  /* Roll (about the fore-aft axis), twist (about the vertical) and heave are rigid-body
+     freedoms of everything above the bows, so they ride here rather than in every builder.
+     T is null while the ground, the pads and the bows themselves are drawn. */
+  var T=null;
+  function setT(roll, yaw, heave, pv){
+    if(!roll && !yaw && !heave){ T=null; return; }
+    T={cr:Math.cos(roll), sr:Math.sin(roll), cy:Math.cos(yaw), sy:Math.sin(yaw),
+       dz:heave||0, py:pv[0], pz:pv[1]};
+  }
+  function vert(p,nr,c){ if(n>A.length-9) return;
+    var qx=p[0], qy=p[1], qz=p[2], mx=nr[0], my=nr[1], mz=nr[2];
+    if(T){
+      var x=qx, y=qy-T.py, z=qz-T.pz;
+      var x1=x*T.cr+z*T.sr, z1=-x*T.sr+z*T.cr;      /* roll about the fore-aft axis */
+      qx=x1*T.cy-y*T.sy; qy=(x1*T.sy+y*T.cy)+T.py; qz=z1+T.pz+T.dz;   /* twist about vertical */
+      var a=mx, b=my, c2=mz;
+      var a1=a*T.cr+c2*T.sr, c1=-a*T.sr+c2*T.cr;
+      mx=a1*T.cy-b*T.sy; my=a1*T.sy+b*T.cy; mz=c1;
+    }
+    A[n++]=qx;A[n++]=qy;A[n++]=qz;A[n++]=mx;A[n++]=my;A[n++]=mz;
+    A[n++]=c[0];A[n++]=c[1];A[n++]=c[2]; }
+  function nrmOf(a,b,c){ var ux=b[0]-a[0],uy=b[1]-a[1],uz=b[2]-a[2],
+      vx=c[0]-a[0],vy=c[1]-a[1],vz=c[2]-a[2],
+      x=uy*vz-uz*vy, y=uz*vx-ux*vz, z=ux*vy-uy*vx, l=Math.hypot(x,y,z)||1;
+    return [x/l,y/l,z/l]; }
+  function quad(a,b,c,d,col){ var nr=nrmOf(a,b,c);
+    vert(a,nr,col);vert(b,nr,col);vert(c,nr,col);vert(a,nr,col);vert(c,nr,col);vert(d,nr,col); }
+  /* Same quad, but each corner carries its own surface normal — that is the whole
+     difference between a tube that reads as a tube and one that reads as a prism. */
+  function quadN(a,b,c,d,na,nb,nc,nd,col){
+    vert(a,na,col);vert(b,nb,col);vert(c,nc,col);
+    vert(a,na,col);vert(c,nc,col);vert(d,nd,col); }
+  function boxAt(x0,x1,y0,y1,z0,z1,col){
+    quad([x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1],col);
+    quad([x0,y1,z0],[x1,y1,z0],[x1,y0,z0],[x0,y0,z0],col);
+    quad([x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1],col);
+    quad([x1,y1,z0],[x0,y1,z0],[x0,y1,z1],[x1,y1,z1],col);
+    quad([x0,y1,z0],[x0,y0,z0],[x0,y0,z1],[x0,y1,z1],col);
+    quad([x1,y0,z0],[x1,y1,z0],[x1,y1,z1],[x1,y0,z1],col);
+  }
+  var SEC={};
+  function ring(w,t,N){                       /* stadium section — the CAD's oval tube */
+    var key=w+"|"+t+"|"+N; if(SEC[key]) return SEC[key];
+    var r=t/2, c=Math.max(0,w/2-r), p=[], i;
+    for(i=0;i<N;i++){ var a=2*Math.PI*i/N, ca=Math.cos(a), sa=Math.sin(a);
+      p.push([(ca>=0?c:-c)+r*ca, r*sa]); }
+    return SEC[key]=p;
+  }
+  function sweep(path,xc,w,t,col,xf,N){
+    N=N||14; var R=ring(w,t,N), P=xf?path.map(function(p){return xf(p);}):path,
+        rings=[], norms=[], i, k;
+    for(i=0;i<P.length;i++){
+      var p=P[i], a=P[Math.max(0,i-1)], b=P[Math.min(P.length-1,i+1)];
+      var dy=b[0]-a[0], dz=b[1]-a[1], l=Math.hypot(dy,dz)||1; dy/=l; dz/=l;
+      var ny=-dz, nz=dy;
+      rings.push(R.map(function(uv){ return [xc+uv[0], p[0]+uv[1]*ny, p[1]+uv[1]*nz]; }));
+      norms.push(R.map(function(uv,j){
+        var ang=2*Math.PI*j/N, ca=Math.cos(ang), sa=Math.sin(ang);
+        var ln=Math.hypot(ca,sa)||1;
+        return [ca/ln, (sa/ln)*ny, (sa/ln)*nz];
+      }));
+    }
+    for(i=0;i<rings.length-1;i++){ var A0=rings[i], A1=rings[i+1], N0=norms[i], N1=norms[i+1];
+      for(k=0;k<N;k++){ var k2=(k+1)%N;
+        quadN(A0[k],A0[k2],A1[k2],A1[k], N0[k],N0[k2],N1[k2],N1[k], col); } }
+    [[rings[0],1],[rings[rings.length-1],0]].forEach(function(e){
+      var r=e[0], flip=e[1], cx=0, cy=0, cz=0, j;
+      for(j=0;j<N;j++){ cx+=r[j][0]; cy+=r[j][1]; cz+=r[j][2]; }
+      var c=[cx/N,cy/N,cz/N];
+      for(j=0;j<N;j++){ var j2=(j+1)%N, a=flip?r[j2]:r[j], b=flip?r[j]:r[j2];
+        var nr=nrmOf(c,a,b); vert(c,nr,col); vert(a,nr,col); vert(b,nr,col); }
+    });
+  }
+  function capsule(xf,j0,j1,r0,r1,xoff,col,N,asp){
+    N=N||12; var q=asp||1, Aa=xf(j0), Bb=xf(j1);
+    var dy=Bb[0]-Aa[0], dz=Bb[1]-Aa[1], l=Math.hypot(dy,dz)||1; dy/=l; dz/=l;
+    var ny=-dz, nz=dy, k;
+    function mk(c,r){ var o=[], i;
+      for(i=0;i<N;i++){ var a=2*Math.PI*i/N, ca=r*q*Math.cos(a);
+        o.push([xoff+r*Math.sin(a), c[0]+ca*ny, c[1]+ca*nz]); }
+      return o; }
+    var NR=[]; for(k=0;k<N;k++){ var a=2*Math.PI*k/N, sx=Math.sin(a), cc=Math.cos(a)/(q||1),
+        ln=Math.hypot(sx,cc)||1;
+      NR.push([sx/ln, (cc/ln)*ny, (cc/ln)*nz]); }
+    var R0=mk(Aa,r0), R1=mk(Bb,r1);
+    for(k=0;k<N;k++){ var k2=(k+1)%N;
+      quadN(R0[k],R0[k2],R1[k2],R1[k], NR[k],NR[k2],NR[k2],NR[k], col); }
+    [[R0,[xoff,Aa[0],Aa[1]],1],[R1,[xoff,Bb[0],Bb[1]],0]].forEach(function(e){
+      var r=e[0], c=e[1], flip=e[2], j;
+      for(j=0;j<N;j++){ var j2=(j+1)%N, a=flip?r[j2]:r[j], b=flip?r[j]:r[j2];
+        var nr=nrmOf(c,a,b); vert(c,nr,col); vert(a,nr,col); vert(b,nr,col); }
+    });
+  }
+  function ball(xf,j,rx,ry,rd,col){
+    var c=xf(j), LAT=14, LON=20, u, v;
+    function P(u,v){ var th=Math.PI*u/LAT, ph=2*Math.PI*v/LON;
+      return [rx*Math.sin(th)*Math.sin(ph), c[0]+rd*Math.sin(th)*Math.cos(ph), c[1]+ry*Math.cos(th)]; }
+    function Nm(u,v){ var th=Math.PI*u/LAT, ph=2*Math.PI*v/LON,
+        a=Math.sin(th)*Math.sin(ph)/rx, b=Math.sin(th)*Math.cos(ph)/rd, cq=Math.cos(th)/ry,
+        l=Math.hypot(a,b,cq)||1;
+      return [a/l, b/l, cq/l]; }
+    for(u=0;u<LAT;u++) for(v=0;v<LON;v++)
+      quadN(P(u,v),P(u,v+1),P(u+1,v+1),P(u+1,v),
+            Nm(u,v),Nm(u,v+1),Nm(u+1,v+1),Nm(u+1,v), col);
+  }
+  /* The sling as fabric rather than a plane: real thickness, edges that turn down,
+     and a little waist so it reads as cloth pulled between two rails. */
+  /* The panel is given its thickness along its OWN normal, not along Z. Offsetting a
+     near-vertical panel like the seat back downwards leaves its two faces very nearly
+     coplanar, and they then fight for depth — which is what made the back flash black
+     as the chair rocked. Normals are taken from the transformed points too, so the
+     shading follows the chair through the rock instead of staying fixed in space. */
+  function fabric(a,b,hw,col,xf,sag){
+    var N=12, i, TH=13, under=[col[0]*0.72,col[1]*0.74,col[2]*0.78];
+    function P(t){ return xf([a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t-(sag||0)*Math.sin(Math.PI*t)]); }
+    function W(t){ return hw*(1-0.055*Math.sin(Math.PI*t)); }
+    var segs=[];
+    for(i=0;i<N;i++){
+      var t0=i/N, t1=(i+1)/N, p0=P(t0), p1=P(t1);
+      var dy=p1[0]-p0[0], dz=p1[1]-p0[1], l=Math.hypot(dy,dz)||1;
+      var uy=dy/l, uz=dz/l, ny=-uz, nz=uy;      /* in-plane normal of this segment */
+      segs.push({p0:p0, p1:p1, s0:W(t0), s1:W(t1), ny:ny, nz:nz, uy:uy, uz:uz});
+    }
+    for(i=0;i<N;i++){
+      var g=segs[i], nUp=[0,g.ny,g.nz], nDn=[0,-g.ny,-g.nz];
+      var A0=[g.p0[0], g.p0[1]], A1=[g.p1[0], g.p1[1]];
+      var B0=[g.p0[0]-g.ny*TH, g.p0[1]-g.nz*TH], B1=[g.p1[0]-g.ny*TH, g.p1[1]-g.nz*TH];
+      quadN([-g.s0,A0[0],A0[1]],[g.s0,A0[0],A0[1]],[g.s1,A1[0],A1[1]],[-g.s1,A1[0],A1[1]],
+            nUp,nUp,nUp,nUp,col);
+      quadN([-g.s1,B1[0],B1[1]],[g.s1,B1[0],B1[1]],[g.s0,B0[0],B0[1]],[-g.s0,B0[0],B0[1]],
+            nDn,nDn,nDn,nDn,under);
+      var rr=[1,0,0], ll=[-1,0,0];
+      quadN([g.s0,A0[0],A0[1]],[g.s0,B0[0],B0[1]],[g.s1,B1[0],B1[1]],[g.s1,A1[0],A1[1]],
+            rr,rr,rr,rr,under);
+      quadN([-g.s0,B0[0],B0[1]],[-g.s0,A0[0],A0[1]],[-g.s1,A1[0],A1[1]],[-g.s1,B1[0],B1[1]],
+            ll,ll,ll,ll,under);
+    }
+    var f=segs[0], e=segs[N-1];
+    var fN=[0,-f.uy,-f.uz], eN=[0,e.uy,e.uz];
+    var fA=[f.p0[0],f.p0[1]], fB=[f.p0[0]-f.ny*TH, f.p0[1]-f.nz*TH];
+    var eA=[e.p1[0],e.p1[1]], eB=[e.p1[0]-e.ny*TH, e.p1[1]-e.nz*TH];
+    quadN([-f.s0,fA[0],fA[1]],[-f.s0,fB[0],fB[1]],[f.s0,fB[0],fB[1]],[f.s0,fA[0],fA[1]],
+          fN,fN,fN,fN,under);
+    quadN([e.s1,eA[0],eA[1]],[e.s1,eB[0],eB[1]],[-e.s1,eB[0],eB[1]],[-e.s1,eA[0],eA[1]],
+          eN,eN,eN,eN,under);
+  }
+  function occupantFaded(xf){ var k=EM.body; if(k<0.06) return; occupant(xf, k); }
+  function occupant(xf, k){
+    var B=BODY, skin=fade(COL.body, k===undefined?1:k),
+        cloth=fade([COL.body[0]*0.80, COL.body[1]*0.83, COL.body[2]*0.88], k===undefined?1:k);
+    capsule(xf,B.hip,B.chest,158,154,0,cloth,16,0.56);
+    capsule(xf,B.chest,B.neck,154,95,0,cloth,16,0.56);
+    capsule(xf,B.neck,B.head,55,51,0,skin,12,0.9);
+    ball(xf,B.head,93,112,99,skin);
+    [-1,1].forEach(function(sx){
+      capsule(xf,B.hip,B.knee,84,66,sx*97,cloth,12,0.90);
+      capsule(xf,B.knee,B.ankle,62,43,sx*97,cloth,12,0.90);
+      capsule(xf,B.ankle,B.toe,45,32,sx*97,skin,10,0.8);
+      capsule(xf,B.shoulder,B.elbow,57,49,sx*190,cloth,10,0.9);
+      capsule(xf,B.elbow,B.hand,47,36,sx*207,skin,10,0.9);
+    });
+  }
+  function shadow(cy,ry,rx){
+    var N=30, c=[0,cy,1.2], up=[0,0,1], k;
+    for(k=0;k<N;k++){
+      var a0=2*Math.PI*k/N, a1=2*Math.PI*(k+1)/N;
+      [[0,0.62,COL.shadow,COL.shadow],[0.62,1,COL.shadow,COL.ground]].forEach(function(s){
+        var f0=s[0], f1=s[1], cA=s[2], cB=s[3];
+        var q0=[rx*f0*Math.cos(a0), cy+ry*f0*Math.sin(a0),1.2],
+            q1=[rx*f0*Math.cos(a1), cy+ry*f0*Math.sin(a1),1.2],
+            q2=[rx*f1*Math.cos(a1), cy+ry*f1*Math.sin(a1),1.2],
+            q3=[rx*f1*Math.cos(a0), cy+ry*f1*Math.sin(a0),1.2];
+        if(f0===0){ vert(c,up,cA); vert(q2,up,cB); vert(q3,up,cB); }
+        else { vert(q0,up,cA); vert(q1,up,cA); vert(q2,up,cB);
+               vert(q0,up,cA); vert(q2,up,cB); vert(q3,up,cB); }
+      });
+    }
+  }
+  function xfRot(pivot, deg, dz){
+    var r=deg*Math.PI/180, c=Math.cos(r), s=Math.sin(r);
+    return function(p){ var dy=p[0]-pivot[0], dzz=p[1]-pivot[1];
+      return [pivot[0]+dy*c-dzz*s, pivot[1]+dy*s+dzz*c+(dz||0)]; };
+  }
+  /* ---- V3: closed side loop on the arched bow ---- */
+  function flexBow(thDeg, pv, liftF, liftR, dz){
+    var th=-thDeg*Math.PI/180, out=BOW.map(function(p){return p.slice();}), i, best=0;
+    for(i=0;i<BOW.length;i++)
+      if(Math.abs(BOW[i][0]-pv[0])<Math.abs(BOW[best][0]-pv[0])) best=i;
+    [[0,liftF],[BOW.length-1,liftR]].forEach(function(e){
+      var i1=e[0], lift=e[1], dir=i1>best?1:-1, N=Math.abs(i1-best), k;
+      for(k=0;k<=N;k++){
+        var idx=best+dir*k, u=k/N, p=BOW[idx], w=1-u*u*(3-2*u);
+        var dy=p[0]-pv[0], dzz=p[1]-pv[1], a=th*w, ca=Math.cos(a), sa=Math.sin(a);
+        out[idx]=[pv[0]+dy*ca-dzz*sa, pv[1]+dy*sa+dzz*ca+lift*u*u+(dz||0)*w];
+      }
+    });
+    return out;
+  }
+  function buildV3(st){
+    var pv=[G.v3.crownY, G.v3.crownZ], xf=xfRot(pv,-st.theta,GS), v3=G.v3;
+    var roll=st.roll||0, yaw=st.yaw||0, heave=st.heave||0;
+    setT(0,0,0,pv);
+    shadow(310,372,330);
+    /* bows and pads stay in the world: each bow's crown follows its own corner of the
+       body, and its half-beams bend to keep the pad flat on the ground */
+    [-1,1].forEach(function(sx){
+      var xc=sx*G.halfW, dz=heave - sx*G.halfW*Math.sin(roll);
+      var bp=flexBow(st.theta,pv,st.liftF,st.liftR,dz).map(function(p){return [p[0],p[1]+GS];});
+      sweep(bp,xc,v3.bowW,v3.bowT,fade(COL.bow,EM.bar),null,10);
+      /* the moulded pads are rounded paddles on the CAD render, not blocks */
+      [[v3.padF,st.liftF],[v3.padR,st.liftR]].forEach(function(e){
+        var z0=e[1]+17, L=v3.pad.len*0.52;
+        sweep([[e[0]-L,z0],[e[0]+L,z0]], xc, v3.pad.hw*2.2, 34, fade(COL.foot,EM.bar), null, 14);
+      });
+    });
+    setT(roll,yaw,heave,[pv[0],pv[1]+GS]);
+    [-1,1].forEach(function(sx){
+      var xc=sx*G.halfW;
+      sweep(LOOP,xc,v3.loop.w,v3.loop.t,fade(COL.frame,EM.frame),xf,10);
+      sweep(BACK,xc,v3.backArc.w,v3.backArc.t,fade(COL.frame,EM.frame),xf,10);
+      sweep([[130,724],[350,724]],xc,64,30,fade(COL.grip,EM.frame),xf,10);
+    });
+    fabric([G.seat.y0,G.seat.z0],[G.seat.y1,G.seat.z1],G.seat.hw,fade(COL.fabric,EM.fabric),xf,14);
+    fabric([G.seat.y1,G.seat.z1],[G.back.y0,G.back.z0],G.seat.hw*0.95,fade(COL.fabric2,EM.fabric),xf,4);
+    fabric([G.back.y0,G.back.z0],[G.back.y1,G.back.z1],G.back.hw,fade(COL.fabric,EM.fabric),xf,18);
+    occupantFaded(xf);
+    setT(0,0,0,pv);
+  }
+  /* ---- V2: cantilever tube frame on the rear S-limb ---- */
+  function buildV2(st){
+    setT(0,0,0,[0,0]);
+    var R1=xfRot([0,0],-st.pitchSag), R2=xfRot([G.v2.pivotY,0],-st.theta);
+    var xf=function(p){ return R2(R1(p)); }, v2=G.v2;
+    shadow(310,372,330);
+    [-1,1].forEach(function(sx){
+      var xc=sx*G.halfW;
+      sweep(ARM,xc,v2.arm.w,v2.arm.t,COL.frame,xf,10);
+      sweep([[v2.lower.y,v2.lower.z0],[v2.lower.y,v2.lower.z1]],xc,v2.lower.w,v2.lower.t,COL.frame,xf,10);
+      sweep(BACKLEG,xc,v2.backLeg.w,v2.backLeg.t,COL.frame,xf,10);
+      sweep([[236,757],[452,725]],xc,64,30,COL.grip,xf,10);
+      capsule(xf,[v2.foot.y,v2.foot.z1],[v2.foot.y,4],21,37,xc,COL.foot,12);
+      boxAt(xc-v2.pad.hw,xc+v2.pad.hw,v2.pad.y0,v2.pad.nose,0,v2.pad.z1*0.55,COL.foot);
+      boxAt(xc-v2.pad.hw*0.8,xc+v2.pad.hw*0.8,v2.pad.nose,v2.pad.y1,0,v2.pad.z1*0.42,COL.foot);
+      var s=st.sag, H=278.93-18.58;
+      var lp=LIMB.map(function(p){
+        var z=18.58+(p[1]-18.58)*(1-s/H);
+        if(p[1]<30 && p[0]>340 && p[0]<505){ var u=(p[0]-340)/165;
+          z-=Math.min(s*0.48, v2.clear)*Math.sin(Math.PI*u); }
+        return [p[0],z];
+      });
+      var cn=lp[lp.length-1], want=xf([v2.clamp.y,v2.clamp.z]);
+      var dY=want[0]-cn[0], dZ=want[1]-cn[1];
+      sweep(lp.map(function(p,i){
+        var w=Math.min(1,Math.max(0,(i-TAILN)/(LIMB.length-1-TAILN)));
+        return [p[0]+dY*w, p[1]+dZ*w];
+      }),xc,v2.limbW,v2.limbT,COL.limb,null,10);
+    });
+    fabric([G.seat.y0,G.seat.z0],[G.seat.y1,G.seat.z1],G.seat.hw,COL.fabric,xf,26);
+    fabric([G.seat.y1,G.seat.z1],[G.back.y0,G.back.z0],G.seat.hw*0.95,COL.fabric2,xf,4);
+    fabric([G.back.y0,G.back.z0],[G.back.y1,G.back.z1],G.back.hw,COL.fabric,xf,18);
+    occupant(xf);
+  }
+  /* ---- camera ---- */
+  function persp(fov,asp,zn,zf){ var f=1/Math.tan(fov/2);
+    return [f/asp,0,0,0, 0,f,0,0, 0,0,(zf+zn)/(zn-zf),-1, 0,0,2*zf*zn/(zn-zf),0]; }
+  function lookAt(e,c,u){
+    var z=[e[0]-c[0],e[1]-c[1],e[2]-c[2]], l=Math.hypot(z[0],z[1],z[2]);
+    z=[z[0]/l,z[1]/l,z[2]/l];
+    var x=[u[1]*z[2]-u[2]*z[1], u[2]*z[0]-u[0]*z[2], u[0]*z[1]-u[1]*z[0]];
+    l=Math.hypot(x[0],x[1],x[2])||1; x=[x[0]/l,x[1]/l,x[2]/l];
+    var y=[z[1]*x[2]-z[2]*x[1], z[2]*x[0]-z[0]*x[2], z[0]*x[1]-z[1]*x[0]];
+    return [x[0],y[0],z[0],0, x[1],y[1],z[1],0, x[2],y[2],z[2],0,
+      -(x[0]*e[0]+x[1]*e[1]+x[2]*e[2]), -(y[0]*e[0]+y[1]*e[1]+y[2]*e[2]),
+      -(z[0]*e[0]+z[1]*e[1]+z[2]*e[2]), 1];
+  }
+  function mul4(a,b){ var o=new Array(16), i,j,k;
+    for(i=0;i<4;i++)for(j=0;j<4;j++){ var s=0; for(k=0;k<4;k++) s+=a[k*4+j]*b[i*4+k]; o[i*4+j]=s; }
+    return o; }
+  var SC=[0.001,0,0,0, 0,0.001,0,0, 0,0,0.001,0, 0,0,0,1];
+
+  return {
+    canvas: cv,
+    /* cam = {az, el (deg), span (mm across the frame's short axis), target (mm),
+       shiftX (NDC lens shift, positive moves the model left to clear the copy)} */
+    draw: function(st, cam){
+      var w=cv.width, h=cv.height;
+      gl.viewport(0,0,w,h);
+      gl.clearColor(0,0,0,0);
+      gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+      var fov=opts.fov||0.52, asp=w/h,
+          az=cam.az*Math.PI/180, el=cam.el*Math.PI/180,
+          dist=(cam.span/1000)/(2*Math.tan(fov/2)),
+          tgt=[cam.target[0]/1000, cam.target[1]/1000, cam.target[2]/1000],
+          eye=[tgt[0]+dist*Math.cos(el)*Math.sin(az),
+               tgt[1]-dist*Math.cos(el)*Math.cos(az),
+               tgt[2]+dist*Math.sin(el)];
+      var P=persp(fov, asp, 0.12, 40);
+      P[8]=cam.shiftX||0; P[9]=cam.shiftY||0;    /* lens shift, not a rotation */
+      var mvp=mul4(mul4(P, lookAt(eye,tgt,[0,0,1])), SC);
+      gl.uniformMatrix4fv(uMVP,false,new Float32Array(mvp));
+      reset();
+      if(opts.version==="v2") buildV2(st); else buildV3(st);
+      gl.bufferData(gl.ARRAY_BUFFER, A.subarray(0,n), gl.DYNAMIC_DRAW);
+      gl.drawArrays(gl.TRIANGLES, 0, n/9);
+    }
+  };
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   BOARD
+   ══════════════════════════════════════════════════════════════════════════ */
+var board=$("board"), fitEl=$("fit"), SCALE=1;
+function fit(){
+  var de=document.documentElement;
+  var vw=de.clientWidth||window.innerWidth, vh=de.clientHeight||window.innerHeight;
+  if(!vh||vh<200) vh=Math.round(vw*9/16);
+  var s=Math.min(vw/1920, vh/1080);
+  SCALE=s;
+  board.style.transform="scale("+s+")";
+  fitEl.style.width=(1920*s)+"px"; fitEl.style.height=(1080*s)+"px";
+  sizeCanvases();
+}
+function sizeCanvas(cv, cssW, cssH){
+  var dpr=Math.min(window.devicePixelRatio||1, 2);
+  var w=Math.max(2, Math.round(cssW*SCALE*dpr)), h=Math.max(2, Math.round(cssH*SCALE*dpr));
+  if(cv.width!==w||cv.height!==h){ cv.width=w; cv.height=h; }
+}
+function sizeCanvases(){
+  var f=$("hero").parentNode;
+  sizeCanvas($("hero"), f.clientWidth||566, f.clientHeight||700);
+  sizeCanvas($("v2cv"), 504, 400);
+  sizeCanvas($("modecv"), 540, 360);
+  sizeCanvas($("archcv"), 540, 250);
+}
+window.addEventListener("resize", fit);
+if(window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
+
+/* clock */
+var clockEl=$("clock");
+function clock(){ var d=new Date();
+  clockEl.textContent=String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); }
+clock(); setInterval(clock, 20000);
+
+/* ticker */
+var FACTS=[
+  "Four soft modes from two parts — bounce, rock, roll and twist",
+  "170 mm of arch, R 394 — the ride rate fixes the rise, not taste",
+  "Steel bars prove it · the production bar is composite, at half the weight",
+  "Rock 1.3 Hz on a 1.8 Hz spring — a long stroke with a quick give under it",
+  "The runner did not go away — it became the spring",
+  "It is not the spring that decides the ride, it is where the spring sits",
+  "A rail rocker walks its contact 140 mm · four pads do not move at all",
+  "No coil, no pivot, no bushing — the bar is the spring",
+  "R 800 arc, 648.5 mm between pads, tangent to the pad blend at Y 72.71",
+  "Every dimension resolved from the STEP assemblies"
+];
+$("tape").innerHTML=(function(){ var h=FACTS.map(function(f){return "<span>"+f+"</span>";}).join("");
+  return h+h; })();
+
+/* count-ups + meters */
+function countUp(el){
+  var target=parseFloat(el.dataset.count), dec=parseInt(el.dataset.dec||"0",10),
+      suffix=el.dataset.suffix||"", t0=null, DUR=1100;
+  if(!(el.firstChild&&el.firstChild.nodeType===3)) return;
+  if(reduce){ el.firstChild.nodeValue=target.toFixed(dec)+suffix; return; }
+  function step(ts){ if(t0===null)t0=ts;
+    var p=Math.min(1,(ts-t0)/DUR), eased=1-Math.pow(1-p,3);
+    el.firstChild.nodeValue=(target*eased).toFixed(dec)+suffix;
+    if(p<1) requestAnimationFrame(step); }
+  requestAnimationFrame(step);
+}
+setTimeout(function(){
+  Array.prototype.forEach.call(document.querySelectorAll(".kpi .meter i"),
+    function(i){ i.style.width=i.dataset.fill+"%"; });
+  Array.prototype.forEach.call(document.querySelectorAll(".kpi [data-count]"), countUp);
+}, 500);
+
+/* ---------- the hero: V3, rocking, on a slow turntable ---------- */
+fit();
+var hero=makeStage($("hero"), {version:"v3", fov:0.50});
+var v2st=makeStage($("v2cv"), {version:"v2", fov:0.52});
+var heroLive=$("herolive"), heroW=0;
+
+/* The four modes, at the rates the beam model gives for a 4.2 mm bow.
+   The hero cycles each one alone, then runs all four together — which is the
+   point of the whole board: three unrelated rates never resolve into one path.
+   Shown at 0.55x so a 2.8 Hz mode reads as motion rather than buzz. */
+var F_ROCK=1.33, F_BOUNCE=1.80, F_ROLL=1.78, F_TWIST=1.6, SLOMO=0.62;
+var MODES=[
+  {k:"bounce", tag:"BOUNCE · 1.8 Hz", cap:"Both arches flatten together — the quick give"},
+  {k:"rock",   tag:"ROCK · 1.3 Hz",   cap:"The arches trade height front to rear"},
+  {k:"roll",   tag:"ROLL · 1.8 Hz",   cap:"Lean on one arm and that side gives"},
+  {k:"twist",  tag:"TWIST · soft",    cap:"The bars wind — almost no torsional stiffness"}
+];
+/* Everything animated here runs off absolute elapsed time rather than accumulated
+   frame deltas, so a throttled or dropped frame never slows the motion down — the
+   board picks up exactly where the clock says it should be. */
+/* ── The camera track ────────────────────────────────────────────────────────
+   The chair is one model and the camera is what does the explaining: under the
+   frame when the copy says look underneath, close on a bar when the copy is about
+   the bar, a near side elevation when it is about the arch.
+
+   Two rules, both because a board someone walks past is not a board someone is
+   steering:
+     · the camera holds perfectly still for the whole of a scene — no drift, no
+       turntable. The chair keeps moving; the camera does not.
+     · it moves only on the scene change, eased in and out over MOVE_MS, so the
+       move reads as "look at this" rather than as motion for its own sake.
+   span is the world height of the frame in mm, so a push-in is a number you can
+   reason about; shiftX is a lens shift that slides the model left to clear the copy. */
+var MOVE_MS=1250;
+/* Close-ups aim at the NEAR bar (-X), because the camera swings to -X: aiming at the
+   far one puts the whole chair between the lens and the subject. */
+var AT={ chair:[0,320,520], underseat:[0,320,215], crown:[-295,324,85],
+         barMid:[-295,300,150], barClose:[-295,215,80], archSide:[-295,324,140] };
+var FULL={bar:1, frame:1, fabric:1, body:1};
+var TRACK=[
+  /* 0  it doesn't just rock   */ {az:-34, el:12, span:1780, at:AT.chair, sx:0.30},
+  /* 1  what everything else   */ {az:-52, el:-4, span:1500, at:AT.underseat, sx:0.28,
+                                   em:{bar:1, frame:0.85, fabric:0.6, body:0.5}},
+  /* 2  the runner became it   */ {az:-93, el:7,  span:800,  at:AT.barMid, sx:0.22, sy:-0.05,
+                                   em:{bar:1, frame:0.30, fabric:0.16, body:0.12}},
+  /* 3  V2, on the side stage  */ {az:-28, el:14, span:1860, at:AT.chair, sx:0.34},
+  /* 4  where the spring sits  */ {az:-44, el:1,  span:1180, at:AT.underseat, sx:0.26,
+                                   em:{bar:1, frame:0.45, fabric:0.30, body:0.55}},
+  /* 5  spring the base        */ {az:-80, el:6,  span:700,  at:AT.crown, sx:0.22, sy:-0.05,
+                                   em:{bar:1, frame:0.35, fabric:0.20, body:0.16}},
+  /* 6  four ways to move      */ {az:-40, el:11, span:1700, at:AT.chair, sx:0.06},
+  /* 7  why that is more fun   */ {az:-24, el:13, span:1740, at:AT.chair, sx:0.30},
+  /* 8  what it is made of     */ {az:-97, el:6,  span:360,  at:AT.barClose, sx:0.18,
+                                   em:{bar:1, frame:0.22, fabric:0.10, body:0.08}},
+  /* 9  how deep the arch      */ {az:-90, el:3,  span:900,  at:AT.archSide, sx:0.30, sy:-0.04,
+                                   em:{bar:1, frame:0.50, fabric:0.28, body:0.22}},
+  /* 10 the build              */ {az:-36, el:14, span:1780, at:AT.chair, sx:0.30}
+];
+function camState(i){
+  var t=TRACK[i%TRACK.length], e=t.em||FULL;
+  return {az:t.az, el:t.el, span:t.span, shiftX:t.sx||0, shiftY:t.sy||0, target:t.at.slice(),
+          em:{bar:e.bar===undefined?1:e.bar, frame:e.frame===undefined?1:e.frame,
+              fabric:e.fabric===undefined?1:e.fabric, body:e.body===undefined?1:e.body}};
+}
+function easeIO(u){ return u<0.5 ? 4*u*u*u : 1-Math.pow(-2*u+2,3)/2; }
+var camFrom=camState(0), camTo=camFrom, camT=1, camT0=0;
+function camGo(i){ camFrom=camNow(); camTo=camState(i); camT=0; camT0=performance.now(); }
+function camNow(){
+  if(camT>=1) return camTo;
+  var u=easeIO(camT), a=camFrom, b=camTo, o={target:[], em:{}}, k;
+  o.az=a.az+(b.az-a.az)*u; o.el=a.el+(b.el-a.el)*u;
+  /* span eases geometrically — a linear ramp from 1800 to 470 spends most of the move
+     already close in, and reads as a lurch followed by a crawl */
+  o.span=a.span*Math.pow(b.span/a.span, u);
+  o.shiftX=a.shiftX+(b.shiftX-a.shiftX)*u; o.shiftY=a.shiftY+(b.shiftY-a.shiftY)*u;
+  for(k=0;k<3;k++) o.target[k]=a.target[k]+(b.target[k]-a.target[k])*u;
+  for(k in b.em) o.em[k]=a.em[k]+(b.em[k]-a.em[k])*u;
+  return o;
+}
+var T0=performance.now(), mt=0, modeI=0, modeT=0, modeCap="";
+var DUR_ONE=7.0, CYCLE=DUR_ONE*4;
+var heroTag=$("herotag");
+function modeAt(e){                      /* one mode at a time, in order */
+  var u=e%CYCLE;
+  return [Math.floor(u/DUR_ONE), u%DUR_ONE];
+}
+/* setup aid: ?pose=theta,rollDeg,yawDeg,heaveMm freezes the chair in one attitude so a
+   single still can be checked against the model. No effect without the parameter. */
+var POSE=(function(){
+  var m=/[?&]pose=([-\d.,]+)/.exec(location.search);
+  if(!m) return null;
+  var v=m[1].split(",").map(parseFloat);
+  return {theta:v[0]||0, roll:(v[1]||0)*Math.PI/180, yaw:(v[2]||0)*Math.PI/180,
+          heave:v[3]||0, liftF:0, liftR:0};
+})();
+function modeState(){
+  var A={theta:0, roll:0, yaw:0, heave:0, liftF:0, liftR:0},
+      k=MODES[modeI].k, w=2*Math.PI*mt,
+      /* ease in and back out so each mode starts and finishes at rest */
+      env=Math.min(1, modeT/0.7)*Math.min(1,((sceneIdx===6?4.0:DUR_ONE)-modeT)/0.7);
+  env=Math.max(0,env);
+  if(k==="bounce") A.heave = 16*env*Math.sin(w*F_BOUNCE);
+  if(k==="rock")   A.theta = 6.0*env*Math.sin(w*F_ROCK);
+  if(k==="roll")   A.roll  = (3.5*Math.PI/180)*env*Math.sin(w*F_ROLL);
+  if(k==="twist")  A.yaw   = (4.0*Math.PI/180)*env*Math.sin(w*F_TWIST);
+  return A;
+}
+/* V2's only motion, in closed form: 26 mm of sag ringing down at 3.1 Hz, re-excited
+   every 2.4 s so the scene always shows it happening */
+function v2Sag(e){
+  var tau=e%2.4, w=2*Math.PI*3.13, z=0.16;
+  return 26 + 26*0.9*Math.exp(-z*w*tau)*Math.cos(w*Math.sqrt(1-z*z)*tau);
+}
+
+var sceneT0=0, tiles=null, lastTile=-1;
+function tick(now){
+  var e=(now-T0)/1000;
+  /* the panel grows on scene 06 — keep the drawing buffer matched to it */
+  if(hero && hero.canvas.clientWidth && hero.canvas.clientWidth!==heroW){
+    heroW=hero.canvas.clientWidth; sizeCanvases();
+  }
+  if(!reduce && sceneIdx===6){
+    /* walk the four motions in step with the tiles, one per quarter of the scene */
+    var se=(now-sceneT0)/1000, per=4.0, k=Math.min(3, Math.floor(se/per));
+    modeI=k; modeT=se-k*per; mt=e*SLOMO;
+    if(k!==lastTile && tiles){
+      for(var q=0;q<tiles.length;q++) tiles[q].classList.toggle("live", q===k);
+      lastTile=k;
+      heroTag.textContent="V3 · "+MODES[modeI].tag;
+      cap.textContent=MODES[modeI].cap;
+    }
+  } else if(!reduce){
+    mt=e*SLOMO;
+    var m=modeAt(e*SLOMO);
+    if(m[0]!==modeI){ modeI=m[0]; heroTag.textContent="V3 · "+MODES[modeI].tag;
+                      modeCap=MODES[modeI].cap;
+                      if(sceneIdx===0||CAPS[sceneIdx]===null) cap.textContent=modeCap; }
+    modeT=m[1];
+  } else if(reduce){ mt=0; modeT=99; }
+  if(camT<1) camT=Math.min(1,(now-camT0)/MOVE_MS);
+  var C=camNow();
+  EM.bar=C.em.bar; EM.frame=C.em.frame; EM.fabric=C.em.fabric; EM.body=C.em.body;
+  var A=POSE||modeState();
+  if(hero){
+    hero.draw(A, C);
+    heroLive.textContent = MODES[modeI].k==="bounce" ? "z "+A.heave.toFixed(0)+" mm"
+        : MODES[modeI].k==="rock" ? "θ "+A.theta.toFixed(1)+"°"
+        : MODES[modeI].k==="roll" ? "ϕ "+(A.roll*180/Math.PI).toFixed(1)+"°"
+        : "ψ "+(A.yaw*180/Math.PI).toFixed(1)+"°";
+  }
+  if(v2st && sceneIdx===3){
+    var sag=reduce?26:v2Sag(e);
+    v2st.draw({theta:0, pitchSag:Math.asin(Math.min(1,sag/489))*180/Math.PI, sag:sag},
+              {az:-64, el:8, span:1700, target:[0,300,430], shiftX:0});
+  }
+}
+/* One bad frame must never take the board down for the rest of the day. */
+function tickSafe(now){
+  try { tick(now); } catch(err){ if(window.console) console.warn("frame skipped:", err); }
+  requestAnimationFrame(tickSafe);
+}
+
+/* ---------- scene 05: the modes, each running at its own rate ---------- */
+var pc=$("modecv"), pcx=pc.getContext("2d");
+var ROWS=[["ROCK","1.3 Hz",F_ROCK,"#2f62bd"],["BOUNCE","1.8 Hz",F_BOUNCE,"#12855c"],
+          ["ROLL","1.8 Hz",F_ROLL,"#c2412c"],["WHAT YOU FEEL","a slow rock on a quick spring",0,"#0e1720"]];
+function drawModes(){
+  var W=pc.width, H=pc.height, sc=W/540;
+  pcx.setTransform(1,0,0,1,0,0); pcx.clearRect(0,0,W,H); pcx.scale(sc,sc);
+  var x0=132, x1=524, rowH=84, top=22;
+  pcx.font="700 12px ui-monospace,Menlo,monospace";
+  for(var r=0;r<ROWS.length;r++){
+    var cy=top+rowH*r+rowH/2, col=ROWS[r][3];
+    pcx.fillStyle="#0e1720"; pcx.textAlign="left";
+    pcx.fillText(ROWS[r][0], 12, cy-6);
+    pcx.fillStyle="#9aa9b4"; pcx.font="600 11px ui-monospace,Menlo,monospace";
+    pcx.fillText(ROWS[r][1], 12, cy+12);
+    pcx.font="700 12px ui-monospace,Menlo,monospace";
+    pcx.strokeStyle="#dfe6ea"; pcx.lineWidth=1;
+    pcx.beginPath(); pcx.moveTo(x0,cy); pcx.lineTo(x1,cy); pcx.stroke();
+    pcx.strokeStyle=col; pcx.lineWidth=r===3?2.6:2;
+    pcx.beginPath();
+    for(var px=x0;px<=x1;px+=2){
+      var u=(px-x0)/(x1-x0), tt=mt-(1-u)*2.6, v;
+      if(r===3) v=(0.62*Math.sin(2*Math.PI*F_ROCK*tt+1.1)+0.52*Math.sin(2*Math.PI*F_BOUNCE*tt)
+                  +0.46*Math.sin(2*Math.PI*F_ROLL*tt+2.3))/1.6;
+      else v=Math.sin(2*Math.PI*ROWS[r][2]*tt);
+      var py=cy-v*(rowH*0.31);
+      if(px===x0) pcx.moveTo(px,py); else pcx.lineTo(px,py);
+    }
+    pcx.stroke();
+  }
+  pcx.fillStyle="#9aa9b4"; pcx.font="600 10px ui-monospace,Menlo,monospace";
+  pcx.textAlign="right"; pcx.fillText("FIRST-ORDER · 170 mm ARCH · 7.2 mm COMPOSITE", x1, top+rowH*4+14);
+}
+
+/* ---------- scene 09: today's arch against the solved one ----------
+   Both arcs are circular, drawn to scale from the chord and the rise. The loaded
+   state keeps the developed length of the bar and solves for the new chord, which
+   is why the contacts move apart as it flattens. */
+var ac=$("archcv"), acx=ac.getContext("2d");
+var CH=648.5;
+function arcOf(c,r){ var R=(c*c/4+r*r)/(2*r); return {R:R, a:Math.asin(Math.min(1,(c/2)/R)),
+  s:2*R*Math.asin(Math.min(1,(c/2)/R))}; }
+function chordAt(s,r){                       /* same bar length, new rise -> new chord */
+  var lo=1e-6, hi=Math.PI-1e-6, a, rr;
+  for(var i=0;i<60;i++){ a=(lo+hi)/2; rr=s*(1-Math.cos(a))/(2*a); if(rr>r) hi=a; else lo=a; }
+  a=(lo+hi)/2; return s*Math.sin(a)/a;
+}
+function drawArch(){
+  var W=ac.width, H=ac.height, sc=W/540;
+  acx.setTransform(1,0,0,1,0,0); acx.clearRect(0,0,W,H); acx.scale(sc,sc);
+  var px=0.70, cx=272, gy=214;                       /* mm -> px, ground line */
+  acx.strokeStyle="#ccd6dd"; acx.lineWidth=1;
+  acx.beginPath(); acx.moveTo(14,gy); acx.lineTo(526,gy); acx.stroke();
+  function curve(c,r,col,wgt,dash){
+    var g=arcOf(c,r), R=g.R, a=g.a;
+    acx.strokeStyle=col; acx.lineWidth=wgt; acx.setLineDash(dash||[]);
+    acx.beginPath();
+    for(var i=0;i<=48;i++){
+      var th=-a+2*a*i/48, x=cx+R*Math.sin(th)*px, y=gy-(R*Math.cos(th)-R*Math.cos(a))*px;
+      if(i===0) acx.moveTo(x,y); else acx.lineTo(x,y);
+    }
+    acx.stroke(); acx.setLineDash([]);
+    return g;
+  }
+  function pads(c,col){
+    var hw=55*px;
+    [-1,1].forEach(function(k){
+      acx.fillStyle=col;
+      acx.fillRect(cx+k*(c/2)*px-hw/2, gy, hw, 7);
+    });
+  }
+  /* today: 45 mm of rise, and it is already flat under the occupant */
+  var t0=arcOf(CH,45);
+  curve(CH,45,"#c2412c",2,[5,4]);
+  var flatC=chordAt(t0.s, 3);
+  curve(flatC,3,"#c2412c",3.2);
+  pads(flatC,"#c2412c");
+  /* proposed: 170 mm, with the seated state and the live bounce */
+  var p0=arcOf(CH,170);
+  curve(CH,170,"#2f62bd",2,[5,4]);
+  var bob=reduce?0:9*Math.sin(2*Math.PI*mt*F_BOUNCE);
+  var rNow=170-77+bob, cNow=chordAt(p0.s, rNow);
+  curve(cNow,rNow,"#2f62bd",3.4);
+  pads(cNow,"#2f62bd");
+  /* callouts */
+  acx.font="700 11px ui-monospace,Menlo,monospace"; acx.textAlign="left";
+  acx.fillStyle="#c2412c"; acx.fillText("TODAY · 45 mm rise · bottomed out", 16, 26);
+  acx.fillStyle="#2f62bd"; acx.fillText("NEXT · 170 mm rise · R 394", 16, 46);
+  acx.fillStyle="#9aa9b4"; acx.font="600 10px ui-monospace,Menlo,monospace";
+  acx.fillText("dashed = unloaded    solid = 95 kg seated", 16, 66);
+  acx.textAlign="right";
+  acx.fillStyle="#2f62bd"; acx.font="700 11px ui-monospace,Menlo,monospace";
+  acx.fillText("94 mm of travel still under you", 526, 26);
+  acx.fillStyle="#9aa9b4"; acx.font="600 10px ui-monospace,Menlo,monospace";
+  acx.fillText("contact rolls 41 mm along the pad — lengthen it to 110", 526, 242);
+}
+
+/* ---------- scene loop ---------- */
+var scenes=Array.prototype.slice.call(document.querySelectorAll(".scene"));
+var CAPS=[
+  null,
+  "Rails, hinges and plungers — all of them one axis",
+  "The ski became an arch, and the arch became the spring",
+  "V2 put the spring behind the person, not under them",
+  "Where the spring sits decides what you feel",
+  "Four springs at the four corners, out of two parts",
+  "Bounce, rock, roll, twist — one at a time",
+  "A long stroke with a quick spring under it",
+  "Steel proves the geometry · composite ships it at half the weight",
+  "45 mm of arch cannot hold 77 mm of sag — the next one is 170",
+  "The next sample is a deeper arch, a composite bar and a longer pad"
+];
+
+var cap=$("cadcap"), rail=$("rail");
+var sceneIdx=-1, timer=null, t0=0, paused=false, dur=0, cogRAF=null;
+
+var archRAF=null;
+function archRun(on){
+  if(on){ if(!archRAF){ (function loop(){ drawArch(); archRAF=requestAnimationFrame(loop); })(); } }
+  else if(archRAF){ cancelAnimationFrame(archRAF); archRAF=null; }
+}
+function modeRun(on){
+  if(on){ if(!cogRAF){ (function loop(){ drawModes(); cogRAF=requestAnimationFrame(loop); })(); } }
+  else if(cogRAF){ cancelAnimationFrame(cogRAF); cogRAF=null; }
+}
+function show(n){
+  if(sceneIdx>=0) scenes[sceneIdx].classList.remove("on");
+  sceneIdx=n;
+  var sc=scenes[sceneIdx];
+  sc.classList.add("on");
+  document.body.classList.toggle("wide", n===6);
+  sceneT0=performance.now(); lastTile=-1;
+  camGo(n);
+  tiles=(n===6)?sc.querySelectorAll(".tiles>div[data-mode]"):null;
+  if(n!==6) Array.prototype.forEach.call(document.querySelectorAll(".tiles>div"),
+                                         function(d){ d.classList.remove("live"); });
+  cap.style.opacity=0;
+  setTimeout(function(){ cap.textContent=CAPS[sceneIdx]||modeCap; cap.style.opacity=1; }, 320);
+  modeRun(sceneIdx===5);
+  archRun(sceneIdx===9);
+  Array.prototype.forEach.call(sc.querySelectorAll("[data-count]"), countUp);
+  dur=parseInt(sc.dataset.dur,10)||11000;
+  t0=performance.now();
+  clearTimeout(timer);
+  timer=setTimeout(function(){ show((sceneIdx+1)%scenes.length); }, dur);
+}
+function railFrame(now){
+  if(!paused&&dur) rail.style.width=(Math.min(1,(now-t0)/dur)*100).toFixed(2)+"%";
+  requestAnimationFrame(railFrame);
+}
+requestAnimationFrame(railFrame);
+requestAnimationFrame(tickSafe);
+
+/* setup conveniences — signage itself never needs them */
+document.addEventListener("keydown", function(e){
+  if(e.key==="ArrowRight") show((sceneIdx+1)%scenes.length);
+  else if(e.key==="ArrowLeft") show((sceneIdx-1+scenes.length)%scenes.length);
+  else if(e.key===" "){ e.preventDefault(); paused=!paused;
+    if(paused) clearTimeout(timer); else show(sceneIdx); }
+  else if(e.key==="f"){ if(document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen(); }
+});
+show((function(){
+  var m=/[?&#]scene=(\d+)/.exec(location.href);
+  var n=m?parseInt(m[1],10):0;
+  return (n>=0 && n<scenes.length)?n:0;
+})());
+})();
+</script>
+</body>
+</html>
