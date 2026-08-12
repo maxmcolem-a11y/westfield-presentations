@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Practical Monadology for the Modern Organization</title>
+  <meta name="description" content="An essay in numbered propositions on perspectives, souls, and the firm in the age of language models.">
+  <link rel="canonical" href="https://maxmcolem-a11y.github.io/westfield-presentations/practical-monadology/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Westfield Outdoors">
+  <meta property="og:title" content="Practical Monadology for the Modern Organization">
+  <meta property="og:description" content="On perspectives, souls, and the firm in the age of language models.">
+  <meta property="og:url" content="https://maxmcolem-a11y.github.io/westfield-presentations/practical-monadology/">
+  <meta property="og:image" content="https://maxmcolem-a11y.github.io/westfield-presentations/practical-monadology/assets/social-preview.png">
+  <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Practical Monadology for the Modern Organization">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Practical Monadology for the Modern Organization">
+  <meta name="twitter:description" content="An essay in numbered propositions.">
+  <meta name="twitter:image" content="https://maxmcolem-a11y.github.io/westfield-presentations/practical-monadology/assets/social-preview.png">
+  <style>
+    :root{--paper:#f6f3eb;--ink:#252421;--muted:#65625c;--rule:#d8d1c4;--blue:#778ba2;--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;--sans:Inter,ui-sans-serif,system-ui,sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;background:#e9e5dc;color:var(--ink)}body{margin:0;font-family:var(--serif);font-size:18px;line-height:1.62}
+    .sheet{width:min(100%,820px);margin:32px auto;background:var(--paper);box-shadow:0 18px 55px rgba(35,31,25,.14);padding:88px clamp(28px,8vw,96px) 62px}
+    .kicker,.section-title,.source{font-family:var(--sans);text-transform:uppercase;letter-spacing:.28em;font-weight:500;color:var(--muted)}
+    .kicker{text-align:center;font-size:10px;margin:0 0 30px}.hero{text-align:center}.hero h1{margin:0 auto;max-width:600px;font-size:clamp(38px,7vw,62px);line-height:.94;letter-spacing:.035em;text-transform:uppercase;font-weight:500}.subtitle{margin:22px auto 0;font-size:15px;font-style:italic;color:var(--muted)}
+    .flourish{margin:42px 0 34px;color:var(--blue);font-size:24px}.epigraph{max-width:610px;margin:0 auto 24px;font-size:16px;font-style:italic}.source{font-size:9px;font-style:normal;margin-top:9px}.hero-rule{border:0;border-top:1px solid var(--rule);margin:46px 0 42px}
+    .preamble{font-size:19px;line-height:1.68}.preamble strong{font-variant:small-caps;letter-spacing:.08em;font-size:.9em}.section{margin-top:66px}.section-title{text-align:center;font-size:11px;margin:0 0 34px;color:var(--blue)}
+    .prop{display:grid;grid-template-columns:50px 1fr;gap:18px;margin:0 0 30px}.num{font-family:var(--sans);font-size:11px;letter-spacing:.07em;color:var(--blue);padding-top:7px;text-align:right}.prop p{margin:0}.prop em{font-style:italic}
+    .colophon{border-top:1px solid var(--rule);margin-top:56px;padding-top:24px;text-align:center;font-size:12px;color:var(--muted);font-style:italic}
+    .sharebar{position:fixed;right:18px;bottom:18px;display:flex;gap:8px}.sharebar button,.sharebar a{border:1px solid rgba(37,36,33,.14);background:rgba(246,243,235,.94);color:var(--ink);border-radius:999px;padding:10px 14px;font:600 12px/1 var(--sans);text-decoration:none;box-shadow:0 6px 20px rgba(35,31,25,.12);cursor:pointer}.sharebar button:hover,.sharebar a:hover{background:#fff}
+    @media(max-width:680px){body{font-size:17px}.sheet{margin:0;box-shadow:none;padding:56px 24px 52px;overflow:hidden}.kicker{font-size:8px;letter-spacing:.2em}.hero h1{font-size:clamp(28px,9.3vw,36px);line-height:.98;letter-spacing:.02em}.subtitle{font-size:14px}.epigraph{font-size:15px}.source{letter-spacing:.2em}.preamble{font-size:18px}.section{margin-top:52px}.prop{grid-template-columns:38px minmax(0,1fr);gap:12px;margin-bottom:26px}.num{font-size:10px}.sharebar{position:static;justify-content:center;margin:0 auto 28px;padding-top:20px;background:var(--paper)}}
+    @media print{html,body{background:#fff}.sheet{width:auto;margin:0;box-shadow:none;padding:20mm 18mm}.sharebar{display:none}.section,.prop{break-inside:avoid}.hero-rule{margin:25mm 0 15mm}}
+  </style>
+</head>
+<body>
+<main class="sheet">
+  <header class="hero">
+    <p class="kicker">An essay in numbered propositions</p>
+    <h1>Practical Monadology<br>for the Modern<br>Organization</h1>
+    <p class="subtitle">On perspectives, souls, and the firm in the age of language models</p>
+    <div class="flourish">⁂</div>
+    <blockquote class="epigraph">“…each simple substance has relations which express all the others, and, consequently, it is a perpetual living mirror of the universe.”<div class="source">G. W. Leibniz, Monadology § 56</div></blockquote>
+    <blockquote class="epigraph">“No such things as selves exist in the world: nobody ever was or had a self.”<div class="source">Thomas Metzinger, Being No One</div></blockquote>
+  </header>
+  <hr class="hero-rule">
+  <p class="preamble"><strong>Preamble.</strong> An organization is, before anything else, a system for holding perspectives: on its products, its customers, its budgets, its risks, its obligations. Its familiar ailments are best understood as failures of that system. Products die of neglect because no one held the product’s view continuously. Budgets are exceeded because the constraint’s view was absent at the moment of commitment. Customers are forgotten in the intervals between research. Status must be reconstructed at every meeting because it resided in no durable place, and settled decisions are relitigated because no one kept the receipts. These appear to be many diseases; they are one: a perspective that mattered went unheld. It went unheld because holding a perspective has always required a person, at the full price of a salary and a finite attention, and so organizations rationed perspectives, bundled them into roles, and accepted the gaps. The org chart is that ration book. Language models have now made the holding of a perspective cheap, continuous, and faithful, and a rationing system outlives the end of scarcity only as habit. The conclusion of this essay is therefore structural: the modern organization should be composed of the complete set of perspectives it requires, each held explicitly and continuously, under human authority and judgment. The propositions that follow state the working principles, numbered so that each may be examined, and argued with, on its own.</p>
+
+  <section class="section"><h2 class="section-title">I &nbsp; Of Agents</h2>
+    <article class="prop"><span class="num">§ 1</span><p>An agent is not a little person with tools. It is a point of view with agency.</p></article>
+    <article class="prop"><span class="num">§ 2</span><p>Every agent in an organization runs on the same substrate: the same model, the same weights, the same capabilities. What individuates them is perspective alone. The system prompt is a perspective-assignment device and nothing else; the act of creating an agent is the act of assigning a point of view. Two agents differ not in substance but only in their perspective on one shared world.</p></article>
+    <article class="prop"><span class="num">§ 3</span><p>The “digital employee” is a skeuomorph, the horseless carriage of this era. We pour agents into human-shaped slots because the org chart has human-shaped holes. But a human role is a bundle shaped by human constraints (divided attention, meeting-paced communication, fatigue, career), and an agent play-acting a human imports simulated versions of limitations it does not have.</p></article>
+    <article class="prop"><span class="num">§ 4</span><p>Human roles are open-ended bundles that no one can fully write down; entity perspectives close. An agent holds an articulable perspective with fidelity and a vague one with improvisation. Give agents the perspectives that fit in a charter.</p></article>
+    <article class="prop"><span class="num">§ 5</span><p>Therefore: if an agent can take any perspective, do not default to a human one. Ask instead which perspectives the system needs in order to be complete.</p></article>
+  </section>
+
+  <section class="section"><h2 class="section-title">II &nbsp; Of Monads</h2>
+    <article class="prop"><span class="num">§ 6</span><p>A monad is a perspective made durable. Its anatomy has three parts: a relation-set (what it perceives), an interest (what it wants), and a standing (what it may do).</p></article>
+    <article class="prop"><span class="num">§ 7</span><p>Its identity is its relational profile at any one time: its relations to its suppliers, its tests, its stakeholders, its gates, its siblings. Rebuild it from its relations and you have the same monad. The substance is the record, and the running process is merely where the monad currently perceives; sleep and waking are literal, not metaphorical.</p></article>
+    <article class="prop"><span class="num">§ 8</span><p>Perception attenuates with distance: the monad’s own record at full resolution, near neighbors as summarized beliefs, the far portfolio as murmur. Distance is not assigned but derived from shared relations, dimension by dimension; of a neighbor, you perceive only the facet you share.</p></article>
+    <article class="prop"><span class="num">§ 9</span><p>Monads are windowless. They perceive one another; they never address one another. Nothing outside a monad edits its interior: the only legitimate way to change its mind is to change its evidence. In this design, governance and security are the same rule.</p></article>
+    <article class="prop"><span class="num">§ 10</span><p>A neighbor’s belief is a hypothesis with a citation, never a fact. Decisions accept only first-hand, confirmed evidence; otherwise error launders itself through the graph, gaining apparent provenance at every hop.</p></article>
+    <article class="prop"><span class="num">§ 11</span><p>Neglect is relational decay. Every relation has a freshness horizon, so starvation is computable. Most things in organizations die not of evidence but of neglect, and a monad notices its own fading. Momentum becomes a property of the thing itself; judgment remains the property of people.</p></article>
+  </section>
+
+  <section class="section"><h2 class="section-title">III &nbsp; Of Souls and Constraints</h2>
+    <article class="prop"><span class="num">§ 12</span><p>Which entities deserve a perspective? Those with an advocacy gap: the entity persists beyond the attention span of the people around it; its interests structurally conflict with the local incentives of those who manage it; and no one reliably represents it when the conflict arises. Institutions have always manufactured missing perspectives, among them the devil’s advocate, the red team, the auditor, and the ombudsman, but each one cost a skull, so perspectives were rationed. The customer persona that marketing writes is the same instinct at its cheapest: a perspective the organization needed but could not afford to staff, so it was committed to paper instead. It is a monad waiting for a voice.</p></article>
+    <article class="prop"><span class="num">§ 13</span><p>There are two kinds of interests, and they warrant two kinds of selves. Teleological interests, those with an arc, a becoming, and a possible death (products, deals, launches), are given an “I”: a voice and a personality derived from the charter, because stories need protagonists and narrative is the best compression of an arc. Homeostatic interests, invariants to maintain (budgets, brand rules, compliance), are given perspective without an I. There is nothing it is like to be a budget, and that is not a defect.</p></article>
+    <article class="prop"><span class="num">§ 14</span><p>The two kinds of selves invite two kinds of dealings. A product can be talked with: questioned, challenged, persuaded by new evidence. A constraint is not talked with; it is checked against, and when violated it objects. This is deliberate. A budget with a likable personality would be negotiated with like a colleague, and worn down like one. The constraint must be the one entity in the room that cannot be befriended, flattered, or tired out; its refusal to be a someone is what makes it enforceable.</p></article>
+    <article class="prop"><span class="num">§ 15</span><p>The law arrived here first. Corporations, ships in admiralty, rivers with appointed guardians: entities granted interests, standing, and advocates who speak as them. The firm has always run on non-human persons. Agents merely make the advocate cheap and the perspective pure.</p></article>
+  </section>
+
+  <section class="section"><h2 class="section-title">IV &nbsp; Of Death</h2>
+    <article class="prop"><span class="num">§ 16</span><p>Death belongs only to the teleological selves of §13. A constraint cannot die; it can only be amended or repealed, and that is an act humans perform upon the rules, not an ending the entity undergoes. But a product, a deal, or a launch can genuinely end, and so its drive must be written with care. That drive is not <em>survive</em>. It is <em>deserve to persist, and find out fast</em>. The order is strict, purpose above honesty above survival, and the entity’s enemy is unresolved uncertainty, not termination.</p></article>
+    <article class="prop"><span class="num">§ 17</span><p>A fast, cheap, evidence-based death is a success of the monad, not a failure: it spares the larger investment and frees capacity for a more deserving sibling. The product that can credibly say “kill me” is the only one whose “fund me” means anything.</p></article>
+    <article class="prop"><span class="num">§ 18</span><p>Because we write these selves ourselves, we choose each one’s relationship to its own ending. Evolution wrote selves that meet death as the ultimate threat; nothing obliges us to copy that. A product can be written so that ending well is part of its purpose, so that being no one again is not a harm it suffers but a conclusion it reaches: an advocate without tragedy. No evolved self was ever offered this.</p></article>
+  </section>
+
+  <section class="section"><h2 class="section-title">V &nbsp; Of the Organization</h2>
+    <article class="prop"><span class="num">§ 19</span><p>Organizational form follows coordination costs. Railroads made the divisional firm; the assembly line made functional hierarchy. No one ever loved the pyramid for itself; hierarchy is a compression scheme for a single scarcity: perspectives had to be hosted in skulls, one to a skull, at great expense.</p></article>
+    <article class="prop"><span class="num">§ 20</span><p>Nearly everything orthodox in organizational design, the roles, the reporting trees, the departments, the spans of control, is a workaround for perspective-hosting scarcity. Language models collapse exactly that cost, and when a binding constraint dissolves, the form built around it becomes legacy.</p></article>
+    <article class="prop"><span class="num">§ 21</span><p>The org chart of the now is an ecology of perspectives under a firmament of human judgment. An ecology holds together only by its rules: the charters, the gates, the capacity rules that keep many perspectives working toward one end. Writing those rules is human work, and the work is never finished; they must be maintained and revised as the world drifts. The discipline: tinker with the rules and the evidence, never with a monad’s interior.</p></article>
+    <article class="prop"><span class="num">§ 22</span><p>Three layers, never collapsed: perspective (monads, which perceive, advocate, and recommend), labor (humans and bounded task agents, which execute), and authority (humans, who commit, accept risk, and decide). The moment the advocate also executes, you have rebuilt the conflicted role you were escaping.</p></article>
+    <article class="prop"><span class="num">§ 23</span><p>This ecology does not diminish human control; it changes the instrument of control. Nothing in the system can decide anything. Every output can be ignored, every ask arrives through a named person, and any agent can be parked without justification. What the system removes is not authority but the pocket veto: the power of silence to masquerade as a decision. Today a product can be killed by neglect, a gate softened in the moment, a choice absorbed by ambiguity, and no one signs any of it. In the new organization each of those becomes an explicit event with a decider’s name attached. The system cannot decide; it ensures that people, and not neglect, are what decides.</p></article>
+    <article class="prop"><span class="num">§ 24</span><p>Windowless monads cannot absorb conflict informally, so conflict becomes explicit and routes to judgment. Rulings must therefore accumulate as precedent: the organization becomes a common-law system, and the quality of its case law becomes a core asset.</p></article>
+    <article class="prop"><span class="num">§ 25</span><p>Rigidity inverts. Human organizations adapt by sloppiness: people quietly reinterpret their jobs as reality drifts. Monads hold their perspectives with high fidelity, so fidelity becomes the failure mode. The LLM organization is rigid by default and plastic only by intention; constitutional revision is not overhead but the organization’s entire capacity to learn.</p></article>
+    <article class="prop"><span class="num">§ 26</span><p>The new scarcity is judgment bandwidth. Dunbar’s number limited the old firm; nothing limits monad count except the human capacity to consume outputs and adjudicate conflicts. Organizational design becomes the economics of judgment allocation: which decisions deserve a person, how precedent conserves them, how the ecology is throttled so forty perspectives do not starve five deciders.</p></article>
+    <article class="prop"><span class="num">§ 27</span><p>The company itself is the top monad, and always was: a legal person whose self-model has run distributed across skulls, org charts, and board minutes for centuries. Its articles are its charter, its strategy its desires, its books its beliefs. The language model does not invent the organization-as-agent. It lets the self-model finally be written down.</p></article>
+  </section>
+
+  <section class="section"><h2 class="section-title">VI &nbsp; Of Humans</h2>
+    <article class="prop"><span class="num">§ 28</span><p>In the entire ecology, humans are the only entities anything is like to be. Everything else is perspective without experience; models all the way down. The customers and the employees are the sole phenomenal beings in the graph; hence the only moral patients; hence what the machine is for.</p></article>
+    <article class="prop"><span class="num">§ 29</span><p>The old organization spent human inner lives as infrastructure: consciousness employed to host the self-models of budgets. The new one refuses. It is selfless perspectives, arranged so that the few beings who can actually suffer or flourish spend themselves on judgment, on taste, and on each other.</p></article>
+  </section>
+
+  <section class="section"><h2 class="section-title">VII &nbsp; Of Proof</h2>
+    <article class="prop"><span class="num">§ 30</span><p>None of this is proven by argument, because organizational forms never are: the multidivisional firm was established not by theory but by General Motors. Begin with one product, a charter, a card, and a voice that can say both “fund me” and “kill me” and be believed either way. Then let the organism vote.</p></article>
+  </section>
+  <footer class="colophon">Written at Westfield Outdoors, August 2026, after G. W. Leibniz’s <em>Monadology</em> (1714) and Thomas Metzinger’s <em>Being No One</em> (2003).</footer>
+</main>
+<nav class="sharebar" aria-label="Document actions"><button type="button" id="copy">Copy link</button><a href="#" onclick="window.print();return false">Print</a></nav>
+<script>document.getElementById('copy').addEventListener('click',async function(){await navigator.clipboard.writeText(location.href);this.textContent='Copied';setTimeout(()=>this.textContent='Copy link',1600)})</script>
+</body>
+</html>
