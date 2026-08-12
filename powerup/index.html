@@ -7,22 +7,9 @@
 </head>
 <body>
 <script>
-var MONAD_CARD_IDS = new Set([
-  '6945bc372e6ca72745a539d9', // Origami
-  '69af305a08fbe45175338ca7', // GRAM
-  '6a22434d7968559894acbcf5', // Fieldboard
-  '6945bbde0ee1134a5422db3b'  // Systems Wagon
-]);
-
 TrelloPowerUp.initialize({
   'card-back-section': function(t, options) {
-    return Promise.all([t.card('id'), t.card('attachments').get('attachments')]).then(function(results) {
-      var card = results[0];
-      var attachments = results[1];
-      // Bound monad cards render these same attachments beneath the Monad surface.
-      // Suppress this duplicate section so Trello's unsupported Power-Up ordering
-      // cannot put presentations above the monad.
-      if (MONAD_CARD_IDS.has(card.id)) return null;
+    return t.card('attachments').get('attachments').then(function(attachments) {
       var htmlAttachments = attachments.filter(function(a) {
         return a.url && a.url.indexOf('maxmcolem-a11y.github.io') !== -1 && a.url.endsWith('/');
       });
@@ -38,7 +25,7 @@ TrelloPowerUp.initialize({
         content: {
           type: 'iframe',
           url: t.signUrl('./card-back-section.html'),
-          height: 480
+          height: 174
         }
       };
     });

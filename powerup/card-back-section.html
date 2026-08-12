@@ -2,152 +2,116 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <script src="https://p.trellocdn.com/power-up.min.js"></script>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { background:#0d1117; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif; color:#c9d1d9; }
-#content { padding:8px; display:flex; flex-direction:column; gap:12px; }
-
-.prez-card { position:relative; border:1px solid #30363d; border-radius:8px; overflow:hidden; background:#161b22; }
-.prez-label { padding:8px 12px; font-size:13px; font-weight:600; color:#e2e8f0; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #30363d; }
-.prez-label .status { font-size:11px; font-weight:400; color:#7d8590; }
-
-.iframe-wrap { position:relative; width:100%; padding-bottom:56.25%; background:#0d1117; }
-.iframe-wrap iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
-
-.iframe-wrap .controls { position:absolute; top:8px; right:8px; display:flex; gap:6px; opacity:0; transition:opacity 0.2s; z-index:10; }
-.iframe-wrap:hover .controls { opacity:1; }
-
-.btn { background:rgba(13,17,23,0.85); border:1px solid #30363d; color:#c9d1d9; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:12px; display:flex; align-items:center; gap:4px; backdrop-filter:blur(4px); }
-.btn:hover { background:rgba(22,27,34,0.95); color:#fff; }
-
-.toast { position:absolute; top:8px; left:50%; transform:translateX(-50%); background:#238636; color:#fff; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:600; opacity:0; transition:opacity 0.3s; z-index:20; pointer-events:none; }
-.toast.show { opacity:1; }
-
-.skeleton { position:absolute; top:0; left:0; width:100%; height:100%; background:#161b22; display:flex; align-items:center; justify-content:center; }
-.skeleton::after { content:'Loading presentation...'; color:#7d8590; font-size:14px; }
-.skeleton.hide { display:none; }
+* { box-sizing:border-box; }
+html, body { margin:0; min-height:0; background:#fff; color:#172b4d; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif; }
+#content { display:flex; gap:10px; padding:4px 2px 8px; overflow-x:auto; scrollbar-width:thin; }
+.deck { flex:0 0 168px; color:inherit; text-decoration:none; }
+.thumb { position:relative; width:168px; height:95px; overflow:hidden; border:1px solid #dfe1e6; border-radius:8px; background:linear-gradient(135deg,#172b4d,#0052cc); box-shadow:0 1px 2px rgba(9,30,66,.12); }
+.thumb img { width:100%; height:100%; display:block; object-fit:cover; }
+.fallback { position:absolute; inset:0; display:grid; place-items:center; padding:14px; color:#fff; font-size:12px; font-weight:800; letter-spacing:.02em; text-align:center; }
+.open { position:absolute; right:6px; bottom:6px; padding:3px 6px; border-radius:5px; background:rgba(9,30,66,.82); color:#fff; font-size:10px; font-weight:700; }
+.title { display:block; margin-top:5px; overflow:hidden; color:#172b4d; font-size:12px; font-weight:600; line-height:1.25; text-overflow:ellipsis; white-space:nowrap; }
+.deck:hover .thumb { border-color:#579dff; box-shadow:0 0 0 2px rgba(87,157,255,.25); }
+.deck:focus-visible { outline:2px solid #0c66e4; outline-offset:2px; border-radius:8px; }
+.empty { padding:10px 4px; color:#6b778c; font-size:12px; }
 </style>
 </head>
 <body>
-<div id="content"></div>
+<div id="content" aria-label="Presentation thumbnails"></div>
 <script>
 var t = TrelloPowerUp.iframe();
-var POLL_INTERVAL = 60000; // 60s to stay under GitHub rate limit
-var REPO = 'maxmcolem-a11y/westfield-presentations';
-var commitCache = {};
+var ORIGIN = 'https://maxmcolem-a11y.github.io';
+var PREFIX = '/westfield-presentations/';
 
-function extractPath(url) {
-  // https://maxmcolem-a11y.github.io/westfield-presentations/ai-agent-proposal/
-  var match = url.match(/github\.io\/westfield-presentations\/(.+?)(?:index\.html)?$/);
-  if (match) return match[1].replace(/\/$/, '') + '/index.html';
-  return null;
+function governedUrl(raw) {
+  try {
+    var url = new URL(raw);
+    return url.protocol === 'https:' && url.origin === ORIGIN && url.pathname.indexOf(PREFIX) === 0 ? url : null;
+  } catch (_) { return null; }
 }
 
-function extractLabel(url) {
-  var match = url.match(/westfield-presentations\/(.+?)\/(?:index\.html)?$/);
-  if (match) return match[1].replace(/-/g, ' ').replace(/\b\w/g, function(c){ return c.toUpperCase(); });
-  return 'Presentation';
+function labelFor(attachment, url) {
+  if (attachment.name && attachment.name !== attachment.url) return attachment.name;
+  var slug = url.pathname.slice(PREFIX.length).replace(/\/?index\.html$/, '').replace(/\/$/, '').split('/').pop();
+  return (slug || 'Presentation').replace(/-/g, ' ').replace(/\b\w/g, function(c){ return c.toUpperCase(); });
 }
 
-function checkForUpdate(path, iframe, toast) {
-  var apiUrl = 'https://api.github.com/repos/' + REPO + '/commits?path=' + encodeURIComponent(path) + '&per_page=1';
-  fetch(apiUrl).then(function(r){ return r.json(); }).then(function(data) {
-    if (!data || !data[0]) return;
-    var sha = data[0].sha;
-    if (commitCache[path] && commitCache[path] !== sha) {
-      // New commit — reload iframe
-      var src = iframe.src.split('?')[0];
-      iframe.src = src + '?v=' + Date.now();
-      toast.classList.add('show');
-      setTimeout(function(){ toast.classList.remove('show'); }, 3000);
-    }
-    commitCache[path] = sha;
-  }).catch(function(){});
+function trelloPreview(attachment) {
+  var previews = Array.isArray(attachment.previews) ? attachment.previews : [];
+  previews.sort(function(a,b){ return (b.width || 0) - (a.width || 0); });
+  return previews[0] && previews[0].url;
 }
 
-function createPresentation(attachment) {
-  var url = attachment.url;
-  var path = extractPath(url);
-  var label = extractLabel(url);
+function absoluteUrl(value, deckUrl) {
+  try { return new URL(value, deckUrl).href; } catch (_) { return null; }
+}
 
-  var card = document.createElement('div');
-  card.className = 'prez-card';
+function metadataThumbnail(deckUrl) {
+  return fetch(deckUrl.href, { cache:'no-store' }).then(function(response) {
+    if (!response.ok) return null;
+    return response.text();
+  }).then(function(source) {
+    if (!source) return null;
+    var doc = new DOMParser().parseFromString(source, 'text/html');
+    var node = doc.querySelector('meta[property="og:image"],meta[name="twitter:image"]');
+    return node ? absoluteUrl(node.content, deckUrl) : null;
+  }).catch(function(){ return null; });
+}
 
-  var labelEl = document.createElement('div');
-  labelEl.className = 'prez-label';
-  labelEl.innerHTML = '<span>📊 ' + label + '</span><span class="status">Live • Auto-refresh</span>';
-  card.appendChild(labelEl);
+function makeTile(attachment) {
+  var url = governedUrl(attachment.url);
+  if (!url) return null;
+  var title = labelFor(attachment, url);
+  var link = document.createElement('a');
+  link.className = 'deck';
+  link.href = url.href;
+  link.target = '_blank';
+  link.rel = 'noreferrer noopener';
+  link.setAttribute('aria-label', 'Open ' + title);
 
-  var wrap = document.createElement('div');
-  wrap.className = 'iframe-wrap';
+  var thumb = document.createElement('span');
+  thumb.className = 'thumb';
+  var fallback = document.createElement('span');
+  fallback.className = 'fallback';
+  fallback.textContent = title;
+  var open = document.createElement('span');
+  open.className = 'open';
+  open.textContent = 'Open ↗';
+  thumb.append(fallback, open);
 
-  var skeleton = document.createElement('div');
-  skeleton.className = 'skeleton';
-  wrap.appendChild(skeleton);
-
-  var iframe = document.createElement('iframe');
-  iframe.src = url + (url.indexOf('?') === -1 ? '?v=' : '&v=') + Date.now();
-  iframe.sandbox = 'allow-scripts allow-same-origin allow-popups allow-presentation';
-  iframe.onload = function(){ skeleton.classList.add('hide'); };
-  wrap.appendChild(iframe);
-
-  var controls = document.createElement('div');
-  controls.className = 'controls';
-
-  var openBtn = document.createElement('button');
-  openBtn.className = 'btn';
-  openBtn.innerHTML = '↗ Open';
-  openBtn.onclick = function() { window.open(url, '_blank'); };
-  controls.appendChild(openBtn);
-
-  var dlBtn = document.createElement('button');
-  dlBtn.className = 'btn';
-  dlBtn.innerHTML = '⬇ Download';
-  dlBtn.onclick = function() {
-    var filename = label.replace(/\s+/g, '-').toLowerCase() + '.html';
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.target = '_blank';
-    a.click();
-  };
-  controls.appendChild(dlBtn);
-
-  wrap.appendChild(controls);
-
-  var toast = document.createElement('div');
-  toast.className = 'toast';
-  toast.textContent = '✓ Updated';
-  wrap.appendChild(toast);
-
-  card.appendChild(wrap);
-
-  // Start polling for updates
-  if (path) {
-    checkForUpdate(path, iframe, toast); // Initial SHA fetch
-    setInterval(function(){ checkForUpdate(path, iframe, toast); }, POLL_INTERVAL);
+  function showImage(src) {
+    if (!src) return;
+    var image = document.createElement('img');
+    image.alt = '';
+    image.loading = 'lazy';
+    image.referrerPolicy = 'no-referrer';
+    image.addEventListener('load', function(){ thumb.insertBefore(image, fallback); fallback.hidden = true; });
+    image.src = src;
   }
 
-  return card;
+  var preview = trelloPreview(attachment);
+  if (preview) showImage(preview);
+  else metadataThumbnail(url).then(showImage);
+
+  var caption = document.createElement('span');
+  caption.className = 'title';
+  caption.textContent = title;
+  caption.title = title;
+  link.append(thumb, caption);
+  return link;
 }
 
 t.card('attachments').get('attachments').then(function(attachments) {
-  var container = document.getElementById('content');
-  var htmlAtts = attachments.filter(function(a) {
-    return a.url && a.url.indexOf('maxmcolem-a11y.github.io') !== -1;
-  });
-
-  if (htmlAtts.length === 0) {
-    container.innerHTML = '<div style="padding:12px;color:#7d8590;">No presentations found. Attach a GitHub Pages URL to this card.</div>';
-    t.sizeTo('#content');
-    return;
+  var content = document.getElementById('content');
+  var tiles = attachments.map(makeTile).filter(Boolean);
+  if (!tiles.length) {
+    content.innerHTML = '<div class="empty">No presentation links attached.</div>';
+  } else {
+    tiles.forEach(function(tile){ content.appendChild(tile); });
   }
-
-  htmlAtts.forEach(function(att) {
-    container.appendChild(createPresentation(att));
-  });
-
   t.sizeTo('#content');
 });
 </script>
