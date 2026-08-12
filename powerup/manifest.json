@@ -1,6 +1,6 @@
 {
   "name": "Presentation Viewer",
-  "details": "Embeds GitHub Pages-hosted HTML presentations directly in Trello card backs with fullscreen support and auto-refresh.",
+  "details": "Shows compact first-slide thumbnails for GitHub Pages-hosted Westfield presentations on Trello card backs.",
   "icon": {
     "url": "https://maxmcolem-a11y.github.io/westfield-presentations/powerup/icon.svg"
   },
