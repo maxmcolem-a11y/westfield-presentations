@@ -54,6 +54,13 @@ body{font-family:var(--sans);color:var(--ink);display:grid;place-items:center}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.82)}}
 .clock{font:600 15px/1 var(--mono);letter-spacing:.16em;color:var(--dim);
   font-variant-numeric:tabular-nums;min-width:104px;text-align:right}
+.lang-toggle{flex:none;border:1px solid var(--line);background:rgba(255,255,255,.78);color:var(--ink);
+  padding:10px 15px;font:700 13px/1 var(--sans);letter-spacing:.08em;border-radius:3px;
+  cursor:pointer;transition:background .2s,border-color .2s,color .2s;position:relative;z-index:8}
+.lang-toggle:hover,.lang-toggle:focus-visible{background:var(--ink);border-color:var(--ink);color:#fff;outline:none}
+html[lang="zh-CN"] body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",var(--sans)}
+html[lang="zh-CN"] h1{letter-spacing:-.02em;line-height:1.08}
+html[lang="zh-CN"] .sub,html[lang="zh-CN"] .cards p,html[lang="zh-CN"] .tiles p{line-height:1.58}
 
 /* ---------- body ---------- */
 .body{flex:1;display:flex;gap:52px;padding:34px 56px 26px;min-height:0}
@@ -249,6 +256,7 @@ h1.wide{max-width:24ch}
     <span class="id">SKW-041 · <b>INSTANT INDOOR</b></span>
     <span class="status"><span class="dot"></span>SAMPLE BESIDE THIS SCREEN</span>
     <span class="clock" id="clock">--:--</span>
+    <button class="lang-toggle" id="langToggle" type="button" aria-label="切换到中文">中文</button>
   </header>
 
   <div class="body">
@@ -492,6 +500,178 @@ h1.wide{max-width:24ch}
 <script>
 (function(){
   "use strict";
+  var LANG = "en";
+  var ZH = {
+    "INSTANT INDOOR":"即时室内",
+    "SAMPLE BESIDE THIS SCREEN":"样品就在屏幕旁",
+    "FINISHED SAMPLE":"成品样品",
+    "One frame · six configurations · parcel-ready":"一个框架 · 六种配置 · 适合包裹配送",
+    "Westfield Skunk Works · SKW-041":"Westfield 创新工坊 · SKW-041",
+    "A real sofa. Ordered like anything else.":"真正的沙发，也能像普通商品一样下单。",
+    "It ships through parcel and marketplace channels":"它可通过包裹与电商平台渠道配送",
+    "and arrives living-room ready.":"，送达即可进入客厅。",
+    "No flat-pack fight. No assembly penalty.":"无需与平板包装较劲，也无需承担组装代价。",
+    "Deployable steel-tube engineering ·":"可展开钢管工程 ·",
+    "one 42 × 42 in frame":"一个 42 × 42 英寸框架",
+    "· six configurations":"· 六种配置",
+    "01 — The problem":"01 — 问题",
+    "Furniture is the worst thing e-commerce ever tried to ship.":"家具是电商最难配送的商品。",
+    "01 · THE FREIGHT":"01 · 运输",
+    "Big and bulky, and it arrives damaged —":"体积大、笨重，还容易在送达时受损——",
+    "large-item delivery is expensive in both directions.":"大件商品的正向与逆向物流都成本高昂。",
+    "02 · THE RETURNS":"02 · 退货",
+    "Returns run high, and":"退货率居高不下，",
+    "reverse logistics on an oversize item eats the margin.":"超大件逆向物流会吞噬利润。",
+    "03 · THE PENALTY":"03 · 代价",
+    "The convenient option arrives":"所谓便利的产品以平板包装送达，",
+    "flat-packed, so":"因此",
+    "the customer pays for it with an assembly fight.":"顾客要用艰难组装来付出代价。",
+    "The category solved delivery by making the customer finish the product.":"这个品类把完成产品的工作交给顾客，才解决了配送问题。",
+    "02 — The idea":"02 — 构想",
+    "Bed in a box. Now sofa in a box.":"床能装进箱子，现在沙发也可以。",
+    "Compression changed how people buy mattresses.":"压缩技术改变了人们购买床垫的方式。",
+    "Deployment changes how people buy sofas.":"展开结构将改变人们购买沙发的方式。",
+    "Collapse a usable indoor structure into a smaller logistics cube — then open it without tools.":"把可用的室内结构收拢成更小的物流体积，再无需工具即可展开。",
+    "Thesis —":"核心主张 —",
+    "make a real sofa as easy to buy as anything else online":"让真正的沙发像任何网购商品一样容易购买",
+    "COLLAPSED · FRAME + PANELS":"收拢状态 · 框架 + 面板",
+    "03 — The mechanism":"03 — 机构",
+    "Westfield already knows how to make steel fold.":"Westfield 已经掌握让钢材折叠的技术。",
+    "A":"采用",
+    "quad fold":"四向折叠",
+    "— all four sides scissor at once, so the frame closes on both axes into a bundle instead of a flat panel.":"——四边同时剪式运动，使框架沿两个轴向收拢成束，而非一块平板。",
+    "The chair beside this screen opens exactly like this.":"屏幕旁的椅子就是这样展开的。",
+    "IN CARTON":"装在纸箱内",
+    "① QUAD FOLD OPEN":"① 展开四向折叠",
+    "② SET PANELS":"② 安装面板",
+    "③ COVER":"③ 套上外罩",
+    "QUAD-FOLD DEPLOY SEQUENCE · SCHEMATIC":"四向折叠展开顺序 · 示意图",
+    "Step":"步骤","Frame module":"框架模块","State":"状态","In carton":"装在纸箱内",
+    "04 — The sample":"04 — 样品",
+    "This is the armchair. Sit in it.":"这就是扶手椅。请坐下来体验。",
+    "Press the seat, lift it, look underneath.":"按压座面、抬起它，再看看下面。",
+    "The armchair is deliberately the hardest configuration":"我们刻意选择最复杂的扶手椅配置",
+    "— every other SKU is a subtraction from this frame.":"——其他每个 SKU 都只是这个框架的减法。",
+    "Deployable":"可展开",
+    "steel-tube frame":"钢管框架",
+    "Tensioned":"张紧式",
+    "seat suspension":"座面悬挂",
+    "True":"真正的",
+    "slipcover":"可拆洗外罩",
+    "over built-in foam":"覆盖内置泡棉",
+    "Finished":"完整的",
+    "cushion package":"软垫系统",
+    "FINISHED SAMPLE · HF STUDIO":"成品样品 · HF 工作室",
+    "FINISHED SAMPLE · FRONT":"成品样品 · 正面","FINISHED SAMPLE · 3/4":"成品样品 · 3/4 视角","DEPLOYED STEEL FRAME":"展开钢管框架","FRAME + ARM TUBES":"框架 + 扶手管","SEAT SUSPENSION · TENSION STRAP":"座面悬挂 · 张紧带","ORIGINAL SECTIONAL CONCEPT":"原始组合沙发概念","SLIPCOVER ON FRAME · HF DEQING":"框架外罩 · HF 德清",
+    "05 — Platform, not SKU":"05 — 平台，而非单一 SKU",
+    "One frame becomes the whole living room.":"一个框架，构成整个客厅。",
+    "A single 42-inch deployable frame is the armchair, the armless chair, the corner, the ottoman, the sofa and the sectional.":"同一个 42 英寸可展开框架，可组成扶手椅、无扶手椅、转角单元、脚凳、沙发和组合沙发。",
+    "One tool, one BOM, one line.":"一套工装、一份 BOM、一条产线。",
+    "configurations · one frame":"种配置 · 一个框架",
+    "1 FRAME → 6 CONFIGURATIONS":"1 个框架 → 6 种配置",
+    "Configuration":"配置","Modules":"模块数","Module size":"模块尺寸",
+    "06 — The category":"06 — 市场品类",
+    "We are aimed at the fastest-growing corner of it.":"我们瞄准的是增长最快的细分领域。",
+    "Fastest material":"增长最快的材料","Fastest category":"增长最快的品类",
+    "The shape of demand":"需求结构","Why it is open":"为什么机会存在",
+    "Within ready-to-assemble furniture,":"在组装家具领域，",
+    "steel is the fastest-growing material.":"钢材是增长最快的材料。",
+    "And":"而且",
+    "sofas are the fastest-growing product category.":"沙发是增长最快的产品品类。",
+    "Sectionals and modular sofas are already":"组合式与模块化沙发已经是",
+    "the largest segment of the sofa market.":"沙发市场最大的细分品类。",
+    "Furniture is structurally hard for e-commerce —":"家具在结构上天然不利于电商——",
+    "and that is exactly what this fixes.":"而这正是本方案解决的问题。",
+    "Steel · sofas · modular —":"钢材 · 沙发 · 模块化 —",
+    "Instant Indoor sits where all three meet":"即时室内正位于三者交汇处",
+    "07 — Why Westfield":"07 — 为什么是 Westfield",
+    "Everything this needs, we already own.":"它需要的一切，我们已经具备。",
+    "Deployable engineering":"展开式工程","Manufacturing":"制造","Distribution":"分销","Counter-seasonal":"反季节互补",
+    "Steel tube that folds, carries load and ships tight —":"可折叠、承载并紧凑运输的钢管——",
+    "our core competence, pointed indoors.":"这是我们面向室内场景的核心能力。",
+    "Our own steel-tube supply chain and factory relationships,":"我们自己的钢管供应链与工厂关系，",
+    "not rented manufacturing.":"而非外借的制造能力。",
+    "Existing retail and e-commerce relationships":"现有零售与电商渠道",
+    "already carry our product.":"已经在销售我们的产品。",
+    "Indoor furniture":"室内家具",
+    "fills outdoor's production and sales troughs.":"可填补户外产品生产与销售的淡季。",
+    "The DTC furniture shakeout proved the demand. It also proved that marketing-first brands can't carry the cost.":"DTC 家具行业洗牌证明了需求，也证明只靠营销的品牌无法承担成本。",
+    "08 — The IP position":"08 — 知识产权布局",
+    "The design-around is the mechanism.":"规避设计的核心就是机构。",
+    "The FTO review put Burrow's family at the center of the risk —":"FTO 审查将 Burrow 专利族列为核心风险——",
+    "panel clips, latches and cushion-coupler architectures.":"包括面板卡扣、锁扣和软垫连接结构。",
+    "Instant Indoor doesn't go near them: a steel-tube quad fold is a different machine.":"即时室内完全避开这些方案：钢管四向折叠是另一种机构。",
+    "FRAME CAD · WF REVISION":"框架 CAD · WF 版本",
+    "risk patents reviewed":"已审查风险专利","patentability candidates":"可专利候选","provisionals scoped":"已规划临时申请",
+    "09 — Where it stands":"09 — 当前进展",
+    "Designed, engineered, and sitting right here.":"设计与工程已经完成，实物就在这里。",
+    "THE PRODUCT":"产品","THE PLATFORM":"平台","THE PROOF":"验证",
+    "A real indoor sofa that":"真正的室内沙发，可",
+    "ships through parcel channels":"通过包裹渠道配送",
+    "and opens without tools.":"并无需工具即可展开。",
+    "One 42-inch deployable frame behind":"一个 42 英寸可展开框架，支持",
+    "six configurations.":"六种配置。",
+    "It is beside this screen — and it is":"它就在屏幕旁——而且它是",
+    "the hardest one we could have built.":"我们能打造的最复杂配置。",
+    "Sit in it before you go.":"离开前，请坐下来体验。",
+    "Configurations":"配置数量","Deploy steps":"展开步骤","Tools required":"所需工具","Risk patents reviewed":"已审查风险专利","Provisionals scoped":"已规划临时申请",
+    "one deployable frame":"一个可展开框架","from the same frame":"源自同一框架","open · set panels · cover":"展开 · 安装面板 · 套罩","it opens by hand":"手动即可展开","FTO review complete":"FTO 审查完成","joint · ecosystem · geometry":"连接 · 生态系统 · 几何结构",
+    "One frame · six configurations · parcel-ready":"一个框架 · 六种配置 · 适合包裹配送","Collapsed for shipping, opened without tools":"收拢运输，无需工具即可展开","The chair beside this screen opens exactly like this":"屏幕旁的椅子就是这样展开的","Press the seat, lift it, look underneath":"按压座面、抬起它，再看看下面","Armchair · armless · corner · ottoman · sofa · sectional":"扶手椅 · 无扶手椅 · 转角 · 脚凳 · 沙发 · 组合沙发","Steel · sofas · modular — where all three meet":"钢材 · 沙发 · 模块化 — 三者交汇之处","Engineering, manufacturing, distribution — already ours":"工程、制造、分销 — 我们已经具备","A steel-tube quad fold is a different machine":"钢管四向折叠是另一种机构","Sit in it before you go":"离开前，请坐下来体验",
+    "LIVING-ROOM READY":"客厅就绪","COVERING":"套罩中","DEPLOYING":"展开中","1 · QUAD FOLD OPEN":"1 · 展开四向折叠","2 · SET PANELS":"2 · 安装面板","3 · COVER + CUSHIONS":"3 · 外罩 + 软垫","COMPLETE":"完成","Ready to sit on":"可以入座","Frame opening":"框架展开中","Panels setting":"面板安装中","Cover closing":"外罩闭合中","Frame open":"框架已展开",
+    "ARMCHAIR":"扶手椅","ARMLESS CHAIR":"无扶手椅","OTTOMAN":"脚凳","CORNER":"转角单元","SOFA":"沙发","SECTIONAL":"组合沙发","1 module":"1 个模块","2 modules":"2 个模块","4 modules":"4 个模块"
+  };
+  var ZH_BLOCK = {
+    "It ships through parcel and marketplace channels and arrives living-room ready. No flat-pack fight. No assembly penalty.":"它可通过包裹与电商平台渠道配送，送达即可进入客厅。无需与平板包装较劲，也无需承担组装代价。",
+    "Deployable steel-tube engineering · one 42 × 42 in frame · six configurations":"可展开钢管工程 · 一个 42 × 42 英寸框架 · 六种配置",
+    "Big and bulky, and it arrives damaged — large-item delivery is expensive in both directions.":"体积大、笨重，还容易在送达时受损——大件商品的正向与逆向物流都成本高昂。",
+    "Returns run high, and reverse logistics on an oversize item eats the margin.":"退货率居高不下，超大件逆向物流会吞噬利润。",
+    "The convenient option arrives flat-packed, so the customer pays for it with an assembly fight.":"所谓便利的产品以平板包装送达，因此顾客要用艰难组装来付出代价。",
+    "Compression changed how people buy mattresses. Deployment changes how people buy sofas. Collapse a usable indoor structure into a smaller logistics cube — then open it without tools.":"压缩技术改变了人们购买床垫的方式。展开结构将改变人们购买沙发的方式。把可用的室内结构收拢成更小的物流体积，再无需工具即可展开。",
+    "Thesis — make a real sofa as easy to buy as anything else online":"核心主张 — 让真正的沙发像任何网购商品一样容易购买",
+    "A quad fold — all four sides scissor at once, so the frame closes on both axes into a bundle instead of a flat panel. The chair beside this screen opens exactly like this.":"采用四向折叠——四边同时剪式运动，使框架沿两个轴向收拢成束，而非一块平板。屏幕旁的椅子就是这样展开的。",
+    "Press the seat, lift it, look underneath. The armchair is deliberately the hardest configuration — every other SKU is a subtraction from this frame.":"按压座面、抬起它，再看看下面。我们刻意选择最复杂的扶手椅配置——其他每个 SKU 都只是这个框架的减法。",
+    "Deployable steel-tube frame":"可展开钢管框架","Tensioned seat suspension":"张紧式座面悬挂","True slipcover over built-in foam":"真正的可拆洗外罩覆盖内置泡棉","Finished cushion package":"完整的软垫系统",
+    "A single 42-inch deployable frame is the armchair, the armless chair, the corner, the ottoman, the sofa and the sectional. One tool, one BOM, one line.":"同一个 42 英寸可展开框架，可组成扶手椅、无扶手椅、转角单元、脚凳、沙发和组合沙发。一套工装、一份 BOM、一条产线。",
+    "Within ready-to-assemble furniture, steel is the fastest-growing material.":"在组装家具领域，钢材是增长最快的材料。",
+    "And sofas are the fastest-growing product category.":"而且沙发是增长最快的产品品类。",
+    "Sectionals and modular sofas are already the largest segment of the sofa market.":"组合式与模块化沙发已经是沙发市场最大的细分品类。",
+    "Furniture is structurally hard for e-commerce — and that is exactly what this fixes.":"家具在结构上天然不利于电商——而这正是本方案解决的问题。",
+    "Steel · sofas · modular — Instant Indoor sits where all three meet":"钢材 · 沙发 · 模块化 — 即时室内正位于三者交汇处",
+    "Steel tube that folds, carries load and ships tight — our core competence, pointed indoors.":"可折叠、承载并紧凑运输的钢管——这是我们面向室内场景的核心能力。",
+    "Our own steel-tube supply chain and factory relationships, not rented manufacturing.":"我们自己的钢管供应链与工厂关系，而非外借的制造能力。",
+    "Existing retail and e-commerce relationships already carry our product.":"现有零售与电商渠道已经在销售我们的产品。",
+    "Indoor furniture fills outdoor's production and sales troughs.":"室内家具可填补户外产品生产与销售的淡季。",
+    "The FTO review put Burrow's family at the center of the risk — panel clips, latches and cushion-coupler architectures. Instant Indoor doesn't go near them: a steel-tube quad fold is a different machine.":"FTO 审查将 Burrow 专利族列为核心风险——包括面板卡扣、锁扣和软垫连接结构。即时室内完全避开这些方案：钢管四向折叠是另一种机构。",
+    "A real indoor sofa that ships through parcel channels and opens without tools.":"真正的室内沙发，可通过包裹渠道配送，并无需工具即可展开。",
+    "One 42-inch deployable frame behind six configurations.":"一个 42 英寸可展开框架，支持六种配置。",
+    "It is beside this screen — and it is the hardest one we could have built.":"它就在屏幕旁——而且它是我们能打造的最复杂配置。",
+    "configurations · one frame":"种配置 · 一个框架"
+  };
+  function norm(s){ return s.replace(/\s+/g," ").trim(); }
+  function tr(s){ var n=norm(s); return LANG === "zh" && ZH[n] ? ZH[n] : s; }
+  var translatable=[];
+  var translatedBlocks=[];
+  (function collect(root){
+    var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),n;
+    while((n=w.nextNode())){
+      if(!norm(n.nodeValue)||n.parentNode.closest("script,style")) continue;
+      translatable.push({node:n,en:n.nodeValue,key:norm(n.nodeValue)});
+    }
+  })(document.getElementById("board"));
+  document.querySelectorAll("h1,.sub,.note,.kicker,.cards p,.tiles p,.bullets li,.mega small").forEach(function(el){
+    var key=norm(el.textContent); if(ZH_BLOCK[key]) translatedBlocks.push({el:el,en:el.innerHTML,key:key});
+  });
+  function applyLanguage(lang){
+    LANG=lang; document.documentElement.lang=lang==="zh"?"zh-CN":"en";
+    translatable.forEach(function(x){ x.node.nodeValue=lang==="zh"&&ZH[x.key]?x.en.replace(norm(x.en),ZH[x.key]):x.en; });
+    translatedBlocks.forEach(function(x){ x.el.innerHTML=lang==="zh"?ZH_BLOCK[x.key]:x.en; });
+    var b=document.getElementById("langToggle");
+    b.textContent=lang==="zh"?"EN":"中文";
+    b.setAttribute("aria-label",lang==="zh"?"Switch to English":"切换到中文");
+    renderTape();
+  }
+  document.getElementById("langToggle").addEventListener("click",function(){applyLanguage(LANG==="zh"?"en":"zh");});
+  if(location.hash.indexOf("lang=zh")!==-1) applyLanguage("zh");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* QA / setup hook. Normal signage playback never sets a hash, so this is inert.
@@ -546,8 +726,17 @@ h1.wide{max-width:24ch}
     "Finished armchair sample received in the US · 2026-07-28"
   ];
   var tape = document.getElementById("tape");
-  var half = FACTS.map(function(f){ return "<span>" + f + "</span>"; }).join("");
-  tape.innerHTML = half + half;      /* two copies: the -50% translate loops seamlessly */
+  var FACTS_ZH = [
+    "一个 42 × 42 英寸可展开框架 · 六种配置","扶手椅 · 无扶手椅 · 转角 · 脚凳 · 沙发 · 组合沙发",
+    "四向折叠 — 四边同时剪式运动","手动展开 · 无工具 · 无紧固件 · 非平板包装",
+    "在组装家具领域，钢材是增长最快的材料","沙发是增长最快的组装家具品类",
+    "组合式与模块化沙发是沙发市场最大的细分品类","成品扶手椅样品已于 2026-07-28 抵达美国"
+  ];
+  function renderTape(){
+    if(!tape)return; var facts=LANG==="zh"?FACTS_ZH:FACTS;
+    var half=facts.map(function(f){return "<span>"+f+"</span>";}).join(""); tape.innerHTML=half+half;
+  }
+  renderTape();      /* two copies: the -50% translate loops seamlessly */
 
   /* ---------- persistent showcase ----------
      Driven by the scene, NOT by a free-running timer. Each scene names two shots and
@@ -597,7 +786,7 @@ h1.wide{max-width:24ch}
     clearTimeout(tagTimer);
     shotTag.style.opacity = 0;
     tagTimer = setTimeout(function(){
-      shotTag.textContent = s[1]; shotTag.style.opacity = 1;
+      shotTag.textContent = tr(s[1]); shotTag.style.opacity = 1;
     }, 380);
   }
 
@@ -824,9 +1013,9 @@ h1.wide{max-width:24ch}
 
     var ready = (act.k === "done");
     dUI.state.classList.toggle("ready", ready);
-    dUI.state.lastElementChild.textContent =
+    dUI.state.lastElementChild.textContent = tr(
       ready ? "LIVING-ROOM READY"
-            : (act.k === "wait" ? "IN CARTON" : (cov > 0 ? "COVERING" : "DEPLOYING"));
+            : (act.k === "wait" ? "IN CARTON" : (cov > 0 ? "COVERING" : "DEPLOYING")));
     /* the chips latch: a step stays ticked through the hold beats that follow it */
     var live = act.step == null ? -1 : act.step, reached = -1;
     for (var z = 0; z <= i; z++) if (DACTS[z].step != null) reached = DACTS[z].step;
@@ -835,14 +1024,14 @@ h1.wide{max-width:24ch}
       dUI.chip[c].classList.toggle("live", isLive);
       dUI.chip[c].classList.toggle("done", ready || c < reached || (c === reached && !isLive));
     }
-    if (live >= 0) dUI.step.textContent = STEPLBL[live];
-    else if (ready) dUI.step.textContent = "COMPLETE";
+    if (live >= 0) dUI.step.textContent = tr(STEPLBL[live]);
+    else if (ready) dUI.step.textContent = tr("COMPLETE");
     else if (act.k === "wait") dUI.step.textContent = "—";
-    dUI.out.textContent = ready ? "Ready to sit on"
+    dUI.out.textContent = tr(ready ? "Ready to sit on"
       : act.k === "wait" ? "In carton"
       : act.k === "open" ? "Frame opening"
       : act.k === "insert" ? "Panels setting"
-      : act.k === "cover" ? "Cover closing" : "Frame open";
+      : act.k === "cover" ? "Cover closing" : "Frame open");
     dUI.out.className = ready ? "v good" : "v hot";
   }
   function dFrame(now){
@@ -964,9 +1153,9 @@ h1.wide{max-width:24ch}
     }
     var showing = local < P_HOLD ? i : nxt;
     if (showing !== pLast){
-      pName.textContent = CFG[showing].n;
-      pMods.textContent = CFG[showing].m.length +
-        (CFG[showing].m.length === 1 ? " module" : " modules");
+      pName.textContent = tr(CFG[showing].n);
+      var modules=CFG[showing].m.length+(CFG[showing].m.length===1?" module":" modules");
+      pMods.textContent = tr(modules);
       for (var k = 0; k < pDotEls.length; k++) pDotEls[k].classList.toggle("on", k === showing);
       pLast = showing;
     }
@@ -980,7 +1169,7 @@ h1.wide{max-width:24ch}
       if (reduce){
         pc.clearRect(0,0,pCv.width,pCv.height);
         drawCfg(CFG[0], 1, cfgCenter(CFG[0]));
-        pName.textContent = CFG[0].n; pMods.textContent = "1 module";
+        pName.textContent = tr(CFG[0].n); pMods.textContent = tr("1 module");
         pDotEls[0].classList.add("on");
         return;
       }
@@ -1054,7 +1243,7 @@ h1.wide{max-width:24ch}
     sc.classList.add("on");
 
     cap.style.opacity = 0;
-    setTimeout(function(){ cap.textContent = CAPS[idx] || ""; cap.style.opacity = 1; }, 320);
+    setTimeout(function(){ cap.textContent = tr(CAPS[idx] || ""); cap.style.opacity = 1; }, 320);
 
     dur = parseInt(sc.dataset.dur, 10) || 12000;
 
