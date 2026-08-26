@@ -468,6 +468,7 @@ body.wide .tiles>div.live .k{color:var(--ink)}
 (function(){
 "use strict";
 var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var embeddedMotion = new URLSearchParams(location.search).get("embed")==="motion";
 var $ = function(id){ return document.getElementById(id); };
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -957,7 +958,8 @@ function fit(){
 }
 function sizeCanvas(cv, cssW, cssH){
   var dpr=Math.min(window.devicePixelRatio||1, 2);
-  var w=Math.max(2, Math.round(cssW*SCALE*dpr)), h=Math.max(2, Math.round(cssH*SCALE*dpr));
+  var renderScale=embeddedMotion?1:SCALE;
+  var w=Math.max(2, Math.round(cssW*renderScale*dpr)), h=Math.max(2, Math.round(cssH*renderScale*dpr));
   if(cv.width!==w||cv.height!==h){ cv.width=w; cv.height=h; }
 }
 function sizeCanvases(){
@@ -1070,7 +1072,7 @@ var TRACK=[
 ];
 function camState(i){
   var t=TRACK[i%TRACK.length], e=t.em||FULL;
-  return {az:t.az, el:t.el, span:t.span, shiftX:t.sx||0, shiftY:t.sy||0, target:t.at.slice(),
+  return {az:t.az, el:t.el, span:t.span, shiftX:embeddedMotion?0:(t.sx||0), shiftY:embeddedMotion?0:(t.sy||0), target:t.at.slice(),
           em:{bar:e.bar===undefined?1:e.bar, frame:e.frame===undefined?1:e.frame,
               fabric:e.fabric===undefined?1:e.fabric, body:e.body===undefined?1:e.body}};
 }
@@ -1093,7 +1095,10 @@ var T0=performance.now(), mt=0, modeI=0, modeT=0, modeCap="";
 var DUR_ONE=7.0, CYCLE=DUR_ONE*4;
 var heroTag=$("herotag");
 function modeAt(e){                      /* one mode at a time, in order */
-  var u=e%CYCLE;
+  /* Nested/lazy iframes can hand the first RAF callback a timestamp from the
+     parent document's time origin. Normalize the remainder so an early
+     negative delta still resolves to one of the four valid motion modes. */
+  var u=((e%CYCLE)+CYCLE)%CYCLE;
   return [Math.floor(u/DUR_ONE), u%DUR_ONE];
 }
 /* setup aid: ?pose=theta,rollDeg,yawDeg,heaveMm freezes the chair in one attitude so a

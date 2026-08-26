@@ -544,7 +544,7 @@
     <div class="section-label">06 | Hawkeye V3</div>
     <div class="content divider-layout">
       <div class="divider-copy"><div class="product-number">06</div><h1>Hawkeye<br>V3</h1><p class="lede">It does not just rock.</p></div>
-      <div class="hero-stage signage-motion"><iframe class="motion-source" loading="lazy" data-motion-kind="panel" src="../hawkeye-v3/signage-4k.html" title="Live Hawkeye V3 response simulation"></iframe><a class="source-link" href="../hawkeye-v3/signage-4k.html" target="_blank" rel="noreferrer">Open motion</a><span class="hero-caption">Live bounce · rock · roll · twist</span></div>
+      <div class="hero-stage signage-motion"><iframe class="motion-source" loading="lazy" data-motion-kind="hawkeye" src="../hawkeye-v3/signage-4k.html?embed=motion&amp;v=motion-clock-2" title="Live Hawkeye V3 response simulation"></iframe><a class="source-link" href="../hawkeye-v3/signage-4k.html" target="_blank" rel="noreferrer">Open motion</a><span class="hero-caption">Live bounce · rock · roll · twist</span></div>
     </div>
     <div class="slide-number">20 / 25</div>
   </section>
@@ -650,6 +650,15 @@
           .show .lay{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important}
         `;
         doc.head.appendChild(style);
+        const syncSourceLayout=()=>{
+          try{
+            frame.contentWindow.dispatchEvent(new Event('resize'));
+            if(typeof frame.contentWindow.fit==='function')frame.contentWindow.fit();
+            if(typeof frame.contentWindow.fitStage==='function')frame.contentWindow.fitStage();
+            if(typeof frame.contentWindow.sizeCanvases==='function')frame.contentWindow.sizeCanvases();
+          }catch(error){}
+        };
+        requestAnimationFrame(()=>{syncSourceLayout();setTimeout(syncSourceLayout,120)});
         if(frame.dataset.motionKind==='gram'){
           setTimeout(()=>{
             try{
@@ -668,6 +677,14 @@
               frame.contentWindow.BOARD?.play();
             }catch(error){}
           },80);
+        }
+        if(frame.dataset.motionKind==='hawkeye'){
+          setTimeout(()=>{
+            try{
+              syncSourceLayout();
+              frame.contentWindow.goScene?.(0);
+            }catch(error){}
+          },180);
         }
         if(frame.dataset.motionKind==='ror'){
           setTimeout(()=>{
