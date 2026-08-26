@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>August Product &amp; Marketing Review | Westfield Outdoors</title>
-  <meta name="description" content="A product-by-product review built from the newest product content shown across Westfield's August digital signage.">
+  <meta name="description" content="A seven-product review built from the newest product content and motion shown across Westfield's August digital signage.">
   <link rel="canonical" href="https://maxmcolem-a11y.github.io/westfield-presentations/august-digital-signage-review-2026/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Westfield Outdoors">
   <meta property="og:title" content="August Product &amp; Marketing Review">
-  <meta property="og:description" content="Six August product stories, rebuilt from the original renders, samples, and engineering visuals.">
+  <meta property="og:description" content="Seven August product stories, rebuilt from the original renders, samples, motion, and engineering visuals.">
   <meta property="og:url" content="https://maxmcolem-a11y.github.io/westfield-presentations/august-digital-signage-review-2026/">
   <meta property="og:image" content="https://maxmcolem-a11y.github.io/westfield-presentations/august-digital-signage-review-2026/assets/social-preview.png">
   <meta property="og:image:width" content="1200">
@@ -17,7 +17,7 @@
   <meta property="og:image:alt" content="Westfield Outdoors August product and marketing review">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="August Product &amp; Marketing Review">
-  <meta name="twitter:description" content="Six August product stories, rebuilt from the original product assets.">
+  <meta name="twitter:description" content="Seven August product stories, rebuilt from the original product assets and motion.">
   <meta name="twitter:image" content="https://maxmcolem-a11y.github.io/westfield-presentations/august-digital-signage-review-2026/assets/social-preview.png">
   <meta name="theme-color" content="#b92f2a">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,11 +56,12 @@
     .cover h1{font-size:clamp(3.4rem,6.8vw,7rem)}
     .cover-line{width:86px;height:7px;border-radius:99px;background:var(--red)}
     .cover-date{color:var(--muted);font-size:.76rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
-    .cover-mosaic{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,minmax(0,1fr));gap:.65rem;height:min(70vh,650px)}
+    .cover-mosaic{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,minmax(0,1fr)) .66fr;gap:.65rem;height:min(72vh,675px)}
     .cover-tile{position:relative;overflow:hidden;border:1px solid rgba(16,37,50,.12);border-radius:var(--r);background:#fff;box-shadow:var(--shadow)}
     .cover-tile img{width:100%;height:100%;object-fit:contain;display:block;padding:.45rem}
     .cover-tile.origami{background:#05090c}.cover-tile.origami img{padding:0;object-fit:cover}
     .cover-tile.instant img,.cover-tile.pack img{object-fit:cover;padding:0}
+    .cover-tile.flow{grid-column:1/-1}.cover-tile.flow img{object-fit:cover;object-position:center 43%;padding:0}
     .cover-tile span{position:absolute;left:.55rem;bottom:.5rem;padding:.26rem .42rem;border-radius:5px;background:rgba(10,24,33,.83);color:#fff;font-size:.55rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
     .lineup{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.72rem}
     .lineup-card{position:relative;display:grid;grid-template-columns:42% 58%;min-height:190px;overflow:hidden;border:1px solid var(--line);border-radius:var(--r);background:#fff;box-shadow:var(--shadow);text-decoration:none}
@@ -70,6 +71,7 @@
     .lineup-copy b{color:var(--red);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase}
     .lineup-copy strong{font-size:1.06rem;line-height:1.05}
     .lineup-copy span{color:var(--muted);font-size:.7rem;line-height:1.3;font-weight:620}
+    .lineup-card.flow{grid-column:2}.lineup-card.flow .visual img{object-fit:cover;object-position:center 43%}
     .divider{background:var(--navy)!important;color:#fff}
     .divider::before{background:linear-gradient(115deg,rgba(255,255,255,.05),transparent 55%),radial-gradient(circle at 80% 35%,rgba(57,138,187,.18),transparent 34%)}
     .divider::after{color:rgba(255,255,255,.35)}
@@ -87,6 +89,23 @@
     .hero-stage .hero-right{right:1%;bottom:1%;width:58%;height:92%}
     .hero-stage .hero-small{right:2%;bottom:3%;width:42%;height:42%;border:1px solid rgba(16,37,50,.16);border-radius:12px;background:#fff;box-shadow:var(--shadow)}
     .hero-caption{position:absolute;left:.75rem;bottom:.68rem;z-index:2;padding:.42rem .58rem;border-radius:7px;background:rgba(9,24,34,.86);color:#fff;font-size:.6rem;font-weight:850;letter-spacing:.07em;text-transform:uppercase}
+    .motion-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#020609}
+    .print-motion-poster{display:none!important}
+    .cycle-player{position:relative;overflow:hidden;background:#eef1f2}
+    .cycle-player>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;opacity:0;animation:asset-cycle 6s linear infinite}
+    .cycle-player>img:nth-child(1){animation-delay:0s}.cycle-player>img:nth-child(2){animation-delay:2s}.cycle-player>img:nth-child(3){animation-delay:4s}
+    @keyframes asset-cycle{0%,28%{opacity:1}33%,100%{opacity:0}}
+    .motion-rock{animation:motion-rock 3.6s ease-in-out infinite;transform-origin:50% 88%}
+    .motion-swing{animation:motion-swing 3.8s ease-in-out infinite;transform-origin:50% 18%}
+    .motion-bounce{animation:motion-bounce 3.2s ease-in-out infinite;transform-origin:50% 86%}
+    .motion-float-left{animation:float-left 4.8s ease-in-out infinite}.motion-float-right{animation:float-right 4.8s ease-in-out infinite}
+    @keyframes motion-rock{0%,100%{transform:rotate(-1.6deg)}50%{transform:rotate(2.2deg)}}
+    @keyframes motion-swing{0%,100%{transform:translateX(-2%) rotate(-1.5deg)}50%{transform:translateX(2%) rotate(1.7deg)}}
+    @keyframes motion-bounce{0%,100%{transform:translateY(0) rotate(-.6deg)}50%{transform:translateY(-3.5%) rotate(.8deg)}}
+    @keyframes float-left{0%,100%{transform:translateX(-1%) translateY(1%)}50%{transform:translateX(1.5%) translateY(-1.2%)}}
+    @keyframes float-right{0%,100%{transform:translateX(1%) translateY(-1%)}50%{transform:translateX(-1.5%) translateY(1.2%)}}
+    .motion-chip{position:absolute;right:.72rem;top:.68rem;z-index:3;display:flex;align-items:center;gap:.35rem;padding:.36rem .5rem;border-radius:999px;background:rgba(9,24,34,.84);color:#fff;font-size:.51rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+    .motion-chip::before{content:"";width:.38rem;height:.38rem;border-radius:50%;background:#65d49b;box-shadow:0 0 0 4px rgba(101,212,155,.18)}
     .story-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(.8rem,2vw,1.5rem);align-items:stretch}
     .story-copy{display:flex;flex-direction:column;justify-content:center;gap:.72rem}
     .story-copy .lede{font-size:clamp(.86rem,1.15vw,1.08rem)}
@@ -151,6 +170,12 @@
     .hawkeye-lesson .spring img{object-fit:cover}
     .response-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
     .response-grid .asset-button{height:min(49vh,440px);padding:.65rem}
+    .flow-compare{display:grid;grid-template-columns:1fr 1fr;gap:.78rem}
+    .flow-motion-card{display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-height:500px;overflow:hidden;border:1px solid var(--line);border-radius:var(--r);background:#fff;box-shadow:var(--shadow)}
+    .flow-motion-card header{display:flex;align-items:center;justify-content:space-between;padding:.7rem .8rem;border-bottom:1px solid var(--line)}
+    .flow-motion-card header b{font-size:.74rem}.flow-motion-card header span{color:var(--muted);font-size:.56rem;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+    .flow-cycle{position:relative;min-height:0;background:#f1f3f3}.flow-cycle img{object-fit:cover!important}
+    .flow-cycle-label{padding:.62rem .76rem;color:var(--muted);font-size:.62rem;line-height:1.3;font-weight:720;text-align:center;letter-spacing:.04em;text-transform:uppercase}
     .progress{position:fixed;left:0;bottom:0;z-index:80;width:0;height:5px;background:var(--red)}
     .language-toggle{position:fixed;left:1rem;bottom:.75rem;z-index:70;padding:.45rem .72rem;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.94);color:var(--ink);font-size:.68rem;font-weight:900;cursor:pointer;box-shadow:0 10px 28px rgba(0,0,0,.1)}
     .translation-note{position:fixed;left:1rem;bottom:3.25rem;z-index:71;max-width:255px;padding:.66rem .75rem;border-radius:11px;background:var(--navy);color:#fff;font-size:.68rem;line-height:1.32;font-weight:700;box-shadow:var(--shadow);opacity:0;transform:translateY(7px);pointer-events:none;transition:.2s}
@@ -160,11 +185,12 @@
     .lightbox-close{position:absolute;right:1.15rem;top:.8rem;width:2.6rem;height:2.6rem;border:1px solid rgba(255,255,255,.5);border-radius:50%;background:rgba(255,255,255,.08);color:#fff;font-size:1.45rem;cursor:pointer}
     @media(max-width:950px){
       html{scroll-snap-type:none}.slide{display:block;min-height:100svh;overflow:visible;padding:3.8rem 0 4.2rem;border-bottom:1px solid var(--line)}.content{width:100%;padding:0 1rem}.deck-logo{right:.78rem;top:.72rem;width:92px}.section-label{left:1rem;top:1rem;max-width:calc(100vw - 7.5rem);font-size:.54rem}.slide-number{right:.9rem;bottom:1.05rem;font-size:.58rem}.slide::after{left:1rem;right:4.7rem;bottom:.4rem;width:auto;transform:none;text-align:left;font-size:.38rem}
-      .cover-grid,.divider-layout,.story-grid,.platform-grid,.frame-gallery,.suspend-layout,.hawkeye-lesson{grid-template-columns:1fr}.cover-mosaic{height:520px}.lineup{grid-template-columns:1fr}.divider .content{padding-top:0}.hero-stage{height:470px}.key-points,.diagram-grid,.finalists,.response-grid{grid-template-columns:1fr}.triptych,.motion-grid{grid-template-columns:1fr}.triptych .asset-button,.motion-grid .asset-button{height:340px}.proof-strip{grid-template-columns:1fr 1fr}.forms-grid{grid-template-columns:repeat(5,1fr)}.finalist{min-height:390px}.update-bar{align-items:flex-start;flex-direction:column}.deployment{grid-template-columns:1fr}.deployment .asset-button{height:280px}.diagram-card{min-height:390px}
+      .cover-grid,.divider-layout,.story-grid,.platform-grid,.frame-gallery,.suspend-layout,.hawkeye-lesson{grid-template-columns:1fr}.cover-mosaic{height:620px}.lineup{grid-template-columns:1fr}.lineup-card.flow{grid-column:auto}.divider .content{padding-top:0}.hero-stage{height:470px}.key-points,.diagram-grid,.finalists,.response-grid,.flow-compare{grid-template-columns:1fr}.triptych,.motion-grid{grid-template-columns:1fr}.triptych .asset-button,.motion-grid .asset-button{height:340px}.proof-strip{grid-template-columns:1fr 1fr}.forms-grid{grid-template-columns:repeat(5,1fr)}.finalist{min-height:390px}.update-bar{align-items:flex-start;flex-direction:column}.deployment{grid-template-columns:1fr}.deployment .asset-button{height:280px}.diagram-card{min-height:390px}.flow-motion-card{min-height:430px}
     }
     @media print{
-      @page{size:13.333in 7.5in;margin:0}html,body{background:#fff}.slide{width:13.333in;height:7.5in;min-height:0;display:flex;overflow:hidden;padding:0;border:0;break-after:page;page-break-after:always}.content{width:min(1390px,95vw);margin:auto;padding:calc(var(--pad) + 1.1rem) var(--pad)}.cover-grid{grid-template-columns:.92fr 1.08fr}.divider-layout{grid-template-columns:.72fr 1.28fr}.story-grid{grid-template-columns:1.12fr .88fr}.platform-grid{grid-template-columns:.92fr 1.08fr}.frame-gallery{grid-template-columns:1.15fr .85fr}.suspend-layout{grid-template-columns:1.08fr .92fr}.hawkeye-lesson{grid-template-columns:.85fr 1.15fr}.lineup{grid-template-columns:repeat(3,minmax(0,1fr))}.finalists,.diagram-grid,.response-grid{grid-template-columns:1fr 1fr}.triptych{grid-template-columns:repeat(3,1fr)}.proof-strip{grid-template-columns:repeat(4,1fr)}.forms-grid{grid-template-columns:repeat(10,1fr)}.motion-grid{grid-template-columns:1.15fr .85fr .85fr}.deployment{grid-template-columns:repeat(3,1fr)}.deck-logo{position:fixed}.progress,.language-toggle,.translation-note,.lightbox{display:none!important}
+      @page{size:13.333in 7.5in;margin:0}html,body{background:#fff}.slide{width:13.333in;height:7.5in;min-height:0;display:flex;overflow:hidden;padding:0;border:0;break-after:page;page-break-after:always}.content{width:min(1390px,95vw);margin:auto;padding:calc(var(--pad) + 1.1rem) var(--pad)}.cover-grid{grid-template-columns:.92fr 1.08fr}.divider-layout{grid-template-columns:.72fr 1.28fr}.story-grid{grid-template-columns:1.12fr .88fr}.platform-grid{grid-template-columns:.92fr 1.08fr}.frame-gallery{grid-template-columns:1.15fr .85fr}.suspend-layout{grid-template-columns:1.08fr .92fr}.hawkeye-lesson{grid-template-columns:.85fr 1.15fr}.lineup{grid-template-columns:repeat(3,minmax(0,1fr))}.finalists,.diagram-grid,.response-grid,.flow-compare{grid-template-columns:1fr 1fr}.triptych{grid-template-columns:repeat(3,1fr)}.proof-strip{grid-template-columns:repeat(4,1fr)}.forms-grid{grid-template-columns:repeat(10,1fr)}.motion-grid{grid-template-columns:1.15fr .85fr .85fr}.deployment{grid-template-columns:repeat(3,1fr)}.deck-logo{position:fixed}.motion-video{display:none!important}.print-motion-poster{display:block!important}.motion-rock,.motion-swing,.motion-bounce,.motion-float-left,.motion-float-right{animation:none!important;transform:none!important}.cycle-player>img{animation:none!important;opacity:0}.cycle-player>img:nth-child(2){opacity:1}.progress,.language-toggle,.translation-note,.lightbox{display:none!important}
     }
+    @media(prefers-reduced-motion:reduce){.motion-rock,.motion-swing,.motion-bounce,.motion-float-left,.motion-float-right,.cycle-player>img{animation:none!important}.cycle-player>img:nth-child(2){opacity:1}.cycle-player>img:not(:nth-child(2)){opacity:0}}
   </style>
 </head>
 <body>
@@ -180,7 +206,7 @@
         <p class="eyebrow">Westfield Outdoors | August 2026</p>
         <h1>August<br>Product Review</h1>
         <div class="cover-line"></div>
-        <p class="lede">The latest product stories shown in August—rebuilt from the original renders, physical samples, and engineering visuals.</p>
+        <p class="lede">The latest product stories shown in August—rebuilt from the original renders, physical samples, engineering visuals, and motion.</p>
         <p class="cover-date">Prepared 26 August 2026</p>
       </div>
       <div class="cover-mosaic" aria-label="August product lineup">
@@ -190,15 +216,16 @@
         <div class="cover-tile"><img src="assets/products/gram/hero.png" alt="GRAM chair"><span>GRAM</span></div>
         <div class="cover-tile"><img src="assets/products/suspend/hero.png" alt="Suspend chair"><span>Suspend</span></div>
         <div class="cover-tile"><img src="assets/products/hawkeye/hero.png" alt="Hawkeye chair"><span>Hawkeye</span></div>
+        <div class="cover-tile flow"><img src="assets/products/flowmotion/hero.jpg" alt="FlowMotion V2 chair"><span>FlowMotion V2</span></div>
       </div>
     </div>
-    <div class="slide-number">01 / 20</div>
+    <div class="slide-number">01 / 23</div>
   </section>
 
   <section class="slide" id="slide-2">
     <div class="section-label">August Lineup</div>
     <div class="content">
-      <p class="eyebrow">What the room saw</p><h1>Six products. Six clear ideas.</h1>
+      <p class="eyebrow">What the room saw</p><h1>Seven products. Seven clear ideas.</h1>
       <p class="lede">The signage was the newest expression of each product—not a dashboard to present, but a source of current product content.</p>
       <div class="lineup">
         <a class="lineup-card" href="#slide-3"><div class="visual dark"><img src="assets/products/origami/stowed.png" alt="Origami Wagon stowed"></div><div class="lineup-copy"><b>01</b><strong>Origami Wagon</strong><span>One folded sheet becomes the body and the mechanism.</span></div></a>
@@ -207,18 +234,19 @@
         <a class="lineup-card" href="#slide-12"><div class="visual"><img src="assets/products/gram/hero.png" alt="GRAM chair"></div><div class="lineup-copy"><b>04</b><strong>GRAM Chair</strong><span>The folding frame itself becomes the rocking mechanism.</span></div></a>
         <a class="lineup-card" href="#slide-15"><div class="visual"><img src="assets/products/suspend/hero.png" alt="Suspend chair"></div><div class="lineup-copy"><b>05</b><strong>Suspend Chair</strong><span>An inner seat hangs inside a conventional folding frame.</span></div></a>
         <a class="lineup-card" href="#slide-18"><div class="visual"><img src="assets/products/hawkeye/hero.png" alt="Hawkeye chair"></div><div class="lineup-copy"><b>06</b><strong>Hawkeye V3</strong><span>Arched spring bars create rock, bounce, roll, and twist.</span></div></a>
+        <a class="lineup-card flow" href="#slide-21"><div class="visual photo"><img src="assets/products/flowmotion/hero.jpg" alt="FlowMotion V2 chair"></div><div class="lineup-copy"><b>07</b><strong>FlowMotion V2</strong><span>An angled spring and tunable wedge create asymmetric rocking.</span></div></a>
       </div>
     </div>
-    <div class="slide-number">02 / 20</div>
+    <div class="slide-number">02 / 23</div>
   </section>
 
   <section class="slide divider" id="slide-3">
     <div class="section-label">01 | Origami Wagon</div>
     <div class="content divider-layout">
       <div class="divider-copy"><div class="product-number">01</div><h1>Origami<br>Wagon</h1><p class="lede">The wagon is one folded sheet.</p></div>
-      <div class="hero-stage dark"><img class="hero-left" src="assets/products/origami/stowed.png" alt="Origami Wagon stowed"><img class="hero-right" src="assets/products/origami/deploying.png" alt="Origami Wagon deploying"><span class="hero-caption">Stowed → deployed</span></div>
+      <div class="hero-stage dark"><video class="motion-video" autoplay muted loop playsinline preload="metadata" poster="assets/products/origami/deploying.png"><source src="assets/products/origami/origami-motion.mp4" type="video/mp4"></video><img class="print-motion-poster hero-main" src="assets/products/origami/deploying.png" alt="Origami Wagon deploying"><span class="motion-chip">Motion loop</span><span class="hero-caption">Stowed → deployed</span></div>
     </div>
-    <div class="slide-number">03 / 20</div>
+    <div class="slide-number">03 / 23</div>
   </section>
 
   <section class="slide" id="slide-4">
@@ -233,7 +261,7 @@
         <div class="key-points"><div class="key-point"><b>Category move</b><p>A mono-material folding body with a fundamentally different silhouette and shipping story.</p></div><div class="key-point"><b>Target</b><p>50 kg payload and a collapsed package roughly four inches thick.</p></div></div>
       </div>
     </div>
-    <div class="slide-number">04 / 20</div>
+    <div class="slide-number">04 / 23</div>
   </section>
 
   <section class="slide" id="slide-5">
@@ -253,16 +281,16 @@
       </div>
       <div class="update-bar"><span><b>Current update:</b> Full-size sample status and the physical acceptance plan.</span><span class="update-links"><a href="https://trello.com/c/qHgjVBW7" target="_blank" rel="noreferrer">Open card →</a></span></div>
     </div>
-    <div class="slide-number">05 / 20</div>
+    <div class="slide-number">05 / 23</div>
   </section>
 
   <section class="slide divider" id="slide-6">
     <div class="section-label">02 | Instant Indoor</div>
     <div class="content divider-layout">
       <div class="divider-copy"><div class="product-number">02</div><h1>Instant<br>Indoor</h1><p class="lede">A real sofa. Ordered like anything else.</p></div>
-      <div class="hero-stage sand"><img class="hero-main" src="assets/products/instant/finished-chair.jpg" alt="Finished Instant Indoor armchair"><img class="hero-small" src="assets/products/instant/collapsed-frame.jpg" alt="Collapsed Instant Indoor frame"><span class="hero-caption">Finished sample + folded architecture</span></div>
+      <div class="hero-stage sand cycle-player"><img src="assets/products/instant/collapsed-frame.jpg" alt="Collapsed Instant Indoor frame"><img src="assets/products/instant/open-frame.jpg" alt="Open Instant Indoor frame"><img src="assets/products/instant/finished-chair.jpg" alt="Finished Instant Indoor armchair"><span class="motion-chip">Deployment loop</span><span class="hero-caption">Folded → open → finished</span></div>
     </div>
-    <div class="slide-number">06 / 20</div>
+    <div class="slide-number">06 / 23</div>
   </section>
 
   <section class="slide" id="slide-7">
@@ -277,7 +305,7 @@
     <div class="content" style="padding-top:0">
       <div class="story-grid" style="grid-template-columns:1fr 1fr"><div><p class="eyebrow">The hardest configuration first</p><h2>A finished chair, not an assembly project.</h2></div><div class="key-points"><div class="key-point"><b>Category problem</b><p>Indoor furniture still arrives through oversized freight or asks the customer to finish the product.</p></div><div class="key-point"><b>Westfield advantage</b><p>A familiar steel folding system deploys by hand, while the soft goods hide the mechanism.</p></div></div></div>
     </div>
-    <div class="slide-number">07 / 20</div>
+    <div class="slide-number">07 / 23</div>
   </section>
 
   <section class="slide" id="slide-8">
@@ -296,16 +324,16 @@
         <div class="update-bar"><span><b>Current update:</b> Quad-fold architecture restart, revised soft goods, and next factory session.</span><span class="update-links"><a href="https://trello.com/c/OUcGqXxw" target="_blank" rel="noreferrer">Open card →</a></span></div>
       </div>
     </div>
-    <div class="slide-number">08 / 20</div>
+    <div class="slide-number">08 / 23</div>
   </section>
 
   <section class="slide divider" id="slide-9">
     <div class="section-label">03 | Timber Ridge Daypacks</div>
     <div class="content divider-layout">
       <div class="divider-copy"><div class="product-number">03</div><h1>Diamond<br>+ Spiral</h1><p class="lede">We stopped drawing bags. We started building them.</p></div>
-      <div class="hero-stage"><img class="hero-left" src="assets/products/daypacks/diamond.jpg" alt="Diamond daypack"><img class="hero-right" src="assets/products/daypacks/spiral.jpg" alt="Spiral daypack"><span class="hero-caption">Two forms carried to sample</span></div>
+      <div class="hero-stage"><img class="hero-left motion-float-left" src="assets/products/daypacks/diamond.jpg" alt="Diamond daypack"><img class="hero-right motion-float-right" src="assets/products/daypacks/spiral.jpg" alt="Spiral daypack"><span class="motion-chip">Form in motion</span><span class="hero-caption">Two forms carried to sample</span></div>
     </div>
-    <div class="slide-number">09 / 20</div>
+    <div class="slide-number">09 / 23</div>
   </section>
 
   <section class="slide" id="slide-10">
@@ -318,7 +346,7 @@
       </div>
       <div class="story-grid" style="grid-template-columns:.74fr 1.26fr"><div class="stats"><div class="stat"><strong>20</strong><span>Volumes modeled</span></div><div class="stat"><strong>3</strong><span>Printed at 1:5</span></div><div class="stat"><strong>2</strong><span>Carried to sample</span></div></div><div class="big-idea">The tech packs described forms we had already held, compared, and chosen.</div></div>
     </div>
-    <div class="slide-number">10 / 20</div>
+    <div class="slide-number">10 / 23</div>
   </section>
 
   <section class="slide" id="slide-11">
@@ -331,16 +359,16 @@
       </div>
       <div class="update-bar"><span><b>Current update:</b> Review the August feedback and next-sample direction separately for Diamond and Spiral.</span><span class="update-links"><a href="https://trello.com/c/UO9YYma7" target="_blank" rel="noreferrer">Diamond →</a><a href="https://trello.com/c/jzPb5qso" target="_blank" rel="noreferrer">Spiral →</a></span></div>
     </div>
-    <div class="slide-number">11 / 20</div>
+    <div class="slide-number">11 / 23</div>
   </section>
 
   <section class="slide divider" id="slide-12">
     <div class="section-label">04 | GRAM Chair</div>
     <div class="content divider-layout">
       <div class="divider-copy"><div class="product-number">04</div><h1>GRAM<br>Chair</h1><p class="lede">A rocking chair with no rocker.</p></div>
-      <div class="hero-stage"><img class="hero-main" src="assets/products/gram/hero.png" alt="GRAM chair with compliant corners"><span class="hero-caption">Eight corners create the motion</span></div>
+      <div class="hero-stage"><img class="hero-main motion-rock" src="assets/products/gram/hero.png" alt="GRAM chair with compliant corners"><span class="motion-chip">Rocking loop</span><span class="hero-caption">Eight corners create the motion</span></div>
     </div>
-    <div class="slide-number">12 / 20</div>
+    <div class="slide-number">12 / 23</div>
   </section>
 
   <section class="slide" id="slide-13">
@@ -349,7 +377,7 @@
       <button class="asset-button" type="button" data-lightbox="assets/products/gram/front.png"><img src="assets/products/gram/front.png" alt="Front view of GRAM chair"><span class="zoom">Open asset</span></button>
       <div class="story-copy"><p class="eyebrow">Nothing added under the seat</p><h2>The frame becomes the rocking mechanism.</h2><p class="lede">Eight rigid elbows are replaced by elastomeric corners. The square frame shears into a parallelogram; each corner pivots and returns.</p><div class="big-idea">No runners. No springs. No linkages. The familiar folding architecture stays intact.</div><div class="stats"><div class="stat"><strong>8</strong><span>Compliant corners</span></div><div class="stat"><strong>0</strong><span>Added linkages</span></div><div class="stat"><strong>3</strong><span>Tuning levers</span></div></div><div class="key-points"><div class="key-point"><b>What changes</b><p>The corner geometry and elastomer specification.</p></div><div class="key-point"><b>What stays</b><p>The tube frame, fold, pack size, and recognizable chair architecture.</p></div></div></div>
     </div>
-    <div class="slide-number">13 / 20</div>
+    <div class="slide-number">13 / 23</div>
   </section>
 
   <section class="slide" id="slide-14">
@@ -362,16 +390,16 @@
       </div>
       <div class="update-bar"><span><b>Current update:</b> Adjustable mechanism rig and the measured feel needed before the next chair prototype.</span><span class="update-links"><a href="https://trello.com/c/7ir1icyE" target="_blank" rel="noreferrer">Open card →</a></span></div>
     </div>
-    <div class="slide-number">14 / 20</div>
+    <div class="slide-number">14 / 23</div>
   </section>
 
   <section class="slide divider" id="slide-15">
     <div class="section-label">05 | Suspend Chair</div>
     <div class="content divider-layout">
       <div class="divider-copy"><div class="product-number">05</div><h1>Suspend<br>Chair</h1><p class="lede">Bring a swing. Not a chair.</p></div>
-      <div class="hero-stage"><img class="hero-main" src="assets/products/suspend/hero.png" alt="Suspend chair"><span class="hero-caption">Motion above the seat</span></div>
+      <div class="hero-stage"><img class="hero-main motion-swing" src="assets/products/suspend/hero.png" alt="Suspend chair"><span class="motion-chip">Swing loop</span><span class="hero-caption">Motion above the seat</span></div>
     </div>
-    <div class="slide-number">15 / 20</div>
+    <div class="slide-number">15 / 23</div>
   </section>
 
   <section class="slide" id="slide-16">
@@ -380,7 +408,7 @@
       <button class="asset-button" type="button" data-lightbox="assets/products/suspend/two-frames.png"><img src="assets/products/suspend/two-frames.png" alt="Suspend chair inner and outer frames"><span class="zoom">Open asset</span></button>
       <div class="story-copy"><p class="eyebrow">Two frames. One hangs.</p><h2>The seat floats inside the folding frame.</h2><p class="lede">The outer frame folds and stands on the ground. The inner seat frame hangs from the arms on four static straps.</p><div class="key-points"><div class="key-point"><b>Four straps</b><p>Carry the seat and define the swing path—forward, back, and slightly side-to-side.</p></div><div class="key-point"><b>Two bungees</b><p>Connect the ends, soften the motion, and return the seat toward center.</p></div></div><div class="stats"><div class="stat"><strong>4</strong><span>Static straps</span></div><div class="stat"><strong>2</strong><span>Return bungees</span></div><div class="stat"><strong>5.6 in</strong><span>Seat travel</span></div></div><div class="big-idea">The chair feels suspended, but the motion lives above the seat—so the product still folds flat.</div></div>
     </div>
-    <div class="slide-number">16 / 20</div>
+    <div class="slide-number">16 / 23</div>
   </section>
 
   <section class="slide" id="slide-17">
@@ -394,16 +422,16 @@
       </div>
       <div class="story-grid" style="grid-template-columns:1fr 1fr"><div class="key-points"><div class="key-point"><b>Motion</b><p>Forward/back swing plus rocking, with gravity bringing the seat home.</p></div><div class="key-point"><b>Portability</b><p>The suspension adds no single member underneath the seat.</p></div></div><div class="update-bar"><span><b>Current update:</b> Lock upper/lower attachment points and strap lengths before V3 styling.</span><span class="update-links"><a href="https://trello.com/c/zgqMBTfm" target="_blank" rel="noreferrer">Open card →</a></span></div></div>
     </div>
-    <div class="slide-number">17 / 20</div>
+    <div class="slide-number">17 / 23</div>
   </section>
 
   <section class="slide divider" id="slide-18">
     <div class="section-label">06 | Hawkeye V3</div>
     <div class="content divider-layout">
       <div class="divider-copy"><div class="product-number">06</div><h1>Hawkeye<br>V3</h1><p class="lede">It does not just rock.</p></div>
-      <div class="hero-stage"><img class="hero-main" src="assets/products/hawkeye/hero.png" alt="Hawkeye V3 chair and rider"><span class="hero-caption">The spring moves under the rider</span></div>
+      <div class="hero-stage"><img class="hero-main motion-bounce" src="assets/products/hawkeye/hero.png" alt="Hawkeye V3 chair and rider"><span class="motion-chip">Response loop</span><span class="hero-caption">The spring moves under the rider</span></div>
     </div>
-    <div class="slide-number">18 / 20</div>
+    <div class="slide-number">18 / 23</div>
   </section>
 
   <section class="slide" id="slide-19">
@@ -412,7 +440,7 @@
       <button class="asset-button" type="button" data-lightbox="assets/products/hawkeye/v2-limb.png"><img src="assets/products/hawkeye/v2-limb.png" alt="Hawkeye V2 spring limb behind rider"><span class="zoom">Open asset</span></button>
       <div class="story-copy"><p class="eyebrow">Not quite it</p><h2>The spring was behind the rider.</h2><p class="lede">V2 proved the response was possible, but the rear spring limb only traveled about a finger's width. The rider felt a quick shudder—not the long, controlled motion the product needs.</p><div class="hawkeye-lesson" style="grid-template-columns:.8fr 1.2fr;gap:.55rem"><button class="asset-button spring" type="button" data-lightbox="assets/products/hawkeye/spring-base.png"><img src="assets/products/hawkeye/spring-base.png" alt="Hawkeye arched spring bar"></button><div class="big-idea" style="display:flex;align-items:center">Move the spring under the rider, where body weight can load the full arch.</div></div><div class="stats"><div class="stat"><strong>2</strong><span>Arched spring bars</span></div><div class="stat"><strong>4</strong><span>Motion modes</span></div><div class="stat"><strong>1</strong><span>Shared geometry</span></div></div></div>
     </div>
-    <div class="slide-number">19 / 20</div>
+    <div class="slide-number">19 / 23</div>
   </section>
 
   <section class="slide" id="slide-20">
@@ -425,13 +453,56 @@
       </div>
       <div class="story-grid" style="grid-template-columns:1fr 1fr"><div class="key-points"><div class="key-point"><b>Today</b><p>45 mm arch rise bottomed out under load.</p></div><div class="key-point"><b>Next</b><p>170 mm rise preserves 94 mm of travel under the rider.</p></div></div><div class="update-bar"><span><b>Current update:</b> V4 adjustable test, rider range, lateral stability, and composite sample timing.</span><span class="update-links"><a href="https://trello.com/c/md4yE8HL" target="_blank" rel="noreferrer">Open card →</a></span></div></div>
     </div>
-    <div class="slide-number">20 / 20</div>
+    <div class="slide-number">20 / 23</div>
+  </section>
+
+  <section class="slide divider" id="slide-21">
+    <div class="section-label">07 | FlowMotion V2</div>
+    <div class="content divider-layout">
+      <div class="divider-copy"><div class="product-number">07</div><h1>FlowMotion<br>V2</h1><p class="lede">Easy lean-back. Controlled return.</p></div>
+      <div class="hero-stage"><img class="hero-main motion-rock" src="assets/products/flowmotion/hero.jpg" alt="FlowMotion V2 chair mechanism"><span class="motion-chip">Rocking loop</span><span class="hero-caption">Angled spring + tunable wedge</span></div>
+    </div>
+    <div class="slide-number">21 / 23</div>
+  </section>
+
+  <section class="slide" id="slide-22">
+    <div class="section-label">FlowMotion V2 | Product Mechanism</div>
+    <div class="content story-grid">
+      <button class="asset-button photo" type="button" data-lightbox="assets/products/flowmotion/hero.jpg"><img src="assets/products/flowmotion/hero.jpg" alt="FlowMotion V2 angled leaf-spring mechanism"><span class="zoom">Open asset</span></button>
+      <div class="story-copy">
+        <p class="eyebrow">One spring. Two different jobs.</p>
+        <h2>The wedge turns the leaf spring into a tunable system.</h2>
+        <p class="lede">V1 proved the flat leaf spring could move, but its symmetric response offered one fixed feel. V2 angles the spring to create a fixed rear fulcrum and a tunable forward fulcrum.</p>
+        <div class="big-idea">The same frame and spring can now be tuned for resistance, travel, return, and pinch clearance through one wedge.</div>
+        <div class="stats"><div class="stat"><strong>2</strong><span>Functional fulcrums</span></div><div class="stat"><strong>1</strong><span>Tuning variable</span></div><div class="stat"><strong>0</strong><span>Frame redesigns</span></div></div>
+        <div class="key-points"><div class="key-point"><b>Rear fulcrum</b><p>A shorter fixed lever arm makes the initial lean-back easy and natural.</p></div><div class="key-point"><b>Forward fulcrum</b><p>Its position sets resistance, motion amplitude, and the pinch-safe gap.</p></div></div>
+      </div>
+    </div>
+    <div class="slide-number">22 / 23</div>
+  </section>
+
+  <section class="slide" id="slide-23">
+    <div class="section-label">FlowMotion V2 | Motion Comparison</div>
+    <div class="content">
+      <p class="eyebrow">Rear → rest → forward</p><h2>The difference is visible in motion.</h2>
+      <div class="flow-compare">
+        <article class="flow-motion-card"><header><b>V1 · Flat leaf spring</b><span>Symmetric response</span></header><div class="flow-cycle cycle-player"><img src="assets/products/flowmotion/v1-rear.jpg" alt="FlowMotion V1 rear motion state"><img src="assets/products/flowmotion/v1-rest.jpg" alt="FlowMotion V1 rest state"><img src="assets/products/flowmotion/v1-forward.jpg" alt="FlowMotion V1 forward motion state"></div><div class="flow-cycle-label">Rear · Rest · Forward — one fixed feel</div></article>
+        <article class="flow-motion-card"><header><b>V2 · Angled spring + wedge</b><span>Tunable response</span></header><div class="flow-cycle cycle-player"><img src="assets/products/flowmotion/v2-rear.jpg" alt="FlowMotion V2 rear motion state"><img src="assets/products/flowmotion/v2-rest.jpg" alt="FlowMotion V2 rest state"><img src="assets/products/flowmotion/v2-forward.jpg" alt="FlowMotion V2 forward motion state"></div><div class="flow-cycle-label">Easy rear · Rest · Controlled forward</div></article>
+      </div>
+      <div class="story-grid" style="grid-template-columns:1fr 1fr"><div class="key-points"><div class="key-point"><b>Easy lean-back</b><p>The fixed rear fulcrum keeps the opening motion light.</p></div><div class="key-point"><b>Controlled return</b><p>The forward wedge controls resistance, travel, and closure.</p></div></div><div class="update-bar"><span><b>Current update:</b> Send HF the final Sample 2 CAD/spec revision and capture HF’s written confirmation that the same revision was received.</span><span class="update-links"><a href="https://trello.com/c/EmhDKNr4" target="_blank" rel="noreferrer">Open card →</a></span></div></div>
+    </div>
+    <div class="slide-number">23 / 23</div>
   </section>
 
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Expanded product asset"><button class="lightbox-close" type="button" aria-label="Close">×</button><img id="lightbox-image" src="" alt="Expanded product asset"></div>
   <script>
     const progress=document.getElementById('progress');
     const slides=[...document.querySelectorAll('.slide')];
+    const motionVideos=[...document.querySelectorAll('video[autoplay]')];
+    function startMotion(){motionVideos.forEach(video=>video.play().catch(()=>{}))}
+    startMotion();
+    addEventListener('load',startMotion,{once:true});
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)startMotion()});
     function updateProgress(){const max=document.documentElement.scrollHeight-innerHeight;progress.style.width=(max>0?scrollY/max*100:0)+'%'}
     addEventListener('scroll',updateProgress,{passive:true});addEventListener('resize',updateProgress);updateProgress();
     document.getElementById('language-toggle').addEventListener('click',()=>{const note=document.getElementById('translation-note');note.classList.add('show');clearTimeout(window.translationTimer);window.translationTimer=setTimeout(()=>note.classList.remove('show'),2600)});
