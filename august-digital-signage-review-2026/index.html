@@ -642,7 +642,7 @@
         style.textContent=`
           html,body,#fit,#board{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;margin:0!important;transform:none!important;zoom:1!important;overflow:hidden!important}
           #board{display:block!important}
-          #board::after,.head,.rail,.stagewrap,.kpis,.ticker,.cap,.tag,.live,.status,.clock,.hint,#photo,#photoScrim,.legend,.stamp,.corner{display:none!important}
+          #board::before,#board::after,.body::before,.head,.rail,.stagewrap,.kpis,.ticker,.cap,.tag,.live,.status,.clock,.hint,#photo,#photoScrim,.legend,.stamp,.corner{display:none!important}
           .body{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;padding:0!important;margin:0!important;display:block!important;overflow:hidden!important}
           .cad,.show{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;min-height:0!important;display:block!important;opacity:1!important;background:transparent!important}
           .cad .frame,.show .frame{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;margin:0!important;border:0!important;background:transparent!important}
@@ -656,6 +656,16 @@
               const track=frame.contentWindow.GRAMStage?.TRACK||[];
               track.forEach(entry=>{entry.cam.shiftX=0;entry.cam.shiftY=0;if(!entry.cam.at)entry.cam.span=Math.max(entry.cam.span||0,1450)});
               doc.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));
+            }catch(error){}
+          },80);
+        }
+        if(frame.dataset.motionKind==='full-canvas'){
+          setTimeout(()=>{
+            try{
+              const track=frame.contentWindow.GRAMStage?.TRACK||[];
+              track.forEach(entry=>{entry.cam.shiftX=0;entry.cam.shiftY=0});
+              frame.contentWindow.BOARD?.go(0);
+              frame.contentWindow.BOARD?.play();
             }catch(error){}
           },80);
         }
