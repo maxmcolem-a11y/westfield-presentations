@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>August Product &amp; Marketing Review | Westfield Outdoors</title>
-  <meta name="description" content="A seven-product review built from the newest product content and motion shown across Westfield's August digital signage.">
+  <meta name="description" content="A seven-product review built from Westfield's newest August product content, motion, samples, and engineering visuals.">
   <link rel="canonical" href="https://maxmcolem-a11y.github.io/westfield-presentations/august-digital-signage-review-2026/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Westfield Outdoors">
@@ -84,7 +84,7 @@
     .hero-caption{position:absolute;left:.75rem;bottom:.68rem;z-index:2;padding:.42rem .58rem;border-radius:7px;background:rgba(9,24,34,.86);color:#fff;font-size:.6rem;font-weight:850;letter-spacing:.07em;text-transform:uppercase}
     .signage-motion{isolation:isolate;background:#05090c}
     .signage-motion iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#05090c;pointer-events:none}
-    .signage-motion::after{content:"ACTUAL DIGITAL-SIGNAGE MODULE";position:absolute;right:.72rem;bottom:.68rem;z-index:3;padding:.4rem .55rem;border:1px solid rgba(255,255,255,.24);border-radius:999px;background:rgba(5,12,17,.78);color:rgba(255,255,255,.88);font-size:.48rem;font-weight:900;letter-spacing:.1em}
+    .signage-motion::after{display:none}
     .source-link{position:absolute;right:.72rem;top:.68rem;z-index:5;padding:.42rem .58rem;border-radius:999px;background:rgba(255,255,255,.92);color:var(--navy);font-size:.5rem;font-weight:900;letter-spacing:.08em;text-decoration:none;text-transform:uppercase;box-shadow:0 8px 24px rgba(0,0,0,.18)}
     .daypack-source-loop{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#111820}
     .source-sequence{position:relative;min-width:0;overflow:hidden;background:#e8edef}
@@ -193,6 +193,23 @@
     .ror-row{display:grid;grid-template-columns:.34fr .66fr;gap:.5rem;padding:.6rem .8rem;border-bottom:1px solid var(--line)}
     .ror-row:last-child{border-bottom:0}.ror-row b{color:var(--red);font-size:.56rem;letter-spacing:.08em;text-transform:uppercase}.ror-row span{color:var(--muted);font-size:.69rem;line-height:1.32;font-weight:650}
     .ror-column.target{border-color:rgba(45,117,90,.38)}.ror-column.target header{background:#edf5f1}.ror-column.target .ror-row b{color:var(--green)}
+    .next-step-layout{display:grid;grid-template-columns:.72fr 1.28fr;gap:clamp(.9rem,2.3vw,2rem);align-items:stretch}
+    .next-step-lead{display:flex;flex-direction:column;justify-content:center;gap:.78rem;padding:1rem 1.05rem;border-radius:var(--r);background:var(--navy);color:#fff;box-shadow:var(--shadow)}
+    .next-step-lead .eyebrow{color:#ef8b84}.next-step-lead h2{color:#fff}.next-step-lead p{color:rgba(255,255,255,.74);font-size:.78rem;line-height:1.46;font-weight:620}
+    .next-step-lead .due-chip{align-self:flex-start;padding:.42rem .58rem;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.08);color:#fff;font-size:.56rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+    .ask-card{display:flex;min-height:0;flex-direction:column;gap:.72rem;padding:1rem 1.05rem;border:1px solid var(--line);border-top:6px solid var(--red);border-radius:var(--r);background:#fff;box-shadow:var(--shadow)}
+    .ask-card.green{border-top-color:var(--green)}.ask-card.blue{border-top-color:var(--blue)}
+    .ask-card header{display:flex;align-items:flex-start;justify-content:space-between;gap:.7rem;padding-bottom:.64rem;border-bottom:1px solid var(--line)}
+    .ask-card header b{font-size:.98rem;line-height:1.15}.ask-card header span{color:var(--muted);font-size:.56rem;line-height:1.25;font-weight:850;letter-spacing:.07em;text-align:right;text-transform:uppercase}
+    .ask-card h3{font-size:clamp(1.15rem,1.75vw,1.7rem);line-height:1.06}
+    .ask-card>p{color:var(--muted);font-size:.75rem;line-height:1.42;font-weight:630}
+    .done-list{display:grid;grid-template-columns:1fr 1fr;gap:.48rem;margin:0;padding:0;list-style:none}
+    .done-list li{position:relative;padding:.58rem .62rem .58rem 1.28rem;border:1px solid var(--line);border-radius:10px;background:#f7f8f7;color:var(--muted);font-size:.66rem;line-height:1.34;font-weight:650}
+    .done-list li::before{content:"";position:absolute;left:.62rem;top:.82rem;width:.34rem;height:.34rem;border-radius:50%;background:var(--red)}
+    .ask-card.green .done-list li::before{background:var(--green)}.ask-card.blue .done-list li::before{background:var(--blue)}
+    .owner-line{display:flex;align-items:center;justify-content:space-between;gap:.65rem;margin-top:auto;padding-top:.62rem;border-top:1px solid var(--line);color:var(--muted);font-size:.62rem;font-weight:760}
+    .owner-line strong{color:var(--ink)}.owner-line a{color:var(--blue);font-size:.57rem;font-weight:900;letter-spacing:.06em;text-decoration:none;text-transform:uppercase}
+    .bag-asks{display:grid;grid-template-columns:1fr 1fr;gap:.72rem}
     .progress{position:fixed;left:0;bottom:0;z-index:80;width:0;height:5px;background:var(--red)}
     .language-toggle{position:fixed;left:1rem;bottom:.75rem;z-index:70;padding:.45rem .72rem;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.94);color:var(--ink);font-size:.68rem;font-weight:900;cursor:pointer;box-shadow:0 10px 28px rgba(0,0,0,.1)}
     .translation-note{position:fixed;left:1rem;bottom:3.25rem;z-index:71;max-width:255px;padding:.66rem .75rem;border-radius:11px;background:var(--navy);color:#fff;font-size:.68rem;line-height:1.32;font-weight:700;box-shadow:var(--shadow);opacity:0;transform:translateY(7px);pointer-events:none;transition:.2s}
@@ -204,6 +221,7 @@
       html{scroll-snap-type:none}.slide{display:block;min-height:100svh;overflow:visible;padding:3.8rem 0 4.2rem;border-bottom:1px solid var(--line)}.content{width:100%;padding:0 1rem}.deck-logo{right:.78rem;top:.72rem;width:92px}.section-label{left:1rem;top:1rem;max-width:calc(100vw - 7.5rem);font-size:.54rem}.slide-number{right:.9rem;bottom:1.05rem;font-size:.58rem}.slide::after{left:1rem;right:4.7rem;bottom:.4rem;width:auto;transform:none;text-align:left;font-size:.38rem}
       .cover-grid,.divider-layout,.story-grid,.platform-grid,.frame-gallery,.suspend-layout,.hawkeye-lesson,.decision-grid{grid-template-columns:1fr}.cover-mosaic{height:620px}.lineup{grid-template-columns:1fr}.lineup-card.flow{grid-column:auto}.divider .content{padding-top:0}.hero-stage{height:470px}.key-points,.diagram-grid,.finalists,.response-grid,.flow-compare,.ror-compare,.revision-summary,.sample-timeline{grid-template-columns:1fr}.triptych,.motion-grid,.revision-strip{grid-template-columns:1fr}.triptych .asset-button,.motion-grid .asset-button,.revision-strip .asset-button{height:340px}.proof-strip{grid-template-columns:1fr 1fr}.forms-grid{grid-template-columns:repeat(5,1fr)}.finalist{min-height:390px}.update-bar{align-items:flex-start;flex-direction:column}.deployment{grid-template-columns:1fr}.deployment .asset-button{height:280px}.diagram-card{min-height:390px}.flow-motion-card{min-height:430px}.decision-list{grid-template-columns:1fr}
     }
+    @media(max-width:950px){.next-step-layout,.bag-asks{grid-template-columns:1fr}.next-step-lead{min-height:260px}.done-list{grid-template-columns:1fr}}
     @media print{
       @page{size:13.333in 7.5in;margin:0}html,body{background:#fff}.slide{width:13.333in;height:7.5in;min-height:0;display:flex;overflow:hidden;padding:0;border:0;break-after:page;page-break-after:always}.content{width:min(1390px,95vw);margin:auto;padding:calc(var(--pad) + 1.1rem) var(--pad)}.divider-layout{grid-template-columns:.72fr 1.28fr}.story-grid{grid-template-columns:1.12fr .88fr}.platform-grid{grid-template-columns:.92fr 1.08fr}.frame-gallery{grid-template-columns:1.15fr .85fr}.suspend-layout{grid-template-columns:1.08fr .92fr}.hawkeye-lesson{grid-template-columns:.85fr 1.15fr}.lineup{grid-template-columns:repeat(4,minmax(0,1fr))}.finalists,.diagram-grid,.response-grid,.flow-compare{grid-template-columns:1fr 1fr}.triptych,.revision-strip{grid-template-columns:repeat(3,1fr)}.proof-strip,.revision-summary,.sample-timeline{grid-template-columns:repeat(4,1fr)}.forms-grid{grid-template-columns:repeat(10,1fr)}.motion-grid{grid-template-columns:1.15fr .85fr .85fr}.deployment{grid-template-columns:repeat(3,1fr)}.decision-grid{grid-template-columns:1.16fr .84fr}.deck-logo{position:fixed}.progress,.language-toggle,.translation-note,.lightbox{display:none!important}
     }
@@ -234,7 +252,7 @@
     <div class="section-label">August Lineup</div>
     <div class="content">
       <p class="eyebrow">What the room saw</p><h1>Seven products. Seven clear ideas.</h1>
-      <p class="lede">The signage was the newest expression of each product—not a dashboard to present, but a source of current product content.</p>
+      <p class="lede">A concise product-by-product review of the newest August work, followed by the controlling next step for each project.</p>
       <div class="lineup">
         <a class="lineup-card" href="#slide-3"><div class="visual dark"><img src="assets/products/origami/stowed.png" alt="Origami Wagon stowed"></div><div class="lineup-copy"><b>01</b><strong>Origami Wagon</strong><span>One folded sheet becomes the body and the mechanism.</span></div></a>
         <a class="lineup-card" href="#slide-6"><div class="visual photo"><img src="assets/products/instant/finished-chair.jpg" alt="Instant Indoor sample"></div><div class="lineup-copy"><b>02</b><strong>Instant Indoor</strong><span>A finished sofa platform designed for ordinary e-commerce.</span></div></a>
@@ -252,7 +270,7 @@
     <div class="section-label">01 | Origami Wagon</div>
     <div class="content divider-layout">
       <div class="divider-copy"><div class="product-number">01</div><h1>Origami<br>Wagon</h1><p class="lede">The wagon is one folded sheet.</p></div>
-      <div class="hero-stage signage-motion"><iframe class="motion-source" loading="lazy" data-motion-kind="panel" src="../origami-wagon/signage-4k.html" title="Live Origami Wagon digital-signage mechanism"></iframe><a class="source-link" href="../origami-wagon/signage-4k.html" target="_blank" rel="noreferrer">Open sign</a><span class="hero-caption">Live fold + turntable canvas</span></div>
+      <div class="hero-stage signage-motion"><iframe class="motion-source" loading="lazy" data-motion-kind="panel" src="../origami-wagon/signage-4k.html" title="Live Origami Wagon folding mechanism"></iframe><a class="source-link" href="../origami-wagon/signage-4k.html" target="_blank" rel="noreferrer">Open motion</a><span class="hero-caption">Live fold + turntable</span></div>
     </div>
     <div class="slide-number">03 / 25</div>
   </section>
@@ -292,11 +310,20 @@
     <div class="slide-number">05 / 25</div>
   </section>
 
+  <section class="slide" id="next-origami">
+    <div class="section-label">Origami Wagon | Next Step</div>
+    <div class="content next-step-layout">
+      <div class="next-step-lead"><p class="eyebrow">Controlling ask</p><h2>Finish the full-size prototype—and make the build reviewable.</h2><p>The sample is already underway. The project advances when the physical result, process, and test evidence are all captured together.</p><span class="due-chip">Due 31 August</span></div>
+      <article class="ask-card"><header><b>Build + document the approved prototype</b><span>Claimed by<br>Adam Carmicheal</span></header><h3>A finished object is not enough. Record what it proves.</h3><ul class="done-list"><li>Add dated photos or video of the completed full-size prototype.</li><li>Record layout, dimensions, materials, folds, connections, process, supplier plan, and sample cost.</li><li>Show opening and folding behavior, required force, folded size, and end-lock function.</li><li>Capture safety observations and performance under a typical load.</li></ul><div class="owner-line"><span><strong>Then:</strong> define the 80/20 rigidity test rig by 11 September; Jordan is the intended engineering recipient.</span><a href="https://trello.com/c/qHgjVBW7" target="_blank" rel="noreferrer">Open card →</a></div></article>
+    </div>
+    <div class="slide-number"></div>
+  </section>
+
   <section class="slide divider" id="slide-6">
     <div class="section-label">02 | Instant Indoor</div>
     <div class="content divider-layout">
       <div class="divider-copy"><div class="product-number">02</div><h1>Instant<br>Indoor</h1><p class="lede">A real sofa. Ordered like anything else.</p></div>
-      <div class="hero-stage signage-motion"><iframe class="motion-source" loading="lazy" data-motion-kind="panel" src="../instant-indoor/signage-4k.html" title="Live Instant Indoor digital-signage deployment module"></iframe><a class="source-link" href="../instant-indoor/signage-4k.html" target="_blank" rel="noreferrer">Open sign</a><span class="hero-caption">Live sample + deployment system</span></div>
+      <div class="hero-stage signage-motion"><iframe class="motion-source" loading="lazy" data-motion-kind="panel" src="../instant-indoor/signage-4k.html" title="Live Instant Indoor deployment sequence"></iframe><a class="source-link" href="../instant-indoor/signage-4k.html" target="_blank" rel="noreferrer">Open motion</a><span class="hero-caption">Live sample + deployment</span></div>
     </div>
     <div class="slide-number">06 / 25</div>
   </section>
@@ -372,14 +399,23 @@
     <div class="slide-number">10 / 25</div>
   </section>
 
+  <section class="slide" id="next-instant">
+    <div class="section-label">Instant Indoor | Next Step</div>
+    <div class="content next-step-layout">
+      <div class="next-step-lead"><p class="eyebrow">Controlling ask</p><h2>Turn the 14 September sprint into a reliable sample plan.</h2><p>Max is driving frame and soft-goods definition in parallel. Bryan’s timing input now needs to establish what can actually be ready for the Hangzhou factory session.</p><span class="due-chip">Date answer due 11 September</span></div>
+      <article class="ask-card blue"><header><b>Get a new completion date</b><span>Claimed by<br>Bryan Nelson</span></header><h3>Confirm the build window—and state what could move it.</h3><ul class="done-list"><li>Add Bryan’s or Darin’s reply with the new sample completion date.</li><li>List any frame, foam, fabric, factory-capacity, or engineering issue that could change that date.</li><li>If a reliable date is not possible yet, record why and when the next timing update will arrive.</li><li>Keep Rev 1 aimed at the 14 September factory session and Rev 2 aimed at the October review.</li></ul><div class="owner-line"><span><strong>Immediate coordination:</strong> align telescoping travel, GOODSLAT support, sewn-in foam tubes, cutting files, and package growth before fabrication.</span><a href="https://trello.com/c/OUcGqXxw" target="_blank" rel="noreferrer">Open card →</a></div></article>
+    </div>
+    <div class="slide-number"></div>
+  </section>
+
   <section class="slide divider" id="slide-9">
     <div class="section-label">03 | Timber Ridge Daypacks</div>
     <div class="content divider-layout">
       <div class="divider-copy"><div class="product-number">03</div><h1>Diamond<br>+ Spiral</h1><p class="lede">We stopped drawing bags. We started building them.</p></div>
       <div class="hero-stage daypack-source-loop">
-        <div class="source-sequence"><span>Diamond · source presentation</span><img src="../diamond-daypack/assets/faceted-pillow-hero-1.jpg" alt="Diamond daypack source hero one"><img src="../diamond-daypack/assets/faceted-pillow-hero-2.jpg" alt="Diamond daypack source hero two"><img src="../diamond-daypack/assets/faceted-pillow-hero-3.jpg" alt="Diamond daypack source hero three"></div>
-        <div class="source-sequence"><span>Spiral · source presentation</span><img src="../spiral-daypack/assets/spiral-hero-1.jpg" alt="Spiral daypack source hero one"><img src="../spiral-daypack/assets/spiral-hero-2.jpg" alt="Spiral daypack source hero two"><img src="../spiral-daypack/assets/spiral-hero-3.jpg" alt="Spiral daypack source hero three"></div>
-        <span class="hero-caption">Actual finalist render sequences</span>
+        <div class="source-sequence"><span>Diamond · form + product</span><img src="../diamond-daypack/assets/faceted-pillow-hero-1.jpg" alt="Diamond daypack hero one"><img src="../diamond-daypack/assets/faceted-pillow-hero-2.jpg" alt="Diamond daypack hero two"><img src="../diamond-daypack/assets/faceted-pillow-hero-3.jpg" alt="Diamond daypack hero three"></div>
+        <div class="source-sequence"><span>Spiral · form + product</span><img src="../spiral-daypack/assets/spiral-hero-1.jpg" alt="Spiral daypack hero one"><img src="../spiral-daypack/assets/spiral-hero-2.jpg" alt="Spiral daypack hero two"><img src="../spiral-daypack/assets/spiral-hero-3.jpg" alt="Spiral daypack hero three"></div>
+        <span class="hero-caption">Diamond + Spiral finalists</span>
       </div>
     </div>
     <div class="slide-number">11 / 25</div>
@@ -411,11 +447,23 @@
     <div class="slide-number">13 / 25</div>
   </section>
 
+  <section class="slide" id="next-daypacks">
+    <div class="section-label">Diamond + Spiral | Next Steps</div>
+    <div class="content">
+      <p class="eyebrow">Two products · two separate feedback records</p><h2>Capture Nessa’s August direction before either bag moves.</h2>
+      <div class="bag-asks">
+        <article class="ask-card blue"><header><b>Diamond Daypack</b><span>Waiting on<br>Nessa Hooper</span></header><h3>Get the Product Day feedback onto the card.</h3><p>The sample is received and the material question is answered. The current controlling need is Nessa’s August/Product Day feedback so Diamond can leave the waiting state with a clear revision direction.</p><ul class="done-list"><li>Record Nessa’s complete feedback with the meeting date.</li><li>Separate approval points from requested design or construction changes.</li><li>Translate the feedback into a specific next-sample decision.</li><li>Keep Diamond’s review independent from Spiral’s.</li></ul><div class="owner-line"><span><strong>Status:</strong> waiting for Product Day feedback.</span><a href="https://trello.com/c/UO9YYma7" target="_blank" rel="noreferrer">Open Diamond →</a></div></article>
+        <article class="ask-card green"><header><b>Spiral Daypack</b><span>Open request<br>Unclaimed</span></header><h3>Find and attach Nessa’s complete August notes.</h3><p>The ask is not to summarize from memory. Add the full notes or original file, identify Nessa, and include the meeting date when known.</p><ul class="done-list"><li>Add a dated comment or file containing the complete notes.</li><li>Identify Nessa and include the meeting date if known.</li><li>Pull the accepted points and required changes into a next-sample brief.</li><li>Keep Spiral’s decision record separate from Diamond’s.</li></ul><div class="owner-line"><span><strong>Needs owner:</strong> a person or agent can claim the notes search.</span><a href="https://trello.com/c/jzPb5qso" target="_blank" rel="noreferrer">Open Spiral →</a></div></article>
+      </div>
+    </div>
+    <div class="slide-number"></div>
+  </section>
+
   <section class="slide divider" id="slide-12">
     <div class="section-label">04 | GRAM Chair</div>
     <div class="content divider-layout">
       <div class="divider-copy"><div class="product-number">04</div><h1>GRAM<br>Chair</h1><p class="lede">A rocking chair with no rocker.</p></div>
-      <div class="hero-stage signage-motion"><iframe class="motion-source" loading="lazy" data-motion-kind="full-canvas" src="../gram-chair/signage-4k.html" title="Live GRAM Chair digital-signage rocking simulation"></iframe><a class="source-link" href="../gram-chair/signage-4k.html" target="_blank" rel="noreferrer">Open sign</a><span class="hero-caption">Live CAD rocking simulation</span></div>
+      <div class="hero-stage signage-motion"><iframe class="motion-source" loading="lazy" data-motion-kind="gram" src="../gram-chair/signage-4k.html" title="Live GRAM Chair rocking simulation"></iframe><a class="source-link" href="../gram-chair/signage-4k.html" target="_blank" rel="noreferrer">Open motion</a><span class="hero-caption">Live CAD rocking simulation</span></div>
     </div>
     <div class="slide-number">14 / 25</div>
   </section>
@@ -442,11 +490,20 @@
     <div class="slide-number">16 / 25</div>
   </section>
 
+  <section class="slide" id="next-gram">
+    <div class="section-label">GRAM Chair | Next Step</div>
+    <div class="content next-step-layout">
+      <div class="next-step-lead"><p class="eyebrow">Controlling ask</p><h2>Close the August record. Define the instrument that replaces guesswork.</h2><p>The production-style prototypes are paused after selling the concept. The next useful build is an adjustable 80/20 test rig with interchangeable compliant corners.</p><span class="due-chip">Due 28 August</span></div>
+      <article class="ask-card"><header><b>August decisions + adjustable rig brief</b><span>Claimed by<br>Max Moore</span></header><h3>Document the meeting, then make body motion measurable.</h3><ul class="done-list"><li>Add the August meeting date, attendees, feedback, decisions, open questions, and owner for every next step.</li><li>Define the adjustable 80/20 seating instrument and its interchangeable printed corner strategy.</li><li>Specify what the rig must measure about rider motion, corner stiffness, return, and mechanism behavior.</li><li>Package the output for engineering review before returning to product-specific chair geometry.</li></ul><div class="owner-line"><span><strong>Intended handoff:</strong> Jordan Cook, after explicit acceptance.</span><a href="https://trello.com/c/7ir1icyE" target="_blank" rel="noreferrer">Open card →</a></div></article>
+    </div>
+    <div class="slide-number"></div>
+  </section>
+
   <section class="slide divider" id="slide-15">
     <div class="section-label">05 | Suspend Chair</div>
     <div class="content divider-layout">
       <div class="divider-copy"><div class="product-number">05</div><h1>Suspend<br>Chair</h1><p class="lede">Bring a swing. Not a chair.</p></div>
-      <div class="hero-stage signage-motion"><iframe class="motion-source" loading="lazy" data-motion-kind="full-canvas" src="../suspend-chair/signage-4k.html" title="Live Suspend Chair digital-signage suspension simulation"></iframe><a class="source-link" href="../suspend-chair/signage-4k.html" target="_blank" rel="noreferrer">Open sign</a><span class="hero-caption">Live suspended-seat simulation</span></div>
+      <div class="hero-stage signage-motion"><iframe class="motion-source" loading="lazy" data-motion-kind="full-canvas" src="../suspend-chair/signage-4k.html" title="Live Suspend Chair suspension simulation"></iframe><a class="source-link" href="../suspend-chair/signage-4k.html" target="_blank" rel="noreferrer">Open motion</a><span class="hero-caption">Live suspended-seat simulation</span></div>
     </div>
     <div class="slide-number">17 / 25</div>
   </section>
@@ -474,11 +531,20 @@
     <div class="slide-number">19 / 25</div>
   </section>
 
+  <section class="slide" id="next-suspend">
+    <div class="section-label">Suspend Chair | Next Step</div>
+    <div class="content next-step-layout">
+      <div class="next-step-lead"><p class="eyebrow">Controlling ask</p><h2>Find the attachment geometry that creates controlled multi-axis motion.</h2><p>This pass is intentionally about motion only. Durability, weight, and cost stay deferred until the suspension geometry is worth carrying into V3.</p><span class="due-chip">Current test pass</span></div>
+      <article class="ask-card blue"><header><b>Test the latest sample against the reference</b><span>Claimed by<br>Lia Simeri</span></header><h3>Map the winning combination—not just the latest hole location.</h3><ul class="done-list"><li>Test upper frame attachment locations, lower bungee locations, and multiple strap lengths in combination.</li><li>Compare front/back motion, side-to-side sway, freedom of movement, stability, and comfort.</li><li>Record the test result behind every proposed V3 change and how the next sample should be judged.</li><li>Document what remains unknown instead of forcing a styling decision too early.</li></ul><div class="owner-line"><span><strong>Next handoff:</strong> Max translates the accepted motion direction into specific V3 CAD.</span><a href="https://trello.com/c/zgqMBTfm" target="_blank" rel="noreferrer">Open card →</a></div></article>
+    </div>
+    <div class="slide-number"></div>
+  </section>
+
   <section class="slide divider" id="slide-18">
     <div class="section-label">06 | Hawkeye V3</div>
     <div class="content divider-layout">
       <div class="divider-copy"><div class="product-number">06</div><h1>Hawkeye<br>V3</h1><p class="lede">It does not just rock.</p></div>
-      <div class="hero-stage signage-motion"><iframe class="motion-source" loading="lazy" data-motion-kind="panel" src="../hawkeye-v3/signage-4k.html" title="Live Hawkeye V3 digital-signage response simulation"></iframe><a class="source-link" href="../hawkeye-v3/signage-4k.html" target="_blank" rel="noreferrer">Open sign</a><span class="hero-caption">Live bounce · rock · roll · twist</span></div>
+      <div class="hero-stage signage-motion"><iframe class="motion-source" loading="lazy" data-motion-kind="panel" src="../hawkeye-v3/signage-4k.html" title="Live Hawkeye V3 response simulation"></iframe><a class="source-link" href="../hawkeye-v3/signage-4k.html" target="_blank" rel="noreferrer">Open motion</a><span class="hero-caption">Live bounce · rock · roll · twist</span></div>
     </div>
     <div class="slide-number">20 / 25</div>
   </section>
@@ -503,6 +569,15 @@
       <div class="story-grid" style="grid-template-columns:1fr 1fr"><div class="key-points"><div class="key-point"><b>Today</b><p>45 mm arch rise bottomed out under load.</p></div><div class="key-point"><b>Next</b><p>170 mm rise preserves 94 mm of travel under the rider.</p></div></div><div class="update-bar"><span><b>Current update:</b> V4 adjustable test, rider range, lateral stability, and composite sample timing.</span><span class="update-links"><a href="https://trello.com/c/md4yE8HL" target="_blank" rel="noreferrer">Open card →</a></span></div></div>
     </div>
     <div class="slide-number">22 / 25</div>
+  </section>
+
+  <section class="slide" id="next-hawkeye">
+    <div class="section-label">Hawkeye V3 | Next Step</div>
+    <div class="content next-step-layout">
+      <div class="next-step-lead"><p class="eyebrow">Controlling ask</p><h2>Define the V4 steel-foot test before moving to fiberglass.</h2><p>V3 earned encouraging sales-meeting feedback. The next round should be a controlled geometry and tuning test—not an early composite commitment.</p><span class="due-chip">Due 28 August</span></div>
+      <article class="ask-card green"><header><b>Publish the V4 steel-foot test specification</b><span>Current owner<br>Jordan Cook</span></header><h3>Make the next sample answer the motion questions.</h3><ul class="done-list"><li>Pull out the V3 sample and close the post-sales-meeting review.</li><li>Define the taller arch geometry and the slider adjustment range.</li><li>State how center of gravity and motion range will be tuned across the adjustment.</li><li>List the evidence the V4 sample must demonstrate before fiberglass development begins.</li></ul><div class="owner-line"><span><strong>Sequence:</strong> controlled steel test first; composite sample timing follows the measured result.</span><a href="https://trello.com/c/md4yE8HL" target="_blank" rel="noreferrer">Open card →</a></div></article>
+    </div>
+    <div class="slide-number"></div>
   </section>
 
   <section class="slide divider" id="slide-21">
@@ -543,10 +618,21 @@
     <div class="slide-number">25 / 25</div>
   </section>
 
+  <section class="slide" id="next-flowmotion">
+    <div class="section-label">RÖR · FlowMotion V2 | Next Step</div>
+    <div class="content next-step-layout">
+      <div class="next-step-lead"><p class="eyebrow">Controlling ask</p><h2>Release one controlled Sample 2 package—and prove HF has that revision.</h2><p>The files are finished. The remaining risk is revision ambiguity between what Westfield releases and what HF actually builds.</p><span class="due-chip">Immediate · due 25 August</span></div>
+      <article class="ask-card"><header><b>Send the final CAD + specifications to HF</b><span>Claimed by<br>Max Moore</span></header><h3>Close the loop with written receipt confirmation.</h3><ul class="done-list"><li>Add the released CAD and specifications with a clear revision name or number.</li><li>Include every July correction: pitch, seat height, firm 24-inch width, feet, split upholstery, front-edge coverage, and stronger bounce plates.</li><li>State the dimensions, resistance, fit, and appearance checks Sample 2 must meet.</li><li>Add HF’s written reply confirming the exact revision they will use.</li></ul><div class="owner-line"><span><strong>After release:</strong> Bryan Nelson owns sample timing and the next-sample go/no-go milestone.</span><a href="https://trello.com/c/EmhDKNr4" target="_blank" rel="noreferrer">Open card →</a></div></article>
+    </div>
+    <div class="slide-number"></div>
+  </section>
+
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Expanded product asset"><button class="lightbox-close" type="button" aria-label="Close">×</button><img id="lightbox-image" src="" alt="Expanded product asset"></div>
   <script>
     const progress=document.getElementById('progress');
     const slides=[...document.querySelectorAll('.slide')];
+    slides.forEach((slide,index)=>{const number=slide.querySelector('.slide-number');if(number)number.textContent=String(index+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0')});
+    if(location.hash){const target=document.querySelector(location.hash);if(target){document.documentElement.style.scrollBehavior='auto';target.scrollIntoView({block:'start'});requestAnimationFrame(()=>{document.documentElement.style.scrollBehavior=''})}}
     function isolateSignageMotion(frame){
       try{
         const doc=frame.contentDocument;
@@ -564,6 +650,15 @@
           .show .lay{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important}
         `;
         doc.head.appendChild(style);
+        if(frame.dataset.motionKind==='gram'){
+          setTimeout(()=>{
+            try{
+              const track=frame.contentWindow.GRAMStage?.TRACK||[];
+              track.forEach(entry=>{entry.cam.shiftX=0;entry.cam.shiftY=0;if(!entry.cam.at)entry.cam.span=Math.max(entry.cam.span||0,1450)});
+              doc.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));
+            }catch(error){}
+          },80);
+        }
         if(frame.dataset.motionKind==='ror'){
           setTimeout(()=>{
             try{frame.contentWindow.goScene(4);frame.contentWindow.setPaused(true)}catch(error){}
