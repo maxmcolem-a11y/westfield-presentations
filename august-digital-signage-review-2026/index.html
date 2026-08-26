@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>August Product &amp; Marketing Review | Westfield Outdoors</title>
-  <meta name="description" content="A product-by-product recap of the newest stories shown in the August digital signage.">
+  <meta name="description" content="A product-by-product review built from the newest product content shown across Westfield's August digital signage.">
   <link rel="canonical" href="https://maxmcolem-a11y.github.io/westfield-presentations/august-digital-signage-review-2026/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Westfield Outdoors">
   <meta property="og:title" content="August Product &amp; Marketing Review">
-  <meta property="og:description" content="Six products, six August stories, and a clear handoff into current updates.">
+  <meta property="og:description" content="Six August product stories, rebuilt from the original renders, samples, and engineering visuals.">
   <meta property="og:url" content="https://maxmcolem-a11y.github.io/westfield-presentations/august-digital-signage-review-2026/">
   <meta property="og:image" content="https://maxmcolem-a11y.github.io/westfield-presentations/august-digital-signage-review-2026/assets/social-preview.png">
   <meta property="og:image:width" content="1200">
@@ -17,97 +17,153 @@
   <meta property="og:image:alt" content="Westfield Outdoors August product and marketing review">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="August Product &amp; Marketing Review">
-  <meta name="twitter:description" content="A product-by-product recap of the August digital signage.">
+  <meta name="twitter:description" content="Six August product stories, rebuilt from the original product assets.">
   <meta name="twitter:image" content="https://maxmcolem-a11y.github.io/westfield-presentations/august-digital-signage-review-2026/assets/social-preview.png">
-  <meta name="theme-color" content="#c7372f">
+  <meta name="theme-color" content="#b92f2a">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg:#f4f6f6; --paper:#fff; --ink:#101b24; --muted:#5c6b75; --line:rgba(18,42,57,.15);
-      --red:#c7372f; --blue:#2368ae; --green:#4d7c0f; --amber:#b26a2d; --navy:#152c3e;
-      --shadow:0 18px 48px rgba(25,46,61,.11); --radius:10px; --pad:clamp(1.2rem,2.7vw,2.65rem);
+    :root{
+      --ink:#101a22;--muted:#61707b;--paper:#f7f8f7;--card:#fff;--line:rgba(16,37,50,.15);
+      --red:#b92f2a;--blue:#296a9f;--green:#2d755a;--navy:#152b3b;--sand:#e9e2d7;--mist:#e8edef;
+      --shadow:0 20px 54px rgba(22,42,55,.13);--r:16px;--pad:clamp(1.1rem,2.5vw,2.6rem);
     }
     *{box-sizing:border-box}
     html{scroll-snap-type:y mandatory;scroll-behavior:smooth;background:#dfe4e6}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Arial,sans-serif;overflow-x:hidden}
-    a{color:inherit}
-    .deck-logo{position:fixed;right:1.55rem;top:1.05rem;z-index:30;width:156px;height:auto;opacity:.9}
-    .slide{position:relative;display:flex;min-height:100vh;min-height:100dvh;overflow:hidden;scroll-snap-align:start;background:linear-gradient(90deg,rgba(35,104,174,.025) 1px,transparent 1px),linear-gradient(rgba(35,104,174,.025) 1px,transparent 1px),#f7f8f8;background-size:48px 48px}
-    .slide:nth-of-type(odd){background-color:#edf1f2}
-    .slide::after{content:"Property of Westfield Outdoors. Confidential and proprietary. Do not reproduce, distribute, or disclose without written permission.";position:absolute;left:50%;bottom:.7rem;transform:translateX(-50%);width:min(650px,46vw);text-align:center;color:rgba(16,27,36,.35);font-size:.47rem;line-height:1.2;font-weight:700;letter-spacing:.03em;z-index:4;pointer-events:none}
-    .content{width:min(1320px,94vw);margin:auto;padding:calc(var(--pad) + 1rem) var(--pad);display:flex;flex-direction:column;gap:.85rem}
-    .section-label{position:absolute;left:1.55rem;top:1.28rem;z-index:5;color:var(--red);font-size:.68rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase}
-    .slide-number{position:absolute;right:1.6rem;bottom:.92rem;z-index:5;color:rgba(16,27,36,.45);font-size:.7rem;font-weight:900;letter-spacing:.09em}
-    .eyebrow{margin:0;color:var(--red);font-size:.73rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase}
-    h1,h2,h3,p{margin:0}
-    h1{max-width:1120px;font-size:clamp(2.25rem,4.7vw,4.7rem);line-height:.97;letter-spacing:-.04em;font-weight:900}
-    h2{font-size:clamp(1.8rem,3.1vw,3.25rem);line-height:1;letter-spacing:-.035em;font-weight:900}
-    h3{font-size:1rem;line-height:1.2}
-    .lede{max-width:1060px;color:var(--muted);font-size:clamp(.98rem,1.4vw,1.3rem);line-height:1.42;font-weight:560}
-    .cover .content{align-items:flex-start}
-    .cover h1{max-width:1050px;font-size:clamp(3rem,7.2vw,7.2rem)}
-    .date-line{margin-top:1.1rem;color:var(--muted);font-size:.82rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-    .callout{margin-top:.45rem;max-width:1040px;padding:.95rem 1.15rem;border-left:6px solid var(--red);border-radius:4px var(--radius) var(--radius) 4px;background:var(--navy);color:#fff;font-size:clamp(1rem,1.45vw,1.35rem);line-height:1.3;font-weight:800}
-    .product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;margin-top:.4rem}
-    .product-tile{position:relative;min-height:205px;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);text-decoration:none;background:#dbe2e5}
-    .product-tile img{display:block;width:100%;height:100%;min-height:205px;object-fit:cover;filter:saturate(.84) contrast(.98)}
-    .product-tile::after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(7,17,24,.94))}
-    .tile-copy{position:absolute;left:.82rem;right:.82rem;bottom:.78rem;z-index:2;color:#fff}
-    .tile-copy strong{display:block;font-size:1.05rem}
-    .tile-copy span{display:block;margin-top:.2rem;color:rgba(255,255,255,.82);font-size:.72rem;line-height:1.26;font-weight:650}
-    .divider{isolation:isolate;background:#122737;color:#fff}
-    .divider::before{content:"";position:absolute;inset:0;z-index:-2;background-image:var(--hero);background-size:cover;background-position:center;filter:saturate(.72) contrast(1.05)}
-    .divider::after{content:"";position:absolute;inset:0;z-index:-1;width:auto;transform:none;background:linear-gradient(90deg,rgba(5,14,21,.94) 0%,rgba(9,22,31,.84) 45%,rgba(9,22,31,.36) 100%)}
-    .divider .content{justify-content:center;min-height:100vh;min-height:100dvh}
-    .divider .product-num{color:var(--red);font-size:clamp(4rem,9vw,8.5rem);line-height:.8;font-weight:900;letter-spacing:-.06em}
-    .divider h1{max-width:900px;color:#fff;font-size:clamp(3.2rem,7.2vw,7rem)}
-    .divider .lede{max-width:760px;color:rgba(255,255,255,.82)}
-    .divider .slide-number{color:rgba(255,255,255,.7)}
-    .divider .section-label{color:#fff}
-    .divider .deck-footer{display:none}
-    .product-layout{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(1rem,2vw,1.7rem);align-items:stretch}
-    .media-frame{position:relative;min-height:0;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow);cursor:zoom-in;padding:0}
-    .media-frame img{display:block;width:100%;height:100%;object-fit:cover}
-    .zoom-label{position:absolute;left:.72rem;bottom:.68rem;padding:.38rem .58rem;border-radius:999px;background:rgba(7,17,24,.8);color:#fff;font-size:.64rem;font-weight:900;letter-spacing:.07em;text-transform:uppercase}
-    .product-copy{display:flex;flex-direction:column;justify-content:center;gap:.72rem}
-    .bullet-list{display:grid;gap:.52rem;margin:.12rem 0 0;padding:0;list-style:none}
-    .bullet-list li{position:relative;padding:.54rem 0 .54rem 1.15rem;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem;line-height:1.36;font-weight:620}
-    .bullet-list li::before{content:"";position:absolute;left:0;top:.9rem;width:.42rem;height:.42rem;border-radius:50%;background:var(--red)}
-    .bullet-list strong{color:var(--ink)}
-    .stats-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.58rem}
-    .stat{padding:.72rem .78rem;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.9)}
-    .stat-value{display:block;color:var(--blue);font-size:clamp(1.35rem,2.2vw,2.25rem);line-height:1;font-weight:900;letter-spacing:-.035em}
-    .stat-label{display:block;margin-top:.28rem;color:var(--muted);font-size:.61rem;line-height:1.25;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
-    .takeaway{padding:.8rem .9rem;border-left:5px solid var(--green);border-radius:4px var(--radius) var(--radius) 4px;background:#eef3e5;color:#314719;font-size:.84rem;line-height:1.35;font-weight:720}
-    .takeaway strong{display:block;margin-bottom:.18rem;color:var(--green);font-size:.62rem;letter-spacing:.11em;text-transform:uppercase}
-    .update-prompt{display:flex;align-items:center;justify-content:space-between;gap:.9rem;padding:.72rem .88rem;border:1px solid rgba(35,104,174,.2);border-radius:var(--radius);background:#e8eff5;color:var(--navy);font-size:.78rem;line-height:1.32;font-weight:700}
-    .update-prompt strong{color:var(--blue)}
-    .update-prompt a{flex:0 0 auto;color:var(--blue);font-size:.66rem;font-weight:900;letter-spacing:.05em;text-decoration:none;text-transform:uppercase}
-    .closing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.72rem;margin-top:.35rem}
-    .closing-card{padding:.85rem .9rem;border:1px solid var(--line);border-top:4px solid var(--blue);border-radius:var(--radius);background:rgba(255,255,255,.93);box-shadow:var(--shadow)}
-    .closing-card:nth-child(2){border-top-color:var(--green)}
-    .closing-card:nth-child(3){border-top-color:var(--amber)}
-    .closing-card:nth-child(4){border-top-color:var(--red)}
-    .closing-card:nth-child(5){border-top-color:#7c3aed}
-    .closing-card:nth-child(6){border-top-color:#0284c7}
-    .closing-card p{margin-top:.3rem;color:var(--muted);font-size:.76rem;line-height:1.32;font-weight:620}
-    .progress{position:fixed;left:0;bottom:0;z-index:50;width:0;height:5px;background:var(--red)}
-    .language-toggle{position:fixed;left:1.15rem;bottom:.82rem;z-index:45;padding:.47rem .75rem;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.94);color:var(--ink);font-size:.7rem;font-weight:900;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.09)}
-    .translation-note{position:fixed;left:1.1rem;bottom:3.35rem;z-index:46;max-width:250px;padding:.68rem .78rem;border-radius:var(--radius);background:var(--navy);color:#fff;font-size:.7rem;line-height:1.3;font-weight:700;box-shadow:var(--shadow);opacity:0;transform:translateY(8px);pointer-events:none;transition:.2s ease}
-    .translation-note.show{opacity:1;transform:translateY(0)}
-    .lightbox{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:3.5rem 2rem 2rem;background:rgba(4,11,16,.94)}
-    .lightbox.open{display:flex}
-    .lightbox img{max-width:96vw;max-height:90vh;object-fit:contain;box-shadow:0 24px 80px rgba(0,0,0,.45)}
-    .lightbox-close{position:absolute;right:1.25rem;top:.9rem;width:2.7rem;height:2.7rem;border:1px solid rgba(255,255,255,.5);border-radius:50%;background:rgba(255,255,255,.08);color:#fff;font-size:1.55rem;cursor:pointer}
-    @media(max-width:920px){
-      html{scroll-snap-type:none}.slide{display:block;min-height:100svh;overflow:visible;padding:4rem 0 4.2rem;border-bottom:1px solid var(--line)}
-      .content{width:100%;padding:0 1rem}.deck-logo{right:.82rem;top:.82rem;width:94px}.section-label{left:1rem;top:1.05rem;max-width:calc(100vw - 8rem);font-size:.56rem}.slide-number{right:.9rem;bottom:1.12rem;font-size:.61rem}.slide::after{left:1rem;right:4.8rem;bottom:.44rem;width:auto;transform:none;text-align:left;font-size:.39rem}
-      h1,.cover h1,.divider h1{font-size:clamp(2.25rem,10vw,3.45rem)}.product-grid,.product-layout,.closing-grid{grid-template-columns:1fr}.product-tile,.product-tile img{min-height:215px}.media-frame{min-height:230px}.stats-row{grid-template-columns:repeat(3,minmax(0,1fr))}.update-prompt{align-items:flex-start;flex-direction:column}.divider{padding:0}.divider .content{min-height:calc(100svh - 8.2rem)}.language-toggle{left:.72rem;bottom:.72rem}
+    body{margin:0;overflow-x:hidden;background:#dfe4e6;color:var(--ink);font-family:Inter,Arial,sans-serif}
+    button,a{font:inherit}a{color:inherit}
+    .deck-logo{position:fixed;right:1.45rem;top:1rem;z-index:40;width:150px;height:auto;opacity:.9}
+    .slide{position:relative;display:flex;min-height:100vh;min-height:100dvh;overflow:hidden;scroll-snap-align:start;background:var(--paper)}
+    .slide:nth-of-type(even){background:#edf1f2}
+    .slide::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(27,55,70,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(27,55,70,.028) 1px,transparent 1px);background-size:48px 48px}
+    .slide::after{content:"Property of Westfield Outdoors. Confidential and proprietary. Do not reproduce, distribute, or disclose without written permission.";position:absolute;left:50%;bottom:.58rem;z-index:8;width:min(690px,48vw);transform:translateX(-50%);color:rgba(16,26,34,.34);font-size:.45rem;line-height:1.2;font-weight:700;letter-spacing:.03em;text-align:center;pointer-events:none}
+    .content{position:relative;z-index:2;width:min(1390px,95vw);margin:auto;padding:calc(var(--pad) + 1.1rem) var(--pad);display:flex;flex-direction:column;gap:.8rem}
+    .section-label{position:absolute;left:1.5rem;top:1.22rem;z-index:10;color:var(--red);font-size:.66rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase}
+    .slide-number{position:absolute;right:1.55rem;bottom:.82rem;z-index:10;color:rgba(16,26,34,.45);font-size:.68rem;font-weight:900;letter-spacing:.08em}
+    .eyebrow{margin:0;color:var(--red);font-size:.7rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase}
+    h1,h2,h3,p{margin:0}h1,h2,h3{letter-spacing:-.035em}
+    h1{font-size:clamp(2.45rem,5vw,5.15rem);line-height:.96;font-weight:900}
+    h2{font-size:clamp(1.8rem,3.1vw,3.2rem);line-height:1;font-weight:900}
+    h3{font-size:clamp(1rem,1.3vw,1.28rem);line-height:1.12;font-weight:850}
+    .lede{max-width:1050px;color:var(--muted);font-size:clamp(.92rem,1.35vw,1.25rem);line-height:1.42;font-weight:570}
+    .small-copy{color:var(--muted);font-size:.76rem;line-height:1.42;font-weight:620}
+    .accent{color:var(--red)}
+    .cover{background:#f4f5f3}
+    .cover::before{background:radial-gradient(circle at 72% 44%,rgba(41,106,159,.13),transparent 34%),linear-gradient(115deg,rgba(185,47,42,.08),transparent 42%)}
+    .cover-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(1rem,3vw,3.4rem);align-items:center}
+    .cover-copy{display:flex;flex-direction:column;gap:1rem}
+    .cover h1{font-size:clamp(3.4rem,6.8vw,7rem)}
+    .cover-line{width:86px;height:7px;border-radius:99px;background:var(--red)}
+    .cover-date{color:var(--muted);font-size:.76rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+    .cover-mosaic{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,minmax(0,1fr));gap:.65rem;height:min(70vh,650px)}
+    .cover-tile{position:relative;overflow:hidden;border:1px solid rgba(16,37,50,.12);border-radius:var(--r);background:#fff;box-shadow:var(--shadow)}
+    .cover-tile img{width:100%;height:100%;object-fit:contain;display:block;padding:.45rem}
+    .cover-tile.origami{background:#05090c}.cover-tile.origami img{padding:0;object-fit:cover}
+    .cover-tile.instant img,.cover-tile.pack img{object-fit:cover;padding:0}
+    .cover-tile span{position:absolute;left:.55rem;bottom:.5rem;padding:.26rem .42rem;border-radius:5px;background:rgba(10,24,33,.83);color:#fff;font-size:.55rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+    .lineup{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.72rem}
+    .lineup-card{position:relative;display:grid;grid-template-columns:42% 58%;min-height:190px;overflow:hidden;border:1px solid var(--line);border-radius:var(--r);background:#fff;box-shadow:var(--shadow);text-decoration:none}
+    .lineup-card .visual{min-width:0;background:#e8edef}.lineup-card .visual.dark{background:#05090c}
+    .lineup-card img{width:100%;height:100%;object-fit:contain;display:block}.lineup-card .photo img{object-fit:cover}
+    .lineup-copy{padding:.82rem;display:flex;flex-direction:column;justify-content:center;gap:.28rem}
+    .lineup-copy b{color:var(--red);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase}
+    .lineup-copy strong{font-size:1.06rem;line-height:1.05}
+    .lineup-copy span{color:var(--muted);font-size:.7rem;line-height:1.3;font-weight:620}
+    .divider{background:var(--navy)!important;color:#fff}
+    .divider::before{background:linear-gradient(115deg,rgba(255,255,255,.05),transparent 55%),radial-gradient(circle at 80% 35%,rgba(57,138,187,.18),transparent 34%)}
+    .divider::after{color:rgba(255,255,255,.35)}
+    .divider .section-label,.divider .slide-number{color:rgba(255,255,255,.75)}
+    .divider-layout{display:grid;grid-template-columns:.72fr 1.28fr;gap:clamp(1rem,3vw,3.5rem);align-items:center}
+    .divider-copy{display:flex;flex-direction:column;gap:.7rem}
+    .divider .product-number{color:var(--red);font-size:clamp(4rem,8.5vw,8.3rem);line-height:.78;font-weight:900;letter-spacing:-.07em}
+    .divider h1{color:#fff;font-size:clamp(3rem,6.2vw,6.4rem)}
+    .divider .lede{color:rgba(255,255,255,.74);max-width:610px}
+    .hero-stage{position:relative;height:min(70vh,650px);overflow:hidden;border:1px solid rgba(255,255,255,.16);border-radius:22px;background:linear-gradient(145deg,#f5f7f7,#dbe3e6);box-shadow:0 34px 90px rgba(0,0,0,.28)}
+    .hero-stage.dark{background:#03070a}.hero-stage.sand{background:#eee9e1}
+    .hero-stage img{position:absolute;display:block;object-fit:contain}
+    .hero-stage .hero-main{inset:3%;width:94%;height:94%}
+    .hero-stage .hero-left{left:1%;bottom:1%;width:58%;height:92%}
+    .hero-stage .hero-right{right:1%;bottom:1%;width:58%;height:92%}
+    .hero-stage .hero-small{right:2%;bottom:3%;width:42%;height:42%;border:1px solid rgba(16,37,50,.16);border-radius:12px;background:#fff;box-shadow:var(--shadow)}
+    .hero-caption{position:absolute;left:.75rem;bottom:.68rem;z-index:2;padding:.42rem .58rem;border-radius:7px;background:rgba(9,24,34,.86);color:#fff;font-size:.6rem;font-weight:850;letter-spacing:.07em;text-transform:uppercase}
+    .story-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(.8rem,2vw,1.5rem);align-items:stretch}
+    .story-copy{display:flex;flex-direction:column;justify-content:center;gap:.72rem}
+    .story-copy .lede{font-size:clamp(.86rem,1.15vw,1.08rem)}
+    .big-idea{padding:.85rem 1rem;border-left:6px solid var(--red);border-radius:5px var(--r) var(--r) 5px;background:var(--navy);color:#fff;font-size:clamp(.94rem,1.35vw,1.25rem);line-height:1.3;font-weight:820}
+    .key-points{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}
+    .key-point{padding:.72rem .78rem;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.9)}
+    .key-point b{display:block;margin-bottom:.28rem;color:var(--red);font-size:.57rem;letter-spacing:.1em;text-transform:uppercase}
+    .key-point p{color:var(--muted);font-size:.72rem;line-height:1.34;font-weight:620}
+    .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.54rem}
+    .stat{padding:.67rem .72rem;border:1px solid var(--line);border-radius:12px;background:#fff}
+    .stat strong{display:block;color:var(--blue);font-size:clamp(1.35rem,2.2vw,2.25rem);line-height:.95;letter-spacing:-.045em}
+    .stat span{display:block;margin-top:.28rem;color:var(--muted);font-size:.55rem;line-height:1.22;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+    .visual-card,.asset-button{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:var(--r);background:#fff;box-shadow:var(--shadow)}
+    .asset-button{width:100%;padding:0;cursor:zoom-in;text-align:left}
+    .asset-button img,.visual-card img{display:block;width:100%;height:100%;object-fit:contain}
+    .asset-button.photo img,.visual-card.photo img{object-fit:cover}
+    .asset-button.dark{background:#020609}
+    .zoom{position:absolute;right:.55rem;bottom:.52rem;padding:.32rem .46rem;border-radius:999px;background:rgba(8,22,31,.82);color:#fff;font-size:.52rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+    .media-caption{position:absolute;left:.58rem;top:.55rem;z-index:2;padding:.34rem .48rem;border-radius:6px;background:rgba(255,255,255,.9);color:var(--navy);font-size:.55rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+    .triptych{display:grid;grid-template-columns:repeat(3,1fr);gap:.62rem}
+    .triptych .asset-button{height:min(55vh,500px)}
+    .triptych .asset-button img{padding:.4rem}.triptych .asset-button.dark img{padding:0}
+    .triptych .step{position:absolute;left:.58rem;bottom:.55rem;z-index:2;color:#fff;font-size:.58rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+    .proof-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:.58rem}
+    .proof-strip .asset-button{height:155px;padding:.3rem}
+    .proof-strip .asset-button img{object-fit:contain}
+    .proof-strip .asset-button::after{content:attr(data-label);position:absolute;left:.45rem;bottom:.4rem;padding:.27rem .4rem;border-radius:5px;background:rgba(10,27,37,.84);color:#fff;font-size:.5rem;font-weight:900;letter-spacing:.07em;text-transform:uppercase}
+    .update-bar{display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.7rem .82rem;border:1px solid rgba(41,106,159,.24);border-radius:12px;background:#e8f0f5;color:var(--navy);font-size:.72rem;line-height:1.34;font-weight:720}
+    .update-bar b{color:var(--blue)}.update-links{display:flex;gap:.55rem;flex:0 0 auto}
+    .update-links a{color:var(--blue);font-size:.58rem;font-weight:900;letter-spacing:.07em;text-decoration:none;text-transform:uppercase;white-space:nowrap}
+    .frame-gallery{display:grid;grid-template-columns:1.15fr .85fr;gap:.65rem;min-height:0}
+    .frame-gallery .primary{height:min(59vh,535px)}
+    .frame-gallery .side{display:grid;grid-template-rows:repeat(2,1fr);gap:.65rem}
+    .frame-gallery .side .asset-button{min-height:0}.frame-gallery .side img{object-fit:cover}
+    .platform-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:.78rem;align-items:stretch}
+    .platform-grid .asset-button{height:min(57vh,520px);padding:.65rem}
+    .deployment{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem}
+    .deployment .asset-button{height:205px}.deployment img{object-fit:cover}
+    .config-chips{display:flex;flex-wrap:wrap;gap:.38rem}.config-chips span{padding:.36rem .52rem;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--muted);font-size:.57rem;font-weight:850;letter-spacing:.04em;text-transform:uppercase}
+    .forms-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:.36rem}
+    .form-card{position:relative;min-width:0;aspect-ratio:128/164;overflow:hidden;border:1px solid var(--line);border-radius:8px;background:#e8edef}
+    .form-card img{display:block;width:100%;height:100%;object-fit:contain}
+    .form-card span{position:absolute;left:.24rem;top:.22rem;color:var(--navy);font-size:.44rem;font-weight:900}
+    .form-card.selected{border:3px solid var(--red);box-shadow:0 0 0 2px rgba(185,47,42,.14)}
+    .form-card.selected span{color:#fff;background:var(--red);padding:.15rem .2rem;border-radius:3px}
+    .finalists{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+    .finalist{display:grid;grid-template-columns:.36fr .64fr;min-height:420px;overflow:hidden;border:1px solid var(--line);border-radius:var(--r);background:#fff;box-shadow:var(--shadow)}
+    .finalist .model{background:#10171c}.finalist .model img{width:100%;height:100%;object-fit:cover}
+    .finalist .product{display:flex;flex-direction:column;justify-content:center;gap:.45rem;padding:.8rem}
+    .finalist .product img{width:100%;height:255px;object-fit:contain}
+    .finalist .product p{color:var(--muted);font-size:.68rem;line-height:1.34;font-weight:620}
+    .diagram-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+    .diagram-card{display:grid;grid-template-rows:1fr auto;min-height:430px;overflow:hidden;border:1px solid var(--line);border-radius:var(--r);background:#fff;box-shadow:var(--shadow)}
+    .diagram-card button{border:0;border-radius:0;box-shadow:none}.diagram-card .diagram-copy{padding:.72rem .82rem;border-top:1px solid var(--line)}
+    .diagram-card .diagram-copy p{margin-top:.25rem;color:var(--muted);font-size:.68rem;line-height:1.34;font-weight:620}
+    .suspend-layout{display:grid;grid-template-columns:1.08fr .92fr;gap:.8rem;align-items:stretch}
+    .suspend-layout .asset-button{height:min(64vh,590px)}
+    .motion-grid{display:grid;grid-template-columns:1.15fr .85fr .85fr;gap:.65rem}
+    .motion-grid .asset-button{height:min(54vh,500px)}
+    .hawkeye-lesson{display:grid;grid-template-columns:.85fr 1.15fr;gap:.8rem;align-items:stretch}
+    .hawkeye-lesson .asset-button{height:min(62vh,560px)}
+    .hawkeye-lesson .spring img{object-fit:cover}
+    .response-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+    .response-grid .asset-button{height:min(49vh,440px);padding:.65rem}
+    .progress{position:fixed;left:0;bottom:0;z-index:80;width:0;height:5px;background:var(--red)}
+    .language-toggle{position:fixed;left:1rem;bottom:.75rem;z-index:70;padding:.45rem .72rem;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.94);color:var(--ink);font-size:.68rem;font-weight:900;cursor:pointer;box-shadow:0 10px 28px rgba(0,0,0,.1)}
+    .translation-note{position:fixed;left:1rem;bottom:3.25rem;z-index:71;max-width:255px;padding:.66rem .75rem;border-radius:11px;background:var(--navy);color:#fff;font-size:.68rem;line-height:1.32;font-weight:700;box-shadow:var(--shadow);opacity:0;transform:translateY(7px);pointer-events:none;transition:.2s}
+    .translation-note.show{opacity:1;transform:none}
+    .lightbox{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:3.4rem 1.5rem 1.5rem;background:rgba(3,9,13,.95)}
+    .lightbox.open{display:flex}.lightbox img{max-width:96vw;max-height:90vh;object-fit:contain;box-shadow:0 25px 90px rgba(0,0,0,.5)}
+    .lightbox-close{position:absolute;right:1.15rem;top:.8rem;width:2.6rem;height:2.6rem;border:1px solid rgba(255,255,255,.5);border-radius:50%;background:rgba(255,255,255,.08);color:#fff;font-size:1.45rem;cursor:pointer}
+    @media(max-width:950px){
+      html{scroll-snap-type:none}.slide{display:block;min-height:100svh;overflow:visible;padding:3.8rem 0 4.2rem;border-bottom:1px solid var(--line)}.content{width:100%;padding:0 1rem}.deck-logo{right:.78rem;top:.72rem;width:92px}.section-label{left:1rem;top:1rem;max-width:calc(100vw - 7.5rem);font-size:.54rem}.slide-number{right:.9rem;bottom:1.05rem;font-size:.58rem}.slide::after{left:1rem;right:4.7rem;bottom:.4rem;width:auto;transform:none;text-align:left;font-size:.38rem}
+      .cover-grid,.divider-layout,.story-grid,.platform-grid,.frame-gallery,.suspend-layout,.hawkeye-lesson{grid-template-columns:1fr}.cover-mosaic{height:520px}.lineup{grid-template-columns:1fr}.divider .content{padding-top:0}.hero-stage{height:470px}.key-points,.diagram-grid,.finalists,.response-grid{grid-template-columns:1fr}.triptych,.motion-grid{grid-template-columns:1fr}.triptych .asset-button,.motion-grid .asset-button{height:340px}.proof-strip{grid-template-columns:1fr 1fr}.forms-grid{grid-template-columns:repeat(5,1fr)}.finalist{min-height:390px}.update-bar{align-items:flex-start;flex-direction:column}.deployment{grid-template-columns:1fr}.deployment .asset-button{height:280px}.diagram-card{min-height:390px}
     }
     @media print{
-      @page{size:13.333in 7.5in;margin:0}html,body{background:#fff}.slide{width:13.333in;height:7.5in;min-height:0;display:flex;overflow:hidden;padding:0;border:0;break-after:page;page-break-after:always}.content{width:min(1320px,94vw);margin:auto;padding:calc(var(--pad) + 1rem) var(--pad)}.deck-logo{position:fixed;right:1.55rem;top:1.05rem;width:156px}.section-label{left:1.55rem;top:1.28rem;max-width:none;font-size:.68rem}.slide-number{right:1.6rem;bottom:.92rem;font-size:.7rem}.slide::after{left:50%;right:auto;bottom:.7rem;width:min(650px,46vw);transform:translateX(-50%);text-align:center;font-size:.47rem}.divider .content{min-height:0}.product-grid,.closing-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.product-layout{grid-template-columns:1.05fr 1fr}.product-tile,.product-tile img{min-height:205px}.media-frame{min-height:0}.progress,.language-toggle,.translation-note,.lightbox{display:none!important}
+      @page{size:13.333in 7.5in;margin:0}html,body{background:#fff}.slide{width:13.333in;height:7.5in;min-height:0;display:flex;overflow:hidden;padding:0;border:0;break-after:page;page-break-after:always}.content{width:min(1390px,95vw);margin:auto;padding:calc(var(--pad) + 1.1rem) var(--pad)}.cover-grid{grid-template-columns:.92fr 1.08fr}.divider-layout{grid-template-columns:.72fr 1.28fr}.story-grid{grid-template-columns:1.12fr .88fr}.platform-grid{grid-template-columns:.92fr 1.08fr}.frame-gallery{grid-template-columns:1.15fr .85fr}.suspend-layout{grid-template-columns:1.08fr .92fr}.hawkeye-lesson{grid-template-columns:.85fr 1.15fr}.lineup{grid-template-columns:repeat(3,minmax(0,1fr))}.finalists,.diagram-grid,.response-grid{grid-template-columns:1fr 1fr}.triptych{grid-template-columns:repeat(3,1fr)}.proof-strip{grid-template-columns:repeat(4,1fr)}.forms-grid{grid-template-columns:repeat(10,1fr)}.motion-grid{grid-template-columns:1.15fr .85fr .85fr}.deployment{grid-template-columns:repeat(3,1fr)}.deck-logo{position:fixed}.progress,.language-toggle,.translation-note,.lightbox{display:none!important}
     }
   </style>
 </head>
@@ -119,229 +175,271 @@
 
   <section class="slide cover" id="slide-1">
     <div class="section-label">Monthly Product + Marketing Meeting</div>
-    <div class="content">
-      <p class="eyebrow">Westfield Outdoors | August 2026</p>
-      <h1>August Product Review</h1>
-      <p class="lede">A product-by-product recap of the newest stories shown in the August digital signage.</p>
-      <div class="callout">Six products. One clear story for each. Then the current update.</div>
-      <p class="date-line">Prepared for the monthly marketing meeting | 26 August 2026</p>
+    <div class="content cover-grid">
+      <div class="cover-copy">
+        <p class="eyebrow">Westfield Outdoors | August 2026</p>
+        <h1>August<br>Product Review</h1>
+        <div class="cover-line"></div>
+        <p class="lede">The latest product stories shown in August—rebuilt from the original renders, physical samples, and engineering visuals.</p>
+        <p class="cover-date">Prepared 26 August 2026</p>
+      </div>
+      <div class="cover-mosaic" aria-label="August product lineup">
+        <div class="cover-tile origami"><img src="assets/products/origami/deploying.png" alt="Origami Wagon deploying"><span>Origami</span></div>
+        <div class="cover-tile instant"><img src="assets/products/instant/finished-chair.jpg" alt="Instant Indoor armchair sample"><span>Instant Indoor</span></div>
+        <div class="cover-tile pack"><img src="assets/products/daypacks/diamond.jpg" alt="Diamond daypack"><span>Daypacks</span></div>
+        <div class="cover-tile"><img src="assets/products/gram/hero.png" alt="GRAM chair"><span>GRAM</span></div>
+        <div class="cover-tile"><img src="assets/products/suspend/hero.png" alt="Suspend chair"><span>Suspend</span></div>
+        <div class="cover-tile"><img src="assets/products/hawkeye/hero.png" alt="Hawkeye chair"><span>Hawkeye</span></div>
+      </div>
     </div>
-    <div class="slide-number">01 / 15</div>
+    <div class="slide-number">01 / 20</div>
   </section>
 
   <section class="slide" id="slide-2">
     <div class="section-label">August Lineup</div>
     <div class="content">
-      <p class="eyebrow">What we showed</p>
-      <h1>Six product stories from the August room.</h1>
-      <p class="lede">Each section begins with the headline visitors saw, then condenses the digital-signage loop into the product idea, the proof, and the handoff into the current update.</p>
-      <div class="product-grid">
-        <a class="product-tile" href="#slide-3"><img src="assets/signage-captures/origami.png" alt="Origami Wagon August signage"><span class="tile-copy"><strong>Origami Wagon</strong><span>The wagon is one folded sheet.</span></span></a>
-        <a class="product-tile" href="#slide-5"><img src="assets/signage-captures/instant.png" alt="Instant Indoor August signage"><span class="tile-copy"><strong>Instant Indoor</strong><span>A real sofa, ordered like anything else.</span></span></a>
-        <a class="product-tile" href="#slide-7"><img src="assets/signage-captures/daypacks.png" alt="Timber Ridge Daypacks August signage"><span class="tile-copy"><strong>Diamond + Spiral</strong><span>We stopped drawing bags. We started building them.</span></span></a>
-        <a class="product-tile" href="#slide-9"><img src="assets/signage-captures/gram.png" alt="GRAM Chair August signage"><span class="tile-copy"><strong>GRAM Chair</strong><span>A rocking chair with no rocker.</span></span></a>
-        <a class="product-tile" href="#slide-11"><img src="assets/signage-captures/suspend.png" alt="Suspend Chair August signage"><span class="tile-copy"><strong>Suspend Chair</strong><span>Bring a swing. Not a chair.</span></span></a>
-        <a class="product-tile" href="#slide-13"><img src="assets/signage-captures/hawkeye.png" alt="Hawkeye August signage"><span class="tile-copy"><strong>Hawkeye V3</strong><span>It does not just rock.</span></span></a>
+      <p class="eyebrow">What the room saw</p><h1>Six products. Six clear ideas.</h1>
+      <p class="lede">The signage was the newest expression of each product—not a dashboard to present, but a source of current product content.</p>
+      <div class="lineup">
+        <a class="lineup-card" href="#slide-3"><div class="visual dark"><img src="assets/products/origami/stowed.png" alt="Origami Wagon stowed"></div><div class="lineup-copy"><b>01</b><strong>Origami Wagon</strong><span>One folded sheet becomes the body and the mechanism.</span></div></a>
+        <a class="lineup-card" href="#slide-6"><div class="visual photo"><img src="assets/products/instant/finished-chair.jpg" alt="Instant Indoor sample"></div><div class="lineup-copy"><b>02</b><strong>Instant Indoor</strong><span>A finished sofa platform designed for ordinary e-commerce.</span></div></a>
+        <a class="lineup-card" href="#slide-9"><div class="visual"><img src="assets/products/daypacks/spiral.jpg" alt="Spiral daypack"></div><div class="lineup-copy"><b>03</b><strong>Diamond + Spiral</strong><span>Physical form studies before tech packs and details.</span></div></a>
+        <a class="lineup-card" href="#slide-12"><div class="visual"><img src="assets/products/gram/hero.png" alt="GRAM chair"></div><div class="lineup-copy"><b>04</b><strong>GRAM Chair</strong><span>The folding frame itself becomes the rocking mechanism.</span></div></a>
+        <a class="lineup-card" href="#slide-15"><div class="visual"><img src="assets/products/suspend/hero.png" alt="Suspend chair"></div><div class="lineup-copy"><b>05</b><strong>Suspend Chair</strong><span>An inner seat hangs inside a conventional folding frame.</span></div></a>
+        <a class="lineup-card" href="#slide-18"><div class="visual"><img src="assets/products/hawkeye/hero.png" alt="Hawkeye chair"></div><div class="lineup-copy"><b>06</b><strong>Hawkeye V3</strong><span>Arched spring bars create rock, bounce, roll, and twist.</span></div></a>
       </div>
     </div>
-    <div class="slide-number">02 / 15</div>
+    <div class="slide-number">02 / 20</div>
   </section>
 
-  <section class="slide divider" id="slide-3" style="--hero:url('assets/signage-captures/origami.png')">
+  <section class="slide divider" id="slide-3">
     <div class="section-label">01 | Origami Wagon</div>
-    <div class="content"><div class="product-num">01</div><h1>Origami Wagon</h1><p class="lede">The wagon is one folded sheet.</p></div>
-    <div class="slide-number">03 / 15</div>
+    <div class="content divider-layout">
+      <div class="divider-copy"><div class="product-number">01</div><h1>Origami<br>Wagon</h1><p class="lede">The wagon is one folded sheet.</p></div>
+      <div class="hero-stage dark"><img class="hero-left" src="assets/products/origami/stowed.png" alt="Origami Wagon stowed"><img class="hero-right" src="assets/products/origami/deploying.png" alt="Origami Wagon deploying"><span class="hero-caption">Stowed → deployed</span></div>
+    </div>
+    <div class="slide-number">03 / 20</div>
   </section>
 
   <section class="slide" id="slide-4">
-    <div class="section-label">Origami Wagon | August Product Story</div>
-    <div class="content product-layout">
-      <button class="media-frame" type="button" data-lightbox="assets/signage-captures/origami.png" aria-label="Open Origami Wagon signage fullscreen"><img src="assets/signage-captures/origami.png" alt="Origami Wagon August signage opening frame"><span class="zoom-label">Open August loop</span></button>
-      <div class="product-copy">
+    <div class="section-label">Origami Wagon | Product Idea</div>
+    <div class="content story-grid">
+      <button class="asset-button dark" type="button" data-lightbox="assets/products/origami/deploying.png" aria-label="Open Origami Wagon render"><img src="assets/products/origami/deploying.png" alt="Origami Wagon partially deployed"><span class="zoom">Open asset</span></button>
+      <div class="story-copy">
         <p class="eyebrow">SKW-033</p><h2>One sheet replaces the frame, bag, and fasteners.</h2>
-        <ul class="bullet-list">
-          <li><strong>The category problem:</strong> folding wagons still use the same tube-frame and fabric-bag architecture, leaving the category to compete on features and price.</li>
-          <li><strong>The product idea:</strong> score one polymer sheet so the basket carries the load and performs the fold; the creases become the hinges.</li>
-          <li><strong>The proof shown:</strong> a solved one-degree-of-freedom mechanism with 26 rigid panels, 78 creases, and a cut-ready tooling file.</li>
-          <li><strong>The payoff:</strong> walls-only ribs carry the structure while the body targets a 50 kg payload and a roughly four-inch collapsed bundle.</li>
-        </ul>
-        <div class="stats-row"><div class="stat"><span class="stat-value">26</span><span class="stat-label">Rigid panels</span></div><div class="stat"><span class="stat-value">44</span><span class="stat-label">Solved states</span></div><div class="stat"><span class="stat-value">50 kg</span><span class="stat-label">Payload target</span></div></div>
-        <div class="takeaway"><strong>August takeaway</strong>This is no longer just a different wagon shape. The structure, folding mechanism, shipping story, and category position are the same idea.</div>
-        <div class="update-prompt"><span><strong>Update prompt:</strong> Where the full-size sample and physical acceptance testing stand now.</span><a href="https://trello.com/c/qHgjVBW7" target="_blank" rel="noreferrer">Trello card →</a></div>
+        <p class="lede">Instead of another tube frame carrying a fabric basket, the scored sheet is the basket, the structure, and the fold.</p>
+        <div class="big-idea">The creases are the hinges. The walls carry the load. The product and its mechanism are the same object.</div>
+        <div class="stats"><div class="stat"><strong>26</strong><span>Rigid panels</span></div><div class="stat"><strong>78</strong><span>Creases</span></div><div class="stat"><strong>1 DoF</strong><span>Solved motion</span></div></div>
+        <div class="key-points"><div class="key-point"><b>Category move</b><p>A mono-material folding body with a fundamentally different silhouette and shipping story.</p></div><div class="key-point"><b>Target</b><p>50 kg payload and a collapsed package roughly four inches thick.</p></div></div>
       </div>
     </div>
-    <div class="slide-number">04 / 15</div>
+    <div class="slide-number">04 / 20</div>
   </section>
 
-  <section class="slide divider" id="slide-5" style="--hero:url('assets/signage-captures/instant.png')">
+  <section class="slide" id="slide-5">
+    <div class="section-label">Origami Wagon | Mechanism + Proof</div>
+    <div class="content">
+      <p class="eyebrow">From solved motion to cut-ready geometry</p><h2>One controlled path from case to wagon.</h2>
+      <div class="triptych">
+        <button class="asset-button dark" type="button" data-lightbox="assets/products/origami/stowed.png"><img src="assets/products/origami/stowed.png" alt="Origami Wagon stowed"><span class="step">01 Stow</span></button>
+        <button class="asset-button dark" type="button" data-lightbox="assets/products/origami/deploying.png"><img src="assets/products/origami/deploying.png" alt="Origami Wagon deploying"><span class="step">02 Deploy</span></button>
+        <button class="asset-button dark" type="button" data-lightbox="assets/products/origami/deployed-sample.png"><img src="assets/products/origami/deployed-sample.png" alt="Origami Wagon deployed sample"><span class="step">03 Carry</span></button>
+      </div>
+      <div class="proof-strip">
+        <button class="asset-button" type="button" data-label="Crease map" data-lightbox="assets/products/origami/crease-map.png"><img src="assets/products/origami/crease-map.png" alt="Origami Wagon crease map"></button>
+        <button class="asset-button" type="button" data-label="Rib strategy" data-lightbox="assets/products/origami/rib-map.png"><img src="assets/products/origami/rib-map.png" alt="Origami Wagon rib map"></button>
+        <button class="asset-button" type="button" data-label="Nested stack" data-lightbox="assets/products/origami/stack-map.png"><img src="assets/products/origami/stack-map.png" alt="Origami Wagon stack thickness map"></button>
+        <button class="asset-button" type="button" data-label="Tooling layout" data-lightbox="assets/products/origami/tooling-layout.png"><img src="assets/products/origami/tooling-layout.png" alt="Origami Wagon tooling layout"></button>
+      </div>
+      <div class="update-bar"><span><b>Current update:</b> Full-size sample status and the physical acceptance plan.</span><span class="update-links"><a href="https://trello.com/c/qHgjVBW7" target="_blank" rel="noreferrer">Open card →</a></span></div>
+    </div>
+    <div class="slide-number">05 / 20</div>
+  </section>
+
+  <section class="slide divider" id="slide-6">
     <div class="section-label">02 | Instant Indoor</div>
-    <div class="content"><div class="product-num">02</div><h1>Instant Indoor</h1><p class="lede">A real sofa. Ordered like anything else.</p></div>
-    <div class="slide-number">05 / 15</div>
+    <div class="content divider-layout">
+      <div class="divider-copy"><div class="product-number">02</div><h1>Instant<br>Indoor</h1><p class="lede">A real sofa. Ordered like anything else.</p></div>
+      <div class="hero-stage sand"><img class="hero-main" src="assets/products/instant/finished-chair.jpg" alt="Finished Instant Indoor armchair"><img class="hero-small" src="assets/products/instant/collapsed-frame.jpg" alt="Collapsed Instant Indoor frame"><span class="hero-caption">Finished sample + folded architecture</span></div>
+    </div>
+    <div class="slide-number">06 / 20</div>
   </section>
 
-  <section class="slide" id="slide-6">
-    <div class="section-label">Instant Indoor | August Product Story</div>
-    <div class="content product-layout">
-      <button class="media-frame" type="button" data-lightbox="assets/signage-captures/instant.png" aria-label="Open Instant Indoor signage fullscreen"><img src="assets/signage-captures/instant.png" alt="Instant Indoor August signage opening frame"><span class="zoom-label">Open August loop</span></button>
-      <div class="product-copy">
-        <p class="eyebrow">SKW-041</p><h2>A sofa platform built around parcel-ready deployment.</h2>
-        <ul class="bullet-list">
-          <li><strong>The category problem:</strong> furniture solved delivery with oversized freight or by making the customer finish the product.</li>
-          <li><strong>The product idea:</strong> use Westfield's folding steel-tube expertise to create a quad-fold frame that opens without tools.</li>
-          <li><strong>The platform:</strong> one 42 × 42 inch frame becomes an armchair, armless chair, corner, ottoman, sofa, or sectional.</li>
-          <li><strong>The proof shown:</strong> the finished armchair sample—the hardest configuration—was beside the screen for people to sit in and inspect.</li>
-        </ul>
-        <div class="stats-row"><div class="stat"><span class="stat-value">1</span><span class="stat-label">Shared frame</span></div><div class="stat"><span class="stat-value">6</span><span class="stat-label">Configurations</span></div><div class="stat"><span class="stat-value">3</span><span class="stat-label">Deploy steps</span></div></div>
-        <div class="takeaway"><strong>August takeaway</strong>The value is not flat-pack furniture. It is a finished indoor product that moves through ordinary e-commerce channels and opens by hand.</div>
-        <div class="update-prompt"><span><strong>Update prompt:</strong> The quad-fold architecture restart, revised soft goods, and next factory session.</span><a href="https://trello.com/c/OUcGqXxw" target="_blank" rel="noreferrer">Trello card →</a></div>
+  <section class="slide" id="slide-7">
+    <div class="section-label">Instant Indoor | Product Idea</div>
+    <div class="content frame-gallery">
+      <button class="asset-button photo primary" type="button" data-lightbox="assets/products/instant/finished-chair.jpg"><span class="media-caption">Finished armchair sample</span><img src="assets/products/instant/finished-chair.jpg" alt="Instant Indoor finished armchair"><span class="zoom">Open asset</span></button>
+      <div class="side">
+        <button class="asset-button photo" type="button" data-lightbox="assets/products/instant/open-frame.jpg"><span class="media-caption">Frame open</span><img src="assets/products/instant/open-frame.jpg" alt="Instant Indoor open frame"></button>
+        <button class="asset-button photo" type="button" data-lightbox="assets/products/instant/suspension-detail.jpg"><span class="media-caption">Seat suspension</span><img src="assets/products/instant/suspension-detail.jpg" alt="Instant Indoor seat suspension detail"></button>
       </div>
     </div>
-    <div class="slide-number">06 / 15</div>
-  </section>
-
-  <section class="slide divider" id="slide-7" style="--hero:url('assets/signage-captures/daypacks.png')">
-    <div class="section-label">03 | Timber Ridge Daypacks</div>
-    <div class="content"><div class="product-num">03</div><h1>Diamond + Spiral</h1><p class="lede">We stopped drawing bags. We started building them.</p></div>
-    <div class="slide-number">07 / 15</div>
+    <div class="content" style="padding-top:0">
+      <div class="story-grid" style="grid-template-columns:1fr 1fr"><div><p class="eyebrow">The hardest configuration first</p><h2>A finished chair, not an assembly project.</h2></div><div class="key-points"><div class="key-point"><b>Category problem</b><p>Indoor furniture still arrives through oversized freight or asks the customer to finish the product.</p></div><div class="key-point"><b>Westfield advantage</b><p>A familiar steel folding system deploys by hand, while the soft goods hide the mechanism.</p></div></div></div>
+    </div>
+    <div class="slide-number">07 / 20</div>
   </section>
 
   <section class="slide" id="slide-8">
-    <div class="section-label">Diamond + Spiral | August Product Story</div>
-    <div class="content product-layout">
-      <button class="media-frame" type="button" data-lightbox="assets/signage-captures/daypacks.png" aria-label="Open Timber Ridge Daypacks signage fullscreen"><img src="assets/signage-captures/daypacks.png" alt="Timber Ridge Daypacks August signage opening frame"><span class="zoom-label">Open August loop</span></button>
-      <div class="product-copy">
-        <p class="eyebrow">TB4695 + TB4696</p><h2>Make the volume real before drawing the soft goods.</h2>
-        <ul class="bullet-list">
-          <li><strong>The process:</strong> twenty volumetric solids were modeled, three were printed at 1:5 scale, and only two advanced to samples.</li>
-          <li><strong>Diamond:</strong> a structured 20-liter body built from mirrored triangular panels with a slanted front access zipper.</li>
-          <li><strong>Spiral:</strong> a 22-liter sling-and-pack hybrid whose front panel wraps into the hip so pack and belt read as one form.</li>
-          <li><strong>The proof shown:</strong> first samples changed pockets, mesh, and webbing—but not the silhouettes chosen from the physical form studies.</li>
-        </ul>
-        <div class="stats-row"><div class="stat"><span class="stat-value">20</span><span class="stat-label">Forms modeled</span></div><div class="stat"><span class="stat-value">3</span><span class="stat-label">Printed at 1:5</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Carried to sample</span></div></div>
-        <div class="takeaway"><strong>August takeaway</strong>Form became a decision made early and cheaply. The tech packs described physical objects instead of asking a supplier to discover the shape.</div>
-        <div class="update-prompt"><span><strong>Update prompt:</strong> Review Diamond and Spiral separately and capture the August feedback for each next sample.</span><a href="https://trello.com/c/UO9YYma7" target="_blank" rel="noreferrer">Diamond →</a><a href="https://trello.com/c/jzPb5qso" target="_blank" rel="noreferrer">Spiral →</a></div>
+    <div class="section-label">Instant Indoor | Platform</div>
+    <div class="content platform-grid">
+      <button class="asset-button" type="button" data-lightbox="assets/products/instant/sectional-platform.png"><span class="media-caption">One frame, multiple configurations</span><img src="assets/products/instant/sectional-platform.png" alt="Instant Indoor sectional platform"><span class="zoom">Open asset</span></button>
+      <div class="story-copy">
+        <p class="eyebrow">42 × 42 platform</p><h2>One frame becomes a room.</h2>
+        <p class="lede">A common quad-fold frame supports the product family instead of creating a new mechanism for every SKU.</p>
+        <div class="deployment">
+          <button class="asset-button photo" type="button" data-lightbox="assets/products/instant/collapsed-frame.jpg"><span class="media-caption">Folded</span><img src="assets/products/instant/collapsed-frame.jpg" alt="Collapsed Instant Indoor frame"></button>
+          <button class="asset-button photo" type="button" data-lightbox="assets/products/instant/open-frame.jpg"><span class="media-caption">Open</span><img src="assets/products/instant/open-frame.jpg" alt="Open Instant Indoor frame"></button>
+          <button class="asset-button photo" type="button" data-lightbox="assets/products/instant/factory-sample.jpg"><span class="media-caption">Upholstered</span><img src="assets/products/instant/factory-sample.jpg" alt="Instant Indoor factory sample"></button>
+        </div>
+        <div class="config-chips"><span>Armchair</span><span>Armless</span><span>Corner</span><span>Ottoman</span><span>Sofa</span><span>Sectional</span></div>
+        <div class="update-bar"><span><b>Current update:</b> Quad-fold architecture restart, revised soft goods, and next factory session.</span><span class="update-links"><a href="https://trello.com/c/OUcGqXxw" target="_blank" rel="noreferrer">Open card →</a></span></div>
       </div>
     </div>
-    <div class="slide-number">08 / 15</div>
+    <div class="slide-number">08 / 20</div>
   </section>
 
-  <section class="slide divider" id="slide-9" style="--hero:url('assets/signage-captures/gram.png')">
-    <div class="section-label">04 | GRAM Chair</div>
-    <div class="content"><div class="product-num">04</div><h1>GRAM Chair</h1><p class="lede">A rocking chair with no rocker.</p></div>
-    <div class="slide-number">09 / 15</div>
+  <section class="slide divider" id="slide-9">
+    <div class="section-label">03 | Timber Ridge Daypacks</div>
+    <div class="content divider-layout">
+      <div class="divider-copy"><div class="product-number">03</div><h1>Diamond<br>+ Spiral</h1><p class="lede">We stopped drawing bags. We started building them.</p></div>
+      <div class="hero-stage"><img class="hero-left" src="assets/products/daypacks/diamond.jpg" alt="Diamond daypack"><img class="hero-right" src="assets/products/daypacks/spiral.jpg" alt="Spiral daypack"><span class="hero-caption">Two forms carried to sample</span></div>
+    </div>
+    <div class="slide-number">09 / 20</div>
   </section>
 
   <section class="slide" id="slide-10">
-    <div class="section-label">GRAM Chair | August Product Story</div>
-    <div class="content product-layout">
-      <button class="media-frame" type="button" data-lightbox="assets/signage-captures/gram.png" aria-label="Open GRAM Chair signage fullscreen"><img src="assets/signage-captures/gram.png" alt="GRAM Chair August signage opening frame"><span class="zoom-label">Open August loop</span></button>
-      <div class="product-copy">
-        <p class="eyebrow">Innovation S28</p><h2>The frame becomes the motion mechanism.</h2>
-        <ul class="bullet-list">
-          <li><strong>The category problem:</strong> portable rockers bolt runners, springs, or linkages onto a frame that already has to fold.</li>
-          <li><strong>The product idea:</strong> replace eight rigid elbows with elastomeric corners that act as the pivot and the return spring.</li>
-          <li><strong>The tunable feel:</strong> wall thickness, flexure length, and durometer set the rocking response without changing the frame.</li>
-          <li><strong>The proof shown:</strong> working samples in the room let visitors feel the motion, inspect underneath, and see that nothing was added below the seat.</li>
-        </ul>
-        <div class="stats-row"><div class="stat"><span class="stat-value">8</span><span class="stat-label">Compliant corners</span></div><div class="stat"><span class="stat-value">3</span><span class="stat-label">Tuning levers</span></div><div class="stat"><span class="stat-value">0</span><span class="stat-label">Frame changes</span></div></div>
-        <div class="takeaway"><strong>August takeaway</strong>Motion is created by one redesigned part, while the familiar fold, tube frame, and pack size remain intact.</div>
-        <div class="update-prompt"><span><strong>Update prompt:</strong> The adjustable test rig and what must be measured before the next chair prototype.</span><a href="https://trello.com/c/7ir1icyE" target="_blank" rel="noreferrer">Trello card →</a></div>
+    <div class="section-label">Diamond + Spiral | Form Exploration</div>
+    <div class="content">
+      <p class="eyebrow">Shape first. Detail second.</p><h2>Twenty volumes made the silhouette a physical decision.</h2>
+      <div class="forms-grid" aria-label="Twenty daypack form studies">
+        <div class="form-card"><span>01</span><img src="assets/products/daypacks/form-01.png" alt="Daypack form 1"></div><div class="form-card"><span>02</span><img src="assets/products/daypacks/form-02.png" alt="Daypack form 2"></div><div class="form-card"><span>03</span><img src="assets/products/daypacks/form-03.png" alt="Daypack form 3"></div><div class="form-card"><span>04</span><img src="assets/products/daypacks/form-04.png" alt="Daypack form 4"></div><div class="form-card"><span>05</span><img src="assets/products/daypacks/form-05.png" alt="Daypack form 5"></div><div class="form-card"><span>06</span><img src="assets/products/daypacks/form-06.png" alt="Daypack form 6"></div><div class="form-card"><span>07</span><img src="assets/products/daypacks/form-07.png" alt="Daypack form 7"></div><div class="form-card"><span>08</span><img src="assets/products/daypacks/form-08.png" alt="Daypack form 8"></div><div class="form-card selected"><span>09</span><img src="assets/products/daypacks/form-09.png" alt="Selected Spiral daypack form"></div><div class="form-card"><span>10</span><img src="assets/products/daypacks/form-10.png" alt="Daypack form 10"></div>
+        <div class="form-card"><span>11</span><img src="assets/products/daypacks/form-11.png" alt="Daypack form 11"></div><div class="form-card"><span>12</span><img src="assets/products/daypacks/form-12.png" alt="Daypack form 12"></div><div class="form-card"><span>13</span><img src="assets/products/daypacks/form-13.png" alt="Daypack form 13"></div><div class="form-card selected"><span>14</span><img src="assets/products/daypacks/form-14.png" alt="Selected Diamond daypack form"></div><div class="form-card"><span>15</span><img src="assets/products/daypacks/form-15.png" alt="Daypack form 15"></div><div class="form-card"><span>16</span><img src="assets/products/daypacks/form-16.png" alt="Daypack form 16"></div><div class="form-card"><span>17</span><img src="assets/products/daypacks/form-17.png" alt="Daypack form 17"></div><div class="form-card"><span>18</span><img src="assets/products/daypacks/form-18.png" alt="Daypack form 18"></div><div class="form-card"><span>19</span><img src="assets/products/daypacks/form-19.png" alt="Daypack form 19"></div><div class="form-card"><span>20</span><img src="assets/products/daypacks/form-20.png" alt="Daypack form 20"></div>
       </div>
+      <div class="story-grid" style="grid-template-columns:.74fr 1.26fr"><div class="stats"><div class="stat"><strong>20</strong><span>Volumes modeled</span></div><div class="stat"><strong>3</strong><span>Printed at 1:5</span></div><div class="stat"><strong>2</strong><span>Carried to sample</span></div></div><div class="big-idea">The tech packs described forms we had already held, compared, and chosen.</div></div>
     </div>
-    <div class="slide-number">10 / 15</div>
+    <div class="slide-number">10 / 20</div>
   </section>
 
-  <section class="slide divider" id="slide-11" style="--hero:url('assets/signage-captures/suspend.png')">
-    <div class="section-label">05 | Suspend Chair</div>
-    <div class="content"><div class="product-num">05</div><h1>Suspend Chair</h1><p class="lede">Bring a swing. Not a chair.</p></div>
-    <div class="slide-number">11 / 15</div>
-  </section>
-
-  <section class="slide" id="slide-12">
-    <div class="section-label">Suspend Chair | August Product Story</div>
-    <div class="content product-layout">
-      <button class="media-frame" type="button" data-lightbox="assets/signage-captures/suspend.png" aria-label="Open Suspend Chair signage fullscreen"><img src="assets/signage-captures/suspend.png" alt="Suspend Chair August signage opening frame"><span class="zoom-label">Open August loop</span></button>
-      <div class="product-copy">
-        <p class="eyebrow">SKW-044</p><h2>Two frames: one hangs inside the other.</h2>
-        <ul class="bullet-list">
-          <li><strong>The category problem:</strong> most camp chairs either fold or move; motion usually arrives as hardware added beneath the seat.</li>
-          <li><strong>The product idea:</strong> suspend the inner seat frame from the arms on four static webbing straps so it swings and pitches inside the outer frame.</li>
-          <li><strong>The experience:</strong> the seat travels forward and back along an arc, rises at full travel, and returns under gravity rather than a spring.</li>
-          <li><strong>The proof shown:</strong> the sample delivered 5.6 inches of travel while the suspension remained entirely above the seat.</li>
-        </ul>
-        <div class="stats-row"><div class="stat"><span class="stat-value">4</span><span class="stat-label">Suspension straps</span></div><div class="stat"><span class="stat-value">5.6 in</span><span class="stat-label">Measured travel</span></div><div class="stat"><span class="stat-value">0</span><span class="stat-label">Hardware below</span></div></div>
-        <div class="takeaway"><strong>August takeaway</strong>The chair keeps a conventional folding footprint while delivering a swing-like experience that begins the moment the user pushes off.</div>
-        <div class="update-prompt"><span><strong>Update prompt:</strong> Which upper points, lower points, and strap lengths now give the best controlled motion.</span><a href="https://trello.com/c/zgqMBTfm" target="_blank" rel="noreferrer">Trello card →</a></div>
+  <section class="slide" id="slide-11">
+    <div class="section-label">Diamond + Spiral | Finalists</div>
+    <div class="content">
+      <p class="eyebrow">Physical form → product character</p><h2>Two silhouettes survived the first sample.</h2>
+      <div class="finalists">
+        <div class="finalist"><button class="model asset-button" type="button" data-lightbox="assets/products/daypacks/form-sample-a.jpg"><img src="assets/products/daypacks/form-sample-a.jpg" alt="Diamond printed form"></button><div class="product"><p class="eyebrow">TB4695 · 20L</p><h3>Diamond</h3><button class="asset-button" type="button" data-lightbox="assets/products/daypacks/diamond.jpg"><img src="assets/products/daypacks/diamond.jpg" alt="Diamond daypack"></button><p>Mirrored triangular panels, M-profile webbing, and slanted front access.</p></div></div>
+        <div class="finalist"><button class="model asset-button" type="button" data-lightbox="assets/products/daypacks/form-sample-spiral.jpg"><img src="assets/products/daypacks/form-sample-spiral.jpg" alt="Spiral printed form"></button><div class="product"><p class="eyebrow">TB4696 · 22L</p><h3>Spiral</h3><button class="asset-button" type="button" data-lightbox="assets/products/daypacks/spiral.jpg"><img src="assets/products/daypacks/spiral.jpg" alt="Spiral daypack"></button><p>A sling-and-pack hybrid whose front panel continues into the hip belt.</p></div></div>
       </div>
+      <div class="update-bar"><span><b>Current update:</b> Review the August feedback and next-sample direction separately for Diamond and Spiral.</span><span class="update-links"><a href="https://trello.com/c/UO9YYma7" target="_blank" rel="noreferrer">Diamond →</a><a href="https://trello.com/c/jzPb5qso" target="_blank" rel="noreferrer">Spiral →</a></span></div>
     </div>
-    <div class="slide-number">12 / 15</div>
+    <div class="slide-number">11 / 20</div>
   </section>
 
-  <section class="slide divider" id="slide-13" style="--hero:url('assets/signage-captures/hawkeye.png')">
-    <div class="section-label">06 | Hawkeye V3</div>
-    <div class="content"><div class="product-num">06</div><h1>Hawkeye V3</h1><p class="lede">It does not just rock.</p></div>
-    <div class="slide-number">13 / 15</div>
+  <section class="slide divider" id="slide-12">
+    <div class="section-label">04 | GRAM Chair</div>
+    <div class="content divider-layout">
+      <div class="divider-copy"><div class="product-number">04</div><h1>GRAM<br>Chair</h1><p class="lede">A rocking chair with no rocker.</p></div>
+      <div class="hero-stage"><img class="hero-main" src="assets/products/gram/hero.png" alt="GRAM chair with compliant corners"><span class="hero-caption">Eight corners create the motion</span></div>
+    </div>
+    <div class="slide-number">12 / 20</div>
+  </section>
+
+  <section class="slide" id="slide-13">
+    <div class="section-label">GRAM Chair | Product Mechanism</div>
+    <div class="content story-grid">
+      <button class="asset-button" type="button" data-lightbox="assets/products/gram/front.png"><img src="assets/products/gram/front.png" alt="Front view of GRAM chair"><span class="zoom">Open asset</span></button>
+      <div class="story-copy"><p class="eyebrow">Nothing added under the seat</p><h2>The frame becomes the rocking mechanism.</h2><p class="lede">Eight rigid elbows are replaced by elastomeric corners. The square frame shears into a parallelogram; each corner pivots and returns.</p><div class="big-idea">No runners. No springs. No linkages. The familiar folding architecture stays intact.</div><div class="stats"><div class="stat"><strong>8</strong><span>Compliant corners</span></div><div class="stat"><strong>0</strong><span>Added linkages</span></div><div class="stat"><strong>3</strong><span>Tuning levers</span></div></div><div class="key-points"><div class="key-point"><b>What changes</b><p>The corner geometry and elastomer specification.</p></div><div class="key-point"><b>What stays</b><p>The tube frame, fold, pack size, and recognizable chair architecture.</p></div></div></div>
+    </div>
+    <div class="slide-number">13 / 20</div>
   </section>
 
   <section class="slide" id="slide-14">
-    <div class="section-label">Hawkeye V3 | August Product Story</div>
-    <div class="content product-layout">
-      <button class="media-frame" type="button" data-lightbox="assets/signage-captures/hawkeye.png" aria-label="Open Hawkeye signage fullscreen"><img src="assets/signage-captures/hawkeye.png" alt="Hawkeye V3 August signage opening frame"><span class="zoom-label">Open August loop</span></button>
-      <div class="product-copy">
-        <p class="eyebrow">SKW-018</p><h2>The runner did not disappear. It became the spring.</h2>
-        <ul class="bullet-list">
-          <li><strong>The category problem:</strong> rail rockers, hinged rockers, and plungers each constrain the user to one motion axis.</li>
-          <li><strong>The V2 lesson:</strong> a spring behind the rider returned a short shudder; moving the spring under the rider changed the experience.</li>
-          <li><strong>The product idea:</strong> two arched bars create four live responses—bounce, rock, roll, and twist—with no coils, pivots, or hinges.</li>
-          <li><strong>The production direction:</strong> steel proved the geometry; a tuned composite bar cuts weight and makes the layup the tuning tool.</li>
-        </ul>
-        <div class="stats-row"><div class="stat"><span class="stat-value">4</span><span class="stat-label">Motion directions</span></div><div class="stat"><span class="stat-value">1.3 Hz</span><span class="stat-label">Rock target</span></div><div class="stat"><span class="stat-value">1.8 Hz</span><span class="stat-label">Bounce target</span></div></div>
-        <div class="takeaway"><strong>August takeaway</strong>Hawkeye answers the rider instead of putting every movement back onto one fixed arc.</div>
-        <div class="update-prompt"><span><strong>Update prompt:</strong> The V4 adjustable test, rider-weight range, lateral stability, and composite-sample timing.</span><a href="https://trello.com/c/md4yE8HL" target="_blank" rel="noreferrer">Trello card →</a></div>
-      </div>
-    </div>
-    <div class="slide-number">14 / 15</div>
-  </section>
-
-  <section class="slide cover" id="slide-15">
-    <div class="section-label">Product-by-Product Discussion</div>
+    <div class="section-label">GRAM Chair | Tuning + Next Generation</div>
     <div class="content">
-      <p class="eyebrow">From August story to current update</p>
-      <h1>What changed next?</h1>
-      <p class="lede">The August signage is the shared starting point. Use the current update to show how each product moved—or what still has to move.</p>
-      <div class="closing-grid">
-        <article class="closing-card"><h3>Origami Wagon</h3><p>Full-size sample and physical acceptance plan.</p></article>
-        <article class="closing-card"><h3>Instant Indoor</h3><p>Quad-fold restart, soft goods, and factory timing.</p></article>
-        <article class="closing-card"><h3>Diamond + Spiral</h3><p>Separate feedback and next-sample decisions.</p></article>
-        <article class="closing-card"><h3>GRAM Chair</h3><p>Adjustable mechanism rig and measured feel.</p></article>
-        <article class="closing-card"><h3>Suspend Chair</h3><p>Best motion geometry before V3 styling.</p></article>
-        <article class="closing-card"><h3>Hawkeye V3</h3><p>Controlled proof across rider weights.</p></article>
+      <p class="eyebrow">Make the feel measurable</p><h2>A narrow window separates a rocker from a dead chair.</h2>
+      <div class="diagram-grid">
+        <div class="diagram-card"><button class="asset-button" type="button" data-lightbox="assets/products/gram/stiffness-window.png"><img src="assets/products/gram/stiffness-window.png" alt="GRAM chair stiffness window"></button><div class="diagram-copy"><h3>Target the viable band</h3><p>Below 120 N·m/rad the chair falls over; above 300 it feels stable but dead. The current recommendation is 240.</p></div></div>
+        <div class="diagram-card"><button class="asset-button" type="button" data-lightbox="assets/products/gram/two-shot-side.png"><img src="assets/products/gram/two-shot-side.png" alt="GRAM chair two-shot side frame"></button><div class="diagram-copy"><h3>One molding per side</h3><p>A rigid structural body and soft elastomer corners become one two-shot side frame.</p></div></div>
       </div>
+      <div class="update-bar"><span><b>Current update:</b> Adjustable mechanism rig and the measured feel needed before the next chair prototype.</span><span class="update-links"><a href="https://trello.com/c/7ir1icyE" target="_blank" rel="noreferrer">Open card →</a></span></div>
     </div>
-    <div class="slide-number">15 / 15</div>
+    <div class="slide-number">14 / 20</div>
   </section>
 
-  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Fullscreen presentation image">
-    <button id="lightbox-close" class="lightbox-close" type="button" aria-label="Close fullscreen image">&times;</button>
-    <img id="lightbox-image" src="" alt="">
-  </div>
+  <section class="slide divider" id="slide-15">
+    <div class="section-label">05 | Suspend Chair</div>
+    <div class="content divider-layout">
+      <div class="divider-copy"><div class="product-number">05</div><h1>Suspend<br>Chair</h1><p class="lede">Bring a swing. Not a chair.</p></div>
+      <div class="hero-stage"><img class="hero-main" src="assets/products/suspend/hero.png" alt="Suspend chair"><span class="hero-caption">Motion above the seat</span></div>
+    </div>
+    <div class="slide-number">15 / 20</div>
+  </section>
 
+  <section class="slide" id="slide-16">
+    <div class="section-label">Suspend Chair | Architecture</div>
+    <div class="content suspend-layout">
+      <button class="asset-button" type="button" data-lightbox="assets/products/suspend/two-frames.png"><img src="assets/products/suspend/two-frames.png" alt="Suspend chair inner and outer frames"><span class="zoom">Open asset</span></button>
+      <div class="story-copy"><p class="eyebrow">Two frames. One hangs.</p><h2>The seat floats inside the folding frame.</h2><p class="lede">The outer frame folds and stands on the ground. The inner seat frame hangs from the arms on four static straps.</p><div class="key-points"><div class="key-point"><b>Four straps</b><p>Carry the seat and define the swing path—forward, back, and slightly side-to-side.</p></div><div class="key-point"><b>Two bungees</b><p>Connect the ends, soften the motion, and return the seat toward center.</p></div></div><div class="stats"><div class="stat"><strong>4</strong><span>Static straps</span></div><div class="stat"><strong>2</strong><span>Return bungees</span></div><div class="stat"><strong>5.6 in</strong><span>Seat travel</span></div></div><div class="big-idea">The chair feels suspended, but the motion lives above the seat—so the product still folds flat.</div></div>
+    </div>
+    <div class="slide-number">16 / 20</div>
+  </section>
+
+  <section class="slide" id="slide-17">
+    <div class="section-label">Suspend Chair | Motion + Form</div>
+    <div class="content">
+      <p class="eyebrow">Design and sample move the same way</p><h2>The mechanism is close. The shape still has room to travel.</h2>
+      <div class="motion-grid">
+        <button class="asset-button" type="button" data-lightbox="assets/products/suspend/sample-design.png"><span class="media-caption">Sample + design</span><img src="assets/products/suspend/sample-design.png" alt="Suspend sample and design comparison"><span class="zoom">Open asset</span></button>
+        <button class="asset-button" type="button" data-lightbox="assets/products/suspend/motion.png"><span class="media-caption">Swing + rock</span><img src="assets/products/suspend/motion.png" alt="Suspend chair motion"></button>
+        <button class="asset-button" type="button" data-lightbox="assets/products/suspend/fold.png"><span class="media-caption">Folds flat</span><img src="assets/products/suspend/fold.png" alt="Suspend chair folded states"></button>
+      </div>
+      <div class="story-grid" style="grid-template-columns:1fr 1fr"><div class="key-points"><div class="key-point"><b>Motion</b><p>Forward/back swing plus rocking, with gravity bringing the seat home.</p></div><div class="key-point"><b>Portability</b><p>The suspension adds no single member underneath the seat.</p></div></div><div class="update-bar"><span><b>Current update:</b> Lock upper/lower attachment points and strap lengths before V3 styling.</span><span class="update-links"><a href="https://trello.com/c/zgqMBTfm" target="_blank" rel="noreferrer">Open card →</a></span></div></div>
+    </div>
+    <div class="slide-number">17 / 20</div>
+  </section>
+
+  <section class="slide divider" id="slide-18">
+    <div class="section-label">06 | Hawkeye V3</div>
+    <div class="content divider-layout">
+      <div class="divider-copy"><div class="product-number">06</div><h1>Hawkeye<br>V3</h1><p class="lede">It does not just rock.</p></div>
+      <div class="hero-stage"><img class="hero-main" src="assets/products/hawkeye/hero.png" alt="Hawkeye V3 chair and rider"><span class="hero-caption">The spring moves under the rider</span></div>
+    </div>
+    <div class="slide-number">18 / 20</div>
+  </section>
+
+  <section class="slide" id="slide-19">
+    <div class="section-label">Hawkeye V3 | The Lesson from V2</div>
+    <div class="content hawkeye-lesson">
+      <button class="asset-button" type="button" data-lightbox="assets/products/hawkeye/v2-limb.png"><img src="assets/products/hawkeye/v2-limb.png" alt="Hawkeye V2 spring limb behind rider"><span class="zoom">Open asset</span></button>
+      <div class="story-copy"><p class="eyebrow">Not quite it</p><h2>The spring was behind the rider.</h2><p class="lede">V2 proved the response was possible, but the rear spring limb only traveled about a finger's width. The rider felt a quick shudder—not the long, controlled motion the product needs.</p><div class="hawkeye-lesson" style="grid-template-columns:.8fr 1.2fr;gap:.55rem"><button class="asset-button spring" type="button" data-lightbox="assets/products/hawkeye/spring-base.png"><img src="assets/products/hawkeye/spring-base.png" alt="Hawkeye arched spring bar"></button><div class="big-idea" style="display:flex;align-items:center">Move the spring under the rider, where body weight can load the full arch.</div></div><div class="stats"><div class="stat"><strong>2</strong><span>Arched spring bars</span></div><div class="stat"><strong>4</strong><span>Motion modes</span></div><div class="stat"><strong>1</strong><span>Shared geometry</span></div></div></div>
+    </div>
+    <div class="slide-number">19 / 20</div>
+  </section>
+
+  <section class="slide" id="slide-20">
+    <div class="section-label">Hawkeye V3 | Response + Next Build</div>
+    <div class="content">
+      <p class="eyebrow">Rock. Bounce. Roll. Twist.</p><h2>One spring pair creates a layered response.</h2>
+      <div class="response-grid">
+        <button class="asset-button" type="button" data-lightbox="assets/products/hawkeye/four-modes.png"><span class="media-caption">Four motion modes</span><img src="assets/products/hawkeye/four-modes.png" alt="Hawkeye four motion modes"><span class="zoom">Open asset</span></button>
+        <button class="asset-button" type="button" data-lightbox="assets/products/hawkeye/arch-comparison.png"><span class="media-caption">Current vs next arch</span><img src="assets/products/hawkeye/arch-comparison.png" alt="Hawkeye current and next arch comparison"><span class="zoom">Open asset</span></button>
+      </div>
+      <div class="story-grid" style="grid-template-columns:1fr 1fr"><div class="key-points"><div class="key-point"><b>Today</b><p>45 mm arch rise bottomed out under load.</p></div><div class="key-point"><b>Next</b><p>170 mm rise preserves 94 mm of travel under the rider.</p></div></div><div class="update-bar"><span><b>Current update:</b> V4 adjustable test, rider range, lateral stability, and composite sample timing.</span><span class="update-links"><a href="https://trello.com/c/md4yE8HL" target="_blank" rel="noreferrer">Open card →</a></span></div></div>
+    </div>
+    <div class="slide-number">20 / 20</div>
+  </section>
+
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Expanded product asset"><button class="lightbox-close" type="button" aria-label="Close">×</button><img id="lightbox-image" src="" alt="Expanded product asset"></div>
   <script>
-    const progressEl=document.getElementById('progress');
-    const languageToggleEl=document.getElementById('language-toggle');
-    const translationNoteEl=document.getElementById('translation-note');
-    const lightboxEl=document.getElementById('lightbox');
-    const lightboxImageEl=document.getElementById('lightbox-image');
-    const lightboxCloseEl=document.getElementById('lightbox-close');
-    const slides=Array.from(document.querySelectorAll('.slide'));
-    function updateProgress(){const max=document.documentElement.scrollHeight-window.innerHeight;progressEl.style.width=`${(max>0?window.scrollY/max:0)*100}%`}
-    function closeLightbox(){lightboxEl.classList.remove('open');lightboxImageEl.src=''}
-    document.querySelectorAll('[data-lightbox]').forEach(button=>button.addEventListener('click',()=>{lightboxImageEl.src=button.dataset.lightbox;lightboxImageEl.alt=button.querySelector('img').alt;lightboxEl.classList.add('open');lightboxCloseEl.focus()}));
-    lightboxCloseEl.addEventListener('click',closeLightbox);
-    lightboxEl.addEventListener('click',event=>{if(event.target===lightboxEl)closeLightbox()});
-    languageToggleEl.addEventListener('click',()=>{translationNoteEl.classList.add('show');window.clearTimeout(window.translationNoteTimer);window.translationNoteTimer=window.setTimeout(()=>translationNoteEl.classList.remove('show'),3200)});
-    window.addEventListener('keydown',event=>{if(event.key==='Escape'&&lightboxEl.classList.contains('open'))return closeLightbox();if(lightboxEl.classList.contains('open')||['INPUT','TEXTAREA','BUTTON'].includes(document.activeElement.tagName))return;const current=slides.reduce((best,slide,index)=>Math.abs(slide.getBoundingClientRect().top)<best.distance?{index,distance:Math.abs(slide.getBoundingClientRect().top)}:best,{index:0,distance:Infinity}).index;if(['ArrowDown','PageDown','ArrowRight',' '].includes(event.key)){event.preventDefault();slides[Math.min(slides.length-1,current+1)].scrollIntoView()}if(['ArrowUp','PageUp','ArrowLeft'].includes(event.key)){event.preventDefault();slides[Math.max(0,current-1)].scrollIntoView()}});
-    window.addEventListener('scroll',updateProgress,{passive:true});window.addEventListener('resize',updateProgress);updateProgress();
+    const progress=document.getElementById('progress');
+    const slides=[...document.querySelectorAll('.slide')];
+    function updateProgress(){const max=document.documentElement.scrollHeight-innerHeight;progress.style.width=(max>0?scrollY/max*100:0)+'%'}
+    addEventListener('scroll',updateProgress,{passive:true});addEventListener('resize',updateProgress);updateProgress();
+    document.getElementById('language-toggle').addEventListener('click',()=>{const note=document.getElementById('translation-note');note.classList.add('show');clearTimeout(window.translationTimer);window.translationTimer=setTimeout(()=>note.classList.remove('show'),2600)});
+    const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lightbox-image');
+    document.querySelectorAll('[data-lightbox]').forEach(el=>el.addEventListener('click',()=>{lbImg.src=el.dataset.lightbox;lb.classList.add('open');document.body.style.overflow='hidden'}));
+    function closeLightbox(){lb.classList.remove('open');lbImg.src='';document.body.style.overflow=''}
+    lb.querySelector('.lightbox-close').addEventListener('click',closeLightbox);lb.addEventListener('click',e=>{if(e.target===lb)closeLightbox()});
+    addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.classList.contains('open')){closeLightbox();return}if(lb.classList.contains('open'))return;if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();const i=Math.min(slides.length-1,Math.round(scrollY/innerHeight)+1);slides[i].scrollIntoView({behavior:'smooth'})}if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();const i=Math.max(0,Math.round(scrollY/innerHeight)-1);slides[i].scrollIntoView({behavior:'smooth'})}});
   </script>
 </body>
 </html>
