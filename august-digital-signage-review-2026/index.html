@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>August Digital Signage Review | Westfield Outdoors</title>
+  <meta name="description" content="What the August digital displays showed, what changed, and the next product decisions.">
+  <link rel="canonical" href="https://maxmcolem-a11y.github.io/westfield-presentations/august-digital-signage-review-2026/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Westfield Outdoors">
+  <meta property="og:title" content="August Digital Signage Review">
+  <meta property="og:description" content="Six August product stories, current Trello-backed updates, and the next meeting decisions.">
+  <meta property="og:url" content="https://maxmcolem-a11y.github.io/westfield-presentations/august-digital-signage-review-2026/">
+  <meta property="og:image" content="https://maxmcolem-a11y.github.io/westfield-presentations/august-digital-signage-review-2026/assets/social-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Westfield Outdoors August digital signage review">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="August Digital Signage Review">
+  <meta name="twitter:description" content="What August showed, what changed, and what happens next.">
+  <meta name="twitter:image" content="https://maxmcolem-a11y.github.io/westfield-presentations/august-digital-signage-review-2026/assets/social-preview.png">
+  <meta name="theme-color" content="#c7372f">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f3f5f5;
+      --paper: #ffffff;
+      --ink: #0d1720;
+      --muted: #586a78;
+      --line: rgba(22, 50, 70, 0.16);
+      --accent: #c7372f;
+      --blue: #2468b2;
+      --green: #0f8a61;
+      --amber: #a6662d;
+      --navy: #142b3e;
+      --shadow: 0 18px 50px rgba(26, 48, 64, 0.1);
+      --pad: clamp(1.25rem, 2.8vw, 2.75rem);
+      --radius: 10px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-snap-type: y mandatory; scroll-behavior: smooth; background: #dfe4e6; }
+    body { margin: 0; color: var(--ink); background: var(--bg); font-family: Inter, Arial, sans-serif; overflow-x: hidden; }
+    a { color: inherit; }
+    .deck-logo { position: fixed; right: 1.6rem; top: 1.15rem; z-index: 30; width: 158px; height: auto; opacity: 0.88; }
+    .slide {
+      min-height: 100vh;
+      min-height: 100dvh;
+      scroll-snap-align: start;
+      position: relative;
+      display: flex;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(36,104,178,.03) 1px, transparent 1px),
+        linear-gradient(rgba(36,104,178,.03) 1px, transparent 1px),
+        #f7f8f8;
+      background-size: 48px 48px;
+    }
+    .slide:nth-of-type(odd) { background-color: #edf1f2; }
+    .slide::after {
+      content: "Property of Westfield Outdoors. Confidential and proprietary. Do not reproduce, distribute, or disclose without written permission.";
+      position: absolute; left: 50%; bottom: .72rem; transform: translateX(-50%); width: min(650px, 46vw);
+      text-align: center; color: rgba(13,23,32,.35); font-size: .47rem; line-height: 1.2; font-weight: 700; letter-spacing: .03em;
+      pointer-events: none; z-index: 1;
+    }
+    .content { width: min(1320px, 94vw); margin: auto; padding: calc(var(--pad) + 1.1rem) var(--pad) calc(var(--pad) + 1.1rem); display: flex; flex-direction: column; gap: .9rem; }
+    .cover .content { align-items: flex-start; }
+    .section-label { position: absolute; left: 1.6rem; top: 1.35rem; color: var(--accent); font-weight: 900; text-transform: uppercase; letter-spacing: .16em; font-size: .7rem; z-index: 2; }
+    .slide-number { position: absolute; right: 1.65rem; bottom: .95rem; font-size: .72rem; font-weight: 900; letter-spacing: .09em; color: rgba(13,23,32,.45); }
+    .eyebrow { margin: 0; color: var(--accent); font-weight: 900; letter-spacing: .15em; text-transform: uppercase; font-size: .76rem; }
+    h1 { margin: 0; max-width: 1140px; font-size: clamp(2rem, 4.45vw, 4.45rem); line-height: .98; letter-spacing: -.035em; font-weight: 900; }
+    h2 { margin: 0; font-size: clamp(1.5rem, 2.5vw, 2.65rem); line-height: 1.02; letter-spacing: -.025em; }
+    h3 { margin: 0; font-size: 1.05rem; line-height: 1.15; }
+    p { margin: 0; }
+    .cover h1 { max-width: 1000px; font-size: clamp(3rem, 7vw, 7.2rem); }
+    .cover .lede { max-width: 880px; }
+    .lede { max-width: 1080px; color: var(--muted); font-size: clamp(.98rem, 1.45vw, 1.32rem); line-height: 1.42; font-weight: 560; }
+    .lede strong { color: var(--ink); }
+    .date-line { margin-top: 1.25rem; color: var(--muted); font-weight: 800; font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; }
+    .callout { margin-top: .6rem; max-width: 1080px; padding: 1rem 1.2rem; border-left: 6px solid var(--accent); background: var(--navy); color: #fff; border-radius: 4px var(--radius) var(--radius) 4px; font-size: clamp(1rem, 1.5vw, 1.4rem); line-height: 1.28; font-weight: 800; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .9rem; margin-top: .45rem; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .95rem; }
+    .card { background: rgba(255,255,255,.92); border: 1px solid var(--line); border-top: 5px solid var(--blue); border-radius: var(--radius); padding: 1rem 1.05rem; box-shadow: var(--shadow); }
+    .card.green { border-top-color: var(--green); }
+    .card.amber { border-top-color: var(--amber); }
+    .card.red { border-top-color: var(--accent); }
+    .card p { margin-top: .42rem; color: var(--muted); font-size: .92rem; line-height: 1.37; font-weight: 620; }
+    .card strong { color: var(--ink); }
+    .metric { display: block; color: var(--ink); font-size: clamp(1.55rem, 2.8vw, 2.8rem); font-weight: 900; line-height: .98; }
+    .metric-label { display: block; margin-top: .3rem; color: var(--muted); font-size: .72rem; text-transform: uppercase; letter-spacing: .11em; font-weight: 900; }
+    .product-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .75rem; margin-top: .45rem; }
+    .product-tile { position: relative; min-height: 180px; border-radius: var(--radius); overflow: hidden; background: #d8e0e4; border: 1px solid var(--line); box-shadow: var(--shadow); text-decoration: none; }
+    .product-tile img { width: 100%; height: 100%; min-height: 180px; object-fit: cover; display: block; filter: saturate(.82) contrast(.98); }
+    .product-tile::after { content: ""; position: absolute; inset: 40% 0 0; background: linear-gradient(transparent, rgba(8,20,29,.92)); }
+    .tile-copy { position: absolute; z-index: 2; left: .8rem; right: .8rem; bottom: .75rem; color: white; }
+    .tile-copy strong { display: block; font-size: 1rem; }
+    .tile-copy span { display: block; margin-top: .2rem; font-size: .72rem; line-height: 1.25; color: rgba(255,255,255,.8); font-weight: 650; }
+    .split { display: grid; grid-template-columns: 1.25fr .9fr; gap: clamp(1rem, 2vw, 1.8rem); align-items: stretch; }
+    .media-frame { position: relative; min-height: 0; border: 1px solid var(--line); background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); cursor: zoom-in; }
+    .media-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .media-frame .zoom-label { position: absolute; left: .75rem; bottom: .7rem; padding: .38rem .58rem; border-radius: 999px; background: rgba(9,20,28,.78); color: white; font-size: .67rem; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+    .story { display: flex; flex-direction: column; gap: .75rem; justify-content: center; }
+    .story h1 { font-size: clamp(2rem, 3.6vw, 3.85rem); }
+    .point-list { display: grid; gap: .55rem; }
+    .point { display: grid; grid-template-columns: 2rem 1fr; gap: .55rem; align-items: start; padding-top: .55rem; border-top: 1px solid var(--line); }
+    .point b { width: 1.65rem; height: 1.65rem; display: inline-grid; place-items: center; border-radius: 50%; background: var(--navy); color: white; font-size: .7rem; }
+    .point p { color: var(--muted); font-size: .9rem; line-height: 1.35; font-weight: 630; }
+    .point strong { color: var(--ink); }
+    .source-links { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: .2rem; }
+    .source-link { display: inline-flex; align-items: center; gap: .35rem; padding: .5rem .72rem; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.9); text-decoration: none; color: var(--blue); font-size: .72rem; font-weight: 900; }
+    .status-head { display: grid; grid-template-columns: 1.3fr .7fr; gap: 1rem; align-items: end; }
+    .status-pill { justify-self: end; padding: .55rem .75rem; border-radius: 999px; color: #fff; background: var(--green); font-size: .72rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .update-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .8rem; margin-top: .4rem; }
+    .update-card { min-height: 150px; padding: 1rem; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,255,255,.92); box-shadow: var(--shadow); }
+    .update-card .tag { color: var(--accent); text-transform: uppercase; letter-spacing: .12em; font-size: .66rem; font-weight: 900; }
+    .update-card h3 { margin-top: .45rem; }
+    .update-card p { margin-top: .45rem; color: var(--muted); font-size: .87rem; line-height: 1.36; font-weight: 620; }
+    .talk-track { margin-top: .35rem; padding: .95rem 1.05rem; background: #e5edf2; border-left: 5px solid var(--blue); border-radius: 4px var(--radius) var(--radius) 4px; color: var(--navy); font-size: clamp(.9rem, 1.12vw, 1.05rem); line-height: 1.36; font-weight: 760; }
+    .talk-track::before { content: "Suggested meeting line"; display: block; margin-bottom: .28rem; color: var(--blue); font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 900; }
+    .daypack-cards { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
+    .daypack { padding: 1rem; border-radius: var(--radius); background: rgba(255,255,255,.92); border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .daypack h2 { font-size: 1.55rem; }
+    .daypack dl { margin: .75rem 0 0; display: grid; grid-template-columns: auto 1fr; gap: .35rem .65rem; font-size: .83rem; line-height: 1.3; }
+    .daypack dt { color: var(--muted); font-weight: 850; }
+    .daypack dd { margin: 0; font-weight: 700; }
+    .alert { padding: .9rem 1rem; border-radius: var(--radius); background: #fff3df; border: 1px solid rgba(166,102,45,.28); color: #704316; font-size: .9rem; line-height: 1.35; font-weight: 740; }
+    .status-table-wrap { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,255,255,.93); box-shadow: var(--shadow); }
+    table { width: 100%; border-collapse: collapse; }
+    th { padding: .62rem .7rem; background: var(--navy); color: white; text-align: left; font-size: .64rem; letter-spacing: .08em; text-transform: uppercase; }
+    td { padding: .62rem .7rem; border-bottom: 1px solid var(--line); vertical-align: top; font-size: .78rem; line-height: 1.27; font-weight: 630; }
+    tr:last-child td { border-bottom: 0; }
+    td strong { display: block; margin-bottom: .15rem; }
+    td a { color: var(--blue); text-decoration: none; }
+    .decision-list { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .8rem; }
+    .decision { display: grid; grid-template-columns: 3rem 1fr; gap: .75rem; padding: 1rem; border-radius: var(--radius); border: 1px solid var(--line); background: rgba(255,255,255,.93); box-shadow: var(--shadow); }
+    .decision .num { width: 2.5rem; height: 2.5rem; display: grid; place-items: center; background: var(--accent); color: white; border-radius: 50%; font-weight: 900; }
+    .decision p { margin-top: .35rem; color: var(--muted); font-size: .87rem; line-height: 1.34; font-weight: 620; }
+    .progress { position: fixed; left: 0; bottom: 0; height: 5px; background: var(--accent); width: 0; z-index: 50; }
+    .language-toggle { position: fixed; left: 1.2rem; bottom: .85rem; z-index: 45; border: 1px solid var(--line); border-radius: 999px; padding: .48rem .76rem; background: rgba(255,255,255,.92); color: var(--ink); font-size: .72rem; font-weight: 900; cursor: pointer; box-shadow: 0 10px 26px rgba(0,0,0,.09); }
+    .translation-note { position: fixed; left: 1.15rem; bottom: 3.4rem; z-index: 46; max-width: 250px; padding: .7rem .8rem; border-radius: var(--radius); color: white; background: var(--navy); font-size: .72rem; line-height: 1.3; font-weight: 700; box-shadow: var(--shadow); opacity: 0; transform: translateY(8px); pointer-events: none; transition: .2s ease; }
+    .translation-note.show { opacity: 1; transform: translateY(0); }
+    .lightbox { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; background: rgba(4,11,16,.94); padding: 3.5rem 2rem 2rem; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 96vw; max-height: 90vh; object-fit: contain; box-shadow: 0 24px 80px rgba(0,0,0,.45); }
+    .lightbox-close { position: absolute; right: 1.25rem; top: .9rem; width: 2.7rem; height: 2.7rem; border: 1px solid rgba(255,255,255,.5); border-radius: 50%; color: white; background: rgba(255,255,255,.08); font-size: 1.55rem; cursor: pointer; }
+    @media (max-width: 920px) {
+      html { scroll-snap-type: none; }
+      .slide { display: block; min-height: 100svh; overflow: visible; padding: 4rem 0 4.2rem; border-bottom: 1px solid var(--line); }
+      .content { width: 100%; padding: 0 1rem; }
+      .deck-logo { right: .85rem; top: .85rem; width: 94px; }
+      .section-label { left: 1rem; top: 1.05rem; max-width: calc(100vw - 8rem); font-size: .58rem; }
+      .slide-number { right: .9rem; bottom: 1.15rem; font-size: .62rem; }
+      .slide::after { left: 1rem; right: 4.8rem; bottom: .45rem; transform: none; width: auto; text-align: left; font-size: .4rem; }
+      h1, .cover h1 { font-size: clamp(2rem, 10vw, 3.2rem); }
+      .grid-3, .grid-2, .product-grid, .split, .update-grid, .daypack-cards, .decision-list, .status-head { grid-template-columns: 1fr; }
+      .product-tile, .product-tile img { min-height: 205px; }
+      .media-frame { min-height: 210px; }
+      .status-pill { justify-self: start; }
+      .status-table-wrap { overflow-x: auto; }
+      table { min-width: 760px; }
+      .language-toggle { left: .75rem; bottom: .75rem; }
+    }
+    @media print {
+      @page { size: 13.333in 7.5in; margin: 0; }
+      html, body { background: white; }
+      .slide { width: 13.333in; height: 7.5in; min-height: 0; display: flex; overflow: hidden; padding: 0; border: 0; break-after: page; page-break-after: always; }
+      .content { width: min(1320px, 94vw); margin: auto; padding: calc(var(--pad) + 1.1rem) var(--pad); }
+      .deck-logo { position: fixed; right: 1.6rem; top: 1.15rem; width: 158px; }
+      .section-label { left: 1.6rem; top: 1.35rem; max-width: none; font-size: .7rem; }
+      .slide-number { right: 1.65rem; bottom: .95rem; font-size: .72rem; }
+      .slide::after { left: 50%; right: auto; bottom: .72rem; transform: translateX(-50%); width: min(650px, 46vw); text-align: center; font-size: .47rem; }
+      .grid-3, .product-grid, .update-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+      .grid-2, .daypack-cards, .decision-list { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .split { grid-template-columns: 1.25fr .9fr; }
+      .status-head { grid-template-columns: 1.3fr .7fr; }
+      .status-pill { justify-self: end; }
+      .product-tile, .product-tile img { min-height: 180px; }
+      .media-frame { min-height: 0; }
+      table { min-width: 0; }
+      .progress, .language-toggle, .translation-note, .lightbox { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <img class="deck-logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors logo">
+  <button id="language-toggle" class="language-toggle" type="button" aria-label="Chinese translation status">中文</button>
+  <div id="translation-note" class="translation-note">Chinese copy will be added after the English deck is declared final.</div>
+  <div id="progress" class="progress" aria-hidden="true"></div>
+
+  <section class="slide cover" id="slide-1">
+    <div class="section-label">Monthly Product + Marketing Review</div>
+    <div class="content">
+      <p class="eyebrow">Westfield Outdoors | August 2026</p>
+      <h1>August Digital Signage Review</h1>
+      <p class="lede">What the six product displays showed, what has changed since the room, and the next decision each product needs.</p>
+      <div class="callout">August sold the idea. This review moves each story from promise to evidence.</div>
+      <p class="date-line">Prepared for the monthly marketing meeting | 26 August 2026</p>
+    </div>
+    <div class="slide-number">01 / 18</div>
+  </section>
+
+  <section class="slide" id="slide-2">
+    <div class="section-label">The Format</div>
+    <div class="content">
+      <p class="eyebrow">What we built</p>
+      <h1>Digital signage did a different job than a meeting deck.</h1>
+      <p class="lede">Each screen was a self-running product story: large enough to read while standing, specific enough to support a sample, and structured so the product could explain itself without a presenter.</p>
+      <div class="grid-3">
+        <article class="card"><span class="metric">6</span><span class="metric-label">Product loops</span><p>Origami, Instant Indoor, Daypacks, GRAM, Suspend, and Hawkeye.</p></article>
+        <article class="card green"><span class="metric">16:9</span><span class="metric-label">Shared display frame</span><p>Built for full-screen 1080p or 4K presentation on the planned rolling displays.</p></article>
+        <article class="card amber"><span class="metric">1 story</span><span class="metric-label">Per product</span><p>Problem, product idea, proof, current state, and the next build.</p></article>
+      </div>
+      <div class="callout">The best screens paired the digital argument with physical proof: sit in it, push it, fold it, or inspect the sample beside the display.</div>
+    </div>
+    <div class="slide-number">02 / 18</div>
+  </section>
+
+  <section class="slide" id="slide-3">
+    <div class="section-label">August at a Glance</div>
+    <div class="content">
+      <p class="eyebrow">The six stories</p>
+      <h1>One room, six product theses.</h1>
+      <div class="product-grid">
+        <a class="product-tile" href="#slide-4"><img src="assets/signage-captures/origami.png" alt="Origami Wagon August signage"><span class="tile-copy"><strong>Origami Wagon</strong><span>The wagon is one folded sheet.</span></span></a>
+        <a class="product-tile" href="#slide-6"><img src="assets/signage-captures/instant.png" alt="Instant Indoor August signage"><span class="tile-copy"><strong>Instant Indoor</strong><span>A real sofa, ordered like anything else.</span></span></a>
+        <a class="product-tile" href="#slide-8"><img src="assets/signage-captures/daypacks.png" alt="Timber Ridge Daypacks August signage"><span class="tile-copy"><strong>Diamond + Spiral</strong><span>Build the volume before drawing the bag.</span></span></a>
+        <a class="product-tile" href="#slide-10"><img src="assets/signage-captures/gram.png" alt="GRAM Chair August signage"><span class="tile-copy"><strong>GRAM Chair</strong><span>A rocking chair with no rocker.</span></span></a>
+        <a class="product-tile" href="#slide-12"><img src="assets/signage-captures/suspend.png" alt="Suspend Chair August signage"><span class="tile-copy"><strong>Suspend Chair</strong><span>Bring a swing, not a chair.</span></span></a>
+        <a class="product-tile" href="#slide-14"><img src="assets/signage-captures/hawkeye.png" alt="Hawkeye V3 August signage"><span class="tile-copy"><strong>Hawkeye V3</strong><span>Four directions from two formed bars.</span></span></a>
+      </div>
+    </div>
+    <div class="slide-number">03 / 18</div>
+  </section>
+
+  <section class="slide" id="slide-4">
+    <div class="section-label">Origami Wagon | What August showed</div>
+    <div class="content split">
+      <button class="media-frame" type="button" data-lightbox="assets/signage-captures/origami.png" aria-label="Open Origami Wagon signage fullscreen"><img src="assets/signage-captures/origami.png" alt="Origami Wagon signage opening frame"><span class="zoom-label">Open fullscreen</span></button>
+      <div class="story">
+        <p class="eyebrow">SKW-033</p>
+        <h1>The wagon is one folded sheet.</h1>
+        <p class="lede">August positioned the basket, hinge system, and deployed structure as the same part.</p>
+        <div class="point-list">
+          <div class="point"><b>1</b><p><strong>Category break:</strong> no tube frame, no fabric bag, and no conventional fastener stack.</p></div>
+          <div class="point"><b>2</b><p><strong>Engineering proof:</strong> 26 rigid panels and 78 creases solved as a single-degree-of-freedom mechanism.</p></div>
+          <div class="point"><b>3</b><p><strong>Claimed payoff:</strong> 50 kg simulation target with a 4.0 in collapsed basket bundle.</p></div>
+        </div>
+        <div class="source-links"><a class="source-link" href="https://maxmcolem-a11y.github.io/westfield-presentations/origami-wagon/signage-4k.html?v=4a5b15f" target="_blank" rel="noreferrer">Open August loop &rarr;</a></div>
+      </div>
+    </div>
+    <div class="slide-number">04 / 18</div>
+  </section>
+
+  <section class="slide" id="slide-5">
+    <div class="section-label">Origami Wagon | Current update</div>
+    <div class="content">
+      <div class="status-head"><div><p class="eyebrow">What changed after August</p><h1>The next proof is physical.</h1></div><span class="status-pill">In development | S29</span></div>
+      <div class="update-grid">
+        <article class="update-card"><span class="tag">Current action</span><h3>Finish the full-size prototype</h3><p>Adam Carmichael is to finish and document the build by <strong>31 August</strong>, including photos, materials, fold behavior, force, safety, and typical-load results.</p></article>
+        <article class="update-card"><span class="tag">Next development tool</span><h3>Build an 80/20 rigidity rig</h3><p>The rig should make half- or full-scale basket tests repeatable. <strong>11 September</strong> is the target for the rig definition and engineering handoff.</p></article>
+        <article class="update-card"><span class="tag">Ownership</span><h3>Adam now, Jordan next</h3><p>Max remains Portfolio Owner. Jordan Cook is the intended next owner after prototype evidence is posted and the handoff is accepted.</p></article>
+      </div>
+      <div class="talk-track">The simulation earned the build. The August update is now whether the full-size prototype folds cleanly, locks safely, and carries a useful load - not another rendering.</div>
+      <div class="source-links"><a class="source-link" href="https://trello.com/c/qHgjVBW7" target="_blank" rel="noreferrer">Open current Trello card &rarr;</a></div>
+    </div>
+    <div class="slide-number">05 / 18</div>
+  </section>
+
+  <section class="slide" id="slide-6">
+    <div class="section-label">Instant Indoor | What August showed</div>
+    <div class="content split">
+      <button class="media-frame" type="button" data-lightbox="assets/signage-captures/instant.png" aria-label="Open Instant Indoor signage fullscreen"><img src="assets/signage-captures/instant.png" alt="Instant Indoor signage opening frame"><span class="zoom-label">Open fullscreen</span></button>
+      <div class="story">
+        <p class="eyebrow">SKW-041</p>
+        <h1>A real sofa, ordered like anything else.</h1>
+        <p class="lede">August sold purchasing ease: parcel-ready indoor furniture without the assembly penalty.</p>
+        <div class="point-list">
+          <div class="point"><b>1</b><p><strong>Customer promise:</strong> sofa-in-a-box convenience with deployment instead of flat-pack assembly.</p></div>
+          <div class="point"><b>2</b><p><strong>Platform:</strong> one 42 x 42 in frame behind six configurations.</p></div>
+          <div class="point"><b>3</b><p><strong>Physical proof:</strong> the armchair was deliberately the hardest configuration and sat beside the display.</p></div>
+        </div>
+        <div class="source-links"><a class="source-link" href="https://maxmcolem-a11y.github.io/westfield-presentations/instant-indoor/signage-4k.html?v=7da7cf6" target="_blank" rel="noreferrer">Open August loop &rarr;</a></div>
+      </div>
+    </div>
+    <div class="slide-number">06 / 18</div>
+  </section>
+
+  <section class="slide" id="slide-7">
+    <div class="section-label">Instant Indoor | Current update</div>
+    <div class="content">
+      <div class="status-head"><div><p class="eyebrow">What changed after August</p><h1>The concept passed. The architecture restarted.</h1></div><span class="status-pill">Red-ball priority | S29</span></div>
+      <div class="update-grid">
+        <article class="update-card"><span class="tag">August direction</span><h3>Move to true quad-fold geometry</h3><p>The review superseded the earlier frame path. The next sample needs a more substantial frame, revised arms, and conventional quad-fold behavior.</p></article>
+        <article class="update-card"><span class="tag">Parallel package</span><h3>Rebuild the seat and soft goods</h3><p>Good Slats support, straps, slipcover retention, arm-top foam, cushions, and value-engineered upholstery are being specified with the frame.</p></article>
+        <article class="update-card"><span class="tag">Milestone</span><h3>Hangzhou factory session</h3><p>Max is coordinating HengFeng frame CAD and the soft-goods package for direct work with engineers and sample technicians by <strong>14 September</strong>.</p></article>
+      </div>
+      <div class="talk-track">The August sample validated the customer story and the fabric direction. It did not validate the final frame. We are now designing the structure and comfort system as one product.</div>
+      <div class="source-links"><a class="source-link" href="https://trello.com/c/OUcGqXxw" target="_blank" rel="noreferrer">Open current Trello card &rarr;</a></div>
+    </div>
+    <div class="slide-number">07 / 18</div>
+  </section>
+
+  <section class="slide" id="slide-8">
+    <div class="section-label">Diamond + Spiral | What August showed</div>
+    <div class="content split">
+      <button class="media-frame" type="button" data-lightbox="assets/signage-captures/daypacks.png" aria-label="Open daypack signage fullscreen"><img src="assets/signage-captures/daypacks.png" alt="Timber Ridge Daypack signage opening frame"><span class="zoom-label">Open fullscreen</span></button>
+      <div class="story">
+        <p class="eyebrow">TB4695 + TB4696</p>
+        <h1>We stopped drawing bags. We started building them.</h1>
+        <p class="lede">August made the process the story: settle the volume in the hand before committing it to a flat pattern.</p>
+        <div class="point-list">
+          <div class="point"><b>1</b><p><strong>20 solids:</strong> shape explored as volume, not as surface graphics.</p></div>
+          <div class="point"><b>2</b><p><strong>3 prints:</strong> one week of physical review killed eighteen forms cheaply.</p></div>
+          <div class="point"><b>3</b><p><strong>2 samples:</strong> Diamond and Spiral carried forward without first-sample silhouette changes.</p></div>
+        </div>
+        <div class="source-links"><a class="source-link" href="https://maxmcolem-a11y.github.io/westfield-presentations/timber-ridge-daypack/signage-4k.html?v=54b5f27" target="_blank" rel="noreferrer">Open August loop &rarr;</a></div>
+      </div>
+    </div>
+    <div class="slide-number">08 / 18</div>
+  </section>
+
+  <section class="slide" id="slide-9">
+    <div class="section-label">Diamond + Spiral | Current update</div>
+    <div class="content">
+      <p class="eyebrow">What changed after August</p>
+      <h1>The two concepts now need two decisions.</h1>
+      <div class="daypack-cards">
+        <article class="daypack"><h2>Diamond Daypack</h2><dl><dt>Status</dt><dd>In development | target season 2028</dd><dt>Current owner</dt><dd>Nessa Hooper</dd><dt>Current action</dt><dd>Submit feedback from the August meeting</dd><dt>Next owner</dt><dd>Lia Simeri</dd><dt>Recorded state</dt><dd>Lia is waiting for Product Day feedback</dd></dl><div class="source-links"><a class="source-link" href="https://trello.com/c/UO9YYma7" target="_blank" rel="noreferrer">Diamond card &rarr;</a></div></article>
+        <article class="daypack"><h2>Spiral Daypack</h2><dl><dt>Status</dt><dd>In development | target season 2028</dd><dt>Current owner</dt><dd>Nessa Hooper</dd><dt>Current action</dt><dd>Submit feedback from the August meeting</dd><dt>Next owner</dt><dd>Lia Simeri</dd><dt>Recorded state</dt><dd>Nessa's complete notes are still being requested</dd></dl><div class="source-links"><a class="source-link" href="https://trello.com/c/jzPb5qso" target="_blank" rel="noreferrer">Spiral card &rarr;</a></div></article>
+      </div>
+      <div class="alert"><strong>Meeting gap:</strong> both cards still point to a 20 August milestone, but the August feedback is not yet visible on the product records. The next credible update is the product-specific decision and sample direction, not a shared daypack summary.</div>
+      <div class="talk-track">The process worked and gave us two real forms. Now Diamond and Spiral should be reviewed independently, with Nessa's August feedback attached before Lia starts the next sample changes.</div>
+    </div>
+    <div class="slide-number">09 / 18</div>
+  </section>
+
+  <section class="slide" id="slide-10">
+    <div class="section-label">GRAM Chair | What August showed</div>
+    <div class="content split">
+      <button class="media-frame" type="button" data-lightbox="assets/signage-captures/gram.png" aria-label="Open GRAM signage fullscreen"><img src="assets/signage-captures/gram.png" alt="GRAM Chair signage opening frame"><span class="zoom-label">Open fullscreen</span></button>
+      <div class="story">
+        <p class="eyebrow">Innovation S28</p>
+        <h1>A rocking chair with no rocker.</h1>
+        <p class="lede">August argued that the existing frame could become the mechanism by replacing rigid corners with compliant ones.</p>
+        <div class="point-list">
+          <div class="point"><b>1</b><p><strong>Mechanism:</strong> eight elastomeric corners act as pivot and spring.</p></div>
+          <div class="point"><b>2</b><p><strong>Advantage:</strong> no runners, coils, linkage bars, or hardware under the seat.</p></div>
+          <div class="point"><b>3</b><p><strong>Physical test:</strong> samples were on the table so people could feel the motion and look underneath.</p></div>
+        </div>
+        <div class="source-links"><a class="source-link" href="https://maxmcolem-a11y.github.io/westfield-presentations/gram-chair/signage-4k.html?v=ca52fed" target="_blank" rel="noreferrer">Open August loop &rarr;</a></div>
+      </div>
+    </div>
+    <div class="slide-number">10 / 18</div>
+  </section>
+
+  <section class="slide" id="slide-11">
+    <div class="section-label">GRAM Chair | Current update</div>
+    <div class="content">
+      <div class="status-head"><div><p class="eyebrow">What changed after August</p><h1>Stop polishing the chair. Improve the experiment.</h1></div><span class="status-pill">In development | S29</span></div>
+      <div class="update-grid">
+        <article class="update-card"><span class="tag">Portfolio decision</span><h3>Production-style prototypes are on hold</h3><p>The August builds served their concept-selling purpose. The next work should isolate motion and mechanism behavior.</p></article>
+        <article class="update-card"><span class="tag">Current action</span><h3>Define an adjustable 80/20 test instrument</h3><p>Max is working with Engineering, Ben, and Lia on a rig with interchangeable printed compliant corners by <strong>28 August</strong>.</p></article>
+        <article class="update-card"><span class="tag">Next ownership</span><h3>Engineering handoff after the rig is defined</h3><p>Jordan Cook is the intended recipient if he accepts the handoff. August meeting notes and decisions still need to be added to the card.</p></article>
+      </div>
+      <div class="talk-track">August proved that people understand and want to feel the mechanism. The next stage is a tunable test instrument that tells us what the product geometry should be.</div>
+      <div class="source-links"><a class="source-link" href="https://trello.com/c/7ir1icyE" target="_blank" rel="noreferrer">Open current Trello card &rarr;</a></div>
+    </div>
+    <div class="slide-number">11 / 18</div>
+  </section>
+
+  <section class="slide" id="slide-12">
+    <div class="section-label">Suspend Chair | What August showed</div>
+    <div class="content split">
+      <button class="media-frame" type="button" data-lightbox="assets/signage-captures/suspend.png" aria-label="Open Suspend signage fullscreen"><img src="assets/signage-captures/suspend.png" alt="Suspend Chair signage opening frame"><span class="zoom-label">Open fullscreen</span></button>
+      <div class="story">
+        <p class="eyebrow">SKW-044</p>
+        <h1>Bring a swing. Not a chair.</h1>
+        <p class="lede">August put the motion above the seat: the inner seat frame hangs from four straps and moves inside the folding outer frame.</p>
+        <div class="point-list">
+          <div class="point"><b>1</b><p><strong>Suspension:</strong> four static straps define the path while bungees control the ends of travel.</p></div>
+          <div class="point"><b>2</b><p><strong>Experience:</strong> measured 5.6 in front-to-back travel with rocking layered into the swing.</p></div>
+          <div class="point"><b>3</b><p><strong>Packability:</strong> no member added below the seat, so the outer frame still folds flat.</p></div>
+        </div>
+        <div class="source-links"><a class="source-link" href="https://maxmcolem-a11y.github.io/westfield-presentations/suspend-chair/signage-4k.html?v=2b7d9f7" target="_blank" rel="noreferrer">Open August loop &rarr;</a></div>
+      </div>
+    </div>
+    <div class="slide-number">12 / 18</div>
+  </section>
+
+  <section class="slide" id="slide-13">
+    <div class="section-label">Suspend Chair | Current update</div>
+    <div class="content">
+      <div class="status-head"><div><p class="eyebrow">What changed after August</p><h1>The motion is now the only job.</h1></div><span class="status-pill">In development | S29</span></div>
+      <div class="update-grid">
+        <article class="update-card"><span class="tag">What Lia tested</span><h3>Attachment points and seat width</h3><p>A narrower stadium seat and new frame holes produced more motion and confirmed that attachment geometry materially changes the feel.</p></article>
+        <article class="update-card"><span class="tag">What we learned</span><h3>Upper points alone are not enough</h3><p>The next comparison must combine upper points, lower bungee locations, and strap length to reach controlled multi-axis motion.</p></article>
+        <article class="update-card"><span class="tag">Handoff condition</span><h3>Document the best motion matrix</h3><p>Lia owns the current action. Once the best configuration is recorded, Max can accept the handoff and translate it into specific V3 CAD.</p></article>
+      </div>
+      <div class="talk-track">We are deliberately not polishing the chair shape yet. First lock the attachment geometry that gives controlled swing and sway; then design V3 around the winning motion.</div>
+      <div class="source-links"><a class="source-link" href="https://trello.com/c/zgqMBTfm" target="_blank" rel="noreferrer">Open current Trello card &rarr;</a></div>
+    </div>
+    <div class="slide-number">13 / 18</div>
+  </section>
+
+  <section class="slide" id="slide-14">
+    <div class="section-label">Hawkeye V3 | What August showed</div>
+    <div class="content split">
+      <button class="media-frame" type="button" data-lightbox="assets/signage-captures/hawkeye.png" aria-label="Open Hawkeye signage fullscreen"><img src="assets/signage-captures/hawkeye.png" alt="Hawkeye V3 signage opening frame"><span class="zoom-label">Open fullscreen</span></button>
+      <div class="story">
+        <p class="eyebrow">SKW-018</p>
+        <h1>It does not just rock.</h1>
+        <p class="lede">August repositioned the runner as the spring: two arched bars under the chair create multiple live motion modes.</p>
+        <div class="point-list">
+          <div class="point"><b>1</b><p><strong>Four responses:</strong> bounce, rock, roll, and twist from two formed bars.</p></div>
+          <div class="point"><b>2</b><p><strong>No motion hardware:</strong> no coils, pivots, hinges, or moving ground contact.</p></div>
+          <div class="point"><b>3</b><p><strong>Next-sample thesis:</strong> deeper arch geometry and a production composite bar tuned by layup.</p></div>
+        </div>
+        <div class="source-links"><a class="source-link" href="https://maxmcolem-a11y.github.io/westfield-presentations/hawkeye-v3/signage-4k.html?v=70c96e6" target="_blank" rel="noreferrer">Open August loop &rarr;</a></div>
+      </div>
+    </div>
+    <div class="slide-number">14 / 18</div>
+  </section>
+
+  <section class="slide" id="slide-15">
+    <div class="section-label">Hawkeye V3 | Current update</div>
+    <div class="content">
+      <div class="status-head"><div><p class="eyebrow">What changed after August</p><h1>The market signal is positive. The next step is controlled proof.</h1></div><span class="status-pill">Active | Innovation S28</span></div>
+      <div class="update-grid">
+        <article class="update-card"><span class="tag">Sales-meeting response</span><h3>Advance the concept</h3><p>Motion, fresh upscale appearance, and use on uneven ground were liked. Hawkeye was included among the strongest-response products to advance.</p></article>
+        <article class="update-card"><span class="tag">Problems to solve</span><h3>Side shift, tube read, and rider range</h3><p>Address lateral shift, test different weight profiles, and treat the wide tube as a development artifact rather than the final visual answer.</p></article>
+        <article class="update-card"><span class="tag">Current engineering action</span><h3>Define the V4 adjustable steel-foot test</h3><p>Jordan is to specify arch height, slider range, COG relationship, motion targets, stability, stress margin, and fatigue criteria before fiberglass work.</p></article>
+      </div>
+      <div class="talk-track">The August room gave Hawkeye a real advance signal. The next sample should prove controllable geometry across rider weights before we commit to the composite limb and final styling.</div>
+      <div class="source-links"><a class="source-link" href="https://trello.com/c/md4yE8HL" target="_blank" rel="noreferrer">Open current source card &rarr;</a></div>
+    </div>
+    <div class="slide-number">15 / 18</div>
+  </section>
+
+  <section class="slide" id="slide-16">
+    <div class="section-label">Portfolio View</div>
+    <div class="content">
+      <p class="eyebrow">As of 26 August 2026</p>
+      <h1>Where the six stories stand now.</h1>
+      <div class="status-table-wrap">
+        <table>
+          <thead><tr><th>Product</th><th>What August sold</th><th>Current owner / action</th><th>Next proof</th><th>Timing</th></tr></thead>
+          <tbody>
+            <tr><td><strong><a href="https://trello.com/c/qHgjVBW7" target="_blank" rel="noreferrer">Origami Wagon</a></strong>S29 in development</td><td>One folded sheet replaces the conventional wagon body.</td><td>Adam - finish and document full-size prototype.</td><td>Physical fold, lock, force, safety, and load evidence.</td><td>Prototype 31 Aug; rig definition 11 Sep.</td></tr>
+            <tr><td><strong><a href="https://trello.com/c/OUcGqXxw" target="_blank" rel="noreferrer">Instant Indoor</a></strong>S29 red-ball priority</td><td>A real sofa with parcel-order convenience.</td><td>Max - coordinate quad-fold frame and comfort package.</td><td>Factory-ready CAD plus revised sample timing.</td><td>Hangzhou working session 14 Sep.</td></tr>
+            <tr><td><strong><a href="https://trello.com/c/UO9YYma7" target="_blank" rel="noreferrer">Diamond</a> + <a href="https://trello.com/c/jzPb5qso" target="_blank" rel="noreferrer">Spiral</a></strong>S29 in development</td><td>Volume-first soft-goods development.</td><td>Nessa - attach August feedback; Lia next.</td><td>Separate product decisions and sample directions.</td><td>20 Aug milestone is past due.</td></tr>
+            <tr><td><strong><a href="https://trello.com/c/7ir1icyE" target="_blank" rel="noreferrer">GRAM Chair</a></strong>S29 in development</td><td>A compliant corner makes the frame rock.</td><td>Max - define adjustable 80/20 test instrument.</td><td>Tunable corner and motion measurements.</td><td>Rig definition 28 Aug.</td></tr>
+            <tr><td><strong><a href="https://trello.com/c/zgqMBTfm" target="_blank" rel="noreferrer">Suspend Chair</a></strong>S29 in development</td><td>Suspended motion without hardware below the seat.</td><td>Lia - tune upper/lower points and strap lengths.</td><td>Best controlled multi-axis configuration.</td><td>No due date recorded.</td></tr>
+            <tr><td><strong><a href="https://trello.com/c/md4yE8HL" target="_blank" rel="noreferrer">Hawkeye V3</a></strong>Innovation S28 source card</td><td>Multiple motion modes from two arched bars.</td><td>Jordan - define V4 adjustable steel-foot test.</td><td>Controlled geometry across rider weights.</td><td>Specification requested by 28 Aug.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lede">The common shift is from concept-selling samples to repeatable evidence: rigs, measured tests, complete meeting feedback, and accepted handoffs.</p>
+    </div>
+    <div class="slide-number">16 / 18</div>
+  </section>
+
+  <section class="slide" id="slide-17">
+    <div class="section-label">Meeting Decisions</div>
+    <div class="content">
+      <p class="eyebrow">What this review should close</p>
+      <h1>Four decisions turn the August room into September progress.</h1>
+      <div class="decision-list">
+        <article class="decision"><span class="num">1</span><div><h3>Record the missing product feedback</h3><p>Attach the August notes and decisions to Diamond, Spiral, and GRAM so the product records control the next sample direction.</p></div></article>
+        <article class="decision"><span class="num">2</span><div><h3>Keep Instant Indoor on the factory critical path</h3><p>Confirm what must be ready for the 14 September HengFeng session and use Bryan's timing to set the actual expedite level.</p></div></article>
+        <article class="decision"><span class="num">3</span><div><h3>Require measured mechanism evidence</h3><p>Origami, GRAM, Suspend, and Hawkeye should return with test outputs tied to the claimed customer experience.</p></div></article>
+        <article class="decision"><span class="num">4</span><div><h3>Make the next signage loops evidence-led</h3><p>Replace generalized promise with prototype footage, measured results, the open decision, and the owner of the next proof.</p></div></article>
+      </div>
+    </div>
+    <div class="slide-number">17 / 18</div>
+  </section>
+
+  <section class="slide cover" id="slide-18">
+    <div class="section-label">Next Review</div>
+    <div class="content">
+      <p class="eyebrow">September digital signage direction</p>
+      <h1>Show the proof, not the promise.</h1>
+      <p class="lede">For each product: one test clip, one measured result, one unresolved decision, and one named next owner.</p>
+      <div class="grid-3">
+        <article class="card"><h3>Physical evidence</h3><p>Prototype, sample, motion test, fold cycle, or factory build.</p></article>
+        <article class="card green"><h3>Measured result</h3><p>Force, travel, stability, load, packed size, comfort, cost, or another pass criterion.</p></article>
+        <article class="card amber"><h3>Decision boundary</h3><p>What the evidence supports, what remains unknown, and who owns the next result.</p></article>
+      </div>
+      <div class="callout">The screens should make progress visible before anyone begins presenting.</div>
+    </div>
+    <div class="slide-number">18 / 18</div>
+  </section>
+
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Fullscreen presentation image">
+    <button id="lightbox-close" class="lightbox-close" type="button" aria-label="Close fullscreen image">&times;</button>
+    <img id="lightbox-image" src="" alt="">
+  </div>
+
+  <script>
+    const progressEl = document.getElementById('progress');
+    const languageToggleEl = document.getElementById('language-toggle');
+    const translationNoteEl = document.getElementById('translation-note');
+    const lightboxEl = document.getElementById('lightbox');
+    const lightboxImageEl = document.getElementById('lightbox-image');
+    const lightboxCloseEl = document.getElementById('lightbox-close');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+
+    function updateProgress() {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progressEl.style.width = `${(max > 0 ? window.scrollY / max : 0) * 100}%`;
+    }
+    function closeLightbox() {
+      lightboxEl.classList.remove('open');
+      lightboxImageEl.src = '';
+    }
+    document.querySelectorAll('[data-lightbox]').forEach((button) => {
+      button.addEventListener('click', () => {
+        lightboxImageEl.src = button.dataset.lightbox;
+        lightboxImageEl.alt = button.querySelector('img').alt;
+        lightboxEl.classList.add('open');
+        lightboxCloseEl.focus();
+      });
+    });
+    lightboxCloseEl.addEventListener('click', closeLightbox);
+    lightboxEl.addEventListener('click', (event) => { if (event.target === lightboxEl) closeLightbox(); });
+    languageToggleEl.addEventListener('click', () => {
+      translationNoteEl.classList.add('show');
+      window.clearTimeout(window.translationNoteTimer);
+      window.translationNoteTimer = window.setTimeout(() => translationNoteEl.classList.remove('show'), 3200);
+    });
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && lightboxEl.classList.contains('open')) return closeLightbox();
+      if (lightboxEl.classList.contains('open') || ['INPUT','TEXTAREA','BUTTON'].includes(document.activeElement.tagName)) return;
+      const current = slides.reduce((best, slide, index) => Math.abs(slide.getBoundingClientRect().top) < best.distance ? {index, distance: Math.abs(slide.getBoundingClientRect().top)} : best, {index: 0, distance: Infinity}).index;
+      if (['ArrowDown','PageDown','ArrowRight',' '].includes(event.key)) { event.preventDefault(); slides[Math.min(slides.length - 1, current + 1)].scrollIntoView(); }
+      if (['ArrowUp','PageUp','ArrowLeft'].includes(event.key)) { event.preventDefault(); slides[Math.max(0, current - 1)].scrollIntoView(); }
+    });
+    window.addEventListener('scroll', updateProgress, {passive: true});
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
+  </script>
+</body>
+</html>
