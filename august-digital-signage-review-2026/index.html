@@ -688,7 +688,7 @@
         }
         if(frame.dataset.motionKind==='ror'){
           setTimeout(()=>{
-            try{frame.contentWindow.goScene(4);frame.contentWindow.setPaused(true)}catch(error){}
+            try{frame.contentWindow.goScene(3);frame.contentWindow.setPaused(true)}catch(error){}
           },250);
         }
       }catch(error){frame.closest('.signage-motion')?.classList.add('source-fallback')}
