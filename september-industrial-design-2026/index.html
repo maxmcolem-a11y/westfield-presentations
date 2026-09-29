@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>September on the ground</title>
+  <meta name="description" content="Industrial Design — product progress and lessons from China">
+  <link rel="canonical" href="https://maxmcolem-a11y.github.io/westfield-presentations/september-industrial-design-2026/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Westfield Outdoors">
+  <meta property="og:title" content="September on the ground">
+  <meta property="og:description" content="Industrial Design — product progress and lessons from China">
+  <meta property="og:url" content="https://maxmcolem-a11y.github.io/westfield-presentations/september-industrial-design-2026/">
+  <meta property="og:image" content="https://maxmcolem-a11y.github.io/westfield-presentations/september-industrial-design-2026/assets/social-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Westfield Outdoors presentation preview for September on the ground">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="September on the ground">
+  <meta name="twitter:description" content="Industrial Design — product progress and lessons from China">
+  <meta name="twitter:image" content="https://maxmcolem-a11y.github.io/westfield-presentations/september-industrial-design-2026/assets/social-preview.png">
+  <meta name="theme-color" content="#d63b2f">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f7f3;
+      --paper: #ffffff;
+      --ink: #141414;
+      --muted: #5b5e5a;
+      --line: rgba(20, 20, 20, 0.12);
+      --accent: #d63b2f;
+      --blue: #2c6588;
+      --green: #1f6e52;
+      --amber: #9a5d36;
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+      --pad: clamp(1.3rem, 3vw, 3rem);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+    html {
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      background: #ecece7;
+    }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #fbfbf8, #ecece7);
+      font-family: Inter, Arial, sans-serif;
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+    .slide {
+      min-height: 100vh;
+      min-height: 100dvh;
+      scroll-snap-align: start;
+      position: relative;
+      display: flex;
+      overflow: hidden;
+    }
+    .slide:nth-child(even) { background: rgba(236, 236, 231, 0.58); }
+    .content {
+      width: min(1220px, 92vw);
+      margin: auto;
+      padding: calc(var(--pad) + 20px) var(--pad);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.75rem, 1.5vw, 1.15rem);
+    }
+    .logo {
+      position: absolute;
+      right: clamp(1rem, 2.2vw, 2rem);
+      top: clamp(0.8rem, 1.4vw, 1.2rem);
+      width: clamp(120px, 12vw, 180px);
+      height: auto;
+      opacity: 0.86;
+    }
+    .brand-fallback {
+      display: none;
+      position: absolute;
+      right: clamp(1rem, 2.2vw, 2rem);
+      top: clamp(0.8rem, 1.4vw, 1.2rem);
+      font-weight: 900;
+      letter-spacing: 0;
+      color: var(--ink);
+    }
+    .slide-number {
+      position: absolute;
+      right: clamp(1rem, 2.2vw, 2rem);
+      bottom: clamp(0.8rem, 1.4vw, 1.2rem);
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: rgba(20, 20, 20, 0.38);
+    }
+    .section-label {
+      position: absolute;
+      right: clamp(5.2rem, 7.8vw, 8.4rem);
+      bottom: clamp(0.8rem, 1.4vw, 1.2rem);
+      max-width: 34vw;
+      border: 1px solid rgba(20, 20, 20, 0.12);
+      background: rgba(255, 255, 255, 0.78);
+      border-radius: 999px;
+      padding: 0.42rem 0.72rem;
+      color: rgba(20, 20, 20, 0.58);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      z-index: 2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .slide::after {
+      content: "Property of Westfield Outdoors. Confidential and proprietary. Do not reproduce, distribute, or disclose without written permission.";
+      position: absolute;
+      left: 50%;
+      bottom: clamp(0.72rem, 1.2vw, 1rem);
+      transform: translateX(-50%);
+      width: min(640px, 42vw);
+      text-align: center;
+      color: rgba(20, 20, 20, 0.34);
+      font-size: 0.48rem;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      z-index: 1;
+      pointer-events: none;
+    }
+    html[lang="zh-Hans"] .slide::after {
+      content: "Westfield Outdoors 财产。保密及专有资料。未经书面许可，不得复制、分发或披露。";
+    }
+    .eyebrow {
+      margin: 0;
+      color: var(--accent);
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+    h1 {
+      margin: 0;
+      max-width: 1080px;
+      font-size: clamp(2rem, 4.7vw, 4.75rem);
+      line-height: 0.98;
+      letter-spacing: 0;
+      font-weight: 900;
+    }
+    .cover h1 { font-size: clamp(2.5rem, 6vw, 5.9rem); }
+    .lede {
+      margin: 0;
+      max-width: 1000px;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.55vw, 1.36rem);
+      line-height: 1.36;
+      font-weight: 550;
+    }
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(4, auto);
+      grid-auto-flow: column;
+      gap: 0.72rem;
+      margin-top: 0.8rem;
+    }
+    .toc-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--accent);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 0.86rem 1rem;
+    }
+    .toc-item:nth-child(3n+1), .card:nth-child(3n+1), .timeline-step:nth-child(3n+1) { border-color: var(--line); border-left-color: var(--blue); border-top-color: var(--blue); }
+    .toc-item:nth-child(3n+2), .card:nth-child(3n+2), .timeline-step:nth-child(3n+2) { border-color: var(--line); border-left-color: var(--green); border-top-color: var(--green); }
+    .toc-item:nth-child(3n), .card:nth-child(3n), .timeline-step:nth-child(3n) { border-color: var(--line); border-left-color: var(--amber); border-top-color: var(--amber); }
+    .toc-index {
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+    .toc-title {
+      font-weight: 900;
+      font-size: clamp(0.96rem, 1.12vw, 1.08rem);
+      line-height: 1.12;
+    }
+    .toc-range {
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--line);
+      border-top: 6px solid var(--accent);
+      border-radius: var(--radius);
+      padding: clamp(1rem, 1.7vw, 1.35rem);
+      box-shadow: var(--shadow);
+    }
+    .card h3 {
+      margin: 0 0 0.45rem;
+      font-size: clamp(1rem, 1.32vw, 1.2rem);
+      line-height: 1.15;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(0.9rem, 1.06vw, 1rem);
+      line-height: 1.35;
+      font-weight: 600;
+    }
+    .callout {
+      margin: 1rem 0 0;
+      background: #151515;
+      color: #ffffff;
+      border-radius: var(--radius);
+      padding: 1.1rem 1.3rem;
+      font-size: clamp(1.05rem, 1.55vw, 1.45rem);
+      font-weight: 850;
+      line-height: 1.24;
+    }
+    .timeline {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 0.8rem;
+      align-items: stretch;
+      margin-top: 1rem;
+    }
+    .timeline-step {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--line);
+      border-top: 7px solid var(--accent);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(1rem, 1.8vw, 1.45rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .timeline-step h3 {
+      margin: 0;
+      font-size: clamp(1.25rem, 1.85vw, 1.9rem);
+      line-height: 1.05;
+    }
+    .timeline-step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(0.95rem, 1.12vw, 1.08rem);
+      line-height: 1.34;
+      font-weight: 650;
+    }
+    .arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: clamp(1.8rem, 3vw, 2.7rem);
+      font-weight: 900;
+    }
+    .progress {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      height: 5px;
+      background: var(--accent);
+      width: 0;
+      z-index: 31;
+    }
+    .language-toggle {
+      position: fixed;
+      left: clamp(1rem, 2.2vw, 2rem);
+      bottom: clamp(0.8rem, 1.4vw, 1.2rem);
+      z-index: 40;
+      border: 1px solid rgba(20, 20, 20, 0.16);
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 0.48rem 0.8rem;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+    }
+    .language-toggle:hover,
+    .language-toggle:focus-visible {
+      background: #151515;
+      color: #ffffff;
+      outline: none;
+    }
+    @media (max-width: 900px) {
+      html { scroll-snap-type: none; }
+      .slide {
+        display: block;
+        min-height: 100svh;
+        overflow: visible;
+        padding: 3.85rem 0 4.15rem;
+        border-bottom: 1px solid rgba(20, 20, 20, 0.08);
+      }
+      .content {
+        width: 100%;
+        margin: 0;
+        padding: 0 1rem;
+      }
+      .logo {
+        top: 0.78rem;
+        right: 0.9rem;
+        width: 94px;
+        max-width: 28vw;
+      }
+      .brand-fallback {
+        top: 0.92rem;
+        right: 0.9rem;
+        max-width: 28vw;
+        font-size: 0.74rem;
+        text-align: right;
+      }
+      .section-label {
+        left: 1rem;
+        right: auto;
+        top: 0.95rem;
+        bottom: auto;
+        max-width: calc(100vw - 8.2rem);
+        font-size: 0.58rem;
+        letter-spacing: 0.06em;
+      }
+      .slide-number {
+        right: 0.95rem;
+        bottom: 1.35rem;
+        font-size: 0.62rem;
+        letter-spacing: 0.04em;
+      }
+      .slide::after {
+        left: 1rem;
+        right: 4.85rem;
+        bottom: 0.55rem;
+        transform: none;
+        width: auto;
+        text-align: left;
+        font-size: 0.43rem;
+        line-height: 1.16;
+      }
+      .language-toggle {
+        left: 0.85rem;
+        bottom: 0.85rem;
+        padding: 0.44rem 0.72rem;
+        font-size: 0.72rem;
+        background: rgba(255, 255, 255, 0.94);
+      }
+      h1 { font-size: clamp(1.85rem, 9vw, 2.55rem); line-height: 1.02; }
+      .cover h1 { font-size: clamp(2rem, 10vw, 2.75rem); }
+      .lede { font-size: 1rem; line-height: 1.34; }
+      .eyebrow { font-size: 0.66rem; letter-spacing: 0.1em; }
+      .toc-grid, .cards, .timeline { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; gap: 0.72rem; }
+      .toc-item { grid-template-columns: auto 1fr; padding: 0.72rem 0.8rem; gap: 0.5rem; }
+      .toc-range { grid-column: 2; font-size: 0.76rem; }
+      .card, .timeline-step { box-shadow: 0 8px 22px rgba(0, 0, 0, 0.07); }
+      .arrow { height: 1.3rem; transform: rotate(90deg); font-size: 1.8rem; line-height: 1; }
+      .callout { padding: 0.88rem 1rem; font-size: 1rem; line-height: 1.25; }
+      .progress { height: 4px; }
+    }
+  </style>
+<style>
+html{scroll-behavior:smooth} .content{width:min(1440px,94vw);padding:80px 38px 76px;gap:24px} h1{font-size:clamp(34px,3.6vw,58px);line-height:1.06;letter-spacing:-.045em;max-width:1200px} h2{font-size:clamp(24px,2.2vw,34px);line-height:1.18;letter-spacing:-.03em;margin:0 0 20px} h3{font-size:clamp(23px,2.2vw,34px);line-height:1.1;letter-spacing:-.03em;margin:24px 0 16px} p{line-height:1.5} em{font-style:normal;color:var(--accent)} .split{display:grid;grid-template-columns:.85fr 1.15fr;gap:6vw;align-items:center}.argument p{font-size:clamp(18px,1.55vw,23px);color:var(--muted)}figure{margin:0;min-width:0} .zoom{display:block;padding:0;border:0;background:transparent;width:100%;cursor:zoom-in}.zoom img{width:100%;height:clamp(240px,44vh,460px);object-fit:contain;display:block}figcaption{font-size:12px;line-height:1.4;color:var(--muted);margin-top:12px}.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}.duo,.quad{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}.tile{padding:25px 26px 30px;border-top:4px solid var(--blue);background:white;box-shadow:0 10px 35px #00000006}.tile:nth-child(2){border-color:var(--green)}.tile:nth-child(3){border-color:var(--accent)}.tile p{font-size:20px;color:var(--muted);margin:0}.quad .tile{padding:22px}.quad h3{margin:12px 0}.chapterlinks{display:flex;justify-content:space-between;margin-top:18px}.chapterlinks a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:600}.strip{display:flex;gap:40px;align-items:center;border-top:1px solid var(--line);padding-top:16px}.strip strong{font-size:24px;min-width:32%}.strip p{font-size:18px;margin:0;color:var(--muted)}.takeaway{font-size:20px;font-weight:600;color:var(--blue);border-top:1px solid var(--line);padding-top:18px;margin:0}.bigstatement{font-size:clamp(35px,4.3vw,65px);font-weight:800;line-height:1.08;letter-spacing:-.04em}.route{display:flex;align-items:center;justify-content:space-between;padding:35px 50px;background:white}.route span{color:var(--accent);font-weight:800}.route h2{font-size:60px;margin:16px 0}.route b{font-size:70px;color:var(--accent)}.route p{font-size:22px;color:var(--muted)}.status{display:block;border-left:3px solid var(--accent);padding-left:18px;font-size:18px}.note{background:#fff;padding:26px;border-top:4px solid var(--blue)}.note:nth-child(2){border-color:var(--green)}blockquote{font-size:clamp(18px,1.65vw,24px);line-height:1.45;margin:22px 0}.note p{font-size:clamp(17px,1.45vw,21px)}small{font-size:12px;color:var(--muted)}.tutorial .zoom img{height:35vh}.cover h1{font-size:clamp(50px,6vw,86px)}.coverline{display:flex;justify-content:space-between;align-items:center}.coverline p{font-size:21px;margin:0}.coverline span{font-size:14px;color:var(--muted)}.photo-ribbon{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.photo-ribbon .zoom img{height:23vh;object-fit:cover}.photo-ribbon figcaption{margin-top:6px}.closing h1{font-size:clamp(44px,5.2vw,78px)}.closingwords{display:flex;gap:35px;font-size:22px;font-weight:700;color:var(--blue)}.controls{position:fixed;bottom:12px;left:15px;z-index:20;display:flex;gap:5px}.controls button{border:1px solid var(--line);background:#ffffffec;border-radius:20px;padding:8px 12px;cursor:pointer}.progress{position:fixed;top:0;left:0;height:4px;background:var(--accent);z-index:50}.lightbox{position:fixed;inset:0;background:#101010ed;z-index:100;display:none;align-items:center;justify-content:center;padding:55px}.lightbox.open{display:flex}.lightbox img{max-width:95vw;max-height:85vh;object-fit:contain}.lightbox button{position:absolute;right:20px;top:16px;color:white;background:none;border:0;font-size:36px;cursor:pointer}.toast{position:fixed;bottom:60px;left:20px;background:#141414;color:white;padding:14px 20px;z-index:80;border-radius:6px;display:none}.slide::after{width:52vw;font-size:8px;bottom:17px}.evidence .zoom img{height:38vh}
+@media(max-height:780px) and (min-width:801px){.content{padding-top:65px;padding-bottom:65px;gap:16px}h1{font-size:40px}.cover h1{font-size:65px}.argument p{font-size:18px}.tile p{font-size:18px}.tile{padding:20px}.note{padding:18px}blockquote{font-size:19px}.note p{font-size:17px}.bigstatement{font-size:48px}.closing h1{font-size:62px}}
+@media(max-width:800px){html{scroll-snap-type:none}.slide{min-height:100svh;overflow:visible}.content{width:100%;padding:85px 24px 85px;gap:22px}.split,.tri,.duo,.quad{grid-template-columns:1fr;gap:25px}.zoom img,.tutorial .zoom img{height:auto;max-height:50vh}.photo-ribbon .zoom img{height:18vh}.cover h1{font-size:50px}.photo-ribbon{gap:8px}.photo-ribbon figcaption{font-size:10px}.coverline{gap:20px}.coverline p{font-size:17px}.coverline span{font-size:12px}.chapterlinks{flex-wrap:wrap;gap:18px}.route{padding:20px;gap:15px}.route h2{font-size:32px}.route b{font-size:34px}.route p{font-size:16px}.strip{display:block}.strip p{margin-top:12px}.closingwords{flex-direction:column;gap:15px}.slide::after{width:55vw;left:60%;font-size:7px;bottom:17px}.slide-number{bottom:43px}.note p,blockquote{font-size:19px}.lightbox{padding:15px}}
+</style><style>.notes{display:none;position:fixed;inset:8vh 12vw;background:white;box-shadow:0 20px 100px #0007;z-index:90;padding:38px;overflow:auto;border-top:5px solid var(--blue)}.notes.open{display:block}.notes h3{font-size:20px;margin:20px 0 8px}.notes p{font-size:18px;line-height:1.6}.notes>button{float:right;font-size:25px;border:0;background:none;cursor:pointer}.notes h2{font-size:28px}@media(max-width:800px){.slide::after{left:24px;width:calc(100% - 48px);transform:none;bottom:15px;text-align:left;padding-right:45px}.controls{left:auto;right:8px;bottom:8px;opacity:.95}.controls button{padding:6px 9px}.notes{inset:4vh 4vw;padding:24px}}</style><style>.photolabel{display:block;font-size:25px;line-height:1.2;color:var(--ink);margin:0 0 10px}.evidence figcaption{font-size:18px}.split .zoom img{height:48vh;max-height:500px}mark{background:#e3eef1;color:#174e69;padding:0 2px}.zoom:focus:not(:focus-visible){outline:none}@media(max-height:780px) and (min-width:801px){.split .zoom img{height:39vh}.photolabel{font-size:22px}}@media(max-width:800px){.controls{position:relative;left:0;right:auto;bottom:auto;justify-content:center;align-items:center;min-height:48px;background:white}.split .zoom img{height:auto;max-height:52vh}.slide::after{padding-right:0;bottom:15px}.slide-number{bottom:45px}.photolabel{font-size:24px}}</style></head><body><nav class="controls" aria-label="Presentation controls"><button id="lang" title="Chinese translation pending final approval">中文</button><button id="prev" aria-label="Previous slide">←</button><button id="home" aria-label="Contents">☰</button><button id="next" aria-label="Next slide">→</button><button id="notes" aria-label="Presenter notes">Notes</button><button id="full" aria-label="Fullscreen">⛶</button></nav><section class="slide cover" id="s1"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">Industrial Design / September 2026</p><h1>Development,<br><em>side by side.</em></h1><div class="coverline"><p>What changed in the products.<br>What changed in the way we work.</p><span>Max Moore<br>September 30, 2026</span></div><div class="photo-ribbon"><figure class=""><button class="zoom" aria-label="Enlarge: Instant Indoor"><img src="assets/instant-frame.jpg" alt="Instant Indoor"></button><figcaption>Instant Indoor</figcaption></figure><figure class=""><button class="zoom" aria-label="Enlarge: Tactical Messenger"><img src="assets/bag-revised.jpg" alt="Tactical Messenger"></button><figcaption>Tactical Messenger</figcaption></figure><figure class=""><button class="zoom" aria-label="Enlarge: Flow Motion V2"><img src="assets/flow-sample.jpg" alt="Flow Motion V2"></button><figcaption>Flow Motion V2</figcaption></figure></div></div><span class="slide-number">01 / 24</span></section><section class="slide " id="s2"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">The month in three products</p><h1>Direct access made the difference.</h1><div class="tri"><article class="tile"><span class="eyebrow">01 / Instant Indoor</span><h3>A next-day reset</h3><p>A complete cover-system rework with the makers and decision-makers together.</p></article><article class="tile"><span class="eyebrow">02 / Tactical Messenger</span><h3>Four revisions. Two weeks.</h3><p>A physical reference and direct factory work reset the direction.</p></article><article class="tile"><span class="eyebrow">03 / Flow Motion V2</span><h3>A late correction</h3><p>Slow, indirect updates let a wrong-baseline build progress too far.</p></article></div><nav class="chapterlinks"><a href="#s3">Products ↗</a><a href="#s12">How we worked ↗</a><a href="#s19">Recap tutorial ↗</a><a href="#s21">What comes next ↗</a></nav></div><span class="slide-number">02 / 24</span></section><section class="slide " id="s3"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">Instant Indoor / 01</p><h1>One integrated furniture system.</h1><div class="split"><div class="argument"><h2>Frame. Suspension. Upholstery.</h2><p>The telescoping frame removes the awkward split-pole step.</p><p>Integrated slat support and a full upholstered silhouette bring the system together.</p></div><figure class=""><button class="zoom" aria-label="Enlarge: September 14 · frame and suspension review"><img src="assets/instant-frame.jpg" alt="September 14 · frame and suspension review"></button><figcaption>September 14 · frame and suspension review</figcaption></figure></div></div><span class="slide-number">03 / 24</span></section><section class="slide " id="s4"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">Instant Indoor / 02</p><h1>A week of rework.<br><em>Ready the next day.</em></h1><div class="split"><div class="argument"><h2>The first cover I designed failed.</h2><p>New patterns. New foam approach. Lighter foam. Revised arm-top attachment.</p><p>With cutting, sewing, upholstery and decisions in the same room, we could change direction immediately.</p></div><figure class=""><button class="zoom" aria-label="Enlarge: September 17 · cover construction"><img src="assets/cover-working.jpg" alt="September 17 · cover construction"></button><figcaption>September 17 · cover construction</figcaption></figure></div></div><span class="slide-number">04 / 24</span></section><section class="slide " id="s5"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">Instant Indoor / 03</p><h1>Design it. Print it. Fit it.</h1><div class="duo"><figure class=""><button class="zoom" aria-label="Enlarge: September 22 · spacer design"><img src="assets/spacer-cad.jpg" alt="September 22 · spacer design"></button><figcaption>September 22 · spacer design</figcaption></figure><figure class=""><button class="zoom" aria-label="Enlarge: September 22 · factory test fit"><img src="assets/spacer-fit.jpg" alt="September 22 · factory test fit"></button><figcaption>September 22 · factory test fit</figcaption></figure></div><div class="strip"><strong>Fuller shape, without adding bulk.</strong><p>Move the lower tension points outward. Next: foam, tailoring, suspension supply and complete pack-out validation.</p></div></div><span class="slide-number">05 / 24</span></section><section class="slide " id="s6"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">Tactical Messenger / 01</p><h1>Make the direction tangible.</h1><div class="split"><div class="argument"><h2>Parker’s physical prototype reset the conversation.</h2><p>The first sample was off-direction in shape, materials and use-context. Our specification needed to evolve, too.</p><p>The office-built reference gave the factory a concrete basis for the new bag.</p></div><figure class=""><button class="zoom" aria-label="Enlarge: September 14 · prototype and reference review"><img src="assets/bag-align.jpg" alt="September 14 · prototype and reference review"></button><figcaption>September 14 · prototype and reference review</figcaption></figure></div></div><span class="slide-number">06 / 24</span></section><section class="slide " id="s7"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">Tactical Messenger / 02</p><h1>Four revisions.<br><em>Two weeks.</em></h1><div class="split"><div class="argument"><h2>The bag team kept the loop moving.</h2><p>Simpler liner and laptop sleeve. Better flap access, grab loops and webbing.</p><p>A loaded walk revealed corner discomfort and closure problems. The makers wore it, then revised it.</p></div><figure class=""><button class="zoom" aria-label="Enlarge: September 21 · intermediate sample, before final changes"><img src="assets/bag-revised.jpg" alt="September 21 · intermediate sample, before final changes"></button><figcaption>September 21 · intermediate sample, before final changes</figcaption></figure></div></div><span class="slide-number">07 / 24</span></section><section class="slide " id="s8"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">Tactical Messenger / 03</p><h1>The next test is the real loadout.</h1><div class="split"><div class="argument"><h2>The bag came back well. More revisions remain.</h2><p>Indianapolis testing can use firearms, magazines and plates—the loadouts we could not test in China.</p><p>That feedback drives the October revision and review.</p></div><figure class=""><button class="zoom" aria-label="Enlarge: September 22 · everyday-load walking test in China"><img src="assets/bag-walk.jpg" alt="September 22 · everyday-load walking test in China"></button><figcaption>September 22 · everyday-load walking test in China</figcaption></figure></div></div><span class="slide-number">08 / 24</span></section><section class="slide " id="s9"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">Flow Motion V2 / 01</p><h1>The wrong baseline got built.</h1><div class="split"><div class="argument"><h2>Not a valid test of the intended design.</h2><p>The team modified its older model instead of following the controlling August 4 (“8.4”) CAD.</p><p>Intermediate reviews happened, but slow, filtered updates did not expose the mismatch before most of the sample was built.</p></div><figure class=""><button class="zoom" aria-label="Enlarge: September 22 · rejected sample"><img src="assets/flow-sample.jpg" alt="September 22 · rejected sample"></button><figcaption>September 22 · rejected sample</figcaption></figure></div></div><span class="slide-number">09 / 24</span></section><section class="slide " id="s10"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">Flow Motion V2 / 02</p><h1>The deviations changed the sit and bounce.</h1><div class="tri evidence"><figure class=""><button class="zoom" aria-label="Enlarge: Too-flat X geometry · thighs contacted the bar"><img src="assets/thigh-000.jpg" alt="Too-flat X geometry · thighs contacted the bar"></button><figcaption><strong class="photolabel">Too-flat X geometry</strong>Thighs contacted the bar.</figcaption></figure><figure class=""><button class="zoom" aria-label="Enlarge: 5 mm spring plate instead of 7 mm · too soft"><img src="assets/spring-000.jpg" alt="5 mm spring plate instead of 7 mm · too soft"></button><figcaption><strong class="photolabel">5 mm instead of 7 mm</strong>Spring response too soft.</figcaption></figure><div class="argument"><h2>Fit and finish missed, too.</h2><p>Old hinges. Exposed hardware. Missing covers. Incorrect arm pads.</p><strong class="status">Sample rejected · September 22</strong></div></div></div><span class="slide-number">10 / 24</span></section><section class="slide " id="s11"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">Flow Motion V2 / 03</p><h1>CAD approved.<br>Physical proof still needed.</h1><div class="tri"><article class="tile"><span class="eyebrow">September 24</span><h3>Corrected CAD approved</h3><p>This is not acceptance of a physical sample.</p></article><article class="tile"><span class="eyebrow">October 15?</span><h3>Tentative completion</h3><p>The sample date remains unconfirmed.</p></article><article class="tile"><span class="eyebrow">October review</span><h3>Verify, then test</h3><p>Check the baseline, sit, bounce and stability before deciding next steps.</p></article></div><p class="takeaway">Future builds need direct maker access and a verified design baseline.</p></div><span class="slide-number">11 / 24</span></section><section class="slide " id="s12"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">How we worked / 01</p><h1>Let the work set the schedule.</h1><div class="split"><div class="argument"><h2>Follow the samples—not an arbitrary itinerary.</h2><p>Move between the factory and offices as samples, designs and prints become ready.</p><p>HengFeng introductions and access made independence useful—not unsupported.</p></div><figure class=""><button class="zoom" aria-label="Enlarge: September 22 · working through the physical sample"><img src="assets/instant-work.jpg" alt="September 22 · working through the physical sample"></button><figcaption>September 22 · working through the physical sample</figcaption></figure></div></div><span class="slide-number">12 / 24</span></section><section class="slide statement" id="s13"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">How we worked / 02</p><h1>Go where the next decision is.</h1><div class="route"><div><span>01</span><h2>Factory</h2><p>When the sample is ready.</p></div><b>↔</b><div><span>02</span><h2>Office</h2><p>When the design or print is needed.</p></div></div><p class="takeaway">DiDi let transport follow the work.</p></div><span class="slide-number">13 / 24</span></section><section class="slide statement" id="s14"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">How we worked / 03</p><h1>Lunch did not need<br>a hosting plan.</h1><div class="bigstatement">Less coordination.<br><em>More control of the day.</em></div><p class="lede">Handle my own meals; use factory dining when it fits.<br>Team meals still matter. Special arrangements are optional.</p></div><span class="slide-number">14 / 24</span></section><section class="slide " id="s15"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">How we worked / 04</p><h1>WeChat made direct communication practical.</h1><div class="split"><div class="bigstatement">Swap contacts.<br>Type or dictate.<br><em>Translate.<br>Retain.</em></div><div class="argument"><h2>Direct to the people doing the work.</h2><p>No coordinating an interpreter for each conversation. No passing translation-app screens back and forth.</p><p>A familiar tool—and a shared reference that remains afterward.</p></div></div></div><span class="slide-number">15 / 24</span></section><section class="slide " id="s16"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">How we worked / 05</p><h1>The makers were in the room.</h1><div class="split"><div class="argument"><h2>One physical problem.<br>One shared decision.</h2><p>Design, cutting, sewing and upholstery could align together.</p><p>The people needed to change direction were present. We could decide and continue.</p></div><figure class=""><button class="zoom" aria-label="Enlarge: September 15 · pattern review at the cutting table"><img src="assets/cutting-000.jpg" alt="September 15 · pattern review at the cutting table"></button><figcaption>September 15 · pattern review at the cutting table</figcaption></figure></div></div><span class="slide-number">16 / 24</span></section><section class="slide " id="s17"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">How we worked / 06</p><h1>Effective for me.<br>Not a universal travel model.</h1><div class="tri"><article class="tile"><span class="eyebrow">Experience</span><h3>China comfort</h3><p>Confidence operating independently on the ground.</p></article><article class="tile"><span class="eyebrow">Authority</span><h3>Decision-making agency</h3><p>Enough autonomy to make decisions and advance the work.</p></article><article class="tile"><span class="eyebrow">Trust</span><h3>Permission and relationships</h3><p>Factory access has to be earned and agreed—not assumed.</p></article></div></div><span class="slide-number">17 / 24</span></section><section class="slide " id="s18"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">How we worked / 07</p><h1>The recap worked across languages, too.</h1><div class="split"><div class="argument"><h2>Chinese slides.<br>English narration.</h2><p>An English presenter copy supported the meeting.</p><p>A bilingual link shared through WeChat kept the agreed direction available afterward.</p></div><figure class=""><button class="zoom" aria-label="Enlarge: September trip recap · bilingual presentation"><img src="assets/slide-01.png" alt="September trip recap · bilingual presentation"></button><figcaption>September trip recap · bilingual presentation</figcaption></figure></div></div><span class="slide-number">18 / 24</span></section><section class="slide " id="s19"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">Recap tutorial / Step 1</p><h1>Send the raw material to my AI agent.</h1><div class="tri tutorial"><article class="note"><span class="eyebrow">01 / My rough note</span><blockquote>“we packed up all of instant indoor today to work out the carton specs. we are currently at <mark>40cm x 40cm x 120cm</mark> for the lounge unit. <mark>still waiting on the final weight</mark>”</blockquote><small>September 21 · original spelling</small></article><article class="note chat"><span class="eyebrow">02 / Pasted WeChat history</span><p><b>Fiona:</b> “try vaccum then roll to a narrow polybag?”</p><p><b>Max:</b> “That’s what we did for the cushions”</p><p>“The cover has rigid elements so I don’t want to press vacuum it”</p></article><figure class=""><button class="zoom" aria-label="Enlarge: 03 / Photo · actual packing trial"><img src="assets/instant-pack.jpg" alt="03 / Photo · actual packing trial"></button><figcaption>03 / Photo · actual packing trial</figcaption></figure></div><p class="takeaway">In Telegram: send notes, chats and photos. Say “done” when finished.</p></div><span class="slide-number">19 / 24</span></section><section class="slide " id="s20"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">Recap tutorial / Step 2</p><h1>One record. Two useful outputs.</h1><div class="duo outputs"><article class="note"><span class="eyebrow">Trello / Project detail</span><blockquote>“Current lounge carton estimate <mark>40 x 40 x 120cm; final weight pending.</mark>”</blockquote><p>“Cover includes rigid elements/installed blue slats: <b>do NOT press-compress</b>…”</p><small>Project record · actionable detail</small></article><article class="note"><span class="eyebrow">Darin / Daily narrative</span><blockquote>“We packed the lounge components today and are currently at a carton size of <mark>40 × 40 × 120 cm.</mark> <mark>Final weight is still pending.</mark>”</blockquote><p>“The cover’s rigid elements need to remain installed for the customer…”</p><small>Approved September 21 recap · excerpts</small></article></div><p class="takeaway">Sort by project → preserve open items → write the recap → review before sending</p></div><span class="slide-number">20 / 24</span></section><section class="slide " id="s21"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">Indianapolis capability</p><h1>A reusable kit for local prototyping.</h1><div class="split"><div class="argument"><h2>Build and adjust chair and mechanism mockups.</h2><p>Compatible 25 × 25 mm modular aluminum framing and practical fittings approved.</p><p>Tooling has the instruction to finish and ship. Dispatch and arrival remain unconfirmed. Small gaps can be sourced or printed locally.</p></div><figure class=""><button class="zoom" aria-label="Enlarge: 80/20-style kit · tooling review"><img src="assets/kit-hardware.jpg" alt="80/20-style kit · tooling review"></button><figcaption>80/20-style kit · tooling review</figcaption></figure></div></div><span class="slide-number">21 / 24</span></section><section class="slide " id="s22"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">China hiring</p><h1>Eyes, ears and hands<br><em>between visits.</em></h1><div class="split"><div class="bigstatement">Keep the<br>momentum.</div><div class="argument"><h2>Isaac Chan selected after four interviews.</h2><p>Design and engineering capability, project knowledge and direct maker access—not another relay point.</p><p class="status">Details pending. Goal: an offer extended and accepted before the October meeting.</p></div></div></div><span class="slide-number">22 / 24</span></section><section class="slide " id="s23"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">October priorities</p><h1>Close out this development round.</h1><div class="quad"><article class="tile"><span class="eyebrow">01</span><h3>Instant Indoor</h3><p>Review the sample; start the next, intended final prototype.</p></article><article class="tile"><span class="eyebrow">02</span><h3>Flow Motion V2</h3><p>Review the corrected sample and decide next steps.</p></article><article class="tile"><span class="eyebrow">03</span><h3>Tactical Messenger</h3><p>Revise and review using Indianapolis loadout feedback.</p></article><article class="tile"><span class="eyebrow">04</span><h3>China team</h3><p>Once accepted, begin integrating Isaac—even socially while he serves notice.</p></article></div></div><span class="slide-number">23 / 24</span></section><section class="slide closing" id="s24"><img class="logo" src="assets/westfield-outdoors-logo.png" alt="Westfield Outdoors"><div class="content"><p class="eyebrow">Discussion</p><h1>Keep designing, deciding<br>and making <em>connected.</em></h1><div class="closingwords"><span>Direct access.</span><span>Flexible logistics.</span><span>Durable records.</span></div><p class="lede">Local prototyping here.<br>Continuity at the factory between visits.</p></div><span class="slide-number">24 / 24</span></section><div class="progress"></div><div class="toast" role="status">Chinese translation follows final English approval.</div><div class="lightbox" role="dialog" aria-label="Fullscreen image"><button aria-label="Close">×</button><img alt=""></div><aside class="notes" role="dialog" aria-label="Presenter notes"><button aria-label="Close notes" onclick="document.querySelector('.notes').classList.remove('open')">×</button><h2>Presenter notes</h2><div></div></aside><script>
+const slides=[...document.querySelectorAll('.slide')];let current=0;const dict={en:{},zh:{}};const key='westfield-september-industrial-design-2026-language';localStorage.setItem(key,'en');
+function go(i){current=Math.max(0,Math.min(slides.length-1,i));slides[current].scrollIntoView({behavior:'instant'});history.replaceState(null,'','#s'+(current+1));document.querySelector('.progress').style.width=((current+1)/slides.length*100)+'%'}
+const lb=document.querySelector('.lightbox');document.querySelectorAll('.zoom').forEach(b=>b.onclick=()=>{lb.querySelector('img').src=b.querySelector('img').src;lb.querySelector('img').alt=b.querySelector('img').alt;lb.classList.add('open')});function close(){lb.classList.remove('open')}lb.onclick=e=>{if(e.target!==lb.querySelector('img'))close()};document.querySelector('#prev').onclick=()=>go(current-1);document.querySelector('#next').onclick=()=>go(current+1);document.querySelector('#home').onclick=()=>go(1);document.querySelector('#full').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();document.querySelector('#lang').onclick=()=>{let t=document.querySelector('.toast');t.style.display='block';setTimeout(()=>t.style.display='none',3200)};document.addEventListener('keydown',e=>{if(e.key==='Escape'){close();document.querySelector('.notes').classList.remove('open')};if(document.querySelector('.notes').classList.contains('open'))return;if(lb.classList.contains('open'))return;if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();go(current+1)}if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(current-1)}if(e.key==='Home')go(0);if(e.key==='End')go(23)});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){current=slides.indexOf(e.target);document.querySelector('.progress').style.width=((current+1)/24*100)+'%'}}),{threshold:.55});slides.forEach(s=>io.observe(s));if(location.hash)document.querySelector(location.hash)?.scrollIntoView();
+
+const notes={"1": "<h3>Speaker notes</h3><p>This month&#x27;s Industrial Design update centers on the September trip: what changed in the products, why the working method mattered, and how we keep progress moving.</p>", "2": "<h3>Speaker notes</h3><p>These are the concrete examples behind the trip&#x27;s main lesson. The comparison is based on this trip, not a claim that every product or team will behave identically.</p>", "3": "<h3>Speaker notes</h3><p>This was product engineering, not only a cover improvement. The telescoping frame is my design, implemented with Cyrus&#x27;s help. The frame folds as a true quad-fold excluding the arms; do not imply the complete upholstered product folds with everything attached. We developed concealed suspension pockets into the seat/inside-arm seam, with removable slats retained for service. Integrated construction and fit were being developed; durability and final production readiness were not demonstrated. The original local fiberglass alternative was too soft: matching the supplied suspension remains important.</p>", "4": "<h3>Speaker notes</h3><p>This was not a small tailoring correction\u2014we touched the whole system. Being on the floor let us change course immediately without another approval chain. My estimate is that resolving the same details remotely would have taken another week or more. Present that as experience-based judgment, not a measured company-wide productivity statistic.</p>", "5": "<h3>Speaker notes</h3><p>September 22 is a second concrete fast-loop example: I printed the spacers at the office and took them to the factory that day. Initial fitting supported the approach; final even tension and corner tailoring remained. Temporary screw holes allowed sizing changes; the intended eventual arrangement is sewn into the cover. Correct arm foam matters because it affects the entire cover shape. Back-cushion fill was reduced 20%, and the September 21 connector modification resolved the insertion/removal issue. Stronger arm/back tubes remain a separate next-frame concern.</p><h3>Remaining gates</h3><p>Reliable matched-stiffness suspension supply; final foam and tailoring; repeated assembly/folding and comfort checks; packed dimensions/weight and cushion recovery. OKE GOODSIDE is a sourcing lead, not a confirmed equivalent or approved supplier.</p><h3>Schedule</h3><p>October 2 shipment was agreed, not confirmed dispatched. October 15 was the target to start making the next production-ready sample, not finish it. Keep these milestones in notes unless relevant to discussion.</p><h3>Packing distinction</h3><p>September 21 trial estimate was 40 \u00d7 40 \u00d7 120 cm; 15 \u00d7 15 \u00d7 45 inches is a separate later target. Neither is a verified final pack-out. Keep installed rigid/slat elements out of press compression; the cover requires suction-only packing while cushion recovery is checked separately.</p>", "6": "<h3>Speaker notes</h3><p>Credit Parker explicitly. A physical reference communicated intent that the first build had missed. Frame the context gap around this product&#x27;s US use case, not as a general statement about the team&#x27;s ability. Crucially, Parker acknowledged in August that the first fabric matched our sample request: the specification and our understanding also needed to improve. The bad product outcome was not proof the factory ignored the requested material. Parker&#x27;s prototype governed size/features; Chrome and Freitag supplied selected material/construction references. We deliberately asked HF not to build ahead of this visit from outdated information.</p>", "7": "<p>Use this slide to connect the product progress to the way the work was done.</p>", "8": "<h3>Speaker notes</h3><p>The remaining questions are not all solvable by looking at an empty bag in the sample room. Actual contents are needed to uncover fit, weight distribution, comfort and access issues. Do not imply those US tests are already complete or that the product has final approval.</p>", "9": "<h3>Speaker notes</h3><p>First introduce the product: a portable rocker using an angled leaf spring and asymmetric motion, intended to give easy lean-back and a controlled return. That is the intended experience, not a validated result of this sample. This is the contrast with the other projects. The problem was not simply that a faithful prototype taught us something new: the build departed from the intended baseline. Delayed visibility prevented an early course correction. There were intermediate reviews\u2014September 16 approval to proceed and September 18 detail checks\u2014so do not say the work was never reviewed. The failure was that those checks did not establish conformity to the full controlling baseline; the CAD arrived September 21 and the September 22 comparison exposed the old-model build. CAD-before-fabrication had already been required earlier in the project. The lesson is both direct access and effective design-release control.</p>", "10": "<h3>Speaker notes</h3><p>Explain the physical consequence of each deviation in plain language. I rejected the sample on September 22. Keep the discussion direct and factual: a mostly completed sample did not demonstrate the intended design. Additional physical checks found loose/oversized foot-bar connections and insufficient cartridge clearance causing unwanted ground contact; those belong in the next-build checklist. Do not diagnose all seating problems from the earlier temporary wood-board trial. The complete upholstered test exposed the thigh-contact problem.</p>", "11": "<h3>Speaker notes</h3><p>CAD approval is not sample approval. October 15 completion was tentative in the project record, not a delivery promise. I am not on the ground for this build, and no new communication process has been established. The recommendation is to move future work toward the Instant Indoor and Tactical Messenger model\u2014not to claim that change has already happened. Cyrus was helping move the work; the issue is a narrow communication route instead of access to the actual frame/fabric makers. Before acceptance, compare the physical build to approved geometry, 7 mm spring, foot clearances, connections, concealment and arm-pad construction, then sit/bounce-test it. The newly attached 8.4 STEP is the baseline, not proof we possess the exact September 24 approved derivative. Weight/capacity and cost/retail questions remain open; do not invent targets.</p>", "12": "<h3>Speaker notes</h3><p>\u201cMinimal accommodation\u201d means minimal reliance on hosted daily arrangements here; do not turn it into an unsupported claim about hotel choice. Independence mattered because development did not always happen on a preset timetable. This was not zero HengFeng support: introductions, access and the sampling teams were essential. The trip also included use of the office/factory bus when convenient; DiDi supplied flexibility, not an exclusive transport mode.</p>", "13": "<h3>Speaker notes</h3><p>The benefit was flexibility, not a claimed transport saving. Direct factory work can require more rides than a normal office visit, and planning should account for that.</p>", "14": "<h3>Speaker notes</h3><p>Treat independent meals as part of the overall flexible routine. Do not invent a particular lunch story or quantified time saving. This is not an argument against team meals or relationship-building. The final trip recap explicitly records using factory dining when the work allowed. The point is no special hosting requirement\u2014not refusing all factory meals.</p>", "15": "<h3>Speaker notes</h3><p>WeChat was already familiar to the team. It reduced dependence on coordinating an interpreter or minder for every exchange. It also left a shared reference after the conversation. Do not claim translation is flawless or that human translation was never used. Some detailed construction discussions still received translation support; WeChat removed the need for an interpreter to accompany every exchange.</p>", "16": "<h3>Speaker notes</h3><p>Briefly return to the Instant Indoor example without repeating its whole story: a full rework was possible because the necessary people could see the same problem and decide together. Being physically present only helps if decision authority and maker access are also present.</p>", "17": "<h3>Speaker notes</h3><p>I did not identify a downside I would change for my own arrangement, but I would not prescribe it indiscriminately. Factories do not simply allow individual visitors to go wherever they want. Access must be agreed; this is not unrestricted movement by default.</p>", "18": "<h3>Speaker notes</h3><p>The September 23, 2 pm recap went well. Presenting Chinese slides while narrating from the English copy worked very well; this is a method we actually used, not a proposed feature. It complemented direct floor conversations and aligned next actions across the five workstreams. Bridge to the tutorial: the presentation and recap were possible because rough notes, chats and photos had been captured throughout the trip. A successful meeting does not mean all milestones were completed.</p>", "19": "<h3>Speaker walkthrough</h3><p>\u201cThis is what I actually sent. I did not clean up the spelling or write a report. The rough note supplied the carton estimate; the chat explained why the cushions and the cover needed different packing methods; the picture showed the physical trial. I sent all of it into the same conversation.\u201d</p><p>Rough-note example: \u201c-I like this back cushion but i think it should have 20% less fill material. we can make it softer and cheaper. (done)\u201d</p><p>Batch instruction: \u201chold for a wechat dump ill yell done when im finished\u201d</p>", "20": "<h3>Speaker walkthrough</h3><p>\u201cI capture once. The agent organizes the evidence, routes it to the right project and writes the daily narrative. I check it and approve the outgoing message. The value is a durable record that reaches the right places and people without me separately writing each version.\u201d</p><h3>Additional matched example</h3><p>Trello: \u201cCompleted: back cushion fill reduced 20%; cover bottom edge binding finished.\u201d</p><p>Darin: \u201cWe reduced the back cushion fill by 20% to improve softness and reduce cost, and finished the binding along the bottom of the cover.\u201d</p><p>Retain the distinction between compressed cushions and the cover\u2019s installed rigid slats. The cover needs suction-only vacuum packing, not press compression. Keep final weight pending and check cushion recovery.</p>", "21": "<h3>Speaker notes</h3><p>The purpose is to build and adjust physical mockups locally, shortening the development loop before handing work to China. Two-meter stock lengths were requested for shipping and storage. Small unavailable parts can be sourced or printed locally rather than holding up the main kit. Dr. Yu/Fisch and tooling still need to confirm final packing, shortages and shipping timing. Do not present the sourcing list as a confirmed packing list.</p>", "22": "<h3>Speaker notes</h3><p>I can accomplish a lot while I am there, but we need someone who knows the projects, reports to me and can keep doing this work after I leave. Four interviews were completed; I selected Isaac Chan (Chan Ka Hung) and asked HR to proceed. The records use Chan, rather than the Chen spelling in our informal discussion. Proceed with this hire first and consider a separate dedicated engineer later. The hope is an offer extended and accepted before the October meeting; it is not yet a confirmed hire. October should begin team integration, including social engagements if the candidate is still serving notice at the previous job. This slide covers China only.</p>", "23": "<h3>Speaker notes</h3><p>These are the priorities for my return, not promises that every product will be production-ready in October. \u201cClose out\u201d means resolve this development round and establish the next disposition for each project.</p>", "24": "<h3>Speaker notes</h3><p>Close on the operating lesson rather than a generic thank-you. The goal is not more travel for its own sake: it is maintaining the proximity, authority and information flow needed to improve products quickly. Invite questions.</p>"};document.querySelector("#notes").onclick=()=>{document.querySelector(".notes div").innerHTML=notes[current+1];document.querySelector(".notes").classList.add("open")};
+</script></body></html>
