@@ -29,6 +29,16 @@
 @media(max-width:900px){.phase:first-child .big-number{font-size:34px;white-space:nowrap;margin-top:5px}.controls-group:first-child>a:first-child{display:none}.controls a,.controls button{white-space:nowrap}.controls-group{gap:12px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.progress{transition:none}}
 @media print{@page{size:landscape;margin:0}html{scroll-snap-type:none}.slide{height:100vh;min-height:0;break-after:page;overflow:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact}.content{padding:60px 6vw 65px;gap:18px}.logo{width:100px;top:17px}.slide-footer{bottom:20px}.controls,.progress,.skip{display:none}h1{font-size:57px}h2{font-size:35px}.gallery img{height:210px}.research p,.phase p,.track p,.clean-list li{font-size:16px}.big-number{font-size:65px}}
+
+/* Complete Simplified Chinese edition, with the same Westfield slide structure. */
+#language-toggle{border:1px solid var(--line);border-radius:4px;padding:5px 10px;color:var(--ink);background:var(--paper);min-width:49px}
+html[lang="zh-Hans"] body{font-family:Inter,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif}
+html[lang="zh-Hans"] h1,html[lang="zh-Hans"] h2,html[lang="zh-Hans"] h3{letter-spacing:0}
+html[lang="zh-Hans"] h1{font-size:clamp(48px,4.6vw,70px);line-height:1.18}
+html[lang="zh-Hans"] h2{font-size:clamp(32px,3vw,44px);line-height:1.2}
+html[lang="zh-Hans"] .lede,html[lang="zh-Hans"] .research p,html[lang="zh-Hans"] .phase p{line-height:1.55}
+html[lang="zh-Hans"] .eyebrow{letter-spacing:.09em}
+@media(max-width:900px){.controls-group{gap:10px}.controls{gap:9px}.controls #fullscreen{font-size:0;padding:5px 0;min-width:23px}.controls #fullscreen:after{content:'⛶';font-size:22px}#language-toggle{padding:5px 8px}html[lang="zh-Hans"] h1{font-size:clamp(37px,9vw,57px)}html[lang="zh-Hans"] h2{font-size:31px}html[lang="zh-Hans"] .gallery figcaption{font-size:12px}html[lang="zh-Hans"] .research h3,html[lang="zh-Hans"] .track h3{font-size:25px}}
 </style>
 </head>
 <body>
@@ -83,7 +93,7 @@
  <footer class="slide-footer"><span>Westfield Outdoors · 23 October 2026</span><span>07 / 07</span></footer>
 </section>
 </main>
-<nav class="controls" aria-label="Slide navigation"><div class="controls-group"><a href="#intro" aria-label="Go to first slide">Westfield</a><a href="#next">Project links ↗</a><span class="key-hint">Arrow keys to present · F for fullscreen</span></div><div class="controls-group"><button id="previous" aria-label="Previous slide">←</button><span class="counter" aria-live="polite">1 / 7</span><button id="next-slide" aria-label="Next slide">→</button><button id="fullscreen" aria-label="Enter fullscreen">Fullscreen</button></div></nav><div class="progress" aria-hidden="true"></div>
+<nav class="controls" aria-label="Slide navigation"><div class="controls-group"><a href="#intro" aria-label="Go to first slide">Westfield</a><a href="#next">Project links ↗</a><button id="language-toggle" type="button" aria-label="Switch to Chinese" lang="zh-Hans">中文</button><span class="key-hint">Arrow keys to present · F for fullscreen</span></div><div class="controls-group"><button id="previous" aria-label="Previous slide">←</button><span class="counter" aria-live="polite">1 / 7</span><button id="next-slide" aria-label="Next slide">→</button><button id="fullscreen" aria-label="Enter fullscreen">Fullscreen</button></div></nav><div class="progress" aria-hidden="true"></div>
 <script>
 (()=>{
  const slides=[...document.querySelectorAll('.slide')],prev=document.querySelector('#previous'),next=document.querySelector('#next-slide'),counter=document.querySelector('.counter'),progress=document.querySelector('.progress'),full=document.querySelector('#fullscreen');let index=0,frame=0;
@@ -96,6 +106,148 @@
  addEventListener('scroll',()=>{if(!frame)frame=requestAnimationFrame(update)},{passive:true});addEventListener('resize',update);
  addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||/INPUT|TEXTAREA|SELECT|BUTTON|A/.test(e.target.tagName))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(index+1)}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(index-1)}else if(e.key==='Home'){e.preventDefault();go(0)}else if(e.key==='End'){e.preventDefault();go(slides.length-1)}else if(e.key.toLowerCase()==='f')fullscreen()});
  document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const s=slides.findIndex(s=>'#'+s.id===a.getAttribute('href'));if(s>=0){e.preventDefault();go(s)}}));update();
+})();
+</script>
+
+<script>
+(()=>{
+ const zh={
+ "Skip to project presentations": "跳转至项目演示",
+ "Industrial Design proposals · 23 October 2026": "工业设计提案 · 2026年10月23日",
+ "Tent concepts.": "帐篷概念。",
+ "Ideas to develop.": "待探讨的开发方向。",
+ "Concepts and development proposals from Industrial Design, for the tent team to consider.": "工业设计团队提出概念与开发建议，供帐篷团队评估。",
+ "Industrial Design Team · Westfield Outdoors": "工业设计团队 · Westfield Outdoors",
+ "Review the concepts": "评估概念方向",
+ "One Pull, Loaf T and the original tension beads.": "One Pull、Loaf T，以及最初的张力珠研究。",
+ "Consider a proven method": "借鉴已有的设计方法",
+ "How printed bag forms helped the team choose a direction.": "通过背包形态的3D打印模型，帮助团队选择设计方向。",
+ "Discuss a tent form study": "讨论帐篷形态研究提案",
+ "A proposed way to explore the next tent—not a fixed development plan.": "提出探索下一款帐篷的方法，具体开发计划仍待讨论。",
+ "The tent team’s input will shape which ideas move into further development.": "由帐篷团队评估并决定哪些想法值得进一步开发。",
+ "Westfield Outdoors · Concepts for tent-team review": "Westfield Outdoors · 供帐篷团队评估的概念",
+ "Industrial Design concepts · Research and development potential": "工业设计概念 · 研究基础与开发潜力",
+ "Three concepts for tent-team review.": "三个概念，供帐篷团队评估。",
+ "Each offers a different opportunity. The linked presentations provide the background for discussion.": "每个概念都有不同的开发潜力。可打开相关演示，了解研究背景并展开讨论。",
+ "One Pull / Sideline": "One Pull / Sideline 遮阳棚",
+ "A captive segmented frame, assembled by a cord. The sockets carry the structural loads.": "分段杆架始终保留在布套内，通过拉绳组装到位，由插接套筒承担结构载荷。",
+ "Possible development trial": "可考虑的开发试验",
+ "Joint trials → one sleeved arch → complete deploy-and-repack cycle.": "接头试验 → 单个带布套的拱架 → 完整展开与收纳循环。",
+ "Open One Pull presentation ↗": "打开 One Pull 演示 ↗",
+ "Existing Max account sign-in required.": "需要登录 Max 现有账号。",
+ "Loaf T / tensegrity": "Loaf T / 张拉整体研究",
+ "Spring battens integrated into the skin. Bloom, cinching and restraint create the form.": "弹性撑条与布面结合，通过回弹展开、收紧和约束形成结构。",
+ "Single-meridian rig: measure bloom, cinch effort and repeatability.": "单弧向试验架：测量回弹展开、收紧力和重复性。",
+ "Open Tensegrity presentation ↗": "打开张拉整体项目演示 ↗",
+ "Open Loaf T studio ↗": "打开 Loaf T 仿真工作室 ↗",
+ "Original tension beads": "最初的张力珠概念",
+ "A flexible segmented member becomes stiffer when a tendon compresses its interfaces.": "柔性分段构件通过拉索压紧接触面后，提高整体刚度。",
+ "A comparative bench rib: stiffness, tension, release and wear.": "肋条对比台架试验：评估刚度、张紧力、释放和磨损。",
+ "Open Tension Bead presentation ↗": "打开张力珠结构演示 ↗",
+ "Tent-team input:": "请帐篷团队评估：",
+ "Which directions merit further development, and what would you change?": "哪些方向值得进一步开发？哪些地方需要调整？",
+ "Renderings and simulations are design inputs, not physical validation.": "效果图和仿真用于辅助设计，不能替代实物验证。",
+ "An Industrial Design precedent · Timber Ridge 26L Daypack": "工业设计案例 · Timber Ridge 26升日用背包",
+ "Printed forms made the choice tangible.": "用实物模型，让设计选择更直观。",
+ "printed models": "比例打印模型",
+ "1 week": "1周",
+ "hands-on review": "实物评审",
+ "directions selected": "个入选方向",
+ "Diamond": "Diamond · 菱形",
+ "Teardrop": "Teardrop · 水滴形",
+ "Spiral": "Spiral · 螺旋形",
+ "Industrial Design explored CAD forms and reviewed physical prints. We propose trying the same approach for tents.": "工业设计团队先探索CAD形态，再评审3D打印实物。我们建议将同样的方法应用于帐篷设计。",
+ "Open the daypack presentation ↗": "打开日用背包项目演示 ↗",
+ "Original project photographs · Model selection, not product validation.": "原项目实物照片 · 用于形态筛选，不代表产品性能验证。",
+ "Industrial Design proposal · Scope for tent-team discussion": "工业设计提案 · 范围由帐篷团队讨论",
+ "Proposal: a physical tent form study.": "提案：用实物模型探索帐篷形态。",
+ "If useful to the tent team, agree one use case and compare forms within a shared size and occupancy brief.": "如帐篷团队认为有价值，可先确定一个使用场景，在统一尺寸和使用人数要求下比较不同形态。",
+ "Explore and print": "探索并打印",
+ "Quick CAD forms, common-scale people and usable-space inserts. Print in one material and at one scale.": "快速建立CAD形态，配合同尺度人物与空间参照，用统一材料和比例打印。",
+ "Develop the shortlist": "深化入选方向",
+ "Compare silhouette, entry and useful volume. Make flexible maquettes and full-size entry/headroom checks.": "比较轮廓、入口与可用空间，制作柔性模型，并以全尺寸模型检查入口和净高。",
+ "Advance a prototype": "推进一个原型",
+ "With tent-team agreement, select a direction and define a suitable structure and first prototype.": "经帐篷团队认可后，选择方向，并确定合适的结构和首个原型方案。",
+ "Tent-team input: is a compact day shelter the right first brief, or would another category be more useful?": "请帐篷团队讨论：是否先研究紧凑型日间遮阳棚，还是其他品类更有价值？",
+ "Proposed scope · Quantities, allocation and prototype selection are not yet committed.": "建议范围 · 数量、资源投入及原型选择均待讨论。",
+ "A possible development approach": "可考虑的开发方式",
+ "Explore form and function in parallel.": "形态与功能并行探索。",
+ "Form + user space": "形态与使用空间",
+ "Printed volumes, scale figures and full-size space checks help us compare:": "利用打印模型、比例人物及全尺寸空间检查，比较：",
+ "A distinctive, recognizable silhouette": "独特、易识别的外形轮廓",
+ "Useful headroom, entry and interior space": "有效净高、入口和内部空间",
+ "Panel language and plausible construction": "裁片设计语言与可行的结构做法",
+ "Deployment + performance": "展开方式与性能",
+ "Physical trials would help the team evaluate:": "通过实物试验，帮助团队评估：",
+ "User actions and operating effort": "操作步骤与所需力度",
+ "Stability, release and compact repacking": "稳定性、释放与紧凑收纳",
+ "Durability and weather performance": "耐久性与风雨性能",
+ "Printed forms guide design choices. Physical trials establish performance.": "打印模型辅助设计选择，实物试验验证产品性能。",
+ "A conventional-pole structure could provide a useful comparison alongside the new mechanisms.": "可将传统帐杆结构作为基准，与新机构进行比较。",
+ "Easy deployment and compact pack-down remain the product requirements.": "便捷展开和紧凑收纳仍是产品要求。",
+ "Proposed collaboration · If a direction is selected": "合作建议 · 在选定方向之后",
+ "Develop the selected ideas together.": "共同开发选定的概念。",
+ "Industrial Design contribution": "工业设计团队的支持",
+ "Concepts, form exploration and user experience": "概念、形态探索与用户体验",
+ "CAD volumes, printed models and design iteration": "CAD形态、打印模型与设计迭代",
+ "Clear communication of the design intent": "清晰表达与传达设计意图",
+ "Tent-team expertise": "帐篷团队的专业支持",
+ "Fit with the tent range and customer needs": "与帐篷产品线及客户需求的匹配",
+ "Structure, materials and construction feasibility": "结构、材料与工艺可行性",
+ "Appropriate trial routes and sample planning": "合适的试验路径与样品计划",
+ "Development support to discuss for any agreed project": "项目确定后，再讨论所需开发支持",
+ "Named counterparts, prototype time and continuity between visits. Shared model-making and test resources at Westfield Indiana remain a separate need.": "明确对接人员、原型制作时间，以及两次到访之间的持续推进安排。Westfield印第安纳团队的共享模型制作与测试资源另行规划。",
+ "Possible working arrangement · Roles and scope to be agreed with the tent team.": "建议的合作方式 · 分工和范围由工业设计与帐篷团队共同确认。",
+ "Tent-team discussion + project library": "帐篷团队讨论 · 项目资料库",
+ "Which ideas should we develop further?": "哪些想法值得进一步开发？",
+ "Choose promising directions": "选择有潜力的方向",
+ "Which concepts fit the tent range and are worth investigating?": "哪些概念适合帐篷产品线，值得继续研究？",
+ "Refine the proposal": "完善提案",
+ "What use case, construction concerns or changes should guide the work?": "应重点考虑哪些使用场景、结构工艺问题或调整方向？",
+ "Agree any next development": "商定后续开发安排",
+ "For selected ideas, define the first study or trial and how the teams will collaborate.": "针对入选概念，明确首项研究或试验，以及双方的合作方式。",
+ "Open the original project presentations": "打开原项目演示",
+ "One Pull / Sideline Shade": "One Pull / Sideline 遮阳棚",
+ "Existing Max account sign-in required": "需要登录 Max 现有账号",
+ "Project Tensegrity": "张拉整体项目",
+ "Loaf T Simulation Studio": "Loaf T 仿真工作室",
+ "Original Tension Bead Structures": "最初的张力珠结构研究",
+ "Timber Ridge 26L Daypack": "Timber Ridge 26升日用背包",
+ "Today’s purpose:": "本次讨论的目的：",
+ "bring ideas to the table and let the tent team decide what merits further development.": "提出概念与建议，由帐篷团队决定哪些方向值得进一步开发。",
+ "Westfield Outdoors · 23 October 2026": "Westfield Outdoors · 2026年10月23日",
+ "Project links ↗": "项目链接 ↗",
+ "Arrow keys to present · F for fullscreen": "方向键翻页 · F键全屏",
+ "Presentation chapters": "演示章节",
+ "Project presentation library": "项目演示资料库",
+ "Slide navigation": "幻灯片导航",
+ "Go to first slide": "返回首页",
+ "Previous slide": "上一页",
+ "Next slide": "下一页",
+ "Physical Diamond daypack form study": "Diamond菱形背包实物形态模型",
+ "Physical Teardrop daypack form study": "Teardrop水滴形背包实物形态模型",
+ "Physical Spiral daypack form study": "Spiral螺旋形背包实物形态模型"
+};
+ const button=document.getElementById('language-toggle'),full=document.getElementById('fullscreen'),slides=[...document.querySelectorAll('.slide')];
+ const textNodes=[];const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ while(walker.nextNode()){const node=walker.currentNode;if(node.parentElement.closest('script,style,#language-toggle,#fullscreen,.counter'))continue;const key=node.textContent.trim();if(Object.hasOwn(zh,key))textNodes.push({node,en:node.textContent,key})}
+ const attrs=[];document.querySelectorAll('[aria-label],img[alt]').forEach(el=>{for(const attr of ['aria-label','alt']){const en=el.getAttribute(attr);if(en&&Object.hasOwn(zh,en))attrs.push({el,attr,en})}});
+ const enTitle=document.title;let language='en';
+ function refreshFullscreen(){full.textContent=language==='zh'?(document.fullscreenElement?'退出全屏':'全屏'):(document.fullscreenElement?'Exit fullscreen':'Fullscreen');full.setAttribute('aria-label',language==='zh'?(document.fullscreenElement?'退出全屏':'进入全屏'):(document.fullscreenElement?'Exit fullscreen':'Enter fullscreen'))}
+ function setLanguage(next,initial=false){
+  let active=slides[0];for(const slide of slides){if(slide.getBoundingClientRect().top<=innerHeight*.38)active=slide}
+  language=next==='zh'?'zh':'en';document.documentElement.lang=language==='zh'?'zh-Hans':'en';
+  for(const item of textNodes)item.node.textContent=language==='zh'?item.en.replace(item.key,zh[item.key]):item.en;
+  for(const item of attrs)item.el.setAttribute(item.attr,language==='zh'?zh[item.en]:item.en);
+  button.textContent=language==='zh'?'English':'中文';button.lang=language==='zh'?'en':'zh-Hans';button.setAttribute('aria-label',language==='zh'?'Switch to English':'切换为中文');
+  document.title=language==='zh'?'帐篷概念与开发提案 — Westfield Outdoors':enTitle;refreshFullscreen();
+  try{localStorage.setItem('wf-tent-deck-language',language)}catch{}
+  if(!initial){const url=new URL(location.href);if(language==='zh')url.searchParams.set('lang','zh');else url.searchParams.delete('lang');history.replaceState(null,'',url);requestAnimationFrame(()=>active.scrollIntoView({behavior:'instant',block:'start'}))}
+ }
+ button.addEventListener('click',()=>setLanguage(language==='en'?'zh':'en'));
+ document.addEventListener('fullscreenchange',refreshFullscreen);
+ const param=new URL(location.href).searchParams.get('lang');let saved='en';try{saved=localStorage.getItem('wf-tent-deck-language')||'en'}catch{}
+ setLanguage(param==='zh'||param==='en'?param:saved,true);
 })();
 </script>
 </body>
