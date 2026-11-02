@@ -1,0 +1,557 @@
+{
+  "status": "Unvalidated capacity planning model, not measured Spark performance or a service-level guarantee",
+  "source_totals_6": {
+    "calls": 17471,
+    "input_tokens": 1458161455,
+    "cached_input_tokens": 1380380800,
+    "output_tokens": 7444251,
+    "reasoning_output_tokens": 1928880
+  },
+  "average_call": {
+    "input_tokens": 83461.81987293229,
+    "cached_input_tokens": 79009.83343826912,
+    "output_tokens": 426.0918665216645,
+    "reasoning_output_tokens": 110.40467059698929
+  },
+  "scale_to_30": 5.0,
+  "local_share_assumption": 0.891653114157133,
+  "scaled_local_30": {
+    "calls": 77890.35778719635,
+    "input_tokens": 6500871011.47323,
+    "cached_input_tokens": 6154104195.2135725,
+    "output_tokens": 33188447.933586758,
+    "reasoning_output_tokens": 8599459.294177053
+  },
+  "assumed_business_hours": 176,
+  "observed_input_reuse_percent": 94.66584069046044,
+  "demand_tps": {
+    "output": 52.3807574709387,
+    "fresh_input_at_observed_reuse": 547.2961115209241,
+    "all_input_no_reuse": 10260.213086289821
+  },
+  "vendor_reference": {
+    "model": "Qwen3.5-35B-A3B",
+    "precision": "FP8",
+    "server": "vLLM",
+    "hardware": "one NVIDIA DGX Spark",
+    "batch_size": 1,
+    "input_tokens": 128000,
+    "output_tokens": 1000,
+    "prefill_tps": 3080,
+    "decode_tps": 35.75,
+    "reported_end_to_end_seconds": 73,
+    "source": "https://developer.nvidia.com/blog/scaling-autonomous-ai-agents-and-workloads-with-nvidia-dgx-spark/",
+    "published": "2026-03-16"
+  },
+  "planning_utilization_limit": 0.7,
+  "equivalent_busy_sparks": 1.642889555874709,
+  "prefill_equivalent_sparks": 0.17769354270159873,
+  "decode_equivalent_sparks": 1.4651960131731103,
+  "minimum_units_at_70_percent": 3,
+  "scenarios": [
+    {
+      "units": 2,
+      "spark_equipment_usd": 9398,
+      "combined_equipment_usd": 18044.73,
+      "mean_modeled_utilization_percent": 82.14447779373545,
+      "planned_output_capacity_tps_same_workload_mix": 44.63663439644311,
+      "one_node_offline_utilization_percent": 164.2889555874709,
+      "two_times_mean_utilization_percent": 164.2889555874709,
+      "maximum_mean_load_multiple_at_70_percent": 0.8521571002711807
+    },
+    {
+      "units": 3,
+      "spark_equipment_usd": 14097,
+      "combined_equipment_usd": 22743.73,
+      "mean_modeled_utilization_percent": 54.76298519582363,
+      "planned_output_capacity_tps_same_workload_mix": 66.95495159466465,
+      "one_node_offline_utilization_percent": 82.14447779373545,
+      "two_times_mean_utilization_percent": 109.52597039164726,
+      "maximum_mean_load_multiple_at_70_percent": 1.278235650406771
+    },
+    {
+      "units": 4,
+      "spark_equipment_usd": 18796,
+      "combined_equipment_usd": 27442.73,
+      "mean_modeled_utilization_percent": 41.072238896867724,
+      "planned_output_capacity_tps_same_workload_mix": 89.27326879288621,
+      "one_node_offline_utilization_percent": 54.76298519582363,
+      "two_times_mean_utilization_percent": 82.14447779373545,
+      "maximum_mean_load_multiple_at_70_percent": 1.7043142005423615
+    }
+  ],
+  "cache_sensitivity": [
+    {
+      "input_reuse_percent": 94.66584069046044,
+      "equivalent_busy_sparks": 1.642889555874709,
+      "minimum_units_at_70_percent": 3,
+      "utilization_percent_by_units": {
+        "2": 82.14447779373545,
+        "3": 54.76298519582363,
+        "4": 41.072238896867724
+      }
+    },
+    {
+      "input_reuse_percent": 90.0,
+      "equivalent_busy_sparks": 1.7983198146760264,
+      "minimum_units_at_70_percent": 3,
+      "utilization_percent_by_units": {
+        "2": 89.91599073380132,
+        "3": 59.94399382253421,
+        "4": 44.95799536690066
+      }
+    },
+    {
+      "input_reuse_percent": 80.0,
+      "equivalent_busy_sparks": 2.1314436161789425,
+      "minimum_units_at_70_percent": 4,
+      "utilization_percent_by_units": {
+        "2": 106.57218080894712,
+        "3": 71.04812053929808,
+        "4": 53.28609040447356
+      }
+    },
+    {
+      "input_reuse_percent": 0,
+      "equivalent_busy_sparks": 4.796434028202273,
+      "minimum_units_at_70_percent": 7,
+      "utilization_percent_by_units": {
+        "2": 239.82170141011366,
+        "3": 159.88113427340912,
+        "4": 119.91085070505683
+      }
+    }
+  ],
+  "daily_proxy_peak": {
+    "date": "2026-10-13",
+    "source_output_tokens_6_users": 948083,
+    "scaled_local_output_tps_over_8h": 146.76409017872172,
+    "scaled_local_fresh_input_tps_over_8h": 1027.9622619705858,
+    "equivalent_busy_sparks": 4.43904321692772,
+    "units_at_70_percent": 7,
+    "utilization_percent_by_units": {
+      "2": 221.952160846386,
+      "3": 147.968107230924,
+      "4": 110.976080423193
+    }
+  },
+  "daily_proxy": [
+    {
+      "date": "2026-10-01",
+      "source_output_tokens_6_users": 418781,
+      "scaled_local_output_tps_over_8h": 64.82767062497193,
+      "scaled_local_fresh_input_tps_over_8h": 769.382239661467,
+      "equivalent_busy_sparks": 2.063160844544646,
+      "units_at_70_percent": 3,
+      "utilization_percent_by_units": {
+        "2": 103.1580422272323,
+        "3": 68.7720281514882,
+        "4": 51.57902111361615
+      }
+    },
+    {
+      "date": "2026-10-02",
+      "source_output_tokens_6_users": 358011,
+      "scaled_local_output_tps_over_8h": 55.42042066883843,
+      "scaled_local_fresh_input_tps_over_8h": 582.1576866180981,
+      "equivalent_busy_sparks": 1.7392337930852726,
+      "units_at_70_percent": 3,
+      "utilization_percent_by_units": {
+        "2": 86.96168965426364,
+        "3": 57.97445976950909,
+        "4": 43.48084482713182
+      }
+    },
+    {
+      "date": "2026-10-03",
+      "source_output_tokens_6_users": 11384,
+      "scaled_local_output_tps_over_8h": 1.7622533075633338,
+      "scaled_local_fresh_input_tps_over_8h": 56.042565437206044,
+      "equivalent_busy_sparks": 0.06748943694192339,
+      "units_at_70_percent": 1,
+      "utilization_percent_by_units": {
+        "2": 3.3744718470961694,
+        "3": 2.249647898064113,
+        "4": 1.6872359235480847
+      }
+    },
+    {
+      "date": "2026-10-04",
+      "source_output_tokens_6_users": 5522,
+      "scaled_local_output_tps_over_8h": 0.8548105028430014,
+      "scaled_local_fresh_input_tps_over_8h": 22.44489033469983,
+      "equivalent_busy_sparks": 0.031198085353028458,
+      "units_at_70_percent": 1,
+      "utilization_percent_by_units": {
+        "2": 1.559904267651423,
+        "3": 1.039936178434282,
+        "4": 0.7799521338257115
+      }
+    },
+    {
+      "date": "2026-10-05",
+      "source_output_tokens_6_users": 374611,
+      "scaled_local_output_tps_over_8h": 57.990115407555166,
+      "scaled_local_fresh_input_tps_over_8h": 518.8924213544432,
+      "equivalent_busy_sparks": 1.7905726956560826,
+      "units_at_70_percent": 3,
+      "utilization_percent_by_units": {
+        "2": 89.52863478280413,
+        "3": 59.685756521869415,
+        "4": 44.76431739140207
+      }
+    },
+    {
+      "date": "2026-10-06",
+      "source_output_tokens_6_users": 366779,
+      "scaled_local_output_tps_over_8h": 56.77771485372207,
+      "scaled_local_fresh_input_tps_over_8h": 707.9394452507582,
+      "equivalent_busy_sparks": 1.8180382973134008,
+      "units_at_70_percent": 3,
+      "utilization_percent_by_units": {
+        "2": 90.90191486567004,
+        "3": 60.60127657711336,
+        "4": 45.45095743283502
+      }
+    },
+    {
+      "date": "2026-10-07",
+      "source_output_tokens_6_users": 207371,
+      "scaled_local_output_tps_over_8h": 32.101214919423406,
+      "scaled_local_fresh_input_tps_over_8h": 439.75139623393187,
+      "equivalent_busy_sparks": 1.0407125090108724,
+      "units_at_70_percent": 2,
+      "utilization_percent_by_units": {
+        "2": 52.03562545054362,
+        "3": 34.69041696702908,
+        "4": 26.01781272527181
+      }
+    },
+    {
+      "date": "2026-10-08",
+      "source_output_tokens_6_users": 384511,
+      "scaled_local_output_tps_over_8h": 59.52264419751273,
+      "scaled_local_fresh_input_tps_over_8h": 669.7739055488514,
+      "equivalent_busy_sparks": 1.8824281287050282,
+      "units_at_70_percent": 3,
+      "utilization_percent_by_units": {
+        "2": 94.12140643525142,
+        "3": 62.7476042901676,
+        "4": 47.06070321762571
+      }
+    },
+    {
+      "date": "2026-10-09",
+      "source_output_tokens_6_users": 685922,
+      "scaled_local_output_tps_over_8h": 106.18133461265434,
+      "scaled_local_fresh_input_tps_over_8h": 1044.8375711604506,
+      "equivalent_busy_sparks": 3.309340239541926,
+      "units_at_70_percent": 5,
+      "utilization_percent_by_units": {
+        "2": 165.4670119770963,
+        "3": 110.3113413180642,
+        "4": 82.73350598854815
+      }
+    },
+    {
+      "date": "2026-10-10",
+      "source_output_tokens_6_users": 12066,
+      "scaled_local_output_tps_over_8h": 1.867827513093744,
+      "scaled_local_fresh_input_tps_over_8h": 140.2085821790123,
+      "equivalent_busy_sparks": 0.09776919038441942,
+      "units_at_70_percent": 1,
+      "utilization_percent_by_units": {
+        "2": 4.888459519220971,
+        "3": 3.2589730128139807,
+        "4": 2.4442297596104856
+      }
+    },
+    {
+      "date": "2026-10-11",
+      "source_output_tokens_6_users": 8184,
+      "scaled_local_output_tps_over_8h": 1.2668904663649265,
+      "scaled_local_fresh_input_tps_over_8h": 31.895639340326056,
+      "equivalent_busy_sparks": 0.04579322262120271,
+      "units_at_70_percent": 1,
+      "utilization_percent_by_units": {
+        "2": 2.2896611310601354,
+        "3": 1.5264407540400904,
+        "4": 1.1448305655300677
+      }
+    },
+    {
+      "date": "2026-10-12",
+      "source_output_tokens_6_users": 326804,
+      "scaled_local_output_tps_over_8h": 50.58954936093883,
+      "scaled_local_fresh_input_tps_over_8h": 643.1038797805048,
+      "equivalent_busy_sparks": 1.6238922507841673,
+      "units_at_70_percent": 3,
+      "utilization_percent_by_units": {
+        "2": 81.19461253920836,
+        "3": 54.12974169280558,
+        "4": 40.59730626960418
+      }
+    },
+    {
+      "date": "2026-10-13",
+      "source_output_tokens_6_users": 948083,
+      "scaled_local_output_tps_over_8h": 146.76409017872172,
+      "scaled_local_fresh_input_tps_over_8h": 1027.9622619705858,
+      "equivalent_busy_sparks": 4.43904321692772,
+      "units_at_70_percent": 7,
+      "utilization_percent_by_units": {
+        "2": 221.952160846386,
+        "3": 147.968107230924,
+        "4": 110.976080423193
+      }
+    },
+    {
+      "date": "2026-10-14",
+      "source_output_tokens_6_users": 477340,
+      "scaled_local_output_tps_over_8h": 73.8926558180149,
+      "scaled_local_fresh_input_tps_over_8h": 623.5146014244265,
+      "equivalent_busy_sparks": 2.2693672411262296,
+      "units_at_70_percent": 4,
+      "utilization_percent_by_units": {
+        "2": 113.46836205631148,
+        "3": 75.64557470420765,
+        "4": 56.73418102815574
+      }
+    },
+    {
+      "date": "2026-10-15",
+      "source_output_tokens_6_users": 514954,
+      "scaled_local_output_tps_over_8h": 79.71533641452643,
+      "scaled_local_fresh_input_tps_over_8h": 722.6665825195879,
+      "equivalent_busy_sparks": 2.464431627298308,
+      "units_at_70_percent": 4,
+      "utilization_percent_by_units": {
+        "2": 123.2215813649154,
+        "3": 82.14772090994359,
+        "4": 61.6107906824577
+      }
+    },
+    {
+      "date": "2026-10-16",
+      "source_output_tokens_6_users": 246848,
+      "scaled_local_output_tps_over_8h": 38.21228957004514,
+      "scaled_local_fresh_input_tps_over_8h": 275.4731336010883,
+      "equivalent_busy_sparks": 1.1583145618197979,
+      "units_at_70_percent": 2,
+      "utilization_percent_by_units": {
+        "2": 57.915728090989894,
+        "3": 38.61048539399326,
+        "4": 28.957864045494947
+      }
+    },
+    {
+      "date": "2026-10-17",
+      "source_output_tokens_6_users": 8474,
+      "scaled_local_output_tps_over_8h": 1.3117827238485322,
+      "scaled_local_fresh_input_tps_over_8h": 27.383967463223694,
+      "equivalent_busy_sparks": 0.045584121571734866,
+      "units_at_70_percent": 1,
+      "utilization_percent_by_units": {
+        "2": 2.279206078586743,
+        "3": 1.519470719057829,
+        "4": 1.1396030392933716
+      }
+    },
+    {
+      "date": "2026-10-18",
+      "source_output_tokens_6_users": 44590,
+      "scaled_local_output_tps_over_8h": 6.902571590324055,
+      "scaled_local_fresh_input_tps_over_8h": 114.97634705724425,
+      "equivalent_busy_sparks": 0.23040890841426367,
+      "units_at_70_percent": 1,
+      "utilization_percent_by_units": {
+        "2": 11.520445420713184,
+        "3": 7.680296947142122,
+        "4": 5.760222710356592
+      }
+    },
+    {
+      "date": "2026-10-19",
+      "source_output_tokens_6_users": 89366,
+      "scaled_local_output_tps_over_8h": 13.83393614579277,
+      "scaled_local_fresh_input_tps_over_8h": 164.34482701462903,
+      "equivalent_busy_sparks": 0.4403219589030489,
+      "units_at_70_percent": 1,
+      "utilization_percent_by_units": {
+        "2": 22.016097945152445,
+        "3": 14.677398630101631,
+        "4": 11.008048972576223
+      }
+    },
+    {
+      "date": "2026-10-20",
+      "source_output_tokens_6_users": 89069,
+      "scaled_local_output_tps_over_8h": 13.78796028209404,
+      "scaled_local_fresh_input_tps_over_8h": 241.60022251994155,
+      "equivalent_busy_sparks": 0.46411884137623793,
+      "units_at_70_percent": 1,
+      "utilization_percent_by_units": {
+        "2": 23.205942068811897,
+        "3": 15.470628045874598,
+        "4": 11.602971034405948
+      }
+    },
+    {
+      "date": "2026-10-21",
+      "source_output_tokens_6_users": 122564,
+      "scaled_local_output_tps_over_8h": 18.973016021450494,
+      "scaled_local_fresh_input_tps_over_8h": 284.87326271638017,
+      "equivalent_busy_sparks": 0.623205053929508,
+      "units_at_70_percent": 1,
+      "utilization_percent_by_units": {
+        "2": 31.1602526964754,
+        "3": 20.773501797650265,
+        "4": 15.5801263482377
+      }
+    },
+    {
+      "date": "2026-10-22",
+      "source_output_tokens_6_users": 186513,
+      "scaled_local_output_tps_over_8h": 28.87237800013704,
+      "scaled_local_fresh_input_tps_over_8h": 282.4986170963855,
+      "equivalent_busy_sparks": 0.8993392952648975,
+      "units_at_70_percent": 2,
+      "utilization_percent_by_units": {
+        "2": 44.966964763244874,
+        "3": 29.97797650882992,
+        "4": 22.483482381622437
+      }
+    },
+    {
+      "date": "2026-10-23",
+      "source_output_tokens_6_users": 167906,
+      "scaled_local_output_tps_over_8h": 25.991997879456175,
+      "scaled_local_fresh_input_tps_over_8h": 324.3818549214863,
+      "equivalent_busy_sparks": 0.8323676757984575,
+      "units_at_70_percent": 2,
+      "utilization_percent_by_units": {
+        "2": 41.61838378992287,
+        "3": 27.745589193281916,
+        "4": 20.809191894961437
+      }
+    },
+    {
+      "date": "2026-10-24",
+      "source_output_tokens_6_users": 8900,
+      "scaled_local_output_tps_over_8h": 1.3777279020830702,
+      "scaled_local_fresh_input_tps_over_8h": 27.63288729092591,
+      "equivalent_busy_sparks": 0.04750956006780908,
+      "units_at_70_percent": 1,
+      "utilization_percent_by_units": {
+        "2": 2.375478003390454,
+        "3": 1.5836520022603027,
+        "4": 1.187739001695227
+      }
+    },
+    {
+      "date": "2026-10-25",
+      "source_output_tokens_6_users": 5645,
+      "scaled_local_output_tps_over_8h": 0.8738510120515652,
+      "scaled_local_fresh_input_tps_over_8h": 21.651690585230885,
+      "equivalent_busy_sparks": 0.03147315462302084,
+      "units_at_70_percent": 1,
+      "utilization_percent_by_units": {
+        "2": 1.573657731151042,
+        "3": 1.0491051541006946,
+        "4": 0.786828865575521
+      }
+    },
+    {
+      "date": "2026-10-26",
+      "source_output_tokens_6_users": 338300,
+      "scaled_local_output_tps_over_8h": 52.36914036794411,
+      "scaled_local_fresh_input_tps_over_8h": 482.5204047394503,
+      "equivalent_busy_sparks": 1.621533528314442,
+      "units_at_70_percent": 3,
+      "utilization_percent_by_units": {
+        "2": 81.0766764157221,
+        "3": 54.051117610481406,
+        "4": 40.53833820786105
+      }
+    },
+    {
+      "date": "2026-10-27",
+      "source_output_tokens_6_users": 360427,
+      "scaled_local_output_tps_over_8h": 55.79441961394322,
+      "scaled_local_fresh_input_tps_over_8h": 509.1672103746159,
+      "equivalent_busy_sparks": 1.7259970954666937,
+      "units_at_70_percent": 3,
+      "utilization_percent_by_units": {
+        "2": 86.29985477333469,
+        "3": 57.53323651555645,
+        "4": 43.14992738666734
+      }
+    },
+    {
+      "date": "2026-10-28",
+      "source_output_tokens_6_users": 211692,
+      "scaled_local_output_tps_over_8h": 32.77010955592913,
+      "scaled_local_fresh_input_tps_over_8h": 402.97178888116537,
+      "equivalent_busy_sparks": 1.0474814175348595,
+      "units_at_70_percent": 2,
+      "utilization_percent_by_units": {
+        "2": 52.37407087674298,
+        "3": 34.91604725116198,
+        "4": 26.18703543837149
+      }
+    },
+    {
+      "date": "2026-10-29",
+      "source_output_tokens_6_users": 197556,
+      "scaled_local_output_tps_over_8h": 30.581844204935166,
+      "scaled_local_fresh_input_tps_over_8h": 367.23012148159717,
+      "equivalent_busy_sparks": 0.9746667604592445,
+      "units_at_70_percent": 2,
+      "utilization_percent_by_units": {
+        "2": 48.73333802296222,
+        "3": 32.48889201530815,
+        "4": 24.36666901148111
+      }
+    },
+    {
+      "date": "2026-10-30",
+      "source_output_tokens_6_users": 259851,
+      "scaled_local_output_tps_over_8h": 40.22516551507728,
+      "scaled_local_fresh_input_tps_over_8h": 470.40630645794346,
+      "equivalent_busy_sparks": 1.2779087752457496,
+      "units_at_70_percent": 2,
+      "utilization_percent_by_units": {
+        "2": 63.89543876228748,
+        "3": 42.59695917485832,
+        "4": 31.94771938114374
+      }
+    },
+    {
+      "date": "2026-10-31",
+      "source_output_tokens_6_users": 6227,
+      "scaled_local_output_tps_over_8h": 0.9639451287945255,
+      "scaled_local_fresh_input_tps_over_8h": 42.82814244468705,
+      "equivalent_busy_sparks": 0.040868741159610394,
+      "units_at_70_percent": 1,
+      "utilization_percent_by_units": {
+        "2": 2.04343705798052,
+        "3": 1.3622913719870131,
+        "4": 1.02171852899026
+      }
+    }
+  ],
+  "limitations": [
+    "Work-step tier proportions assumed proportional to tokens and calls; not a tier-by-token measurement.",
+    "Cloud cached-input ratio is only a sensitivity for local compute reuse, not a measured local prefix-cache hit rate.",
+    "Phase service-time approximation adds prefill and decode; rates vary with context, batching and software. It does not simulate queue latency.",
+    "Published phase rates are rounded and do not reproduce the full 73-second end-to-end vendor result; the 30% planning reserve covers unmodeled overhead and variability, not a proven bound.",
+    "No Qwen-specific batching speedup, smaller-model speedup or multi-node tensor-parallel speedup is assumed. Independent replicas and balanced demand are assumed.",
+    "Logs lack per-call latency and precise arrival traces. Demand tok/s is not observed cloud decode speed. Daily buckets are approximate.",
+    "Reasoning tokens are already included in output; cached tokens are already included in input. Neither is counted twice.",
+    "OpenAI token counts are used as a workload proxy; Qwen tokenization, reasoning and retries may differ.",
+    "Some recorded contexts exceed the published 128K test and even native 262144-token context. Validated compaction or cloud routing is required.",
+    "Multimodal encoding/generation, CAD compute, tools and primary-administrator demand are not sized.",
+    "Thirty users are five times these six users, not thirty simultaneously active sessions.",
+    "70% utilization is an explicit engineering allowance, not an NVIDIA rating or latency guarantee."
+  ]
+}

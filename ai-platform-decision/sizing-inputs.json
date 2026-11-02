@@ -1,0 +1,323 @@
+{
+  "period": "2026-10-01 through 2026-10-31, Indianapolis calendar dates",
+  "excluded": "Completed orphan controller; primary administrator Rimuru and other employee accounts not in this six-user sample",
+  "included": "Normal scheduled and unattributed/background work remains included",
+  "users": [
+    {
+      "user": "Jason / KITT",
+      "calls": 4457,
+      "input_tokens": 411225095,
+      "cached_input_tokens": 392232320,
+      "output_tokens": 1253705,
+      "reasoning_output_tokens": 248274,
+      "max_request_input_tokens": 284388,
+      "source_sha256": "a156cb0ef053598766b2d62a8e3ae41d50adcef44b65ee087b72948103feb6c9"
+    },
+    {
+      "user": "Brayden",
+      "calls": 5852,
+      "input_tokens": 543954242,
+      "cached_input_tokens": 519271168,
+      "output_tokens": 2777147,
+      "reasoning_output_tokens": 665511,
+      "max_request_input_tokens": 359867,
+      "source_sha256": "33101bfe95d280e02d9effc0bf18eea7aebb3ab592e4f10c07f9d0ac30538a11"
+    },
+    {
+      "user": "James",
+      "calls": 2843,
+      "input_tokens": 301661776,
+      "cached_input_tokens": 287516288,
+      "output_tokens": 2416935,
+      "reasoning_output_tokens": 919793,
+      "max_request_input_tokens": 401226,
+      "source_sha256": "6cd79c5e2dde6197222d5b4784a3bd2f24920579fdf69b28982f34dfc079d370"
+    },
+    {
+      "user": "Nessa",
+      "calls": 1624,
+      "input_tokens": 65100923,
+      "cached_input_tokens": 55794560,
+      "output_tokens": 381477,
+      "reasoning_output_tokens": 15725,
+      "max_request_input_tokens": 162848,
+      "source_sha256": "cc1a5acd626fa6363d331feac181fafe5753571bb07dc731a73bdfaf35181dde"
+    },
+    {
+      "user": "Parker",
+      "calls": 1946,
+      "input_tokens": 86109982,
+      "cached_input_tokens": 79200256,
+      "output_tokens": 357495,
+      "reasoning_output_tokens": 48700,
+      "max_request_input_tokens": 129206,
+      "source_sha256": "0523b197416dbe093e3f2a6bb94140ee6a4d75fe49b917b5d7983013bfecb54e"
+    },
+    {
+      "user": "Lia",
+      "calls": 749,
+      "input_tokens": 50109437,
+      "cached_input_tokens": 46366208,
+      "output_tokens": 257492,
+      "reasoning_output_tokens": 30877,
+      "max_request_input_tokens": 214174,
+      "source_sha256": "9b4725505d1494b9e7b77f9f4222b36535da21964b598e4d72322ab0db4b34eb"
+    }
+  ],
+  "tier_percent": {
+    "H": 10.834688584286688,
+    "M": 49.13941105249755,
+    "L": 40.025900363215754
+  },
+  "daily_start_bucket_proxy": {
+    "2026-10-01": {
+      "calls": 1093,
+      "input_tokens": 99309213,
+      "cached_input_tokens": 94339072,
+      "output_tokens": 418781,
+      "reasoning_output_tokens": 119780
+    },
+    "2026-10-02": {
+      "calls": 709,
+      "input_tokens": 49978543,
+      "cached_input_tokens": 46217856,
+      "output_tokens": 358011,
+      "reasoning_output_tokens": 116947
+    },
+    "2026-10-03": {
+      "calls": 65,
+      "input_tokens": 1919534,
+      "cached_input_tokens": 1557504,
+      "output_tokens": 11384,
+      "reasoning_output_tokens": 1240
+    },
+    "2026-10-04": {
+      "calls": 48,
+      "input_tokens": 1332832,
+      "cached_input_tokens": 1187840,
+      "output_tokens": 5522,
+      "reasoning_output_tokens": 605
+    },
+    "2026-10-05": {
+      "calls": 708,
+      "input_tokens": 59186111,
+      "cached_input_tokens": 55834112,
+      "output_tokens": 374611,
+      "reasoning_output_tokens": 112714
+    },
+    "2026-10-06": {
+      "calls": 1007,
+      "input_tokens": 60914602,
+      "cached_input_tokens": 56341376,
+      "output_tokens": 366779,
+      "reasoning_output_tokens": 77656
+    },
+    "2026-10-07": {
+      "calls": 516,
+      "input_tokens": 40121651,
+      "cached_input_tokens": 37280896,
+      "output_tokens": 207371,
+      "reasoning_output_tokens": 29753
+    },
+    "2026-10-08": {
+      "calls": 794,
+      "input_tokens": 68334104,
+      "cached_input_tokens": 64007424,
+      "output_tokens": 384511,
+      "reasoning_output_tokens": 107027
+    },
+    "2026-10-09": {
+      "calls": 1273,
+      "input_tokens": 114270838,
+      "cached_input_tokens": 107521280,
+      "output_tokens": 685922,
+      "reasoning_output_tokens": 204127
+    },
+    "2026-10-10": {
+      "calls": 108,
+      "input_tokens": 2621319,
+      "cached_input_tokens": 1715584,
+      "output_tokens": 12066,
+      "reasoning_output_tokens": 573
+    },
+    "2026-10-11": {
+      "calls": 55,
+      "input_tokens": 1418075,
+      "cached_input_tokens": 1212032,
+      "output_tokens": 8184,
+      "reasoning_output_tokens": 696
+    },
+    "2026-10-12": {
+      "calls": 859,
+      "input_tokens": 55449754,
+      "cached_input_tokens": 51295360,
+      "output_tokens": 326804,
+      "reasoning_output_tokens": 104857
+    },
+    "2026-10-13": {
+      "calls": 1517,
+      "input_tokens": 152886433,
+      "cached_input_tokens": 146245888,
+      "output_tokens": 948083,
+      "reasoning_output_tokens": 276625
+    },
+    "2026-10-14": {
+      "calls": 772,
+      "input_tokens": 75389513,
+      "cached_input_tokens": 71361664,
+      "output_tokens": 477340,
+      "reasoning_output_tokens": 138470
+    },
+    "2026-10-15": {
+      "calls": 1060,
+      "input_tokens": 116909642,
+      "cached_input_tokens": 112241280,
+      "output_tokens": 514954,
+      "reasoning_output_tokens": 129513
+    },
+    "2026-10-16": {
+      "calls": 490,
+      "input_tokens": 56646476,
+      "cached_input_tokens": 54866944,
+      "output_tokens": 246848,
+      "reasoning_output_tokens": 73299
+    },
+    "2026-10-17": {
+      "calls": 50,
+      "input_tokens": 1565058,
+      "cached_input_tokens": 1388160,
+      "output_tokens": 8474,
+      "reasoning_output_tokens": 1356
+    },
+    "2026-10-18": {
+      "calls": 156,
+      "input_tokens": 9844945,
+      "cached_input_tokens": 9102208,
+      "output_tokens": 44590,
+      "reasoning_output_tokens": 3357
+    },
+    "2026-10-19": {
+      "calls": 287,
+      "input_tokens": 26479765,
+      "cached_input_tokens": 25418112,
+      "output_tokens": 89366,
+      "reasoning_output_tokens": 16846
+    },
+    "2026-10-20": {
+      "calls": 357,
+      "input_tokens": 24682508,
+      "cached_input_tokens": 23121792,
+      "output_tokens": 89069,
+      "reasoning_output_tokens": 17001
+    },
+    "2026-10-21": {
+      "calls": 338,
+      "input_tokens": 28187392,
+      "cached_input_tokens": 26347136,
+      "output_tokens": 122564,
+      "reasoning_output_tokens": 27082
+    },
+    "2026-10-22": {
+      "calls": 453,
+      "input_tokens": 41239956,
+      "cached_input_tokens": 39415040,
+      "output_tokens": 186513,
+      "reasoning_output_tokens": 49106
+    },
+    "2026-10-23": {
+      "calls": 428,
+      "input_tokens": 39697526,
+      "cached_input_tokens": 37602048,
+      "output_tokens": 167906,
+      "reasoning_output_tokens": 34602
+    },
+    "2026-10-24": {
+      "calls": 50,
+      "input_tokens": 1715146,
+      "cached_input_tokens": 1536640,
+      "output_tokens": 8900,
+      "reasoning_output_tokens": 1212
+    },
+    "2026-10-25": {
+      "calls": 39,
+      "input_tokens": 1173212,
+      "cached_input_tokens": 1033344,
+      "output_tokens": 5645,
+      "reasoning_output_tokens": 434
+    },
+    "2026-10-26": {
+      "calls": 846,
+      "input_tokens": 71001327,
+      "cached_input_tokens": 67884288,
+      "output_tokens": 338300,
+      "reasoning_output_tokens": 69053
+    },
+    "2026-10-27": {
+      "calls": 1205,
+      "input_tokens": 95936215,
+      "cached_input_tokens": 92647040,
+      "output_tokens": 360427,
+      "reasoning_output_tokens": 89717
+    },
+    "2026-10-28": {
+      "calls": 843,
+      "input_tokens": 53270298,
+      "cached_input_tokens": 50667136,
+      "output_tokens": 211692,
+      "reasoning_output_tokens": 35452
+    },
+    "2026-10-29": {
+      "calls": 624,
+      "input_tokens": 49223730,
+      "cached_input_tokens": 46851456,
+      "output_tokens": 197556,
+      "reasoning_output_tokens": 34028
+    },
+    "2026-10-30": {
+      "calls": 674,
+      "input_tokens": 56184767,
+      "cached_input_tokens": 53145984,
+      "output_tokens": 259851,
+      "reasoning_output_tokens": 55257
+    },
+    "2026-10-31": {
+      "calls": 47,
+      "input_tokens": 1270970,
+      "cached_input_tokens": 994304,
+      "output_tokens": 6227,
+      "reasoning_output_tokens": 495
+    }
+  },
+  "cross_midnight_block_totals": {},
+  "triggers": {
+    "scheduled": {
+      "calls": 3359,
+      "input_tokens": 384047264,
+      "cached_input_tokens": 373660928,
+      "output_tokens": 1081125,
+      "reasoning_output_tokens": 242271
+    },
+    "human": {
+      "calls": 9579,
+      "input_tokens": 632313173,
+      "cached_input_tokens": 586724480,
+      "output_tokens": 3364142,
+      "reasoning_output_tokens": 662474
+    },
+    "other_background_or_unattributed": {
+      "calls": 4296,
+      "input_tokens": 427061833,
+      "cached_input_tokens": 406579072,
+      "output_tokens": 2920523,
+      "reasoning_output_tokens": 1002159
+    },
+    "internal": {
+      "calls": 237,
+      "input_tokens": 14739185,
+      "cached_input_tokens": 13416320,
+      "output_tokens": 78461,
+      "reasoning_output_tokens": 21976
+    }
+  },
+  "daily_method": "All calls in each turn/model aggregate are assigned to its first-call local date. This is a start-day load proxy, not a per-call arrival or concurrency trace."
+}
