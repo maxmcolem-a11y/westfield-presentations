@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sideline Shade Sample Brief</title>
+<style>
+  /* One deliberate look: a paper brief. No external requests (fonts, scripts) so it opens on any network. */
+  :root {
+    --paper: #f6f1e7; --card: #fffdf8; --ink: #1d232a; --mute: #6a6f74; --rule: #ddd3c2;
+    --pole: #1d3b53; --sleeve: #8f9aa5; --cord: #b0322a; --pull: #e8762c; --strap: #3c8a5a; --fabric: #e9d9b6; --spring: #7fae78;
+    --star: #c4561b;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font: 16px/1.55 "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 max(16px, env(safe-area-inset-right, 0px)) 80px max(16px, env(safe-area-inset-left, 0px)); }
+  .conf { background: var(--ink); color: #f6f1e7; font-size: 13px; letter-spacing: .04em; padding: 8px max(16px, env(safe-area-inset-left, 0px)); text-align: center; }
+  .conf b { color: #f3a26a; }
+  header { padding: 56px 0 28px; }
+  .kick { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--star); font-weight: 700; }
+  h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.02; margin: 10px 0 16px; letter-spacing: -.02em; text-wrap: balance; }
+  .lede { font-size: 19px; max-width: 62ch; color: #39414a; margin: 0; }
+  .howto { margin-top: 26px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .howto div { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; font-size: 14.5px; }
+  .howto b { display: block; margin-bottom: 2px; }
+  .star { color: var(--star); font-weight: 700; }
+  section { margin-top: 64px; }
+  .sh { display: flex; gap: 16px; align-items: baseline; border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 18px; }
+  .sh .n { font-size: 15px; font-weight: 800; color: var(--star); font-variant-numeric: tabular-nums; }
+  h2 { font-size: 28px; margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+  h3 { font-size: 19px; margin: 34px 0 6px; }
+  p { margin: 0 0 12px; max-width: 68ch; }
+  figure { margin: 18px 0 8px; background: var(--card); border: 1px solid var(--rule); border-radius: 12px; padding: 14px; overflow-x: auto; }
+  figure svg { display: block; width: 100%; height: auto; min-width: 560px; }
+  .key { margin: 12px 0 4px; padding-left: 26px; font-size: 14.5px; }
+  .key li { margin: 5px 0; }
+  figcaption { font-size: 13px; color: var(--mute); margin-top: 8px; }
+  ul, ol { margin: 0 0 12px; padding-left: 22px; max-width: 68ch; }
+  li { margin: 4px 0; }
+  .tbl { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; min-width: 520px; background: var(--card); border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; font-size: 15px; }
+  th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { background: #efe6d4; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+  tr:last-child td { border-bottom: 0; }
+  .callout { background: #fff4e8; border-left: 4px solid var(--star); padding: 12px 16px; border-radius: 6px; margin: 16px 0; max-width: 72ch; }
+  .sup { display: grid; gap: 10px; }
+  .sup div { background: var(--card); border: 1px dashed var(--sleeve); border-radius: 8px; padding: 12px 14px; font-size: 15px; }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .grid2 > * { min-width: 0; }
+  .grid2 figure svg { min-width: 0; }
+  footer { margin-top: 70px; font-size: 13px; color: var(--mute); border-top: 1px solid var(--rule); padding-top: 14px; }
+  svg text { font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", sans-serif; }
+  #lang { position: fixed; right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 20;
+          display: flex; border: 1px solid var(--ink); border-radius: 999px; overflow: hidden; background: var(--card); box-shadow: 0 4px 14px rgba(0,0,0,.12); }
+  #lang button { font: 600 14px/1 inherit; font-family: inherit; padding: 10px 14px; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+  #lang button[aria-pressed="true"] { background: var(--ink); color: var(--card); }
+  html[lang="zh-Hans"] .kick, html[lang="zh-Hans"] th { letter-spacing: .04em; }
+  html[lang="zh-Hans"] h1 { letter-spacing: 0; }
+  footer { margin-bottom: 72px; }
+  @media print { #lang { display: none; } .conf { position: static; } figure, table { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<div class="conf"><b>WESTFIELD INTERNAL · PRE-FILING</b> · OK for our own factory · outside suppliers get §5 lines only · no photos outside Westfield</div>
+
+<!-- shared sketch filter: wobbles the line work so the diagrams read as directional, not as drawings to measure -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d232a"/></marker>
+    <marker id="ahO" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8762c"/></marker>
+    <marker id="ahG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3c8a5a"/></marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+<header>
+  <div class="kick">First sample brief · sideline shade</div>
+  <h1>Lay it flat. Pull one cord. It stands up.</h1>
+  <p class="lede">This brief describes <b>what the sample has to do</b>, not exactly how to build it. Use your normal materials, hardware and methods wherever they meet the intent, and tell us what you changed.</p>
+  <div class="howto">
+    <div><b><span class="star">★</span> Starred numbers matter.</b>Hit these as closely as you can.</div>
+    <div><b>Everything else is a starting point.</b>If your way works better, use it.</div>
+    <div><b>Diagrams are sketches.</b>They show the idea, not the size. Don't measure them.</div>
+  </div>
+</header>
+
+<!-- ============================================================ 1 -->
+<section>
+  <div class="sh"><span class="n">01</span><h2>What we're making</h2></div>
+  <figure>
+    <svg viewBox="0 0 820 360" role="img" aria-label="The shade standing, and packed in its sack">
+      <g filter="url(#rough)" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M230,300 C230,150 280,110 380,110 C480,110 530,150 530,300 L620,260 C620,110 570,70 470,70 C370,70 320,110 320,260 Z" fill="#e9d9b6" stroke="#c9b48a" stroke-width="1.5" opacity=".92"/>
+        <path d="M320,260 C320,110 370,70 470,70 C570,70 620,110 620,260" fill="none" stroke="#1d3b53" stroke-width="5"/>
+        <line x1="380" y1="110" x2="470" y2="70" stroke="#1d3b53" stroke-width="5"/>
+        <line x1="230" y1="300" x2="320" y2="260" stroke="#1d3b53" stroke-width="5"/>
+        <line x1="530" y1="300" x2="620" y2="260" stroke="#1d3b53" stroke-width="5"/>
+        <path d="M230,300 C230,150 280,110 380,110 C480,110 530,150 530,300" fill="none" stroke="#1d3b53" stroke-width="5"/>
+        <line x1="236" y1="304" x2="524" y2="304" stroke="#3c8a5a" stroke-width="3"/>
+        <line x1="326" y1="264" x2="614" y2="264" stroke="#3c8a5a" stroke-width="3" opacity=".7"/>
+        <line x1="120" y1="306" x2="660" y2="306" stroke="#b9ad97" stroke-width="1.5"/>
+        <!-- sack -->
+        <path d="M700,300 L700,236 Q700,222 716,222 L760,222 Q776,222 776,236 L776,300 Q776,312 760,312 L716,312 Q700,312 700,300 Z" fill="#c9b48a" stroke="#8a7a55" stroke-width="1.5"/>
+        <path d="M704,232 Q738,242 772,232" fill="none" stroke="#8a7a55" stroke-width="1.5"/>
+      </g>
+      <g font-size="15" fill="#1d232a">
+        <line x1="380" y1="116" x2="380" y2="300" stroke="#6a6f74" stroke-dasharray="4 4"/><text x="388" y="214">≈ 1.6 m tall</text>
+        <text x="380" y="332" text-anchor="middle" fill="#c4561b" font-weight="700">★ 2.5 m between the feet (doorway)</text>
+        <text x="600" y="296" fill="#6a6f74">≈ 1.5 m deep</text>
+        <text x="738" y="340" text-anchor="middle" fill="#6a6f74">packs in a sack</text>
+        <text x="738" y="356" text-anchor="middle" fill="#6a6f74">≈ 50 cm long</text>
+        <text x="130" y="168" fill="#1d3b53" font-weight="700">2 arches</text><line x1="196" y1="174" x2="246" y2="200" stroke="#1d3b53"/>
+        <text x="470" y="48" fill="#1d3b53" font-weight="700" text-anchor="middle">ridge pole across the top</text>
+        <text x="200" y="322" fill="#3c8a5a" font-size="13" text-anchor="end">doorway strap</text><line x1="204" y1="318" x2="250" y2="306" stroke="#3c8a5a"/>
+      </g>
+    </svg>
+    <figcaption>A small shade shelter. The poles are already sewn into the fabric, in short sections strung on cords, like shock-corded tent poles.</figcaption>
+  </figure>
+
+  <figure>
+    <svg viewBox="0 0 900 250" role="img" aria-label="Three steps: lay flat, pull until stiff, keep pulling until it stands">
+      <g filter="url(#rough)" stroke-linecap="round">
+        <!-- A flat, joints open -->
+        <polygon points="30,190 230,190 270,140 70,140" fill="#e9d9b6" stroke="#c9b48a"/>
+        <g stroke="#1d3b53" stroke-width="4">
+          <line x1="30" y1="190" x2="70" y2="190"/><line x1="78" y1="190" x2="118" y2="190"/><line x1="126" y1="190" x2="166" y2="190"/><line x1="174" y1="190" x2="230" y2="190"/>
+          <line x1="70" y1="140" x2="110" y2="140"/><line x1="118" y1="140" x2="158" y2="140"/><line x1="166" y1="140" x2="206" y2="140"/><line x1="214" y1="140" x2="270" y2="140"/>
+          <line x1="30" y1="190" x2="46" y2="170"/><line x1="52" y1="163" x2="70" y2="140"/><line x1="230" y1="190" x2="246" y2="170"/><line x1="252" y1="163" x2="270" y2="140"/>
+        </g>
+        <!-- B flat, stiff -->
+        <polygon points="330,190 530,190 570,140 370,140" fill="#e9d9b6" stroke="#c9b48a"/>
+        <polygon points="330,190 530,190 570,140 370,140" fill="none" stroke="#1d3b53" stroke-width="4"/>
+        <path d="M546,196 Q580,214 600,206" fill="none" stroke="#e8762c" stroke-width="2.5" marker-end="url(#ahO)"/>
+        <!-- C standing -->
+        <path d="M640,200 C640,120 668,100 720,100 C772,100 800,120 800,200 L830,186 C830,106 802,86 750,86 C698,86 670,106 670,186 Z" fill="#e9d9b6" stroke="#c9b48a"/>
+        <path d="M640,200 C640,120 668,100 720,100 C772,100 800,120 800,200" fill="none" stroke="#1d3b53" stroke-width="4"/>
+        <path d="M670,186 C670,106 698,86 750,86 C802,86 830,106 830,186" fill="none" stroke="#1d3b53" stroke-width="4"/>
+        <line x1="640" y1="202" x2="800" y2="202" stroke="#3c8a5a" stroke-width="2.5"/>
+      </g>
+      <g font-size="14.5" fill="#1d232a">
+        <text x="150" y="40" text-anchor="middle" font-weight="700">1 · Lay it flat</text>
+        <text x="150" y="60" text-anchor="middle" fill="#6a6f74">joints are sprung open</text>
+        <text x="450" y="40" text-anchor="middle" font-weight="700">2 · Pull</text>
+        <text x="450" y="60" text-anchor="middle" fill="#6a6f74">every joint closes, frame goes stiff</text>
+        <text x="735" y="40" text-anchor="middle" font-weight="700">3 · Keep pulling</text>
+        <text x="735" y="60" text-anchor="middle" fill="#6a6f74">straps squeeze the feet in, arches rise</text>
+        <text x="600" y="232" fill="#e8762c" font-weight="700" text-anchor="middle">one cord, one pull</text>
+      </g>
+    </svg>
+    <figcaption>To take it down: release the catch. Every joint springs open by itself, and it all bunches into the sack. It is stuffed, not rolled.</figcaption>
+  </figure>
+</section>
+
+<!-- ============================================================ 2 -->
+<section>
+  <div class="sh"><span class="n">02</span><h2>How we'll judge the sample</h2></div>
+  <p>These are outcomes, not methods. If the sample does all of these, the build is right, whatever it looks like inside.</p>
+  <div class="tbl"><table>
+    <tr><th>Test</th><th>Target</th></tr>
+    <tr><td>One pull from flat, on grass</td><td>Stands up with no other help. If it tips onto its side, setting it upright is fine.</td></tr>
+    <tr><td>Size</td><td><span class="star">★</span> About 1.6 m tall, <span class="star">2.5 m between the feet</span></td></tr>
+    <tr><td>Pull force</td><td>Comfortable for one adult. We'll measure it; the target is that the last part of the pull stays under roughly 13 kg.</td></tr>
+    <tr><td>Locked up</td><td>Every joint fully closed. The catch holds for an hour with no slipping.</td></tr>
+    <tr><td>Release</td><td>One flick, and <b>every</b> joint springs open by itself.</td></tr>
+    <tr><td>Pack</td><td>Stuffs into a sack about the length of one pole section (≈ 50 cm).</td></tr>
+    <tr><td>Repeat</td><td>20× up and down: no joint stuck open or shut, no worn cord, nothing loose.</td></tr>
+  </table></div>
+</section>
+
+<!-- ============================================================ 3 -->
+<section>
+  <div class="sh"><span class="n">03</span><h2>The parts: what each has to do</h2></div>
+
+  <h3>Where everything sits</h3>
+  <figure>
+    <svg viewBox="0 0 820 330" role="img" aria-label="Top view of the flat shade showing poles, sections, corners, T fittings and catch">
+      <g filter="url(#rough)" stroke-linecap="round">
+        <rect x="95" y="60" width="630" height="210" fill="#e9d9b6" stroke="#c9b48a"/>
+        <g stroke="#1d3b53" stroke-width="6">
+          <!-- arches: 9 sections each, small gaps -->
+          <path d="M101,60 h62 M171,60 h62 M241,60 h62 M311,60 h62 M381,60 h62 M451,60 h62 M521,60 h62 M591,60 h62 M661,60 h58"/>
+          <path d="M101,270 h62 M171,270 h62 M241,270 h62 M311,270 h62 M381,270 h62 M451,270 h62 M521,270 h62 M591,270 h62 M661,270 h58"/>
+          <!-- side poles + ridge: 3 sections -->
+          <path d="M95,70 v58 M95,136 v58 M95,202 v58"/>
+          <path d="M725,70 v58 M725,136 v58 M725,202 v58"/>
+          <path d="M410,72 v56 M410,136 v58 M410,202 v56" stroke="#4d6f8a"/>
+        </g>
+        <g fill="#8f9aa5" stroke="#5b6670">
+          <path d="M89,54 h22 v12 h-10 v10 h-12 z"/><path d="M731,54 h-22 v12 h10 v10 h12 z"/>
+          <path d="M89,276 h22 v-12 h-10 v-10 h-12 z"/><path d="M731,276 h-22 v-12 h10 v-10 h12 z"/>
+          <rect x="398" y="52" width="24" height="18" rx="3"/><rect x="398" y="260" width="24" height="18" rx="3"/>
+        </g>
+        <rect x="738" y="56" width="22" height="16" rx="3" fill="#e8762c"/>
+        <path d="M760,64 Q790,64 800,40" fill="none" stroke="#e8762c" stroke-width="2.5" marker-end="url(#ahO)"/>
+      </g>
+      <g font-size="14" fill="#1d232a">
+        <text x="410" y="38" text-anchor="middle" fill="#1d3b53" font-weight="700">arch · 9 sections</text>
+        <text x="410" y="302" text-anchor="middle" fill="#1d3b53" font-weight="700">arch · 9 sections</text>
+        <text x="80" y="170" text-anchor="end" fill="#1d3b53" font-weight="700">side pole</text><text x="80" y="186" text-anchor="end" fill="#1d3b53">3 sections</text>
+        <text x="425" y="160" fill="#4d6f8a" font-weight="700">ridge pole</text><text x="425" y="176" fill="#4d6f8a">3 sections, own light cord</text>
+        <text x="200" y="168" fill="#8a7a55">fabric (top view, laid flat)</text>
+        <text x="130" y="96" fill="#5b6670">corner piece ×4</text>
+        <text x="434" y="96" fill="#5b6670">T at each arch top</text>
+        <text x="768" y="96" fill="#e8762c" font-weight="700">catch</text><text x="768" y="112" fill="#e8762c">+ pull</text>
+        <path d="M171,48 v-8 M233,48 v-8 M171,44 h62" stroke="#c4561b" stroke-width="1.5"/><text x="202" y="36" text-anchor="middle" fill="#c4561b" font-weight="700" font-size="13">★ ≈500 mm</text>
+      </g>
+    </svg>
+    <figcaption>27 pole sections in all: 2 arches × 9, 2 side poles × 3, ridge × 3. All of them are already in the fabric.</figcaption>
+  </figure>
+
+  <h3>Pole sections</h3>
+  <p>Fibreglass tube, like a normal tent pole: about Ø11 mm, in sections about <span class="star">★ 500 mm</span> long. Use your nearest stock tube and tell us what it is; we'll check the stiffness.</p>
+
+  <h3>Joints: the important part</h3>
+  <p>All 28 joints are the same. Each one has to do three things:</p>
+  <figure>
+    <svg viewBox="0 0 820 530" role="img" aria-label="A joint closed, sprung open, and finding its way back in">
+      <!-- row 1: closed -->
+      <g transform="translate(0,20)">
+        <g filter="url(#rough)">
+          <rect x="30" y="64" width="300" height="32" fill="#b9cbd9" stroke="#1d3b53" stroke-width="1.5"/>
+          <path d="M150,58 H480 L504,50 V110 L480,102 H150 Z" fill="#c7ced5" fill-opacity=".55" stroke="#5b6670" stroke-width="2"/>
+          <rect x="330" y="74" width="72" height="12" fill="#3d4650"/>
+          <path d="M330,66 H402 V74 H330 Z M330,86 H402 V94 H330 Z" fill="#9fc79a" stroke="#5f9a58" stroke-width="1.2"/>
+          <path d="M404,64 Q394,80 404,96 H790 V64 Z" fill="#a9bccb" stroke="#1d3b53" stroke-width="1.5"/>
+          <line x1="20" y1="80" x2="800" y2="80" stroke="#b0322a" stroke-width="2.2"/>
+        </g>
+        <text x="30" y="22" font-size="17" font-weight="800" fill="#1d232a">1 · Closes fully when the cord is pulled tight</text>
+        <g font-size="13.5" fill="#1d232a">
+          <text x="404" y="140" fill="#c4561b" font-weight="700">★ pole end slides ≈30 mm into the metal sleeve</text>
+          <path d="M404,118 H490" stroke="#c4561b" stroke-width="1.5" marker-start="url(#ah)" marker-end="url(#ah)"/>
+          <text x="404" y="158" fill="#3d4650">…until it hits a hard stop inside</text>
+          <text x="600" y="58" fill="#b0322a">cord pulled tight</text>
+        </g>
+      </g>
+      <!-- row 2: sprung open -->
+      <g transform="translate(0,175)">
+        <g filter="url(#rough)">
+          <rect x="30" y="64" width="300" height="32" fill="#b9cbd9" stroke="#1d3b53" stroke-width="1.5"/>
+          <path d="M150,58 H480 L504,50 V110 L480,102 H150 Z" fill="#c7ced5" fill-opacity=".55" stroke="#5b6670" stroke-width="2"/>
+          <rect x="330" y="74" width="72" height="12" fill="#3d4650"/>
+          <path d="M330,66 H474 V94 H330 V86 H402 V74 H330 Z" fill="#9fc79a" stroke="#5f9a58" stroke-width="1.2"/>
+          <path d="M520,64 Q510,80 520,96 H800 V64 Z" fill="#a9bccb" stroke="#1d3b53" stroke-width="1.5"/>
+          <path d="M20,80 H330 M402,80 C440,70 470,92 520,80 M520,80 H800" fill="none" stroke="#b0322a" stroke-width="2.2"/>
+        </g>
+        <text x="30" y="22" font-size="17" font-weight="800" fill="#1d232a">2 · Springs open by itself when the cord is released</text>
+        <g font-size="13.5" fill="#1d232a">
+          <text x="520" y="136" fill="#1d232a">pushed <tspan font-weight="700">fully out</tspan> of the sleeve</text>
+          <text x="600" y="58" fill="#b0322a">cord slack</text>
+        </g>
+      </g>
+      <!-- row 3: finds its way back -->
+      <g transform="translate(0,330)">
+        <g filter="url(#rough)">
+          <rect x="30" y="64" width="300" height="32" fill="#b9cbd9" stroke="#1d3b53" stroke-width="1.5"/>
+          <path d="M150,58 H480 L504,50 V110 L480,102 H150 Z" fill="#c7ced5" fill-opacity=".55" stroke="#5b6670" stroke-width="2"/>
+          <rect x="330" y="74" width="72" height="12" fill="#3d4650"/>
+          <path d="M330,66 H474 V94 H330 V86 H402 V74 H330 Z" fill="#9fc79a" stroke="#5f9a58" stroke-width="1.2"/>
+          <g transform="rotate(16 512 92)"><path d="M512,76 Q502,92 512,108 H760 V76 Z" fill="#a9bccb" stroke="#1d3b53" stroke-width="1.5"/></g>
+          <path d="M20,80 H330 M402,80 Q470,82 515,92" fill="none" stroke="#b0322a" stroke-width="2.2"/>
+          <path d="M600,40 Q560,46 530,74" fill="none" stroke="#1d232a" stroke-width="1.8" marker-end="url(#ah)"/>
+        </g>
+        <text x="30" y="22" font-size="17" font-weight="800" fill="#1d232a">3 · Finds its way back in from a bent or folded start</text>
+        <g font-size="13.5" fill="#1d232a">
+          <text x="600" y="38">pull: the rounded nose</text><text x="600" y="54">slides back in by itself</text>
+          <text x="150" y="132" fill="#5b6670">generous flared / funnel mouth on the sleeve</text>
+        </g>
+      </g>
+    </svg>
+    <figcaption>The cord runs through the middle of everything, so every insert needs a centre hole. Sketch only: proportions are exaggerated.</figcaption>
+  </figure>
+
+  <div class="grid2">
+    <div>
+      <h3>Corners (×4)</h3>
+      <figure>
+        <svg viewBox="0 0 400 300" role="img" aria-label="Corner piece">
+          <g filter="url(#rough)" stroke-linecap="round">
+            <path d="M200,30 V190 Q200,230 240,230 H300" fill="none" stroke="#5b6670" stroke-width="22"/>
+            <path d="M200,30 V190 Q200,230 240,230 H300" fill="none" stroke="#c7ced5" stroke-width="16"/>
+            <path d="M200,10 V190 Q200,230 240,230 H390" fill="none" stroke="#b0322a" stroke-width="2"/>
+            <rect x="192" y="0" width="16" height="70" fill="#1d3b53"/>
+            <rect x="318" y="222" width="82" height="16" fill="#1d3b53"/>
+            <path d="M318,222 Q310,230 318,238" fill="none" stroke="#1d3b53" stroke-width="2"/>
+            <circle cx="178" cy="250" r="12" fill="none" stroke="#8a7a55" stroke-width="3"/>
+          </g>
+          <g font-size="13" fill="#1d232a">
+            <text x="216" y="40" fill="#1d3b53">arch comes down</text>
+            <text x="300" y="268" fill="#1d3b53" text-anchor="middle">side pole plugs in</text>
+            <text x="300" y="284" fill="#1d3b53" text-anchor="middle">like a normal joint</text>
+            <text x="20" y="120">fixed 90°, no hinge</text>
+            <text x="230" y="150" fill="#b0322a">smooth inside:</text><text x="230" y="166" fill="#b0322a">the cord turns here</text>
+            <text x="20" y="254" fill="#8a7a55">peg loop</text>
+          </g>
+        </svg>
+      </figure>
+    </div>
+    <div>
+      <h3>Arch tops (×2)</h3>
+      <figure>
+        <svg viewBox="0 0 400 300" role="img" aria-label="T fitting at the arch top">
+          <g filter="url(#rough)" stroke-linecap="round">
+            <path d="M20,80 Q200,40 380,80" fill="none" stroke="#1d3b53" stroke-width="12"/>
+            <rect x="176" y="46" width="48" height="26" rx="6" fill="#8f9aa5" stroke="#5b6670" stroke-width="2"/>
+            <rect x="188" y="70" width="24" height="70" fill="#c7ced5" stroke="#5b6670" stroke-width="2"/>
+            <rect x="192" y="150" width="16" height="140" fill="#4d6f8a"/>
+            <path d="M192,150 Q200,142 208,150" fill="none" stroke="#4d6f8a" stroke-width="2"/>
+          </g>
+          <g font-size="13" fill="#1d232a">
+            <text x="20" y="30" fill="#1d3b53">arch passes straight through</text>
+            <text x="230" y="110" fill="#5b6670">T fitting</text>
+            <text x="220" y="210" fill="#4d6f8a">ridge pole plugs in</text>
+            <text x="220" y="226" fill="#4d6f8a">like a normal joint</text>
+            <text x="220" y="250" fill="#6a6f74">(its own light shock cord,</text>
+            <text x="220" y="266" fill="#6a6f74">not on the pull)</text>
+          </g>
+        </svg>
+      </figure>
+    </div>
+  </div>
+
+  <h3>Cords and the pull</h3>
+  <figure>
+    <svg viewBox="0 0 820 300" role="img" aria-label="Pull system: joint cord loop, ring, one-way catch, strap cords joining the pull">
+      <g filter="url(#rough)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <rect x="60" y="50" width="400" height="210" fill="#efe4c9" stroke="none"/>
+        <path d="M60,50 H460 V260 H60" stroke="#1d3b53" stroke-width="7"/>
+        <path d="M60,58 H452 V252 H60" stroke="#b0322a" stroke-width="2" opacity=".7"/>
+        <path d="M452,252 Q480,262 500,240 Q520,214 532,196" stroke="#b0322a" stroke-width="2.6"/>
+        <circle cx="540" cy="186" r="11" stroke="#1d232a" stroke-width="2.6"/>
+        <path d="M529,186 V70" stroke="#e8762c" stroke-width="2.6"/>
+        <path d="M551,186 V112 Q551,92 571,92 H620" stroke="#e8762c" stroke-width="2.6"/>
+        <rect x="514" y="44" width="30" height="20" rx="3" fill="#e8762c" stroke="#b35a17"/>
+        <path d="M529,44 V24 Q529,16 539,16 H700" stroke="#e8762c" stroke-width="2.6" marker-end="url(#ahO)"/>
+        <circle cx="620" cy="92" r="4.5" fill="#1d232a" stroke="none"/>
+        <path d="M620,92 H780" stroke="#3c8a5a" stroke-width="2.4" marker-end="url(#ahG)"/>
+        <path d="M620,92 V270" stroke="#3c8a5a" stroke-width="2.4" marker-end="url(#ahG)"/>
+      </g>
+      <g font-size="13" fill="#6a6f74">
+        <circle cx="260" cy="82" r="12" fill="#1d232a"/><text x="260" y="87" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">1</text><circle cx="578" cy="206" r="12" fill="#1d232a"/><text x="578" y="211" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">2</text><circle cx="494" cy="54" r="12" fill="#1d232a"/><text x="494" y="59" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">3</text><circle cx="644" cy="116" r="12" fill="#1d232a"/><text x="644" y="121" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">4</text><circle cx="724" cy="16" r="12" fill="#1d232a"/><text x="724" y="21" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">5</text>
+        <text x="785" y="80" text-anchor="end">to back strap</text>
+        <text x="632" y="262">to front strap</text>
+        <text x="70" y="286">top view of the laid-out shade · schematic only</text>
+      </g>
+    </svg>
+    <ol class="key">
+      <li><b>Joint cord</b> (red): one loop inside both arches and both side poles. Thin, strong, low-stretch, about Ø3 mm, Dyneema-type.</li>
+      <li><b>Ring</b> on the end of the joint cord. The pull cord loops round it (a simple 2:1), which halves the effort.</li>
+      <li><b>One-way catch</b>: flick to release, holds <span class="star">★ about 15 kg</span>.</li>
+      <li><b>Strap cords</b> (green) from both doorway straps join the pull cord here.</li>
+      <li><b>Your pull.</b></li>
+    </ol>
+    <figcaption>Your routing and hardware are fine if they do the same job. Please propose two or three one-way catches you can source that hold on thin Dyneema line and release with a flick.</figcaption>
+  </figure>
+
+  <h3>Doorway straps (×2)</h3>
+  <figure>
+    <svg viewBox="0 0 820 260" role="img" aria-label="Doorway strap across the bottom of an arch, with a sewn stop at 2.5 m">
+      <g filter="url(#rough)" stroke-linecap="round" fill="none">
+        <path d="M200,210 C200,60 260,30 410,30 C560,30 620,60 620,210" stroke="#1d3b53" stroke-width="6"/>
+        <line x1="200" y1="212" x2="606" y2="212" stroke="#3c8a5a" stroke-width="9"/>
+        <rect x="604" y="202" width="8" height="20" fill="#1d232a"/>
+        <circle cx="620" cy="212" r="8" stroke="#1d232a" stroke-width="2.5"/>
+        <path d="M628,212 Q660,212 680,190 H780" stroke="#3c8a5a" stroke-width="2.2" marker-end="url(#ahG)"/>
+        <line x1="120" y1="222" x2="720" y2="222" stroke="#b9ad97" stroke-width="1.5"/>
+      </g>
+      <g font-size="14" fill="#1d232a">
+        <path d="M200,244 H608" stroke="#c4561b" stroke-width="1.5" marker-start="url(#ah)" marker-end="url(#ah)"/>
+        <text x="404" y="238" text-anchor="middle" fill="#c4561b" font-weight="700">★ 2.5 m, ±1 cm: the one length to measure carefully</text>
+        <text x="404" y="200" text-anchor="middle" fill="#3c8a5a">webbing from one foot…</text>
+        <text x="540" y="172" fill="#1d232a" text-anchor="end">sewn stop</text><line x1="544" y1="170" x2="604" y2="204" stroke="#1d232a"/>
+        <text x="634" y="244" fill="#1d232a">ring on the other foot</text>
+        <text x="690" y="182" fill="#3c8a5a">cord → joins the pull</text>
+      </g>
+    </svg>
+    <figcaption>Pulling draws the cord through the ring until the sewn stop jams against it. That sets the doorway width, and so the shape, the same every time.</figcaption>
+  </figure>
+</section>
+
+<!-- ============================================================ 4 -->
+<section>
+  <div class="sh"><span class="n">04</span><h2>Fabric and sewing</h2></div>
+  <p><b>Skin:</b> one rectangle of shade fabric, roughly 4.5 × 1.5 m flat. Use a light UPF polyester you already use for shade products. It should be the right size on the frame <b>when the frame is closed</b>.</p>
+  <div class="callout"><span class="star">★ Sleeves with slack.</span> When the cord is released, every joint springs open and the poles get several centimetres longer. The sleeve only needs enough slack, around and along the pole, that it never grips the pole and stops a joint springing fully open and going loose. Leave the sleeves open at the corners, and don't tie the fabric corners tight to the corner pieces.</div>
+  <figure>
+    <svg viewBox="0 0 820 296" role="img" aria-label="A tight sleeve grips the pole and stops the joint opening; a sleeve with slack lets it spring open">
+      <g filter="url(#rough)" stroke-linecap="round" fill="none">
+        <!-- tight -->
+        <path d="M40,58 H780 M40,82 H780" stroke="#c9b48a" stroke-width="4"/>
+        <line x1="60" y1="70" x2="400" y2="70" stroke="#1d3b53" stroke-width="12"/>
+        <line x1="400" y1="70" x2="770" y2="70" stroke="#1d3b53" stroke-width="12"/>
+        <rect x="330" y="62" width="90" height="16" fill="#8f9aa5" stroke="#5b6670"/>
+        <path d="M600,40 L640,100 M640,40 L600,100" stroke="#b0322a" stroke-width="4"/>
+        <!-- slack -->
+        <path d="M40,172 C120,160 200,186 280,170 S440,160 520,174 S680,186 780,170" stroke="#c9b48a" stroke-width="4"/>
+        <path d="M40,222 C120,234 200,210 280,226 S440,236 520,222 S680,212 780,226" stroke="#c9b48a" stroke-width="4"/>
+        <line x1="60" y1="198" x2="400" y2="198" stroke="#1d3b53" stroke-width="12"/>
+        <rect x="330" y="190" width="90" height="16" fill="#8f9aa5" stroke="#5b6670"/>
+        <line x1="452" y1="196" x2="790" y2="202" stroke="#1d3b53" stroke-width="12"/>
+        <path d="M600,150 L615,166 L645,134" stroke="#3c8a5a" stroke-width="4"/>
+      </g>
+      <g font-size="14" fill="#1d232a">
+        <text x="40" y="30" font-weight="700">too tight</text>
+        <text x="40" y="112" fill="#6a6f74">the fabric grips the pole, so the joint can't spring open</text>
+        <text x="40" y="146" font-weight="700">enough slack ✓</text>
+        <text x="436" y="250" text-anchor="middle" fill="#3d4650">↑ joint springs fully open</text>
+        <text x="40" y="286" fill="#6a6f74">roomy around and along the pole: every joint pops open and goes loose</text>
+      </g>
+    </svg>
+    <figcaption>How much slack is enough is the factory's call: check it in the one-arch trial (lay it in its sleeve, release the cord, and every joint should pop).</figcaption>
+  </figure>
+  <ul>
+    <li>A sleeve runs across the middle for the ridge pole, with an opening at each arch top for the T.</li>
+    <li>Along one side pole, a small channel on top of the sleeve carries the cords to the catch.</li>
+    <li>Doorway straps are attached only at their ends, so they slide freely.</li>
+  </ul>
+</section>
+
+<!-- ============================================================ 5 -->
+<section>
+  <div class="sh"><span class="n">05</span><h2>Short requests for outside suppliers</h2></div>
+  <p>If a part has to come from outside, send <b>only the relevant line</b>, never this brief, and no photos of the sample.</p>
+  <div class="sup">
+    <div><b>Tube:</b> fibreglass tube, about Ø11 mm outside with a bore of about Ø7 mm, cut to 500 mm. Please send stock sizes and stiffness data.</div>
+    <div><b>Metal sleeves:</b> aluminium tube, about Ø14 mm outside, a sliding fit over Ø11 mm tube, about 120 mm long, one end flared. Please send samples and say how the flare is formed.</div>
+    <div><b>Foam inserts:</b> a small sleeve of firm foam, about Ø10 mm, giving 2–3 kg when squeezed from 60 to 30 mm long. Please send a few firmness options.</div>
+    <div><b>Catch:</b> a one-way cleat or cam for 3 mm Dyneema line, with flick release, holding about 15 kg. Please send options.</div>
+  </div>
+</section>
+
+<!-- ============================================================ 6 -->
+<section>
+  <div class="sh"><span class="n">06</span><h2>Suggested order</h2></div>
+  <figure>
+    <svg viewBox="0 0 900 220" role="img" aria-label="Three build stages: joint trial, one arch, full sample">
+      <g filter="url(#rough)" stroke-linecap="round" fill="none">
+        <g stroke-width="7">
+          <path d="M40,70 H120" stroke="#1d3b53"/><path d="M120,70 H150" stroke="#8f9aa5" stroke-width="11"/><path d="M150,70 H230" stroke="#1d3b53"/>
+          <path d="M40,110 H120" stroke="#1d3b53"/><path d="M120,110 H150" stroke="#8f9aa5" stroke-width="11"/><path d="M156,114 L230,138" stroke="#1d3b53"/>
+          <path d="M40,150 H120" stroke="#1d3b53"/><path d="M120,150 H150" stroke="#8f9aa5" stroke-width="11"/><path d="M150,150 H230" stroke="#1d3b53"/>
+        </g>
+        <path d="M330,170 C330,60 370,40 450,40 C530,40 570,60 570,170" stroke="#1d3b53" stroke-width="6"/>
+        <line x1="330" y1="172" x2="570" y2="172" stroke="#3c8a5a" stroke-width="3"/>
+        <path d="M660,170 C660,80 690,60 750,60 C810,60 840,80 840,170 L870,156 C870,66 840,46 780,46 C720,46 690,66 690,156 Z" fill="#e9d9b6" stroke="#c9b48a"/>
+        <path d="M660,170 C660,80 690,60 750,60 C810,60 840,80 840,170" stroke="#1d3b53" stroke-width="5"/>
+        <path d="M690,156 C690,66 720,46 780,46 C840,46 870,66 870,156" stroke="#1d3b53" stroke-width="5"/>
+      </g>
+      <g font-size="14.5" fill="#1d232a" text-anchor="middle">
+        <text x="135" y="200" font-weight="700">1 · Joint trial</text>
+        <text x="450" y="200" font-weight="700">2 · One arch</text>
+        <text x="765" y="200" font-weight="700">3 · Full sample</text>
+      </g>
+    </svg>
+  </figure>
+  <ol>
+    <li><b>Joint trial:</b> about 10 joints in 2–3 variations (e.g. two foam firmnesses and two mouth shapes). Check close, open and re-entry by hand.</li>
+    <li><b>One arch:</b> 9 sections in a loose sleeve with a doorway strap. Lay it flat, pull, check the height, release, stuff, and repeat.</li>
+    <li><b>Full sample,</b> once 1 and 2 work.</li>
+  </ol>
+  <div class="callout">At each step, send us photos and video <b>internally</b>, with what you changed and why. Those changes are the most useful thing the sample gives us.</div>
+</section>
+
+<footer>Sideline shade · first sample brief · 2026-10-20 · Westfield internal, pre-filing. Diagrams are illustrative sketches, not to scale.</footer>
+</div>
+
+<!-- i18n -->
+<div id="lang" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true">EN</button><button type="button" data-l="zh" aria-pressed="false">中文</button></div>
+<script>
+(() => {
+  const ZH = {"<b>WESTFIELD INTERNAL · PRE-FILING</b> · OK for our own factory · outside suppliers get §5 lines only · no photos outside Westfield": "<b>WESTFIELD 内部资料 · 专利申请前保密</b> · 可提供给本公司工厂 · 外部供应商只提供第 5 节中的对应条目 · 样品照片不得外传", "First sample brief · sideline shade": "首样说明 · 场边遮阳棚", "Lay it flat. Pull one cord. It stands up.": "铺平。拉一根绳。它就立起来。", "This brief describes <b>what the sample has to do</b>, not exactly how to build it. Use your normal materials, hardware and methods wherever they meet the intent, and tell us what you changed.": "本说明讲的是<b>样品需要实现什么</b>，而不是具体怎么做。只要能达到设计意图，请使用你们常用的材料、配件和工艺，并告诉我们做了哪些改动。", "<b><span class=\"star\">★</span> Starred numbers matter.</b>Hit these as closely as you can.": "<b><span class=\"star\">★</span> 带星号的数字很重要。</b>请尽量做到。", "<b>Everything else is a starting point.</b>If your way works better, use it.": "<b>其余都只是起点。</b>如果你们的做法更好，就按你们的来。", "<b>Diagrams are sketches.</b>They show the idea, not the size. Don't measure them.": "<b>示意图只是草图。</b>表达的是思路，不是尺寸。请勿在图上量取尺寸。", "What we're making": "我们要做什么", "A small shade shelter. The poles are already sewn into the fabric, in short sections strung on cords, like shock-corded tent poles.": "一个小型遮阳棚。杆子已经缝在布里，分成短节，用绳子串起来，类似弹力绳帐篷杆。", "To take it down: release the catch. Every joint springs open by itself, and it all bunches into the sack. It is stuffed, not rolled.": "收起时：松开锁扣。每个接头都会自己弹开，整个棚子团起来塞进收纳袋。是塞进去，不是卷起来。", "How we'll judge the sample": "我们如何评判样品", "These are outcomes, not methods. If the sample does all of these, the build is right, whatever it looks like inside.": "这些是结果要求，不是做法要求。只要样品全部做到，无论内部怎么做，都算做对了。", "Test": "测试", "Target": "目标", "One pull from flat, on grass": "在草地上从平铺状态拉一次", "Stands up with no other help. If it tips onto its side, setting it upright is fine.": "无需其他帮助即可立起。如果它侧翻倒下，扶正即可。", "Size": "尺寸", "<span class=\"star\">★</span> About 1.6 m tall, <span class=\"star\">2.5 m between the feet</span>": "<span class=\"star\">★</span> 高约 1.6 米，<span class=\"star\">两脚间距 2.5 米</span>", "Pull force": "拉力", "Comfortable for one adult. We'll measure it; the target is that the last part of the pull stays under roughly 13 kg.": "一个成年人能轻松拉动。我们会实测；目标是最后一段拉力不超过约 13 公斤。", "Locked up": "锁紧状态", "Every joint fully closed. The catch holds for an hour with no slipping.": "每个接头完全合拢。锁扣保持一小时不打滑。", "Release": "松开", "One flick, and <b>every</b> joint springs open by itself.": "轻轻一拨，<b>每一个</b>接头都自己弹开。", "Pack": "收纳", "Stuffs into a sack about the length of one pole section (≈ 50 cm).": "能塞进一个约一节杆长（≈ 50 厘米）的收纳袋。", "Repeat": "重复", "20× up and down: no joint stuck open or shut, no worn cord, nothing loose.": "反复搭收 20 次：没有接头卡住（打不开或合不上），绳子无磨损，无松脱。", "The parts: what each has to do": "各部件需要实现的功能", "Where everything sits": "各部件的位置", "27 pole sections in all: 2 arches × 9, 2 side poles × 3, ridge × 3. All of them are already in the fabric.": "共 27 节杆：2 道拱杆 × 9 节，2 根侧杆 × 3 节，脊杆 × 3 节。全部已在布里。", "Pole sections": "杆节", "Fibreglass tube, like a normal tent pole: about Ø11 mm, in sections about <span class=\"star\">★ 500 mm</span> long. Use your nearest stock tube and tell us what it is; we'll check the stiffness.": "玻璃纤维管，类似普通帐篷杆：直径约 Ø11 mm，每节长约 <span class=\"star\">★ 500 mm</span>。请用你们最接近的现有管材，并告诉我们规格；我们来核对刚度。", "Joints: the important part": "接头：最关键的部分", "All 28 joints are the same. Each one has to do three things:": "全部 28 个接头都一样。每个接头要做到三件事：", "The cord runs through the middle of everything, so every insert needs a centre hole. Sketch only: proportions are exaggerated.": "绳子从所有零件的中心穿过，所以每个插件都要有中心孔。仅为示意：比例有夸张。", "Corners (×4)": "转角件（×4）", "Arch tops (×2)": "拱顶件（×2）", "Cords and the pull": "绳子与拉绳系统", "<b>Joint cord</b> (red): one loop inside both arches and both side poles. Thin, strong, low-stretch, about Ø3 mm, Dyneema-type.": "<b>关节绳</b>（红色）：一整圈，穿在两道拱杆和两根侧杆里面。细、结实、低伸长，直径约 Ø3 mm，Dyneema 类（超高分子量聚乙烯）。", "<b>Ring</b> on the end of the joint cord. The pull cord loops round it (a simple 2:1), which halves the effort.": "<b>拉环</b>，系在关节绳末端。拉绳绕过它（简单的 2:1 滑轮组），省一半力。", "<b>One-way catch</b>: flick to release, holds <span class=\"star\">★ about 15 kg</span>.": "<b>单向锁扣</b>：一拨即松，承受 <span class=\"star\">★ 约 15 公斤</span>。", "<b>Strap cords</b> (green) from both doorway straps join the pull cord here.": "<b>门口带的绳</b>（绿色）：两条门口带的绳在这里并入拉绳。", "<b>Your pull.</b>": "<b>你拉的地方。</b>", "Your routing and hardware are fine if they do the same job. Please propose two or three one-way catches you can source that hold on thin Dyneema line and release with a flick.": "只要实现同样的功能，走线和配件可按你们的方式。请推荐两三款你们能采购到的单向锁扣，要能卡住细的 Dyneema 绳，并且一拨即松。", "Doorway straps (×2)": "门口带（×2）", "Pulling draws the cord through the ring until the sewn stop jams against it. That sets the doorway width, and so the shape, the same every time.": "拉动时，绳子穿过拉环，直到缝死的限位挡块卡在环上。这样门口宽度——也就是整体形状——每次都一样。", "Fabric and sewing": "布料与缝制", "<b>Skin:</b> one rectangle of shade fabric, roughly 4.5 × 1.5 m flat. Use a light UPF polyester you already use for shade products. It should be the right size on the frame <b>when the frame is closed</b>.": "<b>篷布：</b>一整块遮阳布，平铺约 4.5 × 1.5 米。请用你们遮阳产品常用的轻质防紫外线涤纶布。尺寸要在<b>框架合拢时</b>刚好合适。", "<span class=\"star\">★ Sleeves with slack.</span> When the cord is released, every joint springs open and the poles get several centimetres longer. The sleeve only needs enough slack, around and along the pole, that it never grips the pole and stops a joint springing fully open and going loose. Leave the sleeves open at the corners, and don't tie the fabric corners tight to the corner pieces.": "<span class=\"star\">★ 套管要留余量。</span>松开绳子时，每个接头都会弹开，杆子会变长几厘米。套管只需在杆子周围和长度方向留足余量，任何时候都不能夹住杆子、妨碍接头完全弹开变松。套管在四角处开口，布的四角不要和转角件绑紧。", "How much slack is enough is the factory's call: check it in the one-arch trial (lay it in its sleeve, release the cord, and every joint should pop).": "余量留多少由工厂决定：在单拱试验中检查（把拱杆放进套管，松开绳子，每个接头都应弹开）。", "A sleeve runs across the middle for the ridge pole, with an opening at each arch top for the T.": "中间有一条横向套管装脊杆，在每个拱顶处开口让 T 形件穿过。", "Along one side pole, a small channel on top of the sleeve carries the cords to the catch.": "沿一根侧杆，在套管上方缝一条小通道，把绳子引到锁扣。", "Doorway straps are attached only at their ends, so they slide freely.": "门口带只在两端固定，以便自由滑动。", "Short requests for outside suppliers": "给外部供应商的简短需求", "If a part has to come from outside, send <b>only the relevant line</b>, never this brief, and no photos of the sample.": "如果某个零件需要外购，<b>只发对应的那一条</b>，绝不发送本说明，也不发样品照片。", "<b>Tube:</b> fibreglass tube, about Ø11 mm outside with a bore of about Ø7 mm, cut to 500 mm. Please send stock sizes and stiffness data.": "<b>管材：</b>玻璃纤维管，外径约 Ø11 mm，内孔约 Ø7 mm，切成 500 mm。请提供现有规格和刚度数据。", "<b>Metal sleeves:</b> aluminium tube, about Ø14 mm outside, a sliding fit over Ø11 mm tube, about 120 mm long, one end flared. Please send samples and say how the flare is formed.": "<b>金属套管：</b>铝管，外径约 Ø14 mm，能滑配套在 Ø11 mm 管上，长约 120 mm，一端扩口。请提供样品并说明扩口工艺。", "<b>Foam inserts:</b> a small sleeve of firm foam, about Ø10 mm, giving 2–3 kg when squeezed from 60 to 30 mm long. Please send a few firmness options.": "<b>泡棉件：</b>一小段较硬的泡棉套，直径约 Ø10 mm，从 60 mm 压到 30 mm 时约 2–3 公斤力。请提供几种硬度选项。", "<b>Catch:</b> a one-way cleat or cam for 3 mm Dyneema line, with flick release, holding about 15 kg. Please send options.": "<b>锁扣：</b>用于 3 mm Dyneema 绳的单向夹绳器或凸轮扣，一拨即松，承受约 15 公斤。请提供选项。", "Suggested order": "建议顺序", "<b>Joint trial:</b> about 10 joints in 2–3 variations (e.g. two foam firmnesses and two mouth shapes). Check close, open and re-entry by hand.": "<b>接头试验：</b>做约 10 个接头，2–3 种变化（例如两种泡棉硬度、两种扩口形状）。手动检查合拢、弹开和重新插入。", "<b>One arch:</b> 9 sections in a loose sleeve with a doorway strap. Lay it flat, pull, check the height, release, stuff, and repeat.": "<b>单拱：</b>9 节杆装在宽松套管里，配一条门口带。铺平、拉、检查高度、松开、塞袋，反复进行。", "<b>Full sample,</b> once 1 and 2 work.": "<b>完整样品，</b>在第 1、2 步都成功之后再做。", "At each step, send us photos and video <b>internally</b>, with what you changed and why. Those changes are the most useful thing the sample gives us.": "每一步都请在<b>内部</b>发照片和视频给我们，并说明改了什么、为什么改。这些改动是样品带给我们最有价值的信息。", "Sideline shade · first sample brief · 2026-10-20 · Westfield internal, pre-filing. Diagrams are illustrative sketches, not to scale.": "场边遮阳棚 · 首样说明 · 2026-10-20 · Westfield 内部资料，专利申请前保密。示意图仅为草图，未按比例。"};
+  const ZS = {"≈ 1.6 m tall": "高 ≈ 1.6 米", "★ 2.5 m between the feet (doorway)": "★ 两脚间距 2.5 米（门口）", "≈ 1.5 m deep": "深 ≈ 1.5 米", "packs in a sack": "装进收纳袋", "≈ 50 cm long": "长 ≈ 50 厘米", "2 arches": "2 道拱杆", "ridge pole across the top": "顶部横跨的脊杆", "doorway strap": "门口带", "1 · Lay it flat": "1 · 铺平", "joints are sprung open": "接头处于弹开状态", "2 · Pull": "2 · 拉", "every joint closes, frame goes stiff": "所有接头合拢，框架变硬", "3 · Keep pulling": "3 · 继续拉", "straps squeeze the feet in, arches rise": "门口带把两脚收拢，拱杆立起", "one cord, one pull": "一根绳，一下拉", "arch · 9 sections": "拱杆 · 9 节", "side pole": "侧杆", "3 sections": "3 节", "ridge pole": "脊杆", "3 sections, own light cord": "3 节，有自己的细弹力绳", "fabric (top view, laid flat)": "布（俯视，平铺）", "corner piece ×4": "转角件 ×4", "T at each arch top": "每个拱顶一个 T 形件", "catch": "锁扣", "+ pull": "+ 拉绳", "1 · Closes fully when the cord is pulled tight": "1 · 拉紧绳子时完全合拢", "★ pole end slides ≈30 mm into the metal sleeve": "★ 杆端插入金属套管约 30 mm", "…until it hits a hard stop inside": "……直到顶住内部的硬限位", "cord pulled tight": "绳子拉紧", "2 · Springs open by itself when the cord is released": "2 · 松开绳子时自己弹开", "pushed <tspan font-weight=\"700\">fully out</tspan> of the sleeve": "被<tspan font-weight=\"700\">完全推出</tspan>套管", "cord slack": "绳子松弛", "3 · Finds its way back in from a bent or folded start": "3 · 从弯折状态也能自己插回去", "pull: the rounded nose": "拉动时：圆头", "slides back in by itself": "自己滑回套管", "generous flared / funnel mouth on the sleeve": "套管口做大扩口 / 喇叭口", "arch comes down": "拱杆从上方下来", "side pole plugs in": "侧杆插入", "like a normal joint": "和普通接头一样", "fixed 90°, no hinge": "固定 90°，无铰链", "smooth inside:": "内部要光滑：", "the cord turns here": "绳子在这里转弯", "peg loop": "地钉环", "arch passes straight through": "拱杆直接穿过", "T fitting": "T 形件", "ridge pole plugs in": "脊杆插入", "(its own light shock cord,": "（有自己的细弹力绳，", "not on the pull)": "不在拉绳上）", "to back strap": "去后门口带", "to front strap": "去前门口带", "top view of the laid-out shade · schematic only": "平铺遮阳棚俯视图 · 仅为示意", "★ 2.5 m, ±1 cm: the one length to measure carefully": "★ 2.5 米，±1 厘米：唯一需要仔细量的长度", "webbing from one foot…": "织带从一只脚开始……", "sewn stop": "缝死的限位挡块", "ring on the other foot": "另一只脚上的环", "cord → joins the pull": "绳 → 并入拉绳", "too tight": "太紧", "the fabric grips the pole, so the joint can't spring open": "布夹住了杆子，接头弹不开", "enough slack ✓": "余量足够 ✓", "↑ joint springs fully open": "↑ 接头完全弹开", "roomy around and along the pole: every joint pops open and goes loose": "杆子周围和长度方向都宽松：每个接头都能弹开变松", "1 · Joint trial": "1 · 接头试验", "2 · One arch": "2 · 单拱", "3 · Full sample": "3 · 完整样品"};
+  const SEL = '.conf, .kick, h1, .lede, .howto div, h2, h3, section > p, li, th, td, figcaption, .callout, .sup div, footer';
+  const nodes = [...document.querySelectorAll(SEL)], texts = [...document.querySelectorAll('figure svg text')];
+  nodes.forEach(e => e.dataset.en = e.innerHTML); texts.forEach(e => e.dataset.en = e.innerHTML);
+  const T = { en: document.title, zh: '场边遮阳棚首样说明' };
+  window.__miss = [];
+  function setLang(l) {
+    document.documentElement.lang = l === 'zh' ? 'zh-Hans' : 'en'; document.title = T[l];
+    window.__miss = [];
+    for (const [list, D] of [[nodes, ZH], [texts, ZS]]) for (const e of list) {
+      const z = D[e.dataset.en];
+      if (l === 'zh' && z === undefined && e.dataset.en.trim() && !/^[\d★≈\s.m]+$/.test(e.textContent)) window.__miss.push(e.dataset.en);
+      e.innerHTML = l === 'zh' && z !== undefined ? z : e.dataset.en;
+    }
+    document.querySelectorAll('#lang button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.l === l)));
+    try { localStorage.setItem('brief-lang', l); } catch (e) {}
+  }
+  window.setLang = setLang;
+  document.querySelectorAll('#lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.l)));
+  addEventListener('keydown', e => { if ((e.key === 'l' || e.key === 'L') && !e.metaKey && !e.ctrlKey && !e.altKey) setLang(document.documentElement.lang === 'en' ? 'zh' : 'en'); });
+  let saved = 'en'; try { saved = localStorage.getItem('brief-lang') || 'en'; } catch (e) {}
+  if (saved === 'zh') setLang('zh');
+})();
+</script>
+<!-- /i18n -->
+</body>
+</html>

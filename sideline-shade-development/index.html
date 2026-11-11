@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>One Pull Shade</title>
+<!-- deck.html is BUILT by build-deck.py from this template + the explainer's drawing code (how-it-works.html). INTERNAL · PRE-FILING — local only, do not publish. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f3efe7; --paper2: #ebe5d9; --ink: #18232e; --ink2: #44505c; --mute: #7b8590;
+    --pole: #1d3b53; --pull: #e8762c; --fabric: #d2a86c; --strap: #3c8a5a; --rule: #d8d0c0;
+    --display: 'Archivo', 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC', 'Microsoft YaHei', sans-serif; --body: 'Inter', -apple-system, Helvetica, Arial, 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #0f151b; overflow: hidden; }
+  body { font-family: var(--body); color: var(--ink); }
+  #stage { position: absolute; left: 50%; top: 50%; width: 1600px; height: 900px; transform-origin: 0 0; }
+  .slide { position: absolute; inset: 0; background: var(--paper); overflow: hidden; opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility 0s .45s; }
+  .slide.on { opacity: 1; visibility: visible; transition: opacity .45s ease; }
+  .slide.dark { background: var(--ink); color: #f3efe7; }
+
+  /* chrome on every slide */
+  .flag { position: absolute; left: 72px; bottom: 34px; font: 600 12px var(--mono); letter-spacing: .1em; color: var(--pull); text-transform: uppercase; }
+  .num { position: absolute; right: 72px; top: 34px; font: 500 12px var(--mono); letter-spacing: .08em; color: var(--mute); }
+  .dark .num { color: #8d98a3; }
+  .over { font: 600 13px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--pull); margin: 0 0 18px; }
+  h1, h2 { font-family: var(--display); margin: 0; text-wrap: balance; letter-spacing: -.02em; }
+  h1 { font-weight: 800; font-size: 148px; line-height: .92; }
+  h2 { font-weight: 800; font-size: 64px; line-height: 1.02; }
+  p.lead { font-size: 26px; line-height: 1.42; color: var(--ink2); margin: 22px 0 0; max-width: 30ch; }
+  .dark p.lead { color: #c7cdd3; }
+
+  /* title */
+  .hero img { position: absolute; right: -120px; top: 40px; width: 1350px; }
+  .hero .txt { position: absolute; left: 72px; top: 150px; width: 640px; }
+  .hero h1 span { color: var(--pull); }
+  .key { margin: 26px 0 0; font: 500 15px var(--body); color: var(--ink2); display: flex; align-items: center; gap: 10px; }
+  .key i { display: inline-block; width: 26px; height: 4px; border-radius: 2px; margin-left: 12px; } .key i:first-child { margin-left: 0; }
+
+  /* problem */
+  .puzzle { position: absolute; left: 72px; right: 72px; top: 330px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+  .puzzle div { border-top: 2px solid var(--ink); padding-top: 20px; }
+  .puzzle svg { width: 100%; height: 190px; display: block; margin-bottom: 18px; }
+  .puzzle b { font: 700 26px var(--display); display: block; }
+  .puzzle span { font-size: 19px; color: var(--ink2); line-height: 1.45; display: block; margin-top: 6px; }
+  .kicker { position: absolute; left: 72px; bottom: 96px; font: 800 40px var(--display); letter-spacing: -.01em; }
+  .kicker em { font-style: normal; color: var(--pull); }
+
+  /* film slides */
+  .film video, .film img.full { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .film .txt { position: absolute; left: 72px; top: 84px; width: 520px; }
+  .steps { list-style: none; padding: 0; margin: 40px 0 0; display: grid; gap: 22px; }
+  .steps li { display: grid; grid-template-columns: 54px 1fr; font-size: 23px; line-height: 1.35; color: var(--ink2); }
+  .steps li b { font: 600 15px var(--mono); color: var(--pull); padding-top: 5px; }
+  .steps li.now { color: var(--ink); font-weight: 600; }
+
+  /* spec */
+  .spec img { position: absolute; left: 520px; top: 0; width: 1280px; }
+  .spec .txt { position: absolute; left: 72px; top: 110px; width: 520px; }
+  .figs { position: absolute; left: 72px; bottom: 110px; display: flex; gap: 56px; }
+  .figs div { display: grid; gap: 6px; }
+  .figs b { font: 800 72px/1 var(--display); letter-spacing: -.03em; }
+  .figs b small { font-size: 32px; font-weight: 700; margin-left: 4px; }
+  .figs span { font: 600 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+
+  /* what's inside */
+  .seq { position: absolute; left: 72px; right: 72px; bottom: 82px; margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .seq li { border-top: 2px solid var(--ink); padding-top: 12px; font-size: 19px; line-height: 1.35; color: var(--ink2); }
+  .seq b { font: 600 13px var(--mono); color: var(--pull); display: block; margin-bottom: 6px; }
+  /* section divider */
+  .divider .txt { position: absolute; left: 72px; top: 260px; width: 1100px; }
+  .divider h2 { font-size: 104px; }
+  .divider ol { position: absolute; left: 72px; right: 72px; bottom: 120px; margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; counter-reset: k; }
+  .divider li { counter-increment: k; border-top: 1px solid #3a4652; padding-top: 14px; font-size: 18px; color: #c7cdd3; line-height: 1.35; }
+  .divider li::before { content: '0' counter(k); display: block; font: 600 13px var(--mono); color: var(--pull); margin-bottom: 8px; }
+
+  /* how-it-works slides */
+  .how .head { position: absolute; left: 72px; top: 72px; right: 72px; display: grid; grid-template-columns: 110px 1fr; align-items: start; }
+  .how .k { font: 800 84px/0.9 var(--display); color: var(--pull); letter-spacing: -.04em; }
+  .how .pa { position: absolute; left: 182px; top: 178px; width: 1340px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .how .pa div { border-top: 2px solid var(--ink); padding-top: 14px; font-size: 21px; line-height: 1.45; color: var(--ink2); }
+  .how .pa div:first-child { border-color: var(--pull); }
+  .how .pa b { display: block; font: 600 12px var(--mono); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 8px; color: var(--ink); }
+  .how .pa div:first-child b { color: var(--pull); }
+  .how .anim { position: absolute; left: 160px; right: 160px; top: 350px; height: 480px; }
+  .how .anim svg { width: 100%; height: 100%; display: block; }
+  .how .scrub { position: absolute; left: 182px; right: 182px; bottom: 58px; height: 3px; background: var(--rule); border-radius: 2px; }
+  .how .scrub i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--ink); border-radius: 2px; }
+
+  /* detail stills */
+  .pair { position: absolute; left: 72px; right: 72px; top: 330px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .pair figure { margin: 0; }
+  .pair img { width: 100%; height: 400px; object-fit: cover; border-radius: 4px; display: block; }
+  .pair figcaption { margin-top: 14px; font-size: 19px; color: var(--ink2); line-height: 1.4; }
+  .pair figcaption b { font: 600 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--pull); display: block; margin-bottom: 4px; }
+
+  /* compare */
+  table.cmp { position: absolute; left: 72px; right: 72px; top: 290px; border-collapse: collapse; font-size: 21px; line-height: 1.35; }
+  .cmp th { text-align: left; font: 600 13px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); padding: 0 0 16px; border-bottom: 2px solid var(--ink); }
+  .cmp th:last-child { color: var(--pull); }
+  .cmp td { padding: 22px 28px 22px 0; border-bottom: 1px solid var(--rule); vertical-align: top; color: var(--ink2); }
+  .cmp td:first-child { font: 700 22px var(--display); color: var(--ink); width: 18%; }
+  .cmp td:last-child { color: var(--ink); font-weight: 600; width: 28%; }
+  .cmp td:nth-child(2), .cmp td:nth-child(3) { width: 27%; }
+
+  /* status */
+  .cols { position: absolute; left: 72px; right: 72px; top: 330px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .cols div { border-top: 2px solid #3a4652; padding-top: 18px; }
+  .cols b { font: 600 13px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--pull); }
+  .cols ul { margin: 14px 0 0; padding: 0 0 0 20px; font-size: 21px; line-height: 1.5; color: #d5dade; }
+  .cols li { margin-bottom: 8px; }
+  .warn { position: absolute; left: 72px; right: 72px; bottom: 96px; border: 1px solid var(--pull); border-radius: 4px; padding: 18px 22px; font-size: 19px; color: #f3efe7; line-height: 1.45; }
+  .warn b { color: var(--pull); font: 600 13px var(--mono); letter-spacing: .12em; margin-right: 10px; }
+
+  /* nav */
+  #prog { position: fixed; left: 0; bottom: 0; height: 3px; background: var(--pull); transition: width .3s; z-index: 5; }
+  #lang { position: fixed; right: 14px; bottom: 12px; z-index: 6; display: flex; border: 1px solid #c9bfab; border-radius: 999px; overflow: hidden; background: #fbf9f4; box-shadow: 0 2px 10px #0002; }
+  #lang button { font: 600 13px var(--body); border: 0; background: transparent; color: var(--ink2); padding: 7px 14px; cursor: pointer; }
+  #lang button.on { background: var(--ink); color: #f3efe7; }
+  html[lang="zh-Hans"] h1, html[lang="zh-Hans"] h2 { letter-spacing: 0; }
+  html[lang="zh-Hans"] .over { letter-spacing: .2em; }
+  #hint { position: fixed; right: 150px; bottom: 18px; font: 500 11px var(--mono); color: #6b7680; z-index: 5; }
+</style>
+
+<style id="westfield-slide-logo">
+  /* Westfield logo only; original slide content and layout unchanged. */
+  .slide::after {
+    content: ""; position: absolute; top: 24px; right: 142px;
+    width: 176px; height: 42px; z-index: 2; pointer-events: none;
+    background: url("data:image/png;base64,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") center / contain no-repeat;
+  }
+  .slide.dark::after { background-image: url("data:image/png;base64,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"); }
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 · title -->
+<section class="slide hero">
+  <img src="media/hero.png" alt="The shade standing: two fibreglass arches with canvas between them">
+  <div class="txt">
+    <p class="over">SW-032 · Sideline shade</p>
+    <h1>One<br>pull<span>.</span></h1>
+    <p class="lead">Lay it flat. Pull one cord. It puts itself up.</p>
+    <p class="key"><i style="background:#e8762c"></i>the pull cord <i style="background:#3c8a5a"></i>doorway straps</p>
+  </div>
+</section>
+
+<!-- 2 · the problem -->
+<section class="slide">
+  <div style="position:absolute;left:72px;top:96px;width:1100px">
+    <p class="over">The problem</p>
+    <h2>Every shade starts with a puzzle.</h2>
+  </div>
+  <div class="puzzle">
+    <div><svg viewBox="0 0 400 190" id="pz1"></svg><b>Sort the poles</b><span>Which section goes where, in what order, and is one missing?</span></div>
+    <div><svg viewBox="0 0 400 190" id="pz2"></svg><b>Thread the sleeves</b><span>Push 4 m of pole through fabric without it snagging or splitting apart.</span></div>
+    <div><svg viewBox="0 0 400 190" id="pz3"></svg><b>Clip, bend, adjust</b><span>Bow the poles into place, then fiddle it square — usually with two people.</span></div>
+  </div>
+  <p class="kicker">We took the puzzle out. <em>All of it.</em></p>
+</section>
+
+<!-- 3 · the film -->
+<section class="slide film" data-video="v1">
+  <video id="v1" src="media/deploy.mp4" muted playsinline preload="auto"></video>
+  <div class="txt">
+    <p class="over">The idea</p>
+    <h2>Lay it flat.<br>Pull.<br>It stops.</h2>
+    <ol class="steps" id="filmSteps">
+      <li data-from="0"><b>01</b>Spread it out. The poles are already sewn into the fabric, in loose short sections.</li>
+      <li data-from="0.1"><b>02</b>Pull the orange cord. Every joint snaps shut (too small to see from here) and the frame goes stiff.</li>
+      <li data-from="0.36"><b>03</b>Keep pulling. The green doorway straps draw each arch's feet together, and the arches rise.</li>
+      <li data-from="0.82"><b>04</b>The straps' sewn stops hit their rings: it stops at the right shape, and stays.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 4 · size -->
+<section class="slide spec">
+  <img src="media/front.png" alt="Front view of the standing shade">
+  <div class="txt">
+    <p class="over">What you get</p>
+    <h2>A doorway of shade. One cord.</h2>
+    <p class="lead">Two arches with canvas between them. No loose poles, no clips, nothing left over in the bag.</p>
+  </div>
+  <div class="figs">
+    <div><b>2.5<small>m</small></b><span>Doorway</span></div>
+    <div><b>1.6<small>m</small></b><span>Tall</span></div>
+    <div><b>1.5<small>m</small></b><span>Deep</span></div>
+    <div><b>1</b><span>Cord to pull</span></div>
+  </div>
+</section>
+
+<!-- 5 · what's inside -->
+<section class="slide sys">
+  <div style="position:absolute;left:72px;top:72px;width:1400px">
+    <p class="over">What's inside</p>
+    <h2>Five poles, two cords, two straps.</h2>
+  </div>
+  <svg id="sysd" viewBox="40 0 1376 470" style="position:absolute;left:72px;top:250px;width:1456px;height:470px"></svg>
+  <ol class="seq"><li><b>1</b>Pull the orange cord</li><li><b>2</b>Every joint shuts: the frame goes stiff</li><li><b>3</b>The same pull draws the green straps in: the arches rise</li><li><b>4</b>The sewn stops hit their rings: done</li></ol>
+</section>
+
+<!--HOW-->
+
+<!-- takedown -->
+<section class="slide how" data-step="Taking it down">
+  <div class="head"><span class="k">↓</span><div><p class="over">Taking it down</p><h2>Down in seconds. Stuffed, not rolled.</h2></div></div>
+  <div class="pa"><div><b>The problem</b>It has to come down as easily as it went up, and pack without care.</div><div><b>The idea</b>Release the one-way catch: every joint springs open, the arches fall flat, and the whole thing gets stuffed in a sack.</div></div>
+  <div class="anim"></div><div class="scrub"><i></i></div>
+</section>
+
+<!-- compare -->
+<section class="slide">
+  <div style="position:absolute;left:72px;top:96px;width:1200px">
+    <p class="over">The difference</p>
+    <h2>Instant up. Easy down.</h2>
+  </div>
+  <table class="cmp">
+    <tr><th></th><th>Pole-and-sleeve shade</th><th>Spring-steel pop-up</th><th>One pull</th></tr>
+    <tr><td>Putting it up</td><td>Assemble poles, thread sleeves, clip, bend into place</td><td>Springs open on its own</td><td>Spread it out, pull one cord</td></tr>
+    <tr><td>Packing it away</td><td>Break down, sort, roll neatly</td><td>Twist-and-fold the hoop — a knack many people never get</td><td>Release the catch, bunch it up, stuff it in the sack</td></tr>
+    <tr><td>Packed size</td><td>A long pole bag</td><td>A flat disc, only as small as the folded hoop</td><td>A sack about as long as one 50 cm pole section</td></tr>
+    <tr><td>Loose parts</td><td>Pole sections, clips</td><td>None</td><td>None — the poles live in the fabric</td></tr>
+  </table>
+</section>
+
+<!-- turntable -->
+<section class="slide film" data-video="v2">
+  <video id="v2" src="media/turntable.mp4" muted playsinline loop preload="auto"></video>
+  <div class="txt">
+    <p class="over">Standing</p>
+    <h2>Nothing to assemble.<br>Nothing left over.</h2>
+  </div>
+</section>
+
+</div>
+<div id="prog"></div>
+<div id="hint">← → to move · F fullscreen</div>
+<div id="lang" role="group" aria-label="Language"><button data-l="en" class="on">EN</button><button data-l="zh">中文</button></div>
+
+<script>
+'use strict';
+
+/* ---------------------------------------------------------------- helpers */
+const cl = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const ph = (t, a, b) => cl((t - a) / (b - a));
+const ez = x => (x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
+const lerp = (a, b, u) => a + (b - a) * u;
+const f1 = (x, d = 0) => x.toFixed(d);
+const C = { pole: '#1d3b53', tend: '#b0322a', pul: '#6b4fa0', strap: '#3c8a5a', dial: '#e8762c', skin: '#efe2c4', fer: '#8f9aa5',
+  foam: '#7fb77a', ink: '#1b1f23', mute: '#6a7380', ground: '#b9ad92', open: '#e8762c', sleeve: '#d9c9a3' };
+const ln = (x1, y1, x2, y2, w = 2, c = C.ink, ex = '') => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${w}" stroke-linecap="round" ${ex}/>`;
+const rc = (x, y, w, h, f, ex = '') => `<rect x="${x}" y="${y}" width="${Math.max(0, w)}" height="${Math.max(0, h)}" fill="${f}" ${ex}/>`;
+const ci = (x, y, r, f, ex = '') => `<circle cx="${x}" cy="${y}" r="${r}" fill="${f}" ${ex}/>`;
+const tx = (x, y, s, o = {}) => `<text x="${x}" y="${y}" font-size="${o.size || 13}" fill="${o.c || C.ink}" text-anchor="${o.a || 'start'}" font-weight="${o.w || 400}" ${o.mono ? 'font-family="ui-monospace,Menlo,monospace"' : 'font-family="-apple-system,Helvetica,Arial,sans-serif"'} ${o.ex || ''}>${s}</text>`;
+const pl = (P, w, c, ex = '') => `<polyline points="${P.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ')}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" ${ex}/>`;
+const arrow = (x1, y1, x2, y2, c, w = 2.5) => { const a = Math.atan2(y2 - y1, x2 - x1), h = 9;
+  return ln(x1, y1, x2, y2, w, c) + `<polygon points="${x2},${y2} ${x2 - h * Math.cos(a - .45)},${y2 - h * Math.sin(a - .45)} ${x2 - h * Math.cos(a + .45)},${y2 - h * Math.sin(a + .45)}" fill="${c}"/>`; };
+const reads = list => '' &&  list.map(([k, v], i) => tx(784, 24 + i * 19, `${k} <tspan font-weight="700">${v}</tspan>`, { a: 'end', mono: 1, size: 12.5, c: '#39414a' })).join('');
+const ground = (y, x0 = 16, x1 = 784) => ln(x0, y, x1, y, 1.5, C.ground) + Array.from({ length: Math.floor((x1 - x0) / 16) }, (_, i) => ln(x0 + 8 + i * 16, y + 1, x0 + i * 16, y + 8, 1, '#d8cfba')).join('');
+const hand = (x, y, lab = 'your hand') => ci(x, y, 10, C.dial) + tx(x, y - 16, lab, { a: 'middle', size: 12, c: '#b35a17', w: 600 });
+
+/* pinned elastica: a pole of length L whose feet are c apart — the shape a bent fibreglass pole really takes */
+function agm(a, b) { for (let i = 0; i < 14; i++) { const m = (a + b) / 2; b = Math.sqrt(a * b); a = m; } return a; }
+function ela(al, n) {
+  const m = Math.sin(al / 2) ** 2, K = Math.PI / (2 * agm(1, Math.sqrt(1 - m))), k2 = (2 * K) ** 2, h = 1 / n, f = (t, o) => [o, -k2 * Math.sin(t)];
+  let th = al, om = 0, x = 0, z = 0; const P = [[0, 0]];
+  for (let i = 0; i < n; i++) {
+    const a = f(th, om), b = f(th + h / 2 * a[0], om + h / 2 * a[1]), c = f(th + h / 2 * b[0], om + h / 2 * b[1]), d = f(th + h * c[0], om + h * c[1]);
+    const t2 = th + h / 6 * (a[0] + 2 * b[0] + 2 * c[0] + d[0]), tm = th + h / 2 * b[0];
+    x += h / 6 * (Math.cos(th) + 4 * Math.cos(tm) + Math.cos(t2)); z += h / 6 * (Math.sin(th) + 4 * Math.sin(tm) + Math.sin(t2));
+    th = t2; om += h / 6 * (a[1] + 2 * b[1] + 2 * c[1] + d[1]); P.push([x, z]);
+  }
+  return P;
+}
+const ARCH = new Map();
+function archPts(c, L = 4.5) {
+  const key = Math.round(c * 1000); if (ARCH.has(key)) return ARCH.get(key);
+  let P;
+  if (c >= L - 1e-4) P = Array.from({ length: 61 }, (_, i) => [L * i / 60, 0]);
+  else { let lo = 1e-5, hi = 2.3; for (let i = 0; i < 40; i++) { const mid = (lo + hi) / 2; if (ela(mid, 50).at(-1)[0] > c / L) lo = mid; else hi = mid; }
+    P = ela((lo + hi) / 2, 60).map(p => [p[0] * L, p[1] * L]); }
+  ARCH.set(key, P); return P;
+}
+function arch(c, s, gx, gy, w = 5) {
+  const P = archPts(c), xl = gx - c * s / 2, pts = P.map(p => [xl + p[0] * s, gy - p[1] * s]);
+  return { pts, svg: pl(pts, w, C.pole), xl, xr: xl + c * s, crown: Math.max(...P.map(p => p[1])), top: Math.min(...pts.map(p => p[1])) };
+}
+
+/* ---------------------------------------------------------------- the steps */
+const STEPS = [
+{ title: 'What it does', kick: 'The whole thing, before any of the how', prob: 'A shade shelter you can put up alone, in seconds, with no poles to sort, thread or clip, and that packs as small as a normal one.', idea: 'The poles are already inside the fabric, in pieces. You lay it flat and pull one cord until it stops. The rest of this page is how that can work.', dur: 9000, draw(t) {
+  const gy = 292, sc = 100, ox = 70, oy = -46, gx = 320;
+  const r = ez(cl((t - .15) / .6)), c = lerp(4.5, 2.5, r);
+  const F = arch(c, sc, gx, gy, 5), B = arch(c, sc, gx + ox, gy + oy, 5);
+  const ci0 = F.pts.reduce((m, p, i) => p[1] < F.pts[m][1] ? i : m, 0);
+  let s = ground(gy + 6, 16, 600);
+  s += `<polygon points="${[...F.pts, ...B.pts.slice().reverse()].map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ')}" fill="${C.skin}" fill-opacity=".85" stroke="${C.sleeve}" stroke-width="1"/>`;
+  s += B.svg.replace(C.pole, '#4d6a82') + ln(F.pts[ci0][0], F.pts[ci0][1], B.pts[ci0][0], B.pts[ci0][1], 4, C.pole) + F.svg;
+  // the pull cord from the front-right foot to the person
+  const px = 690, hy = gy - 70;
+  s += ln(F.xr, gy - 2, px - 14, hy, 2, C.dial);
+  s += ci(px, gy - 128, 10, 'none', `stroke="${C.ink}" stroke-width="2"`) + ln(px, gy - 118, px + 4, gy - 60, 2.5) + ln(px + 4, gy - 60, px - 8, gy, 2.5) + ln(px + 4, gy - 60, px + 18, gy, 2.5)
+     + ln(px + 1, gy - 100, px - 14, hy, 2.5) + ln(px + 1, gy - 100, px + 20, gy - 82, 2.5);
+  if (t < .15) s += tx(F.xl + 10, gy + 26, 'laid out flat: fabric with the poles already inside', { size: 12.5, c: C.mute });
+  if (t > .8) {
+    s += ln(F.xl, gy + 22, F.xr, gy + 22, 1, C.mute) + tx((F.xl + F.xr) / 2, gy + 38, 'doorway 2.5 m', { a: 'middle', size: 12.5, w: 600 });
+    s += ln(F.xl - 18, gy, F.xl - 18, F.top, 1, C.mute) + tx(F.xl - 24, (gy + F.top) / 2, '1.6 m tall', { a: 'end', size: 12.5, w: 600 });
+    s += tx(B.pts[ci0][0] + 12, B.top - 8, '1.5 m deep', { size: 12.5, w: 600 });
+  }
+  s += reads([['stage', t < .15 ? 'flat' : t < .78 ? 'pulling' : 'standing'], ['doorway', c.toFixed(2) + ' m']]);
+  const cap = t < .15 ? '<b>It starts flat on the ground.</b> One piece of fabric with two arch poles and the poles between them already sewn in, each pole in loose short sections.'
+    : t < .78 ? '<b>Pull the cord.</b> First the loose sections close up into stiff poles, then the same pull draws each arch\'s feet together and the arches rise.'
+    : '<b>It stops by itself at the right shape</b> and stays there. Nothing to assemble, nothing to clip — and nothing left over in the bag.';
+  return { s, cap };
+} },
+{ title: 'One joint', kick: 'Two tubes, a metal sleeve, a foam slug and a cord — drawn to scale', prob: 'Poles have to be long and stiff when the shade is up, but short enough to fold into a bag. Normally that means sections of pole you plug together by hand.', idea: 'A joint that springs open by itself, and snaps shut when you pull a cord that runs through it.', dur: 12000, draw(t) {
+  // Real ferrule (pole-layout.py): 50 bonded on the left tube · 30 foam/stop zone · 30 insertion · 8 flared mouth = 118 mm.
+  // Foam 30 mm seated, 60 free: its stroke equals the insertion, so fully popped the right tube's end sits at the mouth.
+  const k = 3, y = 160, h = 11 * k / 1.6, xL = 260, xS = xL + 30 * k, xI = xS + 30 * k, xM = xI + 8 * k;    // left end · seated right end · mouth · flare lip
+  const open = ez(ph(t, .12, .34)) * (1 - ez(ph(t, .62, .84))), fold = Math.sin(Math.PI * ph(t, .36, .58)) * 16, xr = xS + open * 30 * k;
+  let s = rc(20, y - h / 2, xL - 20, h, C.pole);                                                       // left tube
+  s += `<g transform="rotate(${fold.toFixed(2)} ${xr} ${y})">` + `<path d="M ${xr + 6} ${y - h / 2} H 820 V ${y + h / 2} H ${xr + 6} Q ${xr} ${y + h / 2} ${xr} ${y} Q ${xr} ${y - h / 2} ${xr + 6} ${y - h / 2} Z" fill="${C.pole}"/>`
+    + ln(xr, y, 820, y, 1.4 + 2.4 * (1 - open), C.tend) + '</g>';                                        // right tube (round nose) + cord inside
+  s += rc(xL, y - h / 2 + 3, xr - xL, h - 6, C.foam, 'rx="2"');                                         // foam slug
+  const fo = h / 2 + 7;                                                                                  // ferrule: Al sleeve, flared mouth
+  s += `<path d="M ${xL - 50 * k} ${y - fo} H ${xI} L ${xM} ${y - fo - 6} V ${y + fo + 6} L ${xI} ${y + fo} H ${xL - 50 * k} Z" fill="${C.fer}" opacity=".45"/>`;
+  s += ln(20, y, xL, y, 1.4 + 2.4 * (1 - open), C.tend) + ln(xL, y, xr, y, 1.4 + 2.4 * (1 - open), C.tend, 'opacity=".6"');
+  const dim = (x1, x2, yy, lab) => ln(x1, yy, x2, yy, 1, C.mute) + ln(x1, yy - 4, x1, yy + 4, 1, C.mute) + ln(x2, yy - 4, x2, yy + 4, 1, C.mute) + tx((x1 + x2) / 2, yy - 6, lab, { a: 'middle', size: 11, c: C.mute, mono: 1 });
+  s += dim(xL - 50 * k, xL, y - fo - 20, 'glued 50') + dim(xL, xS, y - fo - 20, 'foam 30') + dim(xS, xI, y - fo - 20, 'tube in 30') + dim(xI, xM, y - fo - 20, '8');
+  s += tx((xL - 50 * k + xM) / 2, y - fo - 44, 'metal sleeve glued on the left tube, with a flared mouth (sizes in mm)', { a: 'middle', size: 12, c: C.ink, w: 600 });
+  s += tx(80, y + 34, 'fibreglass tube', { a: 'middle', size: 12, c: C.mute }) + tx(560, y + 34, 'next tube (rounded end)', { a: 'middle', size: 12, c: C.mute });
+  s += tx(30, y - 12, 'cord', { size: 12, c: C.tend, w: 600 });
+  s += tx((xL + xr) / 2, y + fo + 22, `foam ${f1(30 + open * 30)} mm`, { a: 'middle', size: 12, c: '#4d8a48', w: 600 });
+  if (t > .1 && t < .36) s += arrow(xr + 4, y + fo + 40, xr + 40, y + fo + 40, '#4d8a48') + tx(xr + 46, y + fo + 44, 'foam pushes the tube out: 25 N', { size: 12, c: '#4d8a48', w: 600 });
+  if (open > .97) s += tx(xI + 30, y - fo - 70 + 10, 'tube end is OUT at the mouth → the joint can fold', { a: 'middle', size: 12.5, c: '#b35a17', w: 700 });
+  if (t < .1) s += arrow(40, y + 80, 100, y + 80, C.tend) + arrow(780, y + 80, 720, y + 80, C.tend) + tx(410, y + 110, 'cord pulled tight: the joint is held shut', { a: 'middle', c: C.tend, size: 12.5, w: 600 });
+  if (t > .6) s += arrow(40, y + 80, 100, y + 80, C.tend) + arrow(780, y + 80, 720, y + 80, C.tend) + tx(410, y + 110, 'cord pulled harder than 25 N: the tube goes back in, squashing the foam to 30 mm', { a: 'middle', c: C.tend, size: 12.5, w: 600 });
+  s += reads([['tube out', `${f1(open * 30)} of 30 mm`], ['joint', open > .97 ? 'free to fold' : open > .05 ? 'loose' : 'shut (rigid)']]);
+  const cap = t < .12 ? '<b>Shut, because the cord is pulled tight.</b> The next tube sits 30 mm deep in a metal sleeve glued on the end of the first, squashing a foam slug to 30 mm. The cord runs through both tubes.'
+    : t < .36 ? '<b>Let the cord go slack</b> and the foam (25 N) springs back to 60 mm, pushing the tube 30 mm — all the way out to the sleeve\'s flared mouth.'
+    : t < .62 ? '<b>Out of the sleeve, the joint is a hinge:</b> the tube can swing, so the pole can fold here. The cord inside keeps the two tubes together.'
+    : '<b>Pull the cord harder than the foam</b> and the rounded end finds the flared mouth, slides 30 mm back in and squashes the foam. Tube ends butt together inside the sleeve: rigid again. That is the whole trick, 24 times over.';
+  return { s, cap };
+}},
+{ title: 'A string of beads becomes a pole', kick: 'Nine joints on one cord', prob: "One joint isn't a pole. A 4.5 m arch needs 9 sections, and nobody wants to close 8 joints one at a time.", idea: 'Thread all the sections of a pole on one cord, like beads. One pull closes every joint at once.', dur: 11000, draw(t) {
+  const u = ez(ph(t, .3, .58)), push = Math.sin(Math.PI * ph(t, .68, .95)), N = 9, SEG = 70, x0 = 70, y0 = 150;
+  let p = [x0, y0], dir = (1 - u) * .42; const segs = [];
+  for (let i = 0; i < N; i++) {
+    const q = [p[0] + SEG * Math.cos(dir), p[1] + SEG * Math.sin(dir)]; segs.push([p, q]);
+    const gap = (1 - u) * 9; p = [q[0] + gap * Math.cos(dir), q[1] + gap * Math.sin(dir)];
+    dir += (1 - u) * (-.1 + .2 * Math.sin(i * 2.3 + t * 10));
+  }
+  const L = N * SEG, bow = x => push * 16 * Math.sin(Math.PI * cl((x - x0) / L));
+  const S2 = segs.map(([a, b]) => [[a[0], a[1] + bow(a[0])], [b[0], b[1] + bow(b[0])]]);
+  let s = '';
+  const end = S2.at(-1)[1];
+  s += pl([...S2.flatMap(([a, b]) => [a, b]), [end[0] + 30, end[1]]], 1.4 + 1.6 * u, C.tend);
+  for (const [a, b] of S2) s += ln(a[0], a[1], b[0], b[1], 9, C.pole, 'stroke-linecap="butt"');
+  S2.slice(1).forEach(([a], i) => { const b = S2[i][1]; s += ci((a[0] + b[0]) / 2, (a[1] + b[1]) / 2, 6.5, u > .9 ? C.fer : C.open, 'opacity=".9"'); });
+  const hx = end[0] + 30 + (t > .28 ? 20 * u : 0);
+  s += hand(Math.min(hx, 770), end[1]);
+  if (push > .02) { const xm = x0 + L / 2; s += arrow(xm, y0 - 80, xm, y0 - 14 + bow(xm), C.dial) + tx(xm, y0 - 88, 'push', { a: 'middle', c: '#b35a17', w: 600, size: 12 }); }
+  s += tx(400, 300, 'orange = joint open (loose) · grey = joint shut (rigid)', { a: 'middle', c: C.mute, size: 12 });
+  s += reads([['cord', u < .05 ? 'slack' : u < .95 ? 'pulling…' : 'tight'], ['joints open', `${Math.round((1 - u) * 8)} of 8`]]);
+  const cap = t < .3 ? '<b>Cord slack:</b> nine tubes with every joint popped open. It droops and folds — a string of beads, not a pole.'
+    : t < .65 ? '<b>Pull the one cord:</b> every joint closes at the same time, and the string snaps into one straight 4.5 m pole.'
+    : '<b>Push on it now:</b> it flexes like one long fibreglass rod — it doesn\'t fold at the joints. Every pole on the ground edge of the frame (2 arches, 2 rails) works like this.';
+  return { s, cap };
+}},
+{ title: 'The poles are already in place', kick: 'Sewn into the fabric at the factory', prob: "A pole that closes itself still has to go somewhere. If you had to sort 27 sections and thread each one into a sleeve, you'd be back to a normal tent — only fiddlier.", idea: 'Every section is sewn into the fabric at the factory, exactly where it belongs. The fabric does the arranging, so there is nothing to sort, thread or line up.', dur: 11000, draw(t) {
+  // top view, laid flat: 2 arches × 9 + 2 rails × 3 + ridge × 3 = 27 sections, flying from a loose pile into their sleeves
+  const k = 115, x0 = 400 - 2.25 * k, x1 = 400 + 2.25 * k, y0 = 102, y1 = y0 + 1.5 * k, xm = 400;
+  const T = [];                                     // target [ax, ay, bx, by] for each section
+  for (const y of [y0, y1]) for (let i = 0; i < 9; i++) T.push([x0 + i * k / 2, y, x0 + (i + 1) * k / 2, y]);
+  for (const x of [x0, x1, xm]) for (let i = 0; i < 3; i++) T.push([x, y0 + i * k / 2, x, y0 + (i + 1) * k / 2]);
+  const rnd = i => { const v = Math.sin(i * 127.1 + 311.7) * 43758.5453; return v - Math.floor(v); };
+  const close = ez(ph(t, .74, .9)), gap = lerp(5, .8, close);
+  let s = rc(x0 - 14, y0 - 14, x1 - x0 + 28, y1 - y0 + 28, C.skin, `rx="3" opacity="${(.45 + .55 * ez(ph(t, .5, .62))).toFixed(2)}"`);
+  for (const [ax, ay, bx, by] of [[x0, y0, x1, y0], [x0, y1, x1, y1], [x0, y0, x0, y1], [x1, y0, x1, y1], [xm, y0, xm, y1]])
+    s += ln(ax, ay, bx, by, 13, C.sleeve, 'opacity=".8"') + ln(ax, ay, bx, by, 1, '#b8a77f', 'stroke-dasharray="4 4"');
+  T.forEach(([ax, ay, bx, by], i) => {
+    const u = ez(ph(t, .14 + i * .011, .36 + i * .011));
+    const cx = 150 + rnd(i) * 500, cy = 200 + (rnd(i + 50) - .5) * 210, a = rnd(i + 99) * Math.PI, h = k / 4;
+    const sx = cx - h * Math.cos(a), sy = cy - h * Math.sin(a), ex = cx + h * Math.cos(a), ey = cy + h * Math.sin(a);
+    const L = Math.hypot(bx - ax, by - ay), dx = (bx - ax) / L * gap / 2, dy = (by - ay) / L * gap / 2;
+    s += ln(lerp(sx, ax + dx, u), lerp(sy, ay + dy, u), lerp(ex, bx - dx, u), lerp(ey, by - dy, u), 5, C.pole);
+  });
+  if (t < .14) s += tx(400, 322, 'a normal tent: a pile of pole sections to sort, thread and line up by hand', { a: 'middle', size: 12.5, c: '#b35a17', w: 600 });
+  else if (t < .5) s += tx(400, 322, 'every section has one place it belongs…', { a: 'middle', size: 12.5, c: C.mute, w: 600 });
+  else s += tx(400, 322, close > .5 ? '…so one pull closes all of them' : 'here they are sewn in at the factory: already in place', { a: 'middle', size: 12.5, c: '#b35a17', w: 600 });
+  s += tx(x1 + 22, (y0 + y1) / 2 - 6, 'fabric,', { size: 12, c: C.mute }) + tx(x1 + 22, (y0 + y1) / 2 + 10, 'top view', { size: 12, c: C.mute });
+  s += reads([['sections to place by hand', t < .5 ? '27' : '0']]);
+  const cap = t < .14 ? '<b>A pole that closes itself still has to go somewhere.</b> In a normal tent that means 27 loose sections to sort, then thread into the right sleeves.'
+    : t < .5 ? '<b>Each section has exactly one place in the frame</b> — two arches, two side poles and the ridge.'
+    : close < .5 ? '<b>So we sew every one in at the factory.</b> Laid out flat, the fabric already holds each section where it belongs. Nothing to sort, thread or line up.'
+    : '<b>That is what makes one pull possible.</b> Without it, this would just be a normal tent that is harder to put up.';
+  return { s, cap };
+}},
+{ title: 'One pull stiffens the whole frame', kick: 'One cord loop and a pulley', prob: 'The two arches and the two side poles all have to be closed — by one person, with one cord, at a comfortable force.', idea: 'One long cord loop, the joint cord, runs inside both arches and both side poles. Your pull cord goes round a pulley ring tied to its end, which halves the force you need. (The ridge pole has its own small elastic cord.)', dur: 11000, draw(t) {
+  const u = ez(ph(t, .12, .68)), s0 = 95, W = 4.5 * s0, H = 1.5 * s0, X0 = 70, Y0 = 150, FR = [X0 + W, Y0 + H], BR = [X0 + W, Y0];
+  let s = rc(X0, Y0, W, H, C.skin, 'opacity=".55"');
+  // the tendon runs down the middle of every pole, so it shows red in each open gap; gaps drawn ~4× the real 30 mm
+  s += `<rect x="${X0}" y="${Y0}" width="${W}" height="${H}" fill="none" stroke="${C.tend}" stroke-width="2.6"/>`;
+  const g = lerp(13, 0, u), E = 10;
+  const pole = (ax, ay, bx, by, n, endGap) => {     // n sections between the ends; gaps between them (and at both ends for a rail)
+    const L = Math.hypot(bx - ax, by - ay), ux = (bx - ax) / L, uy = (by - ay) / L, sl = (L - (n - 1 + (endGap ? 2 : 0)) * g) / n;
+    let p = endGap ? g : 0, o = '';
+    for (let i = 0; i < n; i++) { o += ln(ax + ux * p, ay + uy * p, ax + ux * (p + sl), ay + uy * (p + sl), 7, C.pole, 'stroke-linecap="butt"'); p += sl + g; }
+    p = endGap ? g : 0;                                // a ferrule mark at every joint, so the sections still read once shut
+    for (let i = 0; i <= n; i++) { if ((i > 0 && i < n) || (endGap && (i === 0 || i === n))) { const q = p - g / 2; o += ln(ax + ux * q - uy * 5, ay + uy * q + ux * 5, ax + ux * q + uy * 5, ay + uy * q - ux * 5, 2, u > .95 ? C.fer : C.open); } p += sl + g; }
+    return o; };
+  s += ln(X0 + W / 2, Y0 + 6, X0 + W / 2, Y0 + H - 6, 5, '#7d97ad', 'stroke-dasharray="44 3"') + tx(X0 + W / 2 + 10, Y0 + H / 2 - 10, 'ridge pole:', { size: 11.5, c: C.mute, w: 600 }) + tx(X0 + W / 2 + 10, Y0 + H / 2 + 5, 'own elastic cord,', { size: 11.5, c: C.mute }) + tx(X0 + W / 2 + 10, Y0 + H / 2 + 20, 'not on this loop', { size: 11.5, c: C.mute });
+  for (const y of [Y0, Y0 + H]) s += pole(X0, y, X0 + W, y, 9, false);                       // arches: 9 sections, 8 joints each
+  for (const x of [X0, X0 + W]) s += pole(x, Y0 + E, x, Y0 + H - E, 3, true);                 // side poles: 3 sections, plugging into the corners
+  for (const [x, y, sx, sy] of [[X0, Y0, 1, 1], [X0 + W, Y0, -1, 1], [X0, Y0 + H, 1, -1], [X0 + W, Y0 + H, -1, -1]])
+    s += ln(x, y, x, y + sy * E, 9, C.fer, 'stroke-linecap="butt"') + ln(x - sx * 4.5, y, x + sx * E, y, 9, C.fer, 'stroke-linecap="butt"');
+  if (u < .5) s += tx(X0 - 6, Y0 - 12, 'corner piece', { size: 11.5, c: C.mute }) + tx(X0 + W * 4 / 9, Y0 - 12, 'joints open: the red cord shows in each gap', { a: 'middle', size: 11.5, c: C.tend, w: 600 });
+  if (u > .95) s += tx(X0 + W * 4 / 9, Y0 - 12, 'all 24 joints shut', { a: 'middle', size: 11.5, c: C.strap, w: 600 });
+  const XC = FR[0] + 26, yR = FR[1] - 34 - u * 70;
+  s += pl([[FR[0] - 7, FR[1] - 7], [FR[0] + 4, FR[1] + 10], [XC, FR[1] + 10], [XC, yR + 8]], 2.2, C.tend);
+  s += pl([[XC - 7, BR[1] - 6], [XC - 7, yR]], 2.2, C.pul) + `<path d="M ${XC - 7} ${yR} A 7 7 0 0 0 ${XC + 7} ${yR}" fill="none" stroke="${C.pul}" stroke-width="2.2"/>` + pl([[XC + 7, yR], [XC + 7, BR[1] - 6]], 2.2, C.pul);
+  s += ci(XC, yR, 9, 'none', `stroke="${C.ink}" stroke-width="2"`) + tx(XC + 16, yR + 4, 'pulley ring', { w: 700, size: 12 });
+  s += rc(XC - 14, BR[1] - 20, 28, 14, C.dial, 'rx="3"') + tx(XC - 20, BR[1] - 26, 'one-way catch (ratchet)', { a: 'end', size: 12, c: '#b35a17', w: 600 });
+  const hx = XC + 70 + u * 140;
+  s += pl([[XC - 7, BR[1] - 20], [XC - 7, BR[1] - 40], [hx, BR[1] - 40]], 2.2, C.dial) + ci(hx, BR[1] - 40, 10, C.dial) + tx(hx, BR[1] - 14, 'your hand', { a: 'middle', size: 12, c: '#b35a17', w: 600 });
+  s += tx(784, FR[1] - 40, 'the loop\'s end comes out at this', { a: 'end', size: 12, c: C.tend }) + tx(784, FR[1] - 24, 'corner, tied to the pulley ring', { a: 'end', size: 12, c: C.tend });
+  s += tx(X0 + W / 2, Y0 + H + 24, 'the joint cord (red): one loop inside the arches and side poles', { a: 'middle', size: 12.5, c: C.tend, w: 600 });
+  s += tx(400, 336, 'top view · gaps and ring travel enlarged to show them', { a: 'middle', c: C.mute, size: 12 });
+  s += reads([['hand pulled', `${f1(u * 1.45, 2)} m`], ['ring moved', `${f1(u * 73)} cm`], ['hand force', u > 0 && u < 1 ? '≈22 N' : '—'], ['joints open', `${Math.round((1 - u) * 24)} of 24`]]);
+  const cap = t < .12 ? '<b>Top view of the flat frame.</b> The joint cord is a single loop running inside both arches and both side poles, through every joint — the red you see in each open gap. One end comes out at the front-right corner, tied to a pulley ring.'
+    : t < .7 ? '<b>Your pull cord (purple) goes through a one-way catch, round the ring and back.</b> Two strands hold the ring, so it moves half as far as your hand with twice the force — the same trick as a pulley block.'
+    : '<b>About 1.5 m of hand travel at ≈22 N</b> moves the ring 73 cm, taking up the 30 mm the foam opened at each joint. That closes all 24 joints at once, including the four where the side poles plug into the corners. The frame is now a stiff flat rectangle, and the ratchet won\'t let it slip back.';
+  return { s, cap };
+}},
+{ title: 'Push a pole\'s ends together and it becomes an arch', kick: 'A bent fibreglass pole is a spring', prob: 'Now the frame is a stiff, flat rectangle lying on the ground. It has to stand up — with the same pull, and no poles to add.', idea: 'Push the two ends of a stiff, springy pole towards each other and it has no choice but to bend up into an arch. A strap across each doorway does the pushing, by pulling the feet together.', dur: 10000, draw(t) {
+  const u = ez(ph(t, .15, .8)), c = lerp(4.5, 2.5, u), s0 = 120, gy = 300, A = arch(c, s0, 400, gy);
+  let s = ground(gy) + A.svg + ln(A.xl, gy - 3, A.xr, gy - 3, 3, C.strap);
+  s += ci(A.xl, gy - 3, 5, C.ink) + ci(A.xr, gy - 3, 5, C.ink);
+  if (t > .12 && t < .82) s += arrow(A.xl - 50, gy - 22, A.xl - 8, gy - 22, C.strap) + arrow(A.xr + 50, gy - 22, A.xr + 8, gy - 22, C.strap);
+  if (A.crown > .05) s += ln(400, gy, 400, A.top + 6, 1, C.mute, 'stroke-dasharray="3 3"') + tx(408, (gy + A.top) / 2, `${f1(A.crown, 2)} m`, { mono: 1, size: 12 });
+  s += tx(400, gy + 26, `doorway strap: feet ${f1(c, 2)} m apart`, { a: 'middle', c: C.strap, size: 12.5, w: 600 });
+  s += reads([['pole length', '4.50 m (always)'], ['feet apart', `${f1(c, 2)} m`], ['top height', `${f1(A.crown, 2)} m`]]);
+  const cap = t < .15 ? '<b>One arch pole, made stiff by the pull (step 5), lying on the ground:</b> 4.5 m long.'
+    : t < .82 ? '<b>Bring its two feet together.</b> The pole can\'t get shorter, so it has to bend — exactly like squeezing the ends of a ruler. The closer the feet, the taller it stands.'
+    : '<b>At 2.5 m between the feet, it stands 1.62 m tall.</b> The bent pole is a spring pushing its feet outward; the strap across the doorway is what holds them in. Two of these arches, 1.5 m apart, make the shade.';
+  return { s, cap };
+}},
+{ title: 'Pull till it stops', kick: 'The doorway straps and their built-in stops', prob: 'If pulling keeps drawing the feet together, how does the user know when to stop — and how does it end up the same shape every time?', idea: "Each doorway strap has a sewn stop that jams against its ring at exactly 2.5 m. After that, extra pull can't change the shape; it only clamps the joints tighter.", dur: 12000, draw(t) {
+  const u = ez(ph(t, .08, .68)), c = lerp(4.5, 2.5, u), s0 = 120, gy = 300, A = arch(c, s0, 400, gy), xb = A.xl + 2.5 * s0;
+  let s = ground(gy) + A.svg;
+  s += ln(A.xl, gy - 4, xb, gy - 4, 6, C.strap, 'stroke-linecap="butt"') + ln(xb, gy - 4, A.xr, gy - 4, 1.8, C.strap);
+  s += rc(xb - 3, gy - 11, 6, 14, C.ink) + ci(A.xr, gy - 4, 7, 'none', `stroke="${C.ink}" stroke-width="2.2"`);
+  const hit = t > .68, flash = hit && t < .78;
+  if (t > .1 && t < .66) s += arrow(A.xl - 46, gy - 26, A.xl - 8, gy - 26, C.strap) + arrow(A.xr + 46, gy - 26, A.xr + 8, gy - 26, C.strap) + tx(A.xl - 8, gy - 36, 'feet squeezed together', { a: 'end', size: 12, c: C.strap, w: 600 });
+  if (flash) s += ci(A.xr, gy - 4, 16, 'none', `stroke="${C.dial}" stroke-width="3"`);
+  s += pl([[A.xr, gy - 4], [A.xr + 30, gy - 40], [Math.min(A.xr + 160, 780), gy - 40]], 1.8, C.strap) + tx(Math.min(A.xr + 36, 640), gy - 48, 'strap cord → joins your pull cord', { size: 12, c: C.strap });
+  s += tx((A.xl + xb) / 2, gy + 22, 'strap webbing, 2.5 m', { a: 'middle', size: 12, c: C.strap, w: 600 }) + tx(xb, gy + 38, 'sewn stop', { a: 'middle', size: 12, c: C.ink });
+  s += tx(A.xr, gy + 22, 'foot ring', { a: 'middle', size: 12 });
+  if (hit) s += tx(400, A.top - 16, 'the stop hit the ring: doorway fixed at 2.50 m', { a: 'middle', c: '#b35a17', size: 12.5, w: 600 });
+  const hf = c > 4.37 ? '—' : t < .68 ? `≈${f1(lerp(121, 82, ph(t, .08, .68)))} N` : t < .75 ? '≈82 N' : `${f1(lerp(82, 88, ph(t, .75, .95)))}–${f1(lerp(82, 131, ph(t, .75, .95)))} N`;
+  s += reads([['doorway', `${f1(c, 2)} m`], ['ridge height', `${f1(A.crown, 2)} m`], ['hand force', hf], ['joint cord', t > .75 ? '100–150 N' : 'holding']]);
+  const cap = t < .08 ? '<b>Each doorway strap is webbing from one foot to a sewn stop, then a thin cord through a ring on the other foot.</b> Both strap cords join your pull cord, so once the joints are shut, the same pull starts drawing the straps in.'
+    : t < .68 ? '<b>Keep pulling.</b> The pull cord now drags both strap cords through their rings together (one join, so both doorways close at the same rate). Feet come in, arches rise. Once they are up off the ground the hand force is about 120 N, easing to about 80 N.'
+    : '<b>The sewn stop hits the ring.</b> The doorway can\'t get narrower than 2.5 m however hard you pull, so the shape is set: 1.62 m tall. Extra pull now only tightens the joint cord (100–150 N), locking every joint. The ratchet holds it; let go.';
+  return { s, cap };
+}},
+{ title: 'The ridge: the same beads, held by its own little cord', kick: 'Why it doesn\'t need to be on the pull', prob: 'Something has to hold the tops of the two arches 1.5 m apart, and it has to fold up with everything else.', idea: 'A pole across the top built exactly like the others (sections with foam joints). The fabric squeezes it shut, and a small elastic cord inside does the rest, so it needs nothing from the pull.', dur: 13000, draw(t) {
+  const squeeze = ez(ph(t, .28, .5)), cord = ez(ph(t, .55, .75)), bars = ez(ph(t, .8, .92));
+  const open = t < .28 ? ez(ph(t, .04, .22)) : lerp(1, .16, squeeze) * (1 - cord);           // 1 = foam popped all 4 joints (drawn ×4)
+  const y = 150, x0 = 150, x1 = 650, G = open * 12, seg = (x1 - x0 - 2 * 26 - 4 * G) / 3;
+  let s = rc(x0 - 4, y - 13, x1 - x0 + 8, 26, C.sleeve, 'rx="4" opacity=".75"');
+  s += tx(400, y - 22, 'sleeve sewn along the skin\'s centre line', { a: 'middle', size: 12, c: '#8a7a55', w: 600 });
+  for (const [x, sg] of [[x0, 1], [x1, -1]]) s += rc(x - 14, y - 34, 28, 68, '#4d6f8a', 'rx="4"') + rc(sg > 0 ? x : x - 26, y - 9, 26, 18, '#4d6f8a', 'rx="3"');
+  s += tx(x0, y + 54, 'T on arch top', { a: 'middle', size: 12 }) + tx(x1, y + 54, 'T on arch top', { a: 'middle', size: 12 }) + tx(x0, y + 69, '(on the front arch)', { a: 'middle', size: 11, c: C.mute }) + tx(x1, y + 69, '(on the back arch)', { a: 'middle', size: 11, c: C.mute });
+  let x = x0 + 26 + G; const J = [x0 + 26 + G / 2];
+  for (let i = 0; i < 3; i++) { s += ln(x, y, x + seg, y, 9, C.pole, 'stroke-linecap="butt"'); x += seg + G; J.push(x - G / 2); }
+  for (const j of J) s += ci(j, y, 6, open > .3 ? C.open : C.fer);
+  if (cord > 0) s += ln(x0, y, x0 + (x1 - x0) * cord, y, 2, '#2a2e33') + (cord > .95 ? tx(400, y + 30, `shock cord ≈20 N, tied off inside both Ts`, { a: 'middle', size: 12, c: '#2a2e33', w: 600 }) : '');
+  if (t > .04 && t < .3) s += tx(400, y + 30, 'foam alone: 25 N pushing every joint open', { a: 'middle', size: 12, c: '#b35a17', w: 600 });
+  if (squeeze > 0 && cord < .5) s += arrow(x0 - 70, y, x0 - 18, y, C.strap) + arrow(x1 + 70, y, x1 + 18, y, C.strap) + tx(400, y + 92, 'the skin squeezes the two arch tops together: ≥ 9.5 N, always', { a: 'middle', size: 12.5, c: C.strap, w: 600 });
+  if (bars > 0) {
+    const by = 268, k = 7 * bars;
+    s += tx(40, by - 8, 'Push open vs hold shut, per ridge:', { size: 12.5, w: 600 });
+    s += rc(40, by, 25 * k, 16, C.open, 'rx="3"') + tx(46 + 25 * k, by + 12, 'foam 25 N', { size: 12, mono: 1 });
+    s += rc(40, by + 24, 20 * k, 16, '#2a2e33', 'rx="3"') + rc(40 + 20 * k, by + 24, 9.5 * k, 16, C.strap, 'rx="3"') + tx(46 + 29.5 * k, by + 36, 'cord 20 + skin 9.5 = 29.5 N → stays shut', { size: 12, mono: 1 });
+  }
+  const mm = t < .28 ? open * 120 : lerp(120, 1.9, squeeze) * (1 - cord);
+  s += reads([['ridge open', `${f1(mm, mm < 10 ? 1 : 0)} mm`], ['drawing', 'gaps not to scale']]);
+  const cap = t < .28 ? '<b>The ridge is built exactly like a rail:</b> three 50 cm beads with foam joints, plugged into a T on each arch top (where the rails plug into elbows at the feet). On its own, the foam would push every joint open.'
+    : t < .55 ? '<b>But the skin squeezes the two arch tops together</b> — at least 9.5 N in every case we modelled, never pulling them apart. Because the middle of the skin is so stiff, the foam can only open the whole ridge about 2 mm.'
+    : t < .8 ? '<b>A light shock cord (≈20 N) through the beads, tied off inside both Ts,</b> closes that last 2 mm and keeps the beads captive in the bag. It isn\'t connected to your pull at all.'
+    : '<b>20 N of cord plus 9.5 N of skin beats the 25 N foam</b>, so the ridge stays shut standing, in wind and when racked — and it never touches your pull.';
+  return { s, cap };
+}},
+{ title: 'Taking it down', kick: 'Everything in reverse', prob: 'It has to come down as easily as it went up.', idea: 'Release the one-way catch on the pull cord: every joint springs open, the arches fall flat, and the whole thing stuffs into a sack.', dur: 10000, draw(t) {
+  const open = ez(ph(t, .08, .45)), bunch = ez(ph(t, .5, .74)), sack = ez(ph(t, .78, .95)), s0 = 120, gy = 290;
+  const rnd = i => { const v = Math.sin(i * 91.3 + 17.1) * 43758.5453; return v - Math.floor(v); };
+  let s = ground(gy);
+  if (bunch === 0) { const A = arch(lerp(2.5, 4.5, open), s0, 400, gy); s += A.svg; if (t < .1) s += tx(400, A.top - 18, 'release the one-way catch', { a: 'middle', c: '#b35a17', w: 600, size: 13 }); }
+  else {
+    const x0 = 400 - 2.25 * s0, L = s0 / 2;
+    for (let i = 0; i < 9; i++) {                       // floppy sections slump into a loose heap where the sack will be
+      const cx = 390 + (rnd(i) - .5) * 110, cy = gy - 12 - rnd(i + 20) * 46, a = rnd(i + 40) * Math.PI, hx = L * .45 * Math.cos(a), hy = L * .45 * Math.sin(a);
+      s += ln(lerp(x0 + i * L, cx - hx, bunch), lerp(gy - 4, cy - hy, bunch), lerp(x0 + (i + 1) * L, cx + hx, bunch), lerp(gy - 4, cy + hy, bunch), 7, C.pole, `opacity="${(1 - sack).toFixed(2)}"`);
+    }
+    if (t < .78) s += tx(390, gy - 92, 'just bunch it up', { a: 'middle', size: 12.5, w: 600 });
+    if (sack > 0) { const h = 20 + 70 * sack, w = 30 + 34 * sack, y0 = gy, cx = 390;      // the stuff sack fills as it all goes in
+      s += `<path d="M${cx - w * .8},${y0} Q${cx - w},${y0 - h * .55} ${cx - w * .62},${y0 - h} L${cx + w * .62},${y0 - h} Q${cx + w},${y0 - h * .55} ${cx + w * .8},${y0} Z" fill="${C.skin}" stroke="#b8a77f" stroke-width="2"/>`
+        + pl([[cx - w * .62, y0 - h], [cx, y0 - h + 6], [cx + w * .62, y0 - h]], 2, '#8a7a55') + tx(cx, y0 - h - 14, 'stuff it in the sack', { a: 'middle', size: 12.5, w: 600 }); }
+  }
+  const cap = t < .48 ? '<b>Release the one-way catch.</b> The line runs free, the strap cords pay out through their rings, and each arch springs back open and lies flat.'
+    : t < .76 ? '<b>Every joint is loose again</b>, so the poles go floppy every 50 cm. No folding order: just bunch the whole thing up.'
+    : '<b>Gather it up and stuff it in the sack</b> — nothing to roll, nothing to sort. Still open: how a joint that comes out of the sack folded finds its way back into its sleeve (the PACK question).';
+  return { s, cap };
+}},
+];
+
+
+
+/* ---------------------------------------------------------------- deck */
+const stage = document.getElementById('stage');
+function fit() { const k = Math.min(innerWidth / 1600, innerHeight / 900); stage.style.transform = `scale(${k}) translate(-50%, -50%)`; }
+addEventListener('resize', fit); fit();
+
+// what's-inside diagram: top view, laid flat, one name per part (used on every slide after this)
+{
+  const P = { pole: '#1d3b53', ridge: '#7d97ad', fer: '#9aa4ae', cord: '#b0322a', pull: '#e8762c', strap: '#3c8a5a', fab: '#ecdcb8', ink: '#18232e', mute: '#5d6873' };
+  const X0 = 250, X1 = 1030, Y0 = 120, Y1 = 380, XM = (X0 + X1) / 2;
+  const L = (x1, y1, x2, y2, w, c, ex = '') => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${w}" ${ex}/>`;
+  const T = (x, y, t, o = {}) => `<text x="${x}" y="${y}" font-family="Inter,Helvetica,Arial,PingFang SC,Hiragino Sans GB,Noto Sans SC,sans-serif" font-size="${o.size || 17}" font-weight="${o.w || 500}" fill="${o.c || P.ink}" text-anchor="${o.a || 'start'}">${t}</text>`;
+  const sections = (ax, ay, bx, by, n, c, w = 9) => { let o = ''; for (let i = 0; i < n; i++) { const u0 = i / n, u1 = (i + 1) / n; o += L(ax + (bx - ax) * u0, ay + (by - ay) * u0, ax + (bx - ax) * u1, ay + (by - ay) * u1, w, c); }
+    for (let i = 1; i < n; i++) { const u = i / n, x = ax + (bx - ax) * u, y = ay + (by - ay) * u, nx = ay === by ? 0 : 1, ny = ay === by ? 1 : 0; o += L(x - nx * 8, y - ny * 8, x + nx * 8, y + ny * 8, 3, P.fer); } return o; };
+  const lead = (x1, y1, x2, y2) => L(x1, y1, x2, y2, 1.2, P.mute);
+  let o = `<rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="${P.fab}"/>`;
+  o += `<rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="none" stroke="${P.cord}" stroke-width="2.4"/>`;          // joint cord, inside the poles
+  o += sections(X0, Y0, X1, Y0, 9, P.pole) + sections(X0, Y1, X1, Y1, 9, P.pole);
+  o += sections(X0, Y0 + 16, X0, Y1 - 16, 3, P.pole) + sections(X1, Y0 + 16, X1, Y1 - 16, 3, P.pole) + sections(XM, Y0 + 10, XM, Y1 - 10, 3, P.ridge, 7);
+  for (const [x, y, sx, sy] of [[X0, Y0, 1, 1], [X1, Y0, -1, 1], [X0, Y1, 1, -1], [X1, Y1, -1, -1]]) o += L(x, y, x, y + sy * 18, 12, P.fer) + L(x - sx * 6, y, x + sx * 18, y, 12, P.fer);
+  // doorway straps: webbing from one foot to a sewn stop, then a thin cord through the far foot ring to the pull cord
+  const stop = X0 + (X1 - X0) * 2.5 / 4.5;
+  for (const [y, d] of [[Y0 - 26, -1], [Y1 + 26, 1]]) o += L(X0, y, stop, y, 7, P.strap) + `<rect x="${stop - 3}" y="${y - 8}" width="6" height="16" fill="${P.ink}"/>` + L(stop, y, X1, y, 2, P.strap) + `<circle cx="${X1}" cy="${y}" r="7" fill="none" stroke="${P.ink}" stroke-width="2.4"/>` + L(X0, y, X0, y - d * 26, 1.5, P.strap, 'stroke-dasharray="3 3"');
+  o += `<path d="M${X1} ${Y0 - 26} H ${X1 + 60} V ${Y1 + 26} H ${X1}" fill="none" stroke="${P.strap}" stroke-width="2"/>`;
+  // pull cord: one-way catch, pulley ring on the joint cord's end, your hand
+  const XC = X1 + 60, yR = Y1 - 70;
+  o += L(X1, Y1, XC - 22, Y1, 2.4, P.cord) + L(XC - 22, Y1, XC - 22, yR + 10, 2.4, P.cord);
+  o += `<circle cx="${XC - 22}" cy="${yR}" r="11" fill="#fff" stroke="${P.ink}" stroke-width="2.4"/>` + L(XC - 30, yR, XC - 30, Y0 + 30, 2.4, P.pull) + L(XC - 14, yR, XC - 14, Y0 + 30, 2.4, P.pull);
+  o += `<rect x="${XC - 40}" y="${Y0 + 16}" width="36" height="18" rx="3" fill="${P.pull}"/>` + `<path d="M${XC - 22} ${Y0 + 16} V ${Y0 - 70} H ${XC + 200}" fill="none" stroke="${P.pull}" stroke-width="3"/>` + `<circle cx="${XC + 200}" cy="${Y0 - 70}" r="13" fill="${P.pull}"/>`;
+  o += `<circle cx="${XC + 60}" cy="${(Y0 + Y1) / 2}" r="6" fill="${P.strap}"/>` + L(XC, (Y0 + Y1) / 2, XC + 60, (Y0 + Y1) / 2, 2, P.strap) + `<path d="M${XC + 60} ${(Y0 + Y1) / 2} V ${Y0 - 70}" fill="none" stroke="${P.strap}" stroke-width="2" stroke-dasharray="5 4"/>`;
+  // labels
+  o += lead(X0 + 190, Y0, X0 + 190, Y0 - 66) + T(X0 + 190, Y0 - 74, '<tspan font-weight="700">Arch</tspan> · 9 sections (×2)', { a: 'middle' });
+  o += lead(X0, Y0 + 130, X0 - 40, Y0 + 130) + T(X0 - 48, Y0 + 126, '<tspan font-weight="700">Side pole</tspan>', { a: 'end' }) + T(X0 - 48, Y0 + 146, '3 sections (×2)', { a: 'end', c: P.mute });
+  o += lead(X0, Y0, X0 - 40, Y0 - 10) + T(X0 - 48, Y0 - 8, '<tspan font-weight="700">Corner piece</tspan> (×4)', { a: 'end' });
+  o += T(XM + 14, (Y0 + Y1) / 2 - 8, '<tspan font-weight="700">Ridge pole</tspan> · 3 sections', {}) + T(XM + 14, (Y0 + Y1) / 2 + 14, 'held by its own small elastic cord', { c: P.mute, size: 15 });
+  o += T(X0 + 24, Y1 - 38, 'Joint cord (red): one loop', { c: P.cord, size: 15, w: 600 }) + T(X0 + 24, Y1 - 18, 'inside the arches and side poles', { c: P.cord, size: 15, w: 600 });
+  o += T(X0 + 110, Y1 + 62, '<tspan font-weight="700" fill="' + P.strap + '">Doorway strap</tspan> (×2) · webbing, then a sewn stop, then a thin cord through the far foot ring', { size: 15 });
+  o += T(XC + 22, yR + 6, 'pulley ring', { size: 15, w: 600 }) + T(XC + 22, yR + 26, 'halves the pull', { size: 14, c: P.mute });
+  o += T(XC + 10, Y0 + 30, 'one-way catch', { size: 15, w: 600, c: '#b35a17' }).replace('<text ', '<text paint-order="stroke" stroke="#f3efe7" stroke-width="7" ');
+  o += T(XC + 200, Y0 - 94, 'Pull cord (orange)', { a: 'middle', w: 700, c: '#b35a17' }) + T(XC + 200, Y0 - 44, 'your hand', { a: 'middle', size: 14, c: P.mute });
+  o += T(XC + 72, (Y0 + Y1) / 2 + 6, 'strap cords join', { size: 14, c: P.strap, w: 600 }) + T(XC + 72, (Y0 + Y1) / 2 + 24, 'the pull cord here', { size: 14, c: P.strap, w: 600 });
+  o += T(X0, 466, 'Top view, laid flat. Every pole section is sewn into the fabric. Gaps and cords not to scale.', { size: 14, c: P.mute });
+  document.getElementById('sysd').innerHTML = o;
+}
+
+// problem-slide line drawings
+{
+  const P = { ink: '#18232e', mute: '#9aa3ab', pull: '#e8762c', fab: '#d2a86c' };
+  const L = (x1, y1, x2, y2, w = 7, c = P.ink) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${w}" stroke-linecap="round"/>`;
+  let a = ''; [[40, 150, 170, 120], [60, 70, 200, 95], [190, 160, 330, 140], [230, 60, 360, 40], [120, 30, 250, 20]].forEach(([x1, y1, x2, y2], i) => a += L(x1, y1, x2, y2, 7, i === 3 ? P.mute : P.ink));
+  a += `<text x="300" y="110" font-family="Archivo,Arial" font-size="56" font-weight="800" fill="${P.pull}">?</text>`;
+  document.getElementById('pz1').innerHTML = a;
+  document.getElementById('pz2').innerHTML = `<path d="M30,140 Q200,20 370,140" fill="none" stroke="${P.fab}" stroke-width="30" stroke-linecap="round" opacity=".55"/>` + `<path d="M30,140 Q120,72 190,62" fill="none" stroke="${P.ink}" stroke-width="7" stroke-linecap="round"/>` + L(190, 62, 214, 60, 7, P.pull) + `<text x="225" y="40" font-family="Archivo,Arial" font-size="22" font-weight="700" fill="${P.pull}">snag</text>`;
+  document.getElementById('pz3').innerHTML = `<path d="M60,170 Q200,10 340,170" fill="none" stroke="${P.ink}" stroke-width="7"/>` + [[60, 170], [340, 170]].map(([x, y]) => `<rect x="${x - 12}" y="${y - 12}" width="24" height="24" rx="4" fill="none" stroke="${P.pull}" stroke-width="4"/>`).join('') + `<path d="M150,40 a24,24 0 1 1 40,18" fill="none" stroke="${P.mute}" stroke-width="4"/><path d="M196,64 l-12,-2 6,-10z" fill="${P.mute}"/>`;
+}
+
+// the how-it-works slides, built from the explainer's own STEPS (drawings stay in lockstep with it)
+const HOW = [
+  ['One joint', 'A joint that closes itself', 'Poles must be long and stiff when it\'s up, but short to pack. Normally that means sections you plug together by hand.', 'A joint that springs open by itself, and snaps shut when you pull a cord that runs through it.'],
+  ['A string of beads becomes a pole', 'A whole pole on one cord', 'One joint isn\'t a pole. An arch needs nine sections, and nobody wants to close joints one at a time.', 'Thread every section of a pole on one cord, like beads. One pull closes every joint at once.'],
+  ['The poles are already in place', 'Nothing to set up', 'A pole that closes itself still has to go somewhere. Sort and thread 27 sections by hand and you\'re back to a normal tent — only fiddlier.', 'Every section is sewn into the fabric at the factory, exactly where it belongs. Nothing to sort, thread or line up. The sleeves are loose: the foam slugs push every joint open and keep the sections apart, and the pull closes them.'],
+  ['One pull stiffens the whole frame', 'One loop, one pull', 'Two arches and two side poles all need closing, by one person, with one cord, without straining.', 'One loop of cord, the joint cord, runs inside both arches and both side poles. Your pull cord goes round a pulley ring on its end, which halves the effort. The ridge pole has its own small elastic cord.'],
+  ['Pull till it stops', 'Squeeze into an arch, stop on a stitch', 'Now there\'s a stiff, flat frame on the ground. It has to stand up with the same pull — and end up the same shape every time.', 'Once every joint is shut, the same pull carries on into a strap across each doorway. It squeezes the arch\'s feet together, so the springy pole has to bow up. A sewn stop on the strap jams at exactly 2.5 m, and after that pulling harder only locks the joints tighter.'],
+];
+{
+  const tpl = HOW.map(([step, h, prob, idea], i) => `<section class="slide how" data-step="${step.replace(/"/g, '&quot;')}">
+    <div class="head"><span class="k">0${i + 1}</span><div><p class="over">How it works</p><h2>${h}</h2></div></div>
+    <div class="pa"><div><b>The problem</b>${prob}</div><div><b>The idea</b>${idea}</div></div>
+    <div class="anim"></div><div class="scrub"><i></i></div></section>`).join('');
+  const marker = [...stage.childNodes].find(n => n.nodeType === 8 && n.data.trim() === 'HOW');
+  const box = document.createElement('div'); box.innerHTML = tpl;
+  [...box.children].forEach(el => stage.insertBefore(el, marker));
+}
+const all = [...document.querySelectorAll('.slide')];
+all.forEach((s, i) => { s.insertAdjacentHTML('beforeend', '<div class="flag">Internal · pre-filing</div>'); s.insertAdjacentHTML('beforeend', `<div class="num">${String(i + 1).padStart(2, '0')} / ${all.length}</div>`); });
+
+/* ---------------------------------------------------------------- language: EN / 中文 (Simplified). Text is swapped in place; drawings are translated label by label. */
+const ZH = {
+  'SW-032 · Sideline shade': 'SW-032 · 场边遮阳棚',
+  'One<br>pull<span>.</span>': '一拉<br>即起<span>。</span>',
+  'Lay it flat. Pull one cord. It puts itself up.': '平铺在地，拉一根绳，它自己就立起来。',
+  '<i style="background:#e8762c"></i>the pull cord <i style="background:#3c8a5a"></i>doorway straps': '<i style="background:#e8762c"></i>拉绳 <i style="background:#3c8a5a"></i>门口绑带',
+  'The problem': '问题', 'The idea': '思路',
+  'Every shade starts with a puzzle.': '每顶遮阳棚，都从一道拼图开始。',
+  'Sort the poles': '分拣杆件', 'Which section goes where, in what order, and is one missing?': '哪节装在哪儿？按什么顺序？是不是少了一节？',
+  'Thread the sleeves': '穿套管', 'Push 4 m of pole through fabric without it snagging or splitting apart.': '把 4 米长的杆子穿进布套，还不能卡住或散开。',
+  'Clip, bend, adjust': '扣、弯、调', 'Bow the poles into place, then fiddle it square — usually with two people.': '把杆子弯到位，再一点点调正——通常得两个人。',
+  'We took the puzzle out. <em>All of it.</em>': '我们把拼图拿掉了。<em>全部。</em>',
+  'Lay it flat.<br>Pull.<br>It stops.': '平铺。<br>拉绳。<br>到位即停。',
+  "<b>01</b>Spread it out. The poles are already sewn into the fabric, in loose short sections.": '<b>01</b>把它铺开。杆子已经缝在布里，是一节节松散的短杆。',
+  "<b>02</b>Pull the orange cord. Every joint snaps shut (too small to see from here) and the frame goes stiff.": '<b>02</b>拉橙色的绳。每个接头都会合拢（从这里看太小，看不见），框架随之变硬。',
+  "<b>03</b>Keep pulling. The green doorway straps draw each arch's feet together, and the arches rise.": '<b>03</b>继续拉。绿色的门口绑带把每道拱的两脚拉近，拱就立起来了。',
+  "<b>04</b>The straps' sewn stops hit their rings: it stops at the right shape, and stays.": '<b>04</b>绑带上的缝制限位卡到脚环：它停在正确的形状，并保持不动。',
+  'What you get': '你得到的', 'A doorway of shade. One cord.': '一道遮阳的门廊，一根绳。',
+  'Two arches with canvas between them. No loose poles, no clips, nothing left over in the bag.': '两道拱，中间是帆布。没有散落的杆子，没有卡扣，袋子里不剩任何零件。',
+  'Doorway': '门宽', 'Tall': '高', 'Deep': '进深', 'Cord to pull': '根拉绳',
+  "What's inside": '内部构造', 'Five poles, two cords, two straps.': '五根杆，两根绳，两条绑带。',
+  '<b>1</b>Pull the orange cord': '<b>1</b>拉橙色的绳', '<b>2</b>Every joint shuts: the frame goes stiff': '<b>2</b>所有接头合拢：框架变硬',
+  '<b>3</b>The same pull draws the green straps in: the arches rise': '<b>3</b>同一下拉动收紧绿色绑带：拱立起来', '<b>4</b>The sewn stops hit their rings: done': '<b>4</b>缝制限位卡到脚环：完成',
+  'How it works': '工作原理',
+  'A joint that closes itself': '会自己合拢的接头',
+  "<b>The problem</b>Poles must be long and stiff when it's up, but short to pack. Normally that means sections you plug together by hand.": '<b>问题</b>杆子搭起来时要长而硬，收起来又要短。通常这意味着要手工一节节插起来。',
+  '<b>The idea</b>A joint that springs open by itself, and snaps shut when you pull a cord that runs through it.': '<b>思路</b>一个会自己弹开的接头；拉动穿过它的绳子，它就啪地合拢。',
+  'A whole pole on one cord': '一根绳串起整根杆',
+  "<b>The problem</b>One joint isn't a pole. An arch needs nine sections, and nobody wants to close joints one at a time.": '<b>问题</b>一个接头还不是一根杆。一道拱需要九节，没人想一个个去合接头。',
+  '<b>The idea</b>Thread every section of a pole on one cord, like beads. One pull closes every joint at once.': '<b>思路</b>像串珠一样，把一根杆的所有节串在一根绳上。一拉，所有接头同时合拢。',
+  'Nothing to set up': '无需安装',
+  "<b>The problem</b>A pole that closes itself still has to go somewhere. Sort and thread 27 sections by hand and you're back to a normal tent — only fiddlier.": '<b>问题</b>会自己合拢的杆子，也得有个位置放。要是 27 节都得手工分拣、穿套，那又回到了普通帐篷——只会更麻烦。',
+  '<b>The idea</b>Every section is sewn into the fabric at the factory, exactly where it belongs. Nothing to sort, thread or line up. The sleeves are loose: the foam slugs push every joint open and keep the sections apart, and the pull closes them.': '<b>思路</b>每一节都在工厂里缝进布中，各就各位。无需分拣、穿套或对齐。套管是松的：泡棉塞把每个接头顶开、让各节分开，一拉就全部合拢。',
+  'One loop, one pull': '一圈绳，一下拉',
+  '<b>The problem</b>Two arches and two side poles all need closing, by one person, with one cord, without straining.': '<b>问题</b>两道拱杆和两根侧杆都要合拢——一个人、一根绳、不费劲。',
+  '<b>The idea</b>One loop of cord, the joint cord, runs inside both arches and both side poles. Your pull cord goes round a pulley ring on its end, which halves the effort. The ridge pole has its own small elastic cord.': '<b>思路</b>一圈绳——关节绳——穿在两道拱杆和两根侧杆里面。拉绳绕过关节绳末端的滑轮环，省一半力。脊杆有自己的一根小弹力绳。',
+  'Squeeze into an arch, stop on a stitch': '一挤成拱，一缝定位',
+  "<b>The problem</b>Now there's a stiff, flat frame on the ground. It has to stand up with the same pull — and end up the same shape every time.": '<b>问题</b>现在地上是一个变硬的平框。它要靠同一下拉动立起来——而且每次都是同样的形状。',
+  "<b>The idea</b>Once every joint is shut, the same pull carries on into a strap across each doorway. It squeezes the arch's feet together, so the springy pole has to bow up. A sewn stop on the strap jams at exactly 2.5 m, and after that pulling harder only locks the joints tighter.": '<b>思路</b>所有接头合拢后，同一下拉动继续作用到每个门口的绑带上。绑带把拱杆两脚拉近，有弹性的杆子只能向上弯成拱。绑带上的缝制限位正好在 2.5 米处卡住，之后再用力只会把接头锁得更紧。',
+  'Taking it down': '收起', 'Down in seconds. Stuffed, not rolled.': '几秒收好。直接塞，不用卷。',
+  '<b>The problem</b>It has to come down as easily as it went up, and pack without care.': '<b>问题</b>收起来要和搭起来一样简单，而且装袋不用讲究。',
+  '<b>The idea</b>Release the one-way catch: every joint springs open, the arches fall flat, and the whole thing gets stuffed in a sack.': '<b>思路</b>松开单向卡扣：每个接头弹开，拱倒平，整个塞进收纳袋。',
+  'The difference': '区别', 'Instant up. Easy down.': '秒搭，易收。',
+  'Pole-and-sleeve shade': '穿杆式遮阳棚', 'Spring-steel pop-up': '弹簧钢速开棚', 'One pull': '一拉即起',
+  'Putting it up': '搭建', 'Assemble poles, thread sleeves, clip, bend into place': '组装杆件、穿套管、扣好、弯到位', 'Springs open on its own': '自己弹开', 'Spread it out, pull one cord': '铺开，拉一根绳',
+  'Packing it away': '收纳', 'Break down, sort, roll neatly': '拆开、分拣、卷整齐', 'Twist-and-fold the hoop — a knack many people never get': '把圈扭转折叠——很多人始终学不会的手法', 'Release the catch, bunch it up, stuff it in the sack': '松开卡扣，团起来，塞进袋子',
+  'Packed size': '收纳尺寸', 'A long pole bag': '一个长杆袋', 'A flat disc, only as small as the folded hoop': '一个扁圆盘，最小也只能到折叠后的圈那么大', 'A sack about as long as one 50 cm pole section': '一个约一节 50 厘米杆长的收纳袋',
+  'Loose parts': '散件', 'Pole sections, clips': '杆节、卡扣', 'None': '无', 'None — the poles live in the fabric': '无——杆子就在布里',
+  'Standing': '立起状态', 'Nothing to assemble.<br>Nothing left over.': '无需组装。<br>没有剩余零件。',
+  'Internal · pre-filing': '内部 · 申请前保密', '← → to move · F fullscreen': '← → 翻页 · F 全屏 · L 切换语言',
+};
+const ZS = {        // labels inside the drawings (matched per text node, surrounding spaces kept)
+  'a normal tent: a pile of pole sections to sort, thread and line up by hand': '普通帐篷：一堆杆节，要手工分拣、穿套、对齐',
+  'all 24 joints shut': '24 个接头全部合拢', 'cord pulled harder than 25 N: the tube goes back in, squashing the foam to 30 mm': '拉力超过 25 N：管子推回去，把泡棉压到 30 mm',
+  'cord pulled tight: the joint is held shut': '绳子拉紧：接头保持合拢', 'cord': '绳', 'corner piece': '转角件', 'corner, tied to the pulley ring': '伸出，系在滑轮环上',
+  "the loop's end comes out at this": '关节绳的末端从这个角', 'every section has one place it belongs…': '每一节都有它唯一的位置……', 'fabric,': '布料，', 'top view': '俯视图',
+  'feet squeezed together': '两脚被拉近', 'fibreglass tube': '玻璃纤维管', 'foam pushes the tube out: 25 N': '泡棉把管子推出：25 N', 'foot ring': '脚环',
+  'joints open: the red cord shows in each gap': '接头打开：每个缝隙里都能看到红绳', 'just bunch it up': '团起来就行',
+  'metal sleeve glued on the left tube, with a flared mouth (sizes in mm)': '金属套管粘在左管上，带喇叭口（单位 mm）', 'next tube (rounded end)': '下一节管（圆头）',
+  'not on this loop': '不在这圈绳上', 'one-way catch (ratchet)': '单向卡扣（棘轮）', 'orange = joint open (loose) · grey = joint shut (rigid)': '橙色 = 接头打开（松）· 灰色 = 接头合拢（硬）',
+  'own elastic cord,': '有自己的弹力绳，', 'pulley ring': '滑轮环', 'push': '推', 'release the one-way catch': '松开单向卡扣', 'ridge pole:': '脊杆：', 'sewn stop': '缝制限位',
+  'strap cord → joins your pull cord': '绑带绳 → 并入你的拉绳', 'strap webbing, 2.5 m': '绑带织带，2.5 m', 'stuff it in the sack': '塞进收纳袋',
+  'the joint cord (red): one loop inside the arches and side poles': '关节绳（红）：穿在拱杆和侧杆里的一整圈', 'the stop hit the ring: doorway fixed at 2.50 m': '限位卡到脚环：门宽固定在 2.50 m',
+  'top view · gaps and ring travel enlarged to show them': '俯视图 · 缝隙和滑轮环行程已放大显示', 'tube end is OUT at the mouth → the joint can fold': '管端已退到喇叭口外 → 接头可以折叠',
+  'your hand': '你的手', 'here they are sewn in at the factory: already in place': '在这里，它们在工厂就缝好了：已经各就各位', '…so one pull closes all of them': '……所以一拉就全部合拢',
+  'glued 50': '粘接 50', 'foam 30': '泡棉 30', 'tube in 30': '插入 30',
+  'Arch': '拱杆', '· 9 sections (×2)': '· 9 节（×2）', 'Side pole': '侧杆', '3 sections (×2)': '3 节（×2）', 'Corner piece': '转角件', 'Ridge pole': '脊杆', '· 3 sections': '· 3 节',
+  'held by its own small elastic cord': '由它自己的小弹力绳固定', 'Joint cord (red): one loop': '关节绳（红）：一整圈', 'inside the arches and side poles': '穿在拱杆和侧杆里面',
+  'Doorway strap': '门口绑带', '(×2) · webbing, then a sewn stop, then a thin cord through the far foot ring': '（×2）· 先是织带，然后是缝制限位，再接一根细绳穿过远端脚环',
+  'halves the pull': '省一半力', 'one-way catch': '单向卡扣', 'Pull cord (orange)': '拉绳（橙）', 'strap cords join': '绑带绳在这里', 'the pull cord here': '并入拉绳',
+  'Top view, laid flat. Every pole section is sewn into the fabric. Gaps and cords not to scale.': '俯视图，平铺状态。每一节杆都缝在布里。缝隙和绳子未按比例。',
+  'snag': '卡住',
+};
+const ZRX = [[/^foam (\d+(?:\.\d+)?) mm$/, '泡棉 $1 mm']];
+const MISS = window.__miss = new Set();
+function trSvg(h) {
+  return h.replace(/>([^<>]+)</g, (m, t) => {
+    const k = t.trim(); if (!k || /^[\d\s.?↓×()]+$/.test(k) || (k in ZS && ZS[k] === k)) return m;
+    let z = ZS[k]; if (z === undefined) for (const [r, rep] of ZRX) if (r.test(k)) { z = k.replace(r, rep); break; }
+    if (z === undefined) { MISS.add(k); return m; }
+    return '>' + t.slice(0, t.indexOf(k)) + z + t.slice(t.indexOf(k) + k.length) + '<';
+  });
+}
+const TXT = '.over, h1, h2, .lead, .key, .puzzle b, .puzzle span, .kicker, .steps li, .figs span, .seq li, .pa div, .cmp th, .cmp td, .flag, #hint';
+const SVGS = ['sysd', 'pz1', 'pz2', 'pz3'].map(id => document.getElementById(id));
+let LANG = 'en';
+function setLang(l) {
+  LANG = l; document.documentElement.lang = l === 'zh' ? 'zh-Hans' : 'en';
+  document.querySelectorAll(TXT).forEach(el => {
+    if (el.dataset.en === undefined) el.dataset.en = el.innerHTML;
+    const z = ZH[el.dataset.en]; if (l === 'zh' && z === undefined && el.dataset.en.trim()) MISS.add(el.dataset.en);
+    el.innerHTML = l === 'zh' && z !== undefined ? z : el.dataset.en;
+  });
+  SVGS.forEach(sv => { if (sv.dataset.en === undefined) sv.dataset.en = sv.innerHTML; sv.innerHTML = l === 'zh' ? trSvg(sv.dataset.en) : sv.dataset.en; });
+  document.querySelectorAll('#lang button').forEach(b => b.classList.toggle('on', b.dataset.l === l));
+  try { localStorage.setItem('deck-lang', l); } catch {}
+}
+document.getElementById('lang').addEventListener('click', e => { e.stopPropagation(); const b = e.target.closest('button'); if (b) setLang(b.dataset.l); });
+addEventListener('keydown', e => { if (e.key === 'l' || e.key === 'L') setLang(LANG === 'en' ? 'zh' : 'en'); });
+
+const byTitle = Object.fromEntries(STEPS.map(s => [s.title, s]));
+let cur = 0, at = 0, last = performance.now();
+function show(i) {
+  cur = Math.max(0, Math.min(all.length - 1, i));
+  all.forEach((s, k) => s.classList.toggle('on', k === cur));
+  document.getElementById('prog').style.width = (100 * (cur + 1) / all.length) + '%';
+  document.querySelectorAll('video').forEach(v => v.pause());
+  const v = all[cur].dataset.video && document.getElementById(all[cur].dataset.video);
+  if (v) { v.currentTime = 0; v.play().catch(() => {}); }
+  at = 0; try { history.replaceState(null, '', '#' + (cur + 1)); } catch {}
+}
+addEventListener('keydown', e => {
+  if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); show(cur + 1); }
+  if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(cur - 1); }
+  if (e.key === 'Home') show(0); if (e.key === 'End') show(all.length - 1);
+  if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.().catch(() => {}); }
+});
+addEventListener('click', e => show(cur + (e.clientX > innerWidth / 3 ? 1 : -1)));
+
+// the deploy film's step list follows the video
+const v1 = document.getElementById('v1'), fs = [...document.querySelectorAll('#filmSteps li')];
+function filmTick() { if (!v1.duration) return; const u = v1.currentTime / v1.duration; let k = 0; fs.forEach((li, i) => { if (u >= +li.dataset.from) k = i; }); fs.forEach((li, i) => li.classList.toggle('now', i === k)); }
+v1.addEventListener('ended', () => setTimeout(() => { if (all[cur].dataset.video === 'v1') { v1.currentTime = 0; v1.play().catch(() => {}); } }, 1800));
+
+function frame(now) {
+  const dt = Math.min(64, now - last); last = now;
+  const s = all[cur], st = s.dataset.step && byTitle[s.dataset.step];
+  if (st) {
+    at += dt / st.dur; if (at > 1 + 1800 / st.dur) at = 0;
+    const t = Math.min(1, at);
+    const svg = st.draw(t).s;
+    s.querySelector('.anim').innerHTML = `<svg viewBox="0 0 800 340">${LANG === 'zh' ? trSvg(svg) : svg}</svg>`;
+    s.querySelector('.scrub i').style.width = (100 * t) + '%';
+  }
+  if (s.dataset.video === 'v1') filmTick();
+  requestAnimationFrame(frame);
+}
+show(Math.max(0, (parseInt(location.hash.slice(1)) || 1) - 1));
+let saved = 'en'; try { saved = localStorage.getItem('deck-lang') || 'en'; } catch {}
+setLang(saved);
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
